@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RosDAL.BaseDAO">
+    <Position X="4.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAACABAAAQQAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>BaseDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.BillDAO">
+    <Position X="8" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAg=</HashCode>
+      <FileName>BillDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.DishDAO">
+    <Position X="3.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAABAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>DishDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.DrinkDAO">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAEAAAAIAAAA=</HashCode>
+      <FileName>DrinkDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.EmployeeDAO">
+    <Position X="8.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>EmployeeDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.OrderDAO">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>OrderDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.TableDAO">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>TableDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
