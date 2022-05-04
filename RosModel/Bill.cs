@@ -8,8 +8,8 @@ namespace RosModel
 {
     public class Bill
     {
-        int BillNumber { get; set; }
-        double BillAmount { get; set; }
+        // int BillNumber { get; set; }
+        // double BillAmount { get; set; }
         string BillStatus { get; set; }
         double TipAmount { get; set; }
 
