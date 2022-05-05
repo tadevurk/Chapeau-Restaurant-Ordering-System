@@ -1,25 +1,18 @@
 ﻿using RosModel;
+using RosLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RosUI
 {
     public partial class Login : Form
     {
-        RosMain uIMain;
-        Employee employee;
+
         public Login()
         {
             InitializeComponent();
         }
-
+      
         private bool CheckPassword()
         {
             return true;
@@ -27,14 +20,24 @@ namespace RosUI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            
             if (CheckPassword())
             {
-                uIMain = new RosMain(employee);
+                Employee employee = new Employee();
+                EmployeeLogic employeeLogic = new EmployeeLogic();
+                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+
+                RosMain uIMain = new RosMain(employee);
                 this.Hide();
                 uIMain.Show();
             }
             else { return; }
+        }
 
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Registration().Show();
         }
     }
 }

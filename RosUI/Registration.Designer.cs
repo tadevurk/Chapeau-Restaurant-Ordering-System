@@ -1,6 +1,7 @@
-﻿namespace RosUI
+﻿
+namespace RosUI
 {
-    partial class Login
+    partial class Registration
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +29,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnLogin
+            // btnExit
             // 
-            this.btnLogin.Location = new System.Drawing.Point(483, 297);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(94, 29);
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnExit.Location = new System.Drawing.Point(0, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(94, 29);
+            this.btnExit.TabIndex = 0;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(483, 342);
+            this.btnRegister.Location = new System.Drawing.Point(326, 262);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(94, 29);
             this.btnRegister.TabIndex = 1;
@@ -56,7 +57,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(274, 126);
+            this.txtUsername.Location = new System.Drawing.Point(326, 187);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(125, 27);
             this.txtUsername.TabIndex = 2;
@@ -64,13 +65,13 @@
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(274, 95);
+            this.lblUsername.Location = new System.Drawing.Point(326, 156);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 20);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "Username";
             // 
-            // Login
+            // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,9 +79,9 @@
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnRegister);
-            this.Controls.Add(this.btnLogin);
-            this.Name = "Login";
-            this.Text = "Login";
+            this.Controls.Add(this.btnExit);
+            this.Name = "Registration";
+            this.Text = "Registration";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,7 +89,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUsername;
