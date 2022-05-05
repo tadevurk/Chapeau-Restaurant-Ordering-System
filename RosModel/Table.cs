@@ -10,22 +10,11 @@ namespace RosModel
     {
 
         public int TableNumber { get; set; }
-        public string TabStatus { get; set; }
+        public bool TableStatus { get; set; }
 
         Bill Bill { get; set; }
 
         Order Order { get; set; }
         Employee Employee { get; set; }
-
-        void ReserveTable(Table table)
-        {
-
-        }
-
-        void AddOrder(Order order)
-        {
-
-        }
-
     }
 }

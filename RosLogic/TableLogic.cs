@@ -10,15 +10,26 @@ namespace RosLogic
 {
     public class TableLogic
     {
-        TableDAO tableDAO = new TableDAO();
+        TableDAO tabledb;
+
+        public TableLogic()
+        {
+            tabledb = new TableDAO();
+        }
+
         public Table GetTableById(int tableNumber)
         {
-            return tableDAO.GetTableById(tableNumber);
+            return tabledb.GetTableById(tableNumber);
         }
 
         public List<Table> GetAllTables()
         {
-            return tableDAO.GetAllTables();
+            return tabledb.GetAllTables();
+        }
+
+        public void Update(Table table)
+        {
+            tabledb.Update(table);
         }
     }
 }
