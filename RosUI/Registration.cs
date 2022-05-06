@@ -17,7 +17,15 @@ namespace RosUI
         {
             EmployeeLogic employeeLogic = new EmployeeLogic();
             Employee employee = new Employee();
-            employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+            Employee blank = employeeLogic.GetLastEmployeeID();
+            int id = blank.EmplID + 1;
+
+            employee.EmplID = id;
+            employee.Username = txtUsername.Text;
+            employee.Name = txtName.Text;
+            employee.PinCode = int.Parse(txtPinCode.Text);
+
+            employeeLogic.Add(employee);
             
             RosMain uIMain = new RosMain(employee);
             this.Hide();

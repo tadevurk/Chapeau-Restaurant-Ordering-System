@@ -52,9 +52,12 @@
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.pnlTableView = new System.Windows.Forms.Panel();
+            this.btnTableOne = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
+            this.pnlTableView.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,21 +87,21 @@
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -121,6 +124,7 @@
             this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
             this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
             this.tableViewToolStripMenuItem.Text = "Table view";
+            this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
             // pnlDashboard
             // 
@@ -246,11 +250,30 @@
             this.columnHeader7.Text = "Order Time";
             this.columnHeader7.Width = 200;
             // 
+            // pnlTableView
+            // 
+            this.pnlTableView.Controls.Add(this.btnTableOne);
+            this.pnlTableView.Location = new System.Drawing.Point(0, 25);
+            this.pnlTableView.Name = "pnlTableView";
+            this.pnlTableView.Size = new System.Drawing.Size(1216, 570);
+            this.pnlTableView.TabIndex = 4;
+            // 
+            // btnTableOne
+            // 
+            this.btnTableOne.Location = new System.Drawing.Point(147, 67);
+            this.btnTableOne.Name = "btnTableOne";
+            this.btnTableOne.Size = new System.Drawing.Size(94, 29);
+            this.btnTableOne.TabIndex = 0;
+            this.btnTableOne.Text = "Table 1";
+            this.btnTableOne.UseVisualStyleBackColor = true;
+            this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
+            // 
             // RosMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
+            this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlDashboard);
@@ -265,6 +288,7 @@
             this.pnlKitchenView.PerformLayout();
             this.pnlBarView.ResumeLayout(false);
             this.pnlBarView.PerformLayout();
+            this.pnlTableView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,5 +320,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Panel pnlTableView;
+        private System.Windows.Forms.Button btnTableOne;
     }
 }

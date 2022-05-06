@@ -10,20 +10,30 @@ namespace RosLogic
 {
     public class EmployeeLogic
     {
-        EmployeeDAO employeeDAO = new EmployeeDAO();    
+        EmployeeDAO employeedb = new EmployeeDAO();    
         public Employee GetEmployeeById(int id)
         {
-            return employeeDAO.GetEmployeeById(id);
+            return employeedb.GetEmployeeById(id);
+        }
+
+        public Employee GetLastEmployeeID()
+        {
+            return employeedb.GetLastEmployeeID();
         }
 
         public List<Employee> GetAllEmployees()
         {
-            return employeeDAO.GetAllEmployees();
+            return employeedb.GetAllEmployees();
         }
 
         public Employee GetEmployeeByUsername(string username)
         {
-            return employeeDAO.GetEmployeeByUsername(username);
+            return employeedb.GetEmployeeByUsername(username);
+        }
+
+        public void Add(Employee employee)
+        {
+            employeedb.Add(employee);
         }
     }
 }

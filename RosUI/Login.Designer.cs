@@ -32,13 +32,15 @@
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
+            this.txtPinCode = new System.Windows.Forms.TextBox();
+            this.lblPinCode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(483, 297);
+            this.btnLogin.Location = new System.Drawing.Point(123, 246);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(94, 29);
+            this.btnLogin.Size = new System.Drawing.Size(113, 29);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -46,9 +48,9 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(483, 342);
+            this.btnRegister.Location = new System.Drawing.Point(123, 292);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(94, 29);
+            this.btnRegister.Size = new System.Drawing.Size(113, 29);
             this.btnRegister.TabIndex = 1;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
@@ -56,7 +58,7 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(274, 126);
+            this.txtUsername.Location = new System.Drawing.Point(121, 88);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(125, 27);
             this.txtUsername.TabIndex = 2;
@@ -64,22 +66,41 @@
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(274, 95);
+            this.lblUsername.Location = new System.Drawing.Point(121, 57);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 20);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "Username";
             // 
+            // txtPinCode
+            // 
+            this.txtPinCode.Location = new System.Drawing.Point(120, 166);
+            this.txtPinCode.Name = "txtPinCode";
+            this.txtPinCode.Size = new System.Drawing.Size(125, 27);
+            this.txtPinCode.TabIndex = 5;
+            // 
+            // lblPinCode
+            // 
+            this.lblPinCode.AutoSize = true;
+            this.lblPinCode.Location = new System.Drawing.Point(120, 143);
+            this.lblPinCode.Name = "lblPinCode";
+            this.lblPinCode.Size = new System.Drawing.Size(64, 20);
+            this.lblPinCode.TabIndex = 7;
+            this.lblPinCode.Text = "PinCode";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(382, 453);
+            this.Controls.Add(this.lblPinCode);
+            this.Controls.Add(this.txtPinCode);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -92,5 +113,7 @@
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.TextBox txtPinCode;
+        private System.Windows.Forms.Label lblPinCode;
     }
 }
