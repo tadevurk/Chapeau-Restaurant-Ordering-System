@@ -8,11 +8,11 @@ namespace RosModel
 {
     public abstract class Item
     {
-        int ItemID { get; set; }
-        string ItemName { get; set; }
-        string ItemPrice { get; set; }
-        int ItemStock { get; set; }
-        string ItemStatus { get; set; }
-        string ItemType { get; set; }
+        public int ItemID { get; set; }
+        public string ItemName { get; set; }
+        public decimal ItemPrice { get; set; }
+        public int ItemStock { get; set; }
+        public string ItemStatus { get; set; }
+        public string ItemType { get; set; }
     }
 }

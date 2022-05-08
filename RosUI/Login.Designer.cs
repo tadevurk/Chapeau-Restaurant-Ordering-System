@@ -1,4 +1,4 @@
-﻿namespace RosUI
+namespace RosUI
 {
     partial class Login
     {

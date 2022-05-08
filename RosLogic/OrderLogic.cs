@@ -10,20 +10,16 @@ namespace RosLogic
 {
     public class OrderLogic
     {
-        OrderDAO orderDAO = new OrderDAO();
-        public Order GetOrderById(int id)
+        OrderDAO orderDAO;
+
+        public OrderLogic()
         {
-            return orderDAO.GetOrderById(id);
+            orderDAO = new OrderDAO();
         }
 
         public List<Order> GetAllOrders()
         {
             return orderDAO.GetAllOrders();
-        }
-
-        public Order GetOrderByTable(Table table)
-        {
-            return orderDAO.GetOrderByTable(table);
         }
     }
 }

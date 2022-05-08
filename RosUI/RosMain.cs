@@ -49,12 +49,6 @@ namespace RosUI
                     pnlBarView.Show();
 
                     break;
-                case "TableView":
-
-                    HideAllPanels();
-                    pnlTableView.Show();
-
-                    break;
             }
                 
         }
@@ -64,7 +58,6 @@ namespace RosUI
             pnlKitchenView.Hide();
             pnlDashboard.Hide();
             pnlBarView.Hide();
-            pnlTableView.Hide();
         }
 
         private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
@@ -82,11 +75,6 @@ namespace RosUI
             ShowPanel("BarView");
         }
 
-        private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("TableView");
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -98,9 +86,11 @@ namespace RosUI
             new Login().Show();
         }
 
-        private void btnTableOne_Click(object sender, EventArgs e)
+        private void takeOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OrderForm orderForm = new OrderForm();
 
+            orderForm.Show();
         }
     }
 }
