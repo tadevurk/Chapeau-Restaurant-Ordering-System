@@ -1,6 +1,7 @@
+﻿
 namespace RosUI
 {
-    partial class Login
+    partial class Drinks
     {
         /// <summary>
         /// Required designer variable.
@@ -28,33 +29,44 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnHeineken = new System.Windows.Forms.Button();
+            this.btnJupiler = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnLogin
+            // btnHeineken
             // 
-            this.btnLogin.Location = new System.Drawing.Point(483, 297);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(94, 29);
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnHeineken.Location = new System.Drawing.Point(46, 63);
+            this.btnHeineken.Name = "btnHeineken";
+            this.btnHeineken.Size = new System.Drawing.Size(207, 87);
+            this.btnHeineken.TabIndex = 0;
+            this.btnHeineken.Text = "Heineken Beer";
+            this.btnHeineken.UseVisualStyleBackColor = true;
             // 
-            // Login
+            // btnJupiler
+            // 
+            this.btnJupiler.Location = new System.Drawing.Point(384, 63);
+            this.btnJupiler.Name = "btnJupiler";
+            this.btnJupiler.Size = new System.Drawing.Size(207, 87);
+            this.btnJupiler.TabIndex = 1;
+            this.btnJupiler.Text = "Jupiler Beer";
+            this.btnJupiler.UseVisualStyleBackColor = true;
+            // 
+            // Drinks
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnLogin);
-            this.Name = "Login";
-            this.Text = "Form1";
+            this.Controls.Add(this.btnJupiler);
+            this.Controls.Add(this.btnHeineken);
+            this.Name = "Drinks";
+            this.Text = "Drinks";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnHeineken;
+        private System.Windows.Forms.Button btnJupiler;
     }
 }

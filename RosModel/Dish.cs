@@ -8,8 +8,14 @@ namespace RosModel
 {
     public class Dish : Item
     {
-        string MenuType { get; set; }
-        string Course { get; set; }
-        
+        public int DishID { get; set; }
+        public string MenuType { get; set; }
+        public string Course { get; set; }
+
+        public override string ToString()
+        {
+            return $"{ItemName}";
+        }
+
     }
 }

@@ -85,5 +85,12 @@ namespace RosUI
             this.Close();
             new Login().Show();
         }
+
+        private void takeOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OrderForm orderForm = new OrderForm();
+
+            orderForm.Show();
+        }
     }
 }

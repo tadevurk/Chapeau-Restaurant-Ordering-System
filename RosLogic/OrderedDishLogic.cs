@@ -8,18 +8,28 @@ using RosDAL;
 
 namespace RosLogic
 {
-    public class OrderedDish
+    public class OrderedDishLogic
     {
-        OrderedDishDAO dishDAO = new OrderedDishDAO();
+        OrderedDishDAO orderedDishdb;
 
-        public List<Dish> GetOrderedDishByTable(Table table)
+        public OrderedDishLogic()
         {
-            return dishDAO.GetOrderedDishByTable(table);
+            orderedDishdb = new OrderedDishDAO();
         }
 
-        public List<Dish> GetOrderedDishByOrder(Order order)
+        public void AddDish(OrderedDish orderedDish)
         {
-            return dishDAO.GetOrderedDishByOrder(order);
+            orderedDishdb.AddDish(orderedDish);
+        }
+
+        public void UpdateDish(OrderedDish orderedDish)
+        {
+            orderedDishdb.UpdateDish(orderedDish);
+        }
+
+        public void RemoveDish(OrderedDish orderedDish)
+        {
+            orderedDishdb.RemoveDish(orderedDish);
         }
     }
 }
