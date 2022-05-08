@@ -96,12 +96,6 @@ namespace RosUI
             new Login().Show();
         }
 
-        private void takeOrderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OrderForm orderForm = new OrderForm();
-
-            orderForm.Show();
-        }
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -110,7 +104,10 @@ namespace RosUI
 
         private void btnTableOne_Click(object sender, EventArgs e)
         {
+            Table table = new Table(1);
+            OrderForm orderForm = new OrderForm(table);
 
+            orderForm.ShowDialog();
         }
 
 
