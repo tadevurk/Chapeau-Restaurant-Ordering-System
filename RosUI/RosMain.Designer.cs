@@ -54,6 +54,7 @@
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.pnlTableView = new System.Windows.Forms.Panel();
             this.btnTableOne = new System.Windows.Forms.Button();
+            this.takeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -67,7 +68,8 @@
             this.applicationToolStripMenuItem,
             this.barViewToolStripMenuItem,
             this.kitchenViewToolStripMenuItem,
-            this.tableViewToolStripMenuItem});
+            this.tableViewToolStripMenuItem,
+            this.takeOrderToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1216, 28);
@@ -138,9 +140,9 @@
             this.pnlKitchenView.Controls.Add(this.label1);
             this.pnlKitchenView.Controls.Add(this.button1);
             this.pnlKitchenView.Controls.Add(this.lvOrderedDishes);
-            this.pnlKitchenView.Location = new System.Drawing.Point(0, 31);
+            this.pnlKitchenView.Location = new System.Drawing.Point(0, 28);
             this.pnlKitchenView.Name = "pnlKitchenView";
-            this.pnlKitchenView.Size = new System.Drawing.Size(1216, 575);
+            this.pnlKitchenView.Size = new System.Drawing.Size(1216, 578);
             this.pnlKitchenView.TabIndex = 0;
             // 
             // label1
@@ -253,9 +255,9 @@
             // pnlTableView
             // 
             this.pnlTableView.Controls.Add(this.btnTableOne);
-            this.pnlTableView.Location = new System.Drawing.Point(0, 25);
+            this.pnlTableView.Location = new System.Drawing.Point(0, 28);
             this.pnlTableView.Name = "pnlTableView";
-            this.pnlTableView.Size = new System.Drawing.Size(1216, 570);
+            this.pnlTableView.Size = new System.Drawing.Size(1216, 567);
             this.pnlTableView.TabIndex = 4;
             // 
             // btnTableOne
@@ -268,6 +270,13 @@
             this.btnTableOne.UseVisualStyleBackColor = true;
             this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
             // 
+            // takeOrderToolStripMenuItem
+            // 
+            this.takeOrderToolStripMenuItem.Name = "takeOrderToolStripMenuItem";
+            this.takeOrderToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.takeOrderToolStripMenuItem.Text = "Take Order";
+            this.takeOrderToolStripMenuItem.Click += new System.EventHandler(this.takeOrderToolStripMenuItem_Click);
+            // 
             // RosMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -275,8 +284,8 @@
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlBarView);
-            this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlDashboard);
+            this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
@@ -322,5 +331,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Panel pnlTableView;
         private System.Windows.Forms.Button btnTableOne;
+        private System.Windows.Forms.ToolStripMenuItem takeOrderToolStripMenuItem;
     }
 }
