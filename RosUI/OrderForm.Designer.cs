@@ -38,6 +38,7 @@ namespace RosUI
             this.btnRemoveItem = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.lblTableNumber = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lboxOrderList
@@ -129,11 +130,21 @@ namespace RosUI
             this.btnLogOut.Text = "Log out";
             this.btnLogOut.UseVisualStyleBackColor = true;
             // 
+            // lblTableNumber
+            // 
+            this.lblTableNumber.AutoSize = true;
+            this.lblTableNumber.Location = new System.Drawing.Point(16, 12);
+            this.lblTableNumber.Name = "lblTableNumber";
+            this.lblTableNumber.Size = new System.Drawing.Size(56, 20);
+            this.lblTableNumber.TabIndex = 12;
+            this.lblTableNumber.Text = "table #";
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 490);
+            this.Controls.Add(this.lblTableNumber);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnMenu);
             this.Controls.Add(this.btnRemoveItem);
@@ -146,6 +157,7 @@ namespace RosUI
             this.Name = "OrderForm";
             this.Text = "OrderForm";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -160,5 +172,6 @@ namespace RosUI
         private System.Windows.Forms.Button btnRemoveItem;
         private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Label lblTableNumber;
     }
 }

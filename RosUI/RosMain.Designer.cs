@@ -54,7 +54,6 @@
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.pnlTableView = new System.Windows.Forms.Panel();
             this.btnTableOne = new System.Windows.Forms.Button();
-            this.takeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -68,8 +67,7 @@
             this.applicationToolStripMenuItem,
             this.barViewToolStripMenuItem,
             this.kitchenViewToolStripMenuItem,
-            this.tableViewToolStripMenuItem,
-            this.takeOrderToolStripMenuItem});
+            this.tableViewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1216, 28);
@@ -89,21 +87,21 @@
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -270,13 +268,6 @@
             this.btnTableOne.UseVisualStyleBackColor = true;
             this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
             // 
-            // takeOrderToolStripMenuItem
-            // 
-            this.takeOrderToolStripMenuItem.Name = "takeOrderToolStripMenuItem";
-            this.takeOrderToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
-            this.takeOrderToolStripMenuItem.Text = "Take Order";
-            this.takeOrderToolStripMenuItem.Click += new System.EventHandler(this.takeOrderToolStripMenuItem_Click);
-            // 
             // RosMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -331,6 +322,5 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Panel pnlTableView;
         private System.Windows.Forms.Button btnTableOne;
-        private System.Windows.Forms.ToolStripMenuItem takeOrderToolStripMenuItem;
     }
 }

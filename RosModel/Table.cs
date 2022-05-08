@@ -12,6 +12,16 @@ namespace RosModel
         public int TableNumber { get; set; }
         public bool TableStatus { get; set; }
 
+        public Table(int number)
+        {
+            TableNumber = number;
+        }
+
+        public Table()
+        {
+
+        }
+
         Bill Bill { get; set; }
 
         Order Order { get; set; }
