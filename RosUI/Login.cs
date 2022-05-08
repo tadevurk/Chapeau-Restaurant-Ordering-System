@@ -7,6 +7,9 @@ namespace RosUI
 {
     public partial class Login : Form
     {
+        Employee employee;
+        EmployeeLogic employeeLogic = new EmployeeLogic();
+
 
         public Login()
         {
@@ -18,6 +21,7 @@ namespace RosUI
             if (txtUsername.Text == "" && txtPinCode.Text == "")
             {
                 MessageBox.Show("*Please your username and password*");
+                return;
             }
             else
             {
@@ -35,17 +39,10 @@ namespace RosUI
                 }
             }
 
-            if (CheckPassword())
+            employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+
+            if (CheckPassword(employee))
             {
-                Employee employee = new Employee();
-                EmployeeLogic employeeLogic = new EmployeeLogic();
-                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
-
-                //if(employee.PinCode = txtPinCode.Text)
-                //{
-                    
-                //}
-
                 RosMain uIMain = new RosMain(employee);
                 this.Hide();
                 uIMain.Show();
@@ -53,9 +50,15 @@ namespace RosUI
             else { return; }
         }
 
-        private bool CheckPassword()
+        private bool CheckPassword(Employee empl)
         {
-            return true;
+
+            if (txtPinCode.Text == empl.PinCode.ToString())
+            {
+                return true;
+            }
+
+            return false;         
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
