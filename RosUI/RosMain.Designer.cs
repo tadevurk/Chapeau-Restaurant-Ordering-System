@@ -1,4 +1,4 @@
-namespace RosUI
+﻿namespace RosUI
 {
     partial class RosMain
     {
@@ -52,10 +52,13 @@ namespace RosUI
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.pnlTableView = new System.Windows.Forms.Panel();
+            this.btnTableOne = new System.Windows.Forms.Button();
             this.takeOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
+            this.pnlTableView.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -123,6 +126,7 @@ namespace RosUI
             this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
             this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(92, 24);
             this.tableViewToolStripMenuItem.Text = "Table view";
+            this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
             // pnlDashboard
             // 
@@ -136,9 +140,9 @@ namespace RosUI
             this.pnlKitchenView.Controls.Add(this.label1);
             this.pnlKitchenView.Controls.Add(this.button1);
             this.pnlKitchenView.Controls.Add(this.lvOrderedDishes);
-            this.pnlKitchenView.Location = new System.Drawing.Point(0, 31);
+            this.pnlKitchenView.Location = new System.Drawing.Point(0, 28);
             this.pnlKitchenView.Name = "pnlKitchenView";
-            this.pnlKitchenView.Size = new System.Drawing.Size(1216, 575);
+            this.pnlKitchenView.Size = new System.Drawing.Size(1216, 578);
             this.pnlKitchenView.TabIndex = 0;
             // 
             // label1
@@ -248,6 +252,24 @@ namespace RosUI
             this.columnHeader7.Text = "Order Time";
             this.columnHeader7.Width = 200;
             // 
+            // pnlTableView
+            // 
+            this.pnlTableView.Controls.Add(this.btnTableOne);
+            this.pnlTableView.Location = new System.Drawing.Point(0, 28);
+            this.pnlTableView.Name = "pnlTableView";
+            this.pnlTableView.Size = new System.Drawing.Size(1216, 567);
+            this.pnlTableView.TabIndex = 4;
+            // 
+            // btnTableOne
+            // 
+            this.btnTableOne.Location = new System.Drawing.Point(147, 67);
+            this.btnTableOne.Name = "btnTableOne";
+            this.btnTableOne.Size = new System.Drawing.Size(94, 29);
+            this.btnTableOne.TabIndex = 0;
+            this.btnTableOne.Text = "Table 1";
+            this.btnTableOne.UseVisualStyleBackColor = true;
+            this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
+            // 
             // takeOrderToolStripMenuItem
             // 
             this.takeOrderToolStripMenuItem.Name = "takeOrderToolStripMenuItem";
@@ -260,9 +282,10 @@ namespace RosUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
+            this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlBarView);
-            this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlDashboard);
+            this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
@@ -274,6 +297,7 @@ namespace RosUI
             this.pnlKitchenView.PerformLayout();
             this.pnlBarView.ResumeLayout(false);
             this.pnlBarView.PerformLayout();
+            this.pnlTableView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,6 +329,8 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.Panel pnlTableView;
+        private System.Windows.Forms.Button btnTableOne;
         private System.Windows.Forms.ToolStripMenuItem takeOrderToolStripMenuItem;
     }
 }
