@@ -1,6 +1,7 @@
+﻿
 namespace RosUI
 {
-    partial class Login
+    partial class Registration
     {
         /// <summary>
         /// Required designer variable.
@@ -28,29 +29,31 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnLogin = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.txtPinCode = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.lblPinCode = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnLogin
+            // btnExit
             // 
-            this.btnLogin.Location = new System.Drawing.Point(123, 246);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(113, 29);
-            this.btnLogin.TabIndex = 0;
-            this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            this.btnExit.Location = new System.Drawing.Point(0, 0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(94, 29);
+            this.btnExit.TabIndex = 0;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(123, 292);
+            this.btnRegister.Location = new System.Drawing.Point(129, 325);
             this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(113, 29);
+            this.btnRegister.Size = new System.Drawing.Size(94, 29);
             this.btnRegister.TabIndex = 1;
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
@@ -58,7 +61,7 @@ namespace RosUI
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(121, 88);
+            this.txtUsername.Location = new System.Drawing.Point(118, 138);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(125, 27);
             this.txtUsername.TabIndex = 2;
@@ -66,42 +69,60 @@ namespace RosUI
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(121, 57);
+            this.lblUsername.Location = new System.Drawing.Point(118, 107);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 20);
             this.lblUsername.TabIndex = 3;
             this.lblUsername.Text = "Username";
             // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(118, 203);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(125, 27);
+            this.txtName.TabIndex = 4;
+            // 
             // txtPinCode
             // 
-            this.txtPinCode.Location = new System.Drawing.Point(120, 166);
+            this.txtPinCode.Location = new System.Drawing.Point(118, 262);
             this.txtPinCode.Name = "txtPinCode";
             this.txtPinCode.Size = new System.Drawing.Size(125, 27);
             this.txtPinCode.TabIndex = 5;
             // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(118, 172);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(49, 20);
+            this.lblName.TabIndex = 6;
+            this.lblName.Text = "Name";
+            // 
             // lblPinCode
             // 
             this.lblPinCode.AutoSize = true;
-            this.lblPinCode.Location = new System.Drawing.Point(120, 143);
+            this.lblPinCode.Location = new System.Drawing.Point(118, 237);
             this.lblPinCode.Name = "lblPinCode";
             this.lblPinCode.Size = new System.Drawing.Size(64, 20);
             this.lblPinCode.TabIndex = 7;
             this.lblPinCode.Text = "PinCode";
             // 
-            // Login
+            // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 453);
             this.Controls.Add(this.lblPinCode);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtPinCode);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblUsername);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.btnRegister);
-            this.Controls.Add(this.btnLogin);
-            this.Name = "Login";
+            this.Controls.Add(this.btnExit);
+            this.Name = "Registration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Login";
+            this.Text = "Registration";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,11 +130,13 @@ namespace RosUI
 
         #endregion
 
-        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUsername;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtPinCode;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblPinCode;
     }
 }

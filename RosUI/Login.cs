@@ -1,23 +1,56 @@
 ﻿using RosModel;
+using RosLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RosUI
 {
     public partial class Login : Form
     {
-        RosMain uIMain;
-        Employee employee;
+
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (txtUsername.Text == "" && txtPinCode.Text == "")
+            {
+                MessageBox.Show("*Please your username and password*");
+            }
+            else
+            {
+                if (txtUsername.Text == "")
+                {
+                    MessageBox.Show("*Please fill your username*");
+                    txtPinCode.Text = "";
+                    return;
+                }
+                if (txtPinCode.Text == "")
+                {
+                    MessageBox.Show("*Please fill your password*");
+                    txtUsername.Text = "";
+                    return;
+                }
+            }
+
+            if (CheckPassword())
+            {
+                Employee employee = new Employee();
+                EmployeeLogic employeeLogic = new EmployeeLogic();
+                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+
+                //if(employee.PinCode = txtPinCode.Text)
+                //{
+                    
+                //}
+
+                RosMain uIMain = new RosMain(employee);
+                this.Hide();
+                uIMain.Show();
+            }
+            else { return; }
         }
 
         private bool CheckPassword()
@@ -25,16 +58,10 @@ namespace RosUI
             return true;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void btnRegister_Click(object sender, EventArgs e)
         {
-            if (CheckPassword())
-            {
-                uIMain = new RosMain(employee);
-                this.Hide();
-                uIMain.Show();
-            }
-            else { return; }
-
+            this.Hide();
+            new Registration().Show();
         }
     }
 }
