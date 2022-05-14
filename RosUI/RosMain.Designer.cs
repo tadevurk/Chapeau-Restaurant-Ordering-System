@@ -54,6 +54,7 @@
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.pnlTableView = new System.Windows.Forms.Panel();
             this.btnTableOne = new System.Windows.Forms.Button();
+            this.btnTableTwo = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -87,21 +88,21 @@
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -252,6 +253,7 @@
             // 
             // pnlTableView
             // 
+            this.pnlTableView.Controls.Add(this.btnTableTwo);
             this.pnlTableView.Controls.Add(this.btnTableOne);
             this.pnlTableView.Location = new System.Drawing.Point(0, 28);
             this.pnlTableView.Name = "pnlTableView";
@@ -267,6 +269,16 @@
             this.btnTableOne.Text = "Table 1";
             this.btnTableOne.UseVisualStyleBackColor = true;
             this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
+            // 
+            // btnTableTwo
+            // 
+            this.btnTableTwo.Location = new System.Drawing.Point(274, 67);
+            this.btnTableTwo.Name = "btnTableTwo";
+            this.btnTableTwo.Size = new System.Drawing.Size(94, 29);
+            this.btnTableTwo.TabIndex = 1;
+            this.btnTableTwo.Text = "Table 2";
+            this.btnTableTwo.UseVisualStyleBackColor = true;
+            this.btnTableTwo.Click += new System.EventHandler(this.btnTableTwo_Click);
             // 
             // RosMain
             // 
@@ -322,5 +334,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.Panel pnlTableView;
         private System.Windows.Forms.Button btnTableOne;
+        private System.Windows.Forms.Button btnTableTwo;
     }
 }

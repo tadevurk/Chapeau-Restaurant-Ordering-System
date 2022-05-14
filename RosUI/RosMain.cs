@@ -110,6 +110,12 @@ namespace RosUI
             orderForm.ShowDialog();
         }
 
+        private void btnTableTwo_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(2);
+            OrderForm orderForm = new OrderForm(table);
 
+            orderForm.ShowDialog();
+        }
     }
 }
