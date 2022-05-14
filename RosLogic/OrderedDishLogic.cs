@@ -16,7 +16,10 @@ namespace RosLogic
         {
             orderedDishdb = new OrderedDishDAO();
         }
-
+        public List<OrderedDish> GetAllOrderedDish()
+        {
+            return orderedDishdb.GetAllOrderedDish();
+        }
         public void AddDish(OrderedDish orderedDish)
         {
             orderedDishdb.AddDish(orderedDish);

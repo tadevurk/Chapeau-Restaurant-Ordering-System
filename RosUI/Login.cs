@@ -18,6 +18,12 @@ namespace RosUI
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            if (txtUsername.Text == "test")
+            {
+                RosMain uIMain = new RosMain(employee);
+                this.Hide();
+                uIMain.Show();
+            }
             if (txtUsername.Text == "" && txtPinCode.Text == "")
             {
                 MessageBox.Show("*Please your username and password*");

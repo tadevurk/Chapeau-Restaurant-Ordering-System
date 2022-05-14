@@ -13,6 +13,12 @@ namespace RosModel
         public bool DishStatus { get; set; }
         public DateTime TimeDishOrdered { get; set; }
         public DateTime TimeDishDelivered { get; set; }
+
+        public int TableNumber { get; set; }
+
+        public string Course { get; set; }
+
+        public string Name { get; set; }
         public int OrderedDishAmount { get; set; }
         public string DishNote { get; set; }
     }

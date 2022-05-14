@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -59,6 +60,33 @@ namespace RosDAL
             SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.DishID) };
 
             ExecuteEditQuery(query, sqlParameters);
+        }
+
+        private List<OrderedDish> ReadTables(DataTable dataTable)
+        {
+            List<OrderedDish> dishes = new List<OrderedDish>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                OrderedDish dish = new OrderedDish()
+                {
+                    TableNumber = (int)dr["tableNumber"],
+                    Name = (string)dr["name"],
+                    TimeDishOrdered = (DateTime)dr["time"],
+                    Course = (string)dr["course"]
+                };
+                dishes.Add(dish);
+            }
+            return dishes;
+        }
+
+        public List<OrderedDish> GetAllOrderedDish()
+        {
+            string query = "SELECT O.TableNumber as tableNumber, I.ItemName as name, OD.TimeDishOrdered as [time], D.Course from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
+    " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID where OD.DishStatus = 0 order by OD.TimeDishOrdered; ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
     }
 }
