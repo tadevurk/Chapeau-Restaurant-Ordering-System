@@ -117,5 +117,69 @@ namespace RosUI
 
             orderForm.ShowDialog();
         }
+
+        private void btnTableThree_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(3);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableFour_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(4);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableFive_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(5);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableSix_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(6);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableSeven_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(7);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableEight_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(8);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableNine_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(9);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableTen_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(10);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
     }
 }
