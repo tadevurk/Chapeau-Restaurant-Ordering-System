@@ -10,10 +10,13 @@ namespace RosModel
     {
         public int OrderID { get; set; }
         public int DrinkID { get; set; }
+        public string Name { get; set; }
         public bool DrinkStatus { get; set; }
         public DateTime TimeDrinkOrdered { get; set; }
         public DateTime TimeDrinkDelivered { get; set; }
         public int OrderedDrinkAmount { get; set; }
+
+        public int TableNumber { get; set; }
         public string DrinkNote { get; set; }
     }
 }

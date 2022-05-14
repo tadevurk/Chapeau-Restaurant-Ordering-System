@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RosLogic;
 
 namespace RosUI
 {
@@ -33,6 +34,7 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlKitchenView.Show();
+                    UpdateDishes();
 
                     break;
 
@@ -47,6 +49,7 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlBarView.Show();
+                    UpdateDrinks();
 
                     break;
 
@@ -108,6 +111,39 @@ namespace RosUI
             OrderForm orderForm = new OrderForm(table);
 
             orderForm.ShowDialog();
+        }
+
+        private void UpdateDrinks()
+        {
+            OrderedDrinkLogic logic = new OrderedDrinkLogic();
+            List<OrderedDrink> orderedDrinks = logic.GetAllOrderedDrinks();
+
+            lvOrderedDrinks.Items.Clear();
+
+            foreach (OrderedDrink drink in orderedDrinks)
+            {
+                ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
+                li.SubItems.Add(drink.Name);
+                li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
+                lvOrderedDrinks.Items.Add(li);
+            }
+        }
+
+        private void UpdateDishes()
+        {
+            OrderedDishLogic logic = new OrderedDishLogic();
+            List<OrderedDish> orderedDrinks = logic.GetAllOrderedDish();
+
+            lvOrderedDishes.Items.Clear();
+
+            foreach (OrderedDish dish in orderedDrinks)
+            {
+                ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
+                li.SubItems.Add(dish.Name);
+                li.SubItems.Add(dish.TimeDishOrdered.ToString());
+                li.SubItems.Add(dish.Course);
+                lvOrderedDishes.Items.Add(li);
+            }
         }
 
 
