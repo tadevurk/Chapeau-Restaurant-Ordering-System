@@ -88,6 +88,7 @@ namespace RosUI
             this.txtPinCode.Name = "txtPinCode";
             this.txtPinCode.Size = new System.Drawing.Size(125, 27);
             this.txtPinCode.TabIndex = 5;
+            this.txtPinCode.UseSystemPasswordChar = true;
             // 
             // lblName
             // 
