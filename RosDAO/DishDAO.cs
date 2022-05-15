@@ -11,22 +11,52 @@ namespace RosDAL
 {
     public class DishDAO : BaseDAO
     {
-        public Dish GetDishById(int id)
-        {
-            return new Dish();
-        }
-
-        public List<Dish> GetAllStarters()
+        //Getting all Starters
+        public List<Dish> GetAllStarters() 
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
                 "where Dish.Course = 'Starter';";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadStarters(ExecuteSelectQuery(query, sqlParameters));
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+        }
+        
+        //Getting all Mains
+        public List<Dish> GetAllMains()
+        {
+            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish " +
+                "join Item on DishID = ItemID " +
+                "where Dish.Course = 'Main';";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public void DecrementStarterStock(Dish starter) // Change the amount of the dish (The question is DishID or OrderID??)
+        //Getting all Desserts
+        public List<Dish> GetAllDesserts()
+        {
+            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish " +
+                "join Item on DishID = ItemID " +
+                "where Dish.Course = 'Dessert';";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        //Getting all Entremets
+        public List<Dish> GetAllEntremets()
+        {
+            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish " +
+                "join Item on DishID = ItemID " +
+                "where Dish.Course = 'Entremes';";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        // Decrease the dish from stock
+        public void DecreaseDishStock(Dish dish)
         {
             string query = "Update Item " +
                 "SET ItemStock = ItemStock - 1 " +
@@ -34,15 +64,31 @@ namespace RosDAL
 
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@ItemID", starter.DishID)
+                new SqlParameter("@ItemID", dish.DishID)
             };
 
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        private List<Dish> ReadStarters(DataTable dataTable)
+        // Increase the dish from stock
+        public void IncreaseDishStock(Dish dish)
         {
-            List<Dish> starters = new List<Dish>();
+            string query = "Update Item " +
+                "SET ItemStock = ItemStock + 1  " +
+                "where ItemID = @ItemID; ";
+
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ItemID", dish.DishID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+
+        private List<Dish> ReadDishes(DataTable dataTable) // Reading the dishes
+        {
+            List<Dish> dishes = new List<Dish>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
@@ -53,14 +99,9 @@ namespace RosDAL
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemStock = (int)dr["ItemStock"]
                 };
-                starters.Add(starter);
+                dishes.Add(starter);
             }
-            return starters;
-        }
-
-        public Dish GetDishByCourse(string course)
-        {
-            return new Dish();
+            return dishes;
         }
     }
 }

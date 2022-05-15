@@ -11,19 +11,40 @@ namespace RosLogic
     public class DrinkLogic
     {
         DrinkDAO drinkDAO = new DrinkDAO();
-        public Drink GetDrinkById(int id)
+
+        public List<Drink> GetAllSoftDrinks()
         {
-            return drinkDAO.GetDrinkById(id);
+            return drinkDAO.GetAllSoftDrinks();
         }
 
-        public List<Drink> GetAllDrink()
+        public List<Drink> GetAllBeers()
         {
-            return drinkDAO.GetAllDrink();
+            return drinkDAO.GetAllBeers();
         }
 
-        public Drink GetDrinkByType(string type)
+        public List<Drink> GetAllWines()
         {
-            return drinkDAO.GetDrinkByType(type);
+            return drinkDAO.GetAllWines();
+        }
+
+        public List<Drink> GetAllSpirits()
+        {
+            return drinkDAO.GetAllSpirits();
+        }
+
+        public List<Drink> GetAllHotDrinks()
+        {
+            return drinkDAO.GetAllHotDrinks();
+        }
+
+        public void IncreaseDrinkStock(Drink drink)
+        {
+            drinkDAO.IncreaseDrinkStock(drink);
+        }
+
+        public void DecreaseDrinkStock(Drink drink)
+        {
+            drinkDAO.DecreaseDrinkStock(drink);
         }
     }
 }

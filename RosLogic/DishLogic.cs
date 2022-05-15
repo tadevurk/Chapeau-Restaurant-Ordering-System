@@ -11,23 +11,34 @@ namespace RosLogic
     public class DishLogic
     {
         DishDAO dishDAO = new DishDAO();
-        public Dish GetDishById(int id)
-        {
-            return dishDAO.GetDishById(id);
-        }
 
         public List<Dish> GetAllStarters()
         {
             return dishDAO.GetAllStarters();
         }
 
-        public void DecrementStarterStock(Dish starter)
+        public List<Dish> GetAllMains()
         {
-            dishDAO.DecrementStarterStock(starter);
+            return dishDAO.GetAllMains();
         }
-        public Dish GetDishByCourse(string course)
+
+        public List<Dish> GetAllDesserts()
         {
-            return dishDAO.GetDishByCourse(course);
+            return dishDAO.GetAllDesserts();
+        }
+
+        public List<Dish> GetAllEntremets()
+        {
+            return dishDAO.GetAllEntremets();
+        }
+        public void IncreaseDishStock(Dish dish)
+        {
+            dishDAO.IncreaseDishStock(dish);
+        }
+
+        public void DecreaseDishStock(Dish dish)
+        {
+            dishDAO.DecreaseDishStock(dish);
         }
     }
 }
