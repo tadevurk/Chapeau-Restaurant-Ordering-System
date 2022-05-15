@@ -53,7 +53,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp);
+                MessageBox.Show("Error Occorred: " + exp.Message);
                 WriteError(exp, exp.Message);
             }
         }
@@ -67,7 +67,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp);
+                MessageBox.Show("Error Occorred: " + exp.Message);
                 WriteError(exp, exp.Message);
             }
         }
