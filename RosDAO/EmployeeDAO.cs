@@ -17,28 +17,28 @@ namespace RosDAL
 
         public Employee GetEmployeeById(int emplID)
         {
-            string query = $"SELECT EmplID, Name, Username, PinCode FROM [Employee] WHERE EmplID = {emplID} ORDER BY [EmplID]";
+            string query = $"SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] WHERE EmplID = {emplID} ORDER BY [EmplID]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public Employee GetLastEmployeeID()
         {
-            string query = "SELECT TOP 1 EmplID, Name, Username, PinCode FROM Employee ORDER BY EmplID DESC";
+            string query = "SELECT TOP 1 EmplID, Name, Username, Salt, Digest FROM Employee ORDER BY EmplID DESC";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public List<Employee> GetAllEmployees()
         {
-            string query = "SELECT EmplID, Name, Username, PinCode FROM [Employee] ORDER BY [EmplID]";
+            string query = "SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] ORDER BY [EmplID]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public Employee GetEmployeeByUsername(string username)
         {
-            string query = $"SELECT EmplID, Name, Username, PinCode FROM [Employee] WHERE Username = '{username}';";
+            string query = $"SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] WHERE Username = '{username}';";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -53,8 +53,9 @@ namespace RosDAL
                 {
                     employee.EmplID = (int)dr["EmplID"];
                     employee.Name = (string)dr["Name"].ToString();
-                    employee.PinCode = (int)dr["PinCode"];
                     employee.Username = (string)dr["Username"].ToString();
+                    employee.Salt = (string)dr["Salt"].ToString();
+                    employee.Digest = (string)dr["Digest"].ToString();
                 };
                 employees.Add(employee);
             }
@@ -69,8 +70,9 @@ namespace RosDAL
             {               
                 employee.EmplID = (int)dr["EmplID"];
                 employee.Name = (string)dr["Name"].ToString();
-                employee.PinCode = (int)dr["PinCode"];
                 employee.Username = (string)dr["Username"].ToString();
+                employee.Salt = (string)dr["Salt"].ToString();
+                employee.Digest = (string)dr["Digest"].ToString();
             }
             return employee;
         }
@@ -80,12 +82,13 @@ namespace RosDAL
             conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Employee VALUES(@EmplID, @Name, @PinCode, @Username);", conn);
+                SqlCommand command = new SqlCommand("INSERT INTO Employee VALUES(@EmplID, @Name, @Username, @Salt, @Digest);", conn);
 
                 command.Parameters.AddWithValue("@EmplID", employee.EmplID);
                 command.Parameters.AddWithValue("@Name", employee.Name);
-                command.Parameters.AddWithValue("@PinCode", employee.PinCode);
                 command.Parameters.AddWithValue("@Username", employee.Username);
+                command.Parameters.AddWithValue("@Salt", employee.Salt);
+                command.Parameters.AddWithValue("@Digest", employee.Digest);
 
                 int nrOfRowsAffected = command.ExecuteNonQuery();
             }
@@ -94,8 +97,6 @@ namespace RosDAL
                 throw new Exception("*Failed to register user*" + e.Message);
             }
             conn.Close();
-        }
-
-        
+        }        
     }
 }

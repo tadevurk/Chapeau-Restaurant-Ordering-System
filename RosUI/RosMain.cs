@@ -8,16 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RosLogic;
 
 namespace RosUI
 {
     public partial class RosMain : Form
     {
         Employee employee = new Employee();
-        OrderedDishLogic dishLogic = new OrderedDishLogic();
-        OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
-
         public RosMain(Employee employee)
         {
             InitializeComponent();
@@ -37,7 +33,6 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlKitchenView.Show();
-                    UpdateDishes();
 
                     break;
 
@@ -52,7 +47,6 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlBarView.Show();
-                    UpdateDrinks();
 
                     break;
 
@@ -111,65 +105,81 @@ namespace RosUI
         private void btnTableOne_Click(object sender, EventArgs e)
         {
             Table table = new Table(1);
-            FormOrder orderForm = new FormOrder(table);
+            OrderForm orderForm = new OrderForm(table);
 
             orderForm.ShowDialog();
         }
 
-        private void UpdateDrinks()
+        private void btnTableTwo_Click(object sender, EventArgs e)
         {
-            List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
+            Table table = new Table(2);
+            OrderForm orderForm = new OrderForm(table);
 
-            lvOrderedDrinks.Items.Clear();
-
-            foreach (OrderedDrink drink in orderedDrinks)
-            {
-                ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
-                li.SubItems.Add(drink.Name);
-                li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
-                li.Tag = drink;
-                lvOrderedDrinks.Items.Add(li);
-            }
+            orderForm.ShowDialog();
         }
 
-        private void UpdateDishes()
+        private void btnTableThree_Click(object sender, EventArgs e)
         {
-            
-            List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
+            Table table = new Table(3);
+            OrderForm orderForm = new OrderForm(table);
 
-            lvOrderedDishes.Items.Clear();
-
-            foreach (OrderedDish dish in orderedDishes)
-            {
-                ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
-                li.SubItems.Add(dish.Name);
-                li.SubItems.Add(dish.TimeDishOrdered.ToString());
-                li.SubItems.Add(dish.Course);
-                li.Tag = dish;
-                lvOrderedDishes.Items.Add(li);
-            }
+            orderForm.ShowDialog();
         }
 
-        private void btnDrinkReady_Click(object sender, EventArgs e)
+        private void btnTableFour_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
-            {
-                OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                drinkLogic.UpdateDrinkStatus(drink);
-            }
+            Table table = new Table(4);
+            OrderForm orderForm = new OrderForm(table);
 
-            UpdateDrinks();
+            orderForm.ShowDialog();
         }
 
-        private void btnDishReady_Click(object sender, EventArgs e)
+        private void btnTableFive_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
-            {
-                OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                dishLogic.UpdateDishStatus(dish);
-            }
+            Table table = new Table(5);
+            OrderForm orderForm = new OrderForm(table);
 
-            UpdateDishes();
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableSix_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(6);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableSeven_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(7);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableEight_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(8);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableNine_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(9);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
+        }
+
+        private void btnTableTen_Click(object sender, EventArgs e)
+        {
+            Table table = new Table(10);
+            OrderForm orderForm = new OrderForm(table);
+
+            orderForm.ShowDialog();
         }
     }
 }
