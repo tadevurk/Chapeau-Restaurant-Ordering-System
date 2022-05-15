@@ -105,7 +105,7 @@ namespace RosUI
         private void btnTableOne_Click(object sender, EventArgs e)
         {
             Table table = new Table(1);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
