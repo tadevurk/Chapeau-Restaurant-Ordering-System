@@ -1,5 +1,6 @@
 ﻿using RosModel;
 using System;
+using RosLogic;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,15 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace RosUI
 {
     public partial class RosMain : Form
     {
         Employee employee = new Employee();
+        OrderedDishLogic dishLogic = new OrderedDishLogic();
+        OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         public RosMain(Employee employee)
         {
             InitializeComponent();
-            this.employee = employee;         
+            this.employee = employee;
         }
 
         private void RosMain_Load(object sender, EventArgs e)
@@ -33,6 +37,7 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlKitchenView.Show();
+                    UpdateDishes();
 
                     break;
 
@@ -47,6 +52,7 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlBarView.Show();
+                    UpdateDrinks();
 
                     break;
 
@@ -59,7 +65,7 @@ namespace RosUI
 
 
             }
-                
+
         }
 
         private void HideAllPanels()
@@ -105,7 +111,7 @@ namespace RosUI
         private void btnTableOne_Click(object sender, EventArgs e)
         {
             Table table = new Table(1);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -113,7 +119,7 @@ namespace RosUI
         private void btnTableTwo_Click(object sender, EventArgs e)
         {
             Table table = new Table(2);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -121,7 +127,7 @@ namespace RosUI
         private void btnTableThree_Click(object sender, EventArgs e)
         {
             Table table = new Table(3);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -129,7 +135,7 @@ namespace RosUI
         private void btnTableFour_Click(object sender, EventArgs e)
         {
             Table table = new Table(4);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -137,7 +143,7 @@ namespace RosUI
         private void btnTableFive_Click(object sender, EventArgs e)
         {
             Table table = new Table(5);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -145,7 +151,7 @@ namespace RosUI
         private void btnTableSix_Click(object sender, EventArgs e)
         {
             Table table = new Table(6);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -153,7 +159,7 @@ namespace RosUI
         private void btnTableSeven_Click(object sender, EventArgs e)
         {
             Table table = new Table(7);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -161,7 +167,7 @@ namespace RosUI
         private void btnTableEight_Click(object sender, EventArgs e)
         {
             Table table = new Table(8);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -169,7 +175,7 @@ namespace RosUI
         private void btnTableNine_Click(object sender, EventArgs e)
         {
             Table table = new Table(9);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
         }
@@ -177,9 +183,64 @@ namespace RosUI
         private void btnTableTen_Click(object sender, EventArgs e)
         {
             Table table = new Table(10);
-            OrderForm orderForm = new OrderForm(table);
+            FormOrder orderForm = new FormOrder(table);
 
             orderForm.ShowDialog();
+        }
+        private void UpdateDrinks()
+        {
+            List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
+
+            lvOrderedDrinks.Items.Clear();
+
+            foreach (OrderedDrink drink in orderedDrinks)
+            {
+                ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
+                li.SubItems.Add(drink.Name);
+                li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
+                li.Tag = drink;
+                lvOrderedDrinks.Items.Add(li);
+            }
+        }
+
+        private void UpdateDishes()
+        {
+
+            List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
+
+            lvOrderedDishes.Items.Clear();
+
+            foreach (OrderedDish dish in orderedDishes)
+            {
+                ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
+                li.SubItems.Add(dish.Name);
+                li.SubItems.Add(dish.TimeDishOrdered.ToString());
+                li.SubItems.Add(dish.Course);
+                li.Tag = dish;
+                lvOrderedDishes.Items.Add(li);
+            }
+        }
+
+        private void btnDrinkReady_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+            {
+                OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                drinkLogic.UpdateDrinkStatus(drink);
+            }
+
+            UpdateDrinks();
+        }
+
+        private void btnDishReady_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+            {
+                OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                dishLogic.UpdateDishStatus(dish);
+            }
+
+            UpdateDishes();
         }
     }
 }

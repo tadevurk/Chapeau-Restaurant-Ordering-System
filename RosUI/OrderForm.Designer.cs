@@ -1,7 +1,7 @@
 ﻿
 namespace RosUI
 {
-    partial class OrderForm
+    partial class FormOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -29,26 +29,30 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.lboxOrderList = new System.Windows.Forms.ListBox();
             this.btnStarters = new System.Windows.Forms.Button();
             this.btnMains = new System.Windows.Forms.Button();
             this.btnDesserts = new System.Windows.Forms.Button();
             this.btnDrinks = new System.Windows.Forms.Button();
-            this.btnCheckOrder = new System.Windows.Forms.Button();
-            this.btnRemoveItem = new System.Windows.Forms.Button();
+            this.btnSendOrder = new System.Windows.Forms.Button();
+            this.btnCancelOrder = new System.Windows.Forms.Button();
             this.btnMenu = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lblTableNumber = new System.Windows.Forms.Label();
+            this.listviewOrder = new System.Windows.Forms.ListView();
+            this.nameOrder = new System.Windows.Forms.ColumnHeader();
+            this.priceOrder = new System.Windows.Forms.ColumnHeader();
+            this.amountOrder = new System.Windows.Forms.ColumnHeader();
+            this.btnOrderAdd = new System.Windows.Forms.Button();
+            this.btnOrderRemove = new System.Windows.Forms.Button();
+            this.btnOrderAddNote = new System.Windows.Forms.Button();
+            this.pnlStarters = new System.Windows.Forms.Panel();
+            this.btnAddStarter = new System.Windows.Forms.Button();
+            this.lblStartersHead = new System.Windows.Forms.Label();
+            this.listviewStarters = new System.Windows.Forms.ListView();
+            this.Name = new System.Windows.Forms.ColumnHeader();
+            this.Price = new System.Windows.Forms.ColumnHeader();
+            this.pnlStarters.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lboxOrderList
-            // 
-            this.lboxOrderList.FormattingEnabled = true;
-            this.lboxOrderList.ItemHeight = 20;
-            this.lboxOrderList.Location = new System.Drawing.Point(12, 56);
-            this.lboxOrderList.Name = "lboxOrderList";
-            this.lboxOrderList.Size = new System.Drawing.Size(616, 204);
-            this.lboxOrderList.TabIndex = 0;
             // 
             // btnStarters
             // 
@@ -88,33 +92,34 @@ namespace RosUI
             this.btnDrinks.UseVisualStyleBackColor = true;
             this.btnDrinks.Click += new System.EventHandler(this.btnDrinks_Click);
             // 
-            // btnCheckOrder
+            // btnSendOrder
             // 
-            this.btnCheckOrder.BackColor = System.Drawing.Color.Green;
-            this.btnCheckOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnCheckOrder.ForeColor = System.Drawing.Color.White;
-            this.btnCheckOrder.Location = new System.Drawing.Point(16, 391);
-            this.btnCheckOrder.Name = "btnCheckOrder";
-            this.btnCheckOrder.Size = new System.Drawing.Size(278, 52);
-            this.btnCheckOrder.TabIndex = 8;
-            this.btnCheckOrder.Text = "CHECK ORDER";
-            this.btnCheckOrder.UseVisualStyleBackColor = false;
+            this.btnSendOrder.BackColor = System.Drawing.Color.Green;
+            this.btnSendOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnSendOrder.ForeColor = System.Drawing.Color.White;
+            this.btnSendOrder.Location = new System.Drawing.Point(16, 702);
+            this.btnSendOrder.Name = "btnSendOrder";
+            this.btnSendOrder.Size = new System.Drawing.Size(278, 52);
+            this.btnSendOrder.TabIndex = 8;
+            this.btnSendOrder.Text = "SEND ORDER";
+            this.btnSendOrder.UseVisualStyleBackColor = false;
             // 
-            // btnRemoveItem
+            // btnCancelOrder
             // 
-            this.btnRemoveItem.BackColor = System.Drawing.Color.Red;
-            this.btnRemoveItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnRemoveItem.ForeColor = System.Drawing.Color.White;
-            this.btnRemoveItem.Location = new System.Drawing.Point(350, 391);
-            this.btnRemoveItem.Name = "btnRemoveItem";
-            this.btnRemoveItem.Size = new System.Drawing.Size(278, 52);
-            this.btnRemoveItem.TabIndex = 9;
-            this.btnRemoveItem.Text = "REMOVE ITEM";
-            this.btnRemoveItem.UseVisualStyleBackColor = false;
+            this.btnCancelOrder.BackColor = System.Drawing.Color.Red;
+            this.btnCancelOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnCancelOrder.ForeColor = System.Drawing.Color.White;
+            this.btnCancelOrder.Location = new System.Drawing.Point(350, 702);
+            this.btnCancelOrder.Name = "btnCancelOrder";
+            this.btnCancelOrder.Size = new System.Drawing.Size(278, 52);
+            this.btnCancelOrder.TabIndex = 9;
+            this.btnCancelOrder.Text = "CANCEL";
+            this.btnCancelOrder.UseVisualStyleBackColor = false;
+            this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
             // 
             // btnMenu
             // 
-            this.btnMenu.Location = new System.Drawing.Point(624, 12);
+            this.btnMenu.Location = new System.Drawing.Point(612, 12);
             this.btnMenu.Name = "btnMenu";
             this.btnMenu.Size = new System.Drawing.Size(103, 29);
             this.btnMenu.TabIndex = 10;
@@ -139,39 +144,168 @@ namespace RosUI
             this.lblTableNumber.TabIndex = 12;
             this.lblTableNumber.Text = "table #";
             // 
-            // OrderForm
+            // listviewOrder
+            // 
+            this.listviewOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameOrder,
+            this.priceOrder,
+            this.amountOrder});
+            this.listviewOrder.HideSelection = false;
+            this.listviewOrder.Location = new System.Drawing.Point(16, 55);
+            this.listviewOrder.Name = "listviewOrder";
+            this.listviewOrder.Size = new System.Drawing.Size(612, 222);
+            this.listviewOrder.TabIndex = 13;
+            this.listviewOrder.UseCompatibleStateImageBehavior = false;
+            this.listviewOrder.View = System.Windows.Forms.View.Details;
+            // 
+            // nameOrder
+            // 
+            this.nameOrder.Text = "Name";
+            this.nameOrder.Width = 450;
+            // 
+            // priceOrder
+            // 
+            this.priceOrder.Text = "Price";
+            this.priceOrder.Width = 75;
+            // 
+            // amountOrder
+            // 
+            this.amountOrder.Text = "Amount";
+            this.amountOrder.Width = 75;
+            // 
+            // btnOrderAdd
+            // 
+            this.btnOrderAdd.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnOrderAdd.Location = new System.Drawing.Point(663, 67);
+            this.btnOrderAdd.Name = "btnOrderAdd";
+            this.btnOrderAdd.Size = new System.Drawing.Size(151, 45);
+            this.btnOrderAdd.TabIndex = 14;
+            this.btnOrderAdd.Text = "+";
+            this.btnOrderAdd.UseVisualStyleBackColor = true;
+            this.btnOrderAdd.Click += new System.EventHandler(this.btnOrderAdd_Click);
+            // 
+            // btnOrderRemove
+            // 
+            this.btnOrderRemove.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btnOrderRemove.Location = new System.Drawing.Point(663, 132);
+            this.btnOrderRemove.Name = "btnOrderRemove";
+            this.btnOrderRemove.Size = new System.Drawing.Size(151, 45);
+            this.btnOrderRemove.TabIndex = 15;
+            this.btnOrderRemove.Text = "-";
+            this.btnOrderRemove.UseVisualStyleBackColor = true;
+            this.btnOrderRemove.Click += new System.EventHandler(this.btnOrderRemove_Click);
+            // 
+            // btnOrderAddNote
+            // 
+            this.btnOrderAddNote.Location = new System.Drawing.Point(663, 230);
+            this.btnOrderAddNote.Name = "btnOrderAddNote";
+            this.btnOrderAddNote.Size = new System.Drawing.Size(151, 60);
+            this.btnOrderAddNote.TabIndex = 16;
+            this.btnOrderAddNote.Text = "Add Note";
+            this.btnOrderAddNote.UseVisualStyleBackColor = true;
+            // 
+            // pnlStarters
+            // 
+            this.pnlStarters.Controls.Add(this.btnAddStarter);
+            this.pnlStarters.Controls.Add(this.lblStartersHead);
+            this.pnlStarters.Controls.Add(this.listviewStarters);
+            this.pnlStarters.Location = new System.Drawing.Point(25, 385);
+            this.pnlStarters.Name = "pnlStarters";
+            this.pnlStarters.Size = new System.Drawing.Size(816, 299);
+            this.pnlStarters.TabIndex = 17;
+            // 
+            // btnAddStarter
+            // 
+            this.btnAddStarter.Location = new System.Drawing.Point(628, 98);
+            this.btnAddStarter.Name = "btnAddStarter";
+            this.btnAddStarter.Size = new System.Drawing.Size(151, 112);
+            this.btnAddStarter.TabIndex = 15;
+            this.btnAddStarter.Text = "Add";
+            this.btnAddStarter.UseVisualStyleBackColor = true;
+            this.btnAddStarter.Click += new System.EventHandler(this.btnAddStarter_Click);
+            // 
+            // lblStartersHead
+            // 
+            this.lblStartersHead.AutoSize = true;
+            this.lblStartersHead.Location = new System.Drawing.Point(14, 13);
+            this.lblStartersHead.Name = "lblStartersHead";
+            this.lblStartersHead.Size = new System.Drawing.Size(75, 20);
+            this.lblStartersHead.TabIndex = 1;
+            this.lblStartersHead.Text = "STARTERS";
+            // 
+            // listviewStarters
+            // 
+            this.listviewStarters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Name,
+            this.Price});
+            this.listviewStarters.HideSelection = false;
+            this.listviewStarters.Location = new System.Drawing.Point(14, 48);
+            this.listviewStarters.Name = "listviewStarters";
+            this.listviewStarters.Size = new System.Drawing.Size(571, 237);
+            this.listviewStarters.TabIndex = 0;
+            this.listviewStarters.UseCompatibleStateImageBehavior = false;
+            this.listviewStarters.View = System.Windows.Forms.View.Details;
+            // 
+            // Name
+            // 
+            this.Name.Text = "Name";
+            this.Name.Width = 450;
+            // 
+            // Price
+            // 
+            this.Price.Text = "Price";
+            this.Price.Width = 120;
+            // 
+            // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(853, 490);
+            this.ClientSize = new System.Drawing.Size(853, 766);
+            this.Controls.Add(this.btnOrderAddNote);
+            this.Controls.Add(this.btnOrderRemove);
+            this.Controls.Add(this.btnOrderAdd);
+            this.Controls.Add(this.listviewOrder);
             this.Controls.Add(this.lblTableNumber);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnMenu);
-            this.Controls.Add(this.btnRemoveItem);
-            this.Controls.Add(this.btnCheckOrder);
+            this.Controls.Add(this.btnCancelOrder);
+            this.Controls.Add(this.btnSendOrder);
             this.Controls.Add(this.btnDrinks);
             this.Controls.Add(this.btnDesserts);
             this.Controls.Add(this.btnMains);
             this.Controls.Add(this.btnStarters);
-            this.Controls.Add(this.lboxOrderList);
-            this.Name = "OrderForm";
+            this.Controls.Add(this.pnlStarters);
             this.Text = "OrderForm";
+            this.Load += new System.EventHandler(this.OrderForm_Load);
+            this.pnlStarters.ResumeLayout(false);
+            this.pnlStarters.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox lboxOrderList;
         private System.Windows.Forms.Button btnStarters;
         private System.Windows.Forms.Button btnMains;
         private System.Windows.Forms.Button btnDesserts;
         private System.Windows.Forms.Button btnDrinks;
-        private System.Windows.Forms.Button btnCheckOrder;
-        private System.Windows.Forms.Button btnRemoveItem;
+        private System.Windows.Forms.Button btnSendOrder;
+        private System.Windows.Forms.Button btnCancelOrder;
         private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Label lblTableNumber;
+        private System.Windows.Forms.ListView listviewOrder;
+        private System.Windows.Forms.Button btnOrderAdd;
+        private System.Windows.Forms.Button btnOrderRemove;
+        private System.Windows.Forms.Button btnOrderAddNote;
+        private System.Windows.Forms.Panel pnlStarters;
+        private System.Windows.Forms.Button btnAddStarter;
+        private System.Windows.Forms.Label lblStartersHead;
+        private System.Windows.Forms.ListView listviewStarters;
+        private System.Windows.Forms.ColumnHeader Name;
+        private System.Windows.Forms.ColumnHeader Price;
+        private System.Windows.Forms.ColumnHeader nameOrder;
+        private System.Windows.Forms.ColumnHeader priceOrder;
+        private System.Windows.Forms.ColumnHeader amountOrder;
     }
 }

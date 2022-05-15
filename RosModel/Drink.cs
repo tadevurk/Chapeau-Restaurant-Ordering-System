@@ -8,7 +8,10 @@ namespace RosModel
 {
     public class Drink : Item
     {
-        int Amount { get; set; }
+        public int DrinkID { get; set; }
+        public int AmountType { get; set; }
+        public string DrinkTypeID { get; set; }
+        public string DrinkCategory { get; set; }
 
     }
 }

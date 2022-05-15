@@ -16,7 +16,15 @@ namespace RosLogic
         {
             orderedDrinkdb = new OrderedDrinkDAO();
         }
+        public List<OrderedDrink> GetAllOrderedDrinks()
+        {
+            return orderedDrinkdb.GetAllOrderedDrinks();
+        }
 
+        public void UpdateDrinkStatus(OrderedDrink orderedDrink)
+        {
+            orderedDrinkdb.UpdateDrinkStatus(orderedDrink);
+        }
         public void AddDrink(OrderedDrink orderedDrink)
         {
             orderedDrinkdb.AddDrink(orderedDrink);

@@ -1,16 +1,16 @@
-﻿using RosDAL;
-using RosModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RosModel;
+using RosDAL;
 
 namespace RosLogic
 {
     public class EmployeeLogic
     {
-        EmployeeDAO employeedb = new EmployeeDAO();    
+        EmployeeDAO employeedb = new EmployeeDAO();
         public Employee GetEmployeeById(int id)
         {
             return employeedb.GetEmployeeById(id);
