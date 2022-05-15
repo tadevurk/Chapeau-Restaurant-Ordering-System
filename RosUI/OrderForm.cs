@@ -73,6 +73,49 @@ namespace RosUI
 
         private void btnAddStarter_Click(object sender, EventArgs e)
         {
+            AddStarterFunction();
+            // Decrese from stock
+        }
+        private void btnOrderAdd_Click(object sender, EventArgs e)
+        {
+            // Increase the amount of the selected item from ordered list
+            listviewOrder.FullRowSelect = true;
+            ListViewItem selectedStarter = listviewOrder.SelectedItems[0];
+
+            int amount = int.Parse(selectedStarter.SubItems[2].Text);
+            amount++;
+            selectedStarter.SubItems[2].Text = amount.ToString();
+
+            //Decrease from stock
+        }
+
+        private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
+        {
+            listviewOrder.Items.Clear();
+            
+            // Everything should go again to database. (INCREASE STOCK AGAIN)
+        }
+
+        private void btnOrderRemove_Click(object sender, EventArgs e)
+        {
+
+            ListViewItem selectedOrderedStarter = listviewOrder.SelectedItems[0]; // Remove the ORDERED STARTER FROM ORDER LIST
+
+            int amount = int.Parse(selectedOrderedStarter.SubItems[2].Text);
+            if (amount == 1)
+            {
+                listviewOrder.Items.RemoveAt(selectedOrderedStarter.Index);
+            }
+            else
+            {
+                amount--;
+                selectedOrderedStarter.SubItems[2].Text = amount.ToString();
+            }
+            // Increase stock
+        }
+
+        private void AddStarterFunction()
+        {
             listviewStarters.FullRowSelect = true;
             ListViewItem selectedStarter = listviewStarters.SelectedItems[0];
             Dish starter = (Dish)selectedStarter.Tag;
@@ -97,42 +140,6 @@ namespace RosUI
                 li.SubItems.Add(amount.ToString());
                 listviewOrder.Items.Add(li);
             }
-
-            // Decrese from stock
-        }
-
-        private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
-        {
-            listviewOrder.Items.Clear();
-        }
-
-        private void btnOrderRemove_Click(object sender, EventArgs e)
-        {
-            
-            ListViewItem selectedOrderedStarter = listviewOrder.SelectedItems[0]; // Remove the ORDERED STARTER FROM ORDER LIST
-
-            int amount = int.Parse(selectedOrderedStarter.SubItems[2].Text);
-            if (amount == 1)
-            {
-                listviewOrder.Items.RemoveAt(selectedOrderedStarter.Index);
-            }
-            else
-            {
-                amount--;
-                selectedOrderedStarter.SubItems[2].Text = amount.ToString();
-            }
-
-            
-
-            // Increase stock
-        }
-
-        private void btnOrderAdd_Click(object sender, EventArgs e)
-        {
-            // Increase the amount of the selected item from ordered list
-            ListViewItem selectedStarter = listviewOrder.SelectedItems[0];
-
-            Dish orderedDish = (Dish)selectedStarter.Tag;
         }
     }
 }
