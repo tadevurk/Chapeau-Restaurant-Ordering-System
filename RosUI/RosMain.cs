@@ -15,6 +15,9 @@ namespace RosUI
     public partial class RosMain : Form
     {
         Employee employee = new Employee();
+        OrderedDishLogic dishLogic = new OrderedDishLogic();
+        OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
+
         public RosMain(Employee employee)
         {
             InitializeComponent();
@@ -115,8 +118,7 @@ namespace RosUI
 
         private void UpdateDrinks()
         {
-            OrderedDrinkLogic logic = new OrderedDrinkLogic();
-            List<OrderedDrink> orderedDrinks = logic.GetAllOrderedDrinks();
+            List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
 
             lvOrderedDrinks.Items.Clear();
 
@@ -125,27 +127,49 @@ namespace RosUI
                 ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
                 li.SubItems.Add(drink.Name);
                 li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
+                li.Tag = drink;
                 lvOrderedDrinks.Items.Add(li);
             }
         }
 
         private void UpdateDishes()
         {
-            OrderedDishLogic logic = new OrderedDishLogic();
-            List<OrderedDish> orderedDrinks = logic.GetAllOrderedDish();
+            
+            List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
 
             lvOrderedDishes.Items.Clear();
 
-            foreach (OrderedDish dish in orderedDrinks)
+            foreach (OrderedDish dish in orderedDishes)
             {
                 ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
                 li.SubItems.Add(dish.Name);
                 li.SubItems.Add(dish.TimeDishOrdered.ToString());
                 li.SubItems.Add(dish.Course);
+                li.Tag = dish;
                 lvOrderedDishes.Items.Add(li);
             }
         }
 
+        private void btnDrinkReady_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+            {
+                OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                drinkLogic.UpdateDrinkStatus(drink);
+            }
 
+            UpdateDrinks();
+        }
+
+        private void btnDishReady_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+            {
+                OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                dishLogic.UpdateDishStatus(dish);
+            }
+
+            UpdateDishes();
+        }
     }
 }

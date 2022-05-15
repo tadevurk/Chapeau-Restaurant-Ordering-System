@@ -39,7 +39,7 @@
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.pnlKitchenView = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDishReady = new System.Windows.Forms.Button();
             this.lvOrderedDishes = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -47,11 +47,11 @@
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.pnlBarView = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.brnDrinkReady = new System.Windows.Forms.Button();
             this.lvOrderedDrinks = new System.Windows.Forms.ListView();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.clTable = new System.Windows.Forms.ColumnHeader();
+            this.clDrinks = new System.Windows.Forms.ColumnHeader();
+            this.clOrderTime = new System.Windows.Forms.ColumnHeader();
             this.pnlTableView = new System.Windows.Forms.Panel();
             this.btnTableOne = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
@@ -87,21 +87,21 @@
             // dashboardToolStripMenuItem
             // 
             this.dashboardToolStripMenuItem.Name = "dashboardToolStripMenuItem";
-            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.dashboardToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.dashboardToolStripMenuItem.Text = "Dashboard";
             this.dashboardToolStripMenuItem.Click += new System.EventHandler(this.dashboardToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -136,7 +136,7 @@
             // pnlKitchenView
             // 
             this.pnlKitchenView.Controls.Add(this.label1);
-            this.pnlKitchenView.Controls.Add(this.button1);
+            this.pnlKitchenView.Controls.Add(this.btnDishReady);
             this.pnlKitchenView.Controls.Add(this.lvOrderedDishes);
             this.pnlKitchenView.Location = new System.Drawing.Point(0, 28);
             this.pnlKitchenView.Name = "pnlKitchenView";
@@ -152,14 +152,15 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Kitchen View";
             // 
-            // button1
+            // btnDishReady
             // 
-            this.button1.Location = new System.Drawing.Point(1031, 518);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Ready!";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnDishReady.Location = new System.Drawing.Point(1031, 518);
+            this.btnDishReady.Name = "btnDishReady";
+            this.btnDishReady.Size = new System.Drawing.Size(149, 30);
+            this.btnDishReady.TabIndex = 3;
+            this.btnDishReady.Text = "Ready!";
+            this.btnDishReady.UseVisualStyleBackColor = true;
+            this.btnDishReady.Click += new System.EventHandler(this.btnDishReady_Click);
             // 
             // lvOrderedDishes
             // 
@@ -168,6 +169,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.lvOrderedDishes.FullRowSelect = true;
             this.lvOrderedDishes.HideSelection = false;
             this.lvOrderedDishes.Location = new System.Drawing.Point(43, 58);
             this.lvOrderedDishes.Name = "lvOrderedDishes";
@@ -197,7 +199,7 @@
             // pnlBarView
             // 
             this.pnlBarView.Controls.Add(this.label2);
-            this.pnlBarView.Controls.Add(this.button2);
+            this.pnlBarView.Controls.Add(this.brnDrinkReady);
             this.pnlBarView.Controls.Add(this.lvOrderedDrinks);
             this.pnlBarView.Location = new System.Drawing.Point(0, 34);
             this.pnlBarView.Name = "pnlBarView";
@@ -213,21 +215,23 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Bar View";
             // 
-            // button2
+            // brnDrinkReady
             // 
-            this.button2.Location = new System.Drawing.Point(1031, 518);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(149, 30);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Ready!";
-            this.button2.UseVisualStyleBackColor = true;
+            this.brnDrinkReady.Location = new System.Drawing.Point(1031, 518);
+            this.brnDrinkReady.Name = "brnDrinkReady";
+            this.brnDrinkReady.Size = new System.Drawing.Size(149, 30);
+            this.brnDrinkReady.TabIndex = 3;
+            this.brnDrinkReady.Text = "Ready!";
+            this.brnDrinkReady.UseVisualStyleBackColor = true;
+            this.brnDrinkReady.Click += new System.EventHandler(this.btnDrinkReady_Click);
             // 
             // lvOrderedDrinks
             // 
             this.lvOrderedDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7});
+            this.clTable,
+            this.clDrinks,
+            this.clOrderTime});
+            this.lvOrderedDrinks.FullRowSelect = true;
             this.lvOrderedDrinks.HideSelection = false;
             this.lvOrderedDrinks.Location = new System.Drawing.Point(43, 58);
             this.lvOrderedDrinks.Name = "lvOrderedDrinks";
@@ -236,19 +240,19 @@
             this.lvOrderedDrinks.UseCompatibleStateImageBehavior = false;
             this.lvOrderedDrinks.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader5
+            // clTable
             // 
-            this.columnHeader5.Text = "Table";
+            this.clTable.Text = "Table";
             // 
-            // columnHeader6
+            // clDrinks
             // 
-            this.columnHeader6.Text = "Drinks";
-            this.columnHeader6.Width = 800;
+            this.clDrinks.Text = "Drinks";
+            this.clDrinks.Width = 800;
             // 
-            // columnHeader7
+            // clOrderTime
             // 
-            this.columnHeader7.Text = "Order Time";
-            this.columnHeader7.Width = 200;
+            this.clOrderTime.Text = "Order Time";
+            this.clOrderTime.Width = 200;
             // 
             // pnlTableView
             // 
@@ -273,11 +277,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
+            this.Controls.Add(this.pnlKitchenView);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlDashboard);
-            this.Controls.Add(this.pnlKitchenView);
-            this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";
@@ -307,7 +311,7 @@
         private System.Windows.Forms.Panel pnlDashboard;
         private System.Windows.Forms.Panel pnlKitchenView;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDishReady;
         private System.Windows.Forms.ListView lvOrderedDishes;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -315,11 +319,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Panel pnlBarView;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button brnDrinkReady;
         private System.Windows.Forms.ListView lvOrderedDrinks;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader clTable;
+        private System.Windows.Forms.ColumnHeader clDrinks;
+        private System.Windows.Forms.ColumnHeader clOrderTime;
         private System.Windows.Forms.Panel pnlTableView;
         private System.Windows.Forms.Button btnTableOne;
     }

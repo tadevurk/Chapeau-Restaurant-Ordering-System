@@ -71,6 +71,7 @@ namespace RosDAL
                 OrderedDish dish = new OrderedDish()
                 {
                     TableNumber = (int)dr["tableNumber"],
+                    DishID = (int)dr["ID"],
                     Name = (string)dr["name"],
                     TimeDishOrdered = (DateTime)dr["time"],
                     Course = (string)dr["course"]
@@ -82,11 +83,18 @@ namespace RosDAL
 
         public List<OrderedDish> GetAllOrderedDish()
         {
-            string query = "SELECT O.TableNumber as tableNumber, I.ItemName as name, OD.TimeDishOrdered as [time], D.Course from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
+            string query = "SELECT O.TableNumber as tableNumber, OD.DishID as ID, I.ItemName as name, OD.TimeDishOrdered as [time], D.Course from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
     " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID where OD.DishStatus = 0 order by OD.TimeDishOrdered; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public void UpdateDishStatus(OrderedDish orderedDish)
+        {
+            string query = "UPDATE OrderDish SET DishStatus=1 WHERE DishID=@DishID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.DishID) };
+
+            ExecuteEditQuery(query, sqlParameters);
         }
     }
 }

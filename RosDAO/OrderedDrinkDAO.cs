@@ -63,11 +63,19 @@ namespace RosDAL
         }
         public List<OrderedDrink> GetAllOrderedDrinks()
         {
-            string query = "SELECT O.TableNumber as tableNumber, I.ItemName as name, OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
+            string query = "SELECT O.TableNumber as tableNumber, OD.DrinkID as ID, I.ItemName as name, OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on OD.DrinkID=I.ItemID where OD.DrinkStatus = 0 order by OD.TimeDrinkOrdered; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public void UpdateDrinkStatus(OrderedDrink orderedDrink)
+        {
+            string query = "UPDATE OrderDrink SET DrinkStatus=1 WHERE DrinkID=@DrinkID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID) };
+
+            ExecuteEditQuery(query, sqlParameters);
         }
 
         public List<OrderedDrink> ReadTables(DataTable dataTable)
@@ -79,6 +87,7 @@ namespace RosDAL
                 OrderedDrink drink = new OrderedDrink()
                 {
                     TableNumber = (int)dr["tableNumber"],
+                    DrinkID = (int)dr["ID"],
                     Name = (string)dr["name"],
                     TimeDrinkOrdered = (DateTime)dr["time"]
                 };
