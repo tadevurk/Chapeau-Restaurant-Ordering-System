@@ -16,14 +16,25 @@ namespace RosUI
     {
         Table table;
         DishLogic dishLogic;
+        OrderLogic ordLogic = new OrderLogic();
+        OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
+        RosMain rosMain;
+        Employee emp;
         int amount = 1;
-        public FormOrder(Table table)
+        public FormOrder(Table table, Employee emp, RosMain rosMain)
         {
             InitializeComponent();
+            this.rosMain = rosMain;
+            this.emp = emp;
             this.table = table;
             dishLogic = new DishLogic();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
             //pnlStarters.Hide();
+        }
+
+        public FormOrder(Table table)
+        {
+            return;
         }
 
         private void showPanel(string panelName)
@@ -138,8 +149,33 @@ namespace RosUI
                 ListViewItem li = new ListViewItem(starter.ItemName);
                 li.SubItems.Add(starter.ItemPrice.ToString());
                 li.SubItems.Add(amount.ToString());
+                li.Tag = starter;
                 listviewOrder.Items.Add(li);
             }
+        }
+
+        private void btnSendOrder_Click(object sender, EventArgs e)
+        {
+            //create new Order
+            Order order = new Order(emp, table);
+            ordLogic.AddOrder(order);
+
+            //getting Items from listView
+            List<Dish> dishes = new List<Dish>();
+
+            for (int i = 0; i < listviewOrder.Items.Count; i++)
+            {  
+                Dish d = (Dish)listviewOrder.Items[i].Tag;
+                dishes.Add(d);
+            }
+            
+            //Adding dish to Order_Dish table
+            orderedDishLogic.AddDishes(dishes, order);
+            //Update KitchenView
+            rosMain.UpdateDishes();
+
+            //Update TableView
+            rosMain.OrderRecieved(table.TableNumber);
         }
     }
 }

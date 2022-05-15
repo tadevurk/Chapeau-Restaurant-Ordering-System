@@ -63,7 +63,7 @@ namespace RosDAL
         }
         public List<OrderedDrink> GetAllOrderedDrinks()
         {
-            string query = "SELECT O.TableNumber as tableNumber, OD.DrinkID as ID, I.ItemName as name, OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
+            string query = "SELECT O.TableNumber as tableNumber, O.OrderId as [order], OD.DrinkID as ID, I.ItemName as name, OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on OD.DrinkID=I.ItemID where OD.DrinkStatus = 0 order by OD.TimeDrinkOrdered; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
@@ -72,8 +72,10 @@ namespace RosDAL
 
         public void UpdateDrinkStatus(OrderedDrink orderedDrink)
         {
-            string query = "UPDATE OrderDrink SET DrinkStatus=1 WHERE DrinkID=@DrinkID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID) };
+            string query = "UPDATE OrderDrink SET DrinkStatus=1 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID),
+            new SqlParameter("@OrderID", orderedDrink.OrderID)
+            };
 
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -87,6 +89,7 @@ namespace RosDAL
                 OrderedDrink drink = new OrderedDrink()
                 {
                     TableNumber = (int)dr["tableNumber"],
+                    OrderID = (int)dr["order"],
                     DrinkID = (int)dr["ID"],
                     Name = (string)dr["name"],
                     TimeDrinkOrdered = (DateTime)dr["time"]

@@ -103,6 +103,7 @@ namespace RosUI
             this.btnSendOrder.TabIndex = 8;
             this.btnSendOrder.Text = "SEND ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
+            this.btnSendOrder.Click += new System.EventHandler(this.btnSendOrder_Click);
             // 
             // btnCancelOrder
             // 

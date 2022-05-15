@@ -16,6 +16,7 @@ namespace RosUI
     public partial class RosMain : Form
     {
         Employee employee = new Employee();
+        Table table = new Table();
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         public RosMain(Employee employee)
@@ -63,7 +64,6 @@ namespace RosUI
 
                     break;
 
-
             }
 
         }
@@ -110,84 +110,179 @@ namespace RosUI
 
         private void btnTableOne_Click(object sender, EventArgs e)
         {
-            Table table = new Table(1);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(1);
+            FormOrder orderForm = new FormOrder(table,employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableTwo_Click(object sender, EventArgs e)
         {
-            Table table = new Table(2);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(2);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableThree_Click(object sender, EventArgs e)
         {
-            Table table = new Table(3);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(3);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableFour_Click(object sender, EventArgs e)
         {
-            Table table = new Table(4);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(4);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableFive_Click(object sender, EventArgs e)
         {
-            Table table = new Table(5);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(5);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableSix_Click(object sender, EventArgs e)
         {
-            Table table = new Table(6);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(6);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableSeven_Click(object sender, EventArgs e)
         {
-            Table table = new Table(7);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(7);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableEight_Click(object sender, EventArgs e)
         {
-            Table table = new Table(8);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(8);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableNine_Click(object sender, EventArgs e)
         {
-            Table table = new Table(9);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(9);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
 
         private void btnTableTen_Click(object sender, EventArgs e)
         {
-            Table table = new Table(10);
-            FormOrder orderForm = new FormOrder(table);
+            table = new Table(10);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.ShowDialog();
         }
-        private void UpdateDrinks()
+        public void OrderRecieved(int number)
+        {
+            //Changing color of buttons when Order is initiated
+            switch (number)
+            {
+                case 1:
+                    btnTableOne.BackColor = SystemColors.ButtonFace;
+                    break;
+
+                case 2:
+                    btnTableTwo.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 3:
+                    btnTableThree.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 4:
+                    btnTableFour.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 5:
+                    btnTableFive.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 6:
+                    btnTableSix.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 7:
+                    btnTableSeven.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 8:
+                    btnTableEight.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 9:
+                    btnTableNine.BackColor = SystemColors.ButtonFace;
+
+                    break;
+                case 10:
+                    btnTableTen.BackColor = SystemColors.ButtonFace;
+
+                    break;
+            }
+        }
+
+        public void PickUpReady(int number)
+        {
+            //changing color of buttons when order is ready for the pick up 
+            switch (number)
+            {
+                case 1:
+                    btnTableOne.BackColor = SystemColors.Window;
+                    break;
+
+                case 2:
+                    btnTableTwo.BackColor = SystemColors.Window;
+
+                    break;
+                case 3:
+                    btnTableThree.BackColor = SystemColors.Window;
+
+                    break;
+                case 4:
+                    btnTableFour.BackColor = SystemColors.Window;
+
+                    break;
+                case 5:
+                    btnTableFive.BackColor = SystemColors.Window;
+
+                    break;
+                case 6:
+                    btnTableSix.BackColor = SystemColors.Window;
+
+                    break;
+                case 7:
+                    btnTableSeven.BackColor = SystemColors.Window;
+
+                    break;
+                case 8:
+                    btnTableEight.BackColor = SystemColors.Window;
+
+                    break;
+                case 9:
+                    btnTableNine.BackColor = SystemColors.Window;
+
+                    break;
+                case 10:
+                    btnTableTen.BackColor = SystemColors.Window;
+
+                    break;
+            }
+        }
+        public void UpdateDrinks()
         {
             List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
 
@@ -203,7 +298,7 @@ namespace RosUI
             }
         }
 
-        private void UpdateDishes()
+        public void UpdateDishes()
         {
 
             List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
@@ -226,6 +321,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                int tableNumber = drink.TableNumber;
+                PickUpReady(tableNumber);
                 drinkLogic.UpdateDrinkStatus(drink);
             }
 
@@ -237,6 +334,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                int tableNumber = dish.TableNumber;
+                PickUpReady(tableNumber);
                 dishLogic.UpdateDishStatus(dish);
             }
 

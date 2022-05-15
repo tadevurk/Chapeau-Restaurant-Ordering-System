@@ -16,7 +16,10 @@ namespace RosLogic
         {
             orderDAO = new OrderDAO();
         }
-
+        public void AddOrder(Order order)
+        {
+            orderDAO.AddOrder(order);
+        }
         public List<Order> GetAllOrders()
         {
             return orderDAO.GetAllOrders();
