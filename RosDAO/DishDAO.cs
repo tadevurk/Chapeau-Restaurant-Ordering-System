@@ -23,7 +23,7 @@ namespace RosDAL
         }
         public List<Dish> WriteContainedDishes(Table t, Order o)
         {
-            string query = "select I.ItemName as [Name], I.ItemPrice as [Price], OD.OrderedDishAmount as [Amount], OD.OrderID as [Order] from OrderDish as OD" +
+            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], OD.OrderedDishAmount as [Amount], OD.OrderID as [Order] from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DishID" +
                 " where O.TableNumber=@TableNumber and OD.DishStatus<=3";
@@ -45,6 +45,7 @@ namespace RosDAL
 
                 Dish dish = new Dish()
                 {
+                    DishID = (int)dr["DishID"],
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     OrderedAmount = (int)dr["Amount"],

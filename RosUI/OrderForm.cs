@@ -195,9 +195,6 @@ namespace RosUI
                 if (alreadyOrdered.Contains(d))
                 {
                     d.OrderedAmount++;
-                    int index = alreadyOrdered.IndexOf(d);
-                    d.DishID = alreadyOrdered[index].DishID;
-                    d.Order = alreadyOrdered[index].Order;
                     orderedDishLogic.IncreaseAmount(d,order);
                 }
                 else

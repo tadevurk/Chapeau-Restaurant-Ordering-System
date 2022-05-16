@@ -132,7 +132,7 @@ namespace RosDAL
             SqlParameter[] sp = {
                 new SqlParameter("@Amount",d.OrderedAmount),
                 new SqlParameter("@DishID", d.DishID),
-                new SqlParameter("@OrderID", o.OrderID)
+                new SqlParameter("@OrderID", d.Order)
             };
 
             ExecuteEditQuery(query, sp);
