@@ -63,11 +63,44 @@ namespace RosDAL
         }
         public List<OrderedDrink> GetAllOrderedDrinks()
         {
-            string query = "SELECT O.TableNumber as tableNumber, O.OrderId as [order], OD.DrinkID as ID, I.ItemName as name, OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
-                " join Item as I on OD.DrinkID=I.ItemID where OD.DrinkStatus = 0 order by OD.TimeDrinkOrdered; ";
+            string query = "SELECT O.TableNumber as tableNumber, OD.DrinkStatus as [Status], O.OrderID as [order], OD.DrinkID as ID, I.ItemName as name, OD.DrinkNote as [Note], OD.OrderedDrinkAmount as [Amount]," +
+               " OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
+               " join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus = 0 or OD.DrinkStatus = 1 order by OD.TimeDrinkOrdered; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public List<OrderedDrink> ReadTables(DataTable dataTable)
+        {
+
+            List<OrderedDrink> drinks = new List<OrderedDrink>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                string note = "";
+                if (dr["Note"].Equals(DBNull.Value))
+                {
+                    note = "null";
+                }
+                else
+                {
+                    note = (string)dr["Note"];
+                }
+
+                OrderedDrink drink = new OrderedDrink()
+                {
+                    TableNumber = (int)dr["tableNumber"],
+                    DrinkStatus = (DrinkStatus)dr["Status"],
+                    OrderID = (int)dr["order"],
+                    DrinkID = (int)dr["ID"],
+                    DrinkNote = note,
+                    OrderedDrinkAmount = (int)dr["Amount"],
+                    Name = (string)dr["name"],
+                    TimeDrinkOrdered = (DateTime)dr["time"]
+                };
+                drinks.Add(drink);
+            }
+            return drinks;
         }
 
         public void UpdateDrinkStatusPickUp(OrderedDrink orderedDrink)
@@ -80,23 +113,47 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public List<OrderedDrink> ReadTables(DataTable dataTable)
-        {
-            List<OrderedDrink> drinks = new List<OrderedDrink>();
 
-            foreach (DataRow dr in dataTable.Rows)
+
+        public void UpdateDrinkStatusServe(OrderedDrink d)
+        {
+            string query = "UPDATE OrderDrink SET DrinkStatus=2 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.DrinkID),
+            new SqlParameter("@OrderID", d.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+        public void IncreaseAmount(Drink d, Order o)
+        {
+            string query = "update OrderDrink set OrderedDrinkAmount=@Amount where DrinkID=@DrinkID and OrderID=OrderID";
+            SqlParameter[] sp = {
+                new SqlParameter("@Amount",d.Amount),
+                new SqlParameter("@DrinkID", d.DrinkID),
+                new SqlParameter("@OrderID", d.Order)
+            };
+
+            ExecuteEditQuery(query, sp);
+        }
+        public void AddDrink(List<Drink> drink, Order order)
+        {
+            foreach (Drink d in drink)
             {
-                OrderedDrink drink = new OrderedDrink()
+                if (d.Note == null)
                 {
-                    TableNumber = (int)dr["tableNumber"],
-                    OrderID = (int)dr["order"],
-                    DrinkID = (int)dr["ID"],
-                    Name = (string)dr["name"],
-                    TimeDrinkOrdered = (DateTime)dr["time"]
-                };
-                drinks.Add(drink);
+                    d.Note = "null";
+                }
+
+
+                //Adding dish
+                string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@dishID", d.DrinkID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", d.Note),
+                new SqlParameter("@Amount", d.Amount)};
+
+                ExecuteEditQuery(query, sp);
             }
-            return drinks;
         }
     }
 }

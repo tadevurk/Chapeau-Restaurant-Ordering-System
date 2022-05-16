@@ -293,8 +293,24 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
                 li.SubItems.Add(drink.Name);
+                li.SubItems.Add(drink.OrderedDrinkAmount.ToString());
                 li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
+
+                if (drink.DrinkNote == "null")
+                {
+                    li.SubItems.Add("No");
+                }
+                else
+                {
+                    li.SubItems.Add("Yes");
+                }
+                
                 li.Tag = drink;
+
+                if (drink.DrinkStatus == DrinkStatus.PickUp)
+                {
+                    li.BackColor = Color.Green;
+                }
                 lvOrderedDrinks.Items.Add(li);
             }
         }
@@ -339,8 +355,6 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                int tableNumber = drink.TableNumber;
-                PickUpReady(tableNumber);
                 drinkLogic.UpdateDrinkStatusPickUp(drink);
             }
 
@@ -382,6 +396,32 @@ namespace RosUI
             }
 
             UpdateDishes();
+        }
+
+        private void btnViewDrinkNote_Click(object sender, EventArgs e)
+        {
+            OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
+
+            if (d.DrinkNote == "null")
+            {
+                MessageBox.Show("No note");
+            }
+            else
+            {
+                MessageBox.Show(d.DrinkNote);
+            }
+        }
+
+        private void btnDrinkServed_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+            {
+                OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                PickUpReady(orderedDrink.TableNumber);
+                drinkLogic.UpdateDrinkStatusServe(orderedDrink);
+            }
+
+            UpdateDrinks();
         }
     }
 }
