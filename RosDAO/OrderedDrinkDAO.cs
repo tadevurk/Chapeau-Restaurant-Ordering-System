@@ -70,7 +70,7 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public void UpdateDrinkStatus(OrderedDrink orderedDrink)
+        public void UpdateDrinkStatusPickUp(OrderedDrink orderedDrink)
         {
             string query = "UPDATE OrderDrink SET DrinkStatus=1 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
             SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID),

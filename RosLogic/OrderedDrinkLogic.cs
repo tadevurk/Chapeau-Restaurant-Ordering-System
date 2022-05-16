@@ -21,9 +21,9 @@ namespace RosLogic
             return orderedDrinkdb.GetAllOrderedDrinks();
         }
 
-        public void UpdateDrinkStatus(OrderedDrink orderedDrink)
+        public void UpdateDrinkStatusPickUp(OrderedDrink orderedDrink)
         {
-            orderedDrinkdb.UpdateDrinkStatus(orderedDrink);
+            orderedDrinkdb.UpdateDrinkStatusPickUp(orderedDrink);
         }
         public void AddDrink(OrderedDrink orderedDrink)
         {

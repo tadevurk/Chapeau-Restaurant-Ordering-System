@@ -38,6 +38,7 @@
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.pnlKitchenView = new System.Windows.Forms.Panel();
+            this.btnViewNote = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDishReady = new System.Windows.Forms.Button();
             this.lvOrderedDishes = new System.Windows.Forms.ListView();
@@ -65,7 +66,7 @@
             this.btnTableThree = new System.Windows.Forms.Button();
             this.btnTableTwo = new System.Windows.Forms.Button();
             this.btnTableOne = new System.Windows.Forms.Button();
-            this.btnViewNote = new System.Windows.Forms.Button();
+            this.btnServe = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             // pnlKitchenView
             // 
+            this.pnlKitchenView.Controls.Add(this.btnServe);
             this.pnlKitchenView.Controls.Add(this.btnViewNote);
             this.pnlKitchenView.Controls.Add(this.label1);
             this.pnlKitchenView.Controls.Add(this.btnDishReady);
@@ -155,6 +157,16 @@
             this.pnlKitchenView.Name = "pnlKitchenView";
             this.pnlKitchenView.Size = new System.Drawing.Size(1216, 578);
             this.pnlKitchenView.TabIndex = 0;
+            // 
+            // btnViewNote
+            // 
+            this.btnViewNote.Location = new System.Drawing.Point(685, 518);
+            this.btnViewNote.Name = "btnViewNote";
+            this.btnViewNote.Size = new System.Drawing.Size(135, 30);
+            this.btnViewNote.TabIndex = 4;
+            this.btnViewNote.Text = "view note";
+            this.btnViewNote.UseVisualStyleBackColor = true;
+            this.btnViewNote.Click += new System.EventHandler(this.btnViewNote_Click);
             // 
             // label1
             // 
@@ -398,15 +410,15 @@
             this.btnTableOne.UseVisualStyleBackColor = true;
             this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
             // 
-            // btnViewNote
+            // btnServe
             // 
-            this.btnViewNote.Location = new System.Drawing.Point(685, 518);
-            this.btnViewNote.Name = "btnViewNote";
-            this.btnViewNote.Size = new System.Drawing.Size(135, 30);
-            this.btnViewNote.TabIndex = 4;
-            this.btnViewNote.Text = "view note";
-            this.btnViewNote.UseVisualStyleBackColor = true;
-            this.btnViewNote.Click += new System.EventHandler(this.btnViewNote_Click);
+            this.btnServe.Location = new System.Drawing.Point(183, 518);
+            this.btnServe.Name = "btnServe";
+            this.btnServe.Size = new System.Drawing.Size(94, 29);
+            this.btnServe.TabIndex = 5;
+            this.btnServe.Text = "Serve";
+            this.btnServe.UseVisualStyleBackColor = true;
+            this.btnServe.Click += new System.EventHandler(this.btnServe_Click);
             // 
             // RosMain
             // 
@@ -474,5 +486,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.Button btnViewNote;
+        private System.Windows.Forms.Button btnServe;
     }
 }

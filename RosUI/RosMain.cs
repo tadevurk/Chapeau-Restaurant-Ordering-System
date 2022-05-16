@@ -337,7 +337,7 @@ namespace RosUI
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
                 int tableNumber = drink.TableNumber;
                 PickUpReady(tableNumber);
-                drinkLogic.UpdateDrinkStatus(drink);
+                drinkLogic.UpdateDrinkStatusPickUp(drink);
             }
 
             UpdateDrinks();
@@ -350,7 +350,7 @@ namespace RosUI
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
                 int tableNumber = dish.TableNumber;
                 PickUpReady(tableNumber);
-                dishLogic.UpdateDishStatus(dish);
+                dishLogic.UpdateDishStatusPickUp(dish);
             }
 
             UpdateDishes();
@@ -368,6 +368,12 @@ namespace RosUI
             {
                 MessageBox.Show(dish.DishNote);
             }
+        }
+
+        private void btnServe_Click(object sender, EventArgs e)
+        {
+            OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
+            dishLogic.UpdateDishStatusServe(orderedDish);
         }
     }
 }
