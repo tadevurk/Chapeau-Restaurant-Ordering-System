@@ -26,7 +26,7 @@ namespace RosDAL
             string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], OD.OrderedDishAmount as [Amount], OD.OrderID as [Order] from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DishID" +
-                " where O.TableNumber=@TableNumber and OD.DishStatus<=3";
+                " where O.TableNumber=@TableNumber and OD.DishStatus<3";
             SqlParameter[] sp =
             {
                 new SqlParameter("@TableNumber", t.TableNumber),
