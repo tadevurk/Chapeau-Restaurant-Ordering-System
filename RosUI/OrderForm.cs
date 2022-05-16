@@ -178,32 +178,50 @@ namespace RosUI
 
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
-
+            int ordID = 0;
 
             if (alreadyOrdered.Count == 0)
             {
                 ordLogic.AddOrder(order);
+                ordID = order.OrderID;
+            }
+            else
+            {
+                ordID = alreadyOrdered[0].Order;
             }
 
             //getting Items from listView
             List<Dish> dishes = new List<Dish>();
+            List<Dish> contained = new List<Dish>();
 
             for (int i = 0; i < listviewOrder.Items.Count; i++)
-            {  
+            {
+                bool unique = true;
                 Dish d = (Dish)listviewOrder.Items[i].Tag;
-
-                if (alreadyOrdered.Contains(d))
+                ListViewItem li = listviewOrder.Items[i] as ListViewItem;
+                foreach (Dish dish in alreadyOrdered)
                 {
-                    d.OrderedAmount++;
-                    orderedDishLogic.IncreaseAmount(d,order);
+                    if (dish.ItemName == d.ItemName)
+                    {
+                        d.OrderedAmount = int.Parse(li.SubItems[2].Text);
+                        unique = false;
+                    }
+                }
+                d.Order = ordID;
+
+                if (!unique)
+                {
+                    contained.Add(d);
                 }
                 else
                 {
                     dishes.Add(d);
-                }           
+                }
+
             }
 
-            
+            orderedDishLogic.IncreaseAmount(contained, order);
+
             //Adding dish to Order_Dish table
             orderedDishLogic.AddDishes(dishes, order);
 
@@ -212,6 +230,8 @@ namespace RosUI
 
             //Update TableView
             rosMain.OrderRecieved(table.TableNumber);
+
+            WritesContainedDishes();
         }
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)

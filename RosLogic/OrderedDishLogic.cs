@@ -22,9 +22,12 @@ namespace RosLogic
             orderedDishdb.UpdateDishStatusServe(d);
         }
 
-        public void IncreaseAmount(Dish d, Order o)
+        public void IncreaseAmount(List<Dish> dishes, Order o)
         {
-            orderedDishdb.IncreaseAmount(d, o);
+            foreach (Dish d in dishes)
+            {
+                orderedDishdb.IncreaseAmount(d, o);
+            }
         }
 
         public void UpdateDishNote(OrderedDish dish, string message)

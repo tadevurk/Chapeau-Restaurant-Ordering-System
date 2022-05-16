@@ -283,6 +283,53 @@ namespace RosUI
                     break;
             }
         }
+        public void ItemServed(int number)
+        {
+            //changing color of buttons when order is ready for the pick up 
+            switch (number)
+            {
+                case 1:
+                    btnTableOne.BackColor = Color.Yellow;
+                    break;
+
+                case 2:
+                    btnTableTwo.BackColor = Color.Yellow;
+
+                    break;
+                case 3:
+                    btnTableThree.BackColor = Color.Yellow;
+
+                    break;
+                case 4:
+                    btnTableFour.BackColor = Color.Yellow;
+
+                    break;
+                case 5:
+                    btnTableFive.BackColor = Color.Yellow;
+
+                    break;
+                case 6:
+                    btnTableSix.BackColor = Color.Yellow;
+
+                    break;
+                case 7:
+                    btnTableSeven.BackColor = Color.Yellow;
+
+                    break;
+                case 8:
+                    btnTableEight.BackColor = Color.Yellow;
+
+                    break;
+                case 9:
+                    btnTableNine.BackColor = Color.Yellow;
+
+                    break;
+                case 10:
+                    btnTableTen.BackColor = Color.Yellow;
+
+                    break;
+            }
+        }
         public void UpdateDrinks()
         {
             List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
@@ -355,6 +402,7 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                PickUpReady(drink.TableNumber);
                 drinkLogic.UpdateDrinkStatusPickUp(drink);
             }
 
@@ -366,6 +414,7 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                PickUpReady(dish.TableNumber);
                 dishLogic.UpdateDishStatusPickUp(dish);
             }
 
@@ -391,8 +440,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                PickUpReady(orderedDish.TableNumber);
                 dishLogic.UpdateDishStatusServe(orderedDish);
+                ItemServed(orderedDish.TableNumber);
             }
 
             UpdateDishes();
@@ -417,8 +466,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                PickUpReady(orderedDrink.TableNumber);
                 drinkLogic.UpdateDrinkStatusServe(orderedDrink);
+                ItemServed(orderedDrink.TableNumber);
             }
 
             UpdateDrinks();
