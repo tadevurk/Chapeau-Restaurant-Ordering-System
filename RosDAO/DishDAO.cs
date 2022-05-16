@@ -21,7 +21,41 @@ namespace RosDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
-        
+        public List<Dish> WriteContainedDishes(Table t, Order o)
+        {
+            string query = "select I.ItemName as [Name], I.ItemPrice as [Price], OD.OrderedDishAmount as [Amount], OD.OrderID as [Order] from OrderDish as OD" +
+                " join [Order] as O on OD.OrderID=O.OrderID" +
+                " join Item as I on I.ItemID=OD.DishID" +
+                " where O.TableNumber=@TableNumber and OD.DishStatus<=3";
+            SqlParameter[] sp =
+            {
+                new SqlParameter("@TableNumber", t.TableNumber),
+                new SqlParameter("@OrderID", o.OrderID)
+            };
+
+            return ReadTablesOrder(ExecuteSelectQuery(query, sp));
+        }
+
+        private List<Dish> ReadTablesOrder(DataTable table)
+        {
+            List<Dish> dishes = new List<Dish>();
+
+            foreach (DataRow dr in table.Rows)
+            {
+
+                Dish dish = new Dish()
+                {
+                    ItemName = (string)dr["Name"],
+                    ItemPrice = (decimal)dr["Price"],
+                    OrderedAmount = (int)dr["Amount"],
+                    Order = (int)dr["Order"]
+
+                };
+                dishes.Add(dish);
+            }
+            return dishes;
+        }
+
         //Getting all Mains
         public List<Dish> GetAllMains()
         {

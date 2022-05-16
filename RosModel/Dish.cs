@@ -15,6 +15,10 @@ namespace RosModel
 
         public int Amount { get; set; }
 
+        public int Order { get; set; }
+
+        public int OrderedAmount { get; set; }
+
         public override string ToString()
         {
             return $"{ItemName}";

@@ -193,43 +193,43 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = SystemColors.ButtonFace;
+                    btnTableOne.BackColor = Color.Blue;
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = SystemColors.ButtonFace;
+                    btnTableTwo.BackColor = Color.Blue;
 
                     break;
                 case 3:
-                    btnTableThree.BackColor = SystemColors.ButtonFace;
+                    btnTableThree.BackColor = Color.Blue;
 
                     break;
                 case 4:
-                    btnTableFour.BackColor = SystemColors.ButtonFace;
+                    btnTableFour.BackColor = Color.Blue;
 
                     break;
                 case 5:
-                    btnTableFive.BackColor = SystemColors.ButtonFace;
+                    btnTableFive.BackColor = Color.Blue;
 
                     break;
                 case 6:
-                    btnTableSix.BackColor = SystemColors.ButtonFace;
+                    btnTableSix.BackColor = Color.Blue;
 
                     break;
                 case 7:
-                    btnTableSeven.BackColor = SystemColors.ButtonFace;
+                    btnTableSeven.BackColor = Color.Blue;
 
                     break;
                 case 8:
-                    btnTableEight.BackColor = SystemColors.ButtonFace;
+                    btnTableEight.BackColor = Color.Blue;
 
                     break;
                 case 9:
-                    btnTableNine.BackColor = SystemColors.ButtonFace;
+                    btnTableNine.BackColor = Color.Blue;
 
                     break;
                 case 10:
-                    btnTableTen.BackColor = SystemColors.ButtonFace;
+                    btnTableTen.BackColor = Color.Blue;
 
                     break;
             }
@@ -242,43 +242,43 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = SystemColors.Window;
+                    btnTableOne.BackColor = Color.Green;
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = SystemColors.Window;
+                    btnTableTwo.BackColor = Color.Green;
 
                     break;
                 case 3:
-                    btnTableThree.BackColor = SystemColors.Window;
+                    btnTableThree.BackColor = Color.Green;
 
                     break;
                 case 4:
-                    btnTableFour.BackColor = SystemColors.Window;
+                    btnTableFour.BackColor = Color.Green;
 
                     break;
                 case 5:
-                    btnTableFive.BackColor = SystemColors.Window;
+                    btnTableFive.BackColor = Color.Green;
 
                     break;
                 case 6:
-                    btnTableSix.BackColor = SystemColors.Window;
+                    btnTableSix.BackColor = Color.Green;
 
                     break;
                 case 7:
-                    btnTableSeven.BackColor = SystemColors.Window;
+                    btnTableSeven.BackColor = Color.Green;
 
                     break;
                 case 8:
-                    btnTableEight.BackColor = SystemColors.Window;
+                    btnTableEight.BackColor = Color.Green;
 
                     break;
                 case 9:
-                    btnTableNine.BackColor = SystemColors.Window;
+                    btnTableNine.BackColor = Color.Green;
 
                     break;
                 case 10:
-                    btnTableTen.BackColor = SystemColors.Window;
+                    btnTableTen.BackColor = Color.Green;
 
                     break;
             }
@@ -325,6 +325,10 @@ namespace RosUI
 
                 
                 li.Tag = dish;
+                if (dish.Status == DishStatus.PickUp)
+                {
+                    li.BackColor = Color.Green;
+                }
                 lvOrderedDishes.Items.Add(li);
             }
 
@@ -348,8 +352,6 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                int tableNumber = dish.TableNumber;
-                PickUpReady(tableNumber);
                 dishLogic.UpdateDishStatusPickUp(dish);
             }
 
@@ -372,8 +374,14 @@ namespace RosUI
 
         private void btnServe_Click(object sender, EventArgs e)
         {
-            OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
-            dishLogic.UpdateDishStatusServe(orderedDish);
+            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+            {
+                OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                PickUpReady(orderedDish.TableNumber);
+                dishLogic.UpdateDishStatusServe(orderedDish);
+            }
+
+            UpdateDishes();
         }
     }
 }

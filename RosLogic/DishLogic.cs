@@ -16,6 +16,10 @@ namespace RosLogic
         {
             return dishDAO.GetAllStarters();
         }
+        public List<Dish> WriteContainedDishes(Table t, Order o)
+        {
+            return dishDAO.WriteContainedDishes(t, o);
+        }
 
         public List<Dish> GetAllMains()
         {

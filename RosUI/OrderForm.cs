@@ -18,6 +18,7 @@ namespace RosUI
         DishLogic dishLogic;
         Order order;
         OrderLogic ordLogic = new OrderLogic();
+        List<Dish> alreadyOrdered = new List<Dish>();
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
         RosMain rosMain;
         Employee emp;
@@ -42,16 +43,16 @@ namespace RosUI
 
         private void WritesContainedDishes()
         {
-            List<OrderedDish> dishes = orderedDishLogic.WriteContainedDishes(table, order);
+            alreadyOrdered = dishLogic.WriteContainedDishes(table, order);
 
             listviewOrder.Items.Clear();
 
-            foreach (OrderedDish d in dishes)
+            foreach (Dish d in alreadyOrdered)
             {
-                ListViewItem li = new ListViewItem(d.Name.ToString());
-                li.SubItems.Add(d.Price.ToString());
-                li.SubItems.Add(d.OrderedDishAmount.ToString());
-                li.Tag = (OrderedDish)d;
+                ListViewItem li = new ListViewItem(d.ItemName.ToString());
+                li.SubItems.Add(d.ItemPrice.ToString());
+                li.SubItems.Add(d.OrderedAmount.ToString());
+                li.Tag = (Dish)d;
                 listviewOrder.Items.Add(li);
             }
         }
@@ -179,7 +180,7 @@ namespace RosUI
         {
 
 
-            if (listviewOrder.Items.Count == 0)
+            if (alreadyOrdered.Count == 0)
             {
                 ordLogic.AddOrder(order);
             }
@@ -190,7 +191,19 @@ namespace RosUI
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {  
                 Dish d = (Dish)listviewOrder.Items[i].Tag;
-                dishes.Add(d);             
+
+                if (alreadyOrdered.Contains(d))
+                {
+                    d.OrderedAmount++;
+                    int index = alreadyOrdered.IndexOf(d);
+                    d.DishID = alreadyOrdered[index].DishID;
+                    d.Order = alreadyOrdered[index].Order;
+                    orderedDishLogic.IncreaseAmount(d,order);
+                }
+                else
+                {
+                    dishes.Add(d);
+                }           
             }
 
             

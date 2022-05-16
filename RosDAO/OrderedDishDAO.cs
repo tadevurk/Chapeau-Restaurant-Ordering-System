@@ -125,6 +125,18 @@ namespace RosDAL
             }
             return dishes[0];
         }
+
+        public void IncreaseAmount(Dish d, Order o)
+        {
+            string query = "update OrderDish set OrderedDishAmount=@Amount where DishID=@DishID and OrderID=OrderID";
+            SqlParameter[] sp = {
+                new SqlParameter("@Amount",d.OrderedAmount),
+                new SqlParameter("@DishID", d.DishID),
+                new SqlParameter("@OrderID", o.OrderID)
+            };
+
+            ExecuteEditQuery(query, sp);
+        }
         private List<OrderedDish> ReadTables(DataTable dataTable)
         {
             List<OrderedDish> dishes = new List<OrderedDish>();
@@ -190,38 +202,6 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public List<OrderedDish> WriteContainedDishes(Table t, Order o)
-        {
-            string query = "select I.ItemName as [Name], I.ItemPrice as [Price], Od.OrderedDishAmount as [Amount] from OrderDish as OD" +
-                " join [Order] as O on OD.OrderID=O.OrderID" +
-                " join Item as I on I.ItemID=OD.DishID" +
-                " where O.TableNumber=@TableNumber and OD.DishStatus<=3";
-            SqlParameter[] sp =
-            {
-                new SqlParameter("@TableNumber", t.TableNumber),
-                new SqlParameter("@OrderID", o.OrderID)
-            };
 
-            return ReadTablesOrder(ExecuteSelectQuery(query, sp));
-        }
-
-        private List<OrderedDish> ReadTablesOrder(DataTable table)
-        {
-            List<OrderedDish> dishes = new List<OrderedDish>();
-
-            foreach (DataRow dr in table.Rows)
-            {
-
-                OrderedDish dish = new OrderedDish()
-                {
-                    Name = (string)dr["Name"],
-                    Price = (decimal)dr["Price"],
-                    OrderedDishAmount = (int)dr["Amount"]
-
-                };
-                dishes.Add(dish);
-            }
-            return dishes;
-        }
     }
 }

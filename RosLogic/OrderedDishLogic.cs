@@ -22,10 +22,11 @@ namespace RosLogic
             orderedDishdb.UpdateDishStatusServe(d);
         }
 
-        public List<OrderedDish> WriteContainedDishes(Table t, Order o)
+        public void IncreaseAmount(Dish d, Order o)
         {
-           return orderedDishdb.WriteContainedDishes(t, o);
+            orderedDishdb.IncreaseAmount(d, o);
         }
+
         public void UpdateDishNote(OrderedDish dish, string message)
         {
             orderedDishdb.UpdateDishNote(dish, message);
