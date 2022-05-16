@@ -235,6 +235,7 @@ namespace RosUI
             }
         }
 
+ 
         public void PickUpReady(int number)
         {
             //changing color of buttons when order is ready for the pick up 
@@ -309,11 +310,24 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
                 li.SubItems.Add(dish.Name);
+                li.SubItems.Add(dish.OrderedDishAmount.ToString());
                 li.SubItems.Add(dish.TimeDishOrdered.ToString());
                 li.SubItems.Add(dish.Course);
+
+                if (dish.DishNote == "null")
+                {
+                    li.SubItems.Add("No");
+                }
+                else
+                {
+                    li.SubItems.Add("Yes");
+                }
+
+                
                 li.Tag = dish;
                 lvOrderedDishes.Items.Add(li);
             }
+
         }
 
         private void btnDrinkReady_Click(object sender, EventArgs e)
@@ -340,6 +354,20 @@ namespace RosUI
             }
 
             UpdateDishes();
+        }
+
+        private void btnViewNote_Click(object sender, EventArgs e)
+        {
+            OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
+
+            if (dish.DishNote == "null")
+            {
+                MessageBox.Show("No note");
+            }
+            else
+            {
+                MessageBox.Show(dish.DishNote);
+            }
         }
     }
 }

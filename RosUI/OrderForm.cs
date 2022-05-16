@@ -16,11 +16,12 @@ namespace RosUI
     {
         Table table;
         DishLogic dishLogic;
+        Order order;
         OrderLogic ordLogic = new OrderLogic();
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
         RosMain rosMain;
         Employee emp;
-        int amount = 1;
+        int starterAmount = 1;
         public FormOrder(Table table, Employee emp, RosMain rosMain)
         {
             InitializeComponent();
@@ -110,17 +111,17 @@ namespace RosUI
         private void btnOrderRemove_Click(object sender, EventArgs e)
         {
 
-            ListViewItem selectedOrderedStarter = listviewOrder.SelectedItems[0]; // Remove the ORDERED STARTER FROM ORDER LIST
+            Dish d = (Dish)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
 
-            int amount = int.Parse(selectedOrderedStarter.SubItems[2].Text);
+            int amount = d.Amount;
             if (amount == 1)
             {
-                listviewOrder.Items.RemoveAt(selectedOrderedStarter.Index);
+                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
             }
             else
             {
                 amount--;
-                selectedOrderedStarter.SubItems[2].Text = amount.ToString();
+                listviewOrder.SelectedItems[0].SubItems[2].Text = amount.ToString();
             }
             // Increase stock
         }
@@ -138,9 +139,9 @@ namespace RosUI
                 if (starter.ItemName == item.SubItems[0].Text)
                 {
                     currentItem = item;
-                    int amount = int.Parse(item.SubItems[2].Text);
-                    amount++;
-                    item.SubItems[2].Text = amount.ToString();
+                    starter.Amount = int.Parse(item.SubItems[2].Text);
+                    starter.Amount++;
+                    item.SubItems[2].Text = starter.Amount.ToString();
                 }
             }
 
@@ -148,7 +149,8 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(starter.ItemName);
                 li.SubItems.Add(starter.ItemPrice.ToString());
-                li.SubItems.Add(amount.ToString());
+                starter.Amount = 1;
+                li.SubItems.Add(starter.Amount.ToString());
                 li.Tag = starter;
                 listviewOrder.Items.Add(li);
             }
@@ -157,7 +159,7 @@ namespace RosUI
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
             //create new Order
-            Order order = new Order(emp, table);
+            order = new Order(emp, table);
             ordLogic.AddOrder(order);
 
             //getting Items from listView
@@ -167,15 +169,37 @@ namespace RosUI
             {  
                 Dish d = (Dish)listviewOrder.Items[i].Tag;
                 dishes.Add(d);
+                
             }
+
             
             //Adding dish to Order_Dish table
             orderedDishLogic.AddDishes(dishes, order);
+
             //Update KitchenView
             rosMain.UpdateDishes();
 
             //Update TableView
             rosMain.OrderRecieved(table.TableNumber);
+        }
+
+        private void btnOrderAddNote_Click(object sender, EventArgs e)
+        {
+            Dish d = (Dish)listviewOrder.Items[0].Tag;
+
+            if (txtNote.Text == "")
+            {
+                MessageBox.Show("Note is empty!");
+            }
+            else
+            {
+                d.Note = txtNote.Text;
+            }
+        }
+
+        private void StoreNotes(string msg, OrderedDish dish)
+        {       
+            orderedDishLogic.UpdateDishNote(dish, msg);
         }
     }
 }
