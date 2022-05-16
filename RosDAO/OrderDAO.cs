@@ -18,6 +18,31 @@ namespace RosDAL
             return ReadOrders(ExecuteSelectQuery(query, sqlParameters));
         }
 
+        public void AddOrder(Order order)
+        {
+            order.OrderID = MaxCount() + 1;
+            string query = "insert into [Order] values(@count, @WaiterID, null, @TableNumber, null, null);";
+            SqlParameter[] pr = { new SqlParameter("@count", order.OrderID),
+            new SqlParameter("@WaiterID", order.WaiterID),
+            new SqlParameter("@TableNumber", order.TableNumber)
+            };
+            ExecuteEditQuery(query, pr);
+
+        }
+
+        public int MaxCount()
+        {
+            string query = "select count(*) as count from [Order]";
+            SqlParameter[] sp = new SqlParameter[0];
+            return ReadCount(ExecuteSelectQuery(query, sp));
+        }
+
+        private int ReadCount(DataTable dataTable)
+        {
+            DataRow row = dataTable.Rows[0];
+            return (int)row["count"];
+        }
+
         //HOW TO REMOVE THE WHOLE ORDER AT ONCE (OrderID is a foreign key in OrderedDish and OrderedDrink) ...
 
         private List<Order> ReadOrders(DataTable dataTable)

@@ -51,6 +51,7 @@ namespace RosUI
             this.listviewStarters = new System.Windows.Forms.ListView();
             this.Name = new System.Windows.Forms.ColumnHeader();
             this.Price = new System.Windows.Forms.ColumnHeader();
+            this.txtNote = new System.Windows.Forms.RichTextBox();
             this.pnlStarters.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +104,7 @@ namespace RosUI
             this.btnSendOrder.TabIndex = 8;
             this.btnSendOrder.Text = "SEND ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
+            this.btnSendOrder.Click += new System.EventHandler(this.btnSendOrder_Click);
             // 
             // btnCancelOrder
             // 
@@ -197,12 +199,13 @@ namespace RosUI
             // 
             // btnOrderAddNote
             // 
-            this.btnOrderAddNote.Location = new System.Drawing.Point(663, 230);
+            this.btnOrderAddNote.Location = new System.Drawing.Point(663, 198);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
             this.btnOrderAddNote.Size = new System.Drawing.Size(151, 60);
             this.btnOrderAddNote.TabIndex = 16;
             this.btnOrderAddNote.Text = "Add Note";
             this.btnOrderAddNote.UseVisualStyleBackColor = true;
+            this.btnOrderAddNote.Click += new System.EventHandler(this.btnOrderAddNote_Click);
             // 
             // pnlStarters
             // 
@@ -256,11 +259,20 @@ namespace RosUI
             this.Price.Text = "Price";
             this.Price.Width = 120;
             // 
+            // txtNote
+            // 
+            this.txtNote.Location = new System.Drawing.Point(663, 264);
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(151, 115);
+            this.txtNote.TabIndex = 18;
+            this.txtNote.Text = "";
+            // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 766);
+            this.Controls.Add(this.txtNote);
             this.Controls.Add(this.btnOrderAddNote);
             this.Controls.Add(this.btnOrderRemove);
             this.Controls.Add(this.btnOrderAdd);
@@ -307,5 +319,6 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader nameOrder;
         private System.Windows.Forms.ColumnHeader priceOrder;
         private System.Windows.Forms.ColumnHeader amountOrder;
+        private System.Windows.Forms.RichTextBox txtNote;
     }
 }

@@ -43,6 +43,7 @@ namespace RosUI
                 }
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+
           
                 if (CheckPassword())
                 {

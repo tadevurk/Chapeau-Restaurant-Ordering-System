@@ -43,8 +43,10 @@
             this.lvOrderedDishes = new System.Windows.Forms.ListView();
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.pnlBarView = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.brnDrinkReady = new System.Windows.Forms.Button();
@@ -53,16 +55,17 @@
             this.clDrinks = new System.Windows.Forms.ColumnHeader();
             this.clOrderTime = new System.Windows.Forms.ColumnHeader();
             this.pnlTableView = new System.Windows.Forms.Panel();
+            this.btnTableTen = new System.Windows.Forms.Button();
+            this.btnTableNine = new System.Windows.Forms.Button();
+            this.btnTableEight = new System.Windows.Forms.Button();
+            this.btnTableSeven = new System.Windows.Forms.Button();
+            this.btnTableSix = new System.Windows.Forms.Button();
+            this.btnTableFive = new System.Windows.Forms.Button();
+            this.btnTableFour = new System.Windows.Forms.Button();
+            this.btnTableThree = new System.Windows.Forms.Button();
             this.btnTableTwo = new System.Windows.Forms.Button();
             this.btnTableOne = new System.Windows.Forms.Button();
-            this.btnTableThree = new System.Windows.Forms.Button();
-            this.btnTableFour = new System.Windows.Forms.Button();
-            this.btnTableFive = new System.Windows.Forms.Button();
-            this.btnTableSix = new System.Windows.Forms.Button();
-            this.btnTableSeven = new System.Windows.Forms.Button();
-            this.btnTableEight = new System.Windows.Forms.Button();
-            this.btnTableNine = new System.Windows.Forms.Button();
-            this.btnTableTen = new System.Windows.Forms.Button();
+            this.btnViewNote = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -144,6 +147,7 @@
             // 
             // pnlKitchenView
             // 
+            this.pnlKitchenView.Controls.Add(this.btnViewNote);
             this.pnlKitchenView.Controls.Add(this.label1);
             this.pnlKitchenView.Controls.Add(this.btnDishReady);
             this.pnlKitchenView.Controls.Add(this.lvOrderedDishes);
@@ -176,11 +180,14 @@
             this.lvOrderedDishes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader8});
             this.lvOrderedDishes.FullRowSelect = true;
             this.lvOrderedDishes.HideSelection = false;
             this.lvOrderedDishes.Location = new System.Drawing.Point(43, 58);
+            this.lvOrderedDishes.MultiSelect = false;
             this.lvOrderedDishes.Name = "lvOrderedDishes";
             this.lvOrderedDishes.Size = new System.Drawing.Size(1137, 428);
             this.lvOrderedDishes.TabIndex = 0;
@@ -194,16 +201,27 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Dishes";
-            this.columnHeader2.Width = 800;
+            this.columnHeader2.Width = 600;
             // 
-            // columnHeader3
+            // columnHeader5
             // 
-            this.columnHeader3.Text = "Order Time";
-            this.columnHeader3.Width = 200;
+            this.columnHeader5.Text = "Amount";
+            this.columnHeader5.Width = 80;
             // 
-            // columnHeader4
+            // columnHeader6
             // 
-            this.columnHeader4.Text = "Course";
+            this.columnHeader6.Text = "Order Time";
+            this.columnHeader6.Width = 120;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Course";
+            this.columnHeader7.Width = 80;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Note";
+            this.columnHeader8.Width = 80;
             // 
             // pnlBarView
             // 
@@ -280,6 +298,86 @@
             this.pnlTableView.Size = new System.Drawing.Size(1216, 567);
             this.pnlTableView.TabIndex = 4;
             // 
+            // btnTableTen
+            // 
+            this.btnTableTen.Location = new System.Drawing.Point(646, 164);
+            this.btnTableTen.Name = "btnTableTen";
+            this.btnTableTen.Size = new System.Drawing.Size(94, 29);
+            this.btnTableTen.TabIndex = 9;
+            this.btnTableTen.Text = "Table 10";
+            this.btnTableTen.UseVisualStyleBackColor = true;
+            this.btnTableTen.Click += new System.EventHandler(this.btnTableTen_Click);
+            // 
+            // btnTableNine
+            // 
+            this.btnTableNine.Location = new System.Drawing.Point(521, 164);
+            this.btnTableNine.Name = "btnTableNine";
+            this.btnTableNine.Size = new System.Drawing.Size(94, 29);
+            this.btnTableNine.TabIndex = 8;
+            this.btnTableNine.Text = "Table 9";
+            this.btnTableNine.UseVisualStyleBackColor = true;
+            this.btnTableNine.Click += new System.EventHandler(this.btnTableNine_Click);
+            // 
+            // btnTableEight
+            // 
+            this.btnTableEight.Location = new System.Drawing.Point(402, 165);
+            this.btnTableEight.Name = "btnTableEight";
+            this.btnTableEight.Size = new System.Drawing.Size(94, 29);
+            this.btnTableEight.TabIndex = 7;
+            this.btnTableEight.Text = "Table 8";
+            this.btnTableEight.UseVisualStyleBackColor = true;
+            this.btnTableEight.Click += new System.EventHandler(this.btnTableEight_Click);
+            // 
+            // btnTableSeven
+            // 
+            this.btnTableSeven.Location = new System.Drawing.Point(274, 165);
+            this.btnTableSeven.Name = "btnTableSeven";
+            this.btnTableSeven.Size = new System.Drawing.Size(94, 29);
+            this.btnTableSeven.TabIndex = 6;
+            this.btnTableSeven.Text = "Table 7";
+            this.btnTableSeven.UseVisualStyleBackColor = true;
+            this.btnTableSeven.Click += new System.EventHandler(this.btnTableSeven_Click);
+            // 
+            // btnTableSix
+            // 
+            this.btnTableSix.Location = new System.Drawing.Point(147, 165);
+            this.btnTableSix.Name = "btnTableSix";
+            this.btnTableSix.Size = new System.Drawing.Size(94, 29);
+            this.btnTableSix.TabIndex = 5;
+            this.btnTableSix.Text = "Table 6";
+            this.btnTableSix.UseVisualStyleBackColor = true;
+            this.btnTableSix.Click += new System.EventHandler(this.btnTableSix_Click);
+            // 
+            // btnTableFive
+            // 
+            this.btnTableFive.Location = new System.Drawing.Point(646, 67);
+            this.btnTableFive.Name = "btnTableFive";
+            this.btnTableFive.Size = new System.Drawing.Size(94, 29);
+            this.btnTableFive.TabIndex = 4;
+            this.btnTableFive.Text = "Table 5";
+            this.btnTableFive.UseVisualStyleBackColor = true;
+            this.btnTableFive.Click += new System.EventHandler(this.btnTableFive_Click);
+            // 
+            // btnTableFour
+            // 
+            this.btnTableFour.Location = new System.Drawing.Point(521, 67);
+            this.btnTableFour.Name = "btnTableFour";
+            this.btnTableFour.Size = new System.Drawing.Size(94, 29);
+            this.btnTableFour.TabIndex = 3;
+            this.btnTableFour.Text = "Table 4";
+            this.btnTableFour.UseVisualStyleBackColor = true;
+            this.btnTableFour.Click += new System.EventHandler(this.btnTableFour_Click);
+            // 
+            // btnTableThree
+            // 
+            this.btnTableThree.Location = new System.Drawing.Point(402, 67);
+            this.btnTableThree.Name = "btnTableThree";
+            this.btnTableThree.Size = new System.Drawing.Size(94, 29);
+            this.btnTableThree.TabIndex = 2;
+            this.btnTableThree.Text = "Table 3";
+            this.btnTableThree.UseVisualStyleBackColor = true;
+            this.btnTableThree.Click += new System.EventHandler(this.btnTableThree_Click);
+            // 
             // btnTableTwo
             // 
             this.btnTableTwo.Location = new System.Drawing.Point(274, 67);
@@ -300,85 +398,15 @@
             this.btnTableOne.UseVisualStyleBackColor = true;
             this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
             // 
-            // btnTableThree
+            // btnViewNote
             // 
-            this.btnTableThree.Location = new System.Drawing.Point(402, 67);
-            this.btnTableThree.Name = "btnTableThree";
-            this.btnTableThree.Size = new System.Drawing.Size(94, 29);
-            this.btnTableThree.TabIndex = 2;
-            this.btnTableThree.Text = "Table 3";
-            this.btnTableThree.UseVisualStyleBackColor = true;
-            this.btnTableThree.Click += new System.EventHandler(this.btnTableThree_Click);
-            // 
-            // btnTableFour
-            // 
-            this.btnTableFour.Location = new System.Drawing.Point(521, 67);
-            this.btnTableFour.Name = "btnTableFour";
-            this.btnTableFour.Size = new System.Drawing.Size(94, 29);
-            this.btnTableFour.TabIndex = 3;
-            this.btnTableFour.Text = "Table 4";
-            this.btnTableFour.UseVisualStyleBackColor = true;
-            this.btnTableFour.Click += new System.EventHandler(this.btnTableFour_Click);
-            // 
-            // btnTableFive
-            // 
-            this.btnTableFive.Location = new System.Drawing.Point(646, 67);
-            this.btnTableFive.Name = "btnTableFive";
-            this.btnTableFive.Size = new System.Drawing.Size(94, 29);
-            this.btnTableFive.TabIndex = 4;
-            this.btnTableFive.Text = "Table 5";
-            this.btnTableFive.UseVisualStyleBackColor = true;
-            this.btnTableFive.Click += new System.EventHandler(this.btnTableFive_Click);
-            // 
-            // btnTableSix
-            // 
-            this.btnTableSix.Location = new System.Drawing.Point(147, 165);
-            this.btnTableSix.Name = "btnTableSix";
-            this.btnTableSix.Size = new System.Drawing.Size(94, 29);
-            this.btnTableSix.TabIndex = 5;
-            this.btnTableSix.Text = "Table 6";
-            this.btnTableSix.UseVisualStyleBackColor = true;
-            this.btnTableSix.Click += new System.EventHandler(this.btnTableSix_Click);
-            // 
-            // btnTableSeven
-            // 
-            this.btnTableSeven.Location = new System.Drawing.Point(274, 165);
-            this.btnTableSeven.Name = "btnTableSeven";
-            this.btnTableSeven.Size = new System.Drawing.Size(94, 29);
-            this.btnTableSeven.TabIndex = 6;
-            this.btnTableSeven.Text = "Table 7";
-            this.btnTableSeven.UseVisualStyleBackColor = true;
-            this.btnTableSeven.Click += new System.EventHandler(this.btnTableSeven_Click);
-            // 
-            // btnTableEight
-            // 
-            this.btnTableEight.Location = new System.Drawing.Point(402, 165);
-            this.btnTableEight.Name = "btnTableEight";
-            this.btnTableEight.Size = new System.Drawing.Size(94, 29);
-            this.btnTableEight.TabIndex = 7;
-            this.btnTableEight.Text = "Table 8";
-            this.btnTableEight.UseVisualStyleBackColor = true;
-            this.btnTableEight.Click += new System.EventHandler(this.btnTableEight_Click);
-            // 
-            // btnTableNine
-            // 
-            this.btnTableNine.Location = new System.Drawing.Point(521, 164);
-            this.btnTableNine.Name = "btnTableNine";
-            this.btnTableNine.Size = new System.Drawing.Size(94, 29);
-            this.btnTableNine.TabIndex = 8;
-            this.btnTableNine.Text = "Table 9";
-            this.btnTableNine.UseVisualStyleBackColor = true;
-            this.btnTableNine.Click += new System.EventHandler(this.btnTableNine_Click);
-            // 
-            // btnTableTen
-            // 
-            this.btnTableTen.Location = new System.Drawing.Point(646, 164);
-            this.btnTableTen.Name = "btnTableTen";
-            this.btnTableTen.Size = new System.Drawing.Size(94, 29);
-            this.btnTableTen.TabIndex = 9;
-            this.btnTableTen.Text = "Table 10";
-            this.btnTableTen.UseVisualStyleBackColor = true;
-            this.btnTableTen.Click += new System.EventHandler(this.btnTableTen_Click);
+            this.btnViewNote.Location = new System.Drawing.Point(685, 518);
+            this.btnViewNote.Name = "btnViewNote";
+            this.btnViewNote.Size = new System.Drawing.Size(135, 30);
+            this.btnViewNote.TabIndex = 4;
+            this.btnViewNote.Text = "view note";
+            this.btnViewNote.UseVisualStyleBackColor = true;
+            this.btnViewNote.Click += new System.EventHandler(this.btnViewNote_Click);
             // 
             // RosMain
             // 
@@ -423,8 +451,6 @@
         private System.Windows.Forms.ListView lvOrderedDishes;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Panel pnlBarView;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button brnDrinkReady;
@@ -443,5 +469,10 @@
         private System.Windows.Forms.Button btnTableFive;
         private System.Windows.Forms.Button btnTableFour;
         private System.Windows.Forms.Button btnTableThree;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.Button btnViewNote;
     }
 }

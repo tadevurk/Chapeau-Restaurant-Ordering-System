@@ -11,6 +11,32 @@ namespace RosDAL
 {
     public class OrderedDishDAO : BaseDAO
     {
+        OrderDAO orderDAO = new OrderDAO();
+
+        public void UpdateDishNote(OrderedDish dish, string message)
+        {
+            string query = "UPDATE OrderDish SET DishNote=@message  WHERE DishID=@DishID AND OrderID=@OrderID";
+
+            SqlParameter[] sp =
+            {
+                new SqlParameter("@DishID", dish.DishID),
+                new SqlParameter("@message", message),
+                new SqlParameter("@OrderID", dish.OrderID)
+            };
+            ExecuteEditQuery(query, sp);
+        }
+
+        public OrderedDish GetOrderedDishByKey(Order ord,Dish dish)
+        {
+            string query = "select * from OrderDish where OrderID=@OrderID AND DishID=@DishID ";
+            SqlParameter[] sp =
+            {
+                new SqlParameter("@OrderID", ord.OrderID),
+                new SqlParameter("@DishID", dish.DishID)
+            };
+
+            return ReatSingleTable(ExecuteSelectQuery(query, sp));
+        }
         public void AddDish(OrderedDish orderedDish) // Add dish to ordered dish table (The question is DishID or OrderID??)
         {
             string query = "INSERT INTO OrderDish " +
@@ -35,7 +61,27 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public void AddDishes(List<Dish> dishes, Order order)
+        {
+            foreach (Dish dish in dishes)
+            {
+                if (dish.Note == null)
+                {
+                    dish.Note = "null";
+                }
+ 
+                //getting last orderID from Order
+                order.OrderID = orderDAO.MaxCount();
+                //Adding dish
+                string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", dish.Note),
+                new SqlParameter("@Amount", dish.Amount)};
 
+                ExecuteEditQuery(query,sp);
+            }
+        }
         public void UpdateDish(OrderedDish orderedDish) // Change the amount of the dish (The question is DishID or OrderID??)
         {
             string query = "UPDATE [OrderDish] SET TimeDishOrdered = @TimeDishOrdered, TimeDishDelivered = @TimeDishDelivered, " +
@@ -61,8 +107,7 @@ namespace RosDAL
 
             ExecuteEditQuery(query, sqlParameters);
         }
-
-        private List<OrderedDish> ReadTables(DataTable dataTable)
+        private OrderedDish ReatSingleTable(DataTable dataTable)
         {
             List<OrderedDish> dishes = new List<OrderedDish>();
 
@@ -71,7 +116,30 @@ namespace RosDAL
                 OrderedDish dish = new OrderedDish()
                 {
                     TableNumber = (int)dr["tableNumber"],
+                    OrderID = (int)dr["order"],
                     DishID = (int)dr["ID"],
+                    Name = (string)dr["name"],
+                    TimeDishOrdered = (DateTime)dr["time"],
+                    Course = (string)dr["course"]
+                };
+                dishes.Add(dish);
+            }
+            return dishes[0];
+        }
+        private List<OrderedDish> ReadTables(DataTable dataTable)
+        {
+            List<OrderedDish> dishes = new List<OrderedDish>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+
+                OrderedDish dish = new OrderedDish()
+                {
+                    TableNumber = (int)dr["tableNumber"],
+                    OrderID = (int)dr["order"],
+                    DishID = (int)dr["ID"],
+                    DishNote = (string)dr["Note"],
+                    OrderedDishAmount = (int)dr["Amount"],
                     Name = (string)dr["name"],
                     TimeDishOrdered = (DateTime)dr["time"],
                     Course = (string)dr["course"]
@@ -83,16 +151,19 @@ namespace RosDAL
 
         public List<OrderedDish> GetAllOrderedDish()
         {
-            string query = "SELECT O.TableNumber as tableNumber, OD.DishID as ID, I.ItemName as name, OD.TimeDishOrdered as [time], D.Course from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
-    " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID where OD.DishStatus = 0 order by OD.TimeDishOrdered; ";
+            string query = "SELECT O.TableNumber as tableNumber, O.OrderID as [order], OD.DishID as ID, I.ItemName as name, OD.DishNote as [Note], OD.OrderedDishAmount as [Amount]," +
+                " OD.TimeDishOrdered as [time], D.Course from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
+                " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID where OD.DishStatus = 0 order by OD.TimeDishOrdered; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void UpdateDishStatus(OrderedDish orderedDish)
         {
-            string query = "UPDATE OrderDish SET DishStatus=1 WHERE DishID=@DishID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.DishID) };
+            string query = "UPDATE OrderDish SET DishStatus=1 WHERE DishID=@DishID AND OrderID=@OrderID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.DishID),
+            new SqlParameter("@OrderID", orderedDish.OrderID)
+            };
 
             ExecuteEditQuery(query, sqlParameters);
         }
