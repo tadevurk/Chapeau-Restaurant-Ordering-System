@@ -41,17 +41,19 @@ namespace RosUI
             return;
         }
 
-        private void WritesContainedDishes()
+        private void WritesContainedDishes() // Ordered List 
         {
             alreadyOrdered = dishLogic.WriteContainedDishes(table, order);
 
             listviewOrder.Items.Clear();
 
+            
             foreach (Dish d in alreadyOrdered)
             {
                 ListViewItem li = new ListViewItem(d.ItemName.ToString());
                 li.SubItems.Add(d.ItemPrice.ToString());
                 li.SubItems.Add(d.OrderedAmount.ToString());
+                li.ForeColor = Color.Green; // Change color (vedat)
                 li.Tag = (Dish)d;
                 listviewOrder.Items.Add(li);
             }
@@ -160,7 +162,7 @@ namespace RosUI
                 {
                     currentItem = item;
                     starter.Amount = int.Parse(item.SubItems[2].Text);
-                    starter.Amount++;
+                    starter.Amount++;            
                     item.SubItems[2].Text = starter.Amount.ToString();
                 }
             }
@@ -172,6 +174,7 @@ namespace RosUI
                 starter.Amount = 1;
                 li.SubItems.Add(starter.Amount.ToString());
                 li.Tag = starter;
+                li.ForeColor = Color.Red; // Change color (vedat)
                 listviewOrder.Items.Add(li);
             }
         }
