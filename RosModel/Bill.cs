@@ -8,15 +8,13 @@ namespace RosModel
 {
     public class Bill
     {
-        int BillNumber { get; set; }
-        double BillAmount { get; set; }
-        string BillStatus { get; set; }
-        double TipAmount { get; set; }
+        public int BillNumber { get; set; }
+        public decimal BillAmount { get; set; }
+        public bool BillStatus { get; set; }
+        public decimal TipAmount { get; set; }
+        public string Feedback { get; set; }
+        public DateTime PaymentDate { get; set; }
 
-        void PayBill(Bill bill)
-        {
-
-        }
-
+        public int TableNumber { get; set; }
     }
 }

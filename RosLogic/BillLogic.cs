@@ -7,16 +7,26 @@ namespace RosLogic
 {
     public class BillLogic
     {
-        BillDAO billDAO = new BillDAO();
-        
-        public Bill GetBillById(int id)
+        BillDAO billdb;
+
+        public BillLogic()
         {
-            return billDAO.GetBillById(id);
+            billdb = new BillDAO();
         }
 
-        public List<Bill> GetAllBills()
+        public List<OrderedDish> GetOrderedDishes()
         {
-            return billDAO.GetAllBills();
+            return billdb.GetOrderedDishes();
+        }
+
+        public List<OrderedDrink> GetOrderedDrinks()
+        {
+            return billdb.GetOrderedDrinks();
+        }
+
+        public void CreateBills(Bill b)
+        {
+            billdb.CreateBill(b);
         }
     }
 }
