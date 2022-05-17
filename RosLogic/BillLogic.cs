@@ -24,9 +24,9 @@ namespace RosLogic
             return billdb.GetOrderedDrinks();
         }
 
-        public void CreateBills()
+        public void CreateBills(Bill b)
         {
-            return billDAO.GetAllBills();
+            billdb.CreateBill(b);
         }
     }
 }

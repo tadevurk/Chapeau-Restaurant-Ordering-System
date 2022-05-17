@@ -44,5 +44,9 @@ namespace RosLogic
         {
             dishDAO.DecreaseDishStock(dish);
         }
+        public int RetrieveVatByID(int id)
+        {
+            return dishDAO.RetrieveVatByID(id);
+        }
     }
 }

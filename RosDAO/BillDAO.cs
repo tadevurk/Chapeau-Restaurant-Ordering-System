@@ -21,6 +21,8 @@ namespace RosDAL
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
+       
+
 
         private List<OrderedDish> ReadOrderedDishes(DataTable dataTable)
         {

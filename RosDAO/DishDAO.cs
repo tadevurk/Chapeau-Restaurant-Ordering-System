@@ -36,6 +36,29 @@ namespace RosDAL
             return ReadTablesOrder(ExecuteSelectQuery(query, sp));
         }
 
+        public int RetrieveVatByID(int id)
+        {
+            string qr = "Select Vat as VAT from Dish where DishID=@ID";
+
+            SqlParameter[] sp =
+{
+                new SqlParameter("@ID", id),
+            };
+
+            return ReadVat(ExecuteSelectQuery(qr, sp));
+        }
+
+        private int ReadVat(DataTable data)
+        {
+            int vat = 0;
+            foreach (DataRow dr in data.Rows)
+            {
+                vat = (int)dr["VAT"];
+            }
+
+            return vat;
+        }
+
         private List<Dish> ReadTablesOrder(DataTable table)
         {
             List<Dish> dishes = new List<Dish>();
