@@ -6,15 +6,20 @@ using System.Threading.Tasks;
 
 namespace RosModel
 {
+    public enum DishStatus { ToPrepare, PickUp, Serve, Payed }
+
     public class OrderedDish
     {
         public int OrderID { get; set; }
         public int DishID { get; set; }
-        public bool DishStatus { get; set; }
+
+        public DishStatus Status { get; set; }
         public DateTime TimeDishOrdered { get; set; }
         public DateTime TimeDishDelivered { get; set; }
 
         public int TableNumber { get; set; }
+
+        public decimal Price { get; set; }
 
         public string Course { get; set; }
 

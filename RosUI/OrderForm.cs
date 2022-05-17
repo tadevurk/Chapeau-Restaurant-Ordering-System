@@ -18,6 +18,7 @@ namespace RosUI
         DishLogic dishLogic;
         Order order;
         OrderLogic ordLogic = new OrderLogic();
+        List<Dish> alreadyOrdered = new List<Dish>();
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
         RosMain rosMain;
         Employee emp;
@@ -28,14 +29,32 @@ namespace RosUI
             this.rosMain = rosMain;
             this.emp = emp;
             this.table = table;
+            order = new Order(emp, table);
             dishLogic = new DishLogic();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
             //pnlStarters.Hide();
+            WritesContainedDishes();
         }
 
         public FormOrder(Table table)
         {
             return;
+        }
+
+        private void WritesContainedDishes()
+        {
+            alreadyOrdered = dishLogic.WriteContainedDishes(table, order);
+
+            listviewOrder.Items.Clear();
+
+            foreach (Dish d in alreadyOrdered)
+            {
+                ListViewItem li = new ListViewItem(d.ItemName.ToString());
+                li.SubItems.Add(d.ItemPrice.ToString());
+                li.SubItems.Add(d.OrderedAmount.ToString());
+                li.Tag = (Dish)d;
+                listviewOrder.Items.Add(li);
+            }
         }
 
         private void showPanel(string panelName)
@@ -92,11 +111,12 @@ namespace RosUI
         {
             // Increase the amount of the selected item from ordered list
             listviewOrder.FullRowSelect = true;
-            ListViewItem selectedStarter = listviewOrder.SelectedItems[0];
+            ListViewItem item = listviewOrder.SelectedItems[0];
+            Dish selectedStarter = (Dish)listviewOrder.SelectedItems[0].Tag;
 
-            int amount = int.Parse(selectedStarter.SubItems[2].Text);
-            amount++;
-            selectedStarter.SubItems[2].Text = amount.ToString();
+            selectedStarter.Amount++;
+
+            item.SubItems[2].Text = selectedStarter.Amount.ToString();
 
             //Decrease from stock
         }
@@ -158,21 +178,50 @@ namespace RosUI
 
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
-            //create new Order
-            order = new Order(emp, table);
-            ordLogic.AddOrder(order);
+            int ordID = 0;
+
+            if (alreadyOrdered.Count == 0)
+            {
+                ordLogic.AddOrder(order);
+                ordID = order.OrderID;
+            }
+            else
+            {
+                ordID = alreadyOrdered[0].Order;
+            }
 
             //getting Items from listView
             List<Dish> dishes = new List<Dish>();
+            List<Dish> contained = new List<Dish>();
 
             for (int i = 0; i < listviewOrder.Items.Count; i++)
-            {  
+            {
+                bool unique = true;
                 Dish d = (Dish)listviewOrder.Items[i].Tag;
-                dishes.Add(d);
-                
+                ListViewItem li = listviewOrder.Items[i] as ListViewItem;
+                foreach (Dish dish in alreadyOrdered)
+                {
+                    if (dish.ItemName == d.ItemName)
+                    {
+                        d.OrderedAmount = int.Parse(li.SubItems[2].Text);
+                        unique = false;
+                    }
+                }
+                d.Order = ordID;
+
+                if (!unique)
+                {
+                    contained.Add(d);
+                }
+                else
+                {
+                    dishes.Add(d);
+                }
+
             }
 
-            
+            orderedDishLogic.IncreaseAmount(contained, order);
+
             //Adding dish to Order_Dish table
             orderedDishLogic.AddDishes(dishes, order);
 
@@ -181,6 +230,8 @@ namespace RosUI
 
             //Update TableView
             rosMain.OrderRecieved(table.TableNumber);
+
+            WritesContainedDishes();
         }
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)
@@ -197,7 +248,7 @@ namespace RosUI
             }
         }
 
-        private void StoreNotes(string msg, OrderedDish dish)
+        private void UpdateDishNote(string msg, OrderedDish dish)
         {       
             orderedDishLogic.UpdateDishNote(dish, msg);
         }

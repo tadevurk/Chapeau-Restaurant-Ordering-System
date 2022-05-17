@@ -52,6 +52,7 @@ namespace RosUI
             this.Name = new System.Windows.Forms.ColumnHeader();
             this.Price = new System.Windows.Forms.ColumnHeader();
             this.txtNote = new System.Windows.Forms.RichTextBox();
+            this.btnPayment = new System.Windows.Forms.Button();
             this.pnlStarters.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -267,11 +268,21 @@ namespace RosUI
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
             // 
+            // btnPayment
+            // 
+            this.btnPayment.Location = new System.Drawing.Point(710, 714);
+            this.btnPayment.Name = "btnPayment";
+            this.btnPayment.Size = new System.Drawing.Size(94, 29);
+            this.btnPayment.TabIndex = 19;
+            this.btnPayment.Text = "pay";
+            this.btnPayment.UseVisualStyleBackColor = true;
+            // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 766);
+            this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.btnOrderAddNote);
             this.Controls.Add(this.btnOrderRemove);
@@ -320,5 +331,6 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader priceOrder;
         private System.Windows.Forms.ColumnHeader amountOrder;
         private System.Windows.Forms.RichTextBox txtNote;
+        private System.Windows.Forms.Button btnPayment;
     }
 }

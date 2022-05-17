@@ -193,43 +193,43 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = SystemColors.ButtonFace;
+                    btnTableOne.BackColor = Color.Blue;
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = SystemColors.ButtonFace;
+                    btnTableTwo.BackColor = Color.Blue;
 
                     break;
                 case 3:
-                    btnTableThree.BackColor = SystemColors.ButtonFace;
+                    btnTableThree.BackColor = Color.Blue;
 
                     break;
                 case 4:
-                    btnTableFour.BackColor = SystemColors.ButtonFace;
+                    btnTableFour.BackColor = Color.Blue;
 
                     break;
                 case 5:
-                    btnTableFive.BackColor = SystemColors.ButtonFace;
+                    btnTableFive.BackColor = Color.Blue;
 
                     break;
                 case 6:
-                    btnTableSix.BackColor = SystemColors.ButtonFace;
+                    btnTableSix.BackColor = Color.Blue;
 
                     break;
                 case 7:
-                    btnTableSeven.BackColor = SystemColors.ButtonFace;
+                    btnTableSeven.BackColor = Color.Blue;
 
                     break;
                 case 8:
-                    btnTableEight.BackColor = SystemColors.ButtonFace;
+                    btnTableEight.BackColor = Color.Blue;
 
                     break;
                 case 9:
-                    btnTableNine.BackColor = SystemColors.ButtonFace;
+                    btnTableNine.BackColor = Color.Blue;
 
                     break;
                 case 10:
-                    btnTableTen.BackColor = SystemColors.ButtonFace;
+                    btnTableTen.BackColor = Color.Blue;
 
                     break;
             }
@@ -242,43 +242,90 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = SystemColors.Window;
+                    btnTableOne.BackColor = Color.Green;
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = SystemColors.Window;
+                    btnTableTwo.BackColor = Color.Green;
 
                     break;
                 case 3:
-                    btnTableThree.BackColor = SystemColors.Window;
+                    btnTableThree.BackColor = Color.Green;
 
                     break;
                 case 4:
-                    btnTableFour.BackColor = SystemColors.Window;
+                    btnTableFour.BackColor = Color.Green;
 
                     break;
                 case 5:
-                    btnTableFive.BackColor = SystemColors.Window;
+                    btnTableFive.BackColor = Color.Green;
 
                     break;
                 case 6:
-                    btnTableSix.BackColor = SystemColors.Window;
+                    btnTableSix.BackColor = Color.Green;
 
                     break;
                 case 7:
-                    btnTableSeven.BackColor = SystemColors.Window;
+                    btnTableSeven.BackColor = Color.Green;
 
                     break;
                 case 8:
-                    btnTableEight.BackColor = SystemColors.Window;
+                    btnTableEight.BackColor = Color.Green;
 
                     break;
                 case 9:
-                    btnTableNine.BackColor = SystemColors.Window;
+                    btnTableNine.BackColor = Color.Green;
 
                     break;
                 case 10:
-                    btnTableTen.BackColor = SystemColors.Window;
+                    btnTableTen.BackColor = Color.Green;
+
+                    break;
+            }
+        }
+        public void ItemServed(int number)
+        {
+            //changing color of buttons when order is ready for the pick up 
+            switch (number)
+            {
+                case 1:
+                    btnTableOne.BackColor = Color.Yellow;
+                    break;
+
+                case 2:
+                    btnTableTwo.BackColor = Color.Yellow;
+
+                    break;
+                case 3:
+                    btnTableThree.BackColor = Color.Yellow;
+
+                    break;
+                case 4:
+                    btnTableFour.BackColor = Color.Yellow;
+
+                    break;
+                case 5:
+                    btnTableFive.BackColor = Color.Yellow;
+
+                    break;
+                case 6:
+                    btnTableSix.BackColor = Color.Yellow;
+
+                    break;
+                case 7:
+                    btnTableSeven.BackColor = Color.Yellow;
+
+                    break;
+                case 8:
+                    btnTableEight.BackColor = Color.Yellow;
+
+                    break;
+                case 9:
+                    btnTableNine.BackColor = Color.Yellow;
+
+                    break;
+                case 10:
+                    btnTableTen.BackColor = Color.Yellow;
 
                     break;
             }
@@ -293,8 +340,24 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
                 li.SubItems.Add(drink.Name);
+                li.SubItems.Add(drink.OrderedDrinkAmount.ToString());
                 li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
+
+                if (drink.DrinkNote == "null")
+                {
+                    li.SubItems.Add("No");
+                }
+                else
+                {
+                    li.SubItems.Add("Yes");
+                }
+                
                 li.Tag = drink;
+
+                if (drink.DrinkStatus == DrinkStatus.PickUp)
+                {
+                    li.BackColor = Color.Green;
+                }
                 lvOrderedDrinks.Items.Add(li);
             }
         }
@@ -325,6 +388,10 @@ namespace RosUI
 
                 
                 li.Tag = dish;
+                if (dish.Status == DishStatus.PickUp)
+                {
+                    li.BackColor = Color.Green;
+                }
                 lvOrderedDishes.Items.Add(li);
             }
 
@@ -335,9 +402,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                int tableNumber = drink.TableNumber;
-                PickUpReady(tableNumber);
-                drinkLogic.UpdateDrinkStatus(drink);
+                PickUpReady(drink.TableNumber);
+                drinkLogic.UpdateDrinkStatusPickUp(drink);
             }
 
             UpdateDrinks();
@@ -348,9 +414,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                int tableNumber = dish.TableNumber;
-                PickUpReady(tableNumber);
-                dishLogic.UpdateDishStatus(dish);
+                PickUpReady(dish.TableNumber);
+                dishLogic.UpdateDishStatusPickUp(dish);
             }
 
             UpdateDishes();
@@ -368,6 +433,44 @@ namespace RosUI
             {
                 MessageBox.Show(dish.DishNote);
             }
+        }
+
+        private void btnServe_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+            {
+                OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                dishLogic.UpdateDishStatusServe(orderedDish);
+                ItemServed(orderedDish.TableNumber);
+            }
+
+            UpdateDishes();
+        }
+
+        private void btnViewDrinkNote_Click(object sender, EventArgs e)
+        {
+            OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
+
+            if (d.DrinkNote == "null")
+            {
+                MessageBox.Show("No note");
+            }
+            else
+            {
+                MessageBox.Show(d.DrinkNote);
+            }
+        }
+
+        private void btnDrinkServed_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+            {
+                OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                drinkLogic.UpdateDrinkStatusServe(orderedDrink);
+                ItemServed(orderedDrink.TableNumber);
+            }
+
+            UpdateDrinks();
         }
     }
 }
