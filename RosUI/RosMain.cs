@@ -106,6 +106,7 @@ namespace RosUI
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPanel("TableView");
+            new RestaurantOverview().Show();
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
