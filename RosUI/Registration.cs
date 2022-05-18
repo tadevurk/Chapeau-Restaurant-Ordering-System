@@ -95,23 +95,23 @@ namespace RosUI
             switch (licenseKey)
             {
                 case "0001":
-                    employeeLogic.AddManager(employee);
                     employeeLogic.Add(employee);
+                    employeeLogic.AddManager(employee);                   
                     return true;
 
                 case "0002":
-                    employeeLogic.AddWaiter(employee);
                     employeeLogic.Add(employee);
+                    employeeLogic.AddWaiter(employee);                  
                     return true;
 
                 case "0003":
-                    employeeLogic.AddChef(employee);
                     employeeLogic.Add(employee);
+                    employeeLogic.AddChef(employee);                    
                     return true;
 
                 case "0004":
-                    employeeLogic.AddBartender(employee);
                     employeeLogic.Add(employee);
+                    employeeLogic.AddBartender(employee);                   
                     return true;
             }
             MessageBox.Show("*Please check if you have the correct license key*");
