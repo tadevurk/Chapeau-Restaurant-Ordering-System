@@ -17,11 +17,17 @@ namespace RosUI
     {
         Employee employee = new Employee();
         Table table = new Table();
+        TableLogic tableLogic = new TableLogic();
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
+
+        public List<Dish> Contained { get; set; }
         public RosMain(Employee employee)
         {
             InitializeComponent();
+            UpdateDishes();
+            UpdateDrinks();
+            UpdateTables();
             this.employee = employee;
 
             if (employee.Roles == Roles.Chef)
@@ -66,6 +72,7 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlBarView.Show();
+
                     UpdateDrinks();
 
                     break;
@@ -79,6 +86,32 @@ namespace RosUI
 
             }
 
+        }
+
+        public void UpdateTables()
+        {
+
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+            {
+                OrderedDish d = item.Tag as OrderedDish;               
+
+                switch (d.Status)
+                {
+                    case DishStatus.ToPrepare:
+                        OrderRecieved(d.TableNumber);
+                        break;
+                    case DishStatus.PickUp:
+                        PickUpReady(d.TableNumber);
+                        break;
+                    case DishStatus.Serve:
+                        ItemServed(d.TableNumber);
+                        break;
+                }
+                
+            }
+
+
+          
         }
 
         private void HideAllPanels()
@@ -119,8 +152,6 @@ namespace RosUI
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPanel("TableView");
-            new TableOverview(employee, this).Show();
-            this.Hide();
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
@@ -168,7 +199,7 @@ namespace RosUI
             table = new Table(6);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableSeven_Click(object sender, EventArgs e)
@@ -384,11 +415,31 @@ namespace RosUI
 
             lvOrderedDishes.Items.Clear();
 
+
             foreach (OrderedDish dish in orderedDishes)
             {
+
+                int amount = dish.OrderedDishAmount;
+
+                if (Contained != null)
+                {
+                    foreach (Dish d in Contained)
+                    {
+                        if (dish.Name == d.ItemName)
+                        {
+                            amount = d.OrderedAmount;
+                        }
+                    }
+                }
+
+                if (amount == 0)
+                {
+                    continue;
+                }
+
                 ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
                 li.SubItems.Add(dish.Name);
-                li.SubItems.Add(dish.OrderedDishAmount.ToString());
+                li.SubItems.Add(amount.ToString());
                 li.SubItems.Add(dish.TimeDishOrdered.ToString());
                 li.SubItems.Add(dish.Course);
 
@@ -401,7 +452,7 @@ namespace RosUI
                     li.SubItems.Add("Yes");
                 }
 
-                
+
                 li.Tag = dish;
                 if (dish.Status == DishStatus.PickUp)
                 {

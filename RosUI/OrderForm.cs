@@ -184,7 +184,7 @@ namespace RosUI
             {
                 ListViewItem item = new ListViewItem(dish.ItemName.ToString());
                 item.SubItems.Add(dish.ItemPrice.ToString());
-                item.SubItems.Add(dish.OrderedAmount.ToString());
+                item.SubItems.Add(dish.Amount.ToString());
                 item.ForeColor = Color.Green; // Change color from previous orders
                 item.Tag = (Dish)dish;
                 listviewOrder.Items.Add(item);
@@ -209,26 +209,35 @@ namespace RosUI
             List<Dish> dishes = new List<Dish>();
             List<Dish> contained = new List<Dish>();
 
+
+
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                bool unique = true;
+                int toAdd = 1;
+
                 Dish orderedDish = (Dish)listviewOrder.Items[i].Tag;
                 ListViewItem li = listviewOrder.Items[i];
                 foreach (Dish dish in alreadyOrdered)
                 {
-                    if (dish.ItemName == orderedDish.ItemName)
+
+                    if (dish.ItemName == orderedDish.ItemName && dish.Amount != int.Parse(li.SubItems[2].Text))
                     {
-                        orderedDish.OrderedAmount = int.Parse(li.SubItems[2].Text);
-                        unique = false;
+                        orderedDish.OrderedAmount = int.Parse(li.SubItems[2].Text) - dish.Amount;
+                        orderedDish.Amount = int.Parse(li.SubItems[2].Text);
+                        toAdd = 2;
+                    }
+                    else if (dish.ItemName == orderedDish.ItemName)
+                    {
+                        toAdd = 0;
                     }
                 }
                 order.OrderID = ordID; // Dish.Order ID
 
-                if (!unique)
+                if (toAdd == 2)
                 {
                     contained.Add(orderedDish);
                 }
-                else
+                else if (toAdd == 1)
                 {
                     dishes.Add(orderedDish);
                 }
@@ -236,11 +245,16 @@ namespace RosUI
 
             orderedDishLogic.IncreaseAmount(contained, order);
 
+            //pass the contained dishes to Main
+            rosMain.Contained = contained;
+
+
             //Adding dish to Order_Dish table
             orderedDishLogic.AddDishes(dishes, order);
 
             //Update KitchenView
             rosMain.UpdateDishes();
+
 
             //Update TableView
             rosMain.OrderRecieved(table.TableNumber);

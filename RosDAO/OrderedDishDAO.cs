@@ -31,7 +31,7 @@ namespace RosDAL
             string query = "select * from OrderDish where OrderID=@OrderID AND DishID=@DishID ";
             SqlParameter[] sp =
             {
-                new SqlParameter("@OrderID", ord.OrderID),
+                new SqlParameter("@OrderID", dish.Order),
                 new SqlParameter("@DishID", dish.DishID)
             };
 
@@ -74,7 +74,7 @@ namespace RosDAL
                 //Adding dish
                 string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";
                 SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
-                new SqlParameter("@OrderID", dish.Order),
+                new SqlParameter("@OrderID", order.OrderID),
                 new SqlParameter("@Note", dish.Note),
                 new SqlParameter("@Amount", dish.Amount)};
 
@@ -128,11 +128,11 @@ namespace RosDAL
 
         public void IncreaseAmount(Dish dish, Order order)
         {
-            string query = "update OrderDish set OrderedDishAmount=@Amount, DishStatus = 0 where DishID=@DishID and OrderID=OrderID";
+            string query = "update OrderDish set OrderedDishAmount=@Amount, DishStatus = 0 where DishID=@DishID and OrderID=@OrderID";
             SqlParameter[] sp = {
-                new SqlParameter("@Amount",dish.OrderedAmount),
+                new SqlParameter("@Amount",dish.Amount),
                 new SqlParameter("@DishID", dish.DishID),
-                new SqlParameter("@OrderID", order.OrderID)
+                new SqlParameter("@OrderID", order.OrderID),
             };
 
             ExecuteEditQuery(query, sp);
@@ -177,7 +177,7 @@ namespace RosDAL
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], O.OrderID as [order], OD.DishID as ID, I.ItemName as name, OD.DishNote as [Note], OD.OrderedDishAmount as [Amount]," +
                 " OD.TimeDishOrdered as [time], D.Course from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
-                " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID where OD.DishStatus = 0 or OD.DishStatus = 1 order by OD.TimeDishOrdered; ";
+                " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID where OD.DishStatus<2 order by OD.TimeDishOrdered; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));

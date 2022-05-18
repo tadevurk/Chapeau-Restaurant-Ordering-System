@@ -124,6 +124,7 @@ namespace RosUI
             if (IsManager(employee))
             {
                 employee.Roles = Roles.Manager;
+                return;
             }
             else if (IsWaiter(employee))
             {
@@ -151,7 +152,6 @@ namespace RosUI
             {
                 if(manager.EmplID == m.EmplID)
                     isManager = true;
-                break;
             }
             return isManager;
         }

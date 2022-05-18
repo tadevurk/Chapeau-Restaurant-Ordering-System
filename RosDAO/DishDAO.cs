@@ -71,7 +71,7 @@ namespace RosDAL
                     DishID = (int)dr["DishID"],
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
-                    OrderedAmount = (int)dr["Amount"],
+                    Amount = (int)dr["Amount"],
                     Order = (int)dr["Order"]
 
                 };
