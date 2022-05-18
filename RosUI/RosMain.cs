@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 
 namespace RosUI
 {
@@ -106,7 +106,8 @@ namespace RosUI
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPanel("TableView");
-            new RestaurantOverview().Show();
+            new TableOverview(employee, this).Show();
+            this.Hide();
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
@@ -472,6 +473,16 @@ namespace RosUI
             }
 
             UpdateDrinks();
+        }
+
+        //Write error to text file
+        public void WriteError(Exception e, string errorMessage)
+        {
+            StreamWriter writer = File.AppendText("ErrorLog.txt");
+            writer.WriteLine($"Error occurred: {errorMessage}");
+            writer.WriteLine(e);
+            writer.WriteLine(DateTime.Now);
+            writer.Close();
         }
     }
 }

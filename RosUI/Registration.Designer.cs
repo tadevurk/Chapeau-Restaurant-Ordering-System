@@ -37,6 +37,8 @@ namespace RosUI
             this.txtPinCode = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.lblPinCode = new System.Windows.Forms.Label();
+            this.lblLicensKey = new System.Windows.Forms.Label();
+            this.txtLicenseKey = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnExit
@@ -51,7 +53,7 @@ namespace RosUI
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(129, 325);
+            this.btnRegister.Location = new System.Drawing.Point(123, 355);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(94, 29);
             this.btnRegister.TabIndex = 1;
@@ -61,7 +63,7 @@ namespace RosUI
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(118, 138);
+            this.txtUsername.Location = new System.Drawing.Point(119, 114);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(125, 27);
             this.txtUsername.TabIndex = 2;
@@ -69,7 +71,7 @@ namespace RosUI
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(118, 107);
+            this.lblUsername.Location = new System.Drawing.Point(119, 83);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 20);
             this.lblUsername.TabIndex = 3;
@@ -77,14 +79,14 @@ namespace RosUI
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(118, 203);
+            this.txtName.Location = new System.Drawing.Point(119, 179);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(125, 27);
             this.txtName.TabIndex = 4;
             // 
             // txtPinCode
             // 
-            this.txtPinCode.Location = new System.Drawing.Point(118, 262);
+            this.txtPinCode.Location = new System.Drawing.Point(119, 238);
             this.txtPinCode.Name = "txtPinCode";
             this.txtPinCode.Size = new System.Drawing.Size(125, 27);
             this.txtPinCode.TabIndex = 5;
@@ -93,7 +95,7 @@ namespace RosUI
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(118, 172);
+            this.lblName.Location = new System.Drawing.Point(119, 148);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(49, 20);
             this.lblName.TabIndex = 6;
@@ -102,17 +104,35 @@ namespace RosUI
             // lblPinCode
             // 
             this.lblPinCode.AutoSize = true;
-            this.lblPinCode.Location = new System.Drawing.Point(118, 237);
+            this.lblPinCode.Location = new System.Drawing.Point(119, 213);
             this.lblPinCode.Name = "lblPinCode";
             this.lblPinCode.Size = new System.Drawing.Size(64, 20);
             this.lblPinCode.TabIndex = 7;
             this.lblPinCode.Text = "PinCode";
+            // 
+            // lblLicensKey
+            // 
+            this.lblLicensKey.AutoSize = true;
+            this.lblLicensKey.Location = new System.Drawing.Point(118, 279);
+            this.lblLicensKey.Name = "lblLicensKey";
+            this.lblLicensKey.Size = new System.Drawing.Size(85, 20);
+            this.lblLicensKey.TabIndex = 8;
+            this.lblLicensKey.Text = "License Key";
+            // 
+            // txtLicenseKey
+            // 
+            this.txtLicenseKey.Location = new System.Drawing.Point(118, 302);
+            this.txtLicenseKey.Name = "txtLicenseKey";
+            this.txtLicenseKey.Size = new System.Drawing.Size(125, 27);
+            this.txtLicenseKey.TabIndex = 9;
             // 
             // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 453);
+            this.Controls.Add(this.txtLicenseKey);
+            this.Controls.Add(this.lblLicensKey);
             this.Controls.Add(this.lblPinCode);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtPinCode);
@@ -139,5 +159,7 @@ namespace RosUI
         private System.Windows.Forms.TextBox txtPinCode;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblPinCode;
+        private System.Windows.Forms.Label lblLicensKey;
+        private System.Windows.Forms.TextBox txtLicenseKey;
     }
 }
