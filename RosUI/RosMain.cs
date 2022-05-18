@@ -159,7 +159,7 @@ namespace RosUI
             table = new Table(1);
             FormOrder orderForm = new FormOrder(table,employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableTwo_Click(object sender, EventArgs e)
@@ -167,7 +167,7 @@ namespace RosUI
             table = new Table(2);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableThree_Click(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace RosUI
             table = new Table(3);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableFour_Click(object sender, EventArgs e)
@@ -183,7 +183,7 @@ namespace RosUI
             table = new Table(4);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableFive_Click(object sender, EventArgs e)
@@ -191,7 +191,7 @@ namespace RosUI
             table = new Table(5);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableSix_Click(object sender, EventArgs e)
@@ -207,7 +207,7 @@ namespace RosUI
             table = new Table(7);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableEight_Click(object sender, EventArgs e)
@@ -215,7 +215,7 @@ namespace RosUI
             table = new Table(8);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableNine_Click(object sender, EventArgs e)
@@ -223,7 +223,7 @@ namespace RosUI
             table = new Table(9);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableTen_Click(object sender, EventArgs e)
@@ -231,7 +231,7 @@ namespace RosUI
             table = new Table(10);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
         public void OrderRecieved(int number)
         {
@@ -418,6 +418,7 @@ namespace RosUI
 
             foreach (OrderedDish dish in orderedDishes)
             {
+                //assign the new amount to display
 
                 int amount = dish.OrderedDishAmount;
 
@@ -432,10 +433,6 @@ namespace RosUI
                     }
                 }
 
-                if (amount == 0)
-                {
-                    continue;
-                }
 
                 ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
                 li.SubItems.Add(dish.Name);

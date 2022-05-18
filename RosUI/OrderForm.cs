@@ -35,12 +35,6 @@ namespace RosUI
             WritesContainedDishes();
         }
 
-        public FormOrder(Table table)
-        {
-            return;
-        }
-
-
 
         private void showPanel(string panelName)
         {
@@ -213,19 +207,21 @@ namespace RosUI
 
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                int toAdd = 1;
+                int toAdd = 1; // variable to decide if it had to be edited or not
 
                 Dish orderedDish = (Dish)listviewOrder.Items[i].Tag;
                 ListViewItem li = listviewOrder.Items[i];
                 foreach (Dish dish in alreadyOrdered)
                 {
-
+                    //check if is new
                     if (dish.ItemName == orderedDish.ItemName && dish.Amount != int.Parse(li.SubItems[2].Text))
                     {
+                        //calculate how many have been added and store it into dish.OrderAmount
                         orderedDish.OrderedAmount = int.Parse(li.SubItems[2].Text) - dish.Amount;
                         orderedDish.Amount = int.Parse(li.SubItems[2].Text);
                         toAdd = 2;
                     }
+                    //check if is old
                     else if (dish.ItemName == orderedDish.ItemName)
                     {
                         toAdd = 0;
@@ -233,10 +229,12 @@ namespace RosUI
                 }
                 order.OrderID = ordID; // Dish.Order ID
 
+                //if new add than edit
                 if (toAdd == 2)
                 {
                     contained.Add(orderedDish);
                 }
+                //if unique than add
                 else if (toAdd == 1)
                 {
                     dishes.Add(orderedDish);
@@ -278,7 +276,7 @@ namespace RosUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Close();
+            Hide();
         }
     }
 }
