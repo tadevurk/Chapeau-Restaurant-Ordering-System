@@ -22,7 +22,8 @@ namespace RosDAL
         {
             order.OrderID = MaxCount() + 1;
             string query = "insert into [Order] values(@count, @WaiterID, null, @TableNumber, null, null);";
-            SqlParameter[] pr = { new SqlParameter("@count", order.OrderID),
+            SqlParameter[] pr = {
+            new SqlParameter("@count", order.OrderID),
             new SqlParameter("@WaiterID", order.WaiterID),
             new SqlParameter("@TableNumber", order.TableNumber)
             };

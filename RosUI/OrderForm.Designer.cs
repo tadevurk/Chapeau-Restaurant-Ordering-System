@@ -35,8 +35,7 @@ namespace RosUI
             this.btnDrinks = new System.Windows.Forms.Button();
             this.btnSendOrder = new System.Windows.Forms.Button();
             this.btnCancelOrder = new System.Windows.Forms.Button();
-            this.btnMenu = new System.Windows.Forms.Button();
-            this.btnLogOut = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.listviewOrder = new System.Windows.Forms.ListView();
             this.nameOrder = new System.Windows.Forms.ColumnHeader();
@@ -120,23 +119,15 @@ namespace RosUI
             this.btnCancelOrder.UseVisualStyleBackColor = false;
             this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
             // 
-            // btnMenu
+            // btnBack
             // 
-            this.btnMenu.Location = new System.Drawing.Point(612, 12);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(103, 29);
-            this.btnMenu.TabIndex = 10;
-            this.btnMenu.Text = "Menu";
-            this.btnMenu.UseVisualStyleBackColor = true;
-            // 
-            // btnLogOut
-            // 
-            this.btnLogOut.Location = new System.Drawing.Point(733, 12);
-            this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(108, 29);
-            this.btnLogOut.TabIndex = 11;
-            this.btnLogOut.Text = "Log out";
-            this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnBack.Location = new System.Drawing.Point(710, 12);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(103, 29);
+            this.btnBack.TabIndex = 10;
+            this.btnBack.Text = "Back";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // lblTableNumber
             // 
@@ -289,8 +280,7 @@ namespace RosUI
             this.Controls.Add(this.btnOrderAdd);
             this.Controls.Add(this.listviewOrder);
             this.Controls.Add(this.lblTableNumber);
-            this.Controls.Add(this.btnLogOut);
-            this.Controls.Add(this.btnMenu);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
             this.Controls.Add(this.btnDrinks);
@@ -314,8 +304,7 @@ namespace RosUI
         private System.Windows.Forms.Button btnDrinks;
         private System.Windows.Forms.Button btnSendOrder;
         private System.Windows.Forms.Button btnCancelOrder;
-        private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label lblTableNumber;
         private System.Windows.Forms.ListView listviewOrder;
         private System.Windows.Forms.Button btnOrderAdd;

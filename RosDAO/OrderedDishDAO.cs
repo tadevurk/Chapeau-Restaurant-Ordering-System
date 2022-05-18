@@ -126,13 +126,13 @@ namespace RosDAL
             return dishes[0];
         }
 
-        public void IncreaseAmount(Dish d, Order o)
+        public void IncreaseAmount(Dish dish, Order order)
         {
-            string query = "update OrderDish set OrderedDishAmount=@Amount where DishID=@DishID and OrderID=OrderID";
+            string query = "update OrderDish set OrderedDishAmount=@Amount, DishStatus = 0 where DishID=@DishID and OrderID=OrderID";
             SqlParameter[] sp = {
-                new SqlParameter("@Amount",d.OrderedAmount),
-                new SqlParameter("@DishID", d.DishID),
-                new SqlParameter("@OrderID", d.Order)
+                new SqlParameter("@Amount",dish.OrderedAmount),
+                new SqlParameter("@DishID", dish.DishID),
+                new SqlParameter("@OrderID", order.OrderID)
             };
 
             ExecuteEditQuery(query, sp);
