@@ -28,7 +28,9 @@ namespace RosUI
             UpdateDishes();
             UpdateDrinks();
             UpdateTables();
+            Contained = new List<Dish>();
             this.employee = employee;
+
 
             if (employee.Roles == Roles.Chef)
             {
@@ -462,6 +464,11 @@ namespace RosUI
 
         private void btnDrinkReady_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                 MessageBox.Show("No item selected!");
+                return;
+            }
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
@@ -474,6 +481,12 @@ namespace RosUI
 
         private void btnDishReady_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
@@ -486,6 +499,12 @@ namespace RosUI
 
         private void btnViewNote_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
 
             if (dish.DishNote == "null")
@@ -500,6 +519,12 @@ namespace RosUI
 
         private void btnServe_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
@@ -512,6 +537,12 @@ namespace RosUI
 
         private void btnViewDrinkNote_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
 
             if (d.DrinkNote == "null")
@@ -522,10 +553,18 @@ namespace RosUI
             {
                 MessageBox.Show(d.DrinkNote);
             }
+
+
         }
 
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
@@ -545,5 +584,6 @@ namespace RosUI
             writer.WriteLine(DateTime.Now);
             writer.Close();
         }
+
     }
 }
