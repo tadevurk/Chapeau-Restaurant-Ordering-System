@@ -23,6 +23,19 @@ namespace RosUI
         {
             InitializeComponent();
             this.employee = employee;
+
+            if (employee.Roles == Roles.Chef)
+            {
+                barViewToolStripMenuItem.Visible = false;
+                tableViewToolStripMenuItem.Visible = false;
+                ShowPanel("KitchenView");
+            }
+            else if (employee.Roles == Roles.Bartender)
+            {
+                kitchenViewToolStripMenuItem.Visible = false;
+                tableViewToolStripMenuItem.Visible=false;
+                ShowPanel("BarView");
+            }
         }
 
         private void RosMain_Load(object sender, EventArgs e)
