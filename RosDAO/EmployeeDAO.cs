@@ -36,6 +36,34 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
+        public List<Employee> GetAllManagers()
+        {
+            string query = "SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] JOIN Manager ON EmplID = ManagerID ORDER BY [EmplID]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Employee> GetAllWaiters()
+        {
+            string query = "SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] JOIN Waiter ON EmplID = WaiterID ORDER BY [EmplID]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Employee> GetAllChefs()
+        {
+            string query = "SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] JOIN Chef ON EmplID = ChefID ORDER BY [EmplID]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Employee> GetAllBartenders()
+        {
+            string query = "SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] JOIN Bartender ON EmplID = BartenderID ORDER BY [EmplID]";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public Employee GetEmployeeByUsername(string username)
         {
             string query = $"SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] WHERE Username = '{username}';";
@@ -97,6 +125,78 @@ namespace RosDAL
                 throw new Exception("*Failed to register user*" + e.Message);
             }
             conn.Close();
-        }        
+        }
+
+        public void AddManager(Employee employee)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO Manager VALUES(@ManagerID);", conn);
+
+                command.Parameters.AddWithValue("@ManagerID", employee.EmplID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("*Failed to register user*" + e.Message);
+            }
+            conn.Close();
+        }
+
+        public void AddWaiter(Employee employee)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO Waiter VALUES(@WaiterID);", conn);
+
+                command.Parameters.AddWithValue("@WaiterID", employee.EmplID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("*Failed to register user*" + e.Message);
+            }
+            conn.Close();
+        }
+
+        public void AddChef(Employee employee)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO Chef VALUES(@ChefID);", conn);
+
+                command.Parameters.AddWithValue("@ChefID", employee.EmplID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("*Failed to register user*" + e.Message);
+            }
+            conn.Close();
+        }
+
+        public void AddBartender(Employee employee)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("INSERT INTO Bartender VALUES(@BartenderID);", conn);
+
+                command.Parameters.AddWithValue("@BartenderID", employee.EmplID);
+
+                int nrOfRowsAffected = command.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("*Failed to register user*" + e.Message);
+            }
+            conn.Close();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RosModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,100 +8,183 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using RosModel;
 
 namespace RosUI
 {
-    public partial class RestaurantOverview : Form
+    public partial class TableOverview : Form
     {
-        private Table table;
         private Employee employee;
+        private Table table;
         private RosMain rosMain;
 
-        public RestaurantOverview()
+        public TableOverview(Employee employee, RosMain rosMain)
         {
             InitializeComponent();
+            this.employee = employee;
+            this.rosMain = rosMain;
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
         {
-            table = new Table(1);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(1);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableTwo_Click(object sender, EventArgs e)
         {
-            table = new Table(2);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(2);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableThree_Click(object sender, EventArgs e)
         {
-            table = new Table(3);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(3);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableFour_Click(object sender, EventArgs e)
         {
-            table = new Table(4);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(4);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableFive_Click(object sender, EventArgs e)
         {
-            table = new Table(5);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(5);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableSix_Click(object sender, EventArgs e)
         {
-            table = new Table(6);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(6);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableSeven_Click(object sender, EventArgs e)
         {
-            table = new Table(7);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(7);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableEight_Click(object sender, EventArgs e)
         {
-            table = new Table(8);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(8);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableNine_Click(object sender, EventArgs e)
         {
-            table = new Table(9);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(9);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
 
         private void btnTableTen_Click(object sender, EventArgs e)
         {
-            table = new Table(10);
-            FormOrder orderForm = new FormOrder(table, employee, rosMain);
+            try
+            {
+                table = new Table(10);
+                FormOrder orderForm = new FormOrder(table, employee, rosMain);
 
-            orderForm.ShowDialog();
+                orderForm.ShowDialog();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
         }
+
+
         public void OrderRecieved(int number)
         {
             //Changing color of buttons when Order is initiated
@@ -148,6 +232,7 @@ namespace RosUI
                     break;
             }
         }
+
 
         public void PickUpReady(int number)
         {

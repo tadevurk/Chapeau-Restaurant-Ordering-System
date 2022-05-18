@@ -9,6 +9,8 @@ namespace RosUI
 {
     public partial class Registration : Form
     {
+        EmployeeLogic employeeLogic;
+        RosMain rosMain;
         public Registration()
         {
             InitializeComponent();
@@ -18,7 +20,7 @@ namespace RosUI
         {
             try
             {
-                EmployeeLogic employeeLogic = new EmployeeLogic();
+                employeeLogic = new EmployeeLogic();
                 Employee employee = new Employee();
                 Employee blank = employeeLogic.GetLastEmployeeID();
                 int id = blank.EmplID + 1;
@@ -29,17 +31,17 @@ namespace RosUI
                     txtPinCode.Text = "";
                     txtName.Text = "";
                     txtUsername.Text = "";
+                    txtLicenseKey.Text = "";
                     return;
                 }
 
                 employee.EmplID = id;
                 employee.Username = txtUsername.Text;
                 employee.Name = txtName.Text;
-                employee.PinCode = int.Parse(txtPinCode.Text);
+                employee.PinCode = txtPinCode.Text;
 
-                if (CheckPassword(employee))
+                if (CheckPassword(employee) && CheckRole(txtLicenseKey.Text, employee))
                 {
-                    employeeLogic.Add(employee);
                     MessageBox.Show("Registration Successfull");
 
                     this.Hide();
@@ -54,7 +56,7 @@ namespace RosUI
             catch (Exception exp)
             {
                 MessageBox.Show("Error Occorred: " + exp.Message);
-                WriteError(exp, exp.Message);
+                rosMain.WriteError(exp, exp.Message);
             }
         }
         private void btnExit_Click(object sender, EventArgs e)
@@ -68,24 +70,13 @@ namespace RosUI
             catch (Exception exp)
             {
                 MessageBox.Show("Error Occorred: " + exp.Message);
-                WriteError(exp, exp.Message);
+                rosMain.WriteError(exp, exp.Message);
             }
         }
 
-        //Methods
-        //Write error to text file
-        private void WriteError(Exception e, string errorMessage)
+        private bool CheckPassword(Employee employee)
         {
-            StreamWriter writer = File.AppendText("ErrorLog.txt");
-            writer.WriteLine($"Error occurred: {errorMessage}");
-            writer.WriteLine(e);
-            writer.WriteLine(DateTime.Now);
-            writer.Close();
-        }
-
-        public bool CheckPassword(Employee employee)
-        {
-            if (IsValidPassword(employee.PinCode.ToString()))
+            if (IsValidPassword(employee.PinCode))
             {
                 HashWithSaltResult hashResultSha256 = EncryptPassword(txtPinCode.Text);
                 employee.Salt = hashResultSha256.Salt;
@@ -97,6 +88,34 @@ namespace RosUI
                 MessageBox.Show("*Your password must be a 4 digit pincode*");
                 return false;
             }
+        }
+
+        private bool CheckRole(string licenseKey, Employee employee)
+        {
+            switch (licenseKey)
+            {
+                case "0001":
+                    employeeLogic.AddManager(employee);
+                    employeeLogic.Add(employee);
+                    return true;
+
+                case "0002":
+                    employeeLogic.AddWaiter(employee);
+                    employeeLogic.Add(employee);
+                    return true;
+
+                case "0003":
+                    employeeLogic.AddChef(employee);
+                    employeeLogic.Add(employee);
+                    return true;
+
+                case "0004":
+                    employeeLogic.AddBartender(employee);
+                    employeeLogic.Add(employee);
+                    return true;
+            }
+            MessageBox.Show("*Please check if you have the correct license key*");
+            return false;
         }
 
         private HashWithSaltResult EncryptPassword(string password)
