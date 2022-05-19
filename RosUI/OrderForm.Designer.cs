@@ -52,9 +52,21 @@ namespace RosUI
             this.Price = new System.Windows.Forms.ColumnHeader();
             this.txtNote = new System.Windows.Forms.RichTextBox();
             this.btnPayment = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.pnlSoftDrinks = new System.Windows.Forms.Panel();
+            this.btnAddDrink = new System.Windows.Forms.Button();
+            this.lblSoftDrinks = new System.Windows.Forms.Label();
+            this.listviewSoftDrinks = new System.Windows.Forms.ListView();
+            this.columnName = new System.Windows.Forms.ColumnHeader();
+            this.columnPrice = new System.Windows.Forms.ColumnHeader();
+            this.pnlDrinkCategories = new System.Windows.Forms.Panel();
+            this.btnHotDrinks = new System.Windows.Forms.Button();
+            this.btnWine = new System.Windows.Forms.Button();
+            this.btnSpirits = new System.Windows.Forms.Button();
+            this.btnBeers = new System.Windows.Forms.Button();
+            this.btnSoftDrink = new System.Windows.Forms.Button();
             this.pnlStarters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.pnlSoftDrinks.SuspendLayout();
+            this.pnlDrinkCategories.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStarters
@@ -203,11 +215,10 @@ namespace RosUI
             // 
             // pnlStarters
             // 
-            this.pnlStarters.Controls.Add(this.numericUpDown1);
             this.pnlStarters.Controls.Add(this.btnAddStarter);
             this.pnlStarters.Controls.Add(this.lblStartersHead);
             this.pnlStarters.Controls.Add(this.listviewStarters);
-            this.pnlStarters.Location = new System.Drawing.Point(25, 385);
+            this.pnlStarters.Location = new System.Drawing.Point(12, 409);
             this.pnlStarters.Name = "pnlStarters";
             this.pnlStarters.Size = new System.Drawing.Size(816, 299);
             this.pnlStarters.TabIndex = 17;
@@ -272,21 +283,126 @@ namespace RosUI
             this.btnPayment.UseVisualStyleBackColor = true;
             this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
-            // numericUpDown1
+            // pnlSoftDrinks
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(674, 213);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(55, 27);
-            this.numericUpDown1.TabIndex = 16;
+            this.pnlSoftDrinks.Controls.Add(this.btnAddDrink);
+            this.pnlSoftDrinks.Controls.Add(this.lblSoftDrinks);
+            this.pnlSoftDrinks.Controls.Add(this.listviewSoftDrinks);
+            this.pnlSoftDrinks.Location = new System.Drawing.Point(16, 461);
+            this.pnlSoftDrinks.Name = "pnlSoftDrinks";
+            this.pnlSoftDrinks.Size = new System.Drawing.Size(816, 299);
+            this.pnlSoftDrinks.TabIndex = 20;
+            // 
+            // btnAddDrink
+            // 
+            this.btnAddDrink.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDrink.Name = "btnAddDrink";
+            this.btnAddDrink.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDrink.TabIndex = 15;
+            this.btnAddDrink.Text = "Add";
+            this.btnAddDrink.UseVisualStyleBackColor = true;
+            // 
+            // lblSoftDrinks
+            // 
+            this.lblSoftDrinks.AutoSize = true;
+            this.lblSoftDrinks.Location = new System.Drawing.Point(14, 13);
+            this.lblSoftDrinks.Name = "lblSoftDrinks";
+            this.lblSoftDrinks.Size = new System.Drawing.Size(99, 20);
+            this.lblSoftDrinks.TabIndex = 1;
+            this.lblSoftDrinks.Text = "SOFT DRINKS";
+            // 
+            // listviewSoftDrinks
+            // 
+            this.listviewSoftDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnPrice});
+            this.listviewSoftDrinks.HideSelection = false;
+            this.listviewSoftDrinks.Location = new System.Drawing.Point(14, 48);
+            this.listviewSoftDrinks.Name = "listviewSoftDrinks";
+            this.listviewSoftDrinks.Size = new System.Drawing.Size(571, 237);
+            this.listviewSoftDrinks.TabIndex = 0;
+            this.listviewSoftDrinks.UseCompatibleStateImageBehavior = false;
+            this.listviewSoftDrinks.View = System.Windows.Forms.View.Details;
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Name";
+            this.columnName.Width = 450;
+            // 
+            // columnPrice
+            // 
+            this.columnPrice.Text = "Price";
+            this.columnPrice.Width = 120;
+            // 
+            // pnlDrinkCategories
+            // 
+            this.pnlDrinkCategories.Controls.Add(this.btnHotDrinks);
+            this.pnlDrinkCategories.Controls.Add(this.btnWine);
+            this.pnlDrinkCategories.Controls.Add(this.btnSpirits);
+            this.pnlDrinkCategories.Controls.Add(this.btnBeers);
+            this.pnlDrinkCategories.Controls.Add(this.btnSoftDrink);
+            this.pnlDrinkCategories.Location = new System.Drawing.Point(16, 366);
+            this.pnlDrinkCategories.Name = "pnlDrinkCategories";
+            this.pnlDrinkCategories.Size = new System.Drawing.Size(612, 89);
+            this.pnlDrinkCategories.TabIndex = 20;
+            // 
+            // btnHotDrinks
+            // 
+            this.btnHotDrinks.Location = new System.Drawing.Point(503, 13);
+            this.btnHotDrinks.Name = "btnHotDrinks";
+            this.btnHotDrinks.Size = new System.Drawing.Size(94, 54);
+            this.btnHotDrinks.TabIndex = 24;
+            this.btnHotDrinks.Text = "HOT DRINKS";
+            this.btnHotDrinks.UseVisualStyleBackColor = true;
+            // 
+            // btnWine
+            // 
+            this.btnWine.Location = new System.Drawing.Point(253, 13);
+            this.btnWine.Name = "btnWine";
+            this.btnWine.Size = new System.Drawing.Size(94, 54);
+            this.btnWine.TabIndex = 23;
+            this.btnWine.Text = "WINES";
+            this.btnWine.UseVisualStyleBackColor = true;
+            // 
+            // btnSpirits
+            // 
+            this.btnSpirits.Location = new System.Drawing.Point(377, 12);
+            this.btnSpirits.Name = "btnSpirits";
+            this.btnSpirits.Size = new System.Drawing.Size(94, 54);
+            this.btnSpirits.TabIndex = 22;
+            this.btnSpirits.Text = "SPIRITS";
+            this.btnSpirits.UseVisualStyleBackColor = true;
+            // 
+            // btnBeers
+            // 
+            this.btnBeers.Location = new System.Drawing.Point(128, 12);
+            this.btnBeers.Name = "btnBeers";
+            this.btnBeers.Size = new System.Drawing.Size(94, 54);
+            this.btnBeers.TabIndex = 21;
+            this.btnBeers.Text = "BEERS";
+            this.btnBeers.UseVisualStyleBackColor = true;
+            // 
+            // btnSoftDrink
+            // 
+            this.btnSoftDrink.Location = new System.Drawing.Point(3, 13);
+            this.btnSoftDrink.Name = "btnSoftDrink";
+            this.btnSoftDrink.Size = new System.Drawing.Size(94, 54);
+            this.btnSoftDrink.TabIndex = 2;
+            this.btnSoftDrink.Text = "SOFT DRINKS";
+            this.btnSoftDrink.UseVisualStyleBackColor = true;
+            this.btnSoftDrink.Click += new System.EventHandler(this.btnSoftDrink_Click);
             // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 766);
+            this.Controls.Add(this.pnlSoftDrinks);
+            this.Controls.Add(this.pnlDrinkCategories);
             this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.btnOrderAddNote);
+            this.Controls.Add(this.pnlStarters);
             this.Controls.Add(this.btnOrderRemove);
             this.Controls.Add(this.btnOrderAdd);
             this.Controls.Add(this.listviewOrder);
@@ -298,12 +414,13 @@ namespace RosUI
             this.Controls.Add(this.btnDesserts);
             this.Controls.Add(this.btnMains);
             this.Controls.Add(this.btnStarters);
-            this.Controls.Add(this.pnlStarters);
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);
             this.pnlStarters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.pnlSoftDrinks.ResumeLayout(false);
+            this.pnlSoftDrinks.PerformLayout();
+            this.pnlDrinkCategories.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,6 +450,17 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader amountOrder;
         private System.Windows.Forms.RichTextBox txtNote;
         private System.Windows.Forms.Button btnPayment;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Panel pnlSoftDrinks;
+        private System.Windows.Forms.Button btnAddDrink;
+        private System.Windows.Forms.Label lblSoftDrinks;
+        private System.Windows.Forms.ListView listviewSoftDrinks;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnPrice;
+        private System.Windows.Forms.Panel pnlDrinkCategories;
+        private System.Windows.Forms.Button btnHotDrinks;
+        private System.Windows.Forms.Button btnWine;
+        private System.Windows.Forms.Button btnSpirits;
+        private System.Windows.Forms.Button btnBeers;
+        private System.Windows.Forms.Button btnSoftDrink;
     }
 }
