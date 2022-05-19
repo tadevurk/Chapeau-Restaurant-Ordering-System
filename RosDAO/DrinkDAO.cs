@@ -17,7 +17,17 @@ namespace RosDAL
             string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
                 "from Drink " +
                 "join Item on DrinkID = ItemID " +
-                "where Dish.Course = 'SoftDrink';";
+                "where DrinkCategory = 'SoftDrink' ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        //Getting all Drinks
+        public List<Drink> GetAllDrinks()
+        {
+            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
+                "from Drink " +
+                "join Item on DrinkID = ItemID ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
