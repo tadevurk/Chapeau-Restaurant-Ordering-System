@@ -52,7 +52,9 @@ namespace RosUI
             this.Price = new System.Windows.Forms.ColumnHeader();
             this.txtNote = new System.Windows.Forms.RichTextBox();
             this.btnPayment = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.pnlStarters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStarters
@@ -201,6 +203,7 @@ namespace RosUI
             // 
             // pnlStarters
             // 
+            this.pnlStarters.Controls.Add(this.numericUpDown1);
             this.pnlStarters.Controls.Add(this.btnAddStarter);
             this.pnlStarters.Controls.Add(this.lblStartersHead);
             this.pnlStarters.Controls.Add(this.listviewStarters);
@@ -211,7 +214,7 @@ namespace RosUI
             // 
             // btnAddStarter
             // 
-            this.btnAddStarter.Location = new System.Drawing.Point(628, 98);
+            this.btnAddStarter.Location = new System.Drawing.Point(628, 48);
             this.btnAddStarter.Name = "btnAddStarter";
             this.btnAddStarter.Size = new System.Drawing.Size(151, 112);
             this.btnAddStarter.TabIndex = 15;
@@ -269,6 +272,13 @@ namespace RosUI
             this.btnPayment.UseVisualStyleBackColor = true;
             this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(674, 213);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(55, 27);
+            this.numericUpDown1.TabIndex = 16;
+            // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -293,6 +303,7 @@ namespace RosUI
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);
             this.pnlStarters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,5 +333,6 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader amountOrder;
         private System.Windows.Forms.RichTextBox txtNote;
         private System.Windows.Forms.Button btnPayment;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

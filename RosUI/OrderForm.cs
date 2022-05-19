@@ -118,23 +118,22 @@ namespace RosUI
             Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
             ListViewItem li = listviewOrder.SelectedItems[0];
 
-            if (listviewOrder.Items.Count > 0)
-            {
-                if (dish.ItemName == li.SubItems[0].Text )
+                if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
                 {
                     MessageBox.Show("You cannot edit old items");
                 }
-            }
+                else if(dish.Amount == 1)
+                {
+                    listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                    dishLogic.IncreaseDishStock(dish);
 
-            if (dish.Amount==1)
-            {
-                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-            }
-            else
-            {
-                dish.Amount--;
-                listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
-            }
+                }
+                else
+                {
+                    dish.Amount--;
+                    listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
+                    dishLogic.IncreaseDishStock(dish);
+                }
             // Increase stock
         }
 
@@ -147,7 +146,7 @@ namespace RosUI
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
-                if (starter.ItemName == item.SubItems[0].Text)
+                if (starter.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
                 {
                     currentItem = item;
                     starter.Amount = int.Parse(item.SubItems[2].Text);
@@ -210,20 +209,21 @@ namespace RosUI
             {
                 int toAdd = 1; // variable to decide if it had to be edited or not
 
-                Dish orderedDish = (Dish)listviewOrder.Items[i].Tag;
+                Dish dishInOrderList = (Dish)listviewOrder.Items[i].Tag;
+
                 ListViewItem li = listviewOrder.Items[i];
-                foreach (Dish dish in alreadyOrdered)
+                foreach (Dish alreadyOrderedDish in alreadyOrdered)
                 {
                     //check if is new
-                    if (dish.ItemName == orderedDish.ItemName && dish.Amount != int.Parse(li.SubItems[2].Text))
+                    if (alreadyOrderedDish.ItemName == dishInOrderList.ItemName && alreadyOrderedDish.Amount != int.Parse(li.SubItems[2].Text))
                     {
                         //calculate how many have been added and store it into dish.OrderAmount
-                        orderedDish.OrderedAmount = int.Parse(li.SubItems[2].Text) - dish.Amount;
-                        orderedDish.Amount = int.Parse(li.SubItems[2].Text);
+                        dishInOrderList.OrderedAmount = int.Parse(li.SubItems[2].Text) - alreadyOrderedDish.Amount;
+                        dishInOrderList.Amount = int.Parse(li.SubItems[2].Text);
                         toAdd = 2;
                     }
                     //check if is old
-                    else if (dish.ItemName == orderedDish.ItemName)
+                    else if (alreadyOrderedDish.ItemName == dishInOrderList.ItemName)
                     {
                         toAdd = 0;
                     }
@@ -233,23 +233,40 @@ namespace RosUI
                 //if new add than edit
                 if (toAdd == 2)
                 {
-                    contained.Add(orderedDish);
+                    contained.Add(dishInOrderList);
                 }
                 //if unique than add
                 else if (toAdd == 1)
                 {
-                    dishes.Add(orderedDish);
+                    dishes.Add(dishInOrderList);
                 }
             }
 
-            orderedDishLogic.IncreaseAmount(contained, order);
+            List<Dish> newContained = new List<Dish>();
+
+            for (int i = 0; i < contained.Count; i++)
+            {
+                if (!newContained.Contains(contained[i]))
+                {
+                    newContained.Add(contained[i]);
+                }
+                else
+                {
+                    newContained[newContained.IndexOf(contained[i])].Amount += contained[i].Amount;
+                }
+            }
+
+            orderedDishLogic.IncreaseAmount(newContained, order);
 
             //pass the contained dishes to Main
-            rosMain.Contained = contained;
+            rosMain.Contained = newContained;
 
 
             //Adding dish to Order_Dish table
             orderedDishLogic.AddDishes(dishes, order);
+
+            WritesContainedDishes();
+
 
             //Update KitchenView
             rosMain.UpdateDishes();
@@ -258,7 +275,7 @@ namespace RosUI
             //Update TableView
             rosMain.OrderRecieved(table.TableNumber);
 
-            WritesContainedDishes();
+
         }
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)

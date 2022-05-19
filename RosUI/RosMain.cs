@@ -428,7 +428,7 @@ namespace RosUI
                 {
                     foreach (Dish d in Contained)
                     {
-                        if (dish.Name == d.ItemName)
+                        if (dish.Name == d.ItemName && d.Order == dish.OrderID)
                         {
                             amount = d.OrderedAmount;
                         }

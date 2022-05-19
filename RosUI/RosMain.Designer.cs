@@ -164,7 +164,6 @@
             // 
             // btnServe
             // 
-            this.btnServe.Enabled = false;
             this.btnServe.Location = new System.Drawing.Point(183, 518);
             this.btnServe.Name = "btnServe";
             this.btnServe.Size = new System.Drawing.Size(94, 29);
@@ -175,7 +174,6 @@
             // 
             // btnViewNote
             // 
-            this.btnViewNote.Enabled = false;
             this.btnViewNote.Location = new System.Drawing.Point(685, 518);
             this.btnViewNote.Name = "btnViewNote";
             this.btnViewNote.Size = new System.Drawing.Size(135, 30);
@@ -195,7 +193,6 @@
             // 
             // btnDishReady
             // 
-            this.btnDishReady.Enabled = false;
             this.btnDishReady.Location = new System.Drawing.Point(1031, 518);
             this.btnDishReady.Name = "btnDishReady";
             this.btnDishReady.Size = new System.Drawing.Size(149, 30);
