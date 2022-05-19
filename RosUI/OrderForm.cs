@@ -18,12 +18,15 @@ namespace RosUI
         DishLogic dishLogic;
         DrinkLogic drinkLogic;
         Order order;
-        OrderLogic ordLogic = new OrderLogic();
+        OrderLogic orderLogic;
         List<Dish> alreadyOrdered = new List<Dish>();
+        List<Dish> DishesInOrderProcess = new List<Dish>(); // For the orders that are in process (between order- will be ordered)
+        List<Dish> DishesInOrderedList = new List<Dish>(); // For the orders that are already in the listviewOrder
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
         RosMain rosMain;
         Employee emp;
-        int starterAmount = 1;
+        int ordID = 0;
+        int toAdd = 1; // variable to decide if it had to be edited or not
         public FormOrder(Table table, Employee emp, RosMain rosMain)
         {
             InitializeComponent();
@@ -31,9 +34,11 @@ namespace RosUI
             this.emp = emp;
             this.table = table;
             order = new Order(emp, table);
+            orderLogic = new OrderLogic();
             dishLogic = new DishLogic();
             drinkLogic = new DrinkLogic();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
+            
             WritesContainedDishes();
         }
 
@@ -48,6 +53,11 @@ namespace RosUI
                     pnlStarters.Visible = true;
                     ReadStarters();
                     break;
+                case "Mains":
+                    pnlMains.Show();
+                    pnlMains.Visible = true;
+                    ReadMains();
+                    break;
                 case "Drinks":
                     pnlDrinkCategories.Show();
                     pnlDrinkCategories.Visible = true;
@@ -60,26 +70,41 @@ namespace RosUI
             }
         }
 
+        private void OrderForm_Load(object sender, EventArgs e)
+        {
+            HidePanels();
+            btnSendOrder.Visible = false;
+            btnCancelOrder.Visible = false;
+        }
 
         private void btnStarters_Click(object sender, EventArgs e)
         {
             showPanel("Starters");
+            SendCancelButtonsVisible();
+        }
+
+        private void btnMains_Click(object sender, EventArgs e)
+        {
+            showPanel("Mains");
+            SendCancelButtonsVisible();
         }
         private void btnDrinks_Click(object sender, EventArgs e)
         {
             showPanel("Drinks");
+            SendCancelButtonsVisible();
         }
 
         private void btnSoftDrink_Click(object sender, EventArgs e)
         {
             showPanel("SoftDrinks");
+            SendCancelButtonsVisible();
         }
 
-        private void OrderForm_Load(object sender, EventArgs e)
+        private void SendCancelButtonsVisible()
         {
-            HidePanels();
+            btnSendOrder.Visible = true;
+            btnCancelOrder.Visible = true;
         }
-
         void HidePanels()
         {
             pnlStarters.Hide();
@@ -89,6 +114,9 @@ namespace RosUI
 
             pnlSoftDrinks.Hide();
             listviewSoftDrinks.FullRowSelect = true;
+
+            pnlMains.Hide();
+            listviewMains.FullRowSelect = true;
         }
 
         private void ReadSoftDrinks()
@@ -123,10 +151,28 @@ namespace RosUI
             }
         }
 
+        private void ReadMains()
+        {
+            List<Dish> mains = dishLogic.GetAllMains();
+            listviewMains.Items.Clear();
+            listviewMains.FullRowSelect = true;
+
+            foreach (Dish main in mains)
+            {
+                ListViewItem li = new ListViewItem(main.ItemName.ToString());
+                li.SubItems.Add(main.ItemPrice.ToString());
+                li.Tag = main;
+                listviewMains.Items.Add(li);
+            }
+        }
+
         private void btnAddStarter_Click(object sender, EventArgs e)
         {
             AddStarterFunction();
-
+        }
+        private void btnAddMains_Click(object sender, EventArgs e)
+        {
+            AddMainFunction();
         }
         private void btnOrderAdd_Click(object sender, EventArgs e)
         {
@@ -136,17 +182,10 @@ namespace RosUI
             Dish selectedStarter = (Dish)listviewOrder.SelectedItems[0].Tag;
 
             selectedStarter.Amount++;
-
             item.SubItems[2].Text = selectedStarter.Amount.ToString();
+            DishesInOrderedList.Add(selectedStarter); // Adding selected item to again dishesInOrdered with its updated amount
 
             //Decrease from stock
-        }
-
-        private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
-        {
-            listviewOrder.Items.Clear();
-
-            // Everything should go again to database. (INCREASE STOCK AGAIN)
         }
 
         private void btnOrderRemove_Click(object sender, EventArgs e)
@@ -156,6 +195,7 @@ namespace RosUI
 
             if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
             {
+                //!! It should be POSSIBLE to decrease the items amount which comes with (+) button !!
                 MessageBox.Show("You cannot edit old items");
             }
             else if (dish.Amount == 1)
@@ -170,7 +210,38 @@ namespace RosUI
                 listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
                 dishLogic.IncreaseDishStock(dish);
             }
-            // Increase stock
+        }
+
+        private void AddMainFunction() // Add starters to the orderedlist - if there is already one, just increase the amount
+        {
+            listviewMains.FullRowSelect = true;
+            ListViewItem selectedMain = listviewMains.SelectedItems[0];
+            Dish main = (Dish)selectedMain.Tag;
+            ListViewItem currentItem = null;
+
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (main.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                {
+                    currentItem = item;
+                    main.Amount = int.Parse(item.SubItems[2].Text);
+                    main.Amount++;
+                    item.SubItems[2].Text = main.Amount.ToString();
+                }
+            }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(main.ItemName);
+                item.SubItems.Add(main.ItemPrice.ToString());
+                main.Amount = 1;
+                item.SubItems.Add(main.Amount.ToString());
+                item.Tag = main;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+
+            dishLogic.DecreaseDishStock(main); // Decrease the stock
         }
 
         private void AddStarterFunction() // Add starters to the orderedlist - if there is already one, just increase the amount
@@ -221,55 +292,101 @@ namespace RosUI
             }
         }
 
-        private void btnSendOrder_Click(object sender, EventArgs e)
+        private void OrderCheck()
         {
-            int ordID = 0;
-
             if (alreadyOrdered.Count == 0)
             {
-                ordLogic.AddOrder(order); // Create new order
+                orderLogic.AddOrder(order); // Create new order
                 ordID = order.OrderID; // the new orderId will be the orderID from parameter
             }
             else
             {
                 ordID = alreadyOrdered[0].Order; // Else still same orderID
             }
+        }
 
-            //getting Items from listView
-            List<Dish> dishes = new List<Dish>();
-            List<Dish> contained = new List<Dish>();
+        private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
+                {
+                    if (lvOrderInProcess.ForeColor == Color.Red)
+                    {
+                        listviewOrder.Items.Remove(lvOrderInProcess);
+                    }
+                }
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+        }
 
+        private void btnSendOrder_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                //Check the order whether exists or not
+                OrderCheck();
 
+                // send order - ( and grouping the old items' amount by adding the new items' amount)
+                SendOrder();
 
+                //icreasing amount on db and setting back status to toBePrepared
+                orderedDishLogic.IncreaseAmount(DishesInOrderedList, order);
 
+                //pass the contained dishes to Main
+                rosMain.Contained = DishesInOrderedList;
 
+                //Adding compleeteley new dish dish to Order_Dish table
+                orderedDishLogic.AddDishes(DishesInOrderProcess, order);
+
+                WritesContainedDishes();
+
+                //Update KitchenView
+                rosMain.UpdateDishes();
+
+                //Update TableView
+                rosMain.OrderRecieved(table.TableNumber);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+            
+        }
+
+        private void SendOrder()
+        {
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                int toAdd = 1; // variable to decide if it had to be edited or not
+                //int toAdd = 1; // variable to decide if it had to be edited or not
+                Dish dishInOrderList = (Dish)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
+                ListViewItem lvItemInOrderList = listviewOrder.Items[i];
 
-                Dish dishInOrderList = (Dish)listviewOrder.Items[i].Tag;
-
-                ListViewItem li = listviewOrder.Items[i];
-
-                foreach (ListViewItem lv in listviewOrder.Items)
+                foreach (ListViewItem lvItemInOrderProcess in listviewOrder.Items)
                 {
-                    //check if is new
-                    if (lv.SubItems[0].Text == dishInOrderList.ItemName && lv.ForeColor != li.ForeColor)
+                    //check if it is new one
+                    if (lvItemInOrderProcess.SubItems[0].Text == dishInOrderList.ItemName && lvItemInOrderProcess.ForeColor != lvItemInOrderList.ForeColor)
                     {
                         //calculate how many have been added and store it into dish.OrderAmount
-                        dishInOrderList.OrderedAmount = int.Parse(lv.SubItems[2].Text);
-                        dishInOrderList.Amount = int.Parse(li.SubItems[2].Text) + int.Parse(lv.SubItems[2].Text);
+                        dishInOrderList.OrderedAmount = int.Parse(lvItemInOrderProcess.SubItems[2].Text); // This is for the kitchen.
+                        // If they have same name, but one is olde
+                        dishInOrderList.Amount = int.Parse(lvItemInOrderList.SubItems[2].Text) + int.Parse(lvItemInOrderProcess.SubItems[2].Text);
                         toAdd = 2;
                         break;
                     }
-                    //check if is not modified than ignore
+
                     if (alreadyOrdered.Contains(dishInOrderList))
                     {
-                        toAdd = 0;
+                        toAdd = 0; //check if it is not modified then ignore
                     }
                     else
                     {
-                        toAdd = 1;
+                        toAdd = 1; // if this is 1, then add to dishes(list)
                     }
                 }
                 order.OrderID = ordID; // Dish.Order ID
@@ -277,32 +394,14 @@ namespace RosUI
                 //if new add than edit
                 if (toAdd == 2)
                 {
-                    contained.Add(dishInOrderList);
+                    DishesInOrderedList.Add(dishInOrderList);
                 }
                 //if unique than add
                 else if (toAdd == 1)
                 {
-                    dishes.Add(dishInOrderList);
+                    DishesInOrderProcess.Add(dishInOrderList);
                 }
             }
-
-
-            //icreasing amount on db and setting back status to toBePrepared
-            orderedDishLogic.IncreaseAmount(contained, order);
-
-            //pass the contained dishes to Main
-            rosMain.Contained = contained;
-
-            //Adding compleeteley new dish dish to Order_Dish table
-            orderedDishLogic.AddDishes(dishes, order);
-
-            WritesContainedDishes();
-
-            //Update KitchenView
-            rosMain.UpdateDishes();
-
-            //Update TableView
-            rosMain.OrderRecieved(table.TableNumber);
         }
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)
@@ -317,13 +416,13 @@ namespace RosUI
             {
                 dish.Note = txtNote.Text;
             }
+
+            txtNote.Clear();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
             Hide();
         }
-
-
     }
 }
