@@ -73,8 +73,9 @@ namespace RosDAL
         // store a complete bill for a table in the database
         public void CreateBill(Bill bill)
         {
-            string query = "INSERT INTO Bill (BillNumber, TotalAmount, SubTotalAmount, TipAmount, Feedback, TableNumber, PaymentDate) " +
-                "VALUES (@BillNumber, @TotalAmount, @SubTotalAmount, @TipAmount, @Feedback, @TableNumber, @PaymentDate) SELECT SCOPE_IDENTITY()";
+            bill.BillNumber = LastBillNumberPK() + 1;
+            string query = "INSERT INTO Bill (BillNumber, TotalAmount, SubTotalAmount, TipAmount, Feedback, TableNumber, PaymentDate, PaymentMethod) " +
+                "VALUES (@BillNumber, @TotalAmount, @SubTotalAmount, @TipAmount, @Feedback, @TableNumber, GETDATE(), @PaymentMethod)";
 
             SqlParameter[] sqlParameters =
             {
@@ -84,16 +85,30 @@ namespace RosDAL
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
-                new SqlParameter("@PaymentDate", bill.PaymentDate)
+                new SqlParameter("@PaymentMethod", bill.PaymentMethod),
             };
             ExecuteEditQuery(query, sqlParameters);
+        }
+
+        // temporary solution until we change billNumber to autoincrement 
+        public int LastBillNumberPK()
+        {
+            string query = "select count(*) as count from Bill";
+            SqlParameter[] sp = new SqlParameter[0];
+            return ReadCount(ExecuteSelectQuery(query, sp));
+        }
+
+        private int ReadCount(DataTable dataTable)
+        {
+            DataRow row = dataTable.Rows[0];
+            return (int)row["count"];
         }
 
         // update a bill in the database
         public void UpdateBill(Bill bill)
         {
             string query = "UPDATE [Bill] SET BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
-                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = @PaymentDate" +
+                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = GETDATE()" +
                 " WHERE BillNumber = @BillNumber";
             SqlParameter[] sqlParameters =
            {
@@ -103,7 +118,7 @@ namespace RosDAL
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
-                new SqlParameter("@PaymentDate", bill.PaymentDate)
+                //new SqlParameter("@PaymentDate", bill.PaymentDate.GetDateTimeFormats())
             };
             ExecuteEditQuery(query, sqlParameters);
         }
@@ -113,7 +128,7 @@ namespace RosDAL
         public Bill GetBill(Bill bill)
         {
             string query = "SELECT BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
-                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = @PaymentDate" +
+                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = @GETDATE()" +
                 " WHERE BillNumber = @BillNumber";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@BillNumber", bill.BillNumber);

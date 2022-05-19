@@ -30,8 +30,12 @@ namespace RosUI
         private void InitializeComponent()
         {
             this.listViewPayment = new System.Windows.Forms.ListView();
+            this.ColumnHeadings = new System.Windows.Forms.ColumnHeader();
             this.Amount = new System.Windows.Forms.ColumnHeader();
             this.Item = new System.Windows.Forms.ColumnHeader();
+            this.VAT = new System.Windows.Forms.ColumnHeader();
+            this.Subtotal = new System.Windows.Forms.ColumnHeader();
+            this.Total = new System.Windows.Forms.ColumnHeader();
             this.lblTableNumber = new System.Windows.Forms.Label();
             this.radioBtnCash = new System.Windows.Forms.RadioButton();
             this.radioBtnVisa = new System.Windows.Forms.RadioButton();
@@ -46,18 +50,17 @@ namespace RosUI
             this.txtFeedback = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtToPay = new System.Windows.Forms.TextBox();
-            this.VAT = new System.Windows.Forms.ColumnHeader();
-            this.SubTotal = new System.Windows.Forms.ColumnHeader();
-            this.Total = new System.Windows.Forms.ColumnHeader();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listViewPayment
             // 
             this.listViewPayment.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ColumnHeadings,
             this.Amount,
             this.Item,
             this.VAT,
-            this.SubTotal,
+            this.Subtotal,
             this.Total});
             this.listViewPayment.HideSelection = false;
             this.listViewPayment.Location = new System.Drawing.Point(12, 49);
@@ -67,24 +70,43 @@ namespace RosUI
             this.listViewPayment.UseCompatibleStateImageBehavior = false;
             this.listViewPayment.View = System.Windows.Forms.View.Details;
             // 
+            // ColumnHeadings
+            // 
+            this.ColumnHeadings.Text = "";
+            this.ColumnHeadings.Width = 0;
+            // 
             // Amount
             // 
             this.Amount.Text = "Amount";
-            this.Amount.Width = 75;
+            this.Amount.Width = 65;
             // 
             // Item
             // 
             this.Item.Text = "Item";
-            this.Item.Width = 130;
+            this.Item.Width = 160;
+            // 
+            // VAT
+            // 
+            this.VAT.Text = "VAT";
+            this.VAT.Width = 55;
+            // 
+            // Subtotal
+            // 
+            this.Subtotal.Text = "Subtotal";
+            this.Subtotal.Width = 105;
+            // 
+            // Total
+            // 
+            this.Total.Text = "Total";
+            this.Total.Width = 105;
             // 
             // lblTableNumber
             // 
             this.lblTableNumber.AutoSize = true;
-            this.lblTableNumber.Location = new System.Drawing.Point(12, 18);
+            this.lblTableNumber.Location = new System.Drawing.Point(71, 14);
             this.lblTableNumber.Name = "lblTableNumber";
-            this.lblTableNumber.Size = new System.Drawing.Size(56, 20);
+            this.lblTableNumber.Size = new System.Drawing.Size(0, 20);
             this.lblTableNumber.TabIndex = 1;
-            this.lblTableNumber.Text = "table #";
             // 
             // radioBtnCash
             // 
@@ -108,6 +130,7 @@ namespace RosUI
             this.radioBtnVisa.TabStop = true;
             this.radioBtnVisa.Text = "VISA";
             this.radioBtnVisa.UseVisualStyleBackColor = true;
+            this.radioBtnVisa.CheckedChanged += new System.EventHandler(this.radioBtnVisa_CheckedChanged);
             // 
             // radioBtnDebit
             // 
@@ -119,6 +142,7 @@ namespace RosUI
             this.radioBtnDebit.TabStop = true;
             this.radioBtnDebit.Text = "DEBIT";
             this.radioBtnDebit.UseVisualStyleBackColor = true;
+            this.radioBtnDebit.CheckedChanged += new System.EventHandler(this.radioBtnDebit_CheckedChanged);
             // 
             // label2
             // 
@@ -144,6 +168,7 @@ namespace RosUI
             this.txtTip.Name = "txtTip";
             this.txtTip.Size = new System.Drawing.Size(89, 27);
             this.txtTip.TabIndex = 7;
+            this.txtTip.TextChanged += new System.EventHandler(this.txtTip_TextChanged);
             // 
             // lblBillAmount
             // 
@@ -183,6 +208,7 @@ namespace RosUI
             this.btnBack.TabIndex = 13;
             this.btnBack.Text = "BACK";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // txtFeedback
             // 
@@ -208,27 +234,23 @@ namespace RosUI
             this.txtToPay.Name = "txtToPay";
             this.txtToPay.Size = new System.Drawing.Size(89, 27);
             this.txtToPay.TabIndex = 16;
+            this.txtToPay.TextChanged += new System.EventHandler(this.txtToPay_TextChanged);
             // 
-            // VAT
+            // label5
             // 
-            this.VAT.Text = "VAT";
-            this.VAT.Width = 75;
-            // 
-            // SubTotal
-            // 
-            this.SubTotal.Text = "SubTotal";
-            this.SubTotal.Width = 105;
-            // 
-            // Total
-            // 
-            this.Total.Text = "Total";
-            this.Total.Width = 105;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 14);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(57, 20);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Table #";
             // 
             // FormPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 731);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtToPay);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtFeedback);
@@ -268,10 +290,12 @@ namespace RosUI
         private System.Windows.Forms.RichTextBox txtFeedback;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtToPay;
+        private System.Windows.Forms.ColumnHeader ColumnHeadings;
         private System.Windows.Forms.ColumnHeader Amount;
         private System.Windows.Forms.ColumnHeader Item;
         private System.Windows.Forms.ColumnHeader VAT;
-        private System.Windows.Forms.ColumnHeader SubTotal;
+        private System.Windows.Forms.ColumnHeader Subtotal;
         private System.Windows.Forms.ColumnHeader Total;
+        private System.Windows.Forms.Label label5;
     }
 }

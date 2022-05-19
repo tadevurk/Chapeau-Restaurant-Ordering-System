@@ -14,6 +14,7 @@ namespace RosModel
         public decimal TipAmount { get; set; }
         public string Feedback { get; set; }
         public DateTime PaymentDate { get; set; }
+        public string PaymentMethod { get; set; }
 
         public int TableNumber { get; set; }
     }

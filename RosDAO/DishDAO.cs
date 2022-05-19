@@ -38,11 +38,11 @@ namespace RosDAL
 
         public int RetrieveVatByID(int id)
         {
-            string qr = "Select Vat as VAT from Dish where DishID=@ID";
+            string qr = "Select Vat from Dish where DishID=@DishID";
 
             SqlParameter[] sp =
 {
-                new SqlParameter("@ID", id),
+                new SqlParameter("@DishID", id),
             };
 
             return ReadVat(ExecuteSelectQuery(qr, sp));
