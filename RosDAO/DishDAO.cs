@@ -12,7 +12,7 @@ namespace RosDAL
     public class DishDAO : BaseDAO
     {
         //Getting all Starters
-        public List<Dish> GetAllStarters() 
+        public List<Dish> GetAllStarters() // Getting all starters
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
@@ -71,7 +71,7 @@ namespace RosDAL
                     DishID = (int)dr["DishID"],
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
-                    OrderedAmount = (int)dr["Amount"],
+                    Amount = (int)dr["Amount"],
                     Order = (int)dr["Order"]
 
                 };
@@ -80,8 +80,8 @@ namespace RosDAL
             return dishes;
         }
 
-        //Getting all Mains
-        public List<Dish> GetAllMains()
+        
+        public List<Dish> GetAllMains() //Getting all Mains
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
@@ -91,8 +91,8 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        //Getting all Desserts
-        public List<Dish> GetAllDesserts()
+        
+        public List<Dish> GetAllDesserts() //Getting all Desserts
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
@@ -102,8 +102,8 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        //Getting all Entremets
-        public List<Dish> GetAllEntremets()
+        
+        public List<Dish> GetAllEntremets() //Getting all Entremets
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
@@ -113,8 +113,7 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        // Decrease the dish from stock
-        public void DecreaseDishStock(Dish dish)
+        public void DecreaseDishStock(Dish dish) // Decrease the dish from stock
         {
             string query = "Update Item " +
                 "SET ItemStock = ItemStock - 1 " +
@@ -128,8 +127,8 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        // Increase the dish from stock
-        public void IncreaseDishStock(Dish dish)
+        
+        public void IncreaseDishStock(Dish dish) // Increase the dish from stock
         {
             string query = "Update Item " +
                 "SET ItemStock = ItemStock + 1  " +
@@ -142,7 +141,6 @@ namespace RosDAL
 
             ExecuteEditQuery(query, sqlParameters);
         }
-
 
         private List<Dish> ReadDishes(DataTable dataTable) // Reading the dishes
         {

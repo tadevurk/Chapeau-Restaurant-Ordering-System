@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 
 namespace RosUI
 {
@@ -17,12 +17,33 @@ namespace RosUI
     {
         Employee employee = new Employee();
         Table table = new Table();
+        TableLogic tableLogic = new TableLogic();
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
+
+        public List<Dish> Contained { get; set; }
         public RosMain(Employee employee)
         {
             InitializeComponent();
+            UpdateDishes();
+            UpdateDrinks();
+            UpdateTables();
+            Contained = new List<Dish>();
             this.employee = employee;
+
+
+            if (employee.Roles == Roles.Chef)
+            {
+                barViewToolStripMenuItem.Visible = false;
+                tableViewToolStripMenuItem.Visible = false;
+                ShowPanel("KitchenView");
+            }
+            else if (employee.Roles == Roles.Bartender)
+            {
+                kitchenViewToolStripMenuItem.Visible = false;
+                tableViewToolStripMenuItem.Visible=false;
+                ShowPanel("BarView");
+            }
         }
 
         private void RosMain_Load(object sender, EventArgs e)
@@ -53,6 +74,7 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlBarView.Show();
+
                     UpdateDrinks();
 
                     break;
@@ -66,6 +88,32 @@ namespace RosUI
 
             }
 
+        }
+
+        public void UpdateTables()
+        {
+
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+            {
+                OrderedDish d = item.Tag as OrderedDish;               
+
+                switch (d.Status)
+                {
+                    case DishStatus.ToPrepare:
+                        OrderRecieved(d.TableNumber);
+                        break;
+                    case DishStatus.PickUp:
+                        PickUpReady(d.TableNumber);
+                        break;
+                    case DishStatus.Serve:
+                        ItemServed(d.TableNumber);
+                        break;
+                }
+                
+            }
+
+
+          
         }
 
         private void HideAllPanels()
@@ -106,7 +154,6 @@ namespace RosUI
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowPanel("TableView");
-            new RestaurantOverview().Show();
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
@@ -114,7 +161,7 @@ namespace RosUI
             table = new Table(1);
             FormOrder orderForm = new FormOrder(table,employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableTwo_Click(object sender, EventArgs e)
@@ -122,7 +169,7 @@ namespace RosUI
             table = new Table(2);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableThree_Click(object sender, EventArgs e)
@@ -130,7 +177,7 @@ namespace RosUI
             table = new Table(3);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableFour_Click(object sender, EventArgs e)
@@ -138,7 +185,7 @@ namespace RosUI
             table = new Table(4);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableFive_Click(object sender, EventArgs e)
@@ -146,7 +193,7 @@ namespace RosUI
             table = new Table(5);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableSix_Click(object sender, EventArgs e)
@@ -154,7 +201,7 @@ namespace RosUI
             table = new Table(6);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableSeven_Click(object sender, EventArgs e)
@@ -162,7 +209,7 @@ namespace RosUI
             table = new Table(7);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableEight_Click(object sender, EventArgs e)
@@ -170,7 +217,7 @@ namespace RosUI
             table = new Table(8);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableNine_Click(object sender, EventArgs e)
@@ -178,7 +225,7 @@ namespace RosUI
             table = new Table(9);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
 
         private void btnTableTen_Click(object sender, EventArgs e)
@@ -186,7 +233,7 @@ namespace RosUI
             table = new Table(10);
             FormOrder orderForm = new FormOrder(table, employee, this);
 
-            orderForm.ShowDialog();
+            orderForm.Show();
         }
         public void OrderRecieved(int number)
         {
@@ -370,11 +417,28 @@ namespace RosUI
 
             lvOrderedDishes.Items.Clear();
 
+
             foreach (OrderedDish dish in orderedDishes)
             {
+                //assign the new amount to display
+
+                int amount = dish.OrderedDishAmount;
+
+                if (Contained != null)
+                {
+                    foreach (Dish d in Contained)
+                    {
+                        if (dish.Name == d.ItemName)
+                        {
+                            amount = d.OrderedAmount;
+                        }
+                    }
+                }
+
+
                 ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
                 li.SubItems.Add(dish.Name);
-                li.SubItems.Add(dish.OrderedDishAmount.ToString());
+                li.SubItems.Add(amount.ToString());
                 li.SubItems.Add(dish.TimeDishOrdered.ToString());
                 li.SubItems.Add(dish.Course);
 
@@ -387,7 +451,7 @@ namespace RosUI
                     li.SubItems.Add("Yes");
                 }
 
-                
+
                 li.Tag = dish;
                 if (dish.Status == DishStatus.PickUp)
                 {
@@ -400,6 +464,11 @@ namespace RosUI
 
         private void btnDrinkReady_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                 MessageBox.Show("No item selected!");
+                return;
+            }
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
@@ -412,6 +481,12 @@ namespace RosUI
 
         private void btnDishReady_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
@@ -424,6 +499,12 @@ namespace RosUI
 
         private void btnViewNote_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
 
             if (dish.DishNote == "null")
@@ -438,6 +519,12 @@ namespace RosUI
 
         private void btnServe_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
@@ -450,6 +537,12 @@ namespace RosUI
 
         private void btnViewDrinkNote_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
 
             if (d.DrinkNote == "null")
@@ -460,10 +553,18 @@ namespace RosUI
             {
                 MessageBox.Show(d.DrinkNote);
             }
+
+
         }
 
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
@@ -473,5 +574,16 @@ namespace RosUI
 
             UpdateDrinks();
         }
+
+        //Write error to text file
+        public void WriteError(Exception e, string errorMessage)
+        {
+            StreamWriter writer = File.AppendText("ErrorLog.txt");
+            writer.WriteLine($"Error occurred: {errorMessage}");
+            writer.WriteLine(e);
+            writer.WriteLine(DateTime.Now);
+            writer.Close();
+        }
+
     }
 }

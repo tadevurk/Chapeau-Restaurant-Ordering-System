@@ -164,6 +164,7 @@
             // 
             // btnServe
             // 
+            this.btnServe.Enabled = false;
             this.btnServe.Location = new System.Drawing.Point(183, 518);
             this.btnServe.Name = "btnServe";
             this.btnServe.Size = new System.Drawing.Size(94, 29);
@@ -174,6 +175,7 @@
             // 
             // btnViewNote
             // 
+            this.btnViewNote.Enabled = false;
             this.btnViewNote.Location = new System.Drawing.Point(685, 518);
             this.btnViewNote.Name = "btnViewNote";
             this.btnViewNote.Size = new System.Drawing.Size(135, 30);
@@ -193,6 +195,7 @@
             // 
             // btnDishReady
             // 
+            this.btnDishReady.Enabled = false;
             this.btnDishReady.Location = new System.Drawing.Point(1031, 518);
             this.btnDishReady.Name = "btnDishReady";
             this.btnDishReady.Size = new System.Drawing.Size(149, 30);
@@ -213,7 +216,6 @@
             this.lvOrderedDishes.FullRowSelect = true;
             this.lvOrderedDishes.HideSelection = false;
             this.lvOrderedDishes.Location = new System.Drawing.Point(43, 58);
-            this.lvOrderedDishes.MultiSelect = false;
             this.lvOrderedDishes.Name = "lvOrderedDishes";
             this.lvOrderedDishes.Size = new System.Drawing.Size(1137, 428);
             this.lvOrderedDishes.TabIndex = 0;
@@ -464,10 +466,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlBarView);
-            this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlTableView);
+            this.Controls.Add(this.pnlBarView);
+            this.Controls.Add(this.pnlDashboard);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";

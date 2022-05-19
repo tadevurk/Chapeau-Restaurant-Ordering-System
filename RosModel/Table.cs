@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace RosModel
 {
+    public enum TableStatus { Unreserved, Reserved}
+
     public class Table
     {
-
         public int TableNumber { get; set; }
-        public bool TableStatus { get; set; }
+        public TableStatus TableStatus { get; set; }
 
         public Table(int number)
         {

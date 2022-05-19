@@ -17,7 +17,7 @@ namespace RosModel
 
         public int Amount { get; set; }
 
-        public int Order { get; set; }
+        public int Order { get; set; } // OrderID
 
         public int OrderedAmount { get; set; }
 

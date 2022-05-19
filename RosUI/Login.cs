@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.IO;
 using System.Security.Cryptography;
+using System.Collections.Generic;
 
 namespace RosUI
 {
@@ -11,6 +12,7 @@ namespace RosUI
     {
         Employee employee = new Employee();
         EmployeeLogic employeeLogic = new EmployeeLogic();
+        Roles Roles = new Roles();
 
         public Login()
         {
@@ -43,13 +45,42 @@ namespace RosUI
                 }
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+                CheckRole(employee);
 
           
                 if (CheckPassword())
                 {
-                    RosMain uIMain = new RosMain(employee);
-                    this.Hide();
-                    uIMain.Show();
+                    RosMain main;
+                    switch (employee.Roles)
+                    {
+                        case Roles.Manager:
+                            this.Hide();
+                            main = new RosMain(employee);
+                            main.Show();
+                            break;
+                        case Roles.Waiter:
+                            main = new RosMain(employee);
+                            this.Hide();
+                            new TableOverview(employee, main).Show();
+                            break;
+                        case Roles.Chef:
+                            this.Hide();
+                            main = new RosMain(employee);
+                            main.Show();
+
+                            break;
+                        case Roles.Bartender:
+                            this.Hide();
+                            main = new RosMain(employee);
+                            main.Show();
+
+                            break;
+                        case Roles.None:
+                            this.Hide();
+                            main = new RosMain(employee);
+                            main.Show();
+                            break;
+                    }
                 }
                 else
                 {
@@ -85,6 +116,80 @@ namespace RosUI
                 return false;
 
                 return employee.Digest.ToString() == EncryptPassword(txtPinCode.Text, employee.Salt).Digest;
+        }
+
+        private void CheckRole(Employee employee)
+        {
+            
+            if (IsManager(employee))
+            {
+                employee.Roles = Roles.Manager;
+                return;
+            }
+            else if (IsWaiter(employee))
+            {
+                employee.Roles = Roles.Waiter;
+            }
+            else if (IsChef(employee))
+            {
+                employee.Roles = Roles.Chef;
+            }
+            else if (IsBartender(employee))
+            {
+                employee.Roles = Roles.Bartender;
+            }
+            else
+            {
+                employee.Roles = Roles.None;
+            }
+        }
+
+        private bool IsManager(Employee manager)
+        {
+            List<Employee> managers = employeeLogic.GetAllManagers();
+            bool isManager = false;
+            foreach (Employee m in managers)
+            {
+                if(manager.EmplID == m.EmplID)
+                    isManager = true;
+            }
+            return isManager;
+        }
+
+        private bool IsWaiter(Employee waiter)
+        {
+            List<Employee> waiters = employeeLogic.GetAllWaiters();
+            bool isWaiter = false;
+            foreach (Employee w in waiters)
+            {
+                if (waiter.EmplID == w.EmplID)
+                    isWaiter = true;
+            }
+            return isWaiter;
+        }
+
+        private bool IsChef(Employee chef)
+        {
+            List<Employee> chefs = employeeLogic.GetAllChefs();
+            bool isChef = false;
+            foreach (Employee c in chefs)
+            {
+                if (chef.EmplID == c.EmplID)
+                    isChef = true;
+            }
+            return isChef;
+        }
+
+        private bool IsBartender(Employee bartender)
+        {
+            List<Employee> bartenders = employeeLogic.GetAllBartenders();
+            bool isBartender = false;
+            foreach (Employee b in bartenders)
+            {
+                if (bartender.EmplID == b.EmplID)
+                    isBartender = true;
+            }
+            return isBartender;
         }
 
         //Write error to text file

@@ -126,7 +126,7 @@ namespace RosDAL
         }
         public void IncreaseAmount(Drink d, Order o)
         {
-            string query = "update OrderDrink set OrderedDrinkAmount=@Amount where DrinkID=@DrinkID and OrderID=OrderID";
+            string query = "update OrderDrink set OrderedDrinkAmount=@Amount where DrinkID=@DrinkID and OrderID=@OrderID";
             SqlParameter[] sp = {
                 new SqlParameter("@Amount",d.Amount),
                 new SqlParameter("@DrinkID", d.DrinkID),
