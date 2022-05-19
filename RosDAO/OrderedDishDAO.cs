@@ -69,7 +69,6 @@ namespace RosDAL
                 {
                     dish.Note = "null";
                 }
- 
 
                 //Adding dish
                 string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";

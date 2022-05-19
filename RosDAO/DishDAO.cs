@@ -12,15 +12,7 @@ namespace RosDAL
     public class DishDAO : BaseDAO
     {
         //Getting all Starters
-        public List<Dish> GetAllStarters() // Getting all starters
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Starter';";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
+
         public List<Dish> WriteContainedDishes(Table t, Order o)
         {
             string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], OD.OrderedDishAmount as [Amount], OD.OrderID as [Order] from OrderDish as OD" +
@@ -80,7 +72,16 @@ namespace RosDAL
             return dishes;
         }
 
-        
+        public List<Dish> GetAllStarters() // Getting all starters
+        {
+            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish " +
+                "join Item on DishID = ItemID " +
+                "where Dish.Course = 'Starter';";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public List<Dish> GetAllMains() //Getting all Mains
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
