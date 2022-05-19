@@ -22,8 +22,6 @@ namespace RosDAL
         }
 
        
-
-
         private List<OrderedDish> ReadOrderedDishes(DataTable dataTable)
         {
             List<OrderedDish> orderedDishes = new List<OrderedDish>();
@@ -71,17 +69,18 @@ namespace RosDAL
         }
 
 
+
         // store a complete bill for a table in the database
         public void CreateBill(Bill bill)
         {
-            string query = "INSERT INTO Bill (BillNumber, BillAmount, BillStatus, TipAmount, Feedback, TableNumber, PaymentDate) " +
-                "VALUES (@BillNumber, @BillAmount, @BillStatus, @TipAmount, @Feedback, @TableNumber, @PaymentDate) SELECT SCOPE_IDENTITY()";
+            string query = "INSERT INTO Bill (BillNumber, TotalAmount, SubTotalAmount, TipAmount, Feedback, TableNumber, PaymentDate) " +
+                "VALUES (@BillNumber, @TotalAmount, @SubTotalAmount, @TipAmount, @Feedback, @TableNumber, @PaymentDate) SELECT SCOPE_IDENTITY()";
 
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@BillNumber", bill.BillNumber),
-                new SqlParameter("@BillAmount", bill.BillAmount),
-                new SqlParameter("@BillStatus", bill.BillStatus),
+                new SqlParameter("@TotalAmount", bill.TotalAmount),
+                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
@@ -90,17 +89,17 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        // update bill
+        // update a bill in the database
         public void UpdateBill(Bill bill)
         {
-            string query = "UPDATE [Bill] SET BillNumber = @BillNumber, BillAmount = @BillAmount, BillStatus = @BillStatus," +
+            string query = "UPDATE [Bill] SET BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
                 " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = @PaymentDate" +
                 " WHERE BillNumber = @BillNumber";
             SqlParameter[] sqlParameters =
            {
                 new SqlParameter("@BillNumber", bill.BillNumber),
-                new SqlParameter("@BillAmount", bill.BillAmount),
-                new SqlParameter("@BillStatus", bill.BillStatus),
+                new SqlParameter("@BillAmount", bill.TotalAmount),
+                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
@@ -109,11 +108,15 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public Bill GetBillById(int drinkId)
+
+        // retrieve a bill from database
+        public Bill GetBill(Bill bill)
         {
-            string query = "SELECT * FROM [Drinks] WHERE DrinkId = @DrinkId";
+            string query = "SELECT BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
+                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = @PaymentDate" +
+                " WHERE BillNumber = @BillNumber";
             SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@DrinkId", drinkId);
+            sqlParameters[0] = new SqlParameter("@BillNumber", bill.BillNumber);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
         }
 
@@ -126,8 +129,8 @@ namespace RosDAL
                 Bill bill = new Bill()
                 {
                     BillNumber = (int)dr["BillNumber"],
-                    BillAmount = (decimal)dr["BillAmount"],
-                    BillStatus = (bool)dr["BillStatus"],
+                    TotalAmount = (decimal)dr["TotalAmount"],
+                    SubTotalAmount = (decimal)dr["SubTotalAmount"],
                     TipAmount = (decimal)dr["TipAmount"],
                     Feedback = (string)dr["Feedback"],
                     TableNumber = (int)dr["TableNumber"],

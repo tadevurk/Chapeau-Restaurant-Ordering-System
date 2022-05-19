@@ -22,6 +22,7 @@ namespace RosUI
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
         RosMain rosMain;
         Employee emp;
+        FormPayment payment;
         int starterAmount = 1;
         public FormOrder(Table table, Employee emp, RosMain rosMain)
         {
@@ -251,6 +252,21 @@ namespace RosUI
         private void UpdateDishNote(string msg, OrderedDish dish)
         {       
             orderedDishLogic.UpdateDishNote(dish, msg);
+        }
+
+        private void btnPayment_Click(object sender, EventArgs e)
+        {
+            // show the payment form for the table 
+            this.Hide();
+            //List<Dish> dishesToPay = new List<Dish>();
+            //foreach (ListViewItem li in listviewOrder.Items)
+            //{
+            //    Dish d = (Dish)li.Tag;
+            //    dishesToPay.Add(d);
+            //}
+            FormPayment formPayment = new FormPayment(table, alreadyOrdered);
+            formPayment.Show();
+
         }
     }
 }
