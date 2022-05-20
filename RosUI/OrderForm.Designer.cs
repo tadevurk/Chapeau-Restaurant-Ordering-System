@@ -56,6 +56,12 @@ namespace RosUI
             this.listviewMains = new System.Windows.Forms.ListView();
             this.columnMainName = new System.Windows.Forms.ColumnHeader();
             this.columnMainPrice = new System.Windows.Forms.ColumnHeader();
+            this.pnlDesserts = new System.Windows.Forms.Panel();
+            this.btnAddDessert = new System.Windows.Forms.Button();
+            this.lblDesserts = new System.Windows.Forms.Label();
+            this.listviewDesserts = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.txtNote = new System.Windows.Forms.RichTextBox();
             this.btnPayment = new System.Windows.Forms.Button();
             this.pnlSoftDrinks = new System.Windows.Forms.Panel();
@@ -72,6 +78,7 @@ namespace RosUI
             this.btnSoftDrink = new System.Windows.Forms.Button();
             this.pnlStarters.SuspendLayout();
             this.pnlMains.SuspendLayout();
+            this.pnlDesserts.SuspendLayout();
             this.pnlSoftDrinks.SuspendLayout();
             this.pnlDrinkCategories.SuspendLayout();
             this.SuspendLayout();
@@ -104,6 +111,7 @@ namespace RosUI
             this.btnDesserts.TabIndex = 6;
             this.btnDesserts.Text = "DESSERTS";
             this.btnDesserts.UseVisualStyleBackColor = true;
+            this.btnDesserts.Click += new System.EventHandler(this.btnDesserts_Click);
             // 
             // btnDrinks
             // 
@@ -325,6 +333,58 @@ namespace RosUI
             this.columnMainPrice.Text = "Price";
             this.columnMainPrice.Width = 120;
             // 
+            // pnlDesserts
+            // 
+            this.pnlDesserts.Controls.Add(this.btnAddDessert);
+            this.pnlDesserts.Controls.Add(this.lblDesserts);
+            this.pnlDesserts.Controls.Add(this.listviewDesserts);
+            this.pnlDesserts.Location = new System.Drawing.Point(12, 406);
+            this.pnlDesserts.Name = "pnlDesserts";
+            this.pnlDesserts.Size = new System.Drawing.Size(816, 299);
+            this.pnlDesserts.TabIndex = 22;
+            // 
+            // btnAddDessert
+            // 
+            this.btnAddDessert.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDessert.Name = "btnAddDessert";
+            this.btnAddDessert.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDessert.TabIndex = 15;
+            this.btnAddDessert.Text = "Add";
+            this.btnAddDessert.UseVisualStyleBackColor = true;
+            this.btnAddDessert.Click += new System.EventHandler(this.btnAddDessert_Click);
+            // 
+            // lblDesserts
+            // 
+            this.lblDesserts.AutoSize = true;
+            this.lblDesserts.Location = new System.Drawing.Point(14, 13);
+            this.lblDesserts.Name = "lblDesserts";
+            this.lblDesserts.Size = new System.Drawing.Size(76, 20);
+            this.lblDesserts.TabIndex = 1;
+            this.lblDesserts.Text = "DESSERTS";
+            // 
+            // listviewDesserts
+            // 
+            this.listviewDesserts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listviewDesserts.HideSelection = false;
+            this.listviewDesserts.Location = new System.Drawing.Point(14, 48);
+            this.listviewDesserts.Name = "listviewDesserts";
+            this.listviewDesserts.Size = new System.Drawing.Size(571, 237);
+            this.listviewDesserts.TabIndex = 0;
+            this.listviewDesserts.UseCompatibleStateImageBehavior = false;
+            this.listviewDesserts.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 450;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Price";
+            this.columnHeader2.Width = 120;
+            // 
             // txtNote
             // 
             this.txtNote.Location = new System.Drawing.Point(663, 264);
@@ -457,6 +517,7 @@ namespace RosUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(853, 766);
+            this.Controls.Add(this.pnlDesserts);
             this.Controls.Add(this.pnlMains);
             this.Controls.Add(this.pnlDrinkCategories);
             this.Controls.Add(this.btnPayment);
@@ -480,6 +541,8 @@ namespace RosUI
             this.pnlStarters.PerformLayout();
             this.pnlMains.ResumeLayout(false);
             this.pnlMains.PerformLayout();
+            this.pnlDesserts.ResumeLayout(false);
+            this.pnlDesserts.PerformLayout();
             this.pnlSoftDrinks.ResumeLayout(false);
             this.pnlSoftDrinks.PerformLayout();
             this.pnlDrinkCategories.ResumeLayout(false);
@@ -530,5 +593,11 @@ namespace RosUI
         private System.Windows.Forms.ListView listviewMains;
         private System.Windows.Forms.ColumnHeader columnMainName;
         private System.Windows.Forms.ColumnHeader columnMainPrice;
+        private System.Windows.Forms.Panel pnlDesserts;
+        private System.Windows.Forms.Button btnAddDessert;
+        private System.Windows.Forms.Label lblDesserts;
+        private System.Windows.Forms.ListView listviewDesserts;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
