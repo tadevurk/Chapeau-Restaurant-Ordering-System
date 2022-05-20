@@ -399,6 +399,7 @@ namespace RosUI
             this.btnPayment.TabIndex = 19;
             this.btnPayment.Text = "pay";
             this.btnPayment.UseVisualStyleBackColor = true;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // pnlSoftDrinks
             // 

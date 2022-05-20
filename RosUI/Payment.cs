@@ -179,12 +179,22 @@ namespace RosUI
         private void txtToPay_TextChanged(object sender, EventArgs e)
         {
             // calculate the amount that will be paid
-            
-            toPay = Convert.ToDecimal(txtToPay.Text);
-            tip = toPay - bill.TotalAmount;
-            bill.TipAmount = tip;
 
-            txtTip.Text = tip.ToString();
+            if (txtToPay.Text == "")
+            {
+                MessageBox.Show("This value can not be empty!!!");
+                txtToPay.Text = "0.0";
+            }
+            else
+            {
+                toPay = Convert.ToDecimal(txtToPay.Text);
+                tip = toPay - bill.TotalAmount;
+                bill.TipAmount = tip;
+
+                txtTip.Text = tip.ToString();
+
+            }
+
         }
 
         private void btnBack_Click(object sender, EventArgs e)
