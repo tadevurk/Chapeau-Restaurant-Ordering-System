@@ -125,7 +125,7 @@ namespace RosUI
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
             // clear up the order list view
-            formOrder.RemoveContainedItems();
+            //RemoveContainedItems();
             this.Hide();
 
             // return to the table overview through the RosMain form or Restaurant overview form
