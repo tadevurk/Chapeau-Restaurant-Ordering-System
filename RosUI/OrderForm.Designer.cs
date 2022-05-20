@@ -94,7 +94,6 @@ namespace RosUI
             this.btnMains.TabIndex = 5;
             this.btnMains.Text = "MAINS";
             this.btnMains.UseVisualStyleBackColor = true;
-            this.btnMains.Click += new System.EventHandler(this.btnMains_Click);
             // 
             // btnDesserts
             // 
@@ -291,7 +290,6 @@ namespace RosUI
             this.btnAddMains.TabIndex = 15;
             this.btnAddMains.Text = "Add";
             this.btnAddMains.UseVisualStyleBackColor = true;
-            this.btnAddMains.Click += new System.EventHandler(this.btnAddMains_Click);
             // 
             // lblMains
             // 

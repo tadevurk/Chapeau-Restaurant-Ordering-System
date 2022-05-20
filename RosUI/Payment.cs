@@ -88,8 +88,7 @@ namespace RosUI
         // calculate subtotal per product unit
         private decimal calculateSubtotal(decimal itemPrice, int vat)
         {
-
-            return itemPrice * (vat / 100);
+            return itemPrice - (itemPrice * vat/100);
         }
 
         // calculate the bill amount that will be displayed ini the payment form and stored in the database bill table
@@ -112,7 +111,7 @@ namespace RosUI
 
             foreach (Dish d in dishes)
             {
-                subAmount += calculateSubtotal(d.ItemPrice, d.Vat);
+                subAmount += calculateSubtotal(d.ItemPrice, d.Vat) * d.Amount;
             }
 
             return subAmount;
