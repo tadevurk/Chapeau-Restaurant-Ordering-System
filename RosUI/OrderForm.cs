@@ -14,6 +14,7 @@ namespace RosUI
 {
     public partial class FormOrder : Form
     {
+        
         Table table;
         DishLogic dishLogic;
         DrinkLogic drinkLogic;
@@ -48,15 +49,27 @@ namespace RosUI
             HidePanels();
             switch (panelName)
             {
+                case "LunchPanel":
+                    pnlLunch.Show();
+                    pnlLunch.Visible = true;
+                    break;
                 case "Starters":
                     pnlStarters.Show();
+                    pnlLunch.Show();
                     pnlStarters.Visible = true;
                     ReadStarters();
                     break;
                 case "Mains":
                     pnlMains.Show();
+                    pnlLunch.Show();
                     pnlMains.Visible = true;
                     ReadMains();
+                    break;
+                case "Desserts":
+                    pnlDesserts.Show();
+                    pnlLunch.Show();
+                    pnlDesserts.Visible = true;
+                    ReadDesserts();
                     break;
                 case "Drinks":
                     pnlDrinkCategories.Show();
@@ -67,11 +80,7 @@ namespace RosUI
                     pnlSoftDrinks.Visible = true;
                     ReadSoftDrinks();
                     break;
-                case "Desserts":
-                    pnlDesserts.Show();
-                    pnlDesserts.Visible = true;
-                    ReadDesserts();
-                    break;
+
             }
         }
 
@@ -80,6 +89,11 @@ namespace RosUI
             HidePanels();
             btnSendOrder.Visible = false;
             btnCancelOrder.Visible = false;
+        }
+        private void btnLunch_Click(object sender, EventArgs e)
+        {
+            showPanel("LunchPanel");
+            pnlLunch.Show();
         }
 
         private void btnStarters_Click(object sender, EventArgs e)
@@ -117,6 +131,9 @@ namespace RosUI
         }
         void HidePanels()
         {
+            pnlLunch.Hide();
+            pnlDinner.Hide();
+
             pnlStarters.Hide();
             listviewOrder.FullRowSelect = true;
 
@@ -281,7 +298,7 @@ namespace RosUI
                 item.SubItems.Add(starter.ItemPrice.ToString());
                 starter.Amount = 1;
                 item.SubItems.Add(starter.Amount.ToString());
-                item.Tag = starter;
+                item.Tag = starter;             
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
