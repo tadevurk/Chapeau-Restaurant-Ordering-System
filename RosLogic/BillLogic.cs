@@ -38,5 +38,10 @@ namespace RosLogic
         {
             billdb.GetBill(b);
         }
+
+        public void SetItemsPaid(List<Dish> dishes)
+        {
+            billdb.SetItemsPaid(dishes);
+        }
     }
 }
