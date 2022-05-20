@@ -334,15 +334,11 @@ namespace RosUI
             //    Dish d = (Dish)li.Tag;
             //    dishesToPay.Add(d);
             //}
-            FormPayment formPayment = new FormPayment(table, alreadyOrdered, this);
+            FormPayment formPayment = new FormPayment(table, emp, alreadyOrdered, this);
             formPayment.Show();
 
         }
 
-        public void RemoveContainedItems()
-        {
-            listviewOrder.Items.Clear();
-        }
 
     }
 }
