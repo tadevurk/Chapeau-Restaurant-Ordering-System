@@ -35,6 +35,7 @@ namespace RosDAL
         {
             string query = "select count(*) as count from [Order]";
             SqlParameter[] sp = new SqlParameter[0];
+            
             return ReadCount(ExecuteSelectQuery(query, sp));
         }
 
