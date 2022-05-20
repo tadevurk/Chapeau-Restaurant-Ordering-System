@@ -104,6 +104,12 @@ namespace RosDAL
             return (int)row["count"];
         }
 
+        public void SetItemsPaid(List<Dish> dishes)
+        {
+            // write a query that updates the ordered items of a certain table to paid status 
+            string query = "UPDATE [OrderedDrink] SET DishStatus = 3 WHERE ";
+        }
+
         // update a bill in the database
         public void UpdateBill(Bill bill)
         {
@@ -118,7 +124,6 @@ namespace RosDAL
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
-                //new SqlParameter("@PaymentDate", bill.PaymentDate.GetDateTimeFormats())
             };
             ExecuteEditQuery(query, sqlParameters);
         }

@@ -88,8 +88,7 @@ namespace RosUI
         // calculate subtotal per product unit
         private decimal calculateSubtotal(decimal itemPrice, int vat)
         {
-
-            return itemPrice * (vat / 100);
+            return itemPrice - (itemPrice * vat/100);
         }
 
         // calculate the bill amount that will be displayed ini the payment form and stored in the database bill table
@@ -112,7 +111,7 @@ namespace RosUI
 
             foreach (Dish d in dishes)
             {
-                subAmount += calculateSubtotal(d.ItemPrice, d.Vat);
+                subAmount += calculateSubtotal(d.ItemPrice, d.Vat) * d.Amount;
             }
 
             return subAmount;
@@ -125,7 +124,7 @@ namespace RosUI
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
             // clear up the order list view
-            //RemoveContainedItems();
+            SetItemsPaid(dishes);
             this.Hide();
 
             // return to the table overview through the RosMain form or Restaurant overview form
@@ -180,12 +179,22 @@ namespace RosUI
         private void txtToPay_TextChanged(object sender, EventArgs e)
         {
             // calculate the amount that will be paid
-            
-            toPay = Convert.ToDecimal(txtToPay.Text);
-            tip = toPay - bill.TotalAmount;
-            bill.TipAmount = tip;
 
-            txtTip.Text = tip.ToString();
+            if (txtToPay.Text == "")
+            {
+                MessageBox.Show("This value can not be empty!!!");
+                txtToPay.Text = "0.0";
+            }
+            else
+            {
+                toPay = Convert.ToDecimal(txtToPay.Text);
+                tip = toPay - bill.TotalAmount;
+                bill.TipAmount = tip;
+
+                txtTip.Text = tip.ToString();
+
+            }
+
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -195,6 +204,12 @@ namespace RosUI
             formOrder.Show();
             this.Close();
 
+        }
+
+        // remove all items from a table that the payment is completed
+        public void SetItemsPaid(List<Dish> dishes)
+        {
+            billLogic.SetItemsPaid(dishes);
         }
     }
 }
