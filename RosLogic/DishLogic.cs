@@ -12,9 +12,9 @@ namespace RosLogic
     {
         DishDAO dishDAO = new DishDAO();
 
-        public List<Dish> GetAllStarters()
+        public List<Dish> GetLunchStarters()
         {
-            return dishDAO.GetAllStarters();
+            return dishDAO.GetLunchStarters();
         }
         public List<Dish> WriteContainedDishes(Table t, Order o)
         {
