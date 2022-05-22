@@ -421,7 +421,7 @@ namespace RosUI
                 rosMain.UpdateDishes();
 
                 //Update TableView
-                rosMain.OrderRecieved(table.TableNumber);
+                rosMain.UpdateTableToOrdered(table.TableNumber);
             }
             else if (dialogResult == DialogResult.No)
             {

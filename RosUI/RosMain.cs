@@ -20,6 +20,7 @@ namespace RosUI
         TableLogic tableLogic = new TableLogic();
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
+        private List<TableOverview> tableOverview = new List<TableOverview>();
 
         public List<Dish> Contained { get; set; }
         public RosMain(Employee employee)
@@ -100,13 +101,13 @@ namespace RosUI
                 switch (d.Status)
                 {
                     case DishStatus.ToPrepare:
-                        OrderRecieved(d.TableNumber);
+                        UpdateTableToOrdered(d.TableNumber);
                         break;
                     case DishStatus.PickUp:
-                        PickUpReady(d.TableNumber);
+                        UpdateTableToReadyDish(d);
                         break;
                     case DishStatus.Serve:
-                        ItemServed(d.TableNumber);
+                        UpdateTableToServedDish(d);
                         break;
                 }
 
@@ -153,7 +154,9 @@ namespace RosUI
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowPanel("TableView");
+            //ShowPanel("TableView");
+
+            new TableOverview(employee, this).Show();
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
@@ -235,147 +238,11 @@ namespace RosUI
 
             orderForm.Show();
         }
-        public void OrderRecieved(int number)
+        public void UpdateTableToOrdered(int number)
         {
-            //Changing color of buttons when Order is initiated
-            switch (number)
+            foreach (TableOverview to in tableOverview)
             {
-                case 1:
-                    btnTableOne.BackColor = Color.Blue;
-                    break;
-
-                case 2:
-                    btnTableTwo.BackColor = Color.Blue;
-
-                    break;
-                case 3:
-                    btnTableThree.BackColor = Color.Blue;
-
-                    break;
-                case 4:
-                    btnTableFour.BackColor = Color.Blue;
-
-                    break;
-                case 5:
-                    btnTableFive.BackColor = Color.Blue;
-
-                    break;
-                case 6:
-                    btnTableSix.BackColor = Color.Blue;
-
-                    break;
-                case 7:
-                    btnTableSeven.BackColor = Color.Blue;
-
-                    break;
-                case 8:
-                    btnTableEight.BackColor = Color.Blue;
-
-                    break;
-                case 9:
-                    btnTableNine.BackColor = Color.Blue;
-
-                    break;
-                case 10:
-                    btnTableTen.BackColor = Color.Blue;
-
-                    break;
-            }
-        }
-
-
-        public void PickUpReady(int number)
-        {
-            //changing color of buttons when order is ready for the pick up 
-            switch (number)
-            {
-                case 1:
-                    btnTableOne.BackColor = Color.Green;
-                    break;
-
-                case 2:
-                    btnTableTwo.BackColor = Color.Green;
-
-                    break;
-                case 3:
-                    btnTableThree.BackColor = Color.Green;
-
-                    break;
-                case 4:
-                    btnTableFour.BackColor = Color.Green;
-
-                    break;
-                case 5:
-                    btnTableFive.BackColor = Color.Green;
-
-                    break;
-                case 6:
-                    btnTableSix.BackColor = Color.Green;
-
-                    break;
-                case 7:
-                    btnTableSeven.BackColor = Color.Green;
-
-                    break;
-                case 8:
-                    btnTableEight.BackColor = Color.Green;
-
-                    break;
-                case 9:
-                    btnTableNine.BackColor = Color.Green;
-
-                    break;
-                case 10:
-                    btnTableTen.BackColor = Color.Green;
-
-                    break;
-            }
-        }
-        public void ItemServed(int number)
-        {
-            //changing color of buttons when order is ready for the pick up 
-            switch (number)
-            {
-                case 1:
-                    btnTableOne.BackColor = Color.Yellow;
-                    break;
-
-                case 2:
-                    btnTableTwo.BackColor = Color.Yellow;
-
-                    break;
-                case 3:
-                    btnTableThree.BackColor = Color.Yellow;
-
-                    break;
-                case 4:
-                    btnTableFour.BackColor = Color.Yellow;
-
-                    break;
-                case 5:
-                    btnTableFive.BackColor = Color.Yellow;
-
-                    break;
-                case 6:
-                    btnTableSix.BackColor = Color.Yellow;
-
-                    break;
-                case 7:
-                    btnTableSeven.BackColor = Color.Yellow;
-
-                    break;
-                case 8:
-                    btnTableEight.BackColor = Color.Yellow;
-
-                    break;
-                case 9:
-                    btnTableNine.BackColor = Color.Yellow;
-
-                    break;
-                case 10:
-                    btnTableTen.BackColor = Color.Yellow;
-
-                    break;
+                to.OrderRecieved(number);
             }
         }
         public void UpdateDrinks()
@@ -413,6 +280,7 @@ namespace RosUI
                 lvOrderedDrinks.Items.Add(li);
             }
         }
+
 
         public void UpdateDishes()
         {
@@ -463,7 +331,8 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
             {
                 OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                PickUpReady(drink.TableNumber);
+                UpdateTableToReadyDrink(drink);
+
                 drinkLogic.UpdateDrinkStatusPickUp(drink);
             }
 
@@ -481,11 +350,22 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                PickUpReady(dish.TableNumber);
+                UpdateTableToReadyDish(dish);
                 dishLogic.UpdateDishStatusPickUp(dish);
             }
 
             UpdateDishes();
+        }
+
+        private void UpdateTableToReadyDish(OrderedDish dish)
+        {
+            foreach (TableOverview to in tableOverview)
+                to.PickUpReady(dish.TableNumber);
+        }
+        private void UpdateTableToReadyDrink(OrderedDrink drink)
+        {
+            foreach (TableOverview to in tableOverview)
+                to.PickUpReady(drink.TableNumber);
         }
 
         private void btnViewNote_Click(object sender, EventArgs e)
@@ -519,8 +399,9 @@ namespace RosUI
             for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
             {
                 OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                dishLogic.UpdateDishStatusServe(orderedDish);
-                ItemServed(orderedDish.TableNumber);
+
+                UpdateTableToServedDish(orderedDish);//update all table overview
+
             }
 
             UpdateDishes();
@@ -548,6 +429,10 @@ namespace RosUI
 
         }
 
+        public void AddWaiterView(TableOverview to)
+        {
+            tableOverview.Add(to);
+        }
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
             if (lvOrderedDrinks.SelectedItems.Count == 0)
@@ -560,10 +445,29 @@ namespace RosUI
             {
                 OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
                 drinkLogic.UpdateDrinkStatusServe(orderedDrink);
-                ItemServed(orderedDrink.TableNumber);
+
+                UpdateTableToServedDrink(orderedDrink);//update observer tableOverview form
+
+
             }
 
             UpdateDrinks();
+        }
+
+        private void UpdateTableToServedDrink(OrderedDrink orderedDrink)
+        {
+            foreach (TableOverview to in tableOverview)
+            {
+                to.ItemServed(orderedDrink.TableNumber);
+            }
+        }
+
+        private void UpdateTableToServedDish(OrderedDish orderedDish)
+        {
+            foreach (TableOverview to in tableOverview)
+            {
+                to.ItemServed(orderedDish.TableNumber);
+            }
         }
 
         //Write error to text file

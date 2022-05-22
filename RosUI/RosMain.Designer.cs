@@ -221,7 +221,8 @@
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Table";
+            this.columnHeader1.Text = "Amount";
+            this.columnHeader1.Width = 80;
             // 
             // columnHeader2
             // 
@@ -230,7 +231,7 @@
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Amount";
+            this.columnHeader5.Text = "Note";
             this.columnHeader5.Width = 80;
             // 
             // columnHeader6
@@ -245,7 +246,7 @@
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "Note";
+            this.columnHeader8.Text = "Table";
             this.columnHeader8.Width = 80;
             // 
             // pnlBarView
@@ -318,7 +319,7 @@
             // 
             // clTable
             // 
-            this.clTable.Text = "Table";
+            this.clTable.Text = "Amount";
             // 
             // clDrinks
             // 
@@ -327,7 +328,7 @@
             // 
             // clAmount
             // 
-            this.clAmount.Text = "Amount";
+            this.clAmount.Text = "Note";
             this.clAmount.Width = 80;
             // 
             // columnHeader4
@@ -337,7 +338,7 @@
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "Note";
+            this.columnHeader9.Text = "Table";
             this.columnHeader9.Width = 80;
             // 
             // pnlTableView
@@ -463,10 +464,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlKitchenView);
-            this.Controls.Add(this.pnlTableView);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlDashboard);
+            this.Controls.Add(this.pnlKitchenView);
+            this.Controls.Add(this.pnlTableView);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";
