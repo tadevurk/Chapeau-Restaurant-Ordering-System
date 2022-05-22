@@ -71,12 +71,13 @@ namespace RosDAL
             return dishes;
         }
 
-        public List<Dish> GetAllStarters() // Getting all starters
+        public List<Dish> GetLunchStarters() // Getting all starters
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Starter';";
+                "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
+                "where Dish.Course = 'Starter' AND Item.MenuTypeID = 1";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }

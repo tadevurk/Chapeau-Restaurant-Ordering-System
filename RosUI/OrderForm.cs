@@ -150,7 +150,7 @@ namespace RosUI
 
         private void ReadStarters()
         {
-            List<Dish> starters = dishLogic.GetAllStarters();
+            List<Dish> starters = dishLogic.GetLunchStarters();
 
             listviewStarters.Items.Clear();
             listviewStarters.FullRowSelect = true;
