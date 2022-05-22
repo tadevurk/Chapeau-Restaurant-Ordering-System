@@ -41,7 +41,7 @@ namespace RosUI
             else if (employee.Roles == Roles.Bartender)
             {
                 kitchenViewToolStripMenuItem.Visible = false;
-                tableViewToolStripMenuItem.Visible=false;
+                tableViewToolStripMenuItem.Visible = false;
                 ShowPanel("BarView");
             }
         }
@@ -95,7 +95,7 @@ namespace RosUI
 
             foreach (ListViewItem item in lvOrderedDishes.Items)
             {
-                OrderedDish d = item.Tag as OrderedDish;               
+                OrderedDish d = item.Tag as OrderedDish;
 
                 switch (d.Status)
                 {
@@ -109,11 +109,11 @@ namespace RosUI
                         ItemServed(d.TableNumber);
                         break;
                 }
-                
+
             }
 
 
-          
+
         }
 
         private void HideAllPanels()
@@ -159,7 +159,7 @@ namespace RosUI
         private void btnTableOne_Click(object sender, EventArgs e)
         {
             table = new Table(1);
-            FormOrder orderForm = new FormOrder(table,employee, this);
+            FormOrder orderForm = new FormOrder(table, employee, this);
 
             orderForm.Show();
         }
@@ -283,7 +283,7 @@ namespace RosUI
             }
         }
 
- 
+
         public void PickUpReady(int number)
         {
             //changing color of buttons when order is ready for the pick up 
@@ -386,11 +386,8 @@ namespace RosUI
 
             foreach (OrderedDrink drink in orderedDrinks)
             {
-                ListViewItem li = new ListViewItem(drink.TableNumber.ToString());
+                ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
                 li.SubItems.Add(drink.Name);
-                li.SubItems.Add(drink.OrderedDrinkAmount.ToString());
-                li.SubItems.Add(drink.TimeDrinkOrdered.ToString());
-
                 if (drink.DrinkNote == "null")
                 {
                     li.SubItems.Add("No");
@@ -399,7 +396,14 @@ namespace RosUI
                 {
                     li.SubItems.Add("Yes");
                 }
-                
+
+
+                li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
+                li.SubItems.Add(drink.TableNumber.ToString());
+
+
+
+
                 li.Tag = drink;
 
                 if (drink.DrinkStatus == DrinkStatus.PickUp)
@@ -420,28 +424,9 @@ namespace RosUI
 
             foreach (OrderedDish dish in orderedDishes)
             {
-                //assign the new amount to display
 
-                int amount = dish.OrderedDishAmount;
-
-                if (Contained != null)
-                {
-                    foreach (Dish d in Contained)
-                    {
-                        if (dish.Name == d.ItemName && d.Order == dish.OrderID)
-                        {
-                            amount = d.OrderedAmount;
-                        }
-                    }
-                }
-
-
-                ListViewItem li = new ListViewItem(dish.TableNumber.ToString());
+                ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
                 li.SubItems.Add(dish.Name);
-                li.SubItems.Add(amount.ToString());
-                li.SubItems.Add(dish.TimeDishOrdered.ToString());
-                li.SubItems.Add(dish.Course);
-
                 if (dish.DishNote == "null")
                 {
                     li.SubItems.Add("No");
@@ -450,6 +435,11 @@ namespace RosUI
                 {
                     li.SubItems.Add("Yes");
                 }
+                li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+                li.SubItems.Add(dish.Course);
+                li.SubItems.Add(dish.TableNumber.ToString());
+
+
 
 
                 li.Tag = dish;
@@ -458,6 +448,7 @@ namespace RosUI
                     li.BackColor = Color.Green;
                 }
                 lvOrderedDishes.Items.Add(li);
+
             }
 
         }
@@ -466,7 +457,7 @@ namespace RosUI
         {
             if (lvOrderedDrinks.SelectedItems.Count == 0)
             {
-                 MessageBox.Show("No item selected!");
+                MessageBox.Show("No item selected!");
                 return;
             }
             for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
