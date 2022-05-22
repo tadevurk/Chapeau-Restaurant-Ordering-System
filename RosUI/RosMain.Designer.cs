@@ -464,10 +464,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlBarView);
-            this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlTableView);
+            this.Controls.Add(this.pnlBarView);
+            this.Controls.Add(this.pnlDashboard);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";

@@ -400,6 +400,8 @@ namespace RosUI
             {
                 OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
 
+                dishLogic.UpdateDishStatusServe(orderedDish);
+
                 UpdateTableToServedDish(orderedDish);//update all table overview
 
             }
