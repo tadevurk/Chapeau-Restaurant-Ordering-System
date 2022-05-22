@@ -15,10 +15,11 @@ namespace RosDAL
 
         public List<Dish> WriteContainedDishes(Table t, Order o)
         {
-            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], OD.OrderedDishAmount as [Amount], OD.OrderID as [Order] from OrderDish as OD" +
+            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount], O.TableNumber as [TableNumber] from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DishID" +
-                " where O.TableNumber=@TableNumber and OD.DishStatus<3";
+                " where O.TableNumber=@TableNumber and OD.DishStatus<3" +
+                "group by DishID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter[] sp =
             {
                 new SqlParameter("@TableNumber", t.TableNumber),
@@ -64,8 +65,6 @@ namespace RosDAL
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     Amount = (int)dr["Amount"],
-                    Order = (int)dr["Order"]
-
                 };
                 dishes.Add(dish);
             }
@@ -92,7 +91,7 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        
+
         public List<Dish> GetAllDesserts() //Getting all Desserts
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
@@ -103,7 +102,7 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        
+
         public List<Dish> GetAllEntremets() //Getting all Entremets
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
@@ -128,7 +127,7 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        
+
         public void IncreaseDishStock(Dish dish) // Increase the dish from stock
         {
             string query = "Update Item " +

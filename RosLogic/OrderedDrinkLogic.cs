@@ -26,6 +26,11 @@ namespace RosLogic
             orderedDrinkdb.UpdateDrinkStatusServe(drink);
         }
 
+        public void UpdateDeliveryTime(Drink d)
+        {
+            orderedDrinkdb.UpdateDeliveredTime(d);
+        }
+
         public void UpdateDrinkStatusPickUp(OrderedDrink orderedDrink)
         {
             orderedDrinkdb.UpdateDrinkStatusPickUp(orderedDrink);
