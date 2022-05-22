@@ -63,9 +63,11 @@ namespace RosDAL
         }
         public List<OrderedDrink> GetAllOrderedDrinks()
         {
-            string query = "SELECT O.TableNumber as tableNumber, OD.DrinkStatus as [Status], O.OrderID as [order], OD.DrinkID as ID, I.ItemName as name, OD.DrinkNote as [Note], OD.OrderedDrinkAmount as [Amount]," +
-               " OD.TimeDrinkOrdered as [time] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
-               " join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus = 0 or OD.DrinkStatus = 1 order by OD.TimeDrinkOrdered; ";
+            string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note]," +
+                " SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID " +
+                "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus<2 group by O.TableNumber," +
+                " OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered";
+
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
@@ -91,12 +93,12 @@ namespace RosDAL
                 {
                     TableNumber = (int)dr["tableNumber"],
                     DrinkStatus = (DrinkStatus)dr["Status"],
-                    OrderID = (int)dr["order"],
+                    OrderID = (int)dr["OrderID"],
                     DrinkID = (int)dr["ID"],
                     DrinkNote = note,
                     OrderedDrinkAmount = (int)dr["Amount"],
                     Name = (string)dr["name"],
-                    TimeDrinkOrdered = (DateTime)dr["time"]
+                    TimeDrinkOrdered = (DateTime)dr["Time"]
                 };
                 drinks.Add(drink);
             }
@@ -117,7 +119,7 @@ namespace RosDAL
 
         public void UpdateDrinkStatusServe(OrderedDrink d)
         {
-            string query = "UPDATE OrderDrink SET DrinkStatus=2 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
+            string query = "UPDATE OrderDrink SET DrinkStatus=2, TimeDrinkDelivered=GetDate() WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
             SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.DrinkID),
             new SqlParameter("@OrderID", d.OrderID)
             };
@@ -134,6 +136,15 @@ namespace RosDAL
             };
 
             ExecuteEditQuery(query, sp);
+        }
+
+        public void UpdateDeliveredTime(Drink d)
+        {
+            string query = "update OrderDrink set TimeDrinkDelivered=Getdate() where DrinkID=@DrinkID and OrderID=@OrderID";
+            SqlParameter[] sp = {
+                new SqlParameter("@DrinkID", d.DrinkID),
+                new SqlParameter("@OrderID", d.Order)
+            };
         }
         public void AddDrink(List<Drink> drink, Order order)
         {

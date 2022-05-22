@@ -409,6 +409,7 @@ namespace RosUI
             this.btnPayment.TabIndex = 19;
             this.btnPayment.Text = "pay";
             this.btnPayment.UseVisualStyleBackColor = true;
+            this.btnPayment.Click += new System.EventHandler(this.btnPayment_Click);
             // 
             // pnlSoftDrinks
             // 
@@ -586,7 +587,6 @@ namespace RosUI
             this.btnLunch.TabIndex = 25;
             this.btnLunch.Text = "LUNCH";
             this.btnLunch.UseVisualStyleBackColor = true;
-            this.btnLunch.Click += new System.EventHandler(this.btnLunch_Click);
             // 
             // btnDinner
             // 
