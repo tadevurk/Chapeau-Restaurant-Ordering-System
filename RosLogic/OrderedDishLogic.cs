@@ -47,6 +47,11 @@ namespace RosLogic
             return orderedDishdb.GetAllOrderedDish();
         }
 
+        public void UpdateDeliveryTime(Dish d)
+        {
+            orderedDishdb.UpdateDeliveredTime(d);
+        }
+
         public OrderedDish GetOrdereDishByKey(Order ord, Dish dish)
         {
             return orderedDishdb.GetOrderedDishByKey(ord, dish);

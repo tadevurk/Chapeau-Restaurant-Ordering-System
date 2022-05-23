@@ -14,7 +14,6 @@ namespace RosUI
 {
     public partial class FormOrder : Form
     {
-        
         Table table;
         DishLogic dishLogic;
         DrinkLogic drinkLogic;
@@ -49,27 +48,15 @@ namespace RosUI
             HidePanels();
             switch (panelName)
             {
-                case "LunchPanel":
-                    pnlLunch.Show();
-                    pnlLunch.Visible = true;
-                    break;
                 case "Starters":
                     pnlStarters.Show();
-                    pnlLunch.Show();
                     pnlStarters.Visible = true;
                     ReadStarters();
                     break;
                 case "Mains":
                     pnlMains.Show();
-                    pnlLunch.Show();
                     pnlMains.Visible = true;
                     ReadMains();
-                    break;
-                case "Desserts":
-                    pnlDesserts.Show();
-                    pnlLunch.Show();
-                    pnlDesserts.Visible = true;
-                    ReadDesserts();
                     break;
                 case "Drinks":
                     pnlDrinkCategories.Show();
@@ -80,7 +67,11 @@ namespace RosUI
                     pnlSoftDrinks.Visible = true;
                     ReadSoftDrinks();
                     break;
-
+                case "Desserts":
+                    pnlDesserts.Show();
+                    pnlDesserts.Visible = true;
+                    ReadDesserts();
+                    break;
             }
         }
 
@@ -89,11 +80,6 @@ namespace RosUI
             HidePanels();
             btnSendOrder.Visible = false;
             btnCancelOrder.Visible = false;
-        }
-        private void btnLunch_Click(object sender, EventArgs e)
-        {
-            showPanel("LunchPanel");
-            pnlLunch.Show();
         }
 
         private void btnStarters_Click(object sender, EventArgs e)
@@ -131,9 +117,6 @@ namespace RosUI
         }
         void HidePanels()
         {
-            pnlLunch.Hide();
-            pnlDinner.Hide();
-
             pnlStarters.Hide();
             listviewOrder.FullRowSelect = true;
 
@@ -298,7 +281,7 @@ namespace RosUI
                 item.SubItems.Add(starter.ItemPrice.ToString());
                 starter.Amount = 1;
                 item.SubItems.Add(starter.Amount.ToString());
-                item.Tag = starter;             
+                item.Tag = starter;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
@@ -387,17 +370,10 @@ namespace RosUI
             }
         }
 
-        private void OrderCheck()
+        private void CreateOrder()
         {
-            if (alreadyOrdered.Count == 0)
-            {
-                orderLogic.AddOrder(order); // Create new order
-                ordID = order.OrderID; // the new orderId will be the orderID from parameter
-            }
-            else
-            {
-                ordID = alreadyOrdered[0].Order; // Else still same orderID
-            }
+            orderLogic.AddOrder(order); // Create new order
+            ordID = order.OrderID; // the new orderId will be the orderID from parameter           
         }
 
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
@@ -424,17 +400,17 @@ namespace RosUI
             DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                //Check the order whether exists or not
-                OrderCheck();
+                //Create new order
+                CreateOrder();
 
                 // send order - ( and grouping the old items' amount by adding the new items' amount)
                 SendOrder();
 
                 //icreasing amount on db and setting back status to toBePrepared
-                orderedDishLogic.IncreaseAmount(DishesInOrderedList, order);
+                //orderedDishLogic.IncreaseAmount(DishesInOrderedList, order);
 
                 //pass the contained dishes to Main
-                rosMain.Contained = DishesInOrderedList;
+                //rosMain.Contained = DishesInOrderedList;
 
                 //Adding compleeteley new dish dish to Order_Dish table
                 orderedDishLogic.AddDishes(DishesInOrderProcess, order);
@@ -445,7 +421,7 @@ namespace RosUI
                 rosMain.UpdateDishes();
 
                 //Update TableView
-                rosMain.OrderRecieved(table.TableNumber);
+                rosMain.UpdateTableToOrdered(table.TableNumber);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -462,37 +438,7 @@ namespace RosUI
                 Dish dishInOrderList = (Dish)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
                 ListViewItem lvItemInOrderList = listviewOrder.Items[i];
 
-                foreach (ListViewItem lvItemInOrderProcess in listviewOrder.Items)
-                {
-                    //check if it is new one
-                    if (lvItemInOrderProcess.SubItems[0].Text == dishInOrderList.ItemName && lvItemInOrderProcess.ForeColor != lvItemInOrderList.ForeColor)
-                    {
-                        //calculate how many have been added and store it into dish.OrderAmount
-                        dishInOrderList.OrderedAmount = int.Parse(lvItemInOrderProcess.SubItems[2].Text); // This is for the kitchen.
-                        // If they have same name, but one is olde
-                        dishInOrderList.Amount = int.Parse(lvItemInOrderList.SubItems[2].Text) + int.Parse(lvItemInOrderProcess.SubItems[2].Text);
-                        toAdd = 2;
-                        break;
-                    }
-
-                    if (alreadyOrdered.Contains(dishInOrderList))
-                    {
-                        toAdd = 0; //check if it is not modified then ignore
-                    }
-                    else
-                    {
-                        toAdd = 1; // if this is 1, then add to dishes(list)
-                    }
-                }
-                order.OrderID = ordID; // Dish.Order ID
-
-                //if new add than edit
-                if (toAdd == 2)
-                {
-                    DishesInOrderedList.Add(dishInOrderList);
-                }
-                //if unique than add
-                else if (toAdd == 1)
+                if (lvItemInOrderList.ForeColor == Color.Red)
                 {
                     DishesInOrderProcess.Add(dishInOrderList);
                 }
@@ -518,11 +464,6 @@ namespace RosUI
         private void btnBack_Click(object sender, EventArgs e)
         {
             Hide();
-        }
-
-        private void btnPayment_Click(object sender, EventArgs e)
-        {
-            new FormPayment(table, emp, alreadyOrdered, this).Show();
         }
     }
 }
