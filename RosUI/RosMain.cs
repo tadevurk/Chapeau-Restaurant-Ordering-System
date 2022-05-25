@@ -15,7 +15,7 @@ namespace RosUI
 {
     public partial class RosMain : Form
     {
-        Employee employee = new Employee();
+        Employee employee;
         Table table = new Table();
         TableLogic tableLogic = new TableLogic();
         OrderedDishLogic dishLogic = new OrderedDishLogic();

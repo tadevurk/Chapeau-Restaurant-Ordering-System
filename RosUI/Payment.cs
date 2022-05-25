@@ -16,6 +16,7 @@ namespace RosUI
     public partial class FormPayment : Form
     {
         //Order order = new Order();
+        RosMain rosMain;
         Table table;
         BillLogic billLogic = new BillLogic();
         Bill bill = new Bill();
@@ -27,12 +28,13 @@ namespace RosUI
         decimal toPay;
         decimal tip;
 
-        public FormPayment(Table table, Employee emp, FormOrder formOrder)
+        public FormPayment(Table table, Employee emp, FormOrder formOrder, RosMain rosMain)
         {
             InitializeComponent();
             this.table = table;
             this.formOrder = formOrder;
             this.employee = emp;
+            this.rosMain = rosMain;
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
@@ -45,7 +47,7 @@ namespace RosUI
             bill.SubTotalAmount = CalculateSubTotalAmount();
             bill.TotalAmount = CalculateTotalAmount();
             lblBillAmount.Text = bill.TotalAmount.ToString();
-            txtToPay.Text = lblBillAmount.Text;
+            txtToPay.Text = lblBillAmount.Text;     
         }
 
 
@@ -199,7 +201,7 @@ namespace RosUI
         {
             // get back to the table overview
             this.Hide();
-            formOrder.Show();
+            new TableOverview(employee, rosMain).Show();
             this.Close();
 
         }
