@@ -2,14 +2,11 @@
 using System;
 using RosLogic;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+
+////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace RosUI
 {
@@ -29,6 +26,11 @@ namespace RosUI
 
             this.employee = employee;
 
+            AdaptFormOnRole(employee);
+        }
+
+        private void AdaptFormOnRole(Employee employee)
+        {
             if (employee.Roles == Roles.Manager)
             {
                 lblWelcomeBarDash.Text += $" {employee.Name}!";
@@ -43,7 +45,7 @@ namespace RosUI
                 btnUndoKitFin.Enabled = false;
                 lblWelcomeKitDash.Text += $" {employee.Name}!";
                 ShowPanel("KitchenDashboard");
-                
+
             }
             else if (employee.Roles == Roles.Bartender)
             {
@@ -62,6 +64,7 @@ namespace RosUI
 
         private void ShowPanel(string panelName)
         {
+            //shwitch between the different panels
             switch (panelName)
             {
                 case "KitchenView":
@@ -83,7 +86,6 @@ namespace RosUI
 
                     HideAllPanels();
                     pnlBarView.Show();
-
                     UpdateDrinks();
 
                     break;
@@ -109,7 +111,6 @@ namespace RosUI
                     UpdateFinishedDishes();
 
                     break;
-
             }
 
         }
@@ -139,6 +140,7 @@ namespace RosUI
 
         private void HideAllPanels()
         {
+            //hiding all panels
             pnlKitchenView.Hide();
             pnlDashboardKitchen.Hide();
             pnlDashboardBar.Hide();
@@ -201,15 +203,19 @@ namespace RosUI
         {
             try
             {
+                //retrieveing all ordered drinks
                 List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
 
+                //clearing preavious items
                 lvOrderedDrinks.Items.Clear();
 
+                //checking each item in the drinkList
                 foreach (OrderedDrink drink in orderedDrinks)
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
                     li.SubItems.Add(drink.Name);
 
+                    //displaying output according if a note is present
                     if (drink.DrinkNote == "null")
                     {
                         li.SubItems.Add("No");
@@ -219,16 +225,19 @@ namespace RosUI
                         li.SubItems.Add("Yes");
                     }
 
+
                     li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
 
+                    //if the item is ready for pickup should show another color
                     if (drink.DrinkStatus == DrinkStatus.PickUp)
                     {
                         li.BackColor = Color.Green;
                     }
 
+                    //adding item to the list
                     lvOrderedDrinks.Items.Add(li);
                 }
             }
@@ -242,15 +251,20 @@ namespace RosUI
         {
             try
             {
+               //retrieveing all finished drinks
+
                 List<OrderedDrink> finishedDrinks = drinkLogic.GetAllFinishedDrinks();
 
+                //claring preavious items
                 lvFinishedDrinks.Items.Clear();
 
+                //checking each item in the drinkList
                 foreach (OrderedDrink drink in finishedDrinks)
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
                     li.SubItems.Add(drink.Name);
 
+                    //displaying output according if a note is present
                     if (drink.DrinkNote == "null")
                     {
                         li.SubItems.Add("No");
@@ -265,11 +279,7 @@ namespace RosUI
 
                     li.Tag = drink;
 
-                    if (drink.DrinkStatus == DrinkStatus.PickUp)
-                    {
-                        li.BackColor = Color.Green;
-                    }
-
+                    //adding item to the list
                     lvFinishedDrinks.Items.Add(li);
                 }
             }
@@ -284,17 +294,21 @@ namespace RosUI
         {
             try
             {
-
+                //retrieving all ordered dishes
                 List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
 
+
+                //Clearing previous items
                 lvOrderedDishes.Items.Clear();
 
-
+                //checking all items in the dishList
                 foreach (OrderedDish dish in orderedDishes)
                 {
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
                     li.SubItems.Add(dish.Name);
+
+                    //displaying output according if a note is present
                     if (dish.DishNote == "null")
                     {
                         li.SubItems.Add("No");
@@ -309,11 +323,13 @@ namespace RosUI
 
                     li.Tag = dish;
 
+                    //displaying different color for status "ToPickUp"
                     if (dish.Status == DishStatus.PickUp)
                     {
                         li.BackColor = Color.Green;
                     }
 
+                    //adding items to listView
                     lvOrderedDishes.Items.Add(li);
 
                 }
@@ -329,17 +345,20 @@ namespace RosUI
         {
             try
             {
+                //retrieving all finished dishes
                 List<OrderedDish> finishedDishes = dishLogic.GetAllFinishedDish();
 
+                //clearing preavious items
                 lvFinishedDishes.Items.Clear();
 
-
+                //checking items in DishList
                 foreach (OrderedDish dish in finishedDishes)
                 {
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
                     li.SubItems.Add(dish.Name);
 
+                    //displaying output according if a note is present
                     if (dish.DishNote == "null")
                     {
                         li.SubItems.Add("No");
@@ -355,11 +374,7 @@ namespace RosUI
 
                     li.Tag = dish;
 
-                    if (dish.Status == DishStatus.PickUp)
-                    {
-                        li.BackColor = Color.Green;
-                    }
-
+                    //adding finished items to listView
                     lvFinishedDishes.Items.Add(li);
                 }
             }
@@ -373,11 +388,13 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //changing the status of each selected drink, update table status
                 for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
                 {
                     OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
@@ -386,6 +403,7 @@ namespace RosUI
                     drinkLogic.UpdateDrinkStatusPickUp(drink);
                 }
 
+                //update current listView
                 UpdateDrinks();
             }
             catch(Exception exp)
@@ -399,11 +417,13 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //updating the status of each selected dish, update table status
                 for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
                 {
                     OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
@@ -411,6 +431,7 @@ namespace RosUI
                     dishLogic.UpdateDishStatusPickUp(dish);
                 }
 
+                //update current listView
                 UpdateDishes();
             }
             catch(Exception exp)
@@ -421,11 +442,13 @@ namespace RosUI
 
         private void UpdateTableToReadyDish(OrderedDish dish)
         {
+            //send an update to all TableOverview
             foreach (TableOverview to in tableOverview)
                 to.PickUpReady(dish.TableNumber);
         }
         private void UpdateTableToReadyDrink(OrderedDrink drink)
         {
+            //send an update to all TableOverview
             foreach (TableOverview to in tableOverview)
                 to.PickUpReady(drink.TableNumber);
         }
@@ -434,13 +457,16 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected than throw an exception
                 if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //assign selected item to dish 
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
 
+                //display either the note text or if the note is empty display "No note"
                 if (dish.DishNote == "null")
                 {
                     MessageBox.Show("No note");
@@ -460,11 +486,13 @@ namespace RosUI
         {
             try
             {
+                //if no team is selected than throw an exception
                 if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //update all selected dishes status, update table
                 for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
                 {
                     OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
@@ -475,6 +503,7 @@ namespace RosUI
 
                 }
 
+                //update current listView
                 UpdateDishes();
             }
             catch(Exception exp)
@@ -487,13 +516,16 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //assign to drink the selected item
                 OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
 
+                //if the note is empty, display "no note", otherwise display the note
                 if (d.DrinkNote == "null")
                 {
                     MessageBox.Show("No note");
@@ -519,21 +551,22 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected than throw an exception
                 if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //update all selected drink´s status, and update the table
                 for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
                 {
                     OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
                     drinkLogic.UpdateDrinkStatusServe(orderedDrink);
 
                     UpdateTableToServedDrink(orderedDrink);//update observer tableOverview form
-
-
                 }
 
+                //update current listView
                 UpdateDrinks();
             }
             catch(Exception exp)
@@ -544,6 +577,7 @@ namespace RosUI
 
         private void UpdateTableToServedDrink(OrderedDrink orderedDrink)
         {
+            //update all TableOverview
             foreach (TableOverview to in tableOverview)
             {
                 to.ItemServed(orderedDrink.TableNumber);
@@ -552,6 +586,7 @@ namespace RosUI
 
         private void UpdateTableToServedDish(OrderedDish orderedDish)
         {
+            //update all table overview
             foreach (TableOverview to in tableOverview)
             {
                 to.ItemServed(orderedDish.TableNumber);
@@ -602,13 +637,16 @@ namespace RosUI
         {
             try
             {
+                //if no selected item is selected than throw an exception
                 if (lvFinishedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //assign to drink the selected item
                 OrderedDrink d = (OrderedDrink)lvFinishedDrinks.SelectedItems[0].Tag;
 
+                //if the note is null display "no note", otherwise display the note message
                 if (d.DrinkNote == "null")
                 {
                     MessageBox.Show("No note");
@@ -628,13 +666,16 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvFinishedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //assign to dish the selected item
                 OrderedDish dish = (OrderedDish)lvFinishedDishes.SelectedItems[0].Tag;
 
+                //if the note is null display no note, otherwise display the note message
                 if (dish.DishNote == "null")
                 {
                     MessageBox.Show("No note");
@@ -654,11 +695,13 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvFinishedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //update each dish status and update the respective table
                 for (int i = 0; i < lvFinishedDishes.SelectedItems.Count; i++)
                 {
                     OrderedDish finishedDish = (OrderedDish)lvFinishedDishes.SelectedItems[i].Tag;
@@ -668,6 +711,7 @@ namespace RosUI
                     dishLogic.UpdateDishToStart(finishedDish);
                 }
 
+                //update current listView
                 UpdateFinishedDishes();
             }
             catch(Exception exp)
@@ -680,11 +724,13 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvFinishedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No item selected!");
                 }
 
+                //update each drink status update the table
                 for (int i = 0; i < lvFinishedDrinks.SelectedItems.Count; i++)
                 {
                     OrderedDrink finishedDrink = (OrderedDrink)lvFinishedDrinks.SelectedItems[i].Tag;
@@ -694,6 +740,7 @@ namespace RosUI
                     drinkLogic.UpdateDrinkToStart(finishedDrink);
                 }
 
+                //update the current listView
                 UpdateFinishedDrinks();
             }
             catch(Exception exp)
@@ -706,15 +753,18 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No selected item!");
                 }
 
+                //update each item status and update the respective table
                 for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
                 {
                     OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
 
+                    //if the status id to prepare, update the current listView and throw an exception
                     if (orderedDrink.DrinkStatus == DrinkStatus.ToPrepare)
                     {
                         UpdateDrinks();
@@ -723,11 +773,13 @@ namespace RosUI
                         
                     }
 
+                    
                     UpdateTableToOrdered(orderedDrink.TableNumber);
 
                     drinkLogic.BringStatusBack(orderedDrink);
                 }
 
+                //update current listView
                 UpdateDrinks();
             }
             catch(Exception exp)
@@ -740,15 +792,18 @@ namespace RosUI
         {
             try
             {
+                //if no item is selected throw an exception
                 if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No selected items!");
                 }
 
+                //update all selected items, update the table
                 for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
                 {
                     OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
 
+                    //if the selected item is toPrepare, update the current listView and throw an exception
                     if (orderedDish.Status == DishStatus.ToPrepare)
                     {
                         UpdateDishes();
@@ -759,6 +814,7 @@ namespace RosUI
                     UpdateTableToOrdered(orderedDish.TableNumber);
                 }
 
+                //update current listView
                 UpdateDishes();
             }
             catch (Exception exp)
