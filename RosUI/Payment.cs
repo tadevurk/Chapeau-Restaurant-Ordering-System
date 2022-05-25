@@ -88,10 +88,6 @@ namespace RosUI
             }
         }
 
-        //private int calculateVat(int id)
-        //{
-        //    return dishLogic.RetrieveVatByID(id);
-        //}
 
         // calculate subtotal per product unit
         private decimal CalculateItemSubtotal(decimal itemPrice, int vat)
@@ -138,22 +134,17 @@ namespace RosUI
             // return to the table overview through the RosMain form or Restaurant overview form
             RosMain ros = new RosMain(employee);
             ros.Show();
-            //if RosMAin form, show the Tableview panel 
-            // change the protection level to public?
-            //ros.ShowPanel("TableView");
-
+            
             this.Close();
 
         }
 
-        
         private void txtFeedback_TextChanged(object sender, EventArgs e)
         {
             bill.Feedback = txtFeedback.Text;
         }
 
         // check if payment method was selected in order to activate the complete payment button
-
         private void radioBtnCash_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
@@ -187,7 +178,6 @@ namespace RosUI
         private void txtToPay_TextChanged(object sender, EventArgs e)
         {
             // calculate the amount that will be paid
-
             if (txtToPay.Text == "")
             {
                 MessageBox.Show("This value can not be empty!!!");

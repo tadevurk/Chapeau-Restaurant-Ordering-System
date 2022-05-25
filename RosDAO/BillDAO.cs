@@ -26,6 +26,7 @@ namespace RosDAL
        
         private List<BillItem> ReadOrderedDishes(DataTable dataTable)
         {
+
             List<BillItem> orderedDishes = new List<BillItem>();
 
             foreach (DataRow dr in dataTable.Rows)
