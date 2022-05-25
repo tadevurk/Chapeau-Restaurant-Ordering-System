@@ -70,5 +70,20 @@ namespace RosLogic
         {
             orderedDishdb.RemoveDish(orderedDish);
         }
+
+        public List<OrderedDish> GetAllFinishedDish()
+        {
+            return orderedDishdb.GetAllFinishedDish();
+        }
+
+        public void UpdateDishToStart(OrderedDish orderedDish)
+        {
+            orderedDishdb.UpdateDishToStart(orderedDish);
+        }
+
+        public void BringStatusBack(OrderedDish orderedDish)
+        {
+            orderedDishdb.BringStatusBack(orderedDish);
+        }
     }
 }

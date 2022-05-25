@@ -535,7 +535,7 @@ namespace RosUI
 
         private void btnPayment_Click(object sender, EventArgs e)
         {
-            FormPayment formPayment = new FormPayment(table, emp, this);
+            FormPayment formPayment = new FormPayment(table, emp, this, rosMain);
             formPayment.Show();
             this.Hide();
         }

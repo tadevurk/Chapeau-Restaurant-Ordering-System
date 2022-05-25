@@ -1,4 +1,5 @@
 ﻿using RosModel;
+using RosLogic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +15,10 @@ namespace RosUI
     public partial class TableOverview : Form
     {
         private Employee employee;
-        private Table table;
         private RosMain rosMain;
+        private Table table;
+        private TableLogic tableLogic = new TableLogic();
+        private List<Table> tables;
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
@@ -23,16 +26,20 @@ namespace RosUI
             this.employee = employee;
             this.rosMain = rosMain;
             rosMain.AddWaiterView(this);
+            lblWaiter.Text = "Waiter: " + employee.Name;
+            tables = tableLogic.GetAllTables();
+
         }
 
+        //clicking the button opens the table control
+        //passing the button as parameter to change the color
         private void btnTableOne_Click(object sender, EventArgs e)
         {
             try
             {
-                table = new Table(1);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[0];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch(Exception exp)
             {
@@ -45,10 +52,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(2);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[1];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -61,10 +67,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(3);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[2];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -77,10 +82,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(4);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[3];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -93,10 +97,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(5);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[4];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -109,10 +112,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(6);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[5];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -125,10 +127,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(7);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[6];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -141,10 +142,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(8);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[7];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -157,10 +157,9 @@ namespace RosUI
         {
             try
             {
-                table = new Table(9);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[8];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
@@ -173,16 +172,20 @@ namespace RosUI
         {
             try
             {
-                table = new Table(10);
-                FormOrder orderForm = new FormOrder(table, employee, rosMain);
-
-                orderForm.ShowDialog();
+                this.Close();
+                table = tables[9];
+                new TableControl(employee, rosMain, table).Show();
             }
             catch (Exception exp)
             {
                 MessageBox.Show("Error Occorred: " + exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
+        }
+
+        public void UpdateTableStatus()
+        {
+
         }
 
 

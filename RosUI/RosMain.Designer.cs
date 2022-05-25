@@ -34,9 +34,16 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runningOrdersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.finishedOrdersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.kitchenViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runningOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.finishedOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pnlDashboard = new System.Windows.Forms.Panel();
+            this.pnlDashboardKitchen = new System.Windows.Forms.Panel();
+            this.btnFinishKitDash = new System.Windows.Forms.Button();
+            this.btnRunningKitDash = new System.Windows.Forms.Button();
+            this.lblWelcomeKitDash = new System.Windows.Forms.Label();
             this.pnlKitchenView = new System.Windows.Forms.Panel();
             this.btnServe = new System.Windows.Forms.Button();
             this.btnViewNote = new System.Windows.Forms.Button();
@@ -60,21 +67,42 @@
             this.clAmount = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
-            this.pnlTableView = new System.Windows.Forms.Panel();
-            this.btnTableTen = new System.Windows.Forms.Button();
-            this.btnTableNine = new System.Windows.Forms.Button();
-            this.btnTableEight = new System.Windows.Forms.Button();
-            this.btnTableSeven = new System.Windows.Forms.Button();
-            this.btnTableSix = new System.Windows.Forms.Button();
-            this.btnTableFive = new System.Windows.Forms.Button();
-            this.btnTableFour = new System.Windows.Forms.Button();
-            this.btnTableThree = new System.Windows.Forms.Button();
-            this.btnTableTwo = new System.Windows.Forms.Button();
-            this.btnTableOne = new System.Windows.Forms.Button();
+            this.pnlDashboardBar = new System.Windows.Forms.Panel();
+            this.lblWelcomeBarDash = new System.Windows.Forms.Label();
+            this.btnFinishBarDash = new System.Windows.Forms.Button();
+            this.btnRunnningBarDash = new System.Windows.Forms.Button();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.pnlKitchenViewFinished = new System.Windows.Forms.Panel();
+            this.btnUndoKitFin = new System.Windows.Forms.Button();
+            this.btnViewNoteFinDish = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lvFinishedDishes = new System.Windows.Forms.ListView();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader11 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
+            this.pnlBarViewFinished = new System.Windows.Forms.Panel();
+            this.btnViewNoteFinDrink = new System.Windows.Forms.Button();
+            this.btnUndoFinDrink = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lvFinishedDrinks = new System.Windows.Forms.ListView();
+            this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
+            this.btnUndoBarView = new System.Windows.Forms.Button();
+            this.btnUndoKitView = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
+            this.pnlDashboardKitchen.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
-            this.pnlTableView.SuspendLayout();
+            this.pnlDashboardBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.pnlKitchenViewFinished.SuspendLayout();
+            this.pnlBarViewFinished.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -124,17 +152,51 @@
             // 
             // barViewToolStripMenuItem
             // 
+            this.barViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runningOrdersToolStripMenuItem1,
+            this.finishedOrdersToolStripMenuItem1});
             this.barViewToolStripMenuItem.Name = "barViewToolStripMenuItem";
             this.barViewToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.barViewToolStripMenuItem.Text = "Bar View";
             this.barViewToolStripMenuItem.Click += new System.EventHandler(this.barViewToolStripMenuItem_Click);
             // 
+            // runningOrdersToolStripMenuItem1
+            // 
+            this.runningOrdersToolStripMenuItem1.Name = "runningOrdersToolStripMenuItem1";
+            this.runningOrdersToolStripMenuItem1.Size = new System.Drawing.Size(194, 26);
+            this.runningOrdersToolStripMenuItem1.Text = "Running Orders";
+            this.runningOrdersToolStripMenuItem1.Click += new System.EventHandler(this.runningOrdersToolStripMenuItem1_Click);
+            // 
+            // finishedOrdersToolStripMenuItem1
+            // 
+            this.finishedOrdersToolStripMenuItem1.Name = "finishedOrdersToolStripMenuItem1";
+            this.finishedOrdersToolStripMenuItem1.Size = new System.Drawing.Size(194, 26);
+            this.finishedOrdersToolStripMenuItem1.Text = "Finished Orders";
+            this.finishedOrdersToolStripMenuItem1.Click += new System.EventHandler(this.finishedOrdersToolStripMenuItem1_Click);
+            // 
             // kitchenViewToolStripMenuItem
             // 
+            this.kitchenViewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runningOrdersToolStripMenuItem,
+            this.finishedOrdersToolStripMenuItem});
             this.kitchenViewToolStripMenuItem.Name = "kitchenViewToolStripMenuItem";
             this.kitchenViewToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
             this.kitchenViewToolStripMenuItem.Text = "Kitchen view";
             this.kitchenViewToolStripMenuItem.Click += new System.EventHandler(this.kitchenViewToolStripMenuItem_Click);
+            // 
+            // runningOrdersToolStripMenuItem
+            // 
+            this.runningOrdersToolStripMenuItem.Name = "runningOrdersToolStripMenuItem";
+            this.runningOrdersToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.runningOrdersToolStripMenuItem.Text = "Running Orders";
+            this.runningOrdersToolStripMenuItem.Click += new System.EventHandler(this.runningOrdersToolStripMenuItem_Click);
+            // 
+            // finishedOrdersToolStripMenuItem
+            // 
+            this.finishedOrdersToolStripMenuItem.Name = "finishedOrdersToolStripMenuItem";
+            this.finishedOrdersToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.finishedOrdersToolStripMenuItem.Text = "Finished Orders";
+            this.finishedOrdersToolStripMenuItem.Click += new System.EventHandler(this.finishedOrdersToolStripMenuItem_Click);
             // 
             // tableViewToolStripMenuItem
             // 
@@ -143,15 +205,47 @@
             this.tableViewToolStripMenuItem.Text = "Table view";
             this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
             // 
-            // pnlDashboard
+            // pnlDashboardKitchen
             // 
-            this.pnlDashboard.Location = new System.Drawing.Point(0, 31);
-            this.pnlDashboard.Name = "pnlDashboard";
-            this.pnlDashboard.Size = new System.Drawing.Size(1216, 578);
-            this.pnlDashboard.TabIndex = 1;
+            this.pnlDashboardKitchen.Controls.Add(this.btnFinishKitDash);
+            this.pnlDashboardKitchen.Controls.Add(this.btnRunningKitDash);
+            this.pnlDashboardKitchen.Controls.Add(this.lblWelcomeKitDash);
+            this.pnlDashboardKitchen.Location = new System.Drawing.Point(0, 31);
+            this.pnlDashboardKitchen.Name = "pnlDashboardKitchen";
+            this.pnlDashboardKitchen.Size = new System.Drawing.Size(1216, 578);
+            this.pnlDashboardKitchen.TabIndex = 1;
+            // 
+            // btnFinishKitDash
+            // 
+            this.btnFinishKitDash.Location = new System.Drawing.Point(828, 294);
+            this.btnFinishKitDash.Name = "btnFinishKitDash";
+            this.btnFinishKitDash.Size = new System.Drawing.Size(153, 77);
+            this.btnFinishKitDash.TabIndex = 2;
+            this.btnFinishKitDash.Text = "Finished Orders";
+            this.btnFinishKitDash.UseVisualStyleBackColor = true;
+            // 
+            // btnRunningKitDash
+            // 
+            this.btnRunningKitDash.Location = new System.Drawing.Point(283, 294);
+            this.btnRunningKitDash.Name = "btnRunningKitDash";
+            this.btnRunningKitDash.Size = new System.Drawing.Size(151, 77);
+            this.btnRunningKitDash.TabIndex = 1;
+            this.btnRunningKitDash.Text = "Running Orders";
+            this.btnRunningKitDash.UseVisualStyleBackColor = true;
+            this.btnRunningKitDash.Click += new System.EventHandler(this.btnRunningKitDash_Click);
+            // 
+            // lblWelcomeKitDash
+            // 
+            this.lblWelcomeKitDash.AutoSize = true;
+            this.lblWelcomeKitDash.Location = new System.Drawing.Point(580, 82);
+            this.lblWelcomeKitDash.Name = "lblWelcomeKitDash";
+            this.lblWelcomeKitDash.Size = new System.Drawing.Size(71, 20);
+            this.lblWelcomeKitDash.TabIndex = 0;
+            this.lblWelcomeKitDash.Text = "Welcome";
             // 
             // pnlKitchenView
             // 
+            this.pnlKitchenView.Controls.Add(this.btnUndoKitView);
             this.pnlKitchenView.Controls.Add(this.btnServe);
             this.pnlKitchenView.Controls.Add(this.btnViewNote);
             this.pnlKitchenView.Controls.Add(this.label1);
@@ -164,7 +258,7 @@
             // 
             // btnServe
             // 
-            this.btnServe.Location = new System.Drawing.Point(183, 518);
+            this.btnServe.Location = new System.Drawing.Point(384, 521);
             this.btnServe.Name = "btnServe";
             this.btnServe.Size = new System.Drawing.Size(94, 29);
             this.btnServe.TabIndex = 5;
@@ -251,6 +345,7 @@
             // 
             // pnlBarView
             // 
+            this.pnlBarView.Controls.Add(this.btnUndoBarView);
             this.pnlBarView.Controls.Add(this.btnViewDrinkNote);
             this.pnlBarView.Controls.Add(this.btnDrinkServed);
             this.pnlBarView.Controls.Add(this.label2);
@@ -273,7 +368,7 @@
             // 
             // btnDrinkServed
             // 
-            this.btnDrinkServed.Location = new System.Drawing.Point(104, 512);
+            this.btnDrinkServed.Location = new System.Drawing.Point(360, 515);
             this.btnDrinkServed.Name = "btnDrinkServed";
             this.btnDrinkServed.Size = new System.Drawing.Size(94, 29);
             this.btnDrinkServed.TabIndex = 4;
@@ -341,122 +436,241 @@
             this.columnHeader9.Text = "Table";
             this.columnHeader9.Width = 80;
             // 
-            // pnlTableView
+            // pnlDashboardBar
             // 
-            this.pnlTableView.Controls.Add(this.btnTableTen);
-            this.pnlTableView.Controls.Add(this.btnTableNine);
-            this.pnlTableView.Controls.Add(this.btnTableEight);
-            this.pnlTableView.Controls.Add(this.btnTableSeven);
-            this.pnlTableView.Controls.Add(this.btnTableSix);
-            this.pnlTableView.Controls.Add(this.btnTableFive);
-            this.pnlTableView.Controls.Add(this.btnTableFour);
-            this.pnlTableView.Controls.Add(this.btnTableThree);
-            this.pnlTableView.Controls.Add(this.btnTableTwo);
-            this.pnlTableView.Controls.Add(this.btnTableOne);
-            this.pnlTableView.Location = new System.Drawing.Point(0, 28);
-            this.pnlTableView.Name = "pnlTableView";
-            this.pnlTableView.Size = new System.Drawing.Size(1216, 567);
-            this.pnlTableView.TabIndex = 4;
+            this.pnlDashboardBar.Controls.Add(this.lblWelcomeBarDash);
+            this.pnlDashboardBar.Controls.Add(this.btnFinishBarDash);
+            this.pnlDashboardBar.Controls.Add(this.btnRunnningBarDash);
+            this.pnlDashboardBar.Location = new System.Drawing.Point(0, 0);
+            this.pnlDashboardBar.Name = "pnlDashboardBar";
+            this.pnlDashboardBar.Size = new System.Drawing.Size(1216, 603);
+            this.pnlDashboardBar.TabIndex = 3;
             // 
-            // btnTableTen
+            // lblWelcomeBarDash
             // 
-            this.btnTableTen.Location = new System.Drawing.Point(646, 164);
-            this.btnTableTen.Name = "btnTableTen";
-            this.btnTableTen.Size = new System.Drawing.Size(94, 29);
-            this.btnTableTen.TabIndex = 9;
-            this.btnTableTen.Text = "Table 10";
-            this.btnTableTen.UseVisualStyleBackColor = true;
-            this.btnTableTen.Click += new System.EventHandler(this.btnTableTen_Click);
+            this.lblWelcomeBarDash.AutoSize = true;
+            this.lblWelcomeBarDash.Location = new System.Drawing.Point(580, 82);
+            this.lblWelcomeBarDash.Name = "lblWelcomeBarDash";
+            this.lblWelcomeBarDash.Size = new System.Drawing.Size(71, 20);
+            this.lblWelcomeBarDash.TabIndex = 0;
+            this.lblWelcomeBarDash.Text = "Welcome";
             // 
-            // btnTableNine
+            // btnFinishBarDash
             // 
-            this.btnTableNine.Location = new System.Drawing.Point(521, 164);
-            this.btnTableNine.Name = "btnTableNine";
-            this.btnTableNine.Size = new System.Drawing.Size(94, 29);
-            this.btnTableNine.TabIndex = 8;
-            this.btnTableNine.Text = "Table 9";
-            this.btnTableNine.UseVisualStyleBackColor = true;
-            this.btnTableNine.Click += new System.EventHandler(this.btnTableNine_Click);
+            this.btnFinishBarDash.Location = new System.Drawing.Point(828, 294);
+            this.btnFinishBarDash.Name = "btnFinishBarDash";
+            this.btnFinishBarDash.Size = new System.Drawing.Size(153, 77);
+            this.btnFinishBarDash.TabIndex = 2;
+            this.btnFinishBarDash.Text = "Finished Orders";
+            this.btnFinishBarDash.UseVisualStyleBackColor = true;
             // 
-            // btnTableEight
+            // btnRunnningBarDash
             // 
-            this.btnTableEight.Location = new System.Drawing.Point(402, 165);
-            this.btnTableEight.Name = "btnTableEight";
-            this.btnTableEight.Size = new System.Drawing.Size(94, 29);
-            this.btnTableEight.TabIndex = 7;
-            this.btnTableEight.Text = "Table 8";
-            this.btnTableEight.UseVisualStyleBackColor = true;
-            this.btnTableEight.Click += new System.EventHandler(this.btnTableEight_Click);
+            this.btnRunnningBarDash.Location = new System.Drawing.Point(283, 294);
+            this.btnRunnningBarDash.Name = "btnRunnningBarDash";
+            this.btnRunnningBarDash.Size = new System.Drawing.Size(151, 77);
+            this.btnRunnningBarDash.TabIndex = 1;
+            this.btnRunnningBarDash.Text = "Running Orders";
+            this.btnRunnningBarDash.UseVisualStyleBackColor = true;
+            this.btnRunnningBarDash.Click += new System.EventHandler(this.btnRunnningBarDash_Click);
             // 
-            // btnTableSeven
+            // fileSystemWatcher1
             // 
-            this.btnTableSeven.Location = new System.Drawing.Point(274, 165);
-            this.btnTableSeven.Name = "btnTableSeven";
-            this.btnTableSeven.Size = new System.Drawing.Size(94, 29);
-            this.btnTableSeven.TabIndex = 6;
-            this.btnTableSeven.Text = "Table 7";
-            this.btnTableSeven.UseVisualStyleBackColor = true;
-            this.btnTableSeven.Click += new System.EventHandler(this.btnTableSeven_Click);
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
             // 
-            // btnTableSix
+            // pnlKitchenViewFinished
             // 
-            this.btnTableSix.Location = new System.Drawing.Point(147, 165);
-            this.btnTableSix.Name = "btnTableSix";
-            this.btnTableSix.Size = new System.Drawing.Size(94, 29);
-            this.btnTableSix.TabIndex = 5;
-            this.btnTableSix.Text = "Table 6";
-            this.btnTableSix.UseVisualStyleBackColor = true;
-            this.btnTableSix.Click += new System.EventHandler(this.btnTableSix_Click);
+            this.pnlKitchenViewFinished.Controls.Add(this.btnUndoKitFin);
+            this.pnlKitchenViewFinished.Controls.Add(this.btnViewNoteFinDish);
+            this.pnlKitchenViewFinished.Controls.Add(this.label3);
+            this.pnlKitchenViewFinished.Controls.Add(this.lvFinishedDishes);
+            this.pnlKitchenViewFinished.Location = new System.Drawing.Point(0, 30);
+            this.pnlKitchenViewFinished.Name = "pnlKitchenViewFinished";
+            this.pnlKitchenViewFinished.Size = new System.Drawing.Size(1216, 578);
+            this.pnlKitchenViewFinished.TabIndex = 6;
             // 
-            // btnTableFive
+            // btnUndoKitFin
             // 
-            this.btnTableFive.Location = new System.Drawing.Point(646, 67);
-            this.btnTableFive.Name = "btnTableFive";
-            this.btnTableFive.Size = new System.Drawing.Size(94, 29);
-            this.btnTableFive.TabIndex = 4;
-            this.btnTableFive.Text = "Table 5";
-            this.btnTableFive.UseVisualStyleBackColor = true;
-            this.btnTableFive.Click += new System.EventHandler(this.btnTableFive_Click);
+            this.btnUndoKitFin.BackColor = System.Drawing.Color.Red;
+            this.btnUndoKitFin.Location = new System.Drawing.Point(484, 519);
+            this.btnUndoKitFin.Name = "btnUndoKitFin";
+            this.btnUndoKitFin.Size = new System.Drawing.Size(94, 29);
+            this.btnUndoKitFin.TabIndex = 5;
+            this.btnUndoKitFin.Text = "Undo";
+            this.btnUndoKitFin.UseVisualStyleBackColor = false;
+            this.btnUndoKitFin.Click += new System.EventHandler(this.btnUndoKitFin_Click);
             // 
-            // btnTableFour
+            // btnViewNoteFinDish
             // 
-            this.btnTableFour.Location = new System.Drawing.Point(521, 67);
-            this.btnTableFour.Name = "btnTableFour";
-            this.btnTableFour.Size = new System.Drawing.Size(94, 29);
-            this.btnTableFour.TabIndex = 3;
-            this.btnTableFour.Text = "Table 4";
-            this.btnTableFour.UseVisualStyleBackColor = true;
-            this.btnTableFour.Click += new System.EventHandler(this.btnTableFour_Click);
+            this.btnViewNoteFinDish.Location = new System.Drawing.Point(685, 518);
+            this.btnViewNoteFinDish.Name = "btnViewNoteFinDish";
+            this.btnViewNoteFinDish.Size = new System.Drawing.Size(135, 30);
+            this.btnViewNoteFinDish.TabIndex = 4;
+            this.btnViewNoteFinDish.Text = "view note";
+            this.btnViewNoteFinDish.UseVisualStyleBackColor = true;
+            this.btnViewNoteFinDish.Click += new System.EventHandler(this.btnViewNoteFinDish_Click);
             // 
-            // btnTableThree
+            // label3
             // 
-            this.btnTableThree.Location = new System.Drawing.Point(402, 67);
-            this.btnTableThree.Name = "btnTableThree";
-            this.btnTableThree.Size = new System.Drawing.Size(94, 29);
-            this.btnTableThree.TabIndex = 2;
-            this.btnTableThree.Text = "Table 3";
-            this.btnTableThree.UseVisualStyleBackColor = true;
-            this.btnTableThree.Click += new System.EventHandler(this.btnTableThree_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(536, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(94, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Kitchen View";
             // 
-            // btnTableTwo
+            // lvFinishedDishes
             // 
-            this.btnTableTwo.Location = new System.Drawing.Point(274, 67);
-            this.btnTableTwo.Name = "btnTableTwo";
-            this.btnTableTwo.Size = new System.Drawing.Size(94, 29);
-            this.btnTableTwo.TabIndex = 1;
-            this.btnTableTwo.Text = "Table 2";
-            this.btnTableTwo.UseVisualStyleBackColor = true;
-            this.btnTableTwo.Click += new System.EventHandler(this.btnTableTwo_Click);
+            this.lvFinishedDishes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader13,
+            this.columnHeader14});
+            this.lvFinishedDishes.FullRowSelect = true;
+            this.lvFinishedDishes.HideSelection = false;
+            this.lvFinishedDishes.Location = new System.Drawing.Point(43, 58);
+            this.lvFinishedDishes.Name = "lvFinishedDishes";
+            this.lvFinishedDishes.Size = new System.Drawing.Size(1137, 428);
+            this.lvFinishedDishes.TabIndex = 0;
+            this.lvFinishedDishes.UseCompatibleStateImageBehavior = false;
+            this.lvFinishedDishes.View = System.Windows.Forms.View.Details;
             // 
-            // btnTableOne
+            // columnHeader3
             // 
-            this.btnTableOne.Location = new System.Drawing.Point(147, 67);
-            this.btnTableOne.Name = "btnTableOne";
-            this.btnTableOne.Size = new System.Drawing.Size(94, 29);
-            this.btnTableOne.TabIndex = 0;
-            this.btnTableOne.Text = "Table 1";
-            this.btnTableOne.UseVisualStyleBackColor = true;
-            this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
+            this.columnHeader3.Text = "Amount";
+            this.columnHeader3.Width = 80;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Dishes";
+            this.columnHeader10.Width = 600;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Note";
+            this.columnHeader11.Width = 80;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Order Time";
+            this.columnHeader12.Width = 120;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Course";
+            this.columnHeader13.Width = 80;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Table";
+            this.columnHeader14.Width = 80;
+            // 
+            // pnlBarViewFinished
+            // 
+            this.pnlBarViewFinished.Controls.Add(this.btnViewNoteFinDrink);
+            this.pnlBarViewFinished.Controls.Add(this.btnUndoFinDrink);
+            this.pnlBarViewFinished.Controls.Add(this.label4);
+            this.pnlBarViewFinished.Controls.Add(this.lvFinishedDrinks);
+            this.pnlBarViewFinished.Location = new System.Drawing.Point(0, 31);
+            this.pnlBarViewFinished.Name = "pnlBarViewFinished";
+            this.pnlBarViewFinished.Size = new System.Drawing.Size(1216, 572);
+            this.pnlBarViewFinished.TabIndex = 6;
+            // 
+            // btnViewNoteFinDrink
+            // 
+            this.btnViewNoteFinDrink.Location = new System.Drawing.Point(743, 512);
+            this.btnViewNoteFinDrink.Name = "btnViewNoteFinDrink";
+            this.btnViewNoteFinDrink.Size = new System.Drawing.Size(94, 29);
+            this.btnViewNoteFinDrink.TabIndex = 5;
+            this.btnViewNoteFinDrink.Text = "View Note";
+            this.btnViewNoteFinDrink.UseVisualStyleBackColor = true;
+            this.btnViewNoteFinDrink.Click += new System.EventHandler(this.btnViewNoteFinDrink_Click);
+            // 
+            // btnUndoFinDrink
+            // 
+            this.btnUndoFinDrink.BackColor = System.Drawing.Color.Red;
+            this.btnUndoFinDrink.Location = new System.Drawing.Point(460, 512);
+            this.btnUndoFinDrink.Name = "btnUndoFinDrink";
+            this.btnUndoFinDrink.Size = new System.Drawing.Size(94, 29);
+            this.btnUndoFinDrink.TabIndex = 4;
+            this.btnUndoFinDrink.Text = "Undo";
+            this.btnUndoFinDrink.UseVisualStyleBackColor = false;
+            this.btnUndoFinDrink.Click += new System.EventHandler(this.btnUndoFinDrink_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(536, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 20);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Bar View";
+            // 
+            // lvFinishedDrinks
+            // 
+            this.lvFinishedDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader18,
+            this.columnHeader19});
+            this.lvFinishedDrinks.FullRowSelect = true;
+            this.lvFinishedDrinks.HideSelection = false;
+            this.lvFinishedDrinks.Location = new System.Drawing.Point(43, 58);
+            this.lvFinishedDrinks.Name = "lvFinishedDrinks";
+            this.lvFinishedDrinks.Size = new System.Drawing.Size(1137, 428);
+            this.lvFinishedDrinks.TabIndex = 0;
+            this.lvFinishedDrinks.UseCompatibleStateImageBehavior = false;
+            this.lvFinishedDrinks.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Amount";
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Drinks";
+            this.columnHeader16.Width = 750;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "Note";
+            this.columnHeader17.Width = 80;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Order Time";
+            this.columnHeader18.Width = 170;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Table";
+            this.columnHeader19.Width = 80;
+            // 
+            // btnUndoBarView
+            // 
+            this.btnUndoBarView.BackColor = System.Drawing.Color.Red;
+            this.btnUndoBarView.Location = new System.Drawing.Point(125, 514);
+            this.btnUndoBarView.Name = "btnUndoBarView";
+            this.btnUndoBarView.Size = new System.Drawing.Size(94, 29);
+            this.btnUndoBarView.TabIndex = 6;
+            this.btnUndoBarView.Text = "Undo";
+            this.btnUndoBarView.UseVisualStyleBackColor = false;
+            this.btnUndoBarView.Click += new System.EventHandler(this.btnUndoBarView_Click);
+            // 
+            // btnUndoKitView
+            // 
+            this.btnUndoKitView.BackColor = System.Drawing.Color.Red;
+            this.btnUndoKitView.Location = new System.Drawing.Point(125, 520);
+            this.btnUndoKitView.Name = "btnUndoKitView";
+            this.btnUndoKitView.Size = new System.Drawing.Size(94, 29);
+            this.btnUndoKitView.TabIndex = 6;
+            this.btnUndoKitView.Text = "Undo";
+            this.btnUndoKitView.UseVisualStyleBackColor = false;
+            this.btnUndoKitView.Click += new System.EventHandler(this.btnUndoKitView_Click);
             // 
             // RosMain
             // 
@@ -465,20 +679,30 @@
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.pnlKitchenView);
-            this.Controls.Add(this.pnlTableView);
+            this.Controls.Add(this.pnlBarViewFinished);
             this.Controls.Add(this.pnlBarView);
-            this.Controls.Add(this.pnlDashboard);
+            this.Controls.Add(this.pnlDashboardBar);
+            this.Controls.Add(this.pnlDashboardKitchen);
+            this.Controls.Add(this.pnlKitchenViewFinished);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";
             this.Load += new System.EventHandler(this.RosMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.pnlDashboardKitchen.ResumeLayout(false);
+            this.pnlDashboardKitchen.PerformLayout();
             this.pnlKitchenView.ResumeLayout(false);
             this.pnlKitchenView.PerformLayout();
             this.pnlBarView.ResumeLayout(false);
             this.pnlBarView.PerformLayout();
-            this.pnlTableView.ResumeLayout(false);
+            this.pnlDashboardBar.ResumeLayout(false);
+            this.pnlDashboardBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.pnlKitchenViewFinished.ResumeLayout(false);
+            this.pnlKitchenViewFinished.PerformLayout();
+            this.pnlBarViewFinished.ResumeLayout(false);
+            this.pnlBarViewFinished.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -494,7 +718,7 @@
         private System.Windows.Forms.ToolStripMenuItem barViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kitchenViewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tableViewToolStripMenuItem;
-        private System.Windows.Forms.Panel pnlDashboard;
+        private System.Windows.Forms.Panel pnlDashboardKitchen;
         private System.Windows.Forms.Panel pnlKitchenView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDishReady;
@@ -507,17 +731,6 @@
         private System.Windows.Forms.ListView lvOrderedDrinks;
         private System.Windows.Forms.ColumnHeader clTable;
         private System.Windows.Forms.ColumnHeader clDrinks;
-        private System.Windows.Forms.Panel pnlTableView;
-        private System.Windows.Forms.Button btnTableOne;
-        private System.Windows.Forms.Button btnTableTwo;
-        private System.Windows.Forms.Button btnTableTen;
-        private System.Windows.Forms.Button btnTableNine;
-        private System.Windows.Forms.Button btnTableEight;
-        private System.Windows.Forms.Button btnTableSeven;
-        private System.Windows.Forms.Button btnTableSix;
-        private System.Windows.Forms.Button btnTableFive;
-        private System.Windows.Forms.Button btnTableFour;
-        private System.Windows.Forms.Button btnTableThree;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.ColumnHeader columnHeader7;
@@ -529,5 +742,40 @@
         private System.Windows.Forms.ColumnHeader clAmount;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ToolStripMenuItem runningOrdersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem finishedOrdersToolStripMenuItem;
+        private System.Windows.Forms.Button btnFinishKitDash;
+        private System.Windows.Forms.Button btnRunningKitDash;
+        private System.Windows.Forms.Label lblWelcomeKitDash;
+        private System.Windows.Forms.ToolStripMenuItem runningOrdersToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem finishedOrdersToolStripMenuItem1;
+        private System.Windows.Forms.Panel pnlDashboardBar;
+        private System.Windows.Forms.Button btnFinishBarDash;
+        private System.Windows.Forms.Button btnRunnningBarDash;
+        private System.Windows.Forms.Label lblWelcomeBarDash;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Panel pnlBarViewFinished;
+        private System.Windows.Forms.Button btnViewNoteFinDrink;
+        private System.Windows.Forms.Button btnUndoFinDrink;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView lvFinishedDrinks;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.Panel pnlKitchenViewFinished;
+        private System.Windows.Forms.Button btnUndoKitFin;
+        private System.Windows.Forms.Button btnViewNoteFinDish;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView lvFinishedDishes;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.Button btnUndoBarView;
+        private System.Windows.Forms.Button btnUndoKitView;
     }
 }
