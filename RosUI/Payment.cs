@@ -205,9 +205,23 @@ namespace RosUI
         }
 
         // remove all items from a table that the payment is completed
-        public void SetItemsPaid(List<BillItem> billItems)
+        public void SetItemsPaid(List<BillItem> orderedItems)
         {
-            billLogic.SetItemsPaid(billItems);
+            foreach (BillItem item in orderedItems)
+            {
+                SetDishPaid(item);
+                SetDrinkPaid(item);
+            }
+        }
+
+        public void SetDishPaid(BillItem billItem)
+        {
+            billLogic.SetDishPaid(billItem);
+        }
+
+        public void SetDrinkPaid(BillItem billItem)
+        {
+            billLogic.SetDrinkPaid(billItem);
         }
     }
 }
