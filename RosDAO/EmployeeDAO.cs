@@ -110,7 +110,7 @@ namespace RosDAL
             conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Employee VALUES(@EmplID, @Name, @Username, @Salt, @Digest);", conn);
+                SqlCommand command = new SqlCommand("INSERT INTO Employee VALUES(@Name, @Username, @Salt, @Digest);", conn);
 
                 command.Parameters.AddWithValue("@EmplID", employee.EmplID);
                 command.Parameters.AddWithValue("@Name", employee.Name);

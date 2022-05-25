@@ -32,18 +32,29 @@ namespace RosUI
             Contained = new List<Dish>();
             this.employee = employee;
 
+            if (employee.Roles == Roles.Manager)
+            {
+                lblWelcomeBarDash.Text += $" {employee.Name}!";
+                lblWelcomeKitDash.Text += $" {employee.Name}!";
+                ShowPanel("KitchenDashboard");
+            }
 
             if (employee.Roles == Roles.Chef)
             {
                 barViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
-                ShowPanel("KitchenView");
+                btnUndoKitFin.Enabled = false;
+                lblWelcomeKitDash.Text += $" {employee.Name}!";
+                ShowPanel("KitchenDashboard");
+                
             }
             else if (employee.Roles == Roles.Bartender)
             {
                 kitchenViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
-                ShowPanel("BarView");
+                btnUndoKitFin.Enabled = false;
+                lblWelcomeBarDash.Text += $" {employee.Name}!";
+                ShowPanel("BarDashboard");
             }
         }
 
@@ -64,10 +75,10 @@ namespace RosUI
 
                     break;
 
-                case "Dashboard":
+                case "KitchenDashboard":
 
                     HideAllPanels();
-                    pnlDashboard.Show();
+                    pnlDashboardKitchen.Show();
 
                     break;
 
@@ -80,10 +91,25 @@ namespace RosUI
 
                     break;
 
-                case "TableView":
+                case "BarDashboard":
 
                     HideAllPanels();
-                    pnlTableView.Show();
+                    pnlDashboardBar.Show();
+
+                    break;
+                case "FinishedDrinkView":
+
+                    HideAllPanels();
+                    pnlBarViewFinished.Show();
+                    UpdateFinishedDrinks();
+
+                    break;
+
+                case "FinishedDishView":
+
+                    HideAllPanels();
+                    pnlKitchenViewFinished.Show();
+                    UpdateFinishedDishes();
 
                     break;
 
@@ -120,24 +146,35 @@ namespace RosUI
         private void HideAllPanels()
         {
             pnlKitchenView.Hide();
-            pnlDashboard.Hide();
+            pnlDashboardKitchen.Hide();
+            pnlDashboardBar.Hide();
             pnlBarView.Hide();
-            pnlTableView.Hide();
+            pnlKitchenViewFinished.Hide();
+            pnlBarViewFinished.Hide();
+
         }
 
         private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowPanel("KitchenView");
+            ShowPanel("KitchenDashboard");
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowPanel("Dashboard");
+            if (employee.Roles == Roles.Bartender)
+            {
+                ShowPanel("BarDashboard");
+
+            }
+            else
+            {
+                ShowPanel("KitchenDashboard");
+            }
         }
 
         private void barViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowPanel("BarView");
+            ShowPanel("BarDashboard");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -159,85 +196,6 @@ namespace RosUI
             new TableOverview(employee, this).Show();
         }
 
-        private void btnTableOne_Click(object sender, EventArgs e)
-        {
-            table = new Table(1);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableTwo_Click(object sender, EventArgs e)
-        {
-            table = new Table(2);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableThree_Click(object sender, EventArgs e)
-        {
-            table = new Table(3);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableFour_Click(object sender, EventArgs e)
-        {
-            table = new Table(4);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableFive_Click(object sender, EventArgs e)
-        {
-            table = new Table(5);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableSix_Click(object sender, EventArgs e)
-        {
-            table = new Table(6);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableSeven_Click(object sender, EventArgs e)
-        {
-            table = new Table(7);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableEight_Click(object sender, EventArgs e)
-        {
-            table = new Table(8);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableNine_Click(object sender, EventArgs e)
-        {
-            table = new Table(9);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
-
-        private void btnTableTen_Click(object sender, EventArgs e)
-        {
-            table = new Table(10);
-            FormOrder orderForm = new FormOrder(table, employee, this);
-
-            orderForm.Show();
-        }
         public void UpdateTableToOrdered(int number)
         {
             foreach (TableOverview to in tableOverview)
@@ -255,6 +213,7 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
                 li.SubItems.Add(drink.Name);
+
                 if (drink.DrinkNote == "null")
                 {
                     li.SubItems.Add("No");
@@ -264,12 +223,8 @@ namespace RosUI
                     li.SubItems.Add("Yes");
                 }
 
-
                 li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
                 li.SubItems.Add(drink.TableNumber.ToString());
-
-
-
 
                 li.Tag = drink;
 
@@ -277,7 +232,42 @@ namespace RosUI
                 {
                     li.BackColor = Color.Green;
                 }
+
                 lvOrderedDrinks.Items.Add(li);
+            }
+        }
+
+        public void UpdateFinishedDrinks()
+        {
+            List<OrderedDrink> finishedDrinks = drinkLogic.GetAllFinishedDrinks();
+
+            lvFinishedDrinks.Items.Clear();
+
+            foreach (OrderedDrink drink in finishedDrinks)
+            {
+                ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                li.SubItems.Add(drink.Name);
+
+                if (drink.DrinkNote == "null")
+                {
+                    li.SubItems.Add("No");
+                }
+                else
+                {
+                    li.SubItems.Add("Yes");
+                }
+
+                li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
+                li.SubItems.Add(drink.TableNumber.ToString());
+
+                li.Tag = drink;
+
+                if (drink.DrinkStatus == DrinkStatus.PickUp)
+                {
+                    li.BackColor = Color.Green;
+                }
+
+                lvFinishedDrinks.Items.Add(li);
             }
         }
 
@@ -307,18 +297,55 @@ namespace RosUI
                 li.SubItems.Add(dish.Course);
                 li.SubItems.Add(dish.TableNumber.ToString());
 
-
-
-
                 li.Tag = dish;
+
                 if (dish.Status == DishStatus.PickUp)
                 {
                     li.BackColor = Color.Green;
                 }
+
                 lvOrderedDishes.Items.Add(li);
 
             }
 
+        }
+
+        public void UpdateFinishedDishes()
+        {
+            List<OrderedDish> finishedDishes = dishLogic.GetAllFinishedDish();
+
+            lvOrderedDishes.Items.Clear();
+
+
+            foreach (OrderedDish dish in finishedDishes)
+            {
+
+                ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                li.SubItems.Add(dish.Name);
+
+                if (dish.DishNote == "null")
+                {
+                    li.SubItems.Add("No");
+                }
+                else
+                {
+                    li.SubItems.Add("Yes");
+                }
+
+                li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+                li.SubItems.Add(dish.Course);
+                li.SubItems.Add(dish.TableNumber.ToString());
+
+                li.Tag = dish;
+
+                if (dish.Status == DishStatus.PickUp)
+                {
+                    li.BackColor = Color.Green;
+                }
+
+                lvOrderedDishes.Items.Add(li);
+
+            }
         }
 
         private void btnDrinkReady_Click(object sender, EventArgs e)
@@ -482,5 +509,160 @@ namespace RosUI
             writer.Close();
         }
 
+        private void runningOrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel("KitchenView");
+        }
+
+        private void btnRunningKitDash_Click(object sender, EventArgs e)
+        {
+            ShowPanel("KitchenView");
+        }
+
+        private void btnRunnningBarDash_Click(object sender, EventArgs e)
+        {
+            ShowPanel("BarView");
+        }
+
+        private void runningOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowPanel("BarView");
+        }
+
+        private void finishedOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDrinkView");
+        }
+
+        private void finishedOrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDishView");
+        }
+
+        private void btnViewNoteFinDrink_Click(object sender, EventArgs e)
+        {
+            if (lvFinishedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
+            OrderedDrink d = (OrderedDrink)lvFinishedDrinks.SelectedItems[0].Tag;
+
+            if (d.DrinkNote == "null")
+            {
+                MessageBox.Show("No note");
+            }
+            else
+            {
+                MessageBox.Show(d.DrinkNote);
+            }
+        }
+
+        private void btnViewNoteFinDish_Click(object sender, EventArgs e)
+        {
+            if (lvFinishedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
+            OrderedDish dish = (OrderedDish)lvFinishedDishes.SelectedItems[0].Tag;
+
+            if (dish.DishNote == "null")
+            {
+                MessageBox.Show("No note");
+            }
+            else
+            {
+                MessageBox.Show(dish.DishNote);
+            }
+        }
+
+        private void btnUndoKitFin_Click(object sender, EventArgs e)
+        {
+            if (lvFinishedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
+            for (int i = 0; i < lvFinishedDishes.SelectedItems.Count; i++)
+            {
+                OrderedDish finishedDish = (OrderedDish)lvFinishedDishes.SelectedItems[i].Tag;
+
+                dishLogic.UpdateDishToStart(finishedDish);
+            }
+
+            UpdateFinishedDishes();
+        }
+
+        private void btnUndoFinDrink_Click(object sender, EventArgs e)
+        {
+            if (lvFinishedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
+            for (int i = 0; i < lvFinishedDrinks.SelectedItems.Count; i++)
+            {
+                OrderedDrink finishedDrink = (OrderedDrink)lvFinishedDrinks.SelectedItems[i].Tag;
+
+                drinkLogic.UpdateDrinkToStart(finishedDrink);
+            }
+
+            UpdateFinishedDrinks();
+        }
+
+        private void btnUndoBarView_Click(object sender, EventArgs e)
+        {
+            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
+            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+            {
+                OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+
+                if (orderedDrink.DrinkStatus == DrinkStatus.ToPrepare)
+                {
+                    MessageBox.Show("You can not undo this item {0}", orderedDrink.Name);
+                    UpdateDrinks();
+                    return;
+                }
+
+                drinkLogic.BringStatusBack(orderedDrink);
+            }
+
+            UpdateDrinks();
+        }
+
+        private void btnUndoKitView_Click(object sender, EventArgs e)
+        {
+            if (lvOrderedDishes.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("No item selected!");
+                return;
+            }
+
+            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+            {
+                OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+
+                if (orderedDish.Status == DishStatus.ToPrepare)
+                {
+                    MessageBox.Show("You can not undo this item {0}", orderedDish.Name);
+                    UpdateDishes();
+                    return;
+                }
+
+                dishLogic.BringStatusBack(orderedDish);
+            }
+
+            UpdateDishes();
+        }
     }
 }
