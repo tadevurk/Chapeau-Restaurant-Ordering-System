@@ -49,5 +49,20 @@ namespace RosLogic
         {
             orderedDrinkdb.RemoveDrink(orderedDrink);
         }
+
+        public List<OrderedDrink> GetAllFinishedDrinks()
+        {
+            return orderedDrinkdb.GetAllFinishedDrinks();
+        }
+
+        public void UpdateDrinkToStart(OrderedDrink finishedDrink)
+        {
+            orderedDrinkdb.UpdateDrinkToStart(finishedDrink);
+        }
+
+        public void BringStatusBack(OrderedDrink orderedDrink)
+        {
+            orderedDrinkdb.BringStatusBack(orderedDrink);
+        }
     }
 }
