@@ -16,12 +16,9 @@ namespace RosUI
     public partial class RosMain : Form
     {
         Employee employee = new Employee();
-        Table table = new Table();
-        TableLogic tableLogic = new TableLogic();
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
-
         public List<Dish> Contained { get; set; }
         public RosMain(Employee employee)
         {
@@ -119,10 +116,9 @@ namespace RosUI
 
         public void UpdateTables()
         {
-
             foreach (ListViewItem item in lvOrderedDishes.Items)
             {
-                OrderedDish d = item.Tag as OrderedDish;
+                OrderedDish d = (OrderedDish)item.Tag;
 
                 switch (d.Status)
                 {
@@ -138,8 +134,6 @@ namespace RosUI
                 }
 
             }
-
-
 
         }
 
@@ -205,183 +199,224 @@ namespace RosUI
         }
         public void UpdateDrinks()
         {
-            List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
-
-            lvOrderedDrinks.Items.Clear();
-
-            foreach (OrderedDrink drink in orderedDrinks)
+            try
             {
-                ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
-                li.SubItems.Add(drink.Name);
+                List<OrderedDrink> orderedDrinks = drinkLogic.GetAllOrderedDrinks();
 
-                if (drink.DrinkNote == "null")
+                lvOrderedDrinks.Items.Clear();
+
+                foreach (OrderedDrink drink in orderedDrinks)
                 {
-                    li.SubItems.Add("No");
+                    ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    li.SubItems.Add(drink.Name);
+
+                    if (drink.DrinkNote == "null")
+                    {
+                        li.SubItems.Add("No");
+                    }
+                    else
+                    {
+                        li.SubItems.Add("Yes");
+                    }
+
+                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
+                    li.SubItems.Add(drink.TableNumber.ToString());
+
+                    li.Tag = drink;
+
+                    if (drink.DrinkStatus == DrinkStatus.PickUp)
+                    {
+                        li.BackColor = Color.Green;
+                    }
+
+                    lvOrderedDrinks.Items.Add(li);
                 }
-                else
-                {
-                    li.SubItems.Add("Yes");
-                }
-
-                li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
-                li.SubItems.Add(drink.TableNumber.ToString());
-
-                li.Tag = drink;
-
-                if (drink.DrinkStatus == DrinkStatus.PickUp)
-                {
-                    li.BackColor = Color.Green;
-                }
-
-                lvOrderedDrinks.Items.Add(li);
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
         }
 
         public void UpdateFinishedDrinks()
         {
-            List<OrderedDrink> finishedDrinks = drinkLogic.GetAllFinishedDrinks();
-
-            lvFinishedDrinks.Items.Clear();
-
-            foreach (OrderedDrink drink in finishedDrinks)
+            try
             {
-                ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
-                li.SubItems.Add(drink.Name);
+                List<OrderedDrink> finishedDrinks = drinkLogic.GetAllFinishedDrinks();
 
-                if (drink.DrinkNote == "null")
+                lvFinishedDrinks.Items.Clear();
+
+                foreach (OrderedDrink drink in finishedDrinks)
                 {
-                    li.SubItems.Add("No");
+                    ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    li.SubItems.Add(drink.Name);
+
+                    if (drink.DrinkNote == "null")
+                    {
+                        li.SubItems.Add("No");
+                    }
+                    else
+                    {
+                        li.SubItems.Add("Yes");
+                    }
+
+                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
+                    li.SubItems.Add(drink.TableNumber.ToString());
+
+                    li.Tag = drink;
+
+                    if (drink.DrinkStatus == DrinkStatus.PickUp)
+                    {
+                        li.BackColor = Color.Green;
+                    }
+
+                    lvFinishedDrinks.Items.Add(li);
                 }
-                else
-                {
-                    li.SubItems.Add("Yes");
-                }
-
-                li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
-                li.SubItems.Add(drink.TableNumber.ToString());
-
-                li.Tag = drink;
-
-                if (drink.DrinkStatus == DrinkStatus.PickUp)
-                {
-                    li.BackColor = Color.Green;
-                }
-
-                lvFinishedDrinks.Items.Add(li);
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
         }
 
 
         public void UpdateDishes()
         {
-
-            List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
-
-            lvOrderedDishes.Items.Clear();
-
-
-            foreach (OrderedDish dish in orderedDishes)
+            try
             {
 
-                ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
-                li.SubItems.Add(dish.Name);
-                if (dish.DishNote == "null")
+                List<OrderedDish> orderedDishes = dishLogic.GetAllOrderedDish();
+
+                lvOrderedDishes.Items.Clear();
+
+
+                foreach (OrderedDish dish in orderedDishes)
                 {
-                    li.SubItems.Add("No");
+
+                    ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    li.SubItems.Add(dish.Name);
+                    if (dish.DishNote == "null")
+                    {
+                        li.SubItems.Add("No");
+                    }
+                    else
+                    {
+                        li.SubItems.Add("Yes");
+                    }
+                    li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+                    li.SubItems.Add(dish.Course);
+                    li.SubItems.Add(dish.TableNumber.ToString());
+
+                    li.Tag = dish;
+
+                    if (dish.Status == DishStatus.PickUp)
+                    {
+                        li.BackColor = Color.Green;
+                    }
+
+                    lvOrderedDishes.Items.Add(li);
+
                 }
-                else
-                {
-                    li.SubItems.Add("Yes");
-                }
-                li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
-                li.SubItems.Add(dish.Course);
-                li.SubItems.Add(dish.TableNumber.ToString());
-
-                li.Tag = dish;
-
-                if (dish.Status == DishStatus.PickUp)
-                {
-                    li.BackColor = Color.Green;
-                }
-
-                lvOrderedDishes.Items.Add(li);
-
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
 
         }
 
         public void UpdateFinishedDishes()
         {
-            List<OrderedDish> finishedDishes = dishLogic.GetAllFinishedDish();
-
-            lvOrderedDishes.Items.Clear();
-
-
-            foreach (OrderedDish dish in finishedDishes)
+            try
             {
+                List<OrderedDish> finishedDishes = dishLogic.GetAllFinishedDish();
 
-                ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
-                li.SubItems.Add(dish.Name);
+                lvOrderedDishes.Items.Clear();
 
-                if (dish.DishNote == "null")
+
+                foreach (OrderedDish dish in finishedDishes)
                 {
-                    li.SubItems.Add("No");
+
+                    ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    li.SubItems.Add(dish.Name);
+
+                    if (dish.DishNote == "null")
+                    {
+                        li.SubItems.Add("No");
+                    }
+                    else
+                    {
+                        li.SubItems.Add("Yes");
+                    }
+
+                    li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+                    li.SubItems.Add(dish.Course);
+                    li.SubItems.Add(dish.TableNumber.ToString());
+
+                    li.Tag = dish;
+
+                    if (dish.Status == DishStatus.PickUp)
+                    {
+                        li.BackColor = Color.Green;
+                    }
+
+                    lvOrderedDishes.Items.Add(li);
                 }
-                else
-                {
-                    li.SubItems.Add("Yes");
-                }
-
-                li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
-                li.SubItems.Add(dish.Course);
-                li.SubItems.Add(dish.TableNumber.ToString());
-
-                li.Tag = dish;
-
-                if (dish.Status == DishStatus.PickUp)
-                {
-                    li.BackColor = Color.Green;
-                }
-
-                lvOrderedDishes.Items.Add(li);
-
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
             }
         }
 
         private void btnDrinkReady_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
+                if (lvOrderedDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
+
+                for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+                {
+                    OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                    UpdateTableToReadyDrink(drink);
+
+                    drinkLogic.UpdateDrinkStatusPickUp(drink);
+                }
+
+                UpdateDrinks();
             }
-            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+            catch(Exception exp)
             {
-                OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                UpdateTableToReadyDrink(drink);
+                MessageBox.Show($"Error: {exp.Message}");
 
-                drinkLogic.UpdateDrinkStatusPickUp(drink);
             }
-
-            UpdateDrinks();
         }
 
         private void btnDishReady_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDishes.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvOrderedDishes.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+                for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+                {
+                    OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+                    UpdateTableToReadyDish(dish);
+                    dishLogic.UpdateDishStatusPickUp(dish);
+                }
+
+                UpdateDishes();
+            }
+            catch(Exception exp)
             {
-                OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-                UpdateTableToReadyDish(dish);
-                dishLogic.UpdateDishStatusPickUp(dish);
+                MessageBox.Show($"Error: {exp.Message}");
             }
-
-            UpdateDishes();
         }
 
         private void UpdateTableToReadyDish(OrderedDish dish)
@@ -397,62 +432,80 @@ namespace RosUI
 
         private void btnViewNote_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDishes.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvOrderedDishes.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
+                OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
 
-            if (dish.DishNote == "null")
-            {
-                MessageBox.Show("No note");
+                if (dish.DishNote == "null")
+                {
+                    MessageBox.Show("No note");
+                }
+                else
+                {
+                    MessageBox.Show(dish.DishNote);
+                }
             }
-            else
+            catch(Exception exp)
             {
-                MessageBox.Show(dish.DishNote);
+                MessageBox.Show($"Error: {exp.Message}");
             }
         }
 
         private void btnServe_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDishes.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvOrderedDishes.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+                for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+                {
+                    OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+
+                    dishLogic.UpdateDishStatusServe(orderedDish);
+
+                    UpdateTableToServedDish(orderedDish);//update all table overview
+
+                }
+
+                UpdateDishes();
+            }
+            catch(Exception exp)
             {
-                OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-
-                dishLogic.UpdateDishStatusServe(orderedDish);
-
-                UpdateTableToServedDish(orderedDish);//update all table overview
-
+                MessageBox.Show($"Error: {exp.Message}");
             }
-
-            UpdateDishes();
         }
 
         private void btnViewDrinkNote_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvOrderedDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
+                OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
 
-            if (d.DrinkNote == "null")
-            {
-                MessageBox.Show("No note");
+                if (d.DrinkNote == "null")
+                {
+                    MessageBox.Show("No note");
+                }
+                else
+                {
+                    MessageBox.Show(d.DrinkNote);
+                }
             }
-            else
+            catch (Exception exp)
             {
-                MessageBox.Show(d.DrinkNote);
+                MessageBox.Show($"Error: {exp.Message}");
             }
 
 
@@ -464,23 +517,29 @@ namespace RosUI
         }
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvOrderedDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+                for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+                {
+                    OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
+                    drinkLogic.UpdateDrinkStatusServe(orderedDrink);
+
+                    UpdateTableToServedDrink(orderedDrink);//update observer tableOverview form
+
+
+                }
+
+                UpdateDrinks();
+            }
+            catch(Exception exp)
             {
-                OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                drinkLogic.UpdateDrinkStatusServe(orderedDrink);
-
-                UpdateTableToServedDrink(orderedDrink);//update observer tableOverview form
-
-
+                MessageBox.Show($"Error: {exp.Message}");
             }
-
-            UpdateDrinks();
         }
 
         private void UpdateTableToServedDrink(OrderedDrink orderedDrink)
@@ -541,128 +600,172 @@ namespace RosUI
 
         private void btnViewNoteFinDrink_Click(object sender, EventArgs e)
         {
-            if (lvFinishedDrinks.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvFinishedDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            OrderedDrink d = (OrderedDrink)lvFinishedDrinks.SelectedItems[0].Tag;
+                OrderedDrink d = (OrderedDrink)lvFinishedDrinks.SelectedItems[0].Tag;
 
-            if (d.DrinkNote == "null")
-            {
-                MessageBox.Show("No note");
+                if (d.DrinkNote == "null")
+                {
+                    MessageBox.Show("No note");
+                }
+                else
+                {
+                    MessageBox.Show(d.DrinkNote);
+                }
             }
-            else
+            catch(Exception exp)
             {
-                MessageBox.Show(d.DrinkNote);
+                MessageBox.Show($"Error: {exp.Message}");
             }
         }
 
         private void btnViewNoteFinDish_Click(object sender, EventArgs e)
         {
-            if (lvFinishedDishes.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvFinishedDishes.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            OrderedDish dish = (OrderedDish)lvFinishedDishes.SelectedItems[0].Tag;
+                OrderedDish dish = (OrderedDish)lvFinishedDishes.SelectedItems[0].Tag;
 
-            if (dish.DishNote == "null")
-            {
-                MessageBox.Show("No note");
+                if (dish.DishNote == "null")
+                {
+                    MessageBox.Show("No note");
+                }
+                else
+                {
+                    MessageBox.Show(dish.DishNote);
+                }
             }
-            else
+            catch(Exception exp)
             {
-                MessageBox.Show(dish.DishNote);
+                MessageBox.Show($"Error: {exp.Message}");
             }
         }
 
         private void btnUndoKitFin_Click(object sender, EventArgs e)
         {
-            if (lvFinishedDishes.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvFinishedDishes.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            for (int i = 0; i < lvFinishedDishes.SelectedItems.Count; i++)
+                for (int i = 0; i < lvFinishedDishes.SelectedItems.Count; i++)
+                {
+                    OrderedDish finishedDish = (OrderedDish)lvFinishedDishes.SelectedItems[i].Tag;
+
+                    UpdateTableToOrdered(finishedDish.TableNumber);
+
+                    dishLogic.UpdateDishToStart(finishedDish);
+                }
+
+                UpdateFinishedDishes();
+            }
+            catch(Exception exp)
             {
-                OrderedDish finishedDish = (OrderedDish)lvFinishedDishes.SelectedItems[i].Tag;
-
-                dishLogic.UpdateDishToStart(finishedDish);
+                MessageBox.Show($"Error: {exp.Message}");
             }
-
-            UpdateFinishedDishes();
         }
 
         private void btnUndoFinDrink_Click(object sender, EventArgs e)
         {
-            if (lvFinishedDrinks.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
+                if (lvFinishedDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("No item selected!");
+                }
 
-            for (int i = 0; i < lvFinishedDrinks.SelectedItems.Count; i++)
+                for (int i = 0; i < lvFinishedDrinks.SelectedItems.Count; i++)
+                {
+                    OrderedDrink finishedDrink = (OrderedDrink)lvFinishedDrinks.SelectedItems[i].Tag;
+
+                    UpdateTableToOrdered(finishedDrink.TableNumber);
+
+                    drinkLogic.UpdateDrinkToStart(finishedDrink);
+                }
+
+                UpdateFinishedDrinks();
+            }
+            catch(Exception exp)
             {
-                OrderedDrink finishedDrink = (OrderedDrink)lvFinishedDrinks.SelectedItems[i].Tag;
-
-                drinkLogic.UpdateDrinkToStart(finishedDrink);
+                MessageBox.Show($"Error: {exp.Message}");
             }
-
-            UpdateFinishedDrinks();
         }
 
         private void btnUndoBarView_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDrinks.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
-
-            for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
-            {
-                OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-
-                if (orderedDrink.DrinkStatus == DrinkStatus.ToPrepare)
+                if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
-                    MessageBox.Show("You can not undo this item {0}", orderedDrink.Name);
-                    UpdateDrinks();
-                    return;
+                    throw new Exception("No selected item!");
                 }
 
-                drinkLogic.BringStatusBack(orderedDrink);
-            }
+                for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
+                {
+                    OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
 
-            UpdateDrinks();
+                    if (orderedDrink.DrinkStatus == DrinkStatus.ToPrepare)
+                    {
+                        UpdateDrinks();
+
+                        throw new Exception($"You can not undo this item {orderedDrink.Name}");
+                        
+                    }
+
+                    UpdateTableToOrdered(orderedDrink.TableNumber);
+
+                    drinkLogic.BringStatusBack(orderedDrink);
+                }
+
+                UpdateDrinks();
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show($"Error: {exp.Message}");
+            }
         }
 
         private void btnUndoKitView_Click(object sender, EventArgs e)
         {
-            if (lvOrderedDishes.SelectedItems.Count == 0)
+            try
             {
-                MessageBox.Show("No item selected!");
-                return;
-            }
-
-            for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
-            {
-                OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-
-                if (orderedDish.Status == DishStatus.ToPrepare)
+                if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
-                    MessageBox.Show("You can not undo this item {0}", orderedDish.Name);
-                    UpdateDishes();
-                    return;
+                    throw new Exception("No selected items!");
                 }
 
-                dishLogic.BringStatusBack(orderedDish);
+                for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
+                {
+                    OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
+
+                    if (orderedDish.Status == DishStatus.ToPrepare)
+                    {
+                        UpdateDishes();
+                        throw new Exception($"You can not undo this item {orderedDish.Name}");
+                    }
+
+                    dishLogic.BringStatusBack(orderedDish);
+                    UpdateTableToOrdered(orderedDish.TableNumber);
+                }
+
+                UpdateDishes();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"error: {exp.Message}");
             }
 
-            UpdateDishes();
         }
     }
 }

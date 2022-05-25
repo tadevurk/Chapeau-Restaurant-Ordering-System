@@ -23,6 +23,7 @@ namespace RosUI
             this.employee = employee;
             this.rosMain = rosMain;
             rosMain.AddWaiterView(this);
+            rosMain.UpdateTables();
         }
 
         private void btnTableOne_Click(object sender, EventArgs e)
