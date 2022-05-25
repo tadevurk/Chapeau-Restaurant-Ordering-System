@@ -14,14 +14,14 @@ namespace RosLogic
             billdb = new BillDAO();
         }
 
-        public List<OrderedDish> GetOrderedDishes()
+        public List<BillItem> GetOrderedDishes(Table table)
         {
-            return billdb.GetOrderedDishes();
+            return billdb.GetOrderedDishes(table);
         }
 
-        public List<OrderedDrink> GetOrderedDrinks()
+        public List<BillItem> GetOrderedDrinks(Table table)
         {
-            return billdb.GetOrderedDrinks();
+            return billdb.GetOrderedDrinks(table);
         }
 
         public void CreateBill(Bill b)
@@ -39,9 +39,9 @@ namespace RosLogic
             billdb.GetBill(b);
         }
 
-        public void SetItemsPaid(List<Dish> dishes)
+        public void SetItemsPaid(List<BillItem> billItems)
         {
-            billdb.SetItemsPaid(dishes);
+            billdb.SetItemsPaid(billItems);
         }
     }
 }
