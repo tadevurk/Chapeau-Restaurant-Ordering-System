@@ -15,18 +15,18 @@ namespace RosUI
 {
     public partial class RosMain : Form
     {
-        Employee employee = new Employee();
+        Employee employee;
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
-        public List<Dish> Contained { get; set; }
         public RosMain(Employee employee)
         {
             InitializeComponent();
+
             UpdateDishes();
             UpdateDrinks();
             UpdateTables();
-            Contained = new List<Dish>();
+
             this.employee = employee;
 
             if (employee.Roles == Roles.Manager)
@@ -331,7 +331,7 @@ namespace RosUI
             {
                 List<OrderedDish> finishedDishes = dishLogic.GetAllFinishedDish();
 
-                lvOrderedDishes.Items.Clear();
+                lvFinishedDishes.Items.Clear();
 
 
                 foreach (OrderedDish dish in finishedDishes)
@@ -360,7 +360,7 @@ namespace RosUI
                         li.BackColor = Color.Green;
                     }
 
-                    lvOrderedDishes.Items.Add(li);
+                    lvFinishedDishes.Items.Add(li);
                 }
             }
             catch (Exception exp)
