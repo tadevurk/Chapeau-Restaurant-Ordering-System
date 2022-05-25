@@ -82,27 +82,36 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<Dish> GetAllMains() //Getting all Mains
+        public List<Dish> GetLunchMains() //Getting all Mains
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main';";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
 
-        public List<Dish> GetAllDesserts() //Getting all Desserts
+        public List<Dish> GetLunchDesserts() //Getting all Desserts
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Dessert';";
+                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
+        public List<Dish> GetDinnerMains()
+        {
+            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish " +
+                "join Item on DishID = ItemID " +
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+        }
 
         public List<Dish> GetAllEntremets() //Getting all Entremets
         {

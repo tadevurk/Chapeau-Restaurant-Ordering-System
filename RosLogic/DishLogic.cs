@@ -21,14 +21,18 @@ namespace RosLogic
             return dishDAO.WriteContainedDishes(t, o);
         }
 
-        public List<Dish> GetAllMains()
+        public List<Dish> GetLunchMains()
         {
-            return dishDAO.GetAllMains();
+            return dishDAO.GetLunchMains();
         }
 
-        public List<Dish> GetAllDesserts()
+        public List<Dish> GetLunchDesserts()
         {
-            return dishDAO.GetAllDesserts();
+            return dishDAO.GetLunchDesserts();
+        }
+        public List<Dish> GetDinnerMains()
+        {
+            return dishDAO.GetDinnerMains();
         }
 
         public List<Dish> GetAllEntremets()
