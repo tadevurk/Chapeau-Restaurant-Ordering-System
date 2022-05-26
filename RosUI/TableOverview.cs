@@ -18,7 +18,10 @@ namespace RosUI
         private RosMain rosMain;
         private Table table;
         private TableLogic tableLogic = new TableLogic();
+        private OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
+        private OrderedDrinkLogic orderedDrinkLogic = new OrderedDrinkLogic();
         private List<Table> tables;
+
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
@@ -28,11 +31,10 @@ namespace RosUI
             rosMain.AddWaiterView(this);
             lblWaiter.Text = "Waiter: " + employee.Name;
             tables = tableLogic.GetAllTables();
-
+            UpdateAllButtons(tables);
         }
 
         //clicking the button opens the table control
-        //passing the button as parameter to change the color
         private void btnTableOne_Click(object sender, EventArgs e)
         {
             try
@@ -43,7 +45,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show("Error Occurred: " + exp.Message);
+                MessageBox.Show("Error Occorred: " + exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -183,11 +185,47 @@ namespace RosUI
             }
         }
 
-        public void UpdateTableStatus()
+        public Button UpdateButtonColor(Table table, Button button)
         {
-
+            switch (table.TableStatus)
+            {
+                case 0:
+                    button.BackColor = Color.LightGray;
+                    button.Text = "Empty";
+                    return button;
+                case 1:
+                    button.BackColor = Color.Red;
+                    button.Text = "Occupied";
+                    return button;
+                case 2:
+                    button.BackColor = Color.LightBlue;
+                    button.Text = "Standby";
+                    return button;
+                case 3:
+                    button.BackColor = Color.LightGreen;
+                    button.Text = "DrinkReady";
+                    return button;
+                case 4:
+                    button.BackColor = Color.LightGreen;
+                    button.Text = "DishReady";
+                    return button;
+            }        
+            return button;
         }
 
+        public void UpdateAllButtons(List<Table> tables)
+        {
+            UpdateButtonColor(tables[0], btnTableOne);
+            UpdateButtonColor(tables[1], btnTableTwo);
+            UpdateButtonColor(tables[2], btnTableThree);
+            UpdateButtonColor(tables[3], btnTableFour);
+            UpdateButtonColor(tables[4], btnTableFive);
+            UpdateButtonColor(tables[5], btnTableSix);
+            UpdateButtonColor(tables[6], btnTableSeven);
+            UpdateButtonColor(tables[7], btnTableEight);
+            UpdateButtonColor(tables[8], btnTableNine);
+            UpdateButtonColor(tables[9], btnTableTen);
+        }
 
         public void OrderRecieved(int number)
         {
@@ -195,140 +233,261 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = Color.Blue;
+                    table.TableNumber = 1;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = Color.Blue;
-
+                    table.TableNumber = 2;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
-                case 3:
-                    btnTableThree.BackColor = Color.Blue;
 
+                case 3:
+                    table.TableNumber = 3;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
                 case 4:
-                    btnTableFour.BackColor = Color.Blue;
-
+                    table.TableNumber = 4;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 5:
-                    btnTableFive.BackColor = Color.Blue;
-
+                    table.TableNumber = 5;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 6:
-                    btnTableSix.BackColor = Color.Blue;
-
+                    table.TableNumber = 6;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 7:
-                    btnTableSeven.BackColor = Color.Blue;
-
+                    table.TableNumber = 7;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 8:
-                    btnTableEight.BackColor = Color.Blue;
-
+                    table.TableNumber = 8;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 9:
-                    btnTableNine.BackColor = Color.Blue;
-
+                    table.TableNumber = 9;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
-                case 10:
-                    btnTableTen.BackColor = Color.Blue;
 
+                case 10:
+                    table.TableNumber = 10;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
             }
         }
 
 
-        public void PickUpReady(int number)
+        public void DrinkReady(int number)
         {
             //changing color of buttons when order is ready for the pick up 
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = Color.Green;
+                    table.TableNumber = 1;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = Color.Green;
-
+                    table.TableNumber = 2;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
-                case 3:
-                    btnTableThree.BackColor = Color.Green;
 
+                case 3:
+                    table.TableNumber = 3;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
                 case 4:
-                    btnTableFour.BackColor = Color.Green;
-
+                    table.TableNumber = 4;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
+
                 case 5:
-                    btnTableFive.BackColor = Color.Green;
-
+                    table.TableNumber = 5;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
+
                 case 6:
-                    btnTableSix.BackColor = Color.Green;
-
+                    table.TableNumber = 6;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
+
                 case 7:
-                    btnTableSeven.BackColor = Color.Green;
-
+                    table.TableNumber = 7;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
+
                 case 8:
-                    btnTableEight.BackColor = Color.Green;
-
+                    table.TableNumber = 8;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
+
                 case 9:
-                    btnTableNine.BackColor = Color.Green;
-
+                    table.TableNumber = 9;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
-                case 10:
-                    btnTableTen.BackColor = Color.Green;
 
+                case 10:
+                    table.TableNumber = 10;
+                    table.TableStatus = 3;
+                    tableLogic.Update(table);
                     break;
             }
         }
+
+        public void DishReady(int number)
+        {
+            //changing color of buttons when order is ready for the pick up 
+            switch (number)
+            {
+                case 1:
+                    table.TableNumber = 1;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 2:
+                    table.TableNumber = 2;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 3:
+                    table.TableNumber = 3;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+                case 4:
+                    table.TableNumber = 4;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 5:
+                    table.TableNumber = 5;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 6:
+                    table.TableNumber = 6;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 7:
+                    table.TableNumber = 7;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 8:
+                    table.TableNumber = 8;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 9:
+                    table.TableNumber = 9;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+
+                case 10:
+                    table.TableNumber = 10;
+                    table.TableStatus = 4;
+                    tableLogic.Update(table);
+                    break;
+            }
+        }
+
         public void ItemServed(int number)
         {
             //changing color of buttons when order is ready for the pick up 
             switch (number)
             {
                 case 1:
-                    btnTableOne.BackColor = Color.Yellow;
+                    table.TableNumber = 1;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
 
                 case 2:
-                    btnTableTwo.BackColor = Color.Yellow;
-
+                    table.TableNumber = 2;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
-                case 3:
-                    btnTableThree.BackColor = Color.Yellow;
 
+                case 3:
+                    table.TableNumber = 3;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
                 case 4:
-                    btnTableFour.BackColor = Color.Yellow;
-
+                    table.TableNumber = 4;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 5:
-                    btnTableFive.BackColor = Color.Yellow;
-
+                    table.TableNumber = 5;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 6:
-                    btnTableSix.BackColor = Color.Yellow;
-
+                    table.TableNumber = 6;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 7:
-                    btnTableSeven.BackColor = Color.Yellow;
-
+                    table.TableNumber = 7;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 8:
-                    btnTableEight.BackColor = Color.Yellow;
-
+                    table.TableNumber = 8;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
+
                 case 9:
-                    btnTableNine.BackColor = Color.Yellow;
-
+                    table.TableNumber = 9;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
-                case 10:
-                    btnTableTen.BackColor = Color.Yellow;
 
+                case 10:
+                    table.TableNumber = 10;
+                    table.TableStatus = 2;
+                    tableLogic.Update(table);
                     break;
             }
         }

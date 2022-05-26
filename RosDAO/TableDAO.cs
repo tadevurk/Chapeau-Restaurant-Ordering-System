@@ -33,10 +33,9 @@ namespace RosDAL
             conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("UPDATE Table SET TableStatus = @TableStatus, EmplID = @EmplID WHERE TableNumber = @ID ORDER BY [TableNumber]", conn);
+                SqlCommand command = new SqlCommand("UPDATE [Table] SET TableStatus = @TableStatus WHERE TableNumber = @ID", conn);
                 command.Parameters.AddWithValue("@ID", table.TableNumber);
                 command.Parameters.AddWithValue("@TableStatus", table.TableStatus);
-                command.Parameters.AddWithValue("@EmplID", table.Employee.EmplID);
 
                 int nrOfRowAffected = command.ExecuteNonQuery();
                 if (nrOfRowAffected == 0)
@@ -49,6 +48,29 @@ namespace RosDAL
 
             conn.Close();
         }
+
+        public void UpdateTableWaiter(Table table)
+        {
+            conn.Open();
+            try
+            {
+                SqlCommand command = new SqlCommand("UPDATE [Table] SET TableStatus = @TableStatus, WaiterID = @WaiterID WHERE TableNumber = @TableNumber", conn);
+                command.Parameters.AddWithValue("@TableNumber", table.TableNumber);
+                command.Parameters.AddWithValue("@TableStatus", table.TableStatus);
+                command.Parameters.AddWithValue("@WaiterID", table.WaiterID);
+
+                int nrOfRowAffected = command.ExecuteNonQuery();
+                if (nrOfRowAffected == 0)
+                    throw new Exception("Update was succesful");
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Update failed! " + e.Message);
+            }
+
+            conn.Close();
+        }
+
 
         private List<Table> ReadTables(DataTable dataTable)
         {
@@ -72,7 +94,7 @@ namespace RosDAL
             foreach (DataRow dr in dataTable.Rows)
             {                  
                 table.TableNumber = (int)dr["TableNumber"];
-                table.TableStatus = (int)dr["TableStatus"];               
+                table.TableStatus = (int)dr["TableStatus"];
             }
             return table;
         }
