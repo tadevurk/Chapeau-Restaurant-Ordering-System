@@ -638,7 +638,7 @@ namespace RosUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1193, 766);
+            this.ClientSize = new System.Drawing.Size(820, 766);
             this.Controls.Add(this.btnDinner);
             this.Controls.Add(this.btnLunch);
             this.Controls.Add(this.btnDrinks);
@@ -659,7 +659,6 @@ namespace RosUI
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
-            this.Name = "FormOrder";
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);
