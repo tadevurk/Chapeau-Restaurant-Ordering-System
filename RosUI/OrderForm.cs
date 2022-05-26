@@ -933,33 +933,48 @@ namespace RosUI
 
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                orderLogic.AddOrder(order); // Create new order
+                if (listviewOrder.Items.Count == 0)
+                {
+                    throw new Exception("There is nothing to send");
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        orderLogic.AddOrder(order); // Create new order
 
-                // send order - ( and grouping the old items' amount by adding the new items' amount)
-                SendOrder();
+                        // send order - ( and grouping the old items' amount by adding the new items' amount)
+                        SendOrder();
 
-                //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
-                orderedDishLogic.AddDishes(DishesInOrderProcess, order);
-                orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
+                        //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
+                        orderedDishLogic.AddDishes(DishesInOrderProcess, order);
+                        orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
 
-                table.TableStatus = 2;
-                tableLogic.Update(table);
+                        table.TableStatus = 2;
+                        tableLogic.Update(table);
 
-                WritesContainedDishes();
+                        WritesContainedDishes();
 
-                //Update KitchenView
-                rosMain.UpdateDishes();
+                        //Update KitchenView
+                        rosMain.UpdateDishes();
 
-                //Update TableView
-                rosMain.UpdateTableToOrdered(table.TableNumber);
+                        //Update TableView
+                        rosMain.UpdateTableToOrdered(table.TableNumber);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
             }
-            else if (dialogResult == DialogResult.No)
+            catch(Exception exp)
             {
-                return;
+                MessageBox.Show(exp.Message);
             }
+
         }
 
 
@@ -1034,7 +1049,7 @@ namespace RosUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Hide();
+            Hide();   
         }
     }
 }
