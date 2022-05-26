@@ -18,8 +18,8 @@ namespace RosUI
         //Order order = new Order();
         RosMain rosMain;
         Table table;
-        BillLogic billLogic = new BillLogic();
         Bill bill = new Bill();
+        BillLogic billLogic = new BillLogic();
         Employee employee;
         FormOrder formOrder;
         BillItem billItem;
@@ -57,7 +57,7 @@ namespace RosUI
             try
             {
                 listViewPayment.Items.Clear();
-
+              
                 BillLogic dishes = new BillLogic();
                 List<BillItem> orderedDishes = dishes.GetOrderedDishes(table);
 
@@ -126,16 +126,16 @@ namespace RosUI
 
         private void btnCompletePayment_Click(object sender, EventArgs e)
         {
-            
+
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
-            // clear up the order list view
-            SetItemsPaid(orderedItems);
+            
+            //SetItemsPaid(orderedItems);
             this.Hide();
 
             // return to the table overview through the RosMain form or Restaurant overview form
-            RosMain ros = new RosMain(employee);
-            ros.Show();
+            TableOverview tableOverview = new TableOverview(employee, rosMain);
+            tableOverview.Show();
             
             this.Close();
 

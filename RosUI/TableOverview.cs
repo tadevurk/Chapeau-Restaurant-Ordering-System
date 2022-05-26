@@ -43,7 +43,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error Occurred: " + exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
