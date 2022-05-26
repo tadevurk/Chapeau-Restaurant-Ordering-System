@@ -316,7 +316,7 @@ namespace RosUI
         {
             ListViewItem selectedStarter = listviewStarters.SelectedItems[0];
             Dish starter = (Dish)selectedStarter.Tag;
-            ListViewItem currentItem = null;
+            ListViewItem? currentItem = null;
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
@@ -347,7 +347,7 @@ namespace RosUI
         {
             ListViewItem selectedMain = listviewMains.SelectedItems[0];
             Dish main = (Dish)selectedMain.Tag;
-            ListViewItem currentItem = null;
+            ListViewItem? currentItem = null;
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
@@ -378,7 +378,7 @@ namespace RosUI
         {
             ListViewItem selectedDessert = listviewDesserts.SelectedItems[0];
             Dish dessert = (Dish)selectedDessert.Tag;
-            ListViewItem currentItem = null;
+            ListViewItem? currentItem = null;
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
@@ -409,7 +409,7 @@ namespace RosUI
         {
             ListViewItem selectedMain = listviewDinnerMains.SelectedItems[0];
             Dish main = (Dish)selectedMain.Tag;
-            ListViewItem currentItem = null;
+            ListViewItem? currentItem = null;
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
@@ -440,7 +440,7 @@ namespace RosUI
         {
             ListViewItem selectedSoftDrink = listviewSoftDrinks.SelectedItems[0];
             Drink softDrink = (Drink)selectedSoftDrink.Tag;
-            ListViewItem currentItem = null;
+            ListViewItem? currentItem = null;
 
             foreach (ListViewItem item in listviewOrder.Items)
             {

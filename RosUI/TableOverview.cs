@@ -28,6 +28,7 @@ namespace RosUI
             InitializeComponent();
             this.employee = employee;
             this.rosMain = rosMain;
+            table = new Table();
             rosMain.AddWaiterView(this);
             lblWaiter.Text = "Waiter: " + employee.Name;
             tables = tableLogic.GetAllTables();
