@@ -387,12 +387,12 @@ namespace RosUI
         private void UpdateTableToReadyDish(OrderedDish dish)
         {
             foreach (TableOverview to in tableOverview)
-                to.PickUpReady(dish.TableNumber);
+                to.DishReady(dish.TableNumber);
         }
         private void UpdateTableToReadyDrink(OrderedDrink drink)
         {
             foreach (TableOverview to in tableOverview)
-                to.PickUpReady(drink.TableNumber);
+                to.DrinkReady(drink.TableNumber);
         }
 
         private void btnViewNote_Click(object sender, EventArgs e)

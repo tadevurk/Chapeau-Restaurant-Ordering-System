@@ -13,12 +13,19 @@ namespace RosModel
         public int TableNumber { get; set; }
         public int TableStatus { get; set; }
 
-        public Employee Employee { get; set; }
+        public int WaiterID { get; set; }
 
-        public Table(int number, Employee employee)
+        public Table(int number, int tableStatus, int emplID)
         {
             TableNumber = number;
-            Employee = employee;
+            TableStatus = tableStatus;
+            WaiterID = emplID;
+        }
+
+        public Table(int number, int emplID)
+        {
+            TableNumber = number;
+            WaiterID = emplID;
         }
 
         public Table(int number)

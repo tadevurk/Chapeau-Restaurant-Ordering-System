@@ -17,6 +17,7 @@ namespace RosUI
         Table table;
         DishLogic dishLogic;
         DrinkLogic drinkLogic;
+        TableLogic tableLogic;
         Order order;
         OrderLogic orderLogic;
         List<Dish> alreadyOrdered = new List<Dish>();
@@ -490,6 +491,11 @@ namespace RosUI
 
                 //Update TableView
                 rosMain.UpdateTableToOrdered(table.TableNumber);
+
+                //Set TableStatus to StandBy
+                table.TableStatus = 2;
+                tableLogic = new TableLogic();
+                tableLogic.Update(table);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -530,7 +536,7 @@ namespace RosUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Hide();
+            this.Hide();
         }
 
         private void btnPayment_Click(object sender, EventArgs e)

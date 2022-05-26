@@ -19,6 +19,7 @@ namespace RosUI
         RosMain rosMain;
         Table table;
         BillLogic billLogic = new BillLogic();
+        TableLogic tableLogic = new TableLogic();
         Bill bill = new Bill();
         Employee employee;
         FormOrder formOrder;
@@ -132,6 +133,10 @@ namespace RosUI
             // clear up the order list view
             SetItemsPaid(orderedItems);
             this.Hide();
+
+            //Change table status back to empty for new customers
+            table.TableStatus = 0;
+            tableLogic.Update(table);
 
             // return to the table overview through the RosMain form or Restaurant overview form
             RosMain ros = new RosMain(employee);
