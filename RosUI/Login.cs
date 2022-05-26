@@ -10,9 +10,9 @@ namespace RosUI
 {
     public partial class Login : Form
     {
+        RosMain main;
         Employee employee = new Employee();
         EmployeeLogic employeeLogic = new EmployeeLogic();
-        Roles Roles = new Roles();
 
         public Login()
         {
@@ -50,7 +50,6 @@ namespace RosUI
           
                 if (CheckPassword())
                 {
-                    RosMain main;
                     switch (employee.Roles)
                     {
                         case Roles.Manager:

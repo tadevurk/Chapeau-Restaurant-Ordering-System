@@ -11,56 +11,62 @@ namespace RosDAL
 {
     public class BillDAO : BaseDAO
     {
-        public List<OrderedDish> GetOrderedDishes() // Get the list of the ordered dishes
+        public List<BillItem> GetOrderedDishes(Table table) // Get the list of the unpaid ordered dishes for a certain table
         {
-            string query = "SELECT I.ItemName as [name], I.ItemPrice, OD.OrderedDishAmount FROM OrderDish as OD " +
+            string query = "SELECT I.ItemName, I.ItemPrice, OD.OrderedDishAmount, D.Vat FROM OrderDish as OD " +
                 "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DishID = I.ItemID JOIN Dish as D on OD.DishID = D.DishID " +
-                "WHERE O.TableNumber = 1 AND OD.DishStatus>=3; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus <= 3; ";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
+
 
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
        
-        private List<OrderedDish> ReadOrderedDishes(DataTable dataTable)
+        private List<BillItem> ReadOrderedDishes(DataTable dataTable)
         {
-            List<OrderedDish> orderedDishes = new List<OrderedDish>();
+
+            List<BillItem> orderedDishes = new List<BillItem>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                OrderedDish orderedDish = new OrderedDish()
+                BillItem orderedDish = new BillItem()
                 {
                     Name = (string)dr["ItemName"],
-                    Price = (decimal)dr["ItemPrice"],
-                    OrderedDishAmount = (int)dr["OrderedDishAmount"]
-
+                    ItemPrice = (decimal)dr["ItemPrice"],
+                    Amount = (int)dr["OrderedDishAmount"],
+                    Vat = (int)dr["Vat"]
                 };
                 orderedDishes.Add(orderedDish);
             }
             return orderedDishes;
         }
 
-        public List<OrderedDrink> GetOrderedDrinks() // Get the list of the ordered drinks
+        public List<BillItem> GetOrderedDrinks(Table table) // Get the list of the unpaid ordered drinks for a certain table
         {
-            string query = "SELECT I.ItemName as [name], I.ItemPrice, OD.OrderedDrinkAmount FROM OrderDrink as OD " +
-                "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Dish as D on OD.DrinkID = D.DrinkID " +
-                "WHERE O.TableNumber = 1 AND OD.DrinkStatus>=3; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT I.ItemName, I.ItemPrice, OD.OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
+                "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID " +
+                "JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus <= 3; ";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
+
 
             return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private List<OrderedDrink> ReadOrderedDrinks(DataTable dataTable)
+        private List<BillItem> ReadOrderedDrinks(DataTable dataTable)
         {
-            List<OrderedDrink> orderedDrinks = new List<OrderedDrink>();
+            List<BillItem> orderedDrinks = new List<BillItem>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                OrderedDrink orderedDrink = new OrderedDrink()
+                BillItem orderedDrink = new BillItem()
                 {
                     Name = (string)dr["ItemName"],
-                    Price = (decimal)dr["ItemPrice"],
-                    OrderedDrinkAmount = (int)dr["OrderedDrinkAmount"]
+                    ItemPrice = (decimal)dr["ItemPrice"],
+                    Amount = (int)dr["OrderedDrinkAmount"],
+                    Vat = (int)dr["Vat"]
 
                 };
                 orderedDrinks.Add(orderedDrink);
@@ -70,7 +76,7 @@ namespace RosDAL
 
 
 
-        // store a complete bill for a table in the database
+        // store a complete table bill in the database
         public void CreateBill(Bill bill)
         {
             bill.BillNumber = LastBillNumberPK() + 1;
@@ -104,9 +110,9 @@ namespace RosDAL
             return (int)row["count"];
         }
 
-        public void SetItemsPaid(List<Dish> dishes)
+        public void SetItemsPaid(List<BillItem> billItems)
         {
-            // write a query that updates the ordered items of a certain table to paid status 
+            // update the ordered items status of a certain table to paid status 
             string query = "UPDATE [OrderedDrink] SET DishStatus = 3 WHERE ";
         }
 

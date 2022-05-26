@@ -16,61 +16,71 @@ namespace RosUI
     public partial class FormPayment : Form
     {
         //Order order = new Order();
+        RosMain rosMain;
         Table table;
-        List<Dish> dishes;
-        //List<Drink> drinks;
-        DishLogic dishLogic = new DishLogic();
         BillLogic billLogic = new BillLogic();
         Bill bill = new Bill();
         Employee employee;
         FormOrder formOrder;
+        BillItem billItem;
+        List<BillItem> orderedItems;
 
         decimal toPay;
         decimal tip;
 
-        public FormPayment(Table table, Employee emp, List<Dish> dishes, FormOrder formOrder)
+        public FormPayment(Table table, Employee emp, FormOrder formOrder, RosMain rosMain)
         {
             InitializeComponent();
             this.table = table;
-            this.dishes = dishes;
             this.formOrder = formOrder;
             this.employee = emp;
+            this.rosMain = rosMain;
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
-            
+
+
+            orderedItems = new List<BillItem>();
             DisplayBill();
             // calculate the bill amount
             //..
-            bill.SubTotalAmount = calculateSubTotalAmount();
-            bill.TotalAmount = calculateTotalAmount();
+            bill.SubTotalAmount = CalculateSubTotalAmount();
+            bill.TotalAmount = CalculateTotalAmount();
             lblBillAmount.Text = bill.TotalAmount.ToString();
-            txtToPay.Text = lblBillAmount.Text;
+            txtToPay.Text = lblBillAmount.Text;     
         }
 
 
         private void DisplayBill()
         {
-            // Display the billed item with necessary fields (can be either printed or shown to the customer)
+            // Display the billed item with necessary fields (can either printed or shown to the customer)
             try
             {
                 listViewPayment.Items.Clear();
-                
-                foreach (Dish d in dishes)
+
+                BillLogic dishes = new BillLogic();
+                List<BillItem> orderedDishes = dishes.GetOrderedDishes(table);
+
+                BillLogic drinks = new BillLogic();
+                List<BillItem> orderedDrinks = drinks.GetOrderedDrinks(table);
+
+                orderedItems = orderedDishes.Concat(orderedDrinks).ToList();
+
+                foreach (BillItem item in orderedItems)
                 {
                     ListViewItem li = new ListViewItem();
-                    li.SubItems.Add(d.Amount.ToString());
-                    li.SubItems.Add(d.ItemName.ToString());
+                    li.SubItems.Add(item.Amount.ToString());
+                    li.SubItems.Add(item.Name.ToString());
 
-                    d.Vat = calculateVat(d.DishID);
-                    li.SubItems.Add(d.Vat.ToString());
+                    //item.Vat = calculateVat(item.Vat);
+                    li.SubItems.Add(item.Vat.ToString());
 
-                    d.SubPrice = calculateSubtotal(d.ItemPrice, d.Vat);
-                    li.SubItems.Add((d.SubPrice * d.Amount).ToString());
+                    item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.Vat);
+                    li.SubItems.Add((item.SubPrice * item.Amount).ToString());
 
-                    li.SubItems.Add((d.ItemPrice * d.Amount).ToString());
+                    li.SubItems.Add((item.ItemPrice * item.Amount).ToString());
 
-                    li.Tag = d;
+                    li.Tag = item;
                     listViewPayment.Items.Add(li);
                 }
             }
@@ -80,38 +90,34 @@ namespace RosUI
             }
         }
 
-        private int calculateVat(int id)
-        {
-            return dishLogic.RetrieveVatByID(id);
-        }
 
         // calculate subtotal per product unit
-        private decimal calculateSubtotal(decimal itemPrice, int vat)
+        private decimal CalculateItemSubtotal(decimal itemPrice, int vat)
         {
             return itemPrice - (itemPrice * vat/100);
         }
 
         // calculate the bill amount that will be displayed ini the payment form and stored in the database bill table
-        private decimal calculateTotalAmount()
+        private decimal CalculateTotalAmount()
         {
             decimal billAmount = 0;
 
-            foreach (Dish d in dishes)
+            foreach (BillItem i in orderedItems)
             {
-                billAmount += d.ItemPrice * d.Amount;
+                billAmount += i.ItemPrice * i.Amount;
             }
 
             return billAmount;
         }
 
         // calculate the subtotal amount that will be stored  in the database bill table
-        private decimal calculateSubTotalAmount()
+        private decimal CalculateSubTotalAmount()
         {
             decimal subAmount = 0;
 
-            foreach (Dish d in dishes)
+            foreach (BillItem i in orderedItems)
             {
-                subAmount += calculateSubtotal(d.ItemPrice, d.Vat) * d.Amount;
+                subAmount += CalculateItemSubtotal(i.ItemPrice, i.Vat) * i.Amount;
             }
 
             return subAmount;
@@ -124,28 +130,23 @@ namespace RosUI
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
             // clear up the order list view
-            SetItemsPaid(dishes);
+            SetItemsPaid(orderedItems);
             this.Hide();
 
             // return to the table overview through the RosMain form or Restaurant overview form
             RosMain ros = new RosMain(employee);
             ros.Show();
-            //if RosMAin form, show the Tableview panel 
-            // change the protection level to public?
-            //ros.ShowPanel("TableView");
-
+            
             this.Close();
 
         }
 
-        
         private void txtFeedback_TextChanged(object sender, EventArgs e)
         {
             bill.Feedback = txtFeedback.Text;
         }
 
         // check if payment method was selected in order to activate the complete payment button
-
         private void radioBtnCash_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
@@ -179,7 +180,6 @@ namespace RosUI
         private void txtToPay_TextChanged(object sender, EventArgs e)
         {
             // calculate the amount that will be paid
-
             if (txtToPay.Text == "")
             {
                 MessageBox.Show("This value can not be empty!!!");
@@ -201,15 +201,15 @@ namespace RosUI
         {
             // get back to the table overview
             this.Hide();
-            formOrder.Show();
+            new TableOverview(employee, rosMain).Show();
             this.Close();
 
         }
 
         // remove all items from a table that the payment is completed
-        public void SetItemsPaid(List<Dish> dishes)
+        public void SetItemsPaid(List<BillItem> billItems)
         {
-            billLogic.SetItemsPaid(dishes);
+            billLogic.SetItemsPaid(billItems);
         }
     }
 }

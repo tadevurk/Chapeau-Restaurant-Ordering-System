@@ -33,9 +33,10 @@ namespace RosDAL
             conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("UPDATE Table SET TableStatus = @TableStatus WHERE TableNumber = @ID ORDER BY [TableNumber]", conn);
-                command.Parameters.AddWithValue("@Id", table.TableNumber);
+                SqlCommand command = new SqlCommand("UPDATE Table SET TableStatus = @TableStatus, EmplID = @EmplID WHERE TableNumber = @ID ORDER BY [TableNumber]", conn);
+                command.Parameters.AddWithValue("@ID", table.TableNumber);
                 command.Parameters.AddWithValue("@TableStatus", table.TableStatus);
+                command.Parameters.AddWithValue("@EmplID", table.Employee.EmplID);
 
                 int nrOfRowAffected = command.ExecuteNonQuery();
                 if (nrOfRowAffected == 0)
@@ -58,7 +59,7 @@ namespace RosDAL
                 Table table = new Table();
                 {
                     table.TableNumber = (int)dr["TableNumber"];
-                    table.TableStatus = (TableStatus)dr["TableStatus"];
+                    table.TableStatus = (int)dr["TableStatus"];
                 };
                 tables.Add(table);
             }
@@ -71,7 +72,7 @@ namespace RosDAL
             foreach (DataRow dr in dataTable.Rows)
             {                  
                 table.TableNumber = (int)dr["TableNumber"];
-                table.TableStatus = (TableStatus)dr["TableStatus"];               
+                table.TableStatus = (int)dr["TableStatus"];               
             }
             return table;
         }
