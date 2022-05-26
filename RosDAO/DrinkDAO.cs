@@ -74,10 +74,7 @@ namespace RosDAL
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        // Getting all beers
-
-
-        public List<Drink> WriteContainedDrinks(Table t, Order o)
+        public List<Drink> WriteContainedDrinks(Table table)
         {
             string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
                 " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
@@ -86,7 +83,7 @@ namespace RosDAL
                 "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter[] sp =
             {
-                new SqlParameter("@TableNumber", t.TableNumber),
+                new SqlParameter("@TableNumber", table.TableNumber),
             };
 
             return ReadTablesOrder(ExecuteSelectQuery(query, sp));

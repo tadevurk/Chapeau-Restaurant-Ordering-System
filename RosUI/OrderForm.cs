@@ -872,8 +872,8 @@ namespace RosUI
 
             List<Item> itemsInOrder = new List<Item>();
 
-            orderedDishes = dishLogic.WriteContainedDishes(table, order);
-            orderedDrinks = drinkLogic.WriteContainedDrinks(table,order);
+            orderedDishes = dishLogic.WriteContainedDishes(table);
+            orderedDrinks = drinkLogic.WriteContainedDrinks(table);
 
             itemsInOrder.AddRange(orderedDishes);
             itemsInOrder.AddRange(orderedDrinks);

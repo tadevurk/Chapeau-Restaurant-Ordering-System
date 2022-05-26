@@ -16,9 +16,9 @@ namespace RosLogic
         {
             return dishDAO.GetLunchStarters();
         }
-        public List<Dish> WriteContainedDishes(Table t, Order o)
+        public List<Dish> WriteContainedDishes(Table table)
         {
-            return dishDAO.WriteContainedDishes(t, o);
+            return dishDAO.WriteContainedDishes(table);
         }
 
         public List<Dish> GetLunchMains()

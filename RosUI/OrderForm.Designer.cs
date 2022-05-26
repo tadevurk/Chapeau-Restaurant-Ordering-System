@@ -856,7 +856,7 @@ namespace RosUI
             this.pnlWines.Controls.Add(this.btnAddWines);
             this.pnlWines.Controls.Add(this.lblWines);
             this.pnlWines.Controls.Add(this.listviewWines);
-            this.pnlWines.Location = new System.Drawing.Point(0, 48);
+            this.pnlWines.Location = new System.Drawing.Point(9, 382);
             this.pnlWines.Name = "pnlWines";
             this.pnlWines.Size = new System.Drawing.Size(798, 318);
             this.pnlWines.TabIndex = 31;
@@ -1015,10 +1015,10 @@ namespace RosUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 766);
-            this.Controls.Add(this.pnlWines);
             this.Controls.Add(this.btnDinner);
             this.Controls.Add(this.btnLunch);
             this.Controls.Add(this.btnDrinks);
+            this.Controls.Add(this.pnlWines);
             this.Controls.Add(this.pnlDrinkCategories);
             this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.txtNote);

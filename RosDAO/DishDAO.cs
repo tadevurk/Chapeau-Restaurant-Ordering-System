@@ -13,7 +13,7 @@ namespace RosDAL
     {
         //Getting all Starters
 
-        public List<Dish> WriteContainedDishes(Table t, Order o)
+        public List<Dish> WriteContainedDishes(Table t)
         {
             string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount], O.TableNumber as [TableNumber] from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
@@ -23,7 +23,6 @@ namespace RosDAL
             SqlParameter[] sp =
             {
                 new SqlParameter("@TableNumber", t.TableNumber),
-                new SqlParameter("@OrderID", o.OrderID)
             };
 
             return ReadTablesOrder(ExecuteSelectQuery(query, sp));
