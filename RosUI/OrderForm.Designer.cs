@@ -305,6 +305,7 @@ namespace RosUI
             this.btnAddMains.TabIndex = 15;
             this.btnAddMains.Text = "Add";
             this.btnAddMains.UseVisualStyleBackColor = true;
+            this.btnAddMains.Click += new System.EventHandler(this.btnAddMains_Click_1);
             // 
             // lblMains
             // 
