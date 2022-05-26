@@ -580,15 +580,34 @@ namespace RosUI
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)
         {
-            Dish dish = (Dish)listviewOrder.Items[0].Tag;
 
-            if (txtNote.Text == "")
+            Item item = (Item)listviewOrder.SelectedItems[0].Tag;
+
+            if (item is Dish)
             {
-                MessageBox.Show("There is no note!");
+                Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                if (txtNote.Text == "")
+                {
+                    MessageBox.Show("There is no note");
+                }
+                else
+                {
+                    dish.Note = txtNote.Text;
+                    MessageBox.Show("Note has been added!");
+                }               
             }
-            else
+            else if (item is Drink)
             {
-                dish.Note = txtNote.Text;
+                Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                if (txtNote.Text == "")
+                {
+                    MessageBox.Show("There is no note");
+                }
+                else
+                {
+                    drink.Note = txtNote.Text;
+                    MessageBox.Show("Note has been added!");
+                }
             }
 
             txtNote.Clear();
