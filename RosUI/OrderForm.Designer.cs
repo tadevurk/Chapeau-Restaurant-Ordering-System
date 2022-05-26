@@ -101,17 +101,17 @@ namespace RosUI
             this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.pnlBeers = new System.Windows.Forms.Panel();
+            this.btnAddBeers = new System.Windows.Forms.Button();
+            this.lblBeers = new System.Windows.Forms.Label();
+            this.listviewBeers = new System.Windows.Forms.ListView();
+            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.pnlWines = new System.Windows.Forms.Panel();
             this.btnAddWines = new System.Windows.Forms.Button();
             this.lblWines = new System.Windows.Forms.Label();
             this.listviewWines = new System.Windows.Forms.ListView();
             this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
-            this.btnAddBeers = new System.Windows.Forms.Button();
-            this.lblBeers = new System.Windows.Forms.Label();
-            this.listviewBeers = new System.Windows.Forms.ListView();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.pnlSpirits = new System.Windows.Forms.Panel();
             this.btnAddSpirits = new System.Windows.Forms.Button();
             this.lblSpirits = new System.Windows.Forms.Label();
@@ -349,6 +349,7 @@ namespace RosUI
             this.btnAddMains.TabIndex = 15;
             this.btnAddMains.Text = "Add";
             this.btnAddMains.UseVisualStyleBackColor = true;
+            this.btnAddMains.Click += new System.EventHandler(this.btnAddMains_Click);
             // 
             // lblMains
             // 
@@ -799,7 +800,6 @@ namespace RosUI
             // 
             // pnlBeers
             // 
-            this.pnlBeers.Controls.Add(this.pnlWines);
             this.pnlBeers.Controls.Add(this.btnAddBeers);
             this.pnlBeers.Controls.Add(this.lblBeers);
             this.pnlBeers.Controls.Add(this.listviewBeers);
@@ -808,12 +808,55 @@ namespace RosUI
             this.pnlBeers.Size = new System.Drawing.Size(798, 318);
             this.pnlBeers.TabIndex = 30;
             // 
+            // btnAddBeers
+            // 
+            this.btnAddBeers.Location = new System.Drawing.Point(628, 48);
+            this.btnAddBeers.Name = "btnAddBeers";
+            this.btnAddBeers.Size = new System.Drawing.Size(151, 112);
+            this.btnAddBeers.TabIndex = 15;
+            this.btnAddBeers.Text = "Add";
+            this.btnAddBeers.UseVisualStyleBackColor = true;
+            this.btnAddBeers.Click += new System.EventHandler(this.btnAddBeers_Click);
+            // 
+            // lblBeers
+            // 
+            this.lblBeers.AutoSize = true;
+            this.lblBeers.Location = new System.Drawing.Point(14, 13);
+            this.lblBeers.Name = "lblBeers";
+            this.lblBeers.Size = new System.Drawing.Size(51, 20);
+            this.lblBeers.TabIndex = 1;
+            this.lblBeers.Text = "BEERS";
+            // 
+            // listviewBeers
+            // 
+            this.listviewBeers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader7,
+            this.columnHeader8});
+            this.listviewBeers.FullRowSelect = true;
+            this.listviewBeers.HideSelection = false;
+            this.listviewBeers.Location = new System.Drawing.Point(14, 48);
+            this.listviewBeers.Name = "listviewBeers";
+            this.listviewBeers.Size = new System.Drawing.Size(571, 237);
+            this.listviewBeers.TabIndex = 0;
+            this.listviewBeers.UseCompatibleStateImageBehavior = false;
+            this.listviewBeers.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Name";
+            this.columnHeader7.Width = 450;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Price";
+            this.columnHeader8.Width = 120;
+            // 
             // pnlWines
             // 
             this.pnlWines.Controls.Add(this.btnAddWines);
             this.pnlWines.Controls.Add(this.lblWines);
             this.pnlWines.Controls.Add(this.listviewWines);
-            this.pnlWines.Location = new System.Drawing.Point(0, 0);
+            this.pnlWines.Location = new System.Drawing.Point(0, 48);
             this.pnlWines.Name = "pnlWines";
             this.pnlWines.Size = new System.Drawing.Size(798, 318);
             this.pnlWines.TabIndex = 31;
@@ -860,49 +903,6 @@ namespace RosUI
             // 
             this.columnHeader10.Text = "Price";
             this.columnHeader10.Width = 120;
-            // 
-            // btnAddBeers
-            // 
-            this.btnAddBeers.Location = new System.Drawing.Point(628, 48);
-            this.btnAddBeers.Name = "btnAddBeers";
-            this.btnAddBeers.Size = new System.Drawing.Size(151, 112);
-            this.btnAddBeers.TabIndex = 15;
-            this.btnAddBeers.Text = "Add";
-            this.btnAddBeers.UseVisualStyleBackColor = true;
-            this.btnAddBeers.Click += new System.EventHandler(this.btnAddBeers_Click);
-            // 
-            // lblBeers
-            // 
-            this.lblBeers.AutoSize = true;
-            this.lblBeers.Location = new System.Drawing.Point(14, 13);
-            this.lblBeers.Name = "lblBeers";
-            this.lblBeers.Size = new System.Drawing.Size(51, 20);
-            this.lblBeers.TabIndex = 1;
-            this.lblBeers.Text = "BEERS";
-            // 
-            // listviewBeers
-            // 
-            this.listviewBeers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8});
-            this.listviewBeers.FullRowSelect = true;
-            this.listviewBeers.HideSelection = false;
-            this.listviewBeers.Location = new System.Drawing.Point(14, 48);
-            this.listviewBeers.Name = "listviewBeers";
-            this.listviewBeers.Size = new System.Drawing.Size(571, 237);
-            this.listviewBeers.TabIndex = 0;
-            this.listviewBeers.UseCompatibleStateImageBehavior = false;
-            this.listviewBeers.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Name";
-            this.columnHeader7.Width = 450;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Price";
-            this.columnHeader8.Width = 120;
             // 
             // pnlSpirits
             // 
@@ -1015,10 +1015,7 @@ namespace RosUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(823, 766);
-            this.Controls.Add(this.pnlSpirits);
-            this.Controls.Add(this.pnlBeers);
-            this.Controls.Add(this.pnlDinnerDesserts);
-            this.Controls.Add(this.pnlDinnerStarters);
+            this.Controls.Add(this.pnlWines);
             this.Controls.Add(this.btnDinner);
             this.Controls.Add(this.btnLunch);
             this.Controls.Add(this.btnDrinks);
@@ -1032,14 +1029,18 @@ namespace RosUI
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
-            this.Controls.Add(this.pnlStarters);
-            this.Controls.Add(this.pnlDesserts);
-            this.Controls.Add(this.pnlSoftDrinks);
-            this.Controls.Add(this.pnlDinnerMains);
             this.Controls.Add(this.pnlMains);
             this.Controls.Add(this.pnlDinner);
             this.Controls.Add(this.pnlLunch);
             this.Controls.Add(this.pnlHotDrinks);
+            this.Controls.Add(this.pnlSpirits);
+            this.Controls.Add(this.pnlBeers);
+            this.Controls.Add(this.pnlDinnerDesserts);
+            this.Controls.Add(this.pnlDinnerStarters);
+            this.Controls.Add(this.pnlStarters);
+            this.Controls.Add(this.pnlDesserts);
+            this.Controls.Add(this.pnlSoftDrinks);
+            this.Controls.Add(this.pnlDinnerMains);
             this.Name = "FormOrder";
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);

@@ -82,7 +82,8 @@ namespace RosDAL
             string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
                 " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DrinkID" +
-                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
+                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
+                "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter[] sp =
             {
                 new SqlParameter("@TableNumber", t.TableNumber),
