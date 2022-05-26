@@ -189,6 +189,7 @@ namespace RosUI
             this.nameOrder,
             this.priceOrder,
             this.amountOrder});
+            this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
             this.listviewOrder.Location = new System.Drawing.Point(16, 35);
             this.listviewOrder.Name = "listviewOrder";
@@ -267,6 +268,7 @@ namespace RosUI
             this.listviewStarters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Name,
             this.Price});
+            this.listviewStarters.FullRowSelect = true;
             this.listviewStarters.HideSelection = false;
             this.listviewStarters.Location = new System.Drawing.Point(14, 48);
             this.listviewStarters.Name = "listviewStarters";
@@ -318,6 +320,7 @@ namespace RosUI
             this.listviewMains.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnMainName,
             this.columnMainPrice});
+            this.listviewMains.FullRowSelect = true;
             this.listviewMains.HideSelection = false;
             this.listviewMains.Location = new System.Drawing.Point(14, 48);
             this.listviewMains.Name = "listviewMains";
@@ -370,6 +373,7 @@ namespace RosUI
             this.listviewDesserts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.listviewDesserts.FullRowSelect = true;
             this.listviewDesserts.HideSelection = false;
             this.listviewDesserts.Location = new System.Drawing.Point(14, 48);
             this.listviewDesserts.Name = "listviewDesserts";
@@ -439,6 +443,7 @@ namespace RosUI
             this.listviewSoftDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnName,
             this.columnPrice});
+            this.listviewSoftDrinks.FullRowSelect = true;
             this.listviewSoftDrinks.HideSelection = false;
             this.listviewSoftDrinks.Location = new System.Drawing.Point(14, 48);
             this.listviewSoftDrinks.Name = "listviewSoftDrinks";
@@ -617,6 +622,7 @@ namespace RosUI
             this.listviewDinnerMains.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.MainName,
             this.MainPrice});
+            this.listviewDinnerMains.FullRowSelect = true;
             this.listviewDinnerMains.HideSelection = false;
             this.listviewDinnerMains.Location = new System.Drawing.Point(14, 48);
             this.listviewDinnerMains.Name = "listviewDinnerMains";

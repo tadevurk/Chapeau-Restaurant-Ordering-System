@@ -12,6 +12,11 @@ using RosModel;
 
 namespace RosUI
 {
+    /// <summary>
+    
+    /// </summary>
+    ////// Vedat Türk --- 683343 --- GROUP1- IT1D - ///////////////////////
+    ////// With help of Mirko Cuccurullo ////////
     public partial class FormOrder : Form
     {
         Table table;
@@ -151,21 +156,16 @@ namespace RosUI
             pnlDinner.Hide();
 
             pnlStarters.Hide();
-            listviewOrder.FullRowSelect = true;
 
             pnlDrinkCategories.Hide();
 
             pnlSoftDrinks.Hide();
-            listviewSoftDrinks.FullRowSelect = true;
 
             pnlMains.Hide();
-            listviewMains.FullRowSelect = true;
 
             pnlDesserts.Hide();
-            listviewDesserts.FullRowSelect = true;
 
             pnlDinnerMains.Hide();
-            listviewDinnerMains.FullRowSelect = true;
         }
 
         private void ReadSoftDrinks()
@@ -173,8 +173,11 @@ namespace RosUI
             List<Drink> softDrinks = drinkLogic.GetAllSoftDrinks();
 
             listviewSoftDrinks.Items.Clear();
-            listviewSoftDrinks.FullRowSelect = true;
+            DisplayDrinks(softDrinks);
+        }
 
+        private void DisplayDrinks(List<Drink> softDrinks)
+        {
             foreach (Drink softDrink in softDrinks)
             {
                 ListViewItem li = new ListViewItem(softDrink.ItemName.ToString());
@@ -187,10 +190,13 @@ namespace RosUI
         private void ReadStarters()
         {
             List<Dish> starters = dishLogic.GetLunchStarters();
-
             listviewStarters.Items.Clear();
-            listviewStarters.FullRowSelect = true;
 
+            DisplayDishes(starters);
+        }
+
+        private void DisplayDishes(List<Dish> starters)
+        {
             foreach (Dish starter in starters)
             {
                 ListViewItem li = new ListViewItem(starter.ItemName.ToString());
@@ -204,45 +210,24 @@ namespace RosUI
         {
             List<Dish> mains = dishLogic.GetLunchMains();
             listviewMains.Items.Clear();
-            listviewMains.FullRowSelect = true;
 
-            foreach (Dish main in mains)
-            {
-                ListViewItem li = new ListViewItem(main.ItemName.ToString());
-                li.SubItems.Add(main.ItemPrice.ToString());
-                li.Tag = main;
-                listviewMains.Items.Add(li);
-            }
+            DisplayDishes(mains);
         }
 
         private void ReadLunchDesserts()
         {
             List<Dish> desserts = dishLogic.GetLunchDesserts();
             listviewDesserts.Items.Clear();
-            listviewDesserts.FullRowSelect = true;
 
-            foreach (Dish dessert in desserts)
-            {
-                ListViewItem li = new ListViewItem(dessert.ItemName.ToString());
-                li.SubItems.Add(dessert.ItemPrice.ToString());
-                li.Tag = dessert;
-                listviewDesserts.Items.Add(li);
-            }
+            DisplayDishes(desserts);
         }
 
         private void ReadDinnerMains()
         {
             List<Dish> mains = dishLogic.GetDinnerMains();
             listviewDinnerMains.Items.Clear();
-            listviewDinnerMains.FullRowSelect = true;
 
-            foreach (Dish main in mains)
-            {
-                ListViewItem li = new ListViewItem(main.ItemName.ToString());
-                li.SubItems.Add(main.ItemPrice.ToString());
-                li.Tag = main;
-                listviewDinnerMains.Items.Add(li);
-            }
+            DisplayDishes(mains);
         }
 
         private void btnAddStarter_Click(object sender, EventArgs e)
@@ -261,27 +246,29 @@ namespace RosUI
         {
             AddDinnerMain();
         }
+        private void btnAddDrink_Click(object sender, EventArgs e)
+        {
+            AddSoftDrink();
+        }
 
         private void btnOrderRemove_Click(object sender, EventArgs e)
         {
-            Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
+            Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
             ListViewItem li = listviewOrder.SelectedItems[0];
 
-            if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
+            if (item is Dish)
             {
-                //!! It should be POSSIBLE to decrease the items amount which comes with (+) button !!
-                MessageBox.Show("You cannot edit old items");
-            }
-            else
-            {
-                DialogResult dialogResult = MessageBox.Show("Do you want to remove this item?", "Remove Item", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.Yes)
+                Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
                 {
-                    if (dish.Amount == 1)
+                    MessageBox.Show("You cannot edit old items");
+                }
+                else
+                {
+                    if(dish.Amount == 1)
                     {
                         listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
                         dishLogic.IncreaseDishStock(dish);
-
                     }
                     else
                     {
@@ -290,17 +277,33 @@ namespace RosUI
                         dishLogic.IncreaseDishStock(dish);
                     }
                 }
-                else if (dialogResult == DialogResult.No)
+            }
+            else if (item is Drink)
+            {
+               Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                if (drink.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
                 {
-                    return;
+                    MessageBox.Show("You cannot edit old items");
                 }
-
+                else
+                {
+                    if (drink.Amount == 1)
+                    {
+                        listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                        // increase the drink stock
+                    }
+                    else
+                    {
+                        drink.Amount--;
+                        listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
+                        //Increase the drink stock
+                    }
+                }
             }
         }
 
         private void AddStarter() // Add starters to the orderedlist - if there is already one, just increase the amount
         {
-            listviewStarters.FullRowSelect = true;
             ListViewItem selectedStarter = listviewStarters.SelectedItems[0];
             Dish starter = (Dish)selectedStarter.Tag;
             ListViewItem currentItem = null;
@@ -332,7 +335,6 @@ namespace RosUI
 
         private void AddMain() // Add starters to the orderedlist - if there is already one, just increase the amount
         {
-            listviewMains.FullRowSelect = true;
             ListViewItem selectedMain = listviewMains.SelectedItems[0];
             Dish main = (Dish)selectedMain.Tag;
             ListViewItem currentItem = null;
@@ -364,7 +366,6 @@ namespace RosUI
 
         private void AddDessert() // Add starters to the orderedlist - if there is already one, just increase the amount
         {
-            listviewDesserts.FullRowSelect = true;
             ListViewItem selectedDessert = listviewDesserts.SelectedItems[0];
             Dish dessert = (Dish)selectedDessert.Tag;
             ListViewItem currentItem = null;
@@ -396,7 +397,6 @@ namespace RosUI
 
         private void AddDinnerMain() // Add starters to the orderedlist - if there is already one, just increase the amount
         {
-            listviewDinnerMains.FullRowSelect = true;
             ListViewItem selectedMain = listviewDinnerMains.SelectedItems[0];
             Dish main = (Dish)selectedMain.Tag;
             ListViewItem currentItem = null;
@@ -426,23 +426,54 @@ namespace RosUI
             dishLogic.DecreaseDishStock(main); // Decrease the stock
         }
 
+        private void AddSoftDrink() // Add softDrinks to the orderedlist - if there is already one, just increase the amount
+        {
+            ListViewItem selectedSoftDrink = listviewSoftDrinks.SelectedItems[0];
+            Drink softDrink = (Drink)selectedSoftDrink.Tag;
+            ListViewItem currentItem = null;
+
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (softDrink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                {
+                    currentItem = item;
+                    softDrink.Amount = int.Parse(item.SubItems[2].Text);
+                    softDrink.Amount++;
+                    item.SubItems[2].Text = softDrink.Amount.ToString();
+                }
+            }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(softDrink.ItemName);
+                item.SubItems.Add(softDrink.ItemPrice.ToString());
+                softDrink.Amount = 1;
+                item.SubItems.Add(softDrink.Amount.ToString());
+                item.Tag = (Item)softDrink;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+
+            //dishLogic.DecreaseDishStock(softDrink); // Decrease the stock
+        }
+
 
         private void WritesContainedDishes() // Getting the ordered list
         {
-            List<Dish> alreadyOrdered = new List<Dish>();
-            List<Drink> drink = new List<Drink>();
+            List<Dish> orderedDishes = new List<Dish>();
+            List<Drink> orderedDrinks = new List<Drink>();
 
-            List<Item> toDisplay = new List<Item>();
+            List<Item> itemsInOrder = new List<Item>();
 
-            alreadyOrdered = dishLogic.WriteContainedDishes(table, order);
-            drink = drinkLogic.WriteContainedDrinks(table,order);
+            orderedDishes = dishLogic.WriteContainedDishes(table, order);
+            orderedDrinks = drinkLogic.WriteContainedDrinks(table,order);
 
-            toDisplay.AddRange(alreadyOrdered);
-            toDisplay.AddRange(drink);
+            itemsInOrder.AddRange(orderedDishes);
+            itemsInOrder.AddRange(orderedDrinks);
 
             listviewOrder.Items.Clear();
 
-            foreach (Item item in toDisplay)
+            foreach (Item item in itemsInOrder)
             {
                 ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
                 lvItem.SubItems.Add(item.ItemPrice.ToString());
@@ -488,7 +519,7 @@ namespace RosUI
                 // send order - ( and grouping the old items' amount by adding the new items' amount)
                 SendOrder();
 
-                //Adding compleeteley new dish dish to Order_Dish table
+                //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
                 orderedDishLogic.AddDishes(DishesInOrderProcess, order);
 
                 orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
@@ -512,18 +543,18 @@ namespace RosUI
         {
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                Item dishInOrderList = (Item)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
+                Item itemInOrderList = (Item)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
                 ListViewItem lvItemInOrderList = listviewOrder.Items[i];
 
-                if (lvItemInOrderList.ForeColor == Color.Red && dishInOrderList is Dish)
+                if (lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Dish)
                 {
-                    Dish d = (Dish)dishInOrderList;
-                    DishesInOrderProcess.Add(d);
+                    Dish dish = (Dish)itemInOrderList;
+                    DishesInOrderProcess.Add(dish);
                 }
-                else if(lvItemInOrderList.ForeColor == Color.Red && dishInOrderList is Drink)
+                else if(lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Drink)
                 {
-                    Drink d = (Drink)dishInOrderList;
-                    DrinkInOrderProcess.Add(d);
+                    Drink drink = (Drink)itemInOrderList;
+                    DrinkInOrderProcess.Add(drink);
                 }
             }
         }
@@ -547,42 +578,6 @@ namespace RosUI
         private void btnBack_Click(object sender, EventArgs e)
         {
             Hide();
-        }
-
-        private void btnAddDrink_Click(object sender, EventArgs e)
-        {
-            AddSoftDrink();
-        }
-        private void AddSoftDrink() // Add softDrinks to the orderedlist - if there is already one, just increase the amount
-        {
-            listviewSoftDrinks.FullRowSelect = true;
-            ListViewItem selectedSoftDrink = listviewSoftDrinks.SelectedItems[0];
-            Drink softDrink = (Drink)selectedSoftDrink.Tag;
-            ListViewItem currentItem = null;
-
-            foreach (ListViewItem item in listviewOrder.Items)
-            {
-                if (softDrink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                {
-                    currentItem = item;
-                    softDrink.Amount = int.Parse(item.SubItems[2].Text);
-                    softDrink.Amount++;
-                    item.SubItems[2].Text = softDrink.Amount.ToString();
-                }
-            }
-
-            if (currentItem == null)
-            {
-                ListViewItem item = new ListViewItem(softDrink.ItemName);
-                item.SubItems.Add(softDrink.ItemPrice.ToString());
-                softDrink.Amount = 1;
-                item.SubItems.Add(softDrink.Amount.ToString());
-                item.Tag = (Item)softDrink;
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-            }
-
-            //dishLogic.DecreaseDishStock(softDrink); // Decrease the stock
         }
     }
 }
