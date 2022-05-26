@@ -24,6 +24,7 @@ namespace RosUI
         DrinkLogic drinkLogic;
         Order order;
         OrderLogic orderLogic;
+        TableLogic tableLogic;
         List<Dish> DishesInOrderProcess = new List<Dish>(); // For the orders that are in process (between order- will be ordered)
         List<Drink> DrinkInOrderProcess = new List<Drink>();
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
@@ -40,6 +41,7 @@ namespace RosUI
             orderLogic = new OrderLogic();
             dishLogic = new DishLogic();
             drinkLogic = new DrinkLogic();
+            tableLogic = new TableLogic();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
 
             WritesContainedDishes();
@@ -537,6 +539,9 @@ namespace RosUI
                 orderedDishLogic.AddDishes(DishesInOrderProcess, order);
 
                 orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
+
+                table.TableStatus = 2;
+                tableLogic.Update(table);
 
                 WritesContainedDishes();
 
