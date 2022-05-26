@@ -18,6 +18,7 @@ namespace RosUI
         DishLogic dishLogic;
         DrinkLogic drinkLogic;
         Order order;
+        TableLogic tableLogic = new TableLogic();
         OrderLogic orderLogic;
         List<Dish> DishesInOrderProcess = new List<Dish>(); // For the orders that are in process (between order- will be ordered)
         List<Drink> DrinkInOrderProcess = new List<Drink>();
@@ -493,6 +494,9 @@ namespace RosUI
 
                 orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
 
+                table.TableStatus = 2;
+                tableLogic.Update(table);
+
                 WritesContainedDishes();
 
                 //Update KitchenView
@@ -506,6 +510,8 @@ namespace RosUI
                 return;
             }
         }
+
+ 
 
 
         private void SendOrder()

@@ -444,13 +444,13 @@ namespace RosUI
         {
             //send an update to all TableOverview
             foreach (TableOverview to in tableOverview)
-                to.PickUpReady(dish.TableNumber);
+                to.DishReady(dish.TableNumber);
         }
         private void UpdateTableToReadyDrink(OrderedDrink drink)
         {
             //send an update to all TableOverview
             foreach (TableOverview to in tableOverview)
-                to.PickUpReady(drink.TableNumber);
+                to.DrinkReady(drink.TableNumber);
         }
 
         private void btnViewNote_Click(object sender, EventArgs e)

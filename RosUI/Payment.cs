@@ -20,6 +20,7 @@ namespace RosUI
         Table table;
         Bill bill = new Bill();
         BillLogic billLogic = new BillLogic();
+        TableLogic tableLogic = new TableLogic();
         Employee employee;
         FormOrder formOrder;
         List<Item> orderedItems;
@@ -145,6 +146,9 @@ namespace RosUI
                     //do something else
                 }
             }
+
+            table.TableStatus = 0;
+            tableLogic.Update(table);
             
             //SetItemsPaid(orderedItems);
             this.Hide();
