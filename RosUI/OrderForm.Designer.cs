@@ -239,7 +239,7 @@ namespace RosUI
             this.pnlStarters.Controls.Add(this.btnAddStarter);
             this.pnlStarters.Controls.Add(this.lblStartersHead);
             this.pnlStarters.Controls.Add(this.listviewStarters);
-            this.pnlStarters.Location = new System.Drawing.Point(19, 380);
+            this.pnlStarters.Location = new System.Drawing.Point(10, 380);
             this.pnlStarters.Name = "pnlStarters";
             this.pnlStarters.Size = new System.Drawing.Size(798, 318);
             this.pnlStarters.TabIndex = 17;
@@ -292,9 +292,9 @@ namespace RosUI
             this.pnlMains.Controls.Add(this.btnAddMains);
             this.pnlMains.Controls.Add(this.lblMains);
             this.pnlMains.Controls.Add(this.listviewMains);
-            this.pnlMains.Location = new System.Drawing.Point(19, 380);
+            this.pnlMains.Location = new System.Drawing.Point(11, 381);
             this.pnlMains.Name = "pnlMains";
-            this.pnlMains.Size = new System.Drawing.Size(795, 315);
+            this.pnlMains.Size = new System.Drawing.Size(793, 312);
             this.pnlMains.TabIndex = 21;
             // 
             // btnAddMains
@@ -344,7 +344,7 @@ namespace RosUI
             this.pnlDesserts.Controls.Add(this.btnAddDessert);
             this.pnlDesserts.Controls.Add(this.lblDesserts);
             this.pnlDesserts.Controls.Add(this.listviewDesserts);
-            this.pnlDesserts.Location = new System.Drawing.Point(16, 380);
+            this.pnlDesserts.Location = new System.Drawing.Point(8, 380);
             this.pnlDesserts.Name = "pnlDesserts";
             this.pnlDesserts.Size = new System.Drawing.Size(801, 315);
             this.pnlDesserts.TabIndex = 22;
@@ -649,13 +649,8 @@ namespace RosUI
             this.Controls.Add(this.btnDinner);
             this.Controls.Add(this.btnLunch);
             this.Controls.Add(this.btnDrinks);
-            this.Controls.Add(this.pnlSoftDrinks);
-            this.Controls.Add(this.pnlDinnerMains);
             this.Controls.Add(this.pnlDinner);
-            this.Controls.Add(this.pnlMains);
-            this.Controls.Add(this.pnlStarters);
             this.Controls.Add(this.pnlLunch);
-            this.Controls.Add(this.pnlDesserts);
             this.Controls.Add(this.pnlDrinkCategories);
             this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.txtNote);
@@ -666,6 +661,11 @@ namespace RosUI
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
+            this.Controls.Add(this.pnlMains);
+            this.Controls.Add(this.pnlStarters);
+            this.Controls.Add(this.pnlDesserts);
+            this.Controls.Add(this.pnlSoftDrinks);
+            this.Controls.Add(this.pnlDinnerMains);
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);

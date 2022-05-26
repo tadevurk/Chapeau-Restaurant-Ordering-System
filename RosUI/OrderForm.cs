@@ -173,11 +173,6 @@ namespace RosUI
             List<Drink> softDrinks = drinkLogic.GetAllSoftDrinks();
 
             listviewSoftDrinks.Items.Clear();
-            DisplayDrinks(softDrinks);
-        }
-
-        private void DisplayDrinks(List<Drink> softDrinks)
-        {
             foreach (Drink softDrink in softDrinks)
             {
                 ListViewItem li = new ListViewItem(softDrink.ItemName.ToString());
@@ -192,11 +187,6 @@ namespace RosUI
             List<Dish> starters = dishLogic.GetLunchStarters();
             listviewStarters.Items.Clear();
 
-            DisplayDishes(starters);
-        }
-
-        private void DisplayDishes(List<Dish> starters)
-        {
             foreach (Dish starter in starters)
             {
                 ListViewItem li = new ListViewItem(starter.ItemName.ToString());
@@ -211,7 +201,13 @@ namespace RosUI
             List<Dish> mains = dishLogic.GetLunchMains();
             listviewMains.Items.Clear();
 
-            DisplayDishes(mains);
+            foreach (Dish main in mains)
+            {
+                ListViewItem li = new ListViewItem(main.ItemName.ToString());
+                li.SubItems.Add(main.ItemPrice.ToString());
+                li.Tag = main; // Tagging the object
+                listviewMains.Items.Add(li);
+            }
         }
 
         private void ReadLunchDesserts()
@@ -219,7 +215,13 @@ namespace RosUI
             List<Dish> desserts = dishLogic.GetLunchDesserts();
             listviewDesserts.Items.Clear();
 
-            DisplayDishes(desserts);
+            foreach (Dish dessert in desserts)
+            {
+                ListViewItem li = new ListViewItem(dessert.ItemName.ToString());
+                li.SubItems.Add(dessert.ItemPrice.ToString());
+                li.Tag = dessert; // Tagging the object
+                listviewDesserts.Items.Add(li);
+            }
         }
 
         private void ReadDinnerMains()
@@ -227,7 +229,13 @@ namespace RosUI
             List<Dish> mains = dishLogic.GetDinnerMains();
             listviewDinnerMains.Items.Clear();
 
-            DisplayDishes(mains);
+            foreach (Dish main in mains)
+            {
+                ListViewItem li = new ListViewItem(main.ItemName.ToString());
+                li.SubItems.Add(main.ItemPrice.ToString());
+                li.Tag = main; // Tagging the object
+                listviewDinnerMains.Items.Add(li);
+            }
         }
 
         private void btnAddStarter_Click(object sender, EventArgs e)
