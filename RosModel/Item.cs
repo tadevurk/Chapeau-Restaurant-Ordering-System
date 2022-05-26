@@ -15,6 +15,8 @@ namespace RosModel
         public string ItemStatus { get; set; }
         public string ItemType { get; set; }
 
+        public int ItemAmount { get; set; }
+
         public decimal SubPrice { get; set; }
 
     }

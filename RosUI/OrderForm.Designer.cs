@@ -423,6 +423,7 @@ namespace RosUI
             this.btnAddDrink.TabIndex = 15;
             this.btnAddDrink.Text = "Add";
             this.btnAddDrink.UseVisualStyleBackColor = true;
+            this.btnAddDrink.Click += new System.EventHandler(this.btnAddDrink_Click);
             // 
             // lblSoftDrinks
             // 
@@ -659,7 +660,6 @@ namespace RosUI
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
-            this.Name = "FormOrder";
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);

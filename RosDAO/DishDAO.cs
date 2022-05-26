@@ -64,7 +64,7 @@ namespace RosDAL
                     DishID = (int)dr["DishID"],
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
-                    Amount = (int)dr["Amount"],
+                    ItemAmount = (int)dr["Amount"],
                 };
                 dishes.Add(dish);
             }
@@ -77,7 +77,7 @@ namespace RosDAL
                 "from Dish " +
                 "join Item on DishID = ItemID " +
                 "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
-                "where Dish.Course = 'Starter' AND Item.MenuTypeID = 1";
+                "where Dish.Course = 'Starter' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -87,7 +87,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -98,7 +98,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1";
+                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -108,7 +108,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2 OR Item.MenuTypeID=3";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
