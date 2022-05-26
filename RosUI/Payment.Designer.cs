@@ -103,17 +103,19 @@ namespace RosUI
             // lblTableNumber
             // 
             this.lblTableNumber.AutoSize = true;
+            this.lblTableNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblTableNumber.Location = new System.Drawing.Point(71, 14);
             this.lblTableNumber.Name = "lblTableNumber";
-            this.lblTableNumber.Size = new System.Drawing.Size(0, 20);
+            this.lblTableNumber.Size = new System.Drawing.Size(0, 23);
             this.lblTableNumber.TabIndex = 1;
             // 
             // radioBtnCash
             // 
             this.radioBtnCash.AutoSize = true;
+            this.radioBtnCash.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.radioBtnCash.Location = new System.Drawing.Point(86, 406);
             this.radioBtnCash.Name = "radioBtnCash";
-            this.radioBtnCash.Size = new System.Drawing.Size(68, 24);
+            this.radioBtnCash.Size = new System.Drawing.Size(74, 27);
             this.radioBtnCash.TabIndex = 2;
             this.radioBtnCash.TabStop = true;
             this.radioBtnCash.Text = "CASH";
@@ -123,9 +125,10 @@ namespace RosUI
             // radioBtnVisa
             // 
             this.radioBtnVisa.AutoSize = true;
+            this.radioBtnVisa.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.radioBtnVisa.Location = new System.Drawing.Point(214, 406);
             this.radioBtnVisa.Name = "radioBtnVisa";
-            this.radioBtnVisa.Size = new System.Drawing.Size(61, 24);
+            this.radioBtnVisa.Size = new System.Drawing.Size(67, 27);
             this.radioBtnVisa.TabIndex = 3;
             this.radioBtnVisa.TabStop = true;
             this.radioBtnVisa.Text = "VISA";
@@ -135,9 +138,10 @@ namespace RosUI
             // radioBtnDebit
             // 
             this.radioBtnDebit.AutoSize = true;
+            this.radioBtnDebit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.radioBtnDebit.Location = new System.Drawing.Point(343, 406);
             this.radioBtnDebit.Name = "radioBtnDebit";
-            this.radioBtnDebit.Size = new System.Drawing.Size(70, 24);
+            this.radioBtnDebit.Size = new System.Drawing.Size(76, 27);
             this.radioBtnDebit.TabIndex = 4;
             this.radioBtnDebit.TabStop = true;
             this.radioBtnDebit.Text = "DEBIT";
@@ -147,24 +151,27 @@ namespace RosUI
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(19, 296);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 20);
+            this.label2.Size = new System.Drawing.Size(127, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "BILL AMOUNT:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(33, 347);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 20);
+            this.label3.Size = new System.Drawing.Size(116, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "TIP AMOUNT:";
             // 
             // txtTip
             // 
-            this.txtTip.Location = new System.Drawing.Point(147, 344);
+            this.txtTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTip.Location = new System.Drawing.Point(147, 340);
             this.txtTip.Name = "txtTip";
             this.txtTip.Size = new System.Drawing.Size(89, 27);
             this.txtTip.TabIndex = 7;
@@ -174,24 +181,27 @@ namespace RosUI
             // 
             this.lblBillAmount.AutoSize = true;
             this.lblBillAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.lblBillAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblBillAmount.Location = new System.Drawing.Point(147, 296);
             this.lblBillAmount.Name = "lblBillAmount";
-            this.lblBillAmount.Size = new System.Drawing.Size(50, 20);
+            this.lblBillAmount.Size = new System.Drawing.Size(53, 20);
             this.lblBillAmount.TabIndex = 8;
             this.lblBillAmount.Text = "label4";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(334, 347);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 20);
+            this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 9;
             this.label4.Text = "TO PAY:";
             // 
             // btnCompletePayment
             // 
             this.btnCompletePayment.BackColor = System.Drawing.Color.Lime;
+            this.btnCompletePayment.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCompletePayment.Location = new System.Drawing.Point(282, 619);
             this.btnCompletePayment.Name = "btnCompletePayment";
             this.btnCompletePayment.Size = new System.Drawing.Size(225, 75);
@@ -202,6 +212,7 @@ namespace RosUI
             // 
             // btnBack
             // 
+            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.btnBack.Location = new System.Drawing.Point(409, 14);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(98, 29);
@@ -212,6 +223,7 @@ namespace RosUI
             // 
             // txtFeedback
             // 
+            this.txtFeedback.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtFeedback.Location = new System.Drawing.Point(12, 496);
             this.txtFeedback.Name = "txtFeedback";
             this.txtFeedback.Size = new System.Drawing.Size(495, 81);
@@ -222,15 +234,17 @@ namespace RosUI
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(12, 473);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 20);
+            this.label1.Size = new System.Drawing.Size(94, 23);
             this.label1.TabIndex = 15;
             this.label1.Text = "FEEDBACK:";
             // 
             // txtToPay
             // 
-            this.txtToPay.Location = new System.Drawing.Point(409, 344);
+            this.txtToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtToPay.Location = new System.Drawing.Point(409, 340);
             this.txtToPay.Name = "txtToPay";
             this.txtToPay.Size = new System.Drawing.Size(89, 27);
             this.txtToPay.TabIndex = 16;
@@ -239,9 +253,10 @@ namespace RosUI
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(12, 14);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 20);
+            this.label5.Size = new System.Drawing.Size(64, 23);
             this.label5.TabIndex = 17;
             this.label5.Text = "Table #";
             // 

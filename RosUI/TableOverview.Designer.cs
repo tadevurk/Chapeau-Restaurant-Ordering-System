@@ -48,6 +48,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.lblWaiter = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnTableOne
@@ -56,7 +58,7 @@
             this.btnTableOne.Name = "btnTableOne";
             this.btnTableOne.Size = new System.Drawing.Size(101, 40);
             this.btnTableOne.TabIndex = 0;
-            this.btnTableOne.Text = "Table 1";
+            this.btnTableOne.Text = "Empty";
             this.btnTableOne.UseVisualStyleBackColor = true;
             this.btnTableOne.Click += new System.EventHandler(this.btnTableOne_Click);
             // 
@@ -66,7 +68,7 @@
             this.btnTableTwo.Name = "btnTableTwo";
             this.btnTableTwo.Size = new System.Drawing.Size(101, 40);
             this.btnTableTwo.TabIndex = 1;
-            this.btnTableTwo.Text = "Table 2";
+            this.btnTableTwo.Text = "Empty";
             this.btnTableTwo.UseVisualStyleBackColor = true;
             this.btnTableTwo.Click += new System.EventHandler(this.btnTableTwo_Click);
             // 
@@ -76,7 +78,7 @@
             this.btnTableThree.Name = "btnTableThree";
             this.btnTableThree.Size = new System.Drawing.Size(101, 40);
             this.btnTableThree.TabIndex = 2;
-            this.btnTableThree.Text = "Table 3";
+            this.btnTableThree.Text = "Empty";
             this.btnTableThree.UseVisualStyleBackColor = true;
             this.btnTableThree.Click += new System.EventHandler(this.btnTableThree_Click);
             // 
@@ -86,7 +88,7 @@
             this.btnTableFour.Name = "btnTableFour";
             this.btnTableFour.Size = new System.Drawing.Size(101, 40);
             this.btnTableFour.TabIndex = 3;
-            this.btnTableFour.Text = "Table 4";
+            this.btnTableFour.Text = "Empty";
             this.btnTableFour.UseVisualStyleBackColor = true;
             this.btnTableFour.Click += new System.EventHandler(this.btnTableFour_Click);
             // 
@@ -96,7 +98,7 @@
             this.btnTableFive.Name = "btnTableFive";
             this.btnTableFive.Size = new System.Drawing.Size(101, 40);
             this.btnTableFive.TabIndex = 4;
-            this.btnTableFive.Text = "Table 5";
+            this.btnTableFive.Text = "Empty";
             this.btnTableFive.UseVisualStyleBackColor = true;
             this.btnTableFive.Click += new System.EventHandler(this.btnTableFive_Click);
             // 
@@ -106,7 +108,7 @@
             this.btnTableSix.Name = "btnTableSix";
             this.btnTableSix.Size = new System.Drawing.Size(101, 40);
             this.btnTableSix.TabIndex = 5;
-            this.btnTableSix.Text = "Table 6";
+            this.btnTableSix.Text = "Empty";
             this.btnTableSix.UseVisualStyleBackColor = true;
             this.btnTableSix.Click += new System.EventHandler(this.btnTableSix_Click);
             // 
@@ -116,7 +118,7 @@
             this.btnTableSeven.Name = "btnTableSeven";
             this.btnTableSeven.Size = new System.Drawing.Size(101, 40);
             this.btnTableSeven.TabIndex = 6;
-            this.btnTableSeven.Text = "Table 7";
+            this.btnTableSeven.Text = "Empty";
             this.btnTableSeven.UseVisualStyleBackColor = true;
             this.btnTableSeven.Click += new System.EventHandler(this.btnTableSeven_Click);
             // 
@@ -126,7 +128,7 @@
             this.btnTableEight.Name = "btnTableEight";
             this.btnTableEight.Size = new System.Drawing.Size(101, 40);
             this.btnTableEight.TabIndex = 7;
-            this.btnTableEight.Text = "Table 8";
+            this.btnTableEight.Text = "Empty";
             this.btnTableEight.UseVisualStyleBackColor = true;
             this.btnTableEight.Click += new System.EventHandler(this.btnTableEight_Click);
             // 
@@ -136,7 +138,7 @@
             this.btnTableNine.Name = "btnTableNine";
             this.btnTableNine.Size = new System.Drawing.Size(101, 40);
             this.btnTableNine.TabIndex = 8;
-            this.btnTableNine.Text = "Table 9";
+            this.btnTableNine.Text = "Empty";
             this.btnTableNine.UseVisualStyleBackColor = true;
             this.btnTableNine.Click += new System.EventHandler(this.btnTableNine_Click);
             // 
@@ -146,7 +148,7 @@
             this.btnTableTen.Name = "btnTableTen";
             this.btnTableTen.Size = new System.Drawing.Size(101, 40);
             this.btnTableTen.TabIndex = 9;
-            this.btnTableTen.Text = "Table 10";
+            this.btnTableTen.Text = "Empty";
             this.btnTableTen.UseVisualStyleBackColor = true;
             this.btnTableTen.Click += new System.EventHandler(this.btnTableTen_Click);
             // 
@@ -240,11 +242,32 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Table 10";
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Location = new System.Drawing.Point(181, 480);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(100, 40);
+            this.btnLogout.TabIndex = 20;
+            this.btnLogout.Text = "Logout";
+            this.btnLogout.UseVisualStyleBackColor = true;
+            // 
+            // lblWaiter
+            // 
+            this.lblWaiter.AutoSize = true;
+            this.lblWaiter.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblWaiter.Location = new System.Drawing.Point(12, 9);
+            this.lblWaiter.Name = "lblWaiter";
+            this.lblWaiter.Size = new System.Drawing.Size(78, 28);
+            this.lblWaiter.TabIndex = 21;
+            this.lblWaiter.Text = "Waiter: ";
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.lblWaiter);
+            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -295,5 +318,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Label lblWaiter;
     }
 }
