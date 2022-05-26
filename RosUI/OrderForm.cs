@@ -290,13 +290,13 @@ namespace RosUI
                     if (drink.Amount == 1)
                     {
                         listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-                        // increase the drink stock
+                        drinkLogic.IncreaseDrinkStock(drink);
                     }
                     else
                     {
                         drink.Amount--;
                         listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
-                        //Increase the drink stock
+                        drinkLogic.IncreaseDrinkStock(drink);
                     }
                 }
             }
@@ -454,7 +454,7 @@ namespace RosUI
                 listviewOrder.Items.Add(item);
             }
 
-            //dishLogic.DecreaseDishStock(softDrink); // Decrease the stock
+            drinkLogic.DecreaseDrinkStock(softDrink);
         }
 
 
@@ -491,14 +491,20 @@ namespace RosUI
 
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
         {
+
             DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
                 {
+                    Item item = (Item)lvOrderInProcess.Tag;
+
                     if (lvOrderInProcess.ForeColor == Color.Red)
                     {
                         listviewOrder.Items.Remove(lvOrderInProcess);
+                        item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                        item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                        orderLogic.UpdateStock(item);
                     }
                 }
             }
