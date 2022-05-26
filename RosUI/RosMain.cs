@@ -234,7 +234,7 @@ namespace RosUI
                     //if the item is ready for pickup should show another color
                     if (drink.DrinkStatus == DrinkStatus.PickUp)
                     {
-                        li.BackColor = Color.Green;
+                        li.BackColor = Color.LightGreen;
                     }
 
                     //adding item to the list
@@ -326,7 +326,7 @@ namespace RosUI
                     //displaying different color for status "ToPickUp"
                     if (dish.Status == DishStatus.PickUp)
                     {
-                        li.BackColor = Color.Green;
+                        li.BackColor = Color.LightGreen;
                     }
 
                     //adding items to listView
