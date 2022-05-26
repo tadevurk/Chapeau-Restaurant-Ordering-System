@@ -30,9 +30,17 @@ namespace RosLogic
         {
             return dishDAO.GetLunchDesserts();
         }
+        public List<Dish> GetDinnerStarters()
+        {
+            return dishDAO.GetDinnerStarters();
+        }
         public List<Dish> GetDinnerMains()
         {
             return dishDAO.GetDinnerMains();
+        }
+        public List<Dish> GetDinnerDesserts()
+        {
+            return dishDAO.GetDinnerDesserts();
         }
         public void IncreaseDishStock(Dish dish)
         {

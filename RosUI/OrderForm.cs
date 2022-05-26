@@ -57,38 +57,59 @@ namespace RosUI
                     pnlLunch.Show();
                     pnlLunch.Visible = true;
                     break;
+
                 case "Starters":
                     pnlStarters.Show();
                     pnlStarters.Visible = true;
                     pnlLunch.Visible = true;
                     ReadStarters();
                     break;
+
                 case "Mains":
                     pnlMains.Show();
                     pnlMains.Visible = true;
                     pnlLunch.Visible = true;
                     ReadLunchMains();
                     break;
+
                 case "Desserts":
                     pnlDesserts.Show();
                     pnlDesserts.Visible = true;
                     pnlLunch.Visible = true;
                     ReadLunchDesserts();
                     break;
+
                 case "Dinner":
                     pnlDinner.Show();
                     pnlDinner.Visible = true;
                     break;
+
+                case "DinnerStarters":
+                    pnlDinnerStarters.Show();
+                    pnlDinnerStarters.Visible = true;
+                    pnlDinner.Visible = true;
+                    ReadDinnerStarters();
+                    break;
+
                 case "DinnerMains":
                     pnlDinnerMains.Show();
                     pnlDinnerMains.Visible = true;
                     pnlDinner.Visible = true;
                     ReadDinnerMains();
                     break;
+
+                case "DinnerDesserts":
+                    pnlDinnerDesserts.Show();
+                    pnlDinnerDesserts.Visible = true;
+                    pnlDinner.Visible = true;
+                    ReadDinnerDesserts();
+                    break;
+
                 case "Drinks":
                     pnlDrinkCategories.Show();
                     pnlDrinkCategories.Visible = true;
                     break;
+
                 case "SoftDrinks":
                     pnlSoftDrinks.Show();
                     pnlSoftDrinks.Visible = true;
@@ -130,9 +151,19 @@ namespace RosUI
             showPanel("Dinner");
             SendCancelButtonsVisible();
         }
+        private void btnStartersDinner_Click(object sender, EventArgs e)
+        {
+            showPanel("DinnerStarters");
+            SendCancelButtonsVisible();
+        }
         private void btnMainsDinners_Click(object sender, EventArgs e)
         {
             showPanel("DinnerMains");
+            SendCancelButtonsVisible();
+        }
+        private void btnDessertsDinner_Click(object sender, EventArgs e)
+        {
+            showPanel("DinnerDesserts");
             SendCancelButtonsVisible();
         }
         private void btnDrinks_Click(object sender, EventArgs e)
@@ -156,32 +187,18 @@ namespace RosUI
         {
             pnlLunch.Hide();
             pnlDinner.Hide();
+            pnlDrinkCategories.Hide();
 
             pnlStarters.Hide();
+            pnlMains.Hide();
+            pnlDesserts.Hide();
 
-            pnlDrinkCategories.Hide();
+            pnlDinnerStarters.Hide();
+            pnlDinnerMains.Hide();
+            pnlDinnerDesserts.Hide();
 
             pnlSoftDrinks.Hide();
 
-            pnlMains.Hide();
-
-            pnlDesserts.Hide();
-
-            pnlDinnerMains.Hide();
-        }
-
-        private void ReadSoftDrinks()
-        {
-            List<Drink> softDrinks = drinkLogic.GetAllSoftDrinks();
-
-            listviewSoftDrinks.Items.Clear();
-            foreach (Drink softDrink in softDrinks)
-            {
-                ListViewItem li = new ListViewItem(softDrink.ItemName.ToString());
-                li.SubItems.Add(softDrink.ItemPrice.ToString());
-                li.Tag = softDrink; // Tagging the object
-                listviewSoftDrinks.Items.Add(li);
-            }
         }
 
         private void ReadStarters()
@@ -226,6 +243,20 @@ namespace RosUI
             }
         }
 
+        private void ReadDinnerStarters()
+        {
+            List<Dish> starters = dishLogic.GetDinnerStarters();
+            listviewDinnerStarters.Items.Clear();
+
+            foreach (Dish starter in starters)
+            {
+                ListViewItem li = new ListViewItem(starter.ItemName.ToString());
+                li.SubItems.Add(starter.ItemPrice.ToString());
+                li.Tag = starter; // Tagging the object
+                listviewDinnerStarters.Items.Add(li);
+            }
+        }
+
         private void ReadDinnerMains()
         {
             List<Dish> mains = dishLogic.GetDinnerMains();
@@ -237,6 +268,34 @@ namespace RosUI
                 li.SubItems.Add(main.ItemPrice.ToString());
                 li.Tag = main; // Tagging the object
                 listviewDinnerMains.Items.Add(li);
+            }
+        }
+
+        private void ReadDinnerDesserts()
+        {
+            List<Dish> desserts = dishLogic.GetDinnerDesserts();
+            listViewDinnerDesserts.Items.Clear();
+
+            foreach (Dish dessert in desserts)
+            {
+                ListViewItem li = new ListViewItem(dessert.ItemName.ToString());
+                li.SubItems.Add(dessert.ItemPrice.ToString());
+                li.Tag = dessert; // Tagging the object
+                listViewDinnerDesserts.Items.Add(li);
+            }
+        }
+
+        private void ReadSoftDrinks()
+        {
+            List<Drink> softDrinks = drinkLogic.GetAllSoftDrinks();
+
+            listviewSoftDrinks.Items.Clear();
+            foreach (Drink softDrink in softDrinks)
+            {
+                ListViewItem li = new ListViewItem(softDrink.ItemName.ToString());
+                li.SubItems.Add(softDrink.ItemPrice.ToString());
+                li.Tag = softDrink; // Tagging the object
+                listviewSoftDrinks.Items.Add(li);
             }
         }
 
@@ -255,6 +314,14 @@ namespace RosUI
         private void btnAddDinnerMains_Click(object sender, EventArgs e)
         {
             AddDinnerMain();
+        }
+        private void btnAddDinnerStarter_Click(object sender, EventArgs e)
+        {
+            AddDinnerStarter();
+        }
+        private void btnAddDinnerDesserts_Click(object sender, EventArgs e)
+        {
+            AddDinnerDessert();
         }
         private void btnAddDrink_Click(object sender, EventArgs e)
         {
@@ -404,6 +471,36 @@ namespace RosUI
 
             dishLogic.DecreaseDishStock(dessert); // Decrease the stock
         }
+        private void AddDinnerStarter() // Add starters to the orderedlist - if there is already one, just increase the amount
+        {
+            ListViewItem selectedStarter = listviewDinnerStarters.SelectedItems[0];
+            Dish starter = (Dish)selectedStarter.Tag;
+            ListViewItem? currentItem = null;
+
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (starter.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                {
+                    currentItem = item;
+                    starter.Amount = int.Parse(item.SubItems[2].Text);
+                    starter.Amount++;
+                    item.SubItems[2].Text = starter.Amount.ToString();
+                }
+            }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(starter.ItemName);
+                item.SubItems.Add(starter.ItemPrice.ToString());
+                starter.Amount = 1;
+                item.SubItems.Add(starter.Amount.ToString());
+                item.Tag = (Item)starter;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+
+            dishLogic.DecreaseDishStock(starter); // Decrease the stock
+        }
 
         private void AddDinnerMain() // Add starters to the orderedlist - if there is already one, just increase the amount
         {
@@ -434,6 +531,36 @@ namespace RosUI
             }
 
             dishLogic.DecreaseDishStock(main); // Decrease the stock
+        }
+        private void AddDinnerDessert() // Add starters to the orderedlist - if there is already one, just increase the amount
+        {
+            ListViewItem selectedDessert = listViewDinnerDesserts.SelectedItems[0];
+            Dish dessert = (Dish)selectedDessert.Tag;
+            ListViewItem? currentItem = null;
+
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (dessert.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                {
+                    currentItem = item;
+                    dessert.Amount = int.Parse(item.SubItems[2].Text);
+                    dessert.Amount++;
+                    item.SubItems[2].Text = dessert.Amount.ToString();
+                }
+            }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(dessert.ItemName);
+                item.SubItems.Add(dessert.ItemPrice.ToString());
+                dessert.Amount = 1;
+                item.SubItems.Add(dessert.Amount.ToString());
+                item.Tag = (Item)dessert;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+
+            dishLogic.DecreaseDishStock(dessert); // Decrease the stock
         }
 
         private void AddSoftDrink() // Add softDrinks to the orderedlist - if there is already one, just increase the amount
@@ -616,6 +743,26 @@ namespace RosUI
         private void btnBack_Click(object sender, EventArgs e)
         {
             Hide();
+        }
+
+        private void btnAddBeers_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddWines_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddSpirits_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddHotDrinks_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
