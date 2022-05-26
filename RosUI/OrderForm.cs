@@ -21,12 +21,10 @@ namespace RosUI
         OrderLogic orderLogic;
         List<Dish> DishesInOrderProcess = new List<Dish>(); // For the orders that are in process (between order- will be ordered)
         List<Drink> DrinkInOrderProcess = new List<Drink>();
-        List<Dish> DishesInOrderedList = new List<Dish>(); // For the orders that are already in the listviewOrder
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
         OrderedDrinkLogic orderedDrinkLogic = new OrderedDrinkLogic();
         RosMain rosMain;
         Employee emp;
-        int ordID = 0;
         public FormOrder(Table table, Employee emp, RosMain rosMain)
         {
             InitializeComponent();
@@ -458,7 +456,6 @@ namespace RosUI
         private void CreateOrder()
         {
             orderLogic.AddOrder(order); // Create new order
-            ordID = order.OrderID; // the new orderId will be the orderID from parameter           
         }
 
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
@@ -580,7 +577,7 @@ namespace RosUI
                 item.SubItems.Add(softDrink.ItemPrice.ToString());
                 softDrink.Amount = 1;
                 item.SubItems.Add(softDrink.Amount.ToString());
-                item.Tag = softDrink;
+                item.Tag = (Item)softDrink;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
