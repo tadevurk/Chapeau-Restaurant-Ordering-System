@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RosModel;
+
+////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace RosDAL
 {
@@ -59,6 +58,38 @@ namespace RosDAL
                 new SqlParameter("@DishNote", orderedDish.DishNote)
             };
             ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void BringStatusBack(OrderedDish d)
+        {
+            string query = "UPDATE OrderDish SET DishStatus=DishStatus-1 WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=1";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
+            new SqlParameter("@OrderID", d.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+    
+
+        public void UpdateDishToStart(OrderedDish d)
+        {
+            string query = "UPDATE OrderDish SET DishStatus=0 WHERE DishID=@DishID AND OrderID=@OrderID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
+            new SqlParameter("@OrderID", d.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public List<OrderedDish> GetAllFinishedDish()
+        {
+            string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], OD.DishID as ID, OD.OrderID as [OrderID], I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course" +
+    " from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
+    " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID " +
+    "where OD.DishStatus>=2 group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public void AddDishes(List<Dish> dishes, Order order)
@@ -203,7 +234,7 @@ namespace RosDAL
 
         public void UpdateDishStatusServe(OrderedDish d)
         {
-            string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=GetTime() WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=1";
+            string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=GetDate() WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=1";
             SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
             new SqlParameter("@OrderID", d.OrderID)
             };

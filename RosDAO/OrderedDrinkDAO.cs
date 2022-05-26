@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using RosModel;
 
+////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosDAL
 {
     public class OrderedDrinkDAO : BaseDAO
@@ -35,6 +37,37 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public List<OrderedDrink> GetAllFinishedDrinks()
+        {
+            string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note]," +
+    " SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID " +
+    "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus>=2 group by O.TableNumber," +
+    " OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered";
+
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public void BringStatusBack(OrderedDrink orderedDrink)
+        {
+            string query = "UPDATE OrderDrink SET DrinkStatus=DrinkStatus-1 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID),
+            new SqlParameter("@OrderID", orderedDrink.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void UpdateDrinkToStart(OrderedDrink d)
+        {
+            string query = "UPDATE OrderDrink SET DrinkStatus=0 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.DrinkID),
+            new SqlParameter("@OrderID", d.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
         public void UpdateDrink(OrderedDrink orderedDrink) // Change the amount of the drink etc. (The question is DrinkID or OrderID??)
         {

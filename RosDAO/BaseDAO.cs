@@ -89,6 +89,34 @@ namespace RosDAL
             }
         }
 
+        protected int ExecuteScalarQuery(string query, params SqlParameter[] sqlParameters)
+        {
+            SqlCommand command = new SqlCommand();
+            int number = 0;
+
+            try
+            {
+                command.Connection = OpenConnection();
+                command.CommandText = query;
+                command.Parameters.AddRange(sqlParameters);
+                adapter.InsertCommand = command;
+                number = (int)command.ExecuteScalar();
+            }
+            catch (SqlException e)
+            {
+                // Print.ErrorLog(e);
+                Console.WriteLine(e.Message);
+                throw;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+
+            return number;
+        }
+
+
         /* For Select Queries */
         protected DataTable ExecuteSelectQuery(string query, params SqlParameter[] sqlParameters)
         {

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using RosModel;
 using RosDAL;
+
+////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace RosLogic
 {
@@ -69,6 +67,21 @@ namespace RosLogic
         public void RemoveDish(OrderedDish orderedDish)
         {
             orderedDishdb.RemoveDish(orderedDish);
+        }
+
+        public List<OrderedDish> GetAllFinishedDish()
+        {
+            return orderedDishdb.GetAllFinishedDish();
+        }
+
+        public void UpdateDishToStart(OrderedDish orderedDish)
+        {
+            orderedDishdb.UpdateDishToStart(orderedDish);
+        }
+
+        public void BringStatusBack(OrderedDish orderedDish)
+        {
+            orderedDishdb.BringStatusBack(orderedDish);
         }
     }
 }
