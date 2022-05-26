@@ -423,6 +423,7 @@ namespace RosUI
             this.btnAddDrink.TabIndex = 15;
             this.btnAddDrink.Text = "Add";
             this.btnAddDrink.UseVisualStyleBackColor = true;
+            this.btnAddDrink.Click += new System.EventHandler(this.btnAddDrink_Click);
             // 
             // lblSoftDrinks
             // 
