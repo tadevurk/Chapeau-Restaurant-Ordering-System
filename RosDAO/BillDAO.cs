@@ -15,7 +15,7 @@ namespace RosDAL
         {
             string query = "SELECT I.ItemName, I.ItemPrice, OD.OrderedDishAmount, D.Vat FROM OrderDish as OD " +
                 "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DishID = I.ItemID JOIN Dish as D on OD.DishID = D.DishID " +
-                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus <= 3; ";
+                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus < 3; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -23,7 +23,7 @@ namespace RosDAL
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-       
+
         private List<BillItem> ReadOrderedDishes(DataTable dataTable)
         {
 
@@ -47,7 +47,7 @@ namespace RosDAL
         {
             string query = "SELECT I.ItemName, I.ItemPrice, OD.OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
                 "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID " +
-                "JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus <= 3; ";
+                "JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus < 3; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -79,18 +79,22 @@ namespace RosDAL
         // store a complete table bill in the database
         public void CreateBill(Bill bill)
         {
-            bill.BillNumber = LastBillNumberPK() + 1;
-            string query = "INSERT INTO Bill (BillNumber, TotalAmount, SubTotalAmount, TipAmount, Feedback, TableNumber, PaymentDate, PaymentMethod) " +
-                "VALUES (@BillNumber, @TotalAmount, @SubTotalAmount, @TipAmount, @Feedback, @TableNumber, GETDATE(), @PaymentMethod)";
+            //bill.BillNumber = LastBillNumberPK() + 1;
+            string query = "INSERT INTO Bill (TotalAmount, TipAmount,  Feedback, TableNumber, PaymentDate, SubTotalAmount, PaymentMethod) " +
+                "VALUES (@TotalAmount, @TipAmount,  @Feedback, @TableNumber, GETDATE(), @SubTotalAmount, @PaymentMethod)";
 
+            if (bill.Feedback == null)
+            {
+                bill.Feedback = "Null";
+            }
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@BillNumber", bill.BillNumber),
+                //new SqlParameter("@BillNumber", bill.BillNumber),
                 new SqlParameter("@TotalAmount", bill.TotalAmount),
-                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
+                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@PaymentMethod", bill.PaymentMethod),
             };
             ExecuteEditQuery(query, sqlParameters);
@@ -110,10 +114,28 @@ namespace RosDAL
             return (int)row["count"];
         }
 
-        public void SetItemsPaid(List<BillItem> billItems)
+        public void SetDishPaid(BillItem billItem)
         {
-            // update the ordered items status of a certain table to paid status 
-            string query = "UPDATE [OrderedDrink] SET DishStatus = 3 WHERE ";
+            // update the ordered dish status to paid status 
+            string query = "UPDATE [OrderedDish] SET @DishStatus = 3";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@DishStatus", billItem.DishStatus)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void SetDrinkPaid(BillItem billItem)
+        {
+            // update the ordered drinks status to paid status 
+            string query = "UPDATE [OrderedDrink] SET @DrinkStatus = 3";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@DishStatus", billItem.DrinkStatus)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
         }
 
         // update a bill in the database
@@ -123,7 +145,7 @@ namespace RosDAL
                 " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = GETDATE()" +
                 " WHERE BillNumber = @BillNumber";
             SqlParameter[] sqlParameters =
-           {
+            {
                 new SqlParameter("@BillNumber", bill.BillNumber),
                 new SqlParameter("@BillAmount", bill.TotalAmount),
                 new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),

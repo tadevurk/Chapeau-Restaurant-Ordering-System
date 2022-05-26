@@ -11,6 +11,9 @@ namespace RosModel
         public int Amount { get; set; }
         public string Name { get; set; }
         public int Vat { get; set; }
+        public int DishStatus { get; set; }
+        public int DrinkStatus { get; set; }
+
         //public decimal SubPrice { get; set; }
         //public decimal ItemPrice { get; set; }
 

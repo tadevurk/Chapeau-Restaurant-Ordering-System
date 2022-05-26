@@ -39,9 +39,14 @@ namespace RosLogic
             billdb.GetBill(b);
         }
 
-        public void SetItemsPaid(List<BillItem> billItems)
+        public void SetDishPaid(BillItem billItem)
         {
-            billdb.SetItemsPaid(billItems);
+            billdb.SetDishPaid(billItem);
+        }
+
+        public void SetDrinkPaid(BillItem billItem)
+        {
+            billdb.SetDrinkPaid(billItem);
         }
     }
 }
