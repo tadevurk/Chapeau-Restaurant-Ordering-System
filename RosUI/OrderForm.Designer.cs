@@ -189,6 +189,7 @@ namespace RosUI
             this.nameOrder,
             this.priceOrder,
             this.amountOrder});
+            this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
             this.listviewOrder.Location = new System.Drawing.Point(16, 35);
             this.listviewOrder.Name = "listviewOrder";
@@ -238,7 +239,7 @@ namespace RosUI
             this.pnlStarters.Controls.Add(this.btnAddStarter);
             this.pnlStarters.Controls.Add(this.lblStartersHead);
             this.pnlStarters.Controls.Add(this.listviewStarters);
-            this.pnlStarters.Location = new System.Drawing.Point(19, 380);
+            this.pnlStarters.Location = new System.Drawing.Point(10, 380);
             this.pnlStarters.Name = "pnlStarters";
             this.pnlStarters.Size = new System.Drawing.Size(798, 318);
             this.pnlStarters.TabIndex = 17;
@@ -267,6 +268,7 @@ namespace RosUI
             this.listviewStarters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Name,
             this.Price});
+            this.listviewStarters.FullRowSelect = true;
             this.listviewStarters.HideSelection = false;
             this.listviewStarters.Location = new System.Drawing.Point(14, 48);
             this.listviewStarters.Name = "listviewStarters";
@@ -290,9 +292,9 @@ namespace RosUI
             this.pnlMains.Controls.Add(this.btnAddMains);
             this.pnlMains.Controls.Add(this.lblMains);
             this.pnlMains.Controls.Add(this.listviewMains);
-            this.pnlMains.Location = new System.Drawing.Point(19, 380);
+            this.pnlMains.Location = new System.Drawing.Point(11, 381);
             this.pnlMains.Name = "pnlMains";
-            this.pnlMains.Size = new System.Drawing.Size(795, 315);
+            this.pnlMains.Size = new System.Drawing.Size(793, 312);
             this.pnlMains.TabIndex = 21;
             // 
             // btnAddMains
@@ -318,6 +320,7 @@ namespace RosUI
             this.listviewMains.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnMainName,
             this.columnMainPrice});
+            this.listviewMains.FullRowSelect = true;
             this.listviewMains.HideSelection = false;
             this.listviewMains.Location = new System.Drawing.Point(14, 48);
             this.listviewMains.Name = "listviewMains";
@@ -341,7 +344,7 @@ namespace RosUI
             this.pnlDesserts.Controls.Add(this.btnAddDessert);
             this.pnlDesserts.Controls.Add(this.lblDesserts);
             this.pnlDesserts.Controls.Add(this.listviewDesserts);
-            this.pnlDesserts.Location = new System.Drawing.Point(16, 380);
+            this.pnlDesserts.Location = new System.Drawing.Point(8, 380);
             this.pnlDesserts.Name = "pnlDesserts";
             this.pnlDesserts.Size = new System.Drawing.Size(801, 315);
             this.pnlDesserts.TabIndex = 22;
@@ -370,6 +373,7 @@ namespace RosUI
             this.listviewDesserts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.listviewDesserts.FullRowSelect = true;
             this.listviewDesserts.HideSelection = false;
             this.listviewDesserts.Location = new System.Drawing.Point(14, 48);
             this.listviewDesserts.Name = "listviewDesserts";
@@ -439,6 +443,7 @@ namespace RosUI
             this.listviewSoftDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnName,
             this.columnPrice});
+            this.listviewSoftDrinks.FullRowSelect = true;
             this.listviewSoftDrinks.HideSelection = false;
             this.listviewSoftDrinks.Location = new System.Drawing.Point(14, 48);
             this.listviewSoftDrinks.Name = "listviewSoftDrinks";
@@ -617,6 +622,7 @@ namespace RosUI
             this.listviewDinnerMains.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.MainName,
             this.MainPrice});
+            this.listviewDinnerMains.FullRowSelect = true;
             this.listviewDinnerMains.HideSelection = false;
             this.listviewDinnerMains.Location = new System.Drawing.Point(14, 48);
             this.listviewDinnerMains.Name = "listviewDinnerMains";
@@ -639,17 +645,12 @@ namespace RosUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1193, 766);
+            this.ClientSize = new System.Drawing.Size(820, 766);
             this.Controls.Add(this.btnDinner);
             this.Controls.Add(this.btnLunch);
             this.Controls.Add(this.btnDrinks);
-            this.Controls.Add(this.pnlSoftDrinks);
-            this.Controls.Add(this.pnlDinnerMains);
             this.Controls.Add(this.pnlDinner);
-            this.Controls.Add(this.pnlMains);
-            this.Controls.Add(this.pnlStarters);
             this.Controls.Add(this.pnlLunch);
-            this.Controls.Add(this.pnlDesserts);
             this.Controls.Add(this.pnlDrinkCategories);
             this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.txtNote);
@@ -660,6 +661,11 @@ namespace RosUI
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
+            this.Controls.Add(this.pnlMains);
+            this.Controls.Add(this.pnlStarters);
+            this.Controls.Add(this.pnlDesserts);
+            this.Controls.Add(this.pnlSoftDrinks);
+            this.Controls.Add(this.pnlDinnerMains);
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);

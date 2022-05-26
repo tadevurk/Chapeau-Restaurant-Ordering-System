@@ -32,6 +32,21 @@ namespace RosDAL
 
         }
 
+        public void UpdateStock(Item item)
+        {
+            string query = "Update Item " +
+            "SET ItemStock = ItemStock + @amount " +
+            "where ItemName = @ItemName; ";
+
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ItemName", item.ItemName),
+                new SqlParameter("@amount", item.ItemAmount)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
         public int MaxCount()
         {
             string query = "select count(*) as count from [Order]";

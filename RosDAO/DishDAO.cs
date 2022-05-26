@@ -87,7 +87,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -98,7 +98,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
+                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -108,17 +108,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2 OR Item.MenuTypeID=3";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Dish> GetAllEntremets() //Getting all Entremets
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Entremes';";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }

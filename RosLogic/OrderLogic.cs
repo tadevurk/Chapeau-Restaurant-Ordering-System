@@ -25,6 +25,9 @@ namespace RosLogic
             return orderDAO.GetAllOrders();
         }
 
-
+        public void UpdateStock(Item item)
+        {
+            orderDAO.UpdateStock(item);
+        }
     }
 }
