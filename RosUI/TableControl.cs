@@ -26,8 +26,9 @@ namespace RosUI
             this.employee = employee;
             this.rosMain = rosMain;
             this.table =  table;
+            orderForm = new FormOrder(table, employee, rosMain);
             lblTable.Text = "Table: " + table.TableNumber;
-            lblWaiter.Text = "Waiter: " + employee.EmplID;
+            lblWaiter.Text = "Waiter: " + employee.Name;
 
             if (table.TableStatus == 1)
             {

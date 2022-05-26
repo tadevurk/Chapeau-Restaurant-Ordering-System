@@ -34,11 +34,6 @@ namespace RosLogic
         {
             return dishDAO.GetDinnerMains();
         }
-
-        public List<Dish> GetAllEntremets()
-        {
-            return dishDAO.GetAllEntremets();
-        }
         public void IncreaseDishStock(Dish dish)
         {
             dishDAO.IncreaseDishStock(dish);

@@ -11,11 +11,12 @@ namespace RosDAL
 {
     public class BillDAO : BaseDAO
     {
-        public List<BillItem> GetOrderedDishes(Table table) // Get the list of the unpaid ordered dishes for a certain table
+        public List<Dish> GetOrderedDishes(Table table) // Get the list of the unpaid ordered dishes for a certain table
         {
-            string query = "SELECT I.ItemName, I.ItemPrice, OD.OrderedDishAmount, D.Vat FROM OrderDish as OD " +
-                "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DishID = I.ItemID JOIN Dish as D on OD.DishID = D.DishID " +
-                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus <= 3; ";
+            string query = "SELECT I.ItemName, I.ItemPrice, SUM(OD.OrderedDishAmount) as OrderedDishAmount, " +
+                "D.Vat FROM OrderDish as OD JOIN [Order] as O on OD.OrderID = O.OrderID " +
+                "JOIN Item as I on OD.DishID = I.ItemID JOIN Dish as D on OD.DishID = D.DishID " +
+                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus < 3 group by I.ItemName, I.ItemPrice, D.Vat; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -23,31 +24,31 @@ namespace RosDAL
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-       
-        private List<BillItem> ReadOrderedDishes(DataTable dataTable)
+
+        private List<Dish> ReadOrderedDishes(DataTable dataTable)
         {
 
-            List<BillItem> orderedDishes = new List<BillItem>();
+            List<Dish> orderedDishes = new List<Dish>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                BillItem orderedDish = new BillItem()
+                Dish orderedDish = new Dish()
                 {
-                    Name = (string)dr["ItemName"],
+                    ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
-                    Amount = (int)dr["OrderedDishAmount"],
-                    Vat = (int)dr["Vat"]
+                    ItemAmount = (int)dr["OrderedDishAmount"],
+                    ItemVat = (int)dr["Vat"]
                 };
                 orderedDishes.Add(orderedDish);
             }
             return orderedDishes;
         }
 
-        public List<BillItem> GetOrderedDrinks(Table table) // Get the list of the unpaid ordered drinks for a certain table
+        public List<Drink> GetOrderedDrinks(Table table) // Get the list of the unpaid ordered drinks for a certain table
         {
-            string query = "SELECT I.ItemName, I.ItemPrice, OD.OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
-                "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID " +
-                "JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus <= 3; ";
+            string query = "SELECT I.ItemName, I.ItemPrice, SUM(OD.OrderedDrinkAmount) as OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
+                "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID" +
+                " JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus < 3 group by I.ItemName, I.ItemPrice, DT.Vat ; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -55,18 +56,36 @@ namespace RosDAL
             return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private List<BillItem> ReadOrderedDrinks(DataTable dataTable)
+        private List<Drink> ReadOrderedDrinks(DataTable dataTable)
         {
-            List<BillItem> orderedDrinks = new List<BillItem>();
+            List<Drink> orderedDrinks = new List<Drink>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                BillItem orderedDrink = new BillItem()
+                Drink orderedDrink = new Drink()
                 {
-                    Name = (string)dr["ItemName"],
+                    ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
-                    Amount = (int)dr["OrderedDrinkAmount"],
-                    Vat = (int)dr["Vat"]
+                    ItemAmount = (int)dr["OrderedDrinkAmount"],
+                    ItemVat = (int)dr["Vat"]
+
+                };
+                orderedDrinks.Add(orderedDrink);
+            }
+            return orderedDrinks;
+        }
+
+        private List<Drink> ReadOrderedDrinksWithOrder(DataTable dataTable)
+        {
+            List<Drink> orderedDrinks = new List<Drink>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                Drink orderedDrink = new Drink()
+                {
+                    ItemName = (string)dr["DrinkID"],
+                    ItemPrice = (decimal)dr["OrderID"],
+
 
                 };
                 orderedDrinks.Add(orderedDrink);
@@ -79,18 +98,22 @@ namespace RosDAL
         // store a complete table bill in the database
         public void CreateBill(Bill bill)
         {
-            bill.BillNumber = LastBillNumberPK() + 1;
-            string query = "INSERT INTO Bill (BillNumber, TotalAmount, SubTotalAmount, TipAmount, Feedback, TableNumber, PaymentDate, PaymentMethod) " +
-                "VALUES (@BillNumber, @TotalAmount, @SubTotalAmount, @TipAmount, @Feedback, @TableNumber, GETDATE(), @PaymentMethod)";
+            //bill.BillNumber = LastBillNumberPK() + 1;
+            string query = "INSERT INTO Bill (TotalAmount, TipAmount,  Feedback, TableNumber, PaymentDate, SubTotalAmount, PaymentMethod) " +
+                "VALUES (@TotalAmount, @TipAmount,  @Feedback, @TableNumber, GETDATE(), @SubTotalAmount, @PaymentMethod)";
 
+            if (bill.Feedback == null)
+            {
+                bill.Feedback = "Null";
+            }
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@BillNumber", bill.BillNumber),
+                //new SqlParameter("@BillNumber", bill.BillNumber),
                 new SqlParameter("@TotalAmount", bill.TotalAmount),
-                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
                 new SqlParameter("@TableNumber", bill.TableNumber),
+                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@PaymentMethod", bill.PaymentMethod),
             };
             ExecuteEditQuery(query, sqlParameters);
@@ -110,10 +133,29 @@ namespace RosDAL
             return (int)row["count"];
         }
 
-        public void SetItemsPaid(List<BillItem> billItems)
+        public void SetDishPaid(Dish billItem)
         {
-            // update the ordered items status of a certain table to paid status 
-            string query = "UPDATE [OrderedDrink] SET DishStatus = 3 WHERE ";
+            // update the ordered dish status to paid status 
+            string query = "UPDATE [OrderDish] SET DishStatus= 3 where DishID = @DishID and OrderID = @OrderID";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@DishID", billItem.DishID),
+                new SqlParameter("@OrderID", billItem.Order)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void SetDrinkPaid(Drink billItem)
+        {
+            // update the ordered drinks status to paid status 
+            string query = "UPDATE [OrderedDrink] SET @DrinkStatus = 3";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@DishStatus", billItem.ItemStatusDrink)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
         }
 
         // update a bill in the database
@@ -123,7 +165,7 @@ namespace RosDAL
                 " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = GETDATE()" +
                 " WHERE BillNumber = @BillNumber";
             SqlParameter[] sqlParameters =
-           {
+            {
                 new SqlParameter("@BillNumber", bill.BillNumber),
                 new SqlParameter("@BillAmount", bill.TotalAmount),
                 new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
