@@ -45,6 +45,7 @@
             this.btnRunningKitDash = new System.Windows.Forms.Button();
             this.lblWelcomeKitDash = new System.Windows.Forms.Label();
             this.pnlKitchenView = new System.Windows.Forms.Panel();
+            this.btnUndoKitView = new System.Windows.Forms.Button();
             this.btnServe = new System.Windows.Forms.Button();
             this.btnViewNote = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.pnlBarView = new System.Windows.Forms.Panel();
+            this.btnUndoBarView = new System.Windows.Forms.Button();
             this.btnViewDrinkNote = new System.Windows.Forms.Button();
             this.btnDrinkServed = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -93,8 +95,6 @@
             this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
-            this.btnUndoBarView = new System.Windows.Forms.Button();
-            this.btnUndoKitView = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlDashboardKitchen.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
@@ -256,6 +256,17 @@
             this.pnlKitchenView.Size = new System.Drawing.Size(1216, 578);
             this.pnlKitchenView.TabIndex = 0;
             // 
+            // btnUndoKitView
+            // 
+            this.btnUndoKitView.BackColor = System.Drawing.Color.Red;
+            this.btnUndoKitView.Location = new System.Drawing.Point(125, 520);
+            this.btnUndoKitView.Name = "btnUndoKitView";
+            this.btnUndoKitView.Size = new System.Drawing.Size(94, 29);
+            this.btnUndoKitView.TabIndex = 6;
+            this.btnUndoKitView.Text = "Undo";
+            this.btnUndoKitView.UseVisualStyleBackColor = false;
+            this.btnUndoKitView.Click += new System.EventHandler(this.btnUndoKitView_Click);
+            // 
             // btnServe
             // 
             this.btnServe.Location = new System.Drawing.Point(384, 521);
@@ -355,6 +366,17 @@
             this.pnlBarView.Name = "pnlBarView";
             this.pnlBarView.Size = new System.Drawing.Size(1216, 572);
             this.pnlBarView.TabIndex = 4;
+            // 
+            // btnUndoBarView
+            // 
+            this.btnUndoBarView.BackColor = System.Drawing.Color.Red;
+            this.btnUndoBarView.Location = new System.Drawing.Point(125, 514);
+            this.btnUndoBarView.Name = "btnUndoBarView";
+            this.btnUndoBarView.Size = new System.Drawing.Size(94, 29);
+            this.btnUndoBarView.TabIndex = 6;
+            this.btnUndoBarView.Text = "Undo";
+            this.btnUndoBarView.UseVisualStyleBackColor = false;
+            this.btnUndoBarView.Click += new System.EventHandler(this.btnUndoBarView_Click);
             // 
             // btnViewDrinkNote
             // 
@@ -650,40 +672,18 @@
             this.columnHeader19.Text = "Table";
             this.columnHeader19.Width = 80;
             // 
-            // btnUndoBarView
-            // 
-            this.btnUndoBarView.BackColor = System.Drawing.Color.Red;
-            this.btnUndoBarView.Location = new System.Drawing.Point(125, 514);
-            this.btnUndoBarView.Name = "btnUndoBarView";
-            this.btnUndoBarView.Size = new System.Drawing.Size(94, 29);
-            this.btnUndoBarView.TabIndex = 6;
-            this.btnUndoBarView.Text = "Undo";
-            this.btnUndoBarView.UseVisualStyleBackColor = false;
-            this.btnUndoBarView.Click += new System.EventHandler(this.btnUndoBarView_Click);
-            // 
-            // btnUndoKitView
-            // 
-            this.btnUndoKitView.BackColor = System.Drawing.Color.Red;
-            this.btnUndoKitView.Location = new System.Drawing.Point(125, 520);
-            this.btnUndoKitView.Name = "btnUndoKitView";
-            this.btnUndoKitView.Size = new System.Drawing.Size(94, 29);
-            this.btnUndoKitView.TabIndex = 6;
-            this.btnUndoKitView.Text = "Undo";
-            this.btnUndoKitView.UseVisualStyleBackColor = false;
-            this.btnUndoKitView.Click += new System.EventHandler(this.btnUndoKitView_Click);
-            // 
             // RosMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.pnlKitchenViewFinished);
             this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlBarViewFinished);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlDashboardBar);
             this.Controls.Add(this.pnlDashboardKitchen);
-            this.Controls.Add(this.pnlKitchenViewFinished);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";

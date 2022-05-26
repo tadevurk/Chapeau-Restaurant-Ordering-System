@@ -22,8 +22,7 @@ namespace RosUI
         BillLogic billLogic = new BillLogic();
         Employee employee;
         FormOrder formOrder;
-        BillItem billItem;
-        List<BillItem> orderedItems;
+        List<Item> orderedItems;
 
         decimal toPay;
         decimal tip;
@@ -35,12 +34,12 @@ namespace RosUI
             this.formOrder = formOrder;
             this.employee = emp;
             this.rosMain = rosMain;
+            orderedItems = new List<Item>();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
 
 
-            orderedItems = new List<BillItem>();
             DisplayBill();
             // calculate the bill amount
             //..
@@ -57,28 +56,31 @@ namespace RosUI
             try
             {
                 listViewPayment.Items.Clear();
+
+                
               
                 BillLogic dishes = new BillLogic();
-                List<BillItem> orderedDishes = dishes.GetOrderedDishes(table);
+                List<Dish> orderedDishes = dishes.GetOrderedDishes(table);
 
                 BillLogic drinks = new BillLogic();
-                List<BillItem> orderedDrinks = drinks.GetOrderedDrinks(table);
+                List<Drink> orderedDrinks = drinks.GetOrderedDrinks(table);
 
-                orderedItems = orderedDishes.Concat(orderedDrinks).ToList();
+                orderedItems.AddRange(orderedDishes);
+                orderedItems.AddRange(orderedDrinks);
 
-                foreach (BillItem item in orderedItems)
+                foreach (Item item in orderedItems)
                 {
                     ListViewItem li = new ListViewItem();
-                    li.SubItems.Add(item.Amount.ToString());
-                    li.SubItems.Add(item.Name.ToString());
+                    li.SubItems.Add(item.ItemAmount.ToString());
+                    li.SubItems.Add(item.ItemName.ToString());
 
                     //item.Vat = calculateVat(item.Vat);
-                    li.SubItems.Add(item.Vat.ToString());
+                    li.SubItems.Add(item.ItemVat.ToString());
 
-                    item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.Vat);
-                    li.SubItems.Add((item.SubPrice * item.Amount).ToString());
+                    item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.ItemVat);
+                    li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString());
 
-                    li.SubItems.Add((item.ItemPrice * item.Amount).ToString());
+                    li.SubItems.Add((item.ItemPrice * item.ItemAmount).ToString());
 
                     li.Tag = item;
                     listViewPayment.Items.Add(li);
@@ -102,9 +104,9 @@ namespace RosUI
         {
             decimal billAmount = 0;
 
-            foreach (BillItem i in orderedItems)
+            foreach (Item i in orderedItems)
             {
-                billAmount += i.ItemPrice * i.Amount;
+                billAmount += i.ItemPrice * i.ItemAmount;
             }
 
             return billAmount;
@@ -115,9 +117,9 @@ namespace RosUI
         {
             decimal subAmount = 0;
 
-            foreach (BillItem i in orderedItems)
+            foreach (Item i in orderedItems)
             {
-                subAmount += CalculateItemSubtotal(i.ItemPrice, i.Vat) * i.Amount;
+                subAmount += CalculateItemSubtotal(i.ItemPrice, i.ItemVat) * i.ItemAmount;
             }
 
             return subAmount;
@@ -129,6 +131,20 @@ namespace RosUI
 
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
+
+            foreach (Item item in orderedItems)
+            {
+                if (item is Dish)
+                {
+                    // do something
+
+
+                }
+                else if (item is Drink)
+                {
+                    //do something else
+                }
+            }
             
             //SetItemsPaid(orderedItems);
             this.Hide();
@@ -207,21 +223,43 @@ namespace RosUI
         }
 
         // remove all items from a table that the payment is completed
-        public void SetItemsPaid(List<BillItem> orderedItems)
+        public void SetItemsPaid(List<Item> orderedItems)
         {
-            foreach (BillItem item in orderedItems)
+
+            List<Drink> drinks = new List<Drink>();
+
+            List<Dish> dishes = new List<Dish>();
+
+
+            foreach (Drink drink in drinks)
             {
-                SetDishPaid(item);
-                SetDrinkPaid(item);
+                SetDrinkPaid(drink);
             }
+
+            foreach (Dish dish in dishes)
+            {
+                SetDishPaid(dish);
+            }
+            
+            //foreach (Item item in orderedItems)
+            //{
+            //    if (item is Dish)
+            //    {
+            //        SetDishPaid((Dish)item);
+            //    }
+            //    else if (item is Drink)
+            //    {
+            //        SetDrinkPaid((Drink)item);
+            //    }
+            //}
         }
 
-        public void SetDishPaid(BillItem billItem)
+        public void SetDishPaid(Dish billItem)
         {
             billLogic.SetDishPaid(billItem);
         }
 
-        public void SetDrinkPaid(BillItem billItem)
+        public void SetDrinkPaid(Drink billItem)
         {
             billLogic.SetDrinkPaid(billItem);
         }

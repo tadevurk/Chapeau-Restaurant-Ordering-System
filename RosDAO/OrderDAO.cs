@@ -20,14 +20,15 @@ namespace RosDAL
 
         public void AddOrder(Order order)
         {
-            order.OrderID = MaxCount() + 1;
-            string query = "insert into [Order] values(@count, @WaiterID, null, @TableNumber, null, null);";
+            //order.OrderID = MaxCount() + 1;
+            string query = "insert into [Order] values(@WaiterID, null, @TableNumber, null, null);" +
+                "select cast(scope_identity() as int)";
             SqlParameter[] pr = {
             new SqlParameter("@count", order.OrderID),
             new SqlParameter("@WaiterID", order.WaiterID),
             new SqlParameter("@TableNumber", order.TableNumber)
             };
-            ExecuteEditQuery(query, pr);
+            order.OrderID = ExecuteScalarQuery(query, pr);
 
         }
 

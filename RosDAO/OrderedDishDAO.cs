@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using RosModel;
+
+////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
 
 namespace RosDAL
 {
@@ -74,7 +73,7 @@ namespace RosDAL
 
         public void UpdateDishToStart(OrderedDish d)
         {
-            string query = "UPDATE OrderDish SET DishStatus=0 WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=1";
+            string query = "UPDATE OrderDish SET DishStatus=0 WHERE DishID=@DishID AND OrderID=@OrderID";
             SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
             new SqlParameter("@OrderID", d.OrderID)
             };
@@ -235,7 +234,7 @@ namespace RosDAL
 
         public void UpdateDishStatusServe(OrderedDish d)
         {
-            string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=GetTime() WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=1";
+            string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=GetDate() WHERE DishID=@DishID AND OrderID=@OrderID";
             SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
             new SqlParameter("@OrderID", d.OrderID)
             };

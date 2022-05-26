@@ -19,13 +19,12 @@ namespace RosUI
         DrinkLogic drinkLogic;
         Order order;
         OrderLogic orderLogic;
-        List<Dish> alreadyOrdered = new List<Dish>();
         List<Dish> DishesInOrderProcess = new List<Dish>(); // For the orders that are in process (between order- will be ordered)
-        List<Dish> DishesInOrderedList = new List<Dish>(); // For the orders that are already in the listviewOrder
+        List<Drink> DrinkInOrderProcess = new List<Drink>();
         OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
+        OrderedDrinkLogic orderedDrinkLogic = new OrderedDrinkLogic();
         RosMain rosMain;
         Employee emp;
-        int ordID = 0;
         public FormOrder(Table table, Employee emp, RosMain rosMain)
         {
             InitializeComponent();
@@ -323,7 +322,7 @@ namespace RosUI
                 item.SubItems.Add(starter.ItemPrice.ToString());
                 starter.Amount = 1;
                 item.SubItems.Add(starter.Amount.ToString());
-                item.Tag = starter;
+                item.Tag = (Item)starter;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
@@ -355,7 +354,7 @@ namespace RosUI
                 item.SubItems.Add(main.ItemPrice.ToString());
                 main.Amount = 1;
                 item.SubItems.Add(main.Amount.ToString());
-                item.Tag = main;
+                item.Tag = (Item)main;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
@@ -387,7 +386,7 @@ namespace RosUI
                 item.SubItems.Add(dessert.ItemPrice.ToString());
                 dessert.Amount = 1;
                 item.SubItems.Add(dessert.Amount.ToString());
-                item.Tag = dessert;
+                item.Tag = (Item)dessert;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
@@ -419,7 +418,7 @@ namespace RosUI
                 item.SubItems.Add(main.ItemPrice.ToString());
                 main.Amount = 1;
                 item.SubItems.Add(main.Amount.ToString());
-                item.Tag = main;
+                item.Tag = (Item)main;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
@@ -430,24 +429,33 @@ namespace RosUI
 
         private void WritesContainedDishes() // Getting the ordered list
         {
+            List<Dish> alreadyOrdered = new List<Dish>();
+            List<Drink> drink = new List<Drink>();
+
+            List<Item> toDisplay = new List<Item>();
+
             alreadyOrdered = dishLogic.WriteContainedDishes(table, order);
+            drink = drinkLogic.WriteContainedDrinks(table,order);
+
+            toDisplay.AddRange(alreadyOrdered);
+            toDisplay.AddRange(drink);
+
             listviewOrder.Items.Clear();
 
-            foreach (Dish dish in alreadyOrdered)
+            foreach (Item item in toDisplay)
             {
-                ListViewItem item = new ListViewItem(dish.ItemName.ToString());
-                item.SubItems.Add(dish.ItemPrice.ToString());
-                item.SubItems.Add(dish.Amount.ToString());
-                item.ForeColor = Color.Green; // Change color from previous orders
-                item.Tag = (Dish)dish;
-                listviewOrder.Items.Add(item);
+                ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
+                lvItem.SubItems.Add(item.ItemPrice.ToString());
+                lvItem.SubItems.Add(item.ItemAmount.ToString());
+                lvItem.ForeColor = Color.Green; // Change color from previous orders
+                lvItem.Tag = (Item)item;
+                listviewOrder.Items.Add(lvItem);
             }
         }
 
         private void CreateOrder()
         {
             orderLogic.AddOrder(order); // Create new order
-            ordID = order.OrderID; // the new orderId will be the orderID from parameter           
         }
 
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
@@ -483,6 +491,8 @@ namespace RosUI
                 //Adding compleeteley new dish dish to Order_Dish table
                 orderedDishLogic.AddDishes(DishesInOrderProcess, order);
 
+                orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
+
                 WritesContainedDishes();
 
                 //Update KitchenView
@@ -502,12 +512,18 @@ namespace RosUI
         {
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                Dish dishInOrderList = (Dish)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
+                Item dishInOrderList = (Item)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
                 ListViewItem lvItemInOrderList = listviewOrder.Items[i];
 
-                if (lvItemInOrderList.ForeColor == Color.Red)
+                if (lvItemInOrderList.ForeColor == Color.Red && dishInOrderList is Dish)
                 {
-                    DishesInOrderProcess.Add(dishInOrderList);
+                    Dish d = (Dish)dishInOrderList;
+                    DishesInOrderProcess.Add(d);
+                }
+                else if(lvItemInOrderList.ForeColor == Color.Red && dishInOrderList is Drink)
+                {
+                    Drink d = (Drink)dishInOrderList;
+                    DrinkInOrderProcess.Add(d);
                 }
             }
         }
@@ -533,11 +549,40 @@ namespace RosUI
             Hide();
         }
 
-        private void btnPayment_Click(object sender, EventArgs e)
+        private void btnAddDrink_Click(object sender, EventArgs e)
         {
-            FormPayment formPayment = new FormPayment(table, emp, this, rosMain);
-            formPayment.Show();
-            this.Hide();
+            AddSoftDrink();
+        }
+        private void AddSoftDrink() // Add softDrinks to the orderedlist - if there is already one, just increase the amount
+        {
+            listviewSoftDrinks.FullRowSelect = true;
+            ListViewItem selectedSoftDrink = listviewSoftDrinks.SelectedItems[0];
+            Drink softDrink = (Drink)selectedSoftDrink.Tag;
+            ListViewItem currentItem = null;
+
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (softDrink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                {
+                    currentItem = item;
+                    softDrink.Amount = int.Parse(item.SubItems[2].Text);
+                    softDrink.Amount++;
+                    item.SubItems[2].Text = softDrink.Amount.ToString();
+                }
+            }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(softDrink.ItemName);
+                item.SubItems.Add(softDrink.ItemPrice.ToString());
+                softDrink.Amount = 1;
+                item.SubItems.Add(softDrink.Amount.ToString());
+                item.Tag = (Item)softDrink;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+
+            //dishLogic.DecreaseDishStock(softDrink); // Decrease the stock
         }
     }
 }

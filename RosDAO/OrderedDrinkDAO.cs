@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using RosModel;
 
+////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosDAL
 {
     public class OrderedDrinkDAO : BaseDAO
@@ -45,6 +47,26 @@ namespace RosDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
+        {
+            foreach (Drink drink in drinkInOrderProcess)
+            {
+                if (drink.Note == null)
+                {
+                    drink.Note = "null";
+                }
+
+                //Adding dish
+                string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, getdate(), null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", drink.Note),
+                new SqlParameter("@Amount", drink.Amount)};
+
+                ExecuteEditQuery(query, sp);
+            }
         }
 
         public void BringStatusBack(OrderedDrink orderedDrink)
