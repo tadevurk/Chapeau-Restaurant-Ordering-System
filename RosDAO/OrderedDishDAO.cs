@@ -210,6 +210,7 @@ namespace RosDAL
                 new SqlParameter("@DishID", d.DishID),
                 new SqlParameter("@OrderID", d.Order)
             };
+            ExecuteEditQuery(query, sp);
         }
 
         public List<OrderedDish> GetAllOrderedDish()

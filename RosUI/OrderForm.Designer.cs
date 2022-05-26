@@ -702,7 +702,7 @@ namespace RosUI
         private System.Windows.Forms.Button btnAddStarter;
         private System.Windows.Forms.Label lblStartersHead;
         private System.Windows.Forms.ListView listviewStarters;
-        private System.Windows.Forms.ColumnHeader Name;
+        private new System.Windows.Forms.ColumnHeader Name;
         private System.Windows.Forms.ColumnHeader Price;
         private System.Windows.Forms.ColumnHeader nameOrder;
         private System.Windows.Forms.ColumnHeader priceOrder;
