@@ -125,6 +125,7 @@ namespace RosUI
             this.txtLicenseKey.Name = "txtLicenseKey";
             this.txtLicenseKey.Size = new System.Drawing.Size(125, 27);
             this.txtLicenseKey.TabIndex = 9;
+            this.txtLicenseKey.UseSystemPasswordChar = true;
             // 
             // Registration
             // 

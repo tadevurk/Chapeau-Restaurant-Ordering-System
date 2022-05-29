@@ -678,12 +678,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlKitchenViewFinished);
             this.Controls.Add(this.pnlKitchenView);
+            this.Controls.Add(this.pnlDashboardKitchen);
+            this.Controls.Add(this.pnlKitchenViewFinished);
             this.Controls.Add(this.pnlBarViewFinished);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlDashboardBar);
-            this.Controls.Add(this.pnlDashboardKitchen);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";

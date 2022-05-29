@@ -10,29 +10,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+////////////////////Jason Xie, 659045, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosUI
 {
     public partial class TableOverview : Form
     {
         private Employee employee;
         private RosMain rosMain;
-        private Table table;
-        private TableLogic tableLogic = new TableLogic();
-        private OrderedDishLogic orderedDishLogic = new OrderedDishLogic();
-        private OrderedDrinkLogic orderedDrinkLogic = new OrderedDrinkLogic();
+        private Table table = new Table();
+        private TableLogic tableLogic;
         private List<Table> tables;
-
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
             InitializeComponent();
             this.employee = employee;
-            this.rosMain = rosMain;
-            table = new Table();
-            rosMain.AddWaiterView(this);
-            lblWaiter.Text = "Waiter: " + employee.Name;
+            this.rosMain = rosMain;               
+            lblWaiter.Text = "Waiter: " + employee.Name;      
+            tableLogic = new TableLogic();
             tables = tableLogic.GetAllTables();
             UpdateAllButtons(tables);
+            rosMain.AddWaiterView(this);
         }
 
         //clicking the button opens the table control
@@ -41,6 +40,7 @@ namespace RosUI
             try
             {
                 this.Close();
+                // get Table One and opens the TableControl
                 table = tables[0];
                 new TableControl(employee, rosMain, table).Show();
             }
@@ -186,6 +186,7 @@ namespace RosUI
             }
         }
 
+        //Changes the button color depending on the status of the table
         public Button UpdateButtonColor(Table table, Button button)
         {
             switch (table.TableStatus)
@@ -200,7 +201,8 @@ namespace RosUI
                     return button;
                 case 2:
                     button.BackColor = Color.LightBlue;
-                    button.Text = "Standby";
+                        button.Text = "Standby";
+
                     return button;
                 case 3:
                     button.BackColor = Color.LightGreen;
@@ -210,10 +212,11 @@ namespace RosUI
                     button.BackColor = Color.LightGreen;
                     button.Text = "DishReady";
                     return button;
-            }        
+            }
             return button;
         }
 
+        //Updates all the buttons with the newest status
         public void UpdateAllButtons(List<Table> tables)
         {
             UpdateButtonColor(tables[0], btnTableOne);
@@ -228,6 +231,7 @@ namespace RosUI
             UpdateButtonColor(tables[9], btnTableTen);
         }
 
+        //Updates database when the order is received in the kitchen
         public void OrderRecieved(int number)
         {
             //Changing color of buttons when Order is initiated
@@ -294,7 +298,7 @@ namespace RosUI
             }
         }
 
-
+        //Updates database when the drink is ready in the bar
         public void DrinkReady(int number)
         {
             //changing color of buttons when order is ready for the pick up 
@@ -361,6 +365,7 @@ namespace RosUI
             }
         }
 
+        //Updates database when the dish is ready in the kitchen
         public void DishReady(int number)
         {
             //changing color of buttons when order is ready for the pick up 
@@ -427,6 +432,7 @@ namespace RosUI
             }
         }
 
+        //Updates database when 
         public void ItemServed(int number)
         {
             //changing color of buttons when order is ready for the pick up 
@@ -491,6 +497,12 @@ namespace RosUI
                     tableLogic.Update(table);
                     break;
             }
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new Login().Show();
         }
     }
 }

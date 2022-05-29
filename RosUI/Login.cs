@@ -6,23 +6,29 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Collections.Generic;
 
+////////////////////Jason Xie, 659045, GROUP 1, IT1D////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosUI
 {
     public partial class Login : Form
     {
-        RosMain main;
-        Employee employee = new Employee();
-        EmployeeLogic employeeLogic = new EmployeeLogic();
+        private RosMain main;
+        private Employee employee = new Employee();
+        private EmployeeLogic employeeLogic;
+
 
         public Login()
         {
             InitializeComponent();
+            employeeLogic = new EmployeeLogic();
         }
 
+        //Will login the user in
         private void btnLogin_Click(object sender, EventArgs e)
         {
             try
             {
+                //check to see if all fields are filled
                 if (txtUsername.Text == "" && txtPinCode.Text == "")
                 {
                     MessageBox.Show("*Please your username and password*");
@@ -43,13 +49,15 @@ namespace RosUI
                         return;
                     }
                 }
-                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
-                CheckRole(employee);
 
-          
+                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
+                //retrieve the role from the database
+                CheckRole(employee);         
+
+                //Checks the login password
                 if (CheckPassword())
                 {
+                    //Checks which role the users has and opens the corrisponding form
                     switch (employee.Roles)
                     {
                         case Roles.Manager:
@@ -95,12 +103,13 @@ namespace RosUI
             }         
         }
 
+        //Opens the registration form
         private void btnRegister_Click(object sender, EventArgs e)
         {
             try
             {
                 this.Hide();
-                new Registration().Show();
+                new Registration(main).Show();
             }
             catch (Exception exp)
             {
@@ -109,6 +118,7 @@ namespace RosUI
             }
         }
 
+        //Encrypts the password from the login and checks it with the one in the database
         private bool CheckPassword()
         {
             if (employee.Salt == null || employee.Digest == null)
@@ -117,6 +127,7 @@ namespace RosUI
                 return employee.Digest.ToString() == EncryptPassword(txtPinCode.Text, employee.Salt).Digest;
         }
 
+        //Checks which role this user has
         private void CheckRole(Employee employee)
         {
             
@@ -143,6 +154,7 @@ namespace RosUI
             }
         }
 
+        //Checks in the database if the user is a manager
         private bool IsManager(Employee manager)
         {
             List<Employee> managers = employeeLogic.GetAllManagers();
@@ -155,6 +167,7 @@ namespace RosUI
             return isManager;
         }
 
+        //Checks in the database if the user is a waiter
         private bool IsWaiter(Employee waiter)
         {
             List<Employee> waiters = employeeLogic.GetAllWaiters();
@@ -167,6 +180,7 @@ namespace RosUI
             return isWaiter;
         }
 
+        //Checks in the database if the user is a chef
         private bool IsChef(Employee chef)
         {
             List<Employee> chefs = employeeLogic.GetAllChefs();
@@ -179,6 +193,7 @@ namespace RosUI
             return isChef;
         }
 
+        //Checks in the database if the user is a bartender
         private bool IsBartender(Employee bartender)
         {
             List<Employee> bartenders = employeeLogic.GetAllBartenders();
@@ -201,7 +216,7 @@ namespace RosUI
             writer.Close();
         }
 
-        //This method hash the password
+        //This method encrypts the password
         private HashWithSaltResult EncryptPassword(string password, string salt)
         {
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
