@@ -8,7 +8,7 @@ namespace RosModel
 {
     public enum DrinkStatus { ToPrepare, PickUp, Serve, Payed }
 
-    public class OrderedDrink
+    public class OrderedDrink :Item
     {
         public int OrderID { get; set; }
         public int DrinkID { get; set; }

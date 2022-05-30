@@ -38,7 +38,7 @@ namespace RosUI
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
-
+            btnCompletePayment.BackColor = Color.LightGray;
 
             DisplayBill();
             // calculate the bill amount
@@ -57,13 +57,11 @@ namespace RosUI
             {
                 listViewPayment.Items.Clear();
 
-                
-              
                 BillLogic dishes = new BillLogic();
-                List<Dish> orderedDishes = dishes.GetOrderedDishes(table);
+                List<OrderedDish> orderedDishes = dishes.GetOrderedDishes(table);
 
                 BillLogic drinks = new BillLogic();
-                List<Drink> orderedDrinks = drinks.GetOrderedDrinks(table);
+                List<OrderedDrink> orderedDrinks = drinks.GetOrderedDrinks(table);
 
                 orderedItems.AddRange(orderedDishes);
                 orderedItems.AddRange(orderedDrinks);
@@ -132,21 +130,9 @@ namespace RosUI
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
 
-            foreach (Item item in orderedItems)
-            {
-                if (item is Dish)
-                {
-                    // do something
+            // change ordered items status to paid
+            SetItemsPaid(orderedItems);
 
-
-                }
-                else if (item is Drink)
-                {
-                    //do something else
-                }
-            }
-            
-            //SetItemsPaid(orderedItems);
             this.Hide();
 
             // return to the table overview through the RosMain form or Restaurant overview form
@@ -166,12 +152,14 @@ namespace RosUI
         private void radioBtnCash_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
+            btnCompletePayment.BackColor = Color.LightGreen;
             bill.PaymentMethod = "Cash";
         }
 
         private void radioBtnVisa_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
+            btnCompletePayment.BackColor = Color.LightGreen;
             bill.PaymentMethod = "Visa";
 
         }
@@ -179,6 +167,7 @@ namespace RosUI
         private void radioBtnDebit_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
+            btnCompletePayment.BackColor = Color.LightGreen;
             bill.PaymentMethod = "Debit";
 
         }
@@ -186,7 +175,6 @@ namespace RosUI
         private void txtTip_TextChanged(object sender, EventArgs e)
         {
             // add a tip and adjust the amount to be paid
-            // ..
             tip = Convert.ToDecimal(txtTip.Text);
             toPay = tip + bill.TotalAmount;
 
@@ -225,43 +213,28 @@ namespace RosUI
         // remove all items from a table that the payment is completed
         public void SetItemsPaid(List<Item> orderedItems)
         {
-
-            List<Drink> drinks = new List<Drink>();
-
-            List<Dish> dishes = new List<Dish>();
-
-
-            foreach (Drink drink in drinks)
+            foreach (Item item in orderedItems)
             {
-                SetDrinkPaid(drink);
+                if (item is OrderedDish)
+                {
+                    SetDishPaid((OrderedDish)item);
+                }
+                
+                if (item is OrderedDrink)
+                {
+                    SetDrinkPaid((OrderedDrink)item);
+                }
             }
-
-            foreach (Dish dish in dishes)
-            {
-                SetDishPaid(dish);
-            }
-            
-            //foreach (Item item in orderedItems)
-            //{
-            //    if (item is Dish)
-            //    {
-            //        SetDishPaid((Dish)item);
-            //    }
-            //    else if (item is Drink)
-            //    {
-            //        SetDrinkPaid((Drink)item);
-            //    }
-            //}
         }
 
-        public void SetDishPaid(Dish billItem)
+        public void SetDishPaid(OrderedDish item)
         {
-            billLogic.SetDishPaid(billItem);
+            billLogic.SetDishPaid(item);
         }
 
-        public void SetDrinkPaid(Drink billItem)
+        public void SetDrinkPaid(OrderedDrink item)
         {
-            billLogic.SetDrinkPaid(billItem);
+            billLogic.SetDrinkPaid(item);
         }
     }
 }
