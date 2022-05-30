@@ -157,20 +157,20 @@ namespace RosUI
 
         private void ButtonColorReset()
         {
-            btnLunch.BackColor = default(Color);
-            btnStarters.BackColor = default(Color);
-            btnMains.BackColor = default(Color);
-            btnDesserts.BackColor = default(Color);
-            btnDinner.BackColor = default(Color);
-            btnStartersDinner.BackColor = default(Color);
-            btnMainsDinners.BackColor = default(Color);
-            btnDessertsDinner.BackColor = default(Color);
-            btnDrinks.BackColor = default(Color);
-            btnSoftDrink.BackColor = default(Color);
-            btnBeers.BackColor = default(Color);
-            btnWine.BackColor = default(Color);
-            btnSpirits.BackColor = default(Color);
-            btnHotDrinks.BackColor = default(Color);
+            btnLunch.BackColor = Color.LightSkyBlue;
+            btnStarters.BackColor = Color.LightSkyBlue;
+            btnMains.BackColor = Color.LightSkyBlue;
+            btnDesserts.BackColor = Color.LightSkyBlue;
+            btnDinner.BackColor = Color.LightSkyBlue;
+            btnStartersDinner.BackColor = Color.LightSkyBlue;
+            btnMainsDinners.BackColor = Color.LightSkyBlue;
+            btnDessertsDinner.BackColor = Color.LightSkyBlue;
+            btnDrinks.BackColor = Color.LightSkyBlue;
+            btnSoftDrink.BackColor = Color.LightSkyBlue;
+            btnBeers.BackColor = Color.LightSkyBlue;
+            btnWine.BackColor = Color.LightSkyBlue;
+            btnSpirits.BackColor = Color.LightSkyBlue;
+            btnHotDrinks.BackColor = Color.LightSkyBlue;
         }
         private void btnLunch_Click(object sender, EventArgs e)
         {
@@ -660,8 +660,6 @@ namespace RosUI
         {
             try
             {
-                
-
                 if (listviewOrder.SelectedItems.Count == 0)
                 {
                     throw new Exception("Please select an item");
