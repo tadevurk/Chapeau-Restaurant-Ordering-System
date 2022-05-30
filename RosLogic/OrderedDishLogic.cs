@@ -54,10 +54,6 @@ namespace RosLogic
         {
             return orderedDishdb.GetOrderedDishByKey(ord, dish);
         }
-        public void AddDish(OrderedDish orderedDish)
-        {
-            orderedDishdb.AddDish(orderedDish);
-        }
 
         public void UpdateDish(OrderedDish orderedDish)
         {

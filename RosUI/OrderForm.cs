@@ -660,8 +660,7 @@ namespace RosUI
         {
             try
             {
-                Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
-                ListViewItem li = listviewOrder.SelectedItems[0];
+                
 
                 if (listviewOrder.SelectedItems.Count == 0)
                 {
@@ -669,6 +668,8 @@ namespace RosUI
                 }
                 else
                 {
+                    Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
+                    ListViewItem li = listviewOrder.SelectedItems[0];
                     if (item is Dish)
                     {
                         Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
@@ -944,7 +945,7 @@ namespace RosUI
                     DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        orderLogic.AddOrder(order); // Create new order
+                        order.OrderID = orderLogic.AddOrder(emp, table); // Create new order
 
                         // send order - ( and grouping the old items' amount by adding the new items' amount)
                         SendOrder();
