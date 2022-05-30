@@ -51,9 +51,9 @@ namespace RosLogic
             drinkDAO.DecreaseDrinkStock(drink);
         }
 
-        public List<Drink> WriteContainedDrinks(Table table, Order order)
+        public List<Drink> WriteContainedDrinks(Table table)
         {
-            return drinkDAO.WriteContainedDrinks(table,order);
+            return drinkDAO.WriteContainedDrinks(table);
         }
     }
 }

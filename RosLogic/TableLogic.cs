@@ -17,7 +17,6 @@ namespace RosLogic
             tabledb = new TableDAO();
         }
 
-
         public Table GetTableById(int tableNumber)
         {
             return tabledb.GetTableById(tableNumber);
@@ -31,6 +30,11 @@ namespace RosLogic
         public void Update(Table table)
         {
             tabledb.Update(table);
+        }
+
+        public void UpdateTableWaiter(Table table)
+        {
+            tabledb.UpdateTableWaiter(table);
         }
     }
 }

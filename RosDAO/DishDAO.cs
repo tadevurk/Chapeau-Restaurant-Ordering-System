@@ -13,7 +13,7 @@ namespace RosDAL
     {
         //Getting all Starters
 
-        public List<Dish> WriteContainedDishes(Table t, Order o)
+        public List<Dish> WriteContainedDishes(Table t)
         {
             string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount], O.TableNumber as [TableNumber] from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
@@ -23,7 +23,6 @@ namespace RosDAL
             SqlParameter[] sp =
             {
                 new SqlParameter("@TableNumber", t.TableNumber),
-                new SqlParameter("@OrderID", o.OrderID)
             };
 
             return ReadTablesOrder(ExecuteSelectQuery(query, sp));
@@ -87,7 +86,7 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -98,7 +97,18 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
+                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Dish> GetDinnerStarters()
+        {
+            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish " +
+                "join Item on DishID = ItemID " +
+                "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
+                "where Dish.Course = 'Starter' AND Item.MenuTypeID = 2 OR Item.MenuTypeID=3";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -108,17 +118,17 @@ namespace RosDAL
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2 OR Item.MenuTypeID=3";
+                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<Dish> GetAllEntremets() //Getting all Entremets
+        public List<Dish> GetDinnerDesserts() //Getting all Desserts
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +
                 "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Entremes';";
+                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 2";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }

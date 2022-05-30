@@ -198,6 +198,8 @@ namespace RosDAL
                 new SqlParameter("@DrinkID", d.DrinkID),
                 new SqlParameter("@OrderID", d.Order)
             };
+
+            ExecuteEditQuery(query, sp);
         }
         public void AddDrink(List<Drink> drink, Order order)
         {
