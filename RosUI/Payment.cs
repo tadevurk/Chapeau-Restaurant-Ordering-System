@@ -127,20 +127,24 @@ namespace RosUI
 
         private void btnCompletePayment_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("Do you want to complete the payment?", "Complete payment", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {    
+                // when complete payment is clicked, the bill is stored in the database
+                billLogic.CreateBill(bill);
 
-            // when complete payment is clicked, the bill is stored in the database
-            billLogic.CreateBill(bill);
+                // change ordered items status to paid
+                SetItemsPaid(orderedItems);
 
-            // change ordered items status to paid
-            SetItemsPaid(orderedItems);
+                this.Hide();
 
-            this.Hide();
+                // return to the table overview through the RosMain form or Restaurant overview form
+                TableOverview tableOverview = new TableOverview(employee, rosMain);
+                tableOverview.Show();
 
-            // return to the table overview through the RosMain form or Restaurant overview form
-            TableOverview tableOverview = new TableOverview(employee, rosMain);
-            tableOverview.Show();
-            
-            this.Close();
+                this.Close();
+            }
+            else { return; }
 
         }
 
