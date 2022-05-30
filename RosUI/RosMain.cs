@@ -16,6 +16,8 @@ namespace RosUI
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
+        OrderedDish d = new OrderedDish();
+
         public RosMain(Employee employee)
         {
             InitializeComponent();
@@ -119,7 +121,7 @@ namespace RosUI
         {
             foreach (ListViewItem item in lvOrderedDishes.Items)
             {
-                OrderedDish d = (OrderedDish)item.Tag;
+                d = (OrderedDish)item.Tag;
 
                 switch (d.Status)
                 {

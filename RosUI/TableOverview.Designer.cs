@@ -50,6 +50,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblWaiter = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnTableOne
@@ -244,12 +245,13 @@
             // 
             // btnLogout
             // 
+            this.btnLogout.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnLogout.Location = new System.Drawing.Point(181, 480);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(100, 40);
             this.btnLogout.TabIndex = 20;
             this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // lblWaiter
@@ -262,11 +264,23 @@
             this.lblWaiter.TabIndex = 21;
             this.lblWaiter.Text = "Waiter: ";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRefresh.Location = new System.Drawing.Point(385, -3);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(100, 40);
+            this.btnRefresh.TabIndex = 22;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblWaiter);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label10);
@@ -321,5 +335,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblWaiter;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

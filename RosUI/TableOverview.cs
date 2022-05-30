@@ -21,13 +21,15 @@ namespace RosUI
         private Table table = new Table();
         private TableLogic tableLogic;
         private List<Table> tables;
+        private OrderedDish orderedDish = new OrderedDish();
+        private OrderedDishLogic orderedDishLogic;
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
             InitializeComponent();
             this.employee = employee;
-            this.rosMain = rosMain;               
-            lblWaiter.Text = "Waiter: " + employee.Name;      
+            this.rosMain = rosMain;
+            lblWaiter.Text = "Waiter: " + employee.Name;
             tableLogic = new TableLogic();
             tables = tableLogic.GetAllTables();
             UpdateAllButtons(tables);
@@ -189,6 +191,8 @@ namespace RosUI
         //Changes the button color depending on the status of the table
         public Button UpdateButtonColor(Table table, Button button)
         {
+  
+
             switch (table.TableStatus)
             {
                 case 0:
@@ -201,8 +205,8 @@ namespace RosUI
                     return button;
                 case 2:
                     button.BackColor = Color.LightBlue;
-                        button.Text = "Standby";
-
+                    button.Text = "Standby";
+                    CalculateTimeTaken(button, table);
                     return button;
                 case 3:
                     button.BackColor = Color.LightGreen;
@@ -212,6 +216,40 @@ namespace RosUI
                     button.BackColor = Color.LightGreen;
                     button.Text = "DishReady";
                     return button;
+            }
+
+
+
+            return button;
+        }
+
+        public Button CalculateTimeTaken(Button button, Table table)
+        {
+            orderedDishLogic = new OrderedDishLogic();
+            List<OrderedDish> orderedDishes = orderedDishLogic.GetAllOrderedDish();
+
+            foreach (OrderedDish dish in orderedDishes)
+            {
+                if (dish.TableNumber == table.TableNumber && dish.Status == 0)
+                {
+                    TimeSpan timeTaken = DateTime.Now - dish.TimeDishOrdered;
+                    int hours = timeTaken.Hours;
+                    int minutes = timeTaken.Minutes;
+
+                    if (timeTaken.Hours == 0)
+                    {
+                        button.Text = $"{minutes} minutes ago";
+                    }
+                    else
+                    {
+                        button.Text = $"{hours}:{minutes:00}";
+                    }
+
+                    if (button.Text == "0 min ago")
+                    {
+                        button.Text = "1 min ago";
+                    }            
+                }
             }
             return button;
         }
@@ -503,6 +541,11 @@ namespace RosUI
         {
             this.Close();
             new Login().Show();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            UpdateAllButtons(tables);
         }
     }
 }
