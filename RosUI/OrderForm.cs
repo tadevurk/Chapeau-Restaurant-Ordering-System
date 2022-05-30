@@ -1051,10 +1051,5 @@ namespace RosUI
         {
             Hide();   
         }
-
-        private void btnAddMains_Click_1(object sender, EventArgs e)
-        {
-            AddMain();
-        }
     }
 }
