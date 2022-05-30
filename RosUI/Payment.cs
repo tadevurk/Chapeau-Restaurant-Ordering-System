@@ -20,6 +20,7 @@ namespace RosUI
         Table table;
         Bill bill = new Bill();
         BillLogic billLogic = new BillLogic();
+        TableLogic tableLogic = new TableLogic();
         Employee employee;
         FormOrder formOrder;
         List<Item> orderedItems;
