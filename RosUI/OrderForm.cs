@@ -57,38 +57,59 @@ namespace RosUI
                     pnlLunch.Show();
                     pnlLunch.Visible = true;
                     break;
+
                 case "Starters":
                     pnlStarters.Show();
                     pnlStarters.Visible = true;
                     pnlLunch.Visible = true;
                     ReadStarters();
                     break;
+
                 case "Mains":
                     pnlMains.Show();
                     pnlMains.Visible = true;
                     pnlLunch.Visible = true;
                     ReadLunchMains();
                     break;
+
                 case "Desserts":
                     pnlDesserts.Show();
                     pnlDesserts.Visible = true;
                     pnlLunch.Visible = true;
                     ReadLunchDesserts();
                     break;
+
                 case "Dinner":
                     pnlDinner.Show();
                     pnlDinner.Visible = true;
                     break;
+
+                case "DinnerStarters":
+                    pnlDinnerStarters.Show();
+                    pnlDinnerStarters.Visible = true;
+                    pnlDinner.Visible = true;
+                    ReadDinnerStarters();
+                    break;
+
                 case "DinnerMains":
                     pnlDinnerMains.Show();
                     pnlDinnerMains.Visible = true;
                     pnlDinner.Visible = true;
                     ReadDinnerMains();
                     break;
+
+                case "DinnerDesserts":
+                    pnlDinnerDesserts.Show();
+                    pnlDinnerDesserts.Visible = true;
+                    pnlDinner.Visible = true;
+                    ReadDinnerDesserts();
+                    break;
+
                 case "Drinks":
                     pnlDrinkCategories.Show();
                     pnlDrinkCategories.Visible = true;
                     break;
+
                 case "SoftDrinks":
                     pnlSoftDrinks.Show();
                     pnlSoftDrinks.Visible = true;
@@ -96,6 +117,33 @@ namespace RosUI
                     ReadSoftDrinks();
                     break;
 
+                case "Beers":
+                    pnlBeers.Show();
+                    pnlBeers.Visible = true;
+                    pnlDrinkCategories.Visible = true;
+                    ReadBeers();
+                    break;
+
+                case "Wines":
+                    pnlWines.Show();
+                    pnlBeers.Visible = true;
+                    pnlDrinkCategories.Visible = true;
+                    ReadWines();
+                    break;
+
+                case "Spirits":
+                    pnlSpirits.Show();
+                    pnlSpirits.Visible = true;
+                    pnlDrinkCategories.Visible = true;
+                    ReadSpirits();
+                    break;
+
+                case "HotDrinks":
+                    pnlHotDrinks.Show();
+                    pnlHotDrinks.Visible = true;
+                    pnlDrinkCategories.Visible = true;
+                    ReadHotDrinks();
+                    break;
             }
         }
 
@@ -104,46 +152,125 @@ namespace RosUI
             HidePanels();
             btnSendOrder.Visible = false;
             btnCancelOrder.Visible = false;
+            ButtonColorReset();
+        }
+
+        private void ButtonColorReset()
+        {
+            btnLunch.BackColor = Color.LightSkyBlue;
+            btnStarters.BackColor = Color.LightSkyBlue;
+            btnMains.BackColor = Color.LightSkyBlue;
+            btnDesserts.BackColor = Color.LightSkyBlue;
+            btnDinner.BackColor = Color.LightSkyBlue;
+            btnStartersDinner.BackColor = Color.LightSkyBlue;
+            btnMainsDinners.BackColor = Color.LightSkyBlue;
+            btnDessertsDinner.BackColor = Color.LightSkyBlue;
+            btnDrinks.BackColor = Color.LightSkyBlue;
+            btnSoftDrink.BackColor = Color.LightSkyBlue;
+            btnBeers.BackColor = Color.LightSkyBlue;
+            btnWine.BackColor = Color.LightSkyBlue;
+            btnSpirits.BackColor = Color.LightSkyBlue;
+            btnHotDrinks.BackColor = Color.LightSkyBlue;
         }
         private void btnLunch_Click(object sender, EventArgs e)
         {
             showPanel("Lunch");
+            ButtonColorReset();
+            btnLunch.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
         private void btnStarters_Click(object sender, EventArgs e)
         {
             showPanel("Starters");
+            ButtonColorReset();
+            btnStarters.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
         private void btnMains_Click_1(object sender, EventArgs e)
         {
             showPanel("Mains");
+            ButtonColorReset();
+            btnMains.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
         private void btnDesserts_Click(object sender, EventArgs e)
         {
             showPanel("Desserts");
+            ButtonColorReset();
+            btnDesserts.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
         private void btnDinner_Click(object sender, EventArgs e)
         {
             showPanel("Dinner");
+            ButtonColorReset();
+            btnDinner.BackColor = Color.LightGreen;
+            SendCancelButtonsVisible();
+        }
+        private void btnStartersDinner_Click(object sender, EventArgs e)
+        {
+            showPanel("DinnerStarters");
+            ButtonColorReset();
+            btnStartersDinner.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
         private void btnMainsDinners_Click(object sender, EventArgs e)
         {
             showPanel("DinnerMains");
+            ButtonColorReset();
+            btnMainsDinners.BackColor = Color.LightGreen;
+            SendCancelButtonsVisible();
+        }
+        private void btnDessertsDinner_Click(object sender, EventArgs e)
+        {
+            showPanel("DinnerDesserts");
+            ButtonColorReset();
+            btnDessertsDinner.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
         private void btnDrinks_Click(object sender, EventArgs e)
         {
             showPanel("Drinks");
+            ButtonColorReset();
+            btnDrinks.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
 
         private void btnSoftDrink_Click(object sender, EventArgs e)
         {
             showPanel("SoftDrinks");
+            ButtonColorReset();
+            btnSoftDrink.BackColor = Color.LightGreen;
+            SendCancelButtonsVisible();
+        }
+        private void btnBeers_Click(object sender, EventArgs e)
+        {
+            showPanel("Beers");
+            ButtonColorReset();
+            btnBeers.BackColor = Color.LightGreen;
+            SendCancelButtonsVisible();
+        }
+        private void btnWine_Click(object sender, EventArgs e)
+        {
+            showPanel("Wines");
+            ButtonColorReset();
+            btnWine.BackColor = Color.LightGreen;
+            SendCancelButtonsVisible();
+        }
+
+        private void btnSpirits_Click(object sender, EventArgs e)
+        {
+            showPanel("Spirits");
+            ButtonColorReset();
+            btnSpirits.BackColor = Color.LightGreen;
+            SendCancelButtonsVisible();
+        }
+
+        private void btnHotDrinks_Click(object sender, EventArgs e)
+        {
+            showPanel("HotDrinks");
+            ButtonColorReset();
+            btnHotDrinks.BackColor = Color.LightGreen;
             SendCancelButtonsVisible();
         }
 
@@ -156,32 +283,22 @@ namespace RosUI
         {
             pnlLunch.Hide();
             pnlDinner.Hide();
-
-            pnlStarters.Hide();
-
             pnlDrinkCategories.Hide();
 
-            pnlSoftDrinks.Hide();
-
+            pnlStarters.Hide();
             pnlMains.Hide();
-
             pnlDesserts.Hide();
 
+            pnlDinnerStarters.Hide();
             pnlDinnerMains.Hide();
-        }
+            pnlDinnerDesserts.Hide();
 
-        private void ReadSoftDrinks()
-        {
-            List<Drink> softDrinks = drinkLogic.GetAllSoftDrinks();
+            pnlSoftDrinks.Hide();
+            pnlBeers.Hide();
+            pnlWines.Hide();
+            pnlSpirits.Hide();
+            pnlHotDrinks.Hide();
 
-            listviewSoftDrinks.Items.Clear();
-            foreach (Drink softDrink in softDrinks)
-            {
-                ListViewItem li = new ListViewItem(softDrink.ItemName.ToString());
-                li.SubItems.Add(softDrink.ItemPrice.ToString());
-                li.Tag = softDrink; // Tagging the object
-                listviewSoftDrinks.Items.Add(li);
-            }
         }
 
         private void ReadStarters()
@@ -226,6 +343,20 @@ namespace RosUI
             }
         }
 
+        private void ReadDinnerStarters()
+        {
+            List<Dish> starters = dishLogic.GetDinnerStarters();
+            listviewDinnerStarters.Items.Clear();
+
+            foreach (Dish starter in starters)
+            {
+                ListViewItem li = new ListViewItem(starter.ItemName.ToString());
+                li.SubItems.Add(starter.ItemPrice.ToString());
+                li.Tag = starter; // Tagging the object
+                listviewDinnerStarters.Items.Add(li);
+            }
+        }
+
         private void ReadDinnerMains()
         {
             List<Dish> mains = dishLogic.GetDinnerMains();
@@ -240,233 +371,498 @@ namespace RosUI
             }
         }
 
+        private void ReadDinnerDesserts()
+        {
+            List<Dish> desserts = dishLogic.GetDinnerDesserts();
+            listViewDinnerDesserts.Items.Clear();
+
+            foreach (Dish dessert in desserts)
+            {
+                ListViewItem li = new ListViewItem(dessert.ItemName.ToString());
+                li.SubItems.Add(dessert.ItemPrice.ToString());
+                li.Tag = dessert; // Tagging the object
+                listViewDinnerDesserts.Items.Add(li);
+            }
+        }
+
+        private void ReadSoftDrinks()
+        {
+            List<Drink> softDrinks = drinkLogic.GetAllSoftDrinks();
+
+            listviewSoftDrinks.Items.Clear();
+            foreach (Drink softDrink in softDrinks)
+            {
+                ListViewItem li = new ListViewItem(softDrink.ItemName.ToString());
+                li.SubItems.Add(softDrink.ItemPrice.ToString());
+                li.Tag = softDrink; // Tagging the object
+                listviewSoftDrinks.Items.Add(li);
+            }
+        }
+        private void ReadBeers()
+        {
+            List<Drink> beers = drinkLogic.GetAllBeers();
+            listviewBeers.Items.Clear();
+
+            foreach (Drink beer in beers)
+            {
+                ListViewItem li = new ListViewItem(beer.ItemName.ToString());
+                li.SubItems.Add(beer.ItemPrice.ToString());
+                li.Tag = beer; // Tagging the object
+                listviewBeers.Items.Add(li);
+            }
+        }
+
+        private void ReadWines()
+        {
+            List<Drink> wines = drinkLogic.GetAllWines();
+            listviewWines.Items.Clear();
+
+            foreach (Drink wine in wines)
+            {
+                ListViewItem li = new ListViewItem(wine.ItemName.ToString());
+                li.SubItems.Add(wine.ItemPrice.ToString());
+                li.Tag = wine; // Tagging the object
+                listviewWines.Items.Add(li);
+            }
+        }
+
+        private void ReadSpirits()
+        {
+            List<Drink> spirits = drinkLogic.GetAllSpirits();
+            listViewSpirits.Items.Clear();
+
+
+            foreach (Drink spirit in spirits)
+            {
+                ListViewItem li = new ListViewItem(spirit.ItemName.ToString());
+                li.SubItems.Add(spirit.ItemPrice.ToString());
+                li.Tag = spirit; // Tagging the object
+                listViewSpirits.Items.Add(li);
+            }
+        }
+        private void ReadHotDrinks()
+        {
+            List<Drink> hotDrinks = drinkLogic.GetAllHotDrinks();
+
+            listViewHotDrinks.Items.Clear();
+            foreach (Drink hotDrink in hotDrinks)
+            {
+                ListViewItem li = new ListViewItem(hotDrink.ItemName.ToString());
+                li.SubItems.Add(hotDrink.ItemPrice.ToString());
+                li.Tag = hotDrink; // Tagging the object
+                listViewHotDrinks.Items.Add(li);
+            }
+        }
+
         private void btnAddStarter_Click(object sender, EventArgs e)
         {
-            AddStarter();
+            try
+            {
+                if (listviewStarters.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddLunchStarter();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
         }
         private void btnAddMains_Click(object sender, EventArgs e)
         {
-            AddMain();
+            try
+            {
+                if (listviewMains.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddLunchMain();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
         }
         private void btnAddDessert_Click(object sender, EventArgs e)
         {
-            AddDessert();
+            try
+            {
+                if (listviewDesserts.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddLunchDessert();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
         }
         private void btnAddDinnerMains_Click(object sender, EventArgs e)
         {
-            AddDinnerMain();
+            try
+            {
+                if (listviewDinnerMains.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddDinnerMain();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
         }
-        private void btnAddDrink_Click(object sender, EventArgs e)
+        private void btnAddDinnerStarter_Click(object sender, EventArgs e)
         {
-            AddSoftDrink();
+            try
+            {
+                if (listviewDinnerStarters.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddDinnerStarter();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+        private void btnAddDinnerDesserts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listViewDinnerDesserts.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddDinnerDessert();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+        private void btnAddDrink_Click(object sender, EventArgs e) // Soft Drink
+        {
+            try
+            {
+                if (listviewSoftDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddSoftDrink();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+        private void btnAddBeers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listviewBeers.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddBeer();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+
+        private void btnAddWines_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listviewWines.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddWine();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+
+        private void btnAddSpirits_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listViewSpirits.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddSpirit();
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+
+        private void btnAddHotDrinks_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listViewHotDrinks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    AddHotDrink();
+                }
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }
         }
 
         private void btnOrderRemove_Click(object sender, EventArgs e)
         {
-            Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
-            ListViewItem li = listviewOrder.SelectedItems[0];
-
-            if (item is Dish)
+            try
             {
-                Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
-                if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
+                if (listviewOrder.SelectedItems.Count == 0)
                 {
-                    MessageBox.Show("You cannot edit old items");
+                    throw new Exception("Please select an item");
                 }
                 else
                 {
-                    if(dish.Amount == 1)
+                    Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
+                    ListViewItem li = listviewOrder.SelectedItems[0];
+                    if (item is Dish)
                     {
-                        listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-                        dishLogic.IncreaseDishStock(dish);
+                        Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                        if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
+                        {
+                            throw new Exception("You cannot edit an old item");
+                        }
+                        else
+                        {
+                            if (dish.Amount == 1)
+                            {
+                                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                                dishLogic.IncreaseDishStock(dish);
+                            }
+                            else
+                            {
+                                dish.Amount--;
+                                listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
+                                dishLogic.IncreaseDishStock(dish);
+                            }
+                        }
                     }
-                    else
+                    else if (item is Drink)
                     {
-                        dish.Amount--;
-                        listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
-                        dishLogic.IncreaseDishStock(dish);
+                        Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                        if (drink.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
+                        {
+                            throw new Exception("You cannot edit an old item");
+                        }
+                        else
+                        {
+                            if (drink.Amount == 1)
+                            {
+                                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                                drinkLogic.IncreaseDrinkStock(drink);
+                            }
+                            else
+                            {
+                                drink.Amount--;
+                                listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
+                                drinkLogic.IncreaseDrinkStock(drink);
+                            }
+                        }
                     }
                 }
             }
-            else if (item is Drink)
+            catch(Exception exp)
             {
-               Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
-                if (drink.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
-                {
-                    MessageBox.Show("You cannot edit old items");
-                }
-                else
-                {
-                    if (drink.Amount == 1)
-                    {
-                        listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-                        drinkLogic.IncreaseDrinkStock(drink);
-                    }
-                    else
-                    {
-                        drink.Amount--;
-                        listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
-                        drinkLogic.IncreaseDrinkStock(drink);
-                    }
-                }
-            }
+                MessageBox.Show($"{exp.Message}", "ERROR");
+            }       
         }
 
-        private void AddStarter() // Add starters to the orderedlist - if there is already one, just increase the amount
+        private void AddLunchStarter()
         {
             ListViewItem selectedStarter = listviewStarters.SelectedItems[0];
             Dish starter = (Dish)selectedStarter.Tag;
-            ListViewItem? currentItem = null;
-
-            foreach (ListViewItem item in listviewOrder.Items)
-            {
-                if (starter.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                {
-                    currentItem = item;
-                    starter.Amount = int.Parse(item.SubItems[2].Text);
-                    starter.Amount++;
-                    item.SubItems[2].Text = starter.Amount.ToString();
-                }
-            }
-
-            if (currentItem == null)
-            {
-                ListViewItem item = new ListViewItem(starter.ItemName);
-                item.SubItems.Add(starter.ItemPrice.ToString());
-                starter.Amount = 1;
-                item.SubItems.Add(starter.Amount.ToString());
-                item.Tag = (Item)starter;
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-            }
-
-            dishLogic.DecreaseDishStock(starter); // Decrease the stock
+            CheckCurrentDish(starter);
         }
 
-        private void AddMain() // Add starters to the orderedlist - if there is already one, just increase the amount
+        private void AddLunchMain()
         {
             ListViewItem selectedMain = listviewMains.SelectedItems[0];
             Dish main = (Dish)selectedMain.Tag;
-            ListViewItem? currentItem = null;
-
-            foreach (ListViewItem item in listviewOrder.Items)
-            {
-                if (main.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                {
-                    currentItem = item;
-                    main.Amount = int.Parse(item.SubItems[2].Text);
-                    main.Amount++;
-                    item.SubItems[2].Text = main.Amount.ToString();
-                }
-            }
-
-            if (currentItem == null)
-            {
-                ListViewItem item = new ListViewItem(main.ItemName);
-                item.SubItems.Add(main.ItemPrice.ToString());
-                main.Amount = 1;
-                item.SubItems.Add(main.Amount.ToString());
-                item.Tag = (Item)main;
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-            }
-
-            dishLogic.DecreaseDishStock(main); // Decrease the stock
+            CheckCurrentDish(main);
         }
 
-        private void AddDessert() // Add starters to the orderedlist - if there is already one, just increase the amount
+        private void AddLunchDessert()
         {
             ListViewItem selectedDessert = listviewDesserts.SelectedItems[0];
             Dish dessert = (Dish)selectedDessert.Tag;
-            ListViewItem? currentItem = null;
-
-            foreach (ListViewItem item in listviewOrder.Items)
-            {
-                if (dessert.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                {
-                    currentItem = item;
-                    dessert.Amount = int.Parse(item.SubItems[2].Text);
-                    dessert.Amount++;
-                    item.SubItems[2].Text = dessert.Amount.ToString();
-                }
-            }
-
-            if (currentItem == null)
-            {
-                ListViewItem item = new ListViewItem(dessert.ItemName);
-                item.SubItems.Add(dessert.ItemPrice.ToString());
-                dessert.Amount = 1;
-                item.SubItems.Add(dessert.Amount.ToString());
-                item.Tag = (Item)dessert;
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-            }
-
-            dishLogic.DecreaseDishStock(dessert); // Decrease the stock
+            CheckCurrentDish(dessert);
+        }
+        private void AddDinnerStarter()
+        {
+            ListViewItem selectedStarter = listviewDinnerStarters.SelectedItems[0];
+            Dish starter = (Dish)selectedStarter.Tag;
+            CheckCurrentDish(starter);
         }
 
-        private void AddDinnerMain() // Add starters to the orderedlist - if there is already one, just increase the amount
+        private void AddDinnerMain()
         {
             ListViewItem selectedMain = listviewDinnerMains.SelectedItems[0];
             Dish main = (Dish)selectedMain.Tag;
-            ListViewItem? currentItem = null;
-
-            foreach (ListViewItem item in listviewOrder.Items)
-            {
-                if (main.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                {
-                    currentItem = item;
-                    main.Amount = int.Parse(item.SubItems[2].Text);
-                    main.Amount++;
-                    item.SubItems[2].Text = main.Amount.ToString();
-                }
-            }
-
-            if (currentItem == null)
-            {
-                ListViewItem item = new ListViewItem(main.ItemName);
-                item.SubItems.Add(main.ItemPrice.ToString());
-                main.Amount = 1;
-                item.SubItems.Add(main.Amount.ToString());
-                item.Tag = (Item)main;
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-            }
-
-            dishLogic.DecreaseDishStock(main); // Decrease the stock
+            CheckCurrentDish(main);
+        }
+        private void AddDinnerDessert()
+        {
+            ListViewItem selectedDessert = listViewDinnerDesserts.SelectedItems[0];
+            Dish dessert = (Dish)selectedDessert.Tag;
+            CheckCurrentDish(dessert);
         }
 
-        private void AddSoftDrink() // Add softDrinks to the orderedlist - if there is already one, just increase the amount
+        private void AddSoftDrink()
         {
             ListViewItem selectedSoftDrink = listviewSoftDrinks.SelectedItems[0];
             Drink softDrink = (Drink)selectedSoftDrink.Tag;
-            ListViewItem? currentItem = null;
-
-            foreach (ListViewItem item in listviewOrder.Items)
-            {
-                if (softDrink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                {
-                    currentItem = item;
-                    softDrink.Amount = int.Parse(item.SubItems[2].Text);
-                    softDrink.Amount++;
-                    item.SubItems[2].Text = softDrink.Amount.ToString();
-                }
-            }
-
-            if (currentItem == null)
-            {
-                ListViewItem item = new ListViewItem(softDrink.ItemName);
-                item.SubItems.Add(softDrink.ItemPrice.ToString());
-                softDrink.Amount = 1;
-                item.SubItems.Add(softDrink.Amount.ToString());
-                item.Tag = (Item)softDrink;
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-            }
-
-            drinkLogic.DecreaseDrinkStock(softDrink);
+            CheckCurrentDrink(softDrink);
         }
 
+        private void AddBeer()
+        {
+            ListViewItem selectedBeer = listviewBeers.SelectedItems[0];
+            Drink beer = (Drink)selectedBeer.Tag;
+            CheckCurrentDrink(beer);
+        }
+
+        private void AddWine()
+        {
+            ListViewItem selectedWine = listviewWines.SelectedItems[0];
+            Drink wine = (Drink)selectedWine.Tag;
+            CheckCurrentDrink(wine);
+        }
+
+        private void AddSpirit()
+        {
+            ListViewItem selectedSpirit = listViewSpirits.SelectedItems[0];
+            Drink spirit = (Drink)selectedSpirit.Tag;
+            CheckCurrentDrink(spirit);
+        }
+
+        private void AddHotDrink()
+        {
+            ListViewItem selectedHotDrink = listViewHotDrinks.SelectedItems[0];
+            Drink hotDrink = (Drink)selectedHotDrink.Tag;
+            CheckCurrentDrink(hotDrink);          
+        }
+        private void CheckCurrentDish(Dish dish)
+        {
+            ListViewItem? currentItem = null;
+
+            if (dish.ItemStock <= 0)
+            {
+                MessageBox.Show($"{dish.ItemName} is sold out", "Sorry");
+            }
+            else
+            {
+                foreach (ListViewItem item in listviewOrder.Items)
+                {
+                    if (dish.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                    {
+                        currentItem = item;
+                        dish.Amount = int.Parse(item.SubItems[2].Text);
+                        dish.Amount++;
+                        item.SubItems[2].Text = dish.Amount.ToString();
+                    }
+                }
+
+                if (currentItem == null)
+                {
+                    ListViewItem item = new ListViewItem(dish.ItemName);
+                    item.SubItems.Add(dish.ItemPrice.ToString());
+                    dish.Amount = 1;
+                    item.SubItems.Add(dish.Amount.ToString());
+                    item.Tag = (Item)dish;
+                    item.ForeColor = Color.Red; // Change color for the new ordered item
+                    listviewOrder.Items.Add(item);
+                }
+                dishLogic.DecreaseDishStock(dish);
+            }
+        }
+
+        private void CheckCurrentDrink(Drink drink)
+        {
+            ListViewItem? currentItem = null;
+
+            if(drink.ItemStock <= 0)
+            {
+                MessageBox.Show($"{drink.ItemName} is sold out", "Sorry");
+            }
+            else
+            {
+                foreach (ListViewItem item in listviewOrder.Items)
+                {
+                    if (drink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                    {
+                        currentItem = item;
+                        drink.Amount = int.Parse(item.SubItems[2].Text);
+                        drink.Amount++;
+                        item.SubItems[2].Text = drink.Amount.ToString();
+                    }
+                }
+
+                if (currentItem == null)
+                {
+                    ListViewItem item = new ListViewItem(drink.ItemName);
+                    item.SubItems.Add(drink.ItemPrice.ToString());
+                    drink.Amount = 1;
+                    item.SubItems.Add(drink.Amount.ToString());
+                    item.Tag = (Item)drink;
+                    item.ForeColor = Color.Red; // Change color for the new ordered item
+                    listviewOrder.Items.Add(item);
+                }
+                drinkLogic.DecreaseDrinkStock(drink);
+            }
+        }
 
         private void WritesContainedDishes() // Getting the ordered list
         {
@@ -475,8 +871,8 @@ namespace RosUI
 
             List<Item> itemsInOrder = new List<Item>();
 
-            orderedDishes = dishLogic.WriteContainedDishes(table, order);
-            orderedDrinks = drinkLogic.WriteContainedDrinks(table,order);
+            orderedDishes = dishLogic.WriteContainedDishes(table);
+            orderedDrinks = drinkLogic.WriteContainedDrinks(table);
 
             itemsInOrder.AddRange(orderedDishes);
             itemsInOrder.AddRange(orderedDrinks);
@@ -494,67 +890,90 @@ namespace RosUI
             }
         }
 
-        private void CreateOrder()
-        {
-            orderLogic.AddOrder(order); // Create new order
-        }
-
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
         {
-
-            DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
+                if (listviewOrder.Items.Count == 0)
                 {
-                    Item item = (Item)lvOrderInProcess.Tag;
-
-                    if (lvOrderInProcess.ForeColor == Color.Red)
+                    throw new Exception("You did not order anything!");
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
                     {
-                        listviewOrder.Items.Remove(lvOrderInProcess);
-                        item.ItemName = lvOrderInProcess.SubItems[0].Text;
-                        item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
-                        orderLogic.UpdateStock(item);
+                        foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
+                        {
+                            Item item = (Item)lvOrderInProcess.Tag;
+
+                            if (lvOrderInProcess.ForeColor == Color.Red)
+                            {
+                                listviewOrder.Items.Remove(lvOrderInProcess);
+                                item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                                item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                                orderLogic.UpdateStock(item);
+                            }
+                        }
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        return;
                     }
                 }
             }
-            else if (dialogResult == DialogResult.No)
+            catch(Exception exp)
             {
-                return;
+                MessageBox.Show(exp.Message);
             }
+
+
         }
 
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                //Create new order
-                CreateOrder();
+                if (listviewOrder.Items.Count == 0)
+                {
+                    throw new Exception("There is nothing to send");
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        order.OrderID = orderLogic.AddOrder(emp, table); // Create new order
 
-                // send order - ( and grouping the old items' amount by adding the new items' amount)
-                SendOrder();
+                        // send order - ( and grouping the old items' amount by adding the new items' amount)
+                        SendOrder();
 
-                //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
-                orderedDishLogic.AddDishes(DishesInOrderProcess, order);
+                        //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
+                        orderedDishLogic.AddDishes(DishesInOrderProcess, order);
+                        orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
 
-                orderedDrinkLogic.AddDrinks(DrinkInOrderProcess, order);
+                        table.TableStatus = 2;
+                        tableLogic.Update(table);
 
-                table.TableStatus = 2;
-                tableLogic.Update(table);
+                        WritesContainedDishes();
 
-                WritesContainedDishes();
+                        //Update KitchenView
+                        rosMain.UpdateDishes();
 
-                //Update KitchenView
-                rosMain.UpdateDishes();
-
-                //Update TableView
-                rosMain.UpdateTableToOrdered(table.TableNumber);
+                        //Update TableView
+                        rosMain.UpdateTableToOrdered(table.TableNumber);
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
             }
-            else if (dialogResult == DialogResult.No)
+            catch(Exception exp)
             {
-                return;
+                MessageBox.Show(exp.Message);
             }
+
         }
 
 
@@ -580,23 +999,56 @@ namespace RosUI
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)
         {
-            Dish dish = (Dish)listviewOrder.Items[0].Tag;
-
-            if (txtNote.Text == "")
+            try
             {
-                MessageBox.Show("There is no note!");
+                if (listviewOrder.SelectedItems.Count == 0)
+                {
+                    throw new Exception("Please select an item");
+                }
+                else
+                {
+                    Item item = (Item)listviewOrder.SelectedItems[0].Tag;
+
+                    if (item is Dish)
+                    {
+                        Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                        if (txtNote.Text == "")
+                        {
+                            throw new Exception("There is no note");
+                        }
+                        else
+                        {
+                            dish.Note = txtNote.Text;
+                            MessageBox.Show("Note has been added!");
+                        }
+                    }
+                    else if (item is Drink)
+                    {
+                        Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                        if (txtNote.Text == "")
+                        {
+                            throw new Exception("There is no note");
+                        }
+                        else
+                        {
+                            drink.Note = txtNote.Text;
+                            MessageBox.Show("Note has been added!");
+                        }
+                    }
+
+                    txtNote.Clear();
+                }
             }
-            else
+            catch(Exception exp)
             {
-                dish.Note = txtNote.Text;
+                MessageBox.Show(exp.Message);
             }
 
-            txtNote.Clear();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Hide();
+            Hide();   
         }
     }
 }
