@@ -79,10 +79,11 @@ namespace RosDAL
                 }
 
                 //Adding dish
-                string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";
+                string query = "insert into OrderDish values(@OrderID, @dishID, 0, @CurrentTime, null, @Amount, @Note);";
                 SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
                 new SqlParameter("@OrderID", order.OrderID),
                 new SqlParameter("@Note", dish.Note),
+                new SqlParameter("@CurrentTime", DateTime.Now),
                 new SqlParameter("@Amount", dish.Amount)};
 
                 ExecuteEditQuery(query, sp);
