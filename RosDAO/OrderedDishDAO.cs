@@ -153,6 +153,7 @@ namespace RosDAL
             foreach (DataRow dr in dataTable.Rows)
             {
                 string note = "";
+
                 if (dr["Note"].Equals(DBNull.Value))
                 {
                     note = "null";
@@ -161,8 +162,6 @@ namespace RosDAL
                 {
                     note = (string)dr["Note"];
                 }
-
-
 
                 OrderedDish dish = new OrderedDish()
                 {
