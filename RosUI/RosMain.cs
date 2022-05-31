@@ -35,8 +35,6 @@ namespace RosUI
         {
             if (employee.Roles == Roles.Manager)
             {
-                lblWelcomeBarDash.Text += $" {employee.Name}!";
-                lblWelcomeKitDash.Text += $" {employee.Name}!";
                 ShowPanel("KitchenDashboard");
             }
 
@@ -45,8 +43,7 @@ namespace RosUI
                 barViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
                 btnUndoKitFin.Enabled = false;
-                lblWelcomeKitDash.Text += $" {employee.Name}!";
-                ShowPanel("KitchenDashboard");
+                ShowPanel("KitchenView");
 
             }
             else if (employee.Roles == Roles.Bartender)
@@ -54,8 +51,7 @@ namespace RosUI
                 kitchenViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
                 btnUndoKitFin.Enabled = false;
-                lblWelcomeBarDash.Text += $" {employee.Name}!";
-                ShowPanel("BarDashboard");
+                ShowPanel("BarView");
             }
         }
 
@@ -77,13 +73,6 @@ namespace RosUI
 
                     break;
 
-                case "KitchenDashboard":
-
-                    HideAllPanels();
-                    pnlDashboardKitchen.Show();
-
-                    break;
-
                 case "BarView":
 
                     HideAllPanels();
@@ -92,12 +81,6 @@ namespace RosUI
 
                     break;
 
-                case "BarDashboard":
-
-                    HideAllPanels();
-                    pnlDashboardBar.Show();
-
-                    break;
                 case "FinishedDrinkView":
 
                     HideAllPanels();
@@ -144,17 +127,10 @@ namespace RosUI
         {
             //hiding all panels
             pnlKitchenView.Hide();
-            pnlDashboardKitchen.Hide();
-            pnlDashboardBar.Hide();
             pnlBarView.Hide();
             pnlKitchenViewFinished.Hide();
             pnlBarViewFinished.Hide();
 
-        }
-
-        private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("KitchenDashboard");
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,11 +144,6 @@ namespace RosUI
             {
                 ShowPanel("KitchenDashboard");
             }
-        }
-
-        private void barViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("BarDashboard");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -849,6 +820,26 @@ namespace RosUI
                 MessageBox.Show($"{exp.Message}", "Error");
             }
 
+        }
+
+        private void btnFinishedDishes_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDishView");
+        }
+
+        private void btnFinishedOrdersBar_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDrinkView");
+        }
+
+        private void btnRunningOrderesKit_Click(object sender, EventArgs e)
+        {
+            ShowPanel("KitchenView");
+        }
+
+        private void btnRunningOrdersBar_Click(object sender, EventArgs e)
+        {
+            ShowPanel("BarView");
         }
     }
 }
