@@ -44,7 +44,7 @@ namespace RosUI
             tableLogic = new TableLogic();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
 
-            WritesContainedDishes();
+            WriteContainedItems();
         }
 
 
@@ -864,7 +864,7 @@ namespace RosUI
             }
         }
 
-        private void WritesContainedDishes() // Getting the ordered list
+        private void WriteContainedItems() // Getting the ordered list
         {
             List<Dish> orderedDishes = new List<Dish>();
             List<Drink> orderedDrinks = new List<Drink>();
@@ -955,7 +955,7 @@ namespace RosUI
                         table.TableStatus = 2;
                         tableLogic.Update(table);
 
-                        WritesContainedDishes();
+                        WriteContainedItems();
 
                         //Update KitchenView
                         rosMain.UpdateDishes();

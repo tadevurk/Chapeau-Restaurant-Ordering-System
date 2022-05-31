@@ -12,6 +12,27 @@ namespace RosDAL
     {
         OrderDAO orderDAO = new OrderDAO();
 
+        public void AddDishes(List<Dish> dishes, Order order)
+        {
+            foreach (Dish dish in dishes)
+            {
+                if (dish.Note == null)
+                {
+                    dish.Note = "null";
+                }
+
+                //Adding dish
+                string query = "insert into OrderDish values(@OrderID, @dishID, 0, @CurrentTime, null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", dish.Note),
+                new SqlParameter("@CurrentTime", DateTime.Now),
+                new SqlParameter("@Amount", dish.Amount)};
+
+                ExecuteEditQuery(query, sp);
+            }
+        }
+
         public void UpdateDishNote(OrderedDish dish, string message)
         {
             string query = "UPDATE OrderDish SET DishNote=@message  WHERE DishID=@DishID AND OrderID=@OrderID";
@@ -71,25 +92,7 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public void AddDishes(List<Dish> dishes, Order order)
-        {
-            foreach (Dish dish in dishes)
-            {
-                if (dish.Note == null)
-                {
-                    dish.Note = "null";
-                }
 
-                //Adding dish
-                string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
-                new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", dish.Note),
-                new SqlParameter("@Amount", dish.Amount)};
-
-                ExecuteEditQuery(query, sp);
-            }
-        }
         public void UpdateDish(OrderedDish orderedDish) // Change the amount of the dish (The question is DishID or OrderID??)
         {
             string query = "UPDATE [OrderDish] SET TimeDishOrdered = @TimeDishOrdered, TimeDishDelivered = @TimeDishDelivered, " +

@@ -62,7 +62,6 @@ namespace RosUI
             this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.txtNote = new System.Windows.Forms.RichTextBox();
-            this.btnPayment = new System.Windows.Forms.Button();
             this.pnlSoftDrinks = new System.Windows.Forms.Panel();
             this.btnAddDrink = new System.Windows.Forms.Button();
             this.lblSoftDrinks = new System.Windows.Forms.Label();
@@ -142,9 +141,9 @@ namespace RosUI
             // 
             // btnStarters
             // 
-            this.btnStarters.Location = new System.Drawing.Point(3, 13);
+            this.btnStarters.Location = new System.Drawing.Point(2, 12);
             this.btnStarters.Name = "btnStarters";
-            this.btnStarters.Size = new System.Drawing.Size(154, 41);
+            this.btnStarters.Size = new System.Drawing.Size(116, 41);
             this.btnStarters.TabIndex = 1;
             this.btnStarters.Text = "STARTERS";
             this.btnStarters.UseVisualStyleBackColor = true;
@@ -152,9 +151,9 @@ namespace RosUI
             // 
             // btnMains
             // 
-            this.btnMains.Location = new System.Drawing.Point(231, 13);
+            this.btnMains.Location = new System.Drawing.Point(147, 12);
             this.btnMains.Name = "btnMains";
-            this.btnMains.Size = new System.Drawing.Size(154, 41);
+            this.btnMains.Size = new System.Drawing.Size(116, 41);
             this.btnMains.TabIndex = 5;
             this.btnMains.Text = "MAINS";
             this.btnMains.UseVisualStyleBackColor = true;
@@ -162,9 +161,9 @@ namespace RosUI
             // 
             // btnDesserts
             // 
-            this.btnDesserts.Location = new System.Drawing.Point(445, 13);
+            this.btnDesserts.Location = new System.Drawing.Point(284, 12);
             this.btnDesserts.Name = "btnDesserts";
-            this.btnDesserts.Size = new System.Drawing.Size(154, 41);
+            this.btnDesserts.Size = new System.Drawing.Size(116, 41);
             this.btnDesserts.TabIndex = 6;
             this.btnDesserts.Text = "DESSERTS";
             this.btnDesserts.UseVisualStyleBackColor = true;
@@ -172,9 +171,9 @@ namespace RosUI
             // 
             // btnDrinks
             // 
-            this.btnDrinks.Location = new System.Drawing.Point(455, 217);
+            this.btnDrinks.Location = new System.Drawing.Point(299, 44);
             this.btnDrinks.Name = "btnDrinks";
-            this.btnDrinks.Size = new System.Drawing.Size(154, 41);
+            this.btnDrinks.Size = new System.Drawing.Size(116, 41);
             this.btnDrinks.TabIndex = 7;
             this.btnDrinks.Text = "DRINKS";
             this.btnDrinks.UseVisualStyleBackColor = true;
@@ -187,7 +186,7 @@ namespace RosUI
             this.btnSendOrder.ForeColor = System.Drawing.Color.White;
             this.btnSendOrder.Location = new System.Drawing.Point(16, 702);
             this.btnSendOrder.Name = "btnSendOrder";
-            this.btnSendOrder.Size = new System.Drawing.Size(278, 52);
+            this.btnSendOrder.Size = new System.Drawing.Size(178, 52);
             this.btnSendOrder.TabIndex = 8;
             this.btnSendOrder.Text = "SEND ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
@@ -198,9 +197,9 @@ namespace RosUI
             this.btnCancelOrder.BackColor = System.Drawing.Color.Red;
             this.btnCancelOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancelOrder.ForeColor = System.Drawing.Color.White;
-            this.btnCancelOrder.Location = new System.Drawing.Point(350, 702);
+            this.btnCancelOrder.Location = new System.Drawing.Point(290, 702);
             this.btnCancelOrder.Name = "btnCancelOrder";
-            this.btnCancelOrder.Size = new System.Drawing.Size(278, 52);
+            this.btnCancelOrder.Size = new System.Drawing.Size(178, 52);
             this.btnCancelOrder.TabIndex = 9;
             this.btnCancelOrder.Text = "CANCEL";
             this.btnCancelOrder.UseVisualStyleBackColor = false;
@@ -208,7 +207,7 @@ namespace RosUI
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(710, 12);
+            this.btnBack.Location = new System.Drawing.Point(392, 3);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(103, 29);
             this.btnBack.TabIndex = 10;
@@ -233,9 +232,9 @@ namespace RosUI
             this.amountOrder});
             this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
-            this.listviewOrder.Location = new System.Drawing.Point(16, 35);
+            this.listviewOrder.Location = new System.Drawing.Point(21, 484);
             this.listviewOrder.Name = "listviewOrder";
-            this.listviewOrder.Size = new System.Drawing.Size(612, 171);
+            this.listviewOrder.Size = new System.Drawing.Size(345, 176);
             this.listviewOrder.TabIndex = 13;
             this.listviewOrder.UseCompatibleStateImageBehavior = false;
             this.listviewOrder.View = System.Windows.Forms.View.Details;
@@ -243,7 +242,7 @@ namespace RosUI
             // nameOrder
             // 
             this.nameOrder.Text = "Name";
-            this.nameOrder.Width = 450;
+            this.nameOrder.Width = 165;
             // 
             // priceOrder
             // 
@@ -260,9 +259,9 @@ namespace RosUI
             this.btnOrderRemove.BackColor = System.Drawing.Color.Red;
             this.btnOrderRemove.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnOrderRemove.ForeColor = System.Drawing.Color.White;
-            this.btnOrderRemove.Location = new System.Drawing.Point(663, 71);
+            this.btnOrderRemove.Location = new System.Drawing.Point(372, 484);
             this.btnOrderRemove.Name = "btnOrderRemove";
-            this.btnOrderRemove.Size = new System.Drawing.Size(151, 51);
+            this.btnOrderRemove.Size = new System.Drawing.Size(104, 44);
             this.btnOrderRemove.TabIndex = 15;
             this.btnOrderRemove.Text = "-";
             this.btnOrderRemove.UseVisualStyleBackColor = false;
@@ -270,12 +269,13 @@ namespace RosUI
             // 
             // btnOrderAddNote
             // 
-            this.btnOrderAddNote.Location = new System.Drawing.Point(663, 198);
+            this.btnOrderAddNote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOrderAddNote.Location = new System.Drawing.Point(372, 615);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(151, 60);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(123, 46);
             this.btnOrderAddNote.TabIndex = 16;
             this.btnOrderAddNote.Text = "Add Note";
-            this.btnOrderAddNote.UseVisualStyleBackColor = true;
+            this.btnOrderAddNote.UseVisualStyleBackColor = false;
             this.btnOrderAddNote.Click += new System.EventHandler(this.btnOrderAddNote_Click);
             // 
             // pnlStarters
@@ -283,19 +283,20 @@ namespace RosUI
             this.pnlStarters.Controls.Add(this.btnAddStarter);
             this.pnlStarters.Controls.Add(this.lblStartersHead);
             this.pnlStarters.Controls.Add(this.listviewStarters);
-            this.pnlStarters.Location = new System.Drawing.Point(10, 380);
+            this.pnlStarters.Location = new System.Drawing.Point(9, 195);
             this.pnlStarters.Name = "pnlStarters";
-            this.pnlStarters.Size = new System.Drawing.Size(798, 318);
+            this.pnlStarters.Size = new System.Drawing.Size(459, 252);
             this.pnlStarters.TabIndex = 17;
             // 
             // btnAddStarter
             // 
-            this.btnAddStarter.Location = new System.Drawing.Point(628, 48);
+            this.btnAddStarter.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddStarter.Location = new System.Drawing.Point(329, 48);
             this.btnAddStarter.Name = "btnAddStarter";
-            this.btnAddStarter.Size = new System.Drawing.Size(151, 112);
+            this.btnAddStarter.Size = new System.Drawing.Size(117, 78);
             this.btnAddStarter.TabIndex = 15;
             this.btnAddStarter.Text = "Add";
-            this.btnAddStarter.UseVisualStyleBackColor = true;
+            this.btnAddStarter.UseVisualStyleBackColor = false;
             this.btnAddStarter.Click += new System.EventHandler(this.btnAddStarter_Click);
             // 
             // lblStartersHead
@@ -316,7 +317,7 @@ namespace RosUI
             this.listviewStarters.HideSelection = false;
             this.listviewStarters.Location = new System.Drawing.Point(14, 48);
             this.listviewStarters.Name = "listviewStarters";
-            this.listviewStarters.Size = new System.Drawing.Size(571, 237);
+            this.listviewStarters.Size = new System.Drawing.Size(309, 186);
             this.listviewStarters.TabIndex = 0;
             this.listviewStarters.UseCompatibleStateImageBehavior = false;
             this.listviewStarters.View = System.Windows.Forms.View.Details;
@@ -324,7 +325,7 @@ namespace RosUI
             // StarterName
             // 
             this.StarterName.Text = "Name";
-            this.StarterName.Width = 450;
+            this.StarterName.Width = 165;
             // 
             // Price
             // 
@@ -336,19 +337,20 @@ namespace RosUI
             this.pnlMains.Controls.Add(this.btnAddMains);
             this.pnlMains.Controls.Add(this.lblMains);
             this.pnlMains.Controls.Add(this.listviewMains);
-            this.pnlMains.Location = new System.Drawing.Point(11, 381);
+            this.pnlMains.Location = new System.Drawing.Point(9, 195);
             this.pnlMains.Name = "pnlMains";
-            this.pnlMains.Size = new System.Drawing.Size(793, 312);
+            this.pnlMains.Size = new System.Drawing.Size(459, 252);
             this.pnlMains.TabIndex = 21;
             // 
             // btnAddMains
             // 
-            this.btnAddMains.Location = new System.Drawing.Point(628, 48);
+            this.btnAddMains.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddMains.Location = new System.Drawing.Point(329, 48);
             this.btnAddMains.Name = "btnAddMains";
-            this.btnAddMains.Size = new System.Drawing.Size(151, 112);
+            this.btnAddMains.Size = new System.Drawing.Size(117, 78);
             this.btnAddMains.TabIndex = 15;
             this.btnAddMains.Text = "Add";
-            this.btnAddMains.UseVisualStyleBackColor = true;
+            this.btnAddMains.UseVisualStyleBackColor = false;
             this.btnAddMains.Click += new System.EventHandler(this.btnAddMains_Click);
             // 
             // lblMains
@@ -369,7 +371,7 @@ namespace RosUI
             this.listviewMains.HideSelection = false;
             this.listviewMains.Location = new System.Drawing.Point(14, 48);
             this.listviewMains.Name = "listviewMains";
-            this.listviewMains.Size = new System.Drawing.Size(571, 237);
+            this.listviewMains.Size = new System.Drawing.Size(309, 186);
             this.listviewMains.TabIndex = 0;
             this.listviewMains.UseCompatibleStateImageBehavior = false;
             this.listviewMains.View = System.Windows.Forms.View.Details;
@@ -377,7 +379,7 @@ namespace RosUI
             // columnMainName
             // 
             this.columnMainName.Text = "Name";
-            this.columnMainName.Width = 450;
+            this.columnMainName.Width = 165;
             // 
             // columnMainPrice
             // 
@@ -389,19 +391,20 @@ namespace RosUI
             this.pnlDesserts.Controls.Add(this.btnAddDessert);
             this.pnlDesserts.Controls.Add(this.lblDesserts);
             this.pnlDesserts.Controls.Add(this.listviewDesserts);
-            this.pnlDesserts.Location = new System.Drawing.Point(8, 380);
+            this.pnlDesserts.Location = new System.Drawing.Point(9, 195);
             this.pnlDesserts.Name = "pnlDesserts";
-            this.pnlDesserts.Size = new System.Drawing.Size(801, 315);
+            this.pnlDesserts.Size = new System.Drawing.Size(459, 252);
             this.pnlDesserts.TabIndex = 22;
             // 
             // btnAddDessert
             // 
-            this.btnAddDessert.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDessert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDessert.Location = new System.Drawing.Point(329, 48);
             this.btnAddDessert.Name = "btnAddDessert";
-            this.btnAddDessert.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDessert.Size = new System.Drawing.Size(117, 78);
             this.btnAddDessert.TabIndex = 15;
             this.btnAddDessert.Text = "Add";
-            this.btnAddDessert.UseVisualStyleBackColor = true;
+            this.btnAddDessert.UseVisualStyleBackColor = false;
             this.btnAddDessert.Click += new System.EventHandler(this.btnAddDessert_Click);
             // 
             // lblDesserts
@@ -422,7 +425,7 @@ namespace RosUI
             this.listviewDesserts.HideSelection = false;
             this.listviewDesserts.Location = new System.Drawing.Point(14, 48);
             this.listviewDesserts.Name = "listviewDesserts";
-            this.listviewDesserts.Size = new System.Drawing.Size(571, 237);
+            this.listviewDesserts.Size = new System.Drawing.Size(309, 186);
             this.listviewDesserts.TabIndex = 0;
             this.listviewDesserts.UseCompatibleStateImageBehavior = false;
             this.listviewDesserts.View = System.Windows.Forms.View.Details;
@@ -430,7 +433,7 @@ namespace RosUI
             // columnHeader1
             // 
             this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 450;
+            this.columnHeader1.Width = 165;
             // 
             // columnHeader2
             // 
@@ -439,39 +442,31 @@ namespace RosUI
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(663, 264);
+            this.txtNote.Location = new System.Drawing.Point(372, 534);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(151, 115);
+            this.txtNote.Size = new System.Drawing.Size(123, 75);
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
-            // 
-            // btnPayment
-            // 
-            this.btnPayment.Location = new System.Drawing.Point(710, 714);
-            this.btnPayment.Name = "btnPayment";
-            this.btnPayment.Size = new System.Drawing.Size(94, 29);
-            this.btnPayment.TabIndex = 19;
-            this.btnPayment.Text = "pay";
-            this.btnPayment.UseVisualStyleBackColor = true;
             // 
             // pnlSoftDrinks
             // 
             this.pnlSoftDrinks.Controls.Add(this.btnAddDrink);
             this.pnlSoftDrinks.Controls.Add(this.lblSoftDrinks);
             this.pnlSoftDrinks.Controls.Add(this.listviewSoftDrinks);
-            this.pnlSoftDrinks.Location = new System.Drawing.Point(6, 385);
+            this.pnlSoftDrinks.Location = new System.Drawing.Point(9, 195);
             this.pnlSoftDrinks.Name = "pnlSoftDrinks";
-            this.pnlSoftDrinks.Size = new System.Drawing.Size(795, 315);
+            this.pnlSoftDrinks.Size = new System.Drawing.Size(459, 252);
             this.pnlSoftDrinks.TabIndex = 20;
             // 
             // btnAddDrink
             // 
-            this.btnAddDrink.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDrink.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDrink.Location = new System.Drawing.Point(329, 48);
             this.btnAddDrink.Name = "btnAddDrink";
-            this.btnAddDrink.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDrink.Size = new System.Drawing.Size(117, 78);
             this.btnAddDrink.TabIndex = 15;
             this.btnAddDrink.Text = "Add";
-            this.btnAddDrink.UseVisualStyleBackColor = true;
+            this.btnAddDrink.UseVisualStyleBackColor = false;
             this.btnAddDrink.Click += new System.EventHandler(this.btnAddDrink_Click);
             // 
             // lblSoftDrinks
@@ -492,7 +487,7 @@ namespace RosUI
             this.listviewSoftDrinks.HideSelection = false;
             this.listviewSoftDrinks.Location = new System.Drawing.Point(14, 48);
             this.listviewSoftDrinks.Name = "listviewSoftDrinks";
-            this.listviewSoftDrinks.Size = new System.Drawing.Size(571, 237);
+            this.listviewSoftDrinks.Size = new System.Drawing.Size(309, 186);
             this.listviewSoftDrinks.TabIndex = 0;
             this.listviewSoftDrinks.UseCompatibleStateImageBehavior = false;
             this.listviewSoftDrinks.View = System.Windows.Forms.View.Details;
@@ -500,7 +495,7 @@ namespace RosUI
             // columnName
             // 
             this.columnName.Text = "Name";
-            this.columnName.Width = 450;
+            this.columnName.Width = 165;
             // 
             // columnPrice
             // 
@@ -514,16 +509,16 @@ namespace RosUI
             this.pnlDrinkCategories.Controls.Add(this.btnSpirits);
             this.pnlDrinkCategories.Controls.Add(this.btnBeers);
             this.pnlDrinkCategories.Controls.Add(this.btnSoftDrink);
-            this.pnlDrinkCategories.Location = new System.Drawing.Point(15, 258);
+            this.pnlDrinkCategories.Location = new System.Drawing.Point(15, 103);
             this.pnlDrinkCategories.Name = "pnlDrinkCategories";
-            this.pnlDrinkCategories.Size = new System.Drawing.Size(612, 89);
+            this.pnlDrinkCategories.Size = new System.Drawing.Size(410, 66);
             this.pnlDrinkCategories.TabIndex = 20;
             // 
             // btnHotDrinks
             // 
-            this.btnHotDrinks.Location = new System.Drawing.Point(503, 13);
+            this.btnHotDrinks.Location = new System.Drawing.Point(339, 11);
             this.btnHotDrinks.Name = "btnHotDrinks";
-            this.btnHotDrinks.Size = new System.Drawing.Size(94, 54);
+            this.btnHotDrinks.Size = new System.Drawing.Size(70, 53);
             this.btnHotDrinks.TabIndex = 24;
             this.btnHotDrinks.Text = "HOT DRINKS";
             this.btnHotDrinks.UseVisualStyleBackColor = true;
@@ -531,9 +526,9 @@ namespace RosUI
             // 
             // btnWine
             // 
-            this.btnWine.Location = new System.Drawing.Point(253, 13);
+            this.btnWine.Location = new System.Drawing.Point(170, 11);
             this.btnWine.Name = "btnWine";
-            this.btnWine.Size = new System.Drawing.Size(94, 54);
+            this.btnWine.Size = new System.Drawing.Size(70, 53);
             this.btnWine.TabIndex = 23;
             this.btnWine.Text = "WINES";
             this.btnWine.UseVisualStyleBackColor = true;
@@ -541,9 +536,9 @@ namespace RosUI
             // 
             // btnSpirits
             // 
-            this.btnSpirits.Location = new System.Drawing.Point(377, 12);
+            this.btnSpirits.Location = new System.Drawing.Point(255, 11);
             this.btnSpirits.Name = "btnSpirits";
-            this.btnSpirits.Size = new System.Drawing.Size(94, 54);
+            this.btnSpirits.Size = new System.Drawing.Size(70, 53);
             this.btnSpirits.TabIndex = 22;
             this.btnSpirits.Text = "SPIRITS";
             this.btnSpirits.UseVisualStyleBackColor = true;
@@ -551,9 +546,9 @@ namespace RosUI
             // 
             // btnBeers
             // 
-            this.btnBeers.Location = new System.Drawing.Point(128, 12);
+            this.btnBeers.Location = new System.Drawing.Point(86, 11);
             this.btnBeers.Name = "btnBeers";
-            this.btnBeers.Size = new System.Drawing.Size(94, 54);
+            this.btnBeers.Size = new System.Drawing.Size(70, 53);
             this.btnBeers.TabIndex = 21;
             this.btnBeers.Text = "BEERS";
             this.btnBeers.UseVisualStyleBackColor = true;
@@ -561,9 +556,9 @@ namespace RosUI
             // 
             // btnSoftDrink
             // 
-            this.btnSoftDrink.Location = new System.Drawing.Point(3, 13);
+            this.btnSoftDrink.Location = new System.Drawing.Point(3, 11);
             this.btnSoftDrink.Name = "btnSoftDrink";
-            this.btnSoftDrink.Size = new System.Drawing.Size(94, 54);
+            this.btnSoftDrink.Size = new System.Drawing.Size(70, 53);
             this.btnSoftDrink.TabIndex = 2;
             this.btnSoftDrink.Text = "SOFT DRINKS";
             this.btnSoftDrink.UseVisualStyleBackColor = true;
@@ -574,9 +569,9 @@ namespace RosUI
             this.pnlLunch.Controls.Add(this.btnStarters);
             this.pnlLunch.Controls.Add(this.btnMains);
             this.pnlLunch.Controls.Add(this.btnDesserts);
-            this.pnlLunch.Location = new System.Drawing.Point(15, 260);
+            this.pnlLunch.Location = new System.Drawing.Point(15, 103);
             this.pnlLunch.Name = "pnlLunch";
-            this.pnlLunch.Size = new System.Drawing.Size(612, 78);
+            this.pnlLunch.Size = new System.Drawing.Size(410, 66);
             this.pnlLunch.TabIndex = 23;
             // 
             // pnlDinner
@@ -584,16 +579,16 @@ namespace RosUI
             this.pnlDinner.Controls.Add(this.btnStartersDinner);
             this.pnlDinner.Controls.Add(this.btnMainsDinners);
             this.pnlDinner.Controls.Add(this.btnDessertsDinner);
-            this.pnlDinner.Location = new System.Drawing.Point(15, 260);
+            this.pnlDinner.Location = new System.Drawing.Point(15, 103);
             this.pnlDinner.Name = "pnlDinner";
-            this.pnlDinner.Size = new System.Drawing.Size(612, 78);
+            this.pnlDinner.Size = new System.Drawing.Size(410, 66);
             this.pnlDinner.TabIndex = 24;
             // 
             // btnStartersDinner
             // 
             this.btnStartersDinner.Location = new System.Drawing.Point(2, 12);
             this.btnStartersDinner.Name = "btnStartersDinner";
-            this.btnStartersDinner.Size = new System.Drawing.Size(154, 41);
+            this.btnStartersDinner.Size = new System.Drawing.Size(116, 41);
             this.btnStartersDinner.TabIndex = 1;
             this.btnStartersDinner.Text = "STARTERS";
             this.btnStartersDinner.UseVisualStyleBackColor = true;
@@ -601,9 +596,9 @@ namespace RosUI
             // 
             // btnMainsDinners
             // 
-            this.btnMainsDinners.Location = new System.Drawing.Point(230, 12);
+            this.btnMainsDinners.Location = new System.Drawing.Point(147, 12);
             this.btnMainsDinners.Name = "btnMainsDinners";
-            this.btnMainsDinners.Size = new System.Drawing.Size(154, 41);
+            this.btnMainsDinners.Size = new System.Drawing.Size(116, 41);
             this.btnMainsDinners.TabIndex = 5;
             this.btnMainsDinners.Text = "MAINS";
             this.btnMainsDinners.UseVisualStyleBackColor = true;
@@ -611,9 +606,9 @@ namespace RosUI
             // 
             // btnDessertsDinner
             // 
-            this.btnDessertsDinner.Location = new System.Drawing.Point(443, 13);
+            this.btnDessertsDinner.Location = new System.Drawing.Point(284, 12);
             this.btnDessertsDinner.Name = "btnDessertsDinner";
-            this.btnDessertsDinner.Size = new System.Drawing.Size(154, 41);
+            this.btnDessertsDinner.Size = new System.Drawing.Size(116, 41);
             this.btnDessertsDinner.TabIndex = 6;
             this.btnDessertsDinner.Text = "DESSERTS";
             this.btnDessertsDinner.UseVisualStyleBackColor = true;
@@ -621,9 +616,9 @@ namespace RosUI
             // 
             // btnLunch
             // 
-            this.btnLunch.Location = new System.Drawing.Point(16, 217);
+            this.btnLunch.Location = new System.Drawing.Point(16, 44);
             this.btnLunch.Name = "btnLunch";
-            this.btnLunch.Size = new System.Drawing.Size(154, 41);
+            this.btnLunch.Size = new System.Drawing.Size(116, 41);
             this.btnLunch.TabIndex = 25;
             this.btnLunch.Text = "LUNCH";
             this.btnLunch.UseVisualStyleBackColor = true;
@@ -631,9 +626,9 @@ namespace RosUI
             // 
             // btnDinner
             // 
-            this.btnDinner.Location = new System.Drawing.Point(244, 217);
+            this.btnDinner.Location = new System.Drawing.Point(162, 44);
             this.btnDinner.Name = "btnDinner";
-            this.btnDinner.Size = new System.Drawing.Size(154, 41);
+            this.btnDinner.Size = new System.Drawing.Size(116, 41);
             this.btnDinner.TabIndex = 26;
             this.btnDinner.Text = "DINNER";
             this.btnDinner.UseVisualStyleBackColor = true;
@@ -644,19 +639,20 @@ namespace RosUI
             this.pnlDinnerMains.Controls.Add(this.btnAddDinnerMains);
             this.pnlDinnerMains.Controls.Add(this.lblDinnerMain);
             this.pnlDinnerMains.Controls.Add(this.listviewDinnerMains);
-            this.pnlDinnerMains.Location = new System.Drawing.Point(9, 383);
+            this.pnlDinnerMains.Location = new System.Drawing.Point(9, 195);
             this.pnlDinnerMains.Name = "pnlDinnerMains";
-            this.pnlDinnerMains.Size = new System.Drawing.Size(795, 315);
+            this.pnlDinnerMains.Size = new System.Drawing.Size(459, 252);
             this.pnlDinnerMains.TabIndex = 27;
             // 
             // btnAddDinnerMains
             // 
-            this.btnAddDinnerMains.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDinnerMains.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDinnerMains.Location = new System.Drawing.Point(329, 48);
             this.btnAddDinnerMains.Name = "btnAddDinnerMains";
-            this.btnAddDinnerMains.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDinnerMains.Size = new System.Drawing.Size(117, 78);
             this.btnAddDinnerMains.TabIndex = 15;
             this.btnAddDinnerMains.Text = "Add";
-            this.btnAddDinnerMains.UseVisualStyleBackColor = true;
+            this.btnAddDinnerMains.UseVisualStyleBackColor = false;
             this.btnAddDinnerMains.Click += new System.EventHandler(this.btnAddDinnerMains_Click);
             // 
             // lblDinnerMain
@@ -677,7 +673,7 @@ namespace RosUI
             this.listviewDinnerMains.HideSelection = false;
             this.listviewDinnerMains.Location = new System.Drawing.Point(14, 48);
             this.listviewDinnerMains.Name = "listviewDinnerMains";
-            this.listviewDinnerMains.Size = new System.Drawing.Size(571, 237);
+            this.listviewDinnerMains.Size = new System.Drawing.Size(309, 186);
             this.listviewDinnerMains.TabIndex = 0;
             this.listviewDinnerMains.UseCompatibleStateImageBehavior = false;
             this.listviewDinnerMains.View = System.Windows.Forms.View.Details;
@@ -685,7 +681,7 @@ namespace RosUI
             // MainName
             // 
             this.MainName.Text = "Name";
-            this.MainName.Width = 450;
+            this.MainName.Width = 165;
             // 
             // MainPrice
             // 
@@ -697,19 +693,20 @@ namespace RosUI
             this.pnlDinnerStarters.Controls.Add(this.btnAddDinnerStarter);
             this.pnlDinnerStarters.Controls.Add(this.label1);
             this.pnlDinnerStarters.Controls.Add(this.listviewDinnerStarters);
-            this.pnlDinnerStarters.Location = new System.Drawing.Point(9, 383);
+            this.pnlDinnerStarters.Location = new System.Drawing.Point(9, 195);
             this.pnlDinnerStarters.Name = "pnlDinnerStarters";
-            this.pnlDinnerStarters.Size = new System.Drawing.Size(798, 318);
+            this.pnlDinnerStarters.Size = new System.Drawing.Size(459, 252);
             this.pnlDinnerStarters.TabIndex = 28;
             // 
             // btnAddDinnerStarter
             // 
-            this.btnAddDinnerStarter.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDinnerStarter.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDinnerStarter.Location = new System.Drawing.Point(329, 48);
             this.btnAddDinnerStarter.Name = "btnAddDinnerStarter";
-            this.btnAddDinnerStarter.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDinnerStarter.Size = new System.Drawing.Size(117, 78);
             this.btnAddDinnerStarter.TabIndex = 15;
             this.btnAddDinnerStarter.Text = "Add";
-            this.btnAddDinnerStarter.UseVisualStyleBackColor = true;
+            this.btnAddDinnerStarter.UseVisualStyleBackColor = false;
             this.btnAddDinnerStarter.Click += new System.EventHandler(this.btnAddDinnerStarter_Click);
             // 
             // label1
@@ -730,7 +727,7 @@ namespace RosUI
             this.listviewDinnerStarters.HideSelection = false;
             this.listviewDinnerStarters.Location = new System.Drawing.Point(14, 48);
             this.listviewDinnerStarters.Name = "listviewDinnerStarters";
-            this.listviewDinnerStarters.Size = new System.Drawing.Size(571, 237);
+            this.listviewDinnerStarters.Size = new System.Drawing.Size(309, 186);
             this.listviewDinnerStarters.TabIndex = 0;
             this.listviewDinnerStarters.UseCompatibleStateImageBehavior = false;
             this.listviewDinnerStarters.View = System.Windows.Forms.View.Details;
@@ -738,7 +735,7 @@ namespace RosUI
             // columnHeader3
             // 
             this.columnHeader3.Text = "Name";
-            this.columnHeader3.Width = 450;
+            this.columnHeader3.Width = 165;
             // 
             // columnHeader4
             // 
@@ -750,19 +747,20 @@ namespace RosUI
             this.pnlDinnerDesserts.Controls.Add(this.btnAddDinnerDesserts);
             this.pnlDinnerDesserts.Controls.Add(this.lblDinnerDessert);
             this.pnlDinnerDesserts.Controls.Add(this.listViewDinnerDesserts);
-            this.pnlDinnerDesserts.Location = new System.Drawing.Point(8, 382);
+            this.pnlDinnerDesserts.Location = new System.Drawing.Point(9, 195);
             this.pnlDinnerDesserts.Name = "pnlDinnerDesserts";
-            this.pnlDinnerDesserts.Size = new System.Drawing.Size(798, 318);
+            this.pnlDinnerDesserts.Size = new System.Drawing.Size(459, 252);
             this.pnlDinnerDesserts.TabIndex = 29;
             // 
             // btnAddDinnerDesserts
             // 
-            this.btnAddDinnerDesserts.Location = new System.Drawing.Point(628, 48);
+            this.btnAddDinnerDesserts.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDinnerDesserts.Location = new System.Drawing.Point(329, 48);
             this.btnAddDinnerDesserts.Name = "btnAddDinnerDesserts";
-            this.btnAddDinnerDesserts.Size = new System.Drawing.Size(151, 112);
+            this.btnAddDinnerDesserts.Size = new System.Drawing.Size(117, 78);
             this.btnAddDinnerDesserts.TabIndex = 15;
             this.btnAddDinnerDesserts.Text = "Add";
-            this.btnAddDinnerDesserts.UseVisualStyleBackColor = true;
+            this.btnAddDinnerDesserts.UseVisualStyleBackColor = false;
             this.btnAddDinnerDesserts.Click += new System.EventHandler(this.btnAddDinnerDesserts_Click);
             // 
             // lblDinnerDessert
@@ -783,7 +781,7 @@ namespace RosUI
             this.listViewDinnerDesserts.HideSelection = false;
             this.listViewDinnerDesserts.Location = new System.Drawing.Point(14, 48);
             this.listViewDinnerDesserts.Name = "listViewDinnerDesserts";
-            this.listViewDinnerDesserts.Size = new System.Drawing.Size(571, 237);
+            this.listViewDinnerDesserts.Size = new System.Drawing.Size(309, 186);
             this.listViewDinnerDesserts.TabIndex = 0;
             this.listViewDinnerDesserts.UseCompatibleStateImageBehavior = false;
             this.listViewDinnerDesserts.View = System.Windows.Forms.View.Details;
@@ -791,7 +789,7 @@ namespace RosUI
             // columnHeader5
             // 
             this.columnHeader5.Text = "Name";
-            this.columnHeader5.Width = 450;
+            this.columnHeader5.Width = 165;
             // 
             // columnHeader6
             // 
@@ -803,19 +801,20 @@ namespace RosUI
             this.pnlBeers.Controls.Add(this.btnAddBeers);
             this.pnlBeers.Controls.Add(this.lblBeers);
             this.pnlBeers.Controls.Add(this.listviewBeers);
-            this.pnlBeers.Location = new System.Drawing.Point(10, 381);
+            this.pnlBeers.Location = new System.Drawing.Point(9, 195);
             this.pnlBeers.Name = "pnlBeers";
-            this.pnlBeers.Size = new System.Drawing.Size(798, 318);
+            this.pnlBeers.Size = new System.Drawing.Size(459, 252);
             this.pnlBeers.TabIndex = 30;
             // 
             // btnAddBeers
             // 
-            this.btnAddBeers.Location = new System.Drawing.Point(628, 48);
+            this.btnAddBeers.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddBeers.Location = new System.Drawing.Point(329, 48);
             this.btnAddBeers.Name = "btnAddBeers";
-            this.btnAddBeers.Size = new System.Drawing.Size(151, 112);
+            this.btnAddBeers.Size = new System.Drawing.Size(117, 78);
             this.btnAddBeers.TabIndex = 15;
             this.btnAddBeers.Text = "Add";
-            this.btnAddBeers.UseVisualStyleBackColor = true;
+            this.btnAddBeers.UseVisualStyleBackColor = false;
             this.btnAddBeers.Click += new System.EventHandler(this.btnAddBeers_Click);
             // 
             // lblBeers
@@ -836,7 +835,7 @@ namespace RosUI
             this.listviewBeers.HideSelection = false;
             this.listviewBeers.Location = new System.Drawing.Point(14, 48);
             this.listviewBeers.Name = "listviewBeers";
-            this.listviewBeers.Size = new System.Drawing.Size(571, 237);
+            this.listviewBeers.Size = new System.Drawing.Size(309, 186);
             this.listviewBeers.TabIndex = 0;
             this.listviewBeers.UseCompatibleStateImageBehavior = false;
             this.listviewBeers.View = System.Windows.Forms.View.Details;
@@ -844,7 +843,7 @@ namespace RosUI
             // columnHeader7
             // 
             this.columnHeader7.Text = "Name";
-            this.columnHeader7.Width = 450;
+            this.columnHeader7.Width = 165;
             // 
             // columnHeader8
             // 
@@ -856,19 +855,20 @@ namespace RosUI
             this.pnlWines.Controls.Add(this.btnAddWines);
             this.pnlWines.Controls.Add(this.lblWines);
             this.pnlWines.Controls.Add(this.listviewWines);
-            this.pnlWines.Location = new System.Drawing.Point(9, 382);
+            this.pnlWines.Location = new System.Drawing.Point(9, 195);
             this.pnlWines.Name = "pnlWines";
-            this.pnlWines.Size = new System.Drawing.Size(798, 318);
+            this.pnlWines.Size = new System.Drawing.Size(459, 252);
             this.pnlWines.TabIndex = 31;
             // 
             // btnAddWines
             // 
-            this.btnAddWines.Location = new System.Drawing.Point(628, 48);
+            this.btnAddWines.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddWines.Location = new System.Drawing.Point(329, 48);
             this.btnAddWines.Name = "btnAddWines";
-            this.btnAddWines.Size = new System.Drawing.Size(151, 112);
+            this.btnAddWines.Size = new System.Drawing.Size(117, 78);
             this.btnAddWines.TabIndex = 15;
             this.btnAddWines.Text = "Add";
-            this.btnAddWines.UseVisualStyleBackColor = true;
+            this.btnAddWines.UseVisualStyleBackColor = false;
             this.btnAddWines.Click += new System.EventHandler(this.btnAddWines_Click);
             // 
             // lblWines
@@ -889,7 +889,7 @@ namespace RosUI
             this.listviewWines.HideSelection = false;
             this.listviewWines.Location = new System.Drawing.Point(14, 48);
             this.listviewWines.Name = "listviewWines";
-            this.listviewWines.Size = new System.Drawing.Size(571, 237);
+            this.listviewWines.Size = new System.Drawing.Size(309, 186);
             this.listviewWines.TabIndex = 0;
             this.listviewWines.UseCompatibleStateImageBehavior = false;
             this.listviewWines.View = System.Windows.Forms.View.Details;
@@ -897,7 +897,7 @@ namespace RosUI
             // columnHeader9
             // 
             this.columnHeader9.Text = "Name";
-            this.columnHeader9.Width = 450;
+            this.columnHeader9.Width = 165;
             // 
             // columnHeader10
             // 
@@ -909,19 +909,20 @@ namespace RosUI
             this.pnlSpirits.Controls.Add(this.btnAddSpirits);
             this.pnlSpirits.Controls.Add(this.lblSpirits);
             this.pnlSpirits.Controls.Add(this.listViewSpirits);
-            this.pnlSpirits.Location = new System.Drawing.Point(8, 383);
+            this.pnlSpirits.Location = new System.Drawing.Point(9, 195);
             this.pnlSpirits.Name = "pnlSpirits";
-            this.pnlSpirits.Size = new System.Drawing.Size(798, 318);
+            this.pnlSpirits.Size = new System.Drawing.Size(459, 252);
             this.pnlSpirits.TabIndex = 32;
             // 
             // btnAddSpirits
             // 
-            this.btnAddSpirits.Location = new System.Drawing.Point(628, 48);
+            this.btnAddSpirits.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddSpirits.Location = new System.Drawing.Point(329, 48);
             this.btnAddSpirits.Name = "btnAddSpirits";
-            this.btnAddSpirits.Size = new System.Drawing.Size(151, 112);
+            this.btnAddSpirits.Size = new System.Drawing.Size(117, 78);
             this.btnAddSpirits.TabIndex = 15;
             this.btnAddSpirits.Text = "Add";
-            this.btnAddSpirits.UseVisualStyleBackColor = true;
+            this.btnAddSpirits.UseVisualStyleBackColor = false;
             this.btnAddSpirits.Click += new System.EventHandler(this.btnAddSpirits_Click);
             // 
             // lblSpirits
@@ -942,7 +943,7 @@ namespace RosUI
             this.listViewSpirits.HideSelection = false;
             this.listViewSpirits.Location = new System.Drawing.Point(14, 48);
             this.listViewSpirits.Name = "listViewSpirits";
-            this.listViewSpirits.Size = new System.Drawing.Size(571, 237);
+            this.listViewSpirits.Size = new System.Drawing.Size(309, 186);
             this.listViewSpirits.TabIndex = 0;
             this.listViewSpirits.UseCompatibleStateImageBehavior = false;
             this.listViewSpirits.View = System.Windows.Forms.View.Details;
@@ -950,7 +951,7 @@ namespace RosUI
             // columnHeader11
             // 
             this.columnHeader11.Text = "Name";
-            this.columnHeader11.Width = 450;
+            this.columnHeader11.Width = 165;
             // 
             // columnHeader12
             // 
@@ -962,19 +963,20 @@ namespace RosUI
             this.pnlHotDrinks.Controls.Add(this.btnAddHotDrinks);
             this.pnlHotDrinks.Controls.Add(this.lblHotDrinks);
             this.pnlHotDrinks.Controls.Add(this.listViewHotDrinks);
-            this.pnlHotDrinks.Location = new System.Drawing.Point(10, 383);
+            this.pnlHotDrinks.Location = new System.Drawing.Point(9, 195);
             this.pnlHotDrinks.Name = "pnlHotDrinks";
-            this.pnlHotDrinks.Size = new System.Drawing.Size(798, 318);
+            this.pnlHotDrinks.Size = new System.Drawing.Size(459, 252);
             this.pnlHotDrinks.TabIndex = 33;
             // 
             // btnAddHotDrinks
             // 
-            this.btnAddHotDrinks.Location = new System.Drawing.Point(628, 48);
+            this.btnAddHotDrinks.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddHotDrinks.Location = new System.Drawing.Point(329, 48);
             this.btnAddHotDrinks.Name = "btnAddHotDrinks";
-            this.btnAddHotDrinks.Size = new System.Drawing.Size(151, 112);
+            this.btnAddHotDrinks.Size = new System.Drawing.Size(117, 78);
             this.btnAddHotDrinks.TabIndex = 15;
             this.btnAddHotDrinks.Text = "Add";
-            this.btnAddHotDrinks.UseVisualStyleBackColor = true;
+            this.btnAddHotDrinks.UseVisualStyleBackColor = false;
             this.btnAddHotDrinks.Click += new System.EventHandler(this.btnAddHotDrinks_Click);
             // 
             // lblHotDrinks
@@ -995,7 +997,7 @@ namespace RosUI
             this.listViewHotDrinks.HideSelection = false;
             this.listViewHotDrinks.Location = new System.Drawing.Point(14, 48);
             this.listViewHotDrinks.Name = "listViewHotDrinks";
-            this.listViewHotDrinks.Size = new System.Drawing.Size(571, 237);
+            this.listViewHotDrinks.Size = new System.Drawing.Size(309, 186);
             this.listViewHotDrinks.TabIndex = 0;
             this.listViewHotDrinks.UseCompatibleStateImageBehavior = false;
             this.listViewHotDrinks.View = System.Windows.Forms.View.Details;
@@ -1003,7 +1005,7 @@ namespace RosUI
             // columnHeader13
             // 
             this.columnHeader13.Text = "Name";
-            this.columnHeader13.Width = 450;
+            this.columnHeader13.Width = 165;
             // 
             // columnHeader14
             // 
@@ -1014,13 +1016,11 @@ namespace RosUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 766);
+            this.ClientSize = new System.Drawing.Size(503, 766);
             this.Controls.Add(this.btnDinner);
             this.Controls.Add(this.btnLunch);
             this.Controls.Add(this.btnDrinks);
             this.Controls.Add(this.pnlWines);
-            this.Controls.Add(this.pnlDrinkCategories);
-            this.Controls.Add(this.btnPayment);
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.btnOrderAddNote);
             this.Controls.Add(this.btnOrderRemove);
@@ -1030,8 +1030,6 @@ namespace RosUI
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
             this.Controls.Add(this.pnlMains);
-            this.Controls.Add(this.pnlDinner);
-            this.Controls.Add(this.pnlLunch);
             this.Controls.Add(this.pnlHotDrinks);
             this.Controls.Add(this.pnlSpirits);
             this.Controls.Add(this.pnlBeers);
@@ -1041,6 +1039,9 @@ namespace RosUI
             this.Controls.Add(this.pnlDesserts);
             this.Controls.Add(this.pnlSoftDrinks);
             this.Controls.Add(this.pnlDinnerMains);
+            this.Controls.Add(this.pnlDinner);
+            this.Controls.Add(this.pnlLunch);
+            this.Controls.Add(this.pnlDrinkCategories);
             this.Name = "FormOrder";
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
@@ -1096,7 +1097,6 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader priceOrder;
         private System.Windows.Forms.ColumnHeader amountOrder;
         private System.Windows.Forms.RichTextBox txtNote;
-        private System.Windows.Forms.Button btnPayment;
         private System.Windows.Forms.Panel pnlSoftDrinks;
         private System.Windows.Forms.Button btnAddDrink;
         private System.Windows.Forms.Label lblSoftDrinks;
