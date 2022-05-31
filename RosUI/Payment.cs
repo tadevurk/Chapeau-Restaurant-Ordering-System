@@ -39,7 +39,7 @@ namespace RosUI
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
-            btnCompletePayment.BackColor = Color.LightGray;
+
 
             DisplayBill();
             // calculate the bill amount
@@ -58,11 +58,13 @@ namespace RosUI
             {
                 listViewPayment.Items.Clear();
 
+                
+              
                 BillLogic dishes = new BillLogic();
-                List<OrderedDish> orderedDishes = dishes.GetOrderedDishes(table);
+                List<Dish> orderedDishes = dishes.GetOrderedDishes(table);
 
                 BillLogic drinks = new BillLogic();
-                List<OrderedDrink> orderedDrinks = drinks.GetOrderedDrinks(table);
+                List<Drink> orderedDrinks = drinks.GetOrderedDrinks(table);
 
                 orderedItems.AddRange(orderedDishes);
                 orderedItems.AddRange(orderedDrinks);
@@ -127,24 +129,35 @@ namespace RosUI
 
         private void btnCompletePayment_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to complete the payment?", "Complete payment", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {    
-                // when complete payment is clicked, the bill is stored in the database
-                billLogic.CreateBill(bill);
 
-                // change ordered items status to paid
-                SetItemsPaid(orderedItems);
+            // when complete payment is clicked, the bill is stored in the database
+            billLogic.CreateBill(bill);
 
-                this.Hide();
+            foreach (Item item in orderedItems)
+            {
+                if (item is Dish)
+                {
+                    // do something
 
-                // return to the table overview through the RosMain form or Restaurant overview form
-                TableOverview tableOverview = new TableOverview(employee, rosMain);
-                tableOverview.Show();
 
-                this.Close();
+                }
+                else if (item is Drink)
+                {
+                    //do something else
+                }
             }
-            else { return; }
+
+            table.TableStatus = 0;
+            tableLogic.Update(table);
+            
+            //SetItemsPaid(orderedItems);
+            this.Hide();
+
+            // return to the table overview through the RosMain form or Restaurant overview form
+            TableOverview tableOverview = new TableOverview(employee, rosMain);
+            tableOverview.Show();
+            
+            this.Close();
 
         }
 
@@ -157,14 +170,12 @@ namespace RosUI
         private void radioBtnCash_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
-            btnCompletePayment.BackColor = Color.LightGreen;
             bill.PaymentMethod = "Cash";
         }
 
         private void radioBtnVisa_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
-            btnCompletePayment.BackColor = Color.LightGreen;
             bill.PaymentMethod = "Visa";
 
         }
@@ -172,7 +183,6 @@ namespace RosUI
         private void radioBtnDebit_CheckedChanged(object sender, EventArgs e)
         {
             btnCompletePayment.Enabled = true;
-            btnCompletePayment.BackColor = Color.LightGreen;
             bill.PaymentMethod = "Debit";
 
         }
@@ -180,6 +190,7 @@ namespace RosUI
         private void txtTip_TextChanged(object sender, EventArgs e)
         {
             // add a tip and adjust the amount to be paid
+            // ..
             tip = Convert.ToDecimal(txtTip.Text);
             toPay = tip + bill.TotalAmount;
 
@@ -218,28 +229,43 @@ namespace RosUI
         // remove all items from a table that the payment is completed
         public void SetItemsPaid(List<Item> orderedItems)
         {
-            foreach (Item item in orderedItems)
+
+            List<Drink> drinks = new List<Drink>();
+
+            List<Dish> dishes = new List<Dish>();
+
+
+            foreach (Drink drink in drinks)
             {
-                if (item is OrderedDish)
-                {
-                    SetDishPaid((OrderedDish)item);
-                }
-                
-                if (item is OrderedDrink)
-                {
-                    SetDrinkPaid((OrderedDrink)item);
-                }
+                SetDrinkPaid(drink);
             }
+
+            foreach (Dish dish in dishes)
+            {
+                SetDishPaid(dish);
+            }
+            
+            //foreach (Item item in orderedItems)
+            //{
+            //    if (item is Dish)
+            //    {
+            //        SetDishPaid((Dish)item);
+            //    }
+            //    else if (item is Drink)
+            //    {
+            //        SetDrinkPaid((Drink)item);
+            //    }
+            //}
         }
 
-        public void SetDishPaid(OrderedDish item)
+        public void SetDishPaid(Dish billItem)
         {
-            billLogic.SetDishPaid(item);
+            billLogic.SetDishPaid(billItem);
         }
 
-        public void SetDrinkPaid(OrderedDrink item)
+        public void SetDrinkPaid(Drink billItem)
         {
-            billLogic.SetDrinkPaid(item);
+            billLogic.SetDrinkPaid(billItem);
         }
     }
 }
