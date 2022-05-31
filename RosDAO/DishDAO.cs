@@ -28,6 +28,25 @@ namespace RosDAL
             return ReadTablesOrder(ExecuteSelectQuery(query, sp));
         }
 
+        private List<Dish> ReadTablesOrder(DataTable table)
+        {
+            List<Dish> dishes = new List<Dish>();
+
+            foreach (DataRow dr in table.Rows)
+            {
+
+                Dish dish = new Dish()
+                {
+                    DishID = (int)dr["DishID"],
+                    ItemName = (string)dr["Name"],
+                    ItemPrice = (decimal)dr["Price"],
+                    ItemAmount = (int)dr["Amount"],
+                };
+                dishes.Add(dish);
+            }
+            return dishes;
+        }
+
         public int RetrieveVatByID(int id)
         {
             string qr = "Select Vat from Dish where DishID=@DishID";
@@ -51,24 +70,7 @@ namespace RosDAL
             return vat;
         }
 
-        private List<Dish> ReadTablesOrder(DataTable table)
-        {
-            List<Dish> dishes = new List<Dish>();
 
-            foreach (DataRow dr in table.Rows)
-            {
-
-                Dish dish = new Dish()
-                {
-                    DishID = (int)dr["DishID"],
-                    ItemName = (string)dr["Name"],
-                    ItemPrice = (decimal)dr["Price"],
-                    ItemAmount = (int)dr["Amount"],
-                };
-                dishes.Add(dish);
-            }
-            return dishes;
-        }
 
         public List<Dish> GetLunchStarters() // Getting all starters
         {
@@ -148,7 +150,7 @@ namespace RosDAL
         }
 
 
-        public void IncreaseDishStock(Dish dish) // Increase the dish from stock
+        public void IncreaseDishStock(Dish dish) // Increase the dish from stock (Remove button)
         {
             string query = "Update Item " +
                 "SET ItemStock = ItemStock + 1  " +

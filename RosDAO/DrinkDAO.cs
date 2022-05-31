@@ -11,6 +11,40 @@ namespace RosDAL
 {
     public class DrinkDAO : BaseDAO
     {
+
+        public List<Drink> WriteContainedDrinks(Table table)
+        {
+            string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
+                " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
+                " join Item as I on I.ItemID=OD.DrinkID" +
+                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
+                "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
+            SqlParameter[] sp =
+            {
+                new SqlParameter("@TableNumber", table.TableNumber),
+            };
+
+            return ReadTablesOrder(ExecuteSelectQuery(query, sp));
+        }
+
+        private List<Drink> ReadTablesOrder(DataTable dataTable)
+        {
+            List<Drink> drinks = new List<Drink>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+
+                Drink drink = new Drink()
+                {
+                    DrinkID = (int)dr["DrinkID"],
+                    ItemName = (string)dr["Name"],
+                    ItemPrice = (decimal)dr["Price"],
+                    ItemAmount = (int)dr["Amount"],
+                };
+                drinks.Add(drink);
+            }
+            return drinks;
+        }
         // Getting all soft drinks
         public List<Drink> GetAllSoftDrinks()
         {
@@ -74,39 +108,7 @@ namespace RosDAL
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<Drink> WriteContainedDrinks(Table table)
-        {
-            string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
-                " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
-                " join Item as I on I.ItemID=OD.DrinkID" +
-                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
-                "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
-            SqlParameter[] sp =
-            {
-                new SqlParameter("@TableNumber", table.TableNumber),
-            };
 
-            return ReadTablesOrder(ExecuteSelectQuery(query, sp));
-        }
-
-        private List<Drink> ReadTablesOrder(DataTable dataTable)
-        {
-            List<Drink> drinks = new List<Drink>();
-
-            foreach (DataRow dr in dataTable.Rows)
-            {
-
-                Drink drink = new Drink()
-                {
-                    DrinkID = (int)dr["DrinkID"],
-                    ItemName = (string)dr["Name"],
-                    ItemPrice = (decimal)dr["Price"],
-                    ItemAmount = (int)dr["Amount"],
-                };
-                drinks.Add(drink);
-            }
-            return drinks;
-        }
 
         // Increase the drink from stock
         public void IncreaseDrinkStock(Drink drink)

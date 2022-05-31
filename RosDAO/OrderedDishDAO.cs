@@ -36,29 +36,6 @@ namespace RosDAL
 
             return ReatSingleTable(ExecuteSelectQuery(query, sp));
         }
-        public void AddDish(OrderedDish orderedDish) // Add dish to ordered dish table (The question is DishID or OrderID??)
-        {
-            string query = "INSERT INTO OrderDish " +
-                "(OrderID, DishID, " +
-                "DishStatus, TimeDishOrdered, TimeDishDelivered), " +
-                "OrderedDishAmount, DishNote " +
-                "VALUES (@OrderID, @DishID, " +
-                "@DishStatus, @TimeDishOrdered, @TimeDishDelivered), " +
-                "@OrderedDishAmount, @DishNote " +
-                "SELECT SCOPE_IDENTITY()";
-
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@OrderID", orderedDish.OrderID),
-                new SqlParameter("@DishID", orderedDish.DishID),
-                new SqlParameter("@DishStatus", orderedDish.Status),
-                new SqlParameter("@TimeDishOrdered", orderedDish.TimeDishOrdered),
-                new SqlParameter("@TimeDishDelivered", orderedDish.TimeDishDelivered),
-                new SqlParameter("@OrderedDishAmount", orderedDish.OrderedDishAmount),
-                new SqlParameter("@DishNote", orderedDish.DishNote)
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
 
         public void BringStatusBack(OrderedDish d)
         {
