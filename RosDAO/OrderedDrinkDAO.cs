@@ -13,6 +13,26 @@ namespace RosDAL
 {
     public class OrderedDrinkDAO : BaseDAO
     {
+        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
+        {
+            foreach (Drink drink in drinkInOrderProcess)
+            {
+                if (drink.Note == null)
+                {
+                    drink.Note = "null";
+                }
+
+                //Adding dish
+                string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", drink.Note),
+                new SqlParameter("@CurrentTime", DateTime.Now),
+                new SqlParameter("@Amount", drink.Amount)};
+
+                ExecuteEditQuery(query, sp);
+            }
+        }
         public void AddDrink(OrderedDrink orderedDrink) // Add dish to ordered dish table (The question is DishID or OrderID??)
         {
             string query = "INSERT INTO OrderDrink " +
@@ -41,32 +61,14 @@ namespace RosDAL
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note]," +
     " SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID " +
-    "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus>=2 group by O.TableNumber," +
+    "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID" +
+    " where OD.DrinkStatus>=2 and cast(OD.TimeDrinkOrdered as Date) = cast(getdate() as Date)" +
+    " group by O.TableNumber," +
     " OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered";
 
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
-        {
-            foreach (Drink drink in drinkInOrderProcess)
-            {
-                if (drink.Note == null)
-                {
-                    drink.Note = "null";
-                }
-
-                //Adding dish
-                string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, getdate(), null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
-                new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", drink.Note),
-                new SqlParameter("@Amount", drink.Amount)};
-
-                ExecuteEditQuery(query, sp);
-            }
         }
 
         public void BringStatusBack(OrderedDrink orderedDrink)
@@ -118,7 +120,7 @@ namespace RosDAL
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note]," +
                 " SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID " +
-                "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus<2 group by O.TableNumber," +
+                "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus<2 and cast(OD.TimeDrinkOrdered as Date) = cast(getdate() as Date) group by O.TableNumber," +
                 " OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered";
 
             SqlParameter[] sqlParameters = new SqlParameter[0];

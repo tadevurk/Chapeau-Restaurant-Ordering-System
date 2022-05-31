@@ -227,8 +227,18 @@ namespace RosUI
                         li.SubItems.Add("Yes");
                     }
 
+                    string time;
+                    if (CalculateTimeSpent(drink.TimeDrinkOrdered).TotalMinutes > 60)
+                    {
+                        time = "more then an hour";
+                    }
+                    else
+                    {
+                        time = CalculateTimeSpent(drink.TimeDrinkOrdered).TotalMinutes.ToString("00 minutes ago");
+                    }
 
-                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
+
+                    li.SubItems.Add(time);
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -236,7 +246,7 @@ namespace RosUI
                     //if the item is ready for pickup should show another color
                     if (drink.DrinkStatus == DrinkStatus.PickUp)
                     {
-                        li.BackColor = Color.Green;
+                        li.BackColor = Color.LightGreen;
                     }
 
                     //adding item to the list
@@ -276,7 +286,7 @@ namespace RosUI
                         li.SubItems.Add("Yes");
                     }
 
-                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH.mm"));
+                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH:mm"));
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -319,7 +329,18 @@ namespace RosUI
                     {
                         li.SubItems.Add("Yes");
                     }
-                    li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+
+                    string time;
+                    if (CalculateTimeSpent(dish.TimeDishOrdered).TotalMinutes > 60)
+                    {
+                        time = "more then an hour";
+                    }
+                    else
+                    {
+                        time = CalculateTimeSpent(dish.TimeDishOrdered).TotalMinutes.ToString("00 minutes ago");
+                    }
+
+                    li.SubItems.Add(time);
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
@@ -328,7 +349,7 @@ namespace RosUI
                     //displaying different color for status "ToPickUp"
                     if (dish.Status == DishStatus.PickUp)
                     {
-                        li.BackColor = Color.Green;
+                        li.BackColor = Color.LightGreen;
                     }
 
                     //adding items to listView
@@ -340,6 +361,12 @@ namespace RosUI
             {
                 MessageBox.Show(exp.Message);
             }
+
+        }
+
+        private TimeSpan CalculateTimeSpent(DateTime placed)
+        {
+            return DateTime.Now - placed;
 
         }
 

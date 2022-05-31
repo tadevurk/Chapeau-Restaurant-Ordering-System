@@ -107,6 +107,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.LightSkyBlue;
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.applicationToolStripMenuItem,
@@ -217,21 +218,23 @@
             // 
             // btnFinishKitDash
             // 
+            this.btnFinishKitDash.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFinishKitDash.Location = new System.Drawing.Point(828, 294);
             this.btnFinishKitDash.Name = "btnFinishKitDash";
             this.btnFinishKitDash.Size = new System.Drawing.Size(153, 77);
             this.btnFinishKitDash.TabIndex = 2;
             this.btnFinishKitDash.Text = "Finished Orders";
-            this.btnFinishKitDash.UseVisualStyleBackColor = true;
+            this.btnFinishKitDash.UseVisualStyleBackColor = false;
             // 
             // btnRunningKitDash
             // 
+            this.btnRunningKitDash.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnRunningKitDash.Location = new System.Drawing.Point(283, 294);
             this.btnRunningKitDash.Name = "btnRunningKitDash";
             this.btnRunningKitDash.Size = new System.Drawing.Size(151, 77);
             this.btnRunningKitDash.TabIndex = 1;
             this.btnRunningKitDash.Text = "Running Orders";
-            this.btnRunningKitDash.UseVisualStyleBackColor = true;
+            this.btnRunningKitDash.UseVisualStyleBackColor = false;
             this.btnRunningKitDash.Click += new System.EventHandler(this.btnRunningKitDash_Click);
             // 
             // lblWelcomeKitDash
@@ -269,22 +272,24 @@
             // 
             // btnServe
             // 
+            this.btnServe.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnServe.Location = new System.Drawing.Point(384, 521);
             this.btnServe.Name = "btnServe";
             this.btnServe.Size = new System.Drawing.Size(94, 29);
             this.btnServe.TabIndex = 5;
             this.btnServe.Text = "Serve";
-            this.btnServe.UseVisualStyleBackColor = true;
+            this.btnServe.UseVisualStyleBackColor = false;
             this.btnServe.Click += new System.EventHandler(this.btnServe_Click);
             // 
             // btnViewNote
             // 
+            this.btnViewNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNote.Location = new System.Drawing.Point(685, 518);
             this.btnViewNote.Name = "btnViewNote";
             this.btnViewNote.Size = new System.Drawing.Size(135, 30);
             this.btnViewNote.TabIndex = 4;
             this.btnViewNote.Text = "view note";
-            this.btnViewNote.UseVisualStyleBackColor = true;
+            this.btnViewNote.UseVisualStyleBackColor = false;
             this.btnViewNote.Click += new System.EventHandler(this.btnViewNote_Click);
             // 
             // label1
@@ -298,12 +303,13 @@
             // 
             // btnDishReady
             // 
+            this.btnDishReady.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnDishReady.Location = new System.Drawing.Point(1031, 518);
             this.btnDishReady.Name = "btnDishReady";
             this.btnDishReady.Size = new System.Drawing.Size(149, 30);
             this.btnDishReady.TabIndex = 3;
             this.btnDishReady.Text = "Ready!";
-            this.btnDishReady.UseVisualStyleBackColor = true;
+            this.btnDishReady.UseVisualStyleBackColor = false;
             this.btnDishReady.Click += new System.EventHandler(this.btnDishReady_Click);
             // 
             // lvOrderedDishes
@@ -342,7 +348,7 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Order Time";
-            this.columnHeader6.Width = 120;
+            this.columnHeader6.Width = 150;
             // 
             // columnHeader7
             // 
@@ -380,22 +386,24 @@
             // 
             // btnViewDrinkNote
             // 
+            this.btnViewDrinkNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewDrinkNote.Location = new System.Drawing.Point(613, 512);
             this.btnViewDrinkNote.Name = "btnViewDrinkNote";
             this.btnViewDrinkNote.Size = new System.Drawing.Size(94, 29);
             this.btnViewDrinkNote.TabIndex = 5;
             this.btnViewDrinkNote.Text = "View Note";
-            this.btnViewDrinkNote.UseVisualStyleBackColor = true;
+            this.btnViewDrinkNote.UseVisualStyleBackColor = false;
             this.btnViewDrinkNote.Click += new System.EventHandler(this.btnViewDrinkNote_Click);
             // 
             // btnDrinkServed
             // 
+            this.btnDrinkServed.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnDrinkServed.Location = new System.Drawing.Point(360, 515);
             this.btnDrinkServed.Name = "btnDrinkServed";
             this.btnDrinkServed.Size = new System.Drawing.Size(94, 29);
             this.btnDrinkServed.TabIndex = 4;
             this.btnDrinkServed.Text = "Served";
-            this.btnDrinkServed.UseVisualStyleBackColor = true;
+            this.btnDrinkServed.UseVisualStyleBackColor = false;
             this.btnDrinkServed.Click += new System.EventHandler(this.btnDrinkServed_Click);
             // 
             // label2
@@ -409,12 +417,13 @@
             // 
             // brnDrinkReady
             // 
+            this.brnDrinkReady.BackColor = System.Drawing.Color.LightSkyBlue;
             this.brnDrinkReady.Location = new System.Drawing.Point(1031, 518);
             this.brnDrinkReady.Name = "brnDrinkReady";
             this.brnDrinkReady.Size = new System.Drawing.Size(149, 30);
             this.brnDrinkReady.TabIndex = 3;
             this.brnDrinkReady.Text = "Ready!";
-            this.brnDrinkReady.UseVisualStyleBackColor = true;
+            this.brnDrinkReady.UseVisualStyleBackColor = false;
             this.brnDrinkReady.Click += new System.EventHandler(this.btnDrinkReady_Click);
             // 
             // lvOrderedDrinks
@@ -479,21 +488,23 @@
             // 
             // btnFinishBarDash
             // 
+            this.btnFinishBarDash.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFinishBarDash.Location = new System.Drawing.Point(828, 294);
             this.btnFinishBarDash.Name = "btnFinishBarDash";
             this.btnFinishBarDash.Size = new System.Drawing.Size(153, 77);
             this.btnFinishBarDash.TabIndex = 2;
             this.btnFinishBarDash.Text = "Finished Orders";
-            this.btnFinishBarDash.UseVisualStyleBackColor = true;
+            this.btnFinishBarDash.UseVisualStyleBackColor = false;
             // 
             // btnRunnningBarDash
             // 
+            this.btnRunnningBarDash.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnRunnningBarDash.Location = new System.Drawing.Point(283, 294);
             this.btnRunnningBarDash.Name = "btnRunnningBarDash";
             this.btnRunnningBarDash.Size = new System.Drawing.Size(151, 77);
             this.btnRunnningBarDash.TabIndex = 1;
             this.btnRunnningBarDash.Text = "Running Orders";
-            this.btnRunnningBarDash.UseVisualStyleBackColor = true;
+            this.btnRunnningBarDash.UseVisualStyleBackColor = false;
             this.btnRunnningBarDash.Click += new System.EventHandler(this.btnRunnningBarDash_Click);
             // 
             // fileSystemWatcher1
@@ -525,12 +536,13 @@
             // 
             // btnViewNoteFinDish
             // 
+            this.btnViewNoteFinDish.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNoteFinDish.Location = new System.Drawing.Point(685, 518);
             this.btnViewNoteFinDish.Name = "btnViewNoteFinDish";
             this.btnViewNoteFinDish.Size = new System.Drawing.Size(135, 30);
             this.btnViewNoteFinDish.TabIndex = 4;
             this.btnViewNoteFinDish.Text = "view note";
-            this.btnViewNoteFinDish.UseVisualStyleBackColor = true;
+            this.btnViewNoteFinDish.UseVisualStyleBackColor = false;
             this.btnViewNoteFinDish.Click += new System.EventHandler(this.btnViewNoteFinDish_Click);
             // 
             // label3
@@ -578,7 +590,7 @@
             // columnHeader12
             // 
             this.columnHeader12.Text = "Order Time";
-            this.columnHeader12.Width = 120;
+            this.columnHeader12.Width = 150;
             // 
             // columnHeader13
             // 
@@ -603,12 +615,13 @@
             // 
             // btnViewNoteFinDrink
             // 
+            this.btnViewNoteFinDrink.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNoteFinDrink.Location = new System.Drawing.Point(743, 512);
             this.btnViewNoteFinDrink.Name = "btnViewNoteFinDrink";
             this.btnViewNoteFinDrink.Size = new System.Drawing.Size(94, 29);
             this.btnViewNoteFinDrink.TabIndex = 5;
             this.btnViewNoteFinDrink.Text = "View Note";
-            this.btnViewNoteFinDrink.UseVisualStyleBackColor = true;
+            this.btnViewNoteFinDrink.UseVisualStyleBackColor = false;
             this.btnViewNoteFinDrink.Click += new System.EventHandler(this.btnViewNoteFinDrink_Click);
             // 
             // btnUndoFinDrink
@@ -678,12 +691,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlKitchenView);
-            this.Controls.Add(this.pnlDashboardKitchen);
             this.Controls.Add(this.pnlKitchenViewFinished);
             this.Controls.Add(this.pnlBarViewFinished);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlDashboardBar);
+            this.Controls.Add(this.pnlKitchenView);
+            this.Controls.Add(this.pnlDashboardKitchen);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";

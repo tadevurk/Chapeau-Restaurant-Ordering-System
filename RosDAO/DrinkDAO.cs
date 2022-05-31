@@ -11,47 +11,17 @@ namespace RosDAL
 {
     public class DrinkDAO : BaseDAO
     {
-        // Getting all soft drinks
-        public List<Drink> GetAllSoftDrinks()
-        {
-            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
-                "from Drink " +
-                "join Item on DrinkID = ItemID " +
-                "where DrinkCategory = 'SoftDrink' ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
-        }
 
-        //Getting all Drinks
-        public List<Drink> GetAllDrinks()
-        {
-            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
-                "from Drink " +
-                "join Item on DrinkID = ItemID ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        // Getting all beers
-        public List<Drink> GetAllBeers()
-        {
-            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
-                "from Drink " +
-                "join Item on DrinkID = ItemID " +
-                "where Dish.Course = 'Beers';";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Drink> WriteContainedDrinks(Table t, Order o)
+        public List<Drink> WriteContainedDrinks(Table table)
         {
             string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
                 " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DrinkID" +
-                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
+                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
+                "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter[] sp =
             {
-                new SqlParameter("@TableNumber", t.TableNumber),
+                new SqlParameter("@TableNumber", table.TableNumber),
             };
 
             return ReadTablesOrder(ExecuteSelectQuery(query, sp));
@@ -75,14 +45,33 @@ namespace RosDAL
             }
             return drinks;
         }
+        // Getting all soft drinks
+        public List<Drink> GetAllSoftDrinks()
+        {
+            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
+                "from Drink " +
+                "join Item on DrinkID = ItemID " +
+                "where DrinkCategory = 'SoftDrink' ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
+        }
 
+        public List<Drink> GetAllBeers()
+        {
+            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
+                "from Drink " +
+                "join Item on DrinkID = ItemID " +
+                "where DrinkCategory = 'Beer';";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
+        }
         // Getting all wines
         public List<Drink> GetAllWines()
         {
             string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
                 "from Drink " +
                 "join Item on DrinkID = ItemID " +
-                "where Dish.Course = 'Wine';";
+                "where DrinkCategory = 'Wine';";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -93,7 +82,7 @@ namespace RosDAL
             string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
                 "from Drink " +
                 "join Item on DrinkID = ItemID " +
-                "where Dish.Course = 'Spirits';";
+                "where DrinkCategory = 'Spirit';";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -104,10 +93,22 @@ namespace RosDAL
             string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
                 "from Drink " +
                 "join Item on DrinkID = ItemID " +
-                "where Dish.Course = 'HotDrinks';";
+                "where DrinkCategory = 'HotDrink';";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        //Getting all Drinks
+        public List<Drink> GetAllDrinks()
+        {
+            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
+                "from Drink " +
+                "join Item on DrinkID = ItemID ";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadDrinks(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+
 
         // Increase the drink from stock
         public void IncreaseDrinkStock(Drink drink)
