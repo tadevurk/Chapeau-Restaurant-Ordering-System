@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using RosModel;
 using RosLogic;
 
+////////////////////Jason Xie, 659045, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosUI
 {
     public partial class TableControl : Form
@@ -18,7 +20,7 @@ namespace RosUI
         private Employee employee;
         private Table table;
         private RosMain rosMain;
-        private TableLogic tableLogic = new TableLogic();
+        private TableLogic tableLogic;
 
         public TableControl(Employee employee, RosMain rosMain, Table table)
         {
@@ -26,17 +28,25 @@ namespace RosUI
             this.employee = employee;
             this.rosMain = rosMain;
             this.table =  table;
+            tableLogic = new TableLogic();
             orderForm = new FormOrder(table, employee, rosMain);
             lblTable.Text = "Table: " + table.TableNumber;
             lblWaiter.Text = "Waiter: " + employee.Name;
 
-            if (table.TableStatus == 1)
+            if (table.TableStatus == 2 || table.TableStatus == 3 || table.TableStatus == 4)
+            {
+                btnOccupy.Text = "Occupied";
+                btnOccupy.BackColor = Color.Red;
+                btnOccupy.Enabled = false;
+            }
+            else if (table.TableStatus == 1)
             {
                 btnOccupy.Text = "Occupied";
                 btnOccupy.BackColor = Color.Red;
             }
         }
 
+        //When Clicked will Occupy and unOccupy the tables
         private void btnOccupy_Click(object sender, EventArgs e)
         {
             
@@ -57,6 +67,7 @@ namespace RosUI
             }              
         }
 
+        //Will take you to the OrderFrom
         private void btnTakeOrder_Click(object sender, EventArgs e)
         {
             table = tableLogic.GetTableById(table.TableNumber);
@@ -64,6 +75,7 @@ namespace RosUI
             orderForm.ShowDialog();
         }
 
+        //Will take you to the PaymentForm
         private void btnPay_Click(object sender, EventArgs e)
         {
             FormPayment formPayment = new FormPayment(table, employee, orderForm, rosMain);
@@ -71,12 +83,14 @@ namespace RosUI
             this.Close();
         }
 
+        //Logs the user out and opens the LoginForm
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            new Login().Show();
             this.Close();
+            new Login().Show();         
         }
 
+        //Goes back to the TableOverview
         private void btnBack_Click(object sender, EventArgs e)
         {
             new TableOverview(employee, rosMain).Show();

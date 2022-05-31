@@ -5,26 +5,29 @@ using System.Windows.Forms;
 using RosLogic;
 using RosModel;
 
+////////////////////Jason Xie, 659045, GROUP 1, IT1D////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosUI
 {
     public partial class Registration : Form
     {
-        EmployeeLogic employeeLogic;
-        RosMain rosMain;
-        public Registration()
+        private EmployeeLogic employeeLogic;
+        private RosMain rosMain;
+        private Employee employee;
+
+        public Registration(RosMain rosMain)
         {
             InitializeComponent();
+            employeeLogic = new EmployeeLogic();
+            this.rosMain = rosMain;
         }
 
+        //Will register the user and store it into the database
         private void btnRegister_Click(object sender, EventArgs e)
         {
             try
-            {
-                employeeLogic = new EmployeeLogic();
-                Employee employee = new Employee();
-                Employee blank = employeeLogic.GetLastEmployeeID();
-                int id = blank.EmplID + 1;
-
+            {                             
+                //Make sure all the fields are filled
                 if (txtUsername.Text == "" || txtName.Text == "" || txtPinCode.Text == "")
                 {
                     MessageBox.Show("*Please fill all the fields*");
@@ -35,11 +38,17 @@ namespace RosUI
                     return;
                 }
 
+                employee = new Employee();
+
+                //stores the informaion about the user
+                Employee blank = employeeLogic.GetLastEmployeeID();
+                int id = blank.EmplID + 1;
                 employee.EmplID = id;
                 employee.Username = txtUsername.Text;
                 employee.Name = txtName.Text;
                 employee.PinCode = txtPinCode.Text;
 
+                //Make sure the password and the role is correct
                 if (CheckPassword(employee) && CheckRole(txtLicenseKey.Text, employee))
                 {
                     MessageBox.Show("Registration Successfull");
@@ -59,6 +68,8 @@ namespace RosUI
                 rosMain.WriteError(exp, exp.Message);
             }
         }
+
+        //Goes back to the Login Form
         private void btnExit_Click(object sender, EventArgs e)
         {
             try
@@ -74,8 +85,10 @@ namespace RosUI
             }
         }
 
+        //Check for a valid password and Encrypts the password and store it
         private bool CheckPassword(Employee employee)
         {
+            //If the password is valid store the salt and digest
             if (IsValidPassword(employee.PinCode))
             {
                 HashWithSaltResult hashResultSha256 = EncryptPassword(txtPinCode.Text);
@@ -90,6 +103,7 @@ namespace RosUI
             }
         }
 
+        //Check which role this user will be through the license key and adds it to the database
         private bool CheckRole(string licenseKey, Employee employee)
         {
             switch (licenseKey)
@@ -118,6 +132,7 @@ namespace RosUI
             return false;
         }
 
+        //Encrypts the password
         private HashWithSaltResult EncryptPassword(string password)
         {
             PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
@@ -126,6 +141,7 @@ namespace RosUI
             return hashResultSha256;
         }
 
+        //Check if the password the user entered meets the requirement
         private bool IsValidPassword(string pincode)
         {
             if (ContainsNumber(pincode) && pincode.Length == 4)
@@ -135,6 +151,7 @@ namespace RosUI
             return false;
         }
 
+        //Check if the password contains numbers
         private bool ContainsNumber(string pincode)
         {
             foreach (char c in pincode)

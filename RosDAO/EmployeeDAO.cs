@@ -93,14 +93,20 @@ namespace RosDAL
         private Employee ReadTable(DataTable dataTable)
         {
             Employee employee = new Employee();
-
-            foreach (DataRow dr in dataTable.Rows)
-            {               
-                employee.EmplID = (int)dr["EmplID"];
-                employee.Name = (string)dr["Name"].ToString();
-                employee.Username = (string)dr["Username"].ToString();
-                employee.Salt = (string)dr["Salt"].ToString();
-                employee.Digest = (string)dr["Digest"].ToString();
+            try
+            {            
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    employee.EmplID = (int)dr["EmplID"];
+                    employee.Name = (string)dr["Name"].ToString();
+                    employee.Username = (string)dr["Username"].ToString();
+                    employee.Salt = (string)dr["Salt"].ToString();
+                    employee.Digest = (string)dr["Digest"].ToString();
+                }               
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Can't connect to database");
             }
             return employee;
         }

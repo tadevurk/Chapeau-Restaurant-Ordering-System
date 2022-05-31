@@ -39,52 +39,57 @@
             // 
             // btnOccupy
             // 
+            this.btnOccupy.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnOccupy.Location = new System.Drawing.Point(181, 200);
             this.btnOccupy.Name = "btnOccupy";
             this.btnOccupy.Size = new System.Drawing.Size(100, 40);
             this.btnOccupy.TabIndex = 0;
             this.btnOccupy.Text = "Occupy";
-            this.btnOccupy.UseVisualStyleBackColor = true;
+            this.btnOccupy.UseVisualStyleBackColor = false;
             this.btnOccupy.Click += new System.EventHandler(this.btnOccupy_Click);
             // 
             // btnTakeOrder
             // 
+            this.btnTakeOrder.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnTakeOrder.Location = new System.Drawing.Point(181, 280);
             this.btnTakeOrder.Name = "btnTakeOrder";
             this.btnTakeOrder.Size = new System.Drawing.Size(100, 40);
             this.btnTakeOrder.TabIndex = 1;
             this.btnTakeOrder.Text = "Take Order";
-            this.btnTakeOrder.UseVisualStyleBackColor = true;
+            this.btnTakeOrder.UseVisualStyleBackColor = false;
             this.btnTakeOrder.Click += new System.EventHandler(this.btnTakeOrder_Click);
             // 
             // btnPay
             // 
+            this.btnPay.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnPay.Location = new System.Drawing.Point(181, 360);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(100, 40);
             this.btnPay.TabIndex = 2;
-            this.btnPay.Text = "Pay";
-            this.btnPay.UseVisualStyleBackColor = true;
+            this.btnPay.Text = "Payment";
+            this.btnPay.UseVisualStyleBackColor = false;
             this.btnPay.Click += new System.EventHandler(this.btnPay_Click);
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnBack.Location = new System.Drawing.Point(383, -1);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 40);
             this.btnBack.TabIndex = 3;
             this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnLogout
             // 
+            this.btnLogout.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnLogout.Location = new System.Drawing.Point(181, 480);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(100, 40);
             this.btnLogout.TabIndex = 4;
             this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.UseVisualStyleBackColor = false;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // lblTable
