@@ -11,7 +11,6 @@ namespace RosDAL
 {
     public class DishDAO : BaseDAO
     {
-        //Getting all Starters
 
         public List<Dish> WriteContainedDishes(Table t)
         {
@@ -135,7 +134,7 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public void DecreaseDishStock(Dish dish) // Decrease the dish from stock
+        public void DecreaseDishStock(Dish dish) // Decrease the dish from stock (Add buttons)
         {
             string query = "Update Item " +
                 "SET ItemStock = ItemStock - 1 " +
