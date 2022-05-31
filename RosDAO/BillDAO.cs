@@ -13,10 +13,10 @@ namespace RosDAL
     {
         public List<OrderedDish> GetOrderedDishes(Table table) // Get the list of the unpaid ordered dishes for a certain table
         {
-            string query = "SELECT OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDishAmount) as OrderedDishAmount, " +
+            string query = "SELECT OD.DishID, OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDishAmount) as OrderedDishAmount, " +
                 "D.Vat FROM OrderDish as OD JOIN [Order] as O on OD.OrderID = O.OrderID " +
                 "JOIN Item as I on OD.DishID = I.ItemID JOIN Dish as D on OD.DishID = D.DishID " +
-                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus < 3 GROUP BY I.ItemName, I.ItemPrice, D.Vat, OD.OrderID; ";
+                "WHERE O.TableNumber = @TableNumber AND OD.DishStatus < 3 GROUP BY I.ItemName, I.ItemPrice, D.Vat, OD.DishID ,OD.OrderID; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -33,6 +33,7 @@ namespace RosDAL
             {
                 OrderedDish orderedDish = new OrderedDish()
                 {
+                    DishID = (int)dr["DishID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemAmount = (int)dr["OrderedDishAmount"],
@@ -46,9 +47,9 @@ namespace RosDAL
 
         public List<OrderedDrink> GetOrderedDrinks(Table table) // Get the list of the unpaid ordered drinks for a certain table
         {
-            string query = "SELECT OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDrinkAmount) as OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
+            string query = "SELECT OD.DrinkID, OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDrinkAmount) as OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
                 "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID" +
-                " JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus < 3 GROUP BY I.ItemName, I.ItemPrice, DT.Vat, OD.OrderID; ";
+                " JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus < 3 GROUP BY I.ItemName, I.ItemPrice, DT.Vat, OD.DrinkID, OD.OrderID; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -63,6 +64,7 @@ namespace RosDAL
             {
                 OrderedDrink orderedDrink = new OrderedDrink()
                 {
+                    DrinkID = (int)dr["DrinkID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemAmount = (int)dr["OrderedDrinkAmount"],
@@ -102,10 +104,11 @@ namespace RosDAL
         public void SetDishPaid(OrderedDish item)
         {
             // update the ordered dish status to paid status 
-            string query = "UPDATE [OrderDish] SET DishStatus = 3 WHERE OrderID = @OrderID";
+            string query = "UPDATE [OrderDish] SET DishStatus = 3 WHERE OrderID = @OrderID and DishID=@DishID";
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@OrderID", item.OrderID)
+                new SqlParameter("@OrderID", item.OrderID),
+                new SqlParameter("@DishID", item.DishID)
             };
 
             ExecuteEditQuery(query, sqlParameters);
@@ -114,10 +117,11 @@ namespace RosDAL
         public void SetDrinkPaid(OrderedDrink item)
         {
             // update the ordered drinks status to paid status 
-            string query = "UPDATE [OrderDrink] SET DrinkStatus = 3 WHERE OrderID = @OrderID";
+            string query = "UPDATE [OrderDrink] SET DrinkStatus = 3 WHERE OrderID = @OrderID and DrinkID=@DrinkID";
             SqlParameter[] sqlParameters =
             {
-                 new SqlParameter("@OrderID", item.OrderID)
+                 new SqlParameter("@OrderID", item.OrderID),
+                 new SqlParameter("@DrinkID", item.DrinkID)
             };
 
             ExecuteEditQuery(query, sqlParameters);

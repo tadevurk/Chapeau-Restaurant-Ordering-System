@@ -224,24 +224,14 @@ namespace RosUI
             {
                 if (item is OrderedDish)
                 {
-                    SetDishPaid((OrderedDish)item);
+                    billLogic.SetDishPaid((OrderedDish)item);
                 }
 
                 if (item is OrderedDrink)
                 {
-                    SetDrinkPaid((OrderedDrink)item);
+                    billLogic.SetDrinkPaid((OrderedDrink)item);
                 }
             }
-        }
-
-        public void SetDishPaid(OrderedDish item)
-        {
-            billLogic.SetDishPaid(item);
-        }
-
-        public void SetDrinkPaid(OrderedDrink item)
-        {
-            billLogic.SetDrinkPaid(item);
         }
     }
 }
