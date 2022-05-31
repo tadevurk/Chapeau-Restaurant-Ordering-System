@@ -16,9 +16,9 @@ namespace RosLogic
         {
             return dishDAO.GetLunchStarters();
         }
-        public List<Dish> WriteContainedDishes(Table table)
+        public List<Dish> WriteContainedDishes(Table t, Order o)
         {
-            return dishDAO.WriteContainedDishes(table);
+            return dishDAO.WriteContainedDishes(t, o);
         }
 
         public List<Dish> GetLunchMains()
@@ -30,17 +30,9 @@ namespace RosLogic
         {
             return dishDAO.GetLunchDesserts();
         }
-        public List<Dish> GetDinnerStarters()
-        {
-            return dishDAO.GetDinnerStarters();
-        }
         public List<Dish> GetDinnerMains()
         {
             return dishDAO.GetDinnerMains();
-        }
-        public List<Dish> GetDinnerDesserts()
-        {
-            return dishDAO.GetDinnerDesserts();
         }
         public void IncreaseDishStock(Dish dish)
         {
