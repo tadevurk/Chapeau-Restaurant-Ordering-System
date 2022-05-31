@@ -215,6 +215,7 @@ namespace RosUI
                 foreach (OrderedDrink drink in orderedDrinks)
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(drink.Name);
 
                     //displaying output according if a note is present
@@ -224,21 +225,11 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    string time;
-                    if (CalculateTimeSpent(drink.TimeDrinkOrdered).TotalMinutes > 60)
-                    {
-                        time = "more then an hour";
-                    }
-                    else
-                    {
-                        time = CalculateTimeSpent(drink.TimeDrinkOrdered).TotalMinutes.ToString("00 minutes ago");
-                    }
-
-
-                    li.SubItems.Add(time);
+                    li.SubItems.Add(CalculateTimeSpent(drink.TimeDrinkOrdered));
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -246,6 +237,7 @@ namespace RosUI
                     //if the item is ready for pickup should show another color
                     if (drink.DrinkStatus == DrinkStatus.PickUp)
                     {
+                        li.UseItemStyleForSubItems = true;
                         li.BackColor = Color.LightGreen;
                     }
 
@@ -255,7 +247,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -274,6 +266,7 @@ namespace RosUI
                 foreach (OrderedDrink drink in finishedDrinks)
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(drink.Name);
 
                     //displaying output according if a note is present
@@ -283,10 +276,11 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");
+                        li.SubItems[2].BackColor = Color.LightGreen;
                     }
 
-                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH:mm"));
+                    li.SubItems.Add(CalculateTimeSpent(drink.TimeDrinkOrdered));
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -297,7 +291,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -318,6 +312,7 @@ namespace RosUI
                 {
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(dish.Name);
 
                     //displaying output according if a note is present
@@ -327,20 +322,11 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");                     
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    string time;
-                    if (CalculateTimeSpent(dish.TimeDishOrdered).TotalMinutes > 60)
-                    {
-                        time = "more then an hour";
-                    }
-                    else
-                    {
-                        time = CalculateTimeSpent(dish.TimeDishOrdered).TotalMinutes.ToString("00 minutes ago");
-                    }
-
-                    li.SubItems.Add(time);
+                    li.SubItems.Add(CalculateTimeSpent(dish.TimeDishOrdered));
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
@@ -349,6 +335,7 @@ namespace RosUI
                     //displaying different color for status "ToPickUp"
                     if (dish.Status == DishStatus.PickUp)
                     {
+                        li.UseItemStyleForSubItems = true;
                         li.BackColor = Color.LightGreen;
                     }
 
@@ -359,14 +346,23 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
 
         }
 
-        private TimeSpan CalculateTimeSpent(DateTime placed)
+        private string CalculateTimeSpent(DateTime placed)
         {
-            return DateTime.Now - placed;
+            TimeSpan ts = DateTime.Now - placed;
+
+            if (ts.TotalMinutes > 60)
+            {
+                return ts.TotalHours.ToString("00 hours ago");
+            }
+            else
+            {
+                return ts.TotalMinutes.ToString("00 minutes ago");
+            }
 
         }
 
@@ -385,6 +381,7 @@ namespace RosUI
                 {
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(dish.Name);
 
                     //displaying output according if a note is present
@@ -394,10 +391,11 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+                    li.SubItems.Add(CalculateTimeSpent(dish.TimeDishOrdered));
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
@@ -409,7 +407,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -437,7 +435,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
 
             }
         }
@@ -465,7 +463,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -498,16 +496,16 @@ namespace RosUI
                 //display either the note text or if the note is empty display "No note"
                 if (dish.DishNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(dish.DishNote);
+                    MessageBox.Show(dish.DishNote, "Note");
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -537,7 +535,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -557,16 +555,16 @@ namespace RosUI
                 //if the note is empty, display "no note", otherwise display the note
                 if (d.DrinkNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(d.DrinkNote);
+                    MessageBox.Show(d.DrinkNote, "Note");
                 }
             }
             catch (Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
 
 
@@ -600,7 +598,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -678,16 +676,16 @@ namespace RosUI
                 //if the note is null display "no note", otherwise display the note message
                 if (d.DrinkNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(d.DrinkNote);
+                    MessageBox.Show(d.DrinkNote, "Note");
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -707,16 +705,16 @@ namespace RosUI
                 //if the note is null display no note, otherwise display the note message
                 if (dish.DishNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(dish.DishNote);
+                    MessageBox.Show(dish.DishNote, "Note");
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -745,7 +743,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -774,7 +772,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -813,7 +811,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -848,7 +846,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show($"error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
 
         }
