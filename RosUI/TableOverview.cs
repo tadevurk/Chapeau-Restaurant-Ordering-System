@@ -23,6 +23,7 @@ namespace RosUI
         private List<Table> tables;
         private OrderedDish orderedDish = new OrderedDish();
         private OrderedDishLogic orderedDishLogic;
+        public double TotalMinutes { get; }
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
@@ -233,22 +234,13 @@ namespace RosUI
                 if (dish.TableNumber == table.TableNumber && dish.Status == 0)
                 {
                     TimeSpan timeTaken = DateTime.Now - dish.TimeDishOrdered;
-                    int hours = timeTaken.Hours;
-                    int minutes = timeTaken.Minutes;
 
-                    if (timeTaken.Hours == 0)
-                    {
-                        button.Text = $"{minutes} minutes ago";
-                    }
-                    else
-                    {
-                        button.Text = $"{hours}:{minutes:00}";
-                    }
+                    button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes ago";
 
                     if (button.Text == "0 min ago")
                     {
                         button.Text = "1 min ago";
-                    }            
+                    }
                 }
             }
             return button;
