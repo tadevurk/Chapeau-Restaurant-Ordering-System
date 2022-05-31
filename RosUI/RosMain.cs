@@ -17,18 +17,36 @@ namespace RosUI
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
         OrderedDish d = new OrderedDish();
-
         public RosMain(Employee employee)
         {
             InitializeComponent();
 
-            UpdateDishes();
-            UpdateDrinks();
+            Timer timer1 = new Timer();
+
+            timer1.Interval = 300000;//5 minutes
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Start();
+
+            UpdateAllListViews();
+
             UpdateTables();
 
             this.employee = employee;
 
             AdaptFormOnRole(employee);
+        }
+
+        private void UpdateAllListViews()
+        {
+            UpdateDishes();
+            UpdateDrinks();
+            UpdateFinishedDrinks();
+            UpdateFinishedDishes();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateAllListViews();
         }
 
         private void AdaptFormOnRole(Employee employee)
@@ -200,7 +218,13 @@ namespace RosUI
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    li.SubItems.Add(CalculateTimeSpent(drink.TimeDrinkOrdered));
+                    li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
+
+                    if (CalculateTimeSpentInMinutes(drink.TimeDrinkOrdered) > 60)
+                    {
+                        li.SubItems[3].BackColor = Color.Red;
+                    }
+
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -220,6 +244,12 @@ namespace RosUI
             {
                 MessageBox.Show(exp.Message, "Error");
             }
+        }
+
+        private int CalculateTimeSpentInMinutes(DateTime timeDrinkOrdered)
+        {
+            TimeSpan ts = DateTime.Now - timeDrinkOrdered;
+            return (int)ts.TotalMinutes;
         }
 
         public void UpdateFinishedDrinks()
@@ -251,7 +281,7 @@ namespace RosUI
                         li.SubItems[2].BackColor = Color.LightGreen;
                     }
 
-                    li.SubItems.Add(CalculateTimeSpent(drink.TimeDrinkOrdered));
+                    li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -297,7 +327,13 @@ namespace RosUI
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    li.SubItems.Add(CalculateTimeSpent(dish.TimeDishOrdered));
+                    li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
+
+                    if (CalculateTimeSpentInMinutes(dish.TimeDishOrdered) > 60)
+                    {
+                        li.SubItems[3].BackColor = Color.Red;
+                    }
+
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
@@ -322,7 +358,7 @@ namespace RosUI
 
         }
 
-        private string CalculateTimeSpent(DateTime placed)
+        private string ReturnTimeSpentAsString(DateTime placed)
         {
             TimeSpan ts = DateTime.Now - placed;
 
@@ -366,7 +402,7 @@ namespace RosUI
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    li.SubItems.Add(CalculateTimeSpent(dish.TimeDishOrdered));
+                    li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
