@@ -348,7 +348,7 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Order Time";
-            this.columnHeader6.Width = 120;
+            this.columnHeader6.Width = 150;
             // 
             // columnHeader7
             // 
@@ -590,7 +590,7 @@
             // columnHeader12
             // 
             this.columnHeader12.Text = "Order Time";
-            this.columnHeader12.Width = 120;
+            this.columnHeader12.Width = 150;
             // 
             // columnHeader13
             // 
@@ -691,12 +691,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1216, 607);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlKitchenView);
-            this.Controls.Add(this.pnlDashboardKitchen);
             this.Controls.Add(this.pnlKitchenViewFinished);
             this.Controls.Add(this.pnlBarViewFinished);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlDashboardBar);
+            this.Controls.Add(this.pnlKitchenView);
+            this.Controls.Add(this.pnlDashboardKitchen);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";
