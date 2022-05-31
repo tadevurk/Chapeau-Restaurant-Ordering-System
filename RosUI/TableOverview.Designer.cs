@@ -245,7 +245,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLogout.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnLogout.Location = new System.Drawing.Point(181, 480);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(100, 40);
@@ -266,7 +266,7 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRefresh.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnRefresh.Location = new System.Drawing.Point(385, -3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(100, 40);
