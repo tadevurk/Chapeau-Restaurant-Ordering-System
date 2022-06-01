@@ -13,26 +13,7 @@ namespace RosDAL
 {
     public class OrderedDrinkDAO : BaseDAO
     {
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
-        {
-            foreach (Drink drink in drinkInOrderProcess)
-            {
-                if (drink.Note == null)
-                {
-                    drink.Note = "null";
-                }
 
-                //Adding dish
-                string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
-                new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", drink.Note),
-                new SqlParameter("@CurrentTime", DateTime.Now),
-                new SqlParameter("@Amount", drink.Amount)};
-
-                ExecuteEditQuery(query, sp);
-            }
-        }
         public void AddDrink(OrderedDrink orderedDrink) // Add dish to ordered dish table (The question is DishID or OrderID??)
         {
             string query = "INSERT INTO OrderDrink " +

@@ -28,14 +28,6 @@ namespace RosLogic
             }
         }
 
-        public void UpdateDishNote(OrderedDish dish, string message)
-        {
-            orderedDishdb.UpdateDishNote(dish, message);
-        }
-        public void AddDishes(List<Dish> dishes, Order order)
-        {
-            orderedDishdb.AddDishes(dishes, order);
-        }
         public void UpdateDishStatusPickUp(OrderedDish dish)
         {
             orderedDishdb.UpdateDishStatusPickUp(dish);

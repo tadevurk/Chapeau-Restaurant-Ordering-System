@@ -64,10 +64,5 @@ namespace RosLogic
         {
             orderedDrinkdb.BringStatusBack(orderedDrink);
         }
-
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
-        {
-            orderedDrinkdb.AddDrinks(drinkInOrderProcess, order);
-        }
     }
 }

@@ -9,8 +9,29 @@ using System.Threading.Tasks;
 
 namespace RosDAL
 {
+    /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
     public class DrinkDAO : BaseDAO
     {
+        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order) // // Add drink using by Vedat
+        {
+            foreach (Drink drink in drinkInOrderProcess)
+            {
+                if (drink.Note == null)
+                {
+                    drink.Note = "null";
+                }
+
+                //Adding dish
+                string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", drink.Note),
+                new SqlParameter("@CurrentTime", DateTime.Now),
+                new SqlParameter("@Amount", drink.Amount)};
+
+                ExecuteEditQuery(query, sp);
+            }
+        }
 
         public List<Drink> WriteContainedDrinks(Table table)
         {

@@ -12,40 +12,6 @@ namespace RosDAL
     {
         OrderDAO orderDAO = new OrderDAO();
 
-        public void AddDishes(List<Dish> dishes, Order order)
-        {
-            foreach (Dish dish in dishes)
-            {
-                if (dish.Note == null)
-                {
-                    dish.Note = "null";
-                }
-
-                //Adding dish
-                string query = "insert into OrderDish values(@OrderID, @dishID, 0, @CurrentTime, null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
-                new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", dish.Note),
-                new SqlParameter("@CurrentTime", DateTime.Now),
-                new SqlParameter("@Amount", dish.Amount)};
-
-                ExecuteEditQuery(query, sp);
-            }
-        }
-
-        public void UpdateDishNote(OrderedDish dish, string message)
-        {
-            string query = "UPDATE OrderDish SET DishNote=@message  WHERE DishID=@DishID AND OrderID=@OrderID";
-
-            SqlParameter[] sp =
-            {
-                new SqlParameter("@DishID", dish.DishID),
-                new SqlParameter("@message", message),
-                new SqlParameter("@OrderID", dish.OrderID)
-            };
-            ExecuteEditQuery(query, sp);
-        }
-
         public OrderedDish GetOrderedDishByKey(Order ord, Dish dish)
         {
             string query = "select * from OrderDish where OrderID=@OrderID AND DishID=@DishID ";
