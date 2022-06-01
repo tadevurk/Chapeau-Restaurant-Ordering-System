@@ -189,6 +189,18 @@ namespace RosUI
             }
         }
 
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new Login().Show();
+        }
+
+        //Updates all the table buttons every minute
+        private void tmrTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateAllButtons(tables);
+        }
+
         //Changes the button color depending on the status of the table
         public Button UpdateButtonColor(Table table, Button button)
         {
@@ -218,12 +230,10 @@ namespace RosUI
                     button.Text = "DishReady";
                     return button;
             }
-
-
-
             return button;
         }
 
+        //calculates the time taken and displays it on the button
         public Button CalculateTimeTaken(Button button, Table table)
         {
             orderedDishLogic = new OrderedDishLogic();
@@ -237,9 +247,9 @@ namespace RosUI
 
                     button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes ago";
 
-                    if (button.Text == "0 min ago")
+                    if (button.Text == "00 minutes ago")
                     {
-                        button.Text = "1 min ago";
+                        button.Text = "01 minutes ago";
                     }
                 }
             }
@@ -527,17 +537,6 @@ namespace RosUI
                     tableLogic.Update(table);
                     break;
             }
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            new Login().Show();
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            UpdateAllButtons(tables);
         }
     }
 }
