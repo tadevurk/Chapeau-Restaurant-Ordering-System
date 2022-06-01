@@ -21,11 +21,7 @@ namespace RosUI
         {
             InitializeComponent();
 
-            Timer timer1 = new Timer();
-
-            timer1.Interval = 300000;//5 minutes
-            timer1.Tick += new EventHandler(timer1_Tick);
-            timer1.Start();
+            InitialiseTimer();
 
             UpdateAllListViews();
 
@@ -36,7 +32,16 @@ namespace RosUI
             AdaptFormOnRole(employee);
         }
 
-        private void UpdateAllListViews()
+        private void InitialiseTimer()
+        {
+            //setting a timer for aumtatic update
+            Timer timer1 = new Timer();
+            timer1.Interval = 300000;//5 minutes
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Start();
+        }
+
+        public void UpdateAllListViews()
         {
             UpdateDishes();
             UpdateDrinks();
@@ -364,11 +369,11 @@ namespace RosUI
 
             if (ts.TotalMinutes > 60)
             {
-                return ts.TotalHours.ToString("00 hours ago");
+                return $"{ts.TotalHours:00} hours ago";
             }
             else
             {
-                return ts.TotalMinutes.ToString("00 minutes ago");
+                return $"{ts.TotalMinutes:00} minutes ago";
             }
 
         }

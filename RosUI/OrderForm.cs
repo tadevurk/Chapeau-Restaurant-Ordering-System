@@ -958,7 +958,7 @@ namespace RosUI
                         WriteContainedItems();
 
                         //Update KitchenView
-                        rosMain.UpdateDishes();
+                        rosMain.UpdateAllListViews();
 
                         //Update TableView
                         rosMain.UpdateTableToOrdered(table.TableNumber);
