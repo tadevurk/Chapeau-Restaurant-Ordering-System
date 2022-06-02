@@ -26,8 +26,6 @@ namespace RosUI
             UpdateAllListViews();
             InitialiseComboBoxes();
 
-
-
             UpdateTables();
 
             this.employee = employee;
@@ -39,7 +37,7 @@ namespace RosUI
         {
             //setting a timer for aumtatic update
             Timer timer1 = new Timer();
-            timer1.Interval = 300000;//5 minutes
+            timer1.Interval = 60000;//1 minute
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Start();
         }
@@ -85,7 +83,7 @@ namespace RosUI
         {
             if (employee.Roles == Roles.Manager)
             {
-                ShowPanel("KitchenDashboard");
+                ShowPanel("KitchenView");
             }
 
             if (employee.Roles == Roles.Chef)
