@@ -24,6 +24,9 @@ namespace RosUI
             InitialiseTimer();
 
             UpdateAllListViews();
+            InitialiseComboBoxes();
+
+
 
             UpdateTables();
 
@@ -39,6 +42,30 @@ namespace RosUI
             timer1.Interval = 300000;//5 minutes
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Start();
+        }
+
+        private void InitialiseComboBoxes()
+        {
+            //combo table kitchen view/ finished order combo
+            for (int i = 1; i <= 10; i++)
+            {
+                cmbTableKit.Items.Add($"Table {i}");
+                cmbKitFinished.Items.Add($"Table {i}");
+                cmbBarFinished.Items.Add($"Table {i}");
+                cmbSelByTabBar.Items.Add($"Table {i}");
+
+            }
+            cmbTableKit.SelectedIndex = 0;
+            cmbKitFinished.SelectedIndex = 0;
+
+            //combo courses kitchen view
+            cmbCourseKit.Items.Add("Starter");
+            cmbCourseKit.Items.Add("Main");
+            cmbCourseKit.Items.Add("Entremets");
+            cmbCourseKit.Items.Add("Dessert");
+
+            cmbCourseKit.SelectedIndex = 0;
+
         }
 
         public void UpdateAllListViews()
@@ -353,6 +380,7 @@ namespace RosUI
 
                     //adding items to listView
                     lvOrderedDishes.Items.Add(li);
+                    
 
                 }
             }
@@ -882,5 +910,62 @@ namespace RosUI
         {
             ShowPanel("BarView");
         }
+
+        private void btnSelByTabKit_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbTableKit.SelectedItem;
+
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+
+        }
+
+        private void btnSelByCourseKit_Click(object sender, EventArgs e)
+        {
+            string course = (string)cmbCourseKit.SelectedItem;
+
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+                if (item.SubItems[4].Text == course)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void btnSelByTabKitFin_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbKitFinished.SelectedItem;
+
+            foreach (ListViewItem item in lvFinishedDishes.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void BtnSelByTabBarFin_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbBarFinished.SelectedItem;
+
+            foreach (ListViewItem item in lvFinishedDrinks.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void btnSelByTabBar_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbSelByTabBar.SelectedItem;
+
+            foreach (ListViewItem item in lvOrderedDrinks.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+        }
+
     }
 }
