@@ -24,6 +24,8 @@ namespace RosUI
         Employee employee;
         FormOrder formOrder;
         List<Item> orderedItems;
+        List<Item> partialPayItems;
+
 
         decimal toPay;
         decimal tip;
@@ -40,14 +42,16 @@ namespace RosUI
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
             btnCompletePayment.BackColor = Color.LightGray;
+            pnlFeedback.Hide();
 
             DisplayBill();
 
-            // calculate the bill amount
+            // display all different amounts
             bill.SubTotalAmount = CalculateSubTotalAmount();
+            lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
             bill.TotalAmount = CalculateTotalAmount();
-            lblBillAmount.Text = bill.TotalAmount.ToString();
-            txtToPay.Text = lblBillAmount.Text;     
+            lblTotalAmount.Text = bill.TotalAmount.ToString();
+            txtToPay.Text = lblTotalAmount.Text;
         }
 
         private void DisplayBill()
@@ -76,7 +80,7 @@ namespace RosUI
                     li.SubItems.Add(item.ItemVat.ToString());
 
                     item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.ItemVat);
-                    li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString());
+                    li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString("0.00"));
 
                     li.SubItems.Add((item.ItemPrice * item.ItemAmount).ToString());
 
@@ -94,7 +98,7 @@ namespace RosUI
         // calculate subtotal per product unit
         private decimal CalculateItemSubtotal(decimal itemPrice, int vat)
         {
-            return itemPrice - (itemPrice * vat/100);
+            return itemPrice - (itemPrice * vat / 100);
         }
 
         // calculate the bill amount that will be displayed ini the payment form and stored in the database bill table
@@ -126,33 +130,28 @@ namespace RosUI
 
         private void btnCompletePayment_Click(object sender, EventArgs e)
         {
-            DialogResult dialogResult = MessageBox.Show("Do you want to complete the payment?", "Complete payment", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
+            try
             {
-                // when complete payment is clicked, the bill is stored in the database
-                billLogic.CreateBill(bill);
 
-                // change ordered items status to paid
-                SetItemsPaid(orderedItems);
+                DialogResult dialogResult = MessageBox.Show("Do you want to add feedback?", "Complete payment", MessageBoxButtons.YesNo);
 
-                table.TableStatus = 0;
-                tableLogic.Update(table);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    // proceed with adding some feedback
+                    pnlFeedback.Show();
+                }
+                else
+                {
+                    CompletePayment();
+                }
 
-                this.Hide();
-
-                // return to the table overview through the RosMain form or Restaurant overview form
-                TableOverview tableOverview = new TableOverview(employee, rosMain);
-                tableOverview.Show();
-
-                this.Close();
             }
-            else { return; }
+            catch (Exception ex)
+            {
 
-        }
+                MessageBox.Show("Could not close the bill: " + ex.Message);
+            }
 
-        private void txtFeedback_TextChanged(object sender, EventArgs e)
-        {
-            bill.Feedback = txtFeedback.Text;
         }
 
         // check if payment method was selected in order to activate the complete payment button
@@ -233,5 +232,36 @@ namespace RosUI
                 }
             }
         }
+
+        private void txtFeedback_TextChanged(object sender, EventArgs e)
+        {
+            bill.Feedback = txtFeedback.Text;
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            CompletePayment();
+        }
+
+        public void CompletePayment()
+        {
+            // when complete payment is clicked, the bill is stored in the database
+            billLogic.CreateBill(bill);
+
+            // change ordered items status to paid
+            SetItemsPaid(orderedItems);
+
+            table.TableStatus = 0;
+            tableLogic.Update(table);
+
+            this.Hide();
+
+            // return to the table overview through the RosMain form or Restaurant overview form
+            TableOverview tableOverview = new TableOverview(employee, rosMain);
+            tableOverview.Show();
+
+            this.Close();
+        }
+
     }
 }
