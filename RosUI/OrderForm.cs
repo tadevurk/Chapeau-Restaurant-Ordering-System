@@ -999,7 +999,6 @@ namespace RosUI
         {
             try
             {
-                //if (listviewOrder.SelectedItems.Count == 0)
                 if (listviewOrder.Items.Count == 0)
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
@@ -1019,11 +1018,9 @@ namespace RosUI
                     {
                         throw new Exception("There is no note");
                     }
-                    else
-                    {
-                        dish.Note = txtNote.Text;
-                        MessageBox.Show($"{emp.Name}, You've added the note!");
-                    }
+
+                    dish.Note = txtNote.Text;
+                    MessageBox.Show($"{emp.Name}, You've added the note!");
                 }
                 else if (item is Drink)
                 {
@@ -1032,11 +1029,9 @@ namespace RosUI
                     {
                         throw new Exception("There is no note");
                     }
-                    else
-                    {
-                        drink.Note = txtNote.Text;
-                        MessageBox.Show($"{emp.Name}, You've added the note!");
-                    }              
+
+                    drink.Note = txtNote.Text;
+                    MessageBox.Show($"{emp.Name}, You've added the note!");
                 }
                 txtNote.Clear();
             }
@@ -1044,7 +1039,6 @@ namespace RosUI
             {
                 MessageBox.Show(exp.Message);
             }
-
         }
 
         private void btnBack_Click(object sender, EventArgs e)
