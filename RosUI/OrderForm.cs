@@ -175,63 +175,63 @@ namespace RosUI
             showPanel("Lunch");
             ButtonColorReset();
             btnLunch.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnStarters_Click(object sender, EventArgs e)
         {
             showPanel("Starters");
             ButtonColorReset();
             btnStarters.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnMains_Click_1(object sender, EventArgs e)
         {
             showPanel("Mains");
             ButtonColorReset();
             btnMains.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnDesserts_Click(object sender, EventArgs e)
         {
             showPanel("Desserts");
             ButtonColorReset();
             btnDesserts.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnDinner_Click(object sender, EventArgs e)
         {
             showPanel("Dinner");
             ButtonColorReset();
             btnDinner.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnStartersDinner_Click(object sender, EventArgs e)
         {
             showPanel("DinnerStarters");
             ButtonColorReset();
             btnStartersDinner.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnMainsDinners_Click(object sender, EventArgs e)
         {
             showPanel("DinnerMains");
             ButtonColorReset();
             btnMainsDinners.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnDessertsDinner_Click(object sender, EventArgs e)
         {
             showPanel("DinnerDesserts");
             ButtonColorReset();
             btnDessertsDinner.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnDrinks_Click(object sender, EventArgs e)
         {
             showPanel("Drinks");
             ButtonColorReset();
             btnDrinks.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
 
         private void btnSoftDrink_Click(object sender, EventArgs e)
@@ -239,21 +239,21 @@ namespace RosUI
             showPanel("SoftDrinks");
             ButtonColorReset();
             btnSoftDrink.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnBeers_Click(object sender, EventArgs e)
         {
             showPanel("Beers");
             ButtonColorReset();
             btnBeers.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
         private void btnWine_Click(object sender, EventArgs e)
         {
             showPanel("Wines");
             ButtonColorReset();
             btnWine.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
 
         private void btnSpirits_Click(object sender, EventArgs e)
@@ -261,7 +261,7 @@ namespace RosUI
             showPanel("Spirits");
             ButtonColorReset();
             btnSpirits.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
 
         private void btnHotDrinks_Click(object sender, EventArgs e)
@@ -269,13 +269,15 @@ namespace RosUI
             showPanel("HotDrinks");
             ButtonColorReset();
             btnHotDrinks.BackColor = Color.LightGreen;
-            SendCancelButtonsVisible();
+            SendCancelNoteButtonsVisible();
         }
 
-        private void SendCancelButtonsVisible()
+        private void SendCancelNoteButtonsVisible()
         {
             btnSendOrder.Visible = true;
             btnCancelOrder.Visible = true;
+            txtNote.Visible = true;
+            btnOrderAddNote.Visible = true;
         }
         void HidePanels()
         {
@@ -665,56 +667,66 @@ namespace RosUI
                 else
                 {
                     Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
-                    ListViewItem li = listviewOrder.SelectedItems[0];
+                    ListViewItem lvItem = listviewOrder.SelectedItems[0];
                     if (item is Dish)
                     {
                         Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
-                        if (dish.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
-                        {
-                            throw new Exception($"{emp.Name}, you cannot edit an old item");
-                        }
-                        else
-                        {
-                            if (dish.Amount == 1)
-                            {
-                                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-                                dishLogic.IncreaseDishStock(dish);
-                            }
-                            else
-                            {
-                                dish.Amount--;
-                                listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
-                                dishLogic.IncreaseDishStock(dish);
-                            }
-                        }
+                        CheckDishToRemove(lvItem, dish);
                     }
                     else if (item is Drink)
                     {
                         Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
-                        if (drink.ItemName == li.SubItems[0].Text && li.SubItems[0].ForeColor == Color.Green)
-                        {
-                            throw new Exception($"{emp.Name}, you cannot edit an old item");
-                        }
-                        else
-                        {
-                            if (drink.Amount == 1)
-                            {
-                                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-                                drinkLogic.IncreaseDrinkStock(drink);
-                            }
-                            else
-                            {
-                                drink.Amount--;
-                                listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
-                                drinkLogic.IncreaseDrinkStock(drink);
-                            }
-                        }
+                        CheckDrinkToRemove(lvItem, drink);
                     }
                 }
             }
             catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "ERROR");
+            }
+        }
+
+        private void CheckDishToRemove(ListViewItem lvItem, Dish dish)
+        {
+            if (dish.ItemName == lvItem.SubItems[0].Text && lvItem.SubItems[0].ForeColor == Color.Green)
+            {
+                throw new Exception($"{emp.Name}, you cannot edit an old item");
+            }
+            else
+            {
+                if (dish.Amount == 1)
+                {
+                    listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                    dishLogic.IncreaseDishStock(dish);
+                }
+                else
+                {
+                    dish.Amount--;
+                    listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
+                    dishLogic.IncreaseDishStock(dish);
+                }
+            }
+        }
+
+        private void CheckDrinkToRemove(ListViewItem lvItem, Drink drink)
+        {
+            if (drink.ItemName == lvItem.SubItems[0].Text && lvItem.SubItems[0].ForeColor == Color.Green)
+            {
+                throw new Exception($"{emp.Name}, you cannot edit an old item");
+            }
+            else
+            {
+                if (drink.Amount == 1)
+                {
+                    listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                    drinkLogic.IncreaseDrinkStock(drink);
+                }
+                else
+                {
+                    drink.Amount--;
+                    listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
+                    drinkLogic.IncreaseDrinkStock(drink);
+                }
             }
         }
 
@@ -950,10 +962,10 @@ namespace RosUI
                         dishLogic.AddDishes(DishesInOrderProcess, order);
                         drinkLogic.AddDrinks(DrinkInOrderProcess, order);
 
-                        table.TableStatus = 2;
-                        tableLogic.Update(table);
+                        table.TableStatus = 2; // Jason
+                        tableLogic.Update(table); // Jason
 
-                        WriteContainedItems();
+                        WriteContainedItems(); // Update the list again
 
                         //Update KitchenView and Barview
                         rosMain.UpdateAllListViews();

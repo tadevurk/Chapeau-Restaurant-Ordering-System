@@ -184,9 +184,9 @@ namespace RosUI
             this.btnSendOrder.BackColor = System.Drawing.Color.Green;
             this.btnSendOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSendOrder.ForeColor = System.Drawing.Color.White;
-            this.btnSendOrder.Location = new System.Drawing.Point(18, 679);
+            this.btnSendOrder.Location = new System.Drawing.Point(18, 700);
             this.btnSendOrder.Name = "btnSendOrder";
-            this.btnSendOrder.Size = new System.Drawing.Size(178, 52);
+            this.btnSendOrder.Size = new System.Drawing.Size(138, 39);
             this.btnSendOrder.TabIndex = 8;
             this.btnSendOrder.Text = "SEND ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
@@ -197,9 +197,9 @@ namespace RosUI
             this.btnCancelOrder.BackColor = System.Drawing.Color.Red;
             this.btnCancelOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancelOrder.ForeColor = System.Drawing.Color.White;
-            this.btnCancelOrder.Location = new System.Drawing.Point(290, 679);
+            this.btnCancelOrder.Location = new System.Drawing.Point(212, 700);
             this.btnCancelOrder.Name = "btnCancelOrder";
-            this.btnCancelOrder.Size = new System.Drawing.Size(178, 52);
+            this.btnCancelOrder.Size = new System.Drawing.Size(138, 39);
             this.btnCancelOrder.TabIndex = 9;
             this.btnCancelOrder.Text = "CANCEL";
             this.btnCancelOrder.UseVisualStyleBackColor = false;
@@ -233,7 +233,7 @@ namespace RosUI
             this.amountOrder});
             this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
-            this.listviewOrder.Location = new System.Drawing.Point(21, 484);
+            this.listviewOrder.Location = new System.Drawing.Point(21, 517);
             this.listviewOrder.Name = "listviewOrder";
             this.listviewOrder.Size = new System.Drawing.Size(329, 176);
             this.listviewOrder.TabIndex = 13;
@@ -260,7 +260,7 @@ namespace RosUI
             this.btnOrderRemove.BackColor = System.Drawing.Color.Red;
             this.btnOrderRemove.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnOrderRemove.ForeColor = System.Drawing.Color.White;
-            this.btnOrderRemove.Location = new System.Drawing.Point(355, 484);
+            this.btnOrderRemove.Location = new System.Drawing.Point(364, 517);
             this.btnOrderRemove.Name = "btnOrderRemove";
             this.btnOrderRemove.Size = new System.Drawing.Size(104, 44);
             this.btnOrderRemove.TabIndex = 15;
@@ -271,12 +271,13 @@ namespace RosUI
             // btnOrderAddNote
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnOrderAddNote.Location = new System.Drawing.Point(356, 615);
+            this.btnOrderAddNote.Location = new System.Drawing.Point(248, 453);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(114, 46);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(84, 42);
             this.btnOrderAddNote.TabIndex = 16;
             this.btnOrderAddNote.Text = "Add Note";
             this.btnOrderAddNote.UseVisualStyleBackColor = false;
+            this.btnOrderAddNote.Visible = false;
             this.btnOrderAddNote.Click += new System.EventHandler(this.btnOrderAddNote_Click);
             // 
             // pnlStarters
@@ -449,11 +450,12 @@ namespace RosUI
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(356, 534);
+            this.txtNote.Location = new System.Drawing.Point(23, 453);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(114, 75);
+            this.txtNote.Size = new System.Drawing.Size(219, 58);
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
+            this.txtNote.Visible = false;
             // 
             // pnlSoftDrinks
             // 
