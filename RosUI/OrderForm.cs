@@ -999,6 +999,8 @@ namespace RosUI
         {
             try
             {
+                Item item;
+
                 if (listviewOrder.Items.Count == 0)
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
@@ -1009,29 +1011,33 @@ namespace RosUI
                     throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
                 }
 
-                Item item = (Item)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
-
-                if (item is Dish)
+                if (listviewOrder.SelectedItems[0].ForeColor == Color.Red)
                 {
-                    Dish dish = (Dish)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
-                    if (txtNote.Text == "")
+                    item = (Item)listviewOrder.SelectedItems[0].Tag;
+                    if (item is Dish)
                     {
-                        throw new Exception("There is no note");
+                        Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                        AddDishNote(dish);
                     }
-
-                    dish.Note = txtNote.Text;
-                    MessageBox.Show($"{emp.Name}, You've added the note!");
+                    else if (item is Drink)
+                    {
+                        Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                        AddDrinkNote(drink);
+                    }
                 }
-                else if (item is Drink)
+                else
                 {
-                    Drink drink = (Drink)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
-                    if (txtNote.Text == "")
+                    item = (Item)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                    if (item is Dish)
                     {
-                        throw new Exception("There is no note");
+                        Dish dish = (Dish)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                        AddDishNote(dish);
                     }
-
-                    drink.Note = txtNote.Text;
-                    MessageBox.Show($"{emp.Name}, You've added the note!");
+                    else if (item is Drink)
+                    {
+                        Drink drink = (Drink)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                        AddDrinkNote(drink);
+                    }
                 }
                 txtNote.Clear();
             }
@@ -1039,6 +1045,28 @@ namespace RosUI
             {
                 MessageBox.Show(exp.Message);
             }
+        }
+
+        void AddDrinkNote(Drink drink)
+        {
+            if (txtNote.Text == "")
+            {
+                throw new Exception("There is no note");
+            }
+
+            drink.Note = txtNote.Text;
+            MessageBox.Show($"{emp.Name}, You've added the note!");
+        }
+
+        private void AddDishNote(Dish dish)
+        {
+            if (txtNote.Text == "")
+            {
+                throw new Exception("There is no note");
+            }
+
+            dish.Note = txtNote.Text;
+            MessageBox.Show($"{emp.Name}, You've added the note!");
         }
 
         private void btnBack_Click(object sender, EventArgs e)
