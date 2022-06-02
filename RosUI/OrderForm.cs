@@ -13,7 +13,7 @@ using RosModel;
 namespace RosUI
 {
     /// <summary>
-    
+
     /// </summary>
     ////// Vedat Türk --- 683343 --- GROUP1- IT1D - ///////////////////////
     ////// With help of Mirko Cuccurullo ////////
@@ -648,7 +648,7 @@ namespace RosUI
                     AddHotDrink();
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "Sorry");
             }
@@ -712,10 +712,10 @@ namespace RosUI
                     }
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "ERROR");
-            }       
+            }
         }
 
         private void AddLunchStarter()
@@ -790,7 +790,7 @@ namespace RosUI
         {
             ListViewItem selectedHotDrink = listViewHotDrinks.SelectedItems[0];
             Drink hotDrink = (Drink)selectedHotDrink.Tag;
-            CheckCurrentDrink(hotDrink);          
+            CheckCurrentDrink(hotDrink);
         }
         private void CheckCurrentDish(Dish dish)
         {
@@ -831,7 +831,7 @@ namespace RosUI
         {
             ListViewItem? currentItem = null;
 
-            if(drink.ItemStock <= 0)
+            if (drink.ItemStock <= 0)
             {
                 MessageBox.Show($"{drink.ItemName} is sold out", $"Sorry {emp.Name}");
             }
@@ -920,7 +920,7 @@ namespace RosUI
                     }
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
             }
@@ -967,7 +967,7 @@ namespace RosUI
                     }
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
             }
@@ -987,7 +987,7 @@ namespace RosUI
                     Dish dish = (Dish)itemInOrderList;
                     DishesInOrderProcess.Add(dish);
                 }
-                else if(lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Drink)
+                else if (lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Drink)
                 {
                     Drink drink = (Drink)itemInOrderList;
                     DrinkInOrderProcess.Add(drink);
@@ -999,45 +999,48 @@ namespace RosUI
         {
             try
             {
-                if (listviewOrder.SelectedItems.Count == 0)
+                //if (listviewOrder.SelectedItems.Count == 0)
+                if (listviewOrder.Items.Count == 0)
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
+
+                if (listviewOrder.Items[listviewOrder.Items.Count - 1].ForeColor == Color.Green)
                 {
-                    Item item = (Item)listviewOrder.SelectedItems[0].Tag;
-
-                    if (item is Dish)
-                    {
-                        Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
-                        if (txtNote.Text == "")
-                        {
-                            throw new Exception("There is no note");
-                        }
-                        else
-                        {
-                            dish.Note = txtNote.Text;
-                            MessageBox.Show($"{emp.Name}, You've added the note!");
-                        }
-                    }
-                    else if (item is Drink)
-                    {
-                        Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
-                        if (txtNote.Text == "")
-                        {
-                            throw new Exception("There is no note");
-                        }
-                        else
-                        {
-                            drink.Note = txtNote.Text;
-                            MessageBox.Show($"{emp.Name}, You've added the note!");
-                        }
-                    }
-
-                    txtNote.Clear();
+                    throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
                 }
+
+                Item item = (Item)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+
+                if (item is Dish)
+                {
+                    Dish dish = (Dish)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                    if (txtNote.Text == "")
+                    {
+                        throw new Exception("There is no note");
+                    }
+                    else
+                    {
+                        dish.Note = txtNote.Text;
+                        MessageBox.Show($"{emp.Name}, You've added the note!");
+                    }
+                }
+                else if (item is Drink)
+                {
+                    Drink drink = (Drink)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                    if (txtNote.Text == "")
+                    {
+                        throw new Exception("There is no note");
+                    }
+                    else
+                    {
+                        drink.Note = txtNote.Text;
+                        MessageBox.Show($"{emp.Name}, You've added the note!");
+                    }              
+                }
+                txtNote.Clear();
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
             }
@@ -1046,7 +1049,7 @@ namespace RosUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Hide();   
+            Hide();
         }
     }
 }
