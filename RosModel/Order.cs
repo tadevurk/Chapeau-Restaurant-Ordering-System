@@ -15,15 +15,8 @@ namespace RosModel
 
         }
 
-        public Order()
-        {
-
-        }
         public int OrderID { get; set; }
         public int WaiterID { get; set; }
-        public int ChefID { get; set; }
         public int TableNumber { get; set; }
-        public int BartenderID { get; set; }
-        public int BillNumber { get; set; }
-    }
+     }
 }

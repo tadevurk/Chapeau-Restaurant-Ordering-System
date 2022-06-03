@@ -837,6 +837,8 @@ namespace RosUI
                 }
                 dishLogic.DecreaseDishStock(dish);
             }
+
+            AddItemNote();
         }
 
         private void CheckCurrentDrink(Drink drink)
@@ -872,6 +874,8 @@ namespace RosUI
                 }
                 drinkLogic.DecreaseDrinkStock(drink);
             }
+
+            AddItemNote();
         }
 
         private void WriteContainedItems() // Getting the ordered list
@@ -1009,10 +1013,15 @@ namespace RosUI
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)
         {
+                AddItemNote();
+        }
+
+        private void AddItemNote()
+        {
+            Item item;
+
             try
             {
-                Item item;
-
                 if (listviewOrder.Items.Count == 0)
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
@@ -1023,7 +1032,7 @@ namespace RosUI
                     throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
                 }
 
-                if (listviewOrder.SelectedItems.Count >0 && listviewOrder.SelectedItems[0].ForeColor == Color.Red)
+                if (listviewOrder.SelectedItems.Count > 0 && listviewOrder.SelectedItems[0].ForeColor == Color.Red)
                 {
                     item = (Item)listviewOrder.SelectedItems[0].Tag;
                     if (item is Dish)
@@ -1054,6 +1063,7 @@ namespace RosUI
 
                 txtNote.Clear();
             }
+
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
@@ -1064,7 +1074,7 @@ namespace RosUI
         {
             if (txtNote.Text == "")
             {
-                throw new Exception("There is no note");
+                return;
             }
 
             drink.ItemNote = txtNote.Text;
@@ -1075,7 +1085,7 @@ namespace RosUI
         {
             if (txtNote.Text == "")
             {
-                throw new Exception("There is no note");
+                return;
             }
 
             dish.ItemNote = txtNote.Text;

@@ -16,7 +16,6 @@ namespace RosUI
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
-        OrderedDish d = new OrderedDish();
         public RosMain(Employee employee)
         {
             InitializeComponent();
@@ -806,6 +805,8 @@ namespace RosUI
 
         private void btnSelByCourseKit_Click(object sender, EventArgs e)
         {
+            lvOrderedDishes.SelectedItems.Clear();
+
             string course = (string)cmbCourseKit.SelectedItem;
             string tableNum = (string)cmbTableKit.SelectedItem;
 
@@ -818,6 +819,8 @@ namespace RosUI
 
         private void btnSelByTabKitFin_Click(object sender, EventArgs e)
         {
+            lvFinishedDishes.SelectedItems.Clear();
+
             string tableNum = (string)cmbKitFinished.SelectedItem;
 
             foreach (ListViewItem item in lvFinishedDishes.Items)
@@ -829,6 +832,8 @@ namespace RosUI
 
         private void BtnSelByTabBarFin_Click(object sender, EventArgs e)
         {
+            lvFinishedDrinks.SelectedItems.Clear();
+
             string tableNum = (string)cmbBarFinished.SelectedItem;
 
             foreach (ListViewItem item in lvFinishedDrinks.Items)
@@ -840,6 +845,8 @@ namespace RosUI
 
         private void btnSelByTabBar_Click(object sender, EventArgs e)
         {
+            lvOrderedDrinks.SelectedItems.Clear();
+
             string tableNum = (string)cmbSelByTabBar.SelectedItem;
 
             foreach (ListViewItem item in lvOrderedDrinks.Items)
