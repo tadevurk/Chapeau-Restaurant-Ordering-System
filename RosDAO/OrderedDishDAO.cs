@@ -89,7 +89,7 @@ namespace RosDAL
                 " from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID " +
                 "where OD.DishStatus<2 and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) " +
-                "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered" +
+                "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered " +
                 "order by OD.TimeDishOrdered DESC";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
