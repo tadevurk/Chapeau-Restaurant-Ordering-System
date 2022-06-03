@@ -23,6 +23,7 @@ namespace RosUI
         private List<Table> tables;
         private OrderedDish orderedDish = new OrderedDish();
         private OrderedDishLogic orderedDishLogic;
+        public double TotalMinutes { get; }
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
@@ -188,6 +189,18 @@ namespace RosUI
             }
         }
 
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new Login().Show();
+        }
+
+        //Updates all the table buttons every minute
+        private void tmrTimer_Tick(object sender, EventArgs e)
+        {
+            UpdateAllButtons(tables);
+        }
+
         //Changes the button color depending on the status of the table
         public Button UpdateButtonColor(Table table, Button button)
         {
@@ -217,12 +230,10 @@ namespace RosUI
                     button.Text = "DishReady";
                     return button;
             }
-
-
-
             return button;
         }
 
+        //calculates the time taken and displays it on the button
         public Button CalculateTimeTaken(Button button, Table table)
         {
             orderedDishLogic = new OrderedDishLogic();
@@ -233,22 +244,13 @@ namespace RosUI
                 if (dish.TableNumber == table.TableNumber && dish.Status == 0)
                 {
                     TimeSpan timeTaken = DateTime.Now - dish.TimeDishOrdered;
-                    int hours = timeTaken.Hours;
-                    int minutes = timeTaken.Minutes;
 
-                    if (timeTaken.Hours == 0)
-                    {
-                        button.Text = $"{minutes} minutes ago";
-                    }
-                    else
-                    {
-                        button.Text = $"{hours}:{minutes:00}";
-                    }
+                    button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes ago";
 
-                    if (button.Text == "0 min ago")
+                    if (button.Text == "00 minutes ago")
                     {
-                        button.Text = "1 min ago";
-                    }            
+                        button.Text = "01 minutes ago";
+                    }
                 }
             }
             return button;
@@ -535,17 +537,6 @@ namespace RosUI
                     tableLogic.Update(table);
                     break;
             }
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            new Login().Show();
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            UpdateAllButtons(tables);
         }
     }
 }
