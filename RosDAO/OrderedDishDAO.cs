@@ -12,17 +12,6 @@ namespace RosDAL
     {
         OrderDAO orderDAO = new OrderDAO();
 
-        public OrderedDish GetOrderedDishByKey(Order ord, Dish dish)
-        {
-            string query = "select * from OrderDish where OrderID=@OrderID AND DishID=@DishID ";
-            SqlParameter[] sp =
-            {
-                new SqlParameter("@OrderID", dish.Order),
-                new SqlParameter("@DishID", dish.DishID)
-            };
-
-            return ReatSingleTable(ExecuteSelectQuery(query, sp));
-        }
 
         public void BringStatusBack(OrderedDish d)
         {
@@ -58,63 +47,6 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-
-        public void UpdateDish(OrderedDish orderedDish) // Change the amount of the dish (The question is DishID or OrderID??)
-        {
-            string query = "UPDATE [OrderDish] SET TimeDishOrdered = @TimeDishOrdered, TimeDishDelivered = @TimeDishDelivered, " +
-                "OrderedDishAmount = @OrderedDishAmount, DishNote = @DishNote " +
-                "WHERE DishID = @DishID";
-
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@DishID", orderedDish.DishID),
-                new SqlParameter("@TimeDishOrdered", orderedDish.TimeDishOrdered),
-                new SqlParameter("@TimeDishDelivered", orderedDish.TimeDishDelivered),
-                new SqlParameter("@OrderedDishAmount", orderedDish.OrderedDishAmount),
-                new SqlParameter("@DishNote", orderedDish.DishNote)
-            };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
-        public void RemoveDish(OrderedDish orderedDish) // Remove dish from ordered dish table (The question is DishID or OrderID??)
-        {
-            string query = "DELETE FROM OrderDish WHERE DishID = @DishID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.DishID) };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
-        private OrderedDish ReatSingleTable(DataTable dataTable)
-        {
-            List<OrderedDish> dishes = new List<OrderedDish>();
-
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                OrderedDish dish = new OrderedDish()
-                {
-                    TableNumber = (int)dr["tableNumber"],
-                    OrderID = (int)dr["order"],
-                    DishID = (int)dr["ID"],
-                    Name = (string)dr["name"],
-                    TimeDishOrdered = (DateTime)dr["time"],
-                    Course = (string)dr["course"]
-                };
-                dishes.Add(dish);
-            }
-            return dishes[0];
-        }
-
-        public void IncreaseAmount(Dish dish, Order order)
-        {
-            string query = "update OrderDish set OrderedDishAmount=@Amount, DishStatus = 0 where DishID=@DishID and OrderID=@OrderID";
-            SqlParameter[] sp = {
-                new SqlParameter("@Amount",dish.Amount),
-                new SqlParameter("@DishID", dish.DishID),
-                new SqlParameter("@OrderID", order.OrderID),
-            };
-
-            ExecuteEditQuery(query, sp);
-        }
         private List<OrderedDish> ReadTables(DataTable dataTable)
         {
             List<OrderedDish> dishes = new List<OrderedDish>();
@@ -150,16 +82,6 @@ namespace RosDAL
             return dishes;
         }
 
-        public void UpdateDeliveredTime(Dish d)
-        {
-            string query = "update OrderDish set TimeDishDelivered=Getdate() where DrinkID=@DishID and OrderID=@OrderID";
-            SqlParameter[] sp = {
-                new SqlParameter("@DishID", d.DishID),
-                new SqlParameter("@OrderID", d.Order)
-            };
-            ExecuteEditQuery(query, sp);
-        }
-
         public List<OrderedDish> GetAllOrderedDish()
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], OD.DishID as ID, OD.OrderID as [OrderID]," +
@@ -167,7 +89,8 @@ namespace RosDAL
                 " from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID " +
                 "where OD.DishStatus<2 and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) " +
-                "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered";
+                "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered" +
+                "order by OD.TimeDishOrdered DESC";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));

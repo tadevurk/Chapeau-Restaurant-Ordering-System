@@ -55,11 +55,12 @@ namespace RosUI
             }
             cmbTableKit.SelectedIndex = 0;
             cmbKitFinished.SelectedIndex = 0;
+            cmbSelByTabBar.SelectedIndex = 0;
+            cmbBarFinished.SelectedIndex = 0;
 
             //combo courses kitchen view
             cmbCourseKit.Items.Add("Starter");
             cmbCourseKit.Items.Add("Main");
-            cmbCourseKit.Items.Add("Entremets");
             cmbCourseKit.Items.Add("Dessert");
 
             cmbCourseKit.SelectedIndex = 0;
