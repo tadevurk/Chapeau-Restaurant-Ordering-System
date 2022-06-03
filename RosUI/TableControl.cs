@@ -21,31 +21,20 @@ namespace RosUI
         private Table table;
         private RosMain rosMain;
         private TableLogic tableLogic;
+        private TableOverview tableOverview;
 
         public TableControl(Employee employee, RosMain rosMain, Table table)
         {
             InitializeComponent();
             this.employee = employee;
             this.rosMain = rosMain;
-            this.table =  table;
+            this.table = table;
             tableLogic = new TableLogic();
             orderForm = new FormOrder(table, employee, rosMain);
+            tableOverview = new TableOverview(employee, rosMain);
             lblTable.Text = "Table: " + table.TableNumber;
             lblWaiter.Text = "Waiter: " + employee.Name;
-
-            if (table.TableStatus == 2 || table.TableStatus == 3 || table.TableStatus == 4)
-            {
-                btnOccupy.Text = "Occupied";
-                btnOccupy.BackColor = Color.Red;
-                btnOccupy.ForeColor = Color.White;
-                btnOccupy.Enabled = false;
-            }
-            else if (table.TableStatus == 1)
-            {
-                btnOccupy.Text = "Occupied";
-                btnOccupy.BackColor = Color.Red;
-                btnOccupy.ForeColor = Color.White;
-            }
+            UpdateButtonAccessibilty();
         }
 
         //When Clicked will Occupy and unOccupy the tables
@@ -61,9 +50,8 @@ namespace RosUI
                 table.WaiterID = employee.EmplID;
                 tableLogic.UpdateTableWaiter(table);
             }
-            else
-            {
-                btnOccupy.Text = "Occupy";
+            else if (btnOccupy.Text == "Occupy")
+            {          
                 btnOccupy.BackColor = Color.LightGray;
                 btnOccupy.ForeColor = Color.Black;
                 table.TableStatus = 0;
@@ -88,18 +76,80 @@ namespace RosUI
             this.Close();
         }
 
-        //Logs the user out and opens the LoginForm
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            new Login().Show();         
-        }
-
         //Goes back to the TableOverview
         private void btnBack_Click(object sender, EventArgs e)
         {
             new TableOverview(employee, rosMain).Show();
             this.Close();
+        }
+
+        private void btnDishServed_Click(object sender, EventArgs e)
+        {
+            tableOverview.GetAllOrderedDishes(table);
+            btnOccupy.Text = "Served";
+            btnOccupy.BackColor = Color.Yellow;
+            table.TableStatus = 5;
+            tableLogic.Update(table);
+            btnPay.Enabled = true;
+        }
+
+        private void btnDrinkServed_Click(object sender, EventArgs e)
+        {
+            tableOverview.GetAllOrderedDrinks(table);
+            btnOccupy.Text = "Served";
+            btnOccupy.BackColor = Color.Yellow;
+            table.TableStatus = 5;
+            tableLogic.Update(table);
+            btnPay.Enabled = true;
+        }
+
+        private void UpdateButtonAccessibilty()
+        {
+            btnPay.Enabled = false;
+            btnDishServed.Enabled = false;
+            btnDrinkServed.Enabled = false;
+            btnOccupy.Enabled = false;
+
+            if (table.TableStatus == 1)
+            {
+                btnOccupy.Text = "Occupied";
+                btnOccupy.BackColor = Color.Red;
+                btnOccupy.ForeColor = Color.White;
+                btnOccupy.Enabled = true;
+            }
+            else if (table.TableStatus == 2)
+            {
+                btnOccupy.Text = "Occupied";
+                btnOccupy.BackColor = Color.Red;
+                btnOccupy.ForeColor = Color.White;
+            }
+            else if (table.TableStatus == 3)
+            {
+                btnOccupy.Text = "Drink Ready";
+                btnOccupy.BackColor = Color.LightGreen;
+                btnOccupy.ForeColor = Color.Black;          
+                btnDrinkServed.Enabled = true;
+            }
+            else if (table.TableStatus == 4)
+            {
+                btnOccupy.Text = "Dish Ready";
+                btnOccupy.BackColor = Color.LightGreen;
+                btnOccupy.ForeColor = Color.Black;
+                btnDishServed.Enabled = true;
+            }
+            else if (table.TableStatus == 5)
+            {
+                btnOccupy.Text = "Served";
+                btnOccupy.BackColor = Color.Yellow;
+                btnPay.Enabled = true;
+            }
+            else
+            {
+                btnOccupy.Text = "Occupy";
+                btnOccupy.BackColor = Color.LightGray;
+                btnOccupy.ForeColor = Color.Black;
+                btnOccupy.Enabled = true;
+            }
         }
     }
 }

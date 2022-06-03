@@ -32,17 +32,18 @@
             this.btnTakeOrder = new System.Windows.Forms.Button();
             this.btnPay = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnLogout = new System.Windows.Forms.Button();
             this.lblTable = new System.Windows.Forms.Label();
             this.lblWaiter = new System.Windows.Forms.Label();
+            this.btnDishServed = new System.Windows.Forms.Button();
+            this.btnDrinkServed = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnOccupy
             // 
             this.btnOccupy.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnOccupy.Location = new System.Drawing.Point(181, 200);
+            this.btnOccupy.Location = new System.Drawing.Point(176, 200);
             this.btnOccupy.Name = "btnOccupy";
-            this.btnOccupy.Size = new System.Drawing.Size(100, 40);
+            this.btnOccupy.Size = new System.Drawing.Size(110, 40);
             this.btnOccupy.TabIndex = 0;
             this.btnOccupy.Text = "Occupy";
             this.btnOccupy.UseVisualStyleBackColor = false;
@@ -51,9 +52,9 @@
             // btnTakeOrder
             // 
             this.btnTakeOrder.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnTakeOrder.Location = new System.Drawing.Point(181, 280);
+            this.btnTakeOrder.Location = new System.Drawing.Point(176, 280);
             this.btnTakeOrder.Name = "btnTakeOrder";
-            this.btnTakeOrder.Size = new System.Drawing.Size(100, 40);
+            this.btnTakeOrder.Size = new System.Drawing.Size(110, 40);
             this.btnTakeOrder.TabIndex = 1;
             this.btnTakeOrder.Text = "Take Order";
             this.btnTakeOrder.UseVisualStyleBackColor = false;
@@ -62,9 +63,9 @@
             // btnPay
             // 
             this.btnPay.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnPay.Location = new System.Drawing.Point(181, 360);
+            this.btnPay.Location = new System.Drawing.Point(176, 360);
             this.btnPay.Name = "btnPay";
-            this.btnPay.Size = new System.Drawing.Size(100, 40);
+            this.btnPay.Size = new System.Drawing.Size(110, 40);
             this.btnPay.TabIndex = 2;
             this.btnPay.Text = "Payment";
             this.btnPay.UseVisualStyleBackColor = false;
@@ -80,17 +81,6 @@
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnLogout
-            // 
-            this.btnLogout.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnLogout.Location = new System.Drawing.Point(181, 480);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(100, 40);
-            this.btnLogout.TabIndex = 4;
-            this.btnLogout.Text = "Logout";
-            this.btnLogout.UseVisualStyleBackColor = false;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // lblTable
             // 
@@ -112,14 +102,37 @@
             this.lblWaiter.TabIndex = 6;
             this.lblWaiter.Text = "Waiter:";
             // 
+            // btnDishServed
+            // 
+            this.btnDishServed.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnDishServed.Location = new System.Drawing.Point(176, 440);
+            this.btnDishServed.Name = "btnDishServed";
+            this.btnDishServed.Size = new System.Drawing.Size(110, 40);
+            this.btnDishServed.TabIndex = 7;
+            this.btnDishServed.Text = "Dish Served";
+            this.btnDishServed.UseVisualStyleBackColor = false;
+            this.btnDishServed.Click += new System.EventHandler(this.btnDishServed_Click);
+            // 
+            // btnDrinkServed
+            // 
+            this.btnDrinkServed.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnDrinkServed.Location = new System.Drawing.Point(176, 520);
+            this.btnDrinkServed.Name = "btnDrinkServed";
+            this.btnDrinkServed.Size = new System.Drawing.Size(110, 40);
+            this.btnDrinkServed.TabIndex = 8;
+            this.btnDrinkServed.Text = "Drink Served";
+            this.btnDrinkServed.UseVisualStyleBackColor = false;
+            this.btnDrinkServed.Click += new System.EventHandler(this.btnDrinkServed_Click);
+            // 
             // TableControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.btnDrinkServed);
+            this.Controls.Add(this.btnDishServed);
             this.Controls.Add(this.lblWaiter);
             this.Controls.Add(this.lblTable);
-            this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnPay);
             this.Controls.Add(this.btnTakeOrder);
@@ -138,8 +151,9 @@
         private System.Windows.Forms.Button btnTakeOrder;
         private System.Windows.Forms.Button btnPay;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblTable;
         private System.Windows.Forms.Label lblWaiter;
+        private System.Windows.Forms.Button btnDishServed;
+        private System.Windows.Forms.Button btnDrinkServed;
     }
 }

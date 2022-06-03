@@ -23,6 +23,7 @@ namespace RosUI
         private List<Table> tables;
         private OrderedDish orderedDish = new OrderedDish();
         private OrderedDishLogic orderedDishLogic;
+        private OrderedDrinkLogic orderedDrinkLogic;
         public double TotalMinutes { get; }
 
         public TableOverview(Employee employee, RosMain rosMain)
@@ -32,6 +33,8 @@ namespace RosUI
             this.rosMain = rosMain;
             lblWaiter.Text = "Waiter: " + employee.Name;
             tableLogic = new TableLogic();
+            orderedDrinkLogic = new OrderedDrinkLogic();
+            orderedDishLogic = new OrderedDishLogic();
             tables = tableLogic.GetAllTables();
             UpdateAllButtons(tables);
             rosMain.AddWaiterView(this);
@@ -204,8 +207,6 @@ namespace RosUI
         //Changes the button color depending on the status of the table
         public Button UpdateButtonColor(Table table, Button button)
         {
-  
-
             switch (table.TableStatus)
             {
                 case 0:
@@ -230,6 +231,10 @@ namespace RosUI
                     button.BackColor = Color.LightGreen;
                     button.Text = "DishReady";
                     return button;
+                case 5:
+                    button.BackColor = Color.Yellow;
+                    button.Text = "Served";
+                    return button;
             }
             return button;
         }
@@ -237,7 +242,6 @@ namespace RosUI
         //calculates the time taken and displays it on the button
         public Button CalculateTimeTaken(Button button, Table table)
         {
-            orderedDishLogic = new OrderedDishLogic();
             List<OrderedDish> orderedDishes = orderedDishLogic.GetAllOrderedDish();
 
             foreach (OrderedDish dish in orderedDishes)
@@ -270,6 +274,54 @@ namespace RosUI
             UpdateButtonColor(tables[7], btnTableEight);
             UpdateButtonColor(tables[8], btnTableNine);
             UpdateButtonColor(tables[9], btnTableTen);
+        }
+
+        public void ServeDrinks(List<OrderedDrink> orderedDrinks)
+        {
+            try
+            {
+                foreach (OrderedDrink orderedDrink in orderedDrinks)
+                {
+                    orderedDrinkLogic.UpdateDrinkStatusServe(orderedDrink);                
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
+        }
+
+        public void ServeDishes(List<OrderedDish> orderedDishes)
+        {
+            try
+            {
+                foreach (OrderedDish orderedDish in orderedDishes)
+                {
+                    orderedDishLogic.UpdateDishStatusServe(orderedDish);
+                }            
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show("Error Occorred: " + exp.Message);
+                rosMain.WriteError(exp, exp.Message);
+            }
+        }
+
+        public List<OrderedDrink> GetAllOrderedDrinks(Table table)
+        {
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber);
+            ServeDrinks(orderedDrinks);
+
+            return orderedDrinks;
+        }
+
+        public List<OrderedDish> GetAllOrderedDishes(Table table)
+        {
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber);
+            ServeDishes(orderedDishes);
+
+            return orderedDishes;
         }
 
         //Updates database when the order is received in the kitchen
