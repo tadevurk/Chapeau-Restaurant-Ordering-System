@@ -1068,6 +1068,7 @@ namespace RosUI
             this.Controls.Add(this.pnlLunch);
             this.Controls.Add(this.pnlDrinkCategories);
             this.Name = "FormOrder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlStarters.ResumeLayout(false);
