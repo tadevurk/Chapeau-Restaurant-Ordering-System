@@ -141,6 +141,7 @@ namespace RosUI
             // 
             // btnStarters
             // 
+            this.btnStarters.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStarters.Location = new System.Drawing.Point(2, 12);
             this.btnStarters.Name = "btnStarters";
             this.btnStarters.Size = new System.Drawing.Size(116, 41);
@@ -151,6 +152,7 @@ namespace RosUI
             // 
             // btnMains
             // 
+            this.btnMains.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMains.Location = new System.Drawing.Point(147, 12);
             this.btnMains.Name = "btnMains";
             this.btnMains.Size = new System.Drawing.Size(116, 41);
@@ -161,6 +163,7 @@ namespace RosUI
             // 
             // btnDesserts
             // 
+            this.btnDesserts.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDesserts.Location = new System.Drawing.Point(284, 12);
             this.btnDesserts.Name = "btnDesserts";
             this.btnDesserts.Size = new System.Drawing.Size(116, 41);
@@ -171,6 +174,7 @@ namespace RosUI
             // 
             // btnDrinks
             // 
+            this.btnDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDrinks.Location = new System.Drawing.Point(299, 44);
             this.btnDrinks.Name = "btnDrinks";
             this.btnDrinks.Size = new System.Drawing.Size(116, 41);
@@ -182,6 +186,7 @@ namespace RosUI
             // btnSendOrder
             // 
             this.btnSendOrder.BackColor = System.Drawing.Color.Green;
+            this.btnSendOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSendOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnSendOrder.ForeColor = System.Drawing.Color.White;
             this.btnSendOrder.Location = new System.Drawing.Point(18, 700);
@@ -195,6 +200,7 @@ namespace RosUI
             // btnCancelOrder
             // 
             this.btnCancelOrder.BackColor = System.Drawing.Color.Red;
+            this.btnCancelOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCancelOrder.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnCancelOrder.ForeColor = System.Drawing.Color.White;
             this.btnCancelOrder.Location = new System.Drawing.Point(212, 700);
@@ -208,6 +214,7 @@ namespace RosUI
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBack.Location = new System.Drawing.Point(367, 3);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(103, 29);
@@ -258,6 +265,7 @@ namespace RosUI
             // btnOrderRemove
             // 
             this.btnOrderRemove.BackColor = System.Drawing.Color.Red;
+            this.btnOrderRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOrderRemove.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnOrderRemove.ForeColor = System.Drawing.Color.White;
             this.btnOrderRemove.Location = new System.Drawing.Point(364, 517);
@@ -271,6 +279,7 @@ namespace RosUI
             // btnOrderAddNote
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOrderAddNote.Location = new System.Drawing.Point(248, 453);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
             this.btnOrderAddNote.Size = new System.Drawing.Size(84, 42);
@@ -293,6 +302,7 @@ namespace RosUI
             // btnAddStarter
             // 
             this.btnAddStarter.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddStarter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddStarter.Location = new System.Drawing.Point(329, 48);
             this.btnAddStarter.Name = "btnAddStarter";
             this.btnAddStarter.Size = new System.Drawing.Size(117, 78);
@@ -349,6 +359,7 @@ namespace RosUI
             // btnAddMains
             // 
             this.btnAddMains.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddMains.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddMains.Location = new System.Drawing.Point(329, 48);
             this.btnAddMains.Name = "btnAddMains";
             this.btnAddMains.Size = new System.Drawing.Size(117, 78);
@@ -405,6 +416,7 @@ namespace RosUI
             // btnAddDessert
             // 
             this.btnAddDessert.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDessert.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddDessert.Location = new System.Drawing.Point(329, 48);
             this.btnAddDessert.Name = "btnAddDessert";
             this.btnAddDessert.Size = new System.Drawing.Size(117, 78);
@@ -470,6 +482,7 @@ namespace RosUI
             // btnAddDrink
             // 
             this.btnAddDrink.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDrink.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddDrink.Location = new System.Drawing.Point(329, 48);
             this.btnAddDrink.Name = "btnAddDrink";
             this.btnAddDrink.Size = new System.Drawing.Size(117, 78);
@@ -527,6 +540,7 @@ namespace RosUI
             // 
             // btnHotDrinks
             // 
+            this.btnHotDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnHotDrinks.Location = new System.Drawing.Point(339, 11);
             this.btnHotDrinks.Name = "btnHotDrinks";
             this.btnHotDrinks.Size = new System.Drawing.Size(70, 53);
@@ -537,6 +551,7 @@ namespace RosUI
             // 
             // btnWine
             // 
+            this.btnWine.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnWine.Location = new System.Drawing.Point(170, 11);
             this.btnWine.Name = "btnWine";
             this.btnWine.Size = new System.Drawing.Size(70, 53);
@@ -547,6 +562,7 @@ namespace RosUI
             // 
             // btnSpirits
             // 
+            this.btnSpirits.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSpirits.Location = new System.Drawing.Point(255, 11);
             this.btnSpirits.Name = "btnSpirits";
             this.btnSpirits.Size = new System.Drawing.Size(70, 53);
@@ -557,6 +573,7 @@ namespace RosUI
             // 
             // btnBeers
             // 
+            this.btnBeers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBeers.Location = new System.Drawing.Point(86, 11);
             this.btnBeers.Name = "btnBeers";
             this.btnBeers.Size = new System.Drawing.Size(70, 53);
@@ -567,6 +584,7 @@ namespace RosUI
             // 
             // btnSoftDrink
             // 
+            this.btnSoftDrink.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSoftDrink.Location = new System.Drawing.Point(3, 11);
             this.btnSoftDrink.Name = "btnSoftDrink";
             this.btnSoftDrink.Size = new System.Drawing.Size(70, 53);
@@ -597,6 +615,7 @@ namespace RosUI
             // 
             // btnStartersDinner
             // 
+            this.btnStartersDinner.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStartersDinner.Location = new System.Drawing.Point(2, 12);
             this.btnStartersDinner.Name = "btnStartersDinner";
             this.btnStartersDinner.Size = new System.Drawing.Size(116, 41);
@@ -607,6 +626,7 @@ namespace RosUI
             // 
             // btnMainsDinners
             // 
+            this.btnMainsDinners.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMainsDinners.Location = new System.Drawing.Point(147, 12);
             this.btnMainsDinners.Name = "btnMainsDinners";
             this.btnMainsDinners.Size = new System.Drawing.Size(116, 41);
@@ -617,6 +637,7 @@ namespace RosUI
             // 
             // btnDessertsDinner
             // 
+            this.btnDessertsDinner.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDessertsDinner.Location = new System.Drawing.Point(284, 12);
             this.btnDessertsDinner.Name = "btnDessertsDinner";
             this.btnDessertsDinner.Size = new System.Drawing.Size(116, 41);
@@ -627,6 +648,7 @@ namespace RosUI
             // 
             // btnLunch
             // 
+            this.btnLunch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLunch.Location = new System.Drawing.Point(16, 44);
             this.btnLunch.Name = "btnLunch";
             this.btnLunch.Size = new System.Drawing.Size(116, 41);
@@ -637,6 +659,7 @@ namespace RosUI
             // 
             // btnDinner
             // 
+            this.btnDinner.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDinner.Location = new System.Drawing.Point(162, 44);
             this.btnDinner.Name = "btnDinner";
             this.btnDinner.Size = new System.Drawing.Size(116, 41);
@@ -658,6 +681,7 @@ namespace RosUI
             // btnAddDinnerMains
             // 
             this.btnAddDinnerMains.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDinnerMains.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddDinnerMains.Location = new System.Drawing.Point(329, 48);
             this.btnAddDinnerMains.Name = "btnAddDinnerMains";
             this.btnAddDinnerMains.Size = new System.Drawing.Size(117, 78);
@@ -714,6 +738,7 @@ namespace RosUI
             // btnAddDinnerStarter
             // 
             this.btnAddDinnerStarter.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDinnerStarter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddDinnerStarter.Location = new System.Drawing.Point(329, 48);
             this.btnAddDinnerStarter.Name = "btnAddDinnerStarter";
             this.btnAddDinnerStarter.Size = new System.Drawing.Size(117, 78);
@@ -770,6 +795,7 @@ namespace RosUI
             // btnAddDinnerDesserts
             // 
             this.btnAddDinnerDesserts.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddDinnerDesserts.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddDinnerDesserts.Location = new System.Drawing.Point(329, 48);
             this.btnAddDinnerDesserts.Name = "btnAddDinnerDesserts";
             this.btnAddDinnerDesserts.Size = new System.Drawing.Size(117, 78);
@@ -826,6 +852,7 @@ namespace RosUI
             // btnAddBeers
             // 
             this.btnAddBeers.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddBeers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddBeers.Location = new System.Drawing.Point(329, 48);
             this.btnAddBeers.Name = "btnAddBeers";
             this.btnAddBeers.Size = new System.Drawing.Size(117, 78);
@@ -882,6 +909,7 @@ namespace RosUI
             // btnAddWines
             // 
             this.btnAddWines.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddWines.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddWines.Location = new System.Drawing.Point(329, 48);
             this.btnAddWines.Name = "btnAddWines";
             this.btnAddWines.Size = new System.Drawing.Size(117, 78);
@@ -938,6 +966,7 @@ namespace RosUI
             // btnAddSpirits
             // 
             this.btnAddSpirits.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddSpirits.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddSpirits.Location = new System.Drawing.Point(329, 48);
             this.btnAddSpirits.Name = "btnAddSpirits";
             this.btnAddSpirits.Size = new System.Drawing.Size(117, 78);
@@ -994,6 +1023,7 @@ namespace RosUI
             // btnAddHotDrinks
             // 
             this.btnAddHotDrinks.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnAddHotDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddHotDrinks.Location = new System.Drawing.Point(329, 48);
             this.btnAddHotDrinks.Name = "btnAddHotDrinks";
             this.btnAddHotDrinks.Size = new System.Drawing.Size(117, 78);
