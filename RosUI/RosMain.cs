@@ -17,13 +17,15 @@ namespace RosUI
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
         OrderedDish d = new OrderedDish();
-
         public RosMain(Employee employee)
         {
             InitializeComponent();
 
-            UpdateDishes();
-            UpdateDrinks();
+            InitialiseTimer();
+
+            UpdateAllListViews();
+            InitialiseComboBoxes();
+
             UpdateTables();
 
             this.employee = employee;
@@ -31,13 +33,58 @@ namespace RosUI
             AdaptFormOnRole(employee);
         }
 
+        private void InitialiseTimer()
+        {
+            //setting a timer for aumtatic update
+            Timer timer1 = new Timer();
+            timer1.Interval = 60000;//1 minute
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Start();
+        }
+
+        private void InitialiseComboBoxes()
+        {
+            //combo table kitchen view/ finished order combo
+            for (int i = 1; i <= 10; i++)
+            {
+                cmbTableKit.Items.Add($"Table {i}");
+                cmbKitFinished.Items.Add($"Table {i}");
+                cmbBarFinished.Items.Add($"Table {i}");
+                cmbSelByTabBar.Items.Add($"Table {i}");
+
+            }
+            cmbTableKit.SelectedIndex = 0;
+            cmbKitFinished.SelectedIndex = 0;
+            cmbSelByTabBar.SelectedIndex = 0;
+            cmbBarFinished.SelectedIndex = 0;
+
+            //combo courses kitchen view
+            cmbCourseKit.Items.Add("Starter");
+            cmbCourseKit.Items.Add("Main");
+            cmbCourseKit.Items.Add("Dessert");
+
+            cmbCourseKit.SelectedIndex = 0;
+
+        }
+
+        public void UpdateAllListViews()
+        {
+            UpdateDishes();
+            UpdateDrinks();
+            UpdateFinishedDrinks();
+            UpdateFinishedDishes();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            UpdateAllListViews();
+        }
+
         private void AdaptFormOnRole(Employee employee)
         {
             if (employee.Roles == Roles.Manager)
             {
-                lblWelcomeBarDash.Text += $" {employee.Name}!";
-                lblWelcomeKitDash.Text += $" {employee.Name}!";
-                ShowPanel("KitchenDashboard");
+                ShowPanel("KitchenView");
             }
 
             if (employee.Roles == Roles.Chef)
@@ -45,8 +92,7 @@ namespace RosUI
                 barViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
                 btnUndoKitFin.Enabled = false;
-                lblWelcomeKitDash.Text += $" {employee.Name}!";
-                ShowPanel("KitchenDashboard");
+                ShowPanel("KitchenView");
 
             }
             else if (employee.Roles == Roles.Bartender)
@@ -54,8 +100,7 @@ namespace RosUI
                 kitchenViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
                 btnUndoKitFin.Enabled = false;
-                lblWelcomeBarDash.Text += $" {employee.Name}!";
-                ShowPanel("BarDashboard");
+                ShowPanel("BarView");
             }
         }
 
@@ -77,13 +122,6 @@ namespace RosUI
 
                     break;
 
-                case "KitchenDashboard":
-
-                    HideAllPanels();
-                    pnlDashboardKitchen.Show();
-
-                    break;
-
                 case "BarView":
 
                     HideAllPanels();
@@ -92,12 +130,6 @@ namespace RosUI
 
                     break;
 
-                case "BarDashboard":
-
-                    HideAllPanels();
-                    pnlDashboardBar.Show();
-
-                    break;
                 case "FinishedDrinkView":
 
                     HideAllPanels();
@@ -144,17 +176,10 @@ namespace RosUI
         {
             //hiding all panels
             pnlKitchenView.Hide();
-            pnlDashboardKitchen.Hide();
-            pnlDashboardBar.Hide();
             pnlBarView.Hide();
             pnlKitchenViewFinished.Hide();
             pnlBarViewFinished.Hide();
 
-        }
-
-        private void kitchenViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("KitchenDashboard");
         }
 
         private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -168,11 +193,6 @@ namespace RosUI
             {
                 ShowPanel("KitchenDashboard");
             }
-        }
-
-        private void barViewToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("BarDashboard");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -215,6 +235,7 @@ namespace RosUI
                 foreach (OrderedDrink drink in orderedDrinks)
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(drink.Name);
 
                     //displaying output according if a note is present
@@ -224,21 +245,17 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    string time;
-                    if (CalculateTimeSpent(drink.TimeDrinkOrdered).TotalMinutes > 60)
+                    li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
+
+                    if (CalculateTimeSpentInMinutes(drink.TimeDrinkOrdered) > 60)
                     {
-                        time = "more then an hour";
-                    }
-                    else
-                    {
-                        time = CalculateTimeSpent(drink.TimeDrinkOrdered).TotalMinutes.ToString("00 minutes ago");
+                        li.SubItems[3].BackColor = Color.Red;
                     }
 
-
-                    li.SubItems.Add(time);
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -246,6 +263,7 @@ namespace RosUI
                     //if the item is ready for pickup should show another color
                     if (drink.DrinkStatus == DrinkStatus.PickUp)
                     {
+                        li.UseItemStyleForSubItems = true;
                         li.BackColor = Color.LightGreen;
                     }
 
@@ -255,8 +273,14 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
+        }
+
+        private int CalculateTimeSpentInMinutes(DateTime timeDrinkOrdered)
+        {
+            TimeSpan ts = DateTime.Now - timeDrinkOrdered;
+            return (int)ts.TotalMinutes;
         }
 
         public void UpdateFinishedDrinks()
@@ -274,6 +298,7 @@ namespace RosUI
                 foreach (OrderedDrink drink in finishedDrinks)
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(drink.Name);
 
                     //displaying output according if a note is present
@@ -283,10 +308,11 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");
+                        li.SubItems[2].BackColor = Color.LightGreen;
                     }
 
-                    li.SubItems.Add(drink.TimeDrinkOrdered.ToString("HH:mm"));
+                    li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
                     li.SubItems.Add(drink.TableNumber.ToString());
 
                     li.Tag = drink;
@@ -297,7 +323,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -318,6 +344,7 @@ namespace RosUI
                 {
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(dish.Name);
 
                     //displaying output according if a note is present
@@ -327,20 +354,17 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");                     
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    string time;
-                    if (CalculateTimeSpent(dish.TimeDishOrdered).TotalMinutes > 60)
+                    li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
+
+                    if (CalculateTimeSpentInMinutes(dish.TimeDishOrdered) > 60)
                     {
-                        time = "more then an hour";
-                    }
-                    else
-                    {
-                        time = CalculateTimeSpent(dish.TimeDishOrdered).TotalMinutes.ToString("00 minutes ago");
+                        li.SubItems[3].BackColor = Color.Red;
                     }
 
-                    li.SubItems.Add(time);
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
@@ -349,24 +373,35 @@ namespace RosUI
                     //displaying different color for status "ToPickUp"
                     if (dish.Status == DishStatus.PickUp)
                     {
+                        li.UseItemStyleForSubItems = true;
                         li.BackColor = Color.LightGreen;
                     }
 
                     //adding items to listView
                     lvOrderedDishes.Items.Add(li);
+                    
 
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
 
         }
 
-        private TimeSpan CalculateTimeSpent(DateTime placed)
+        private string ReturnTimeSpentAsString(DateTime placed)
         {
-            return DateTime.Now - placed;
+            TimeSpan ts = DateTime.Now - placed;
+
+            if (ts.TotalMinutes > 60)
+            {
+                return $"{ts.TotalHours:00} hours ago";
+            }
+            else
+            {
+                return $"{ts.TotalMinutes:00} minutes ago";
+            }
 
         }
 
@@ -385,6 +420,7 @@ namespace RosUI
                 {
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(dish.Name);
 
                     //displaying output according if a note is present
@@ -394,10 +430,11 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes");
+                        li.SubItems.Add("Yes!");
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
-                    li.SubItems.Add(dish.TimeDishOrdered.ToString("HH:mm"));
+                    li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
                     li.SubItems.Add(dish.Course);
                     li.SubItems.Add(dish.TableNumber.ToString());
 
@@ -409,7 +446,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -437,7 +474,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
 
             }
         }
@@ -465,7 +502,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -498,16 +535,16 @@ namespace RosUI
                 //display either the note text or if the note is empty display "No note"
                 if (dish.DishNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(dish.DishNote);
+                    MessageBox.Show(dish.DishNote, "Note");
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -537,7 +574,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -557,16 +594,16 @@ namespace RosUI
                 //if the note is empty, display "no note", otherwise display the note
                 if (d.DrinkNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(d.DrinkNote);
+                    MessageBox.Show(d.DrinkNote, "Note");
                 }
             }
             catch (Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
 
 
@@ -600,7 +637,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -678,16 +715,16 @@ namespace RosUI
                 //if the note is null display "no note", otherwise display the note message
                 if (d.DrinkNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(d.DrinkNote);
+                    MessageBox.Show(d.DrinkNote, "Note");
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -707,16 +744,16 @@ namespace RosUI
                 //if the note is null display no note, otherwise display the note message
                 if (dish.DishNote == "null")
                 {
-                    MessageBox.Show("No note");
+                    MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(dish.DishNote);
+                    MessageBox.Show(dish.DishNote, "Note");
                 }
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -745,7 +782,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -774,7 +811,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -813,7 +850,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show($"Error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
         }
 
@@ -848,9 +885,86 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show($"error: {exp.Message}");
+                MessageBox.Show($"{exp.Message}", "Error");
             }
 
         }
+
+        private void btnFinishedDishes_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDishView");
+        }
+
+        private void btnFinishedOrdersBar_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDrinkView");
+        }
+
+        private void btnRunningOrderesKit_Click(object sender, EventArgs e)
+        {
+            ShowPanel("KitchenView");
+        }
+
+        private void btnRunningOrdersBar_Click(object sender, EventArgs e)
+        {
+            ShowPanel("BarView");
+        }
+
+        private void btnSelByTabKit_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbTableKit.SelectedItem;
+
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+
+        }
+
+        private void btnSelByCourseKit_Click(object sender, EventArgs e)
+        {
+            string course = (string)cmbCourseKit.SelectedItem;
+
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+                if (item.SubItems[4].Text == course)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void btnSelByTabKitFin_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbKitFinished.SelectedItem;
+
+            foreach (ListViewItem item in lvFinishedDishes.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void BtnSelByTabBarFin_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbBarFinished.SelectedItem;
+
+            foreach (ListViewItem item in lvFinishedDrinks.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void btnSelByTabBar_Click(object sender, EventArgs e)
+        {
+            string tableNum = (string)cmbSelByTabBar.SelectedItem;
+
+            foreach (ListViewItem item in lvOrderedDrinks.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
+                {
+                    item.Selected = true;
+                }
+        }
+
     }
 }

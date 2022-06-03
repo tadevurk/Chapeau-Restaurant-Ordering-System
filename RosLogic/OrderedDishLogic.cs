@@ -20,49 +20,14 @@ namespace RosLogic
             orderedDishdb.UpdateDishStatusServe(d);
         }
 
-        public void IncreaseAmount(List<Dish> dishes, Order o)
-        {
-            foreach (Dish d in dishes)
-            {
-                orderedDishdb.IncreaseAmount(d, o);
-            }
-        }
-
-        public void UpdateDishNote(OrderedDish dish, string message)
-        {
-            orderedDishdb.UpdateDishNote(dish, message);
-        }
-        public void AddDishes(List<Dish> dishes, Order order)
-        {
-            orderedDishdb.AddDishes(dishes, order);
-        }
         public void UpdateDishStatusPickUp(OrderedDish dish)
         {
             orderedDishdb.UpdateDishStatusPickUp(dish);
         }
+
         public List<OrderedDish> GetAllOrderedDish()
         {
             return orderedDishdb.GetAllOrderedDish();
-        }
-
-        public void UpdateDeliveryTime(Dish d)
-        {
-            orderedDishdb.UpdateDeliveredTime(d);
-        }
-
-        public OrderedDish GetOrdereDishByKey(Order ord, Dish dish)
-        {
-            return orderedDishdb.GetOrderedDishByKey(ord, dish);
-        }
-
-        public void UpdateDish(OrderedDish orderedDish)
-        {
-            orderedDishdb.UpdateDish(orderedDish);
-        }
-
-        public void RemoveDish(OrderedDish orderedDish)
-        {
-            orderedDishdb.RemoveDish(orderedDish);
         }
 
         public List<OrderedDish> GetAllFinishedDish()

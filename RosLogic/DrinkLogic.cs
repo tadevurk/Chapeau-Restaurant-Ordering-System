@@ -7,10 +7,16 @@ using System.Threading.Tasks;
 using RosDAL;
 
 namespace RosLogic
+/////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
 {
     public class DrinkLogic
     {
         DrinkDAO drinkDAO = new DrinkDAO();
+
+        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
+        {
+            drinkDAO.AddDrinks(drinkInOrderProcess, order);
+        }
 
         public List<Drink> GetAllSoftDrinks()
         {
