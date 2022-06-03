@@ -16,7 +16,7 @@ namespace RosDAL
         public void BringStatusBack(OrderedDish d)
         {
             string query = "UPDATE OrderDish SET DishStatus=DishStatus-1 WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=1";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.ItemID),
             new SqlParameter("@OrderID", d.OrderID)
             };
 
@@ -27,7 +27,7 @@ namespace RosDAL
         public void UpdateDishToStart(OrderedDish d)
         {
             string query = "UPDATE OrderDish SET DishStatus=0 WHERE DishID=@DishID AND OrderID=@OrderID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.ItemID),
             new SqlParameter("@OrderID", d.OrderID)
             };
 
@@ -68,11 +68,11 @@ namespace RosDAL
                 {
                     TableNumber = (int)dr["tableNumber"],
                     Status = (DishStatus)dr["Status"],
-                    DishID = (int)dr["ID"],
+                    ItemID = (int)dr["ID"],
                     OrderID = (int)dr["OrderID"],
-                    DishNote = note,
+                    ItemNote = note,
                     OrderedDishAmount = (int)dr["Amount"],
-                    Name = (string)dr["name"],
+                    ItemName = (string)dr["name"],
                     TimeDishOrdered = (DateTime)dr["Time"],
                     Course = (string)dr["Course"]
 
@@ -98,7 +98,7 @@ namespace RosDAL
         public void UpdateDishStatusPickUp(OrderedDish orderedDish)
         {
             string query = "UPDATE OrderDish SET DishStatus=1 WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=0";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.DishID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", orderedDish.ItemID),
             new SqlParameter("@OrderID", orderedDish.OrderID)
             };
 
@@ -108,7 +108,7 @@ namespace RosDAL
         public void UpdateDishStatusServe(OrderedDish d)
         {
             string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=GetDate() WHERE DishID=@DishID AND OrderID=@OrderID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.DishID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.ItemID),
             new SqlParameter("@OrderID", d.OrderID)
             };
 

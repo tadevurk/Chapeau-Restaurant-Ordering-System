@@ -33,7 +33,7 @@ namespace RosDAL
             {
                 OrderedDish orderedDish = new OrderedDish()
                 {
-                    DishID = (int)dr["DishID"],
+                    ItemID = (int)dr["DishID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemAmount = (int)dr["OrderedDishAmount"],
@@ -64,7 +64,7 @@ namespace RosDAL
             {
                 OrderedDrink orderedDrink = new OrderedDrink()
                 {
-                    DrinkID = (int)dr["DrinkID"],
+                    ItemID = (int)dr["DrinkID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemAmount = (int)dr["OrderedDrinkAmount"],
@@ -108,7 +108,7 @@ namespace RosDAL
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@OrderID", item.OrderID),
-                new SqlParameter("@DishID", item.DishID)
+                new SqlParameter("@DishID", item.ItemID)
             };
 
             ExecuteEditQuery(query, sqlParameters);
@@ -121,7 +121,7 @@ namespace RosDAL
             SqlParameter[] sqlParameters =
             {
                  new SqlParameter("@OrderID", item.OrderID),
-                 new SqlParameter("@DrinkID", item.DrinkID)
+                 new SqlParameter("@DrinkID", item.ItemID)
             };
 
             ExecuteEditQuery(query, sqlParameters);

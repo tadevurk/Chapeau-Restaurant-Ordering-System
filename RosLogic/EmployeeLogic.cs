@@ -11,19 +11,10 @@ namespace RosLogic
     public class EmployeeLogic
     {
         EmployeeDAO employeedb = new EmployeeDAO();
-        public Employee GetEmployeeById(int id)
-        {
-            return employeedb.GetEmployeeById(id);
-        }
 
         public Employee GetLastEmployeeID()
         {
             return employeedb.GetLastEmployeeID();
-        }
-
-        public List<Employee> GetAllEmployees()
-        {
-            return employeedb.GetAllEmployees();
         }
 
         public List<Employee> GetAllManagers()

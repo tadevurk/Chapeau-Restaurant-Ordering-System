@@ -15,6 +15,8 @@ namespace RosModel
         public string ItemStatusDrink { get; set; }
         public string ItemType { get; set; }
 
+        public string ItemNote { get; set; }  
+
         public int ItemAmount { get; set; }
 
         public int ItemVat { get; set; }

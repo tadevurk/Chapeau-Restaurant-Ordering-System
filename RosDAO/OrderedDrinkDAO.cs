@@ -31,7 +31,7 @@ namespace RosDAL
         public void BringStatusBack(OrderedDrink orderedDrink)
         {
             string query = "UPDATE OrderDrink SET DrinkStatus=DrinkStatus-1 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.ItemID),
             new SqlParameter("@OrderID", orderedDrink.OrderID)
             };
 
@@ -41,7 +41,7 @@ namespace RosDAL
         public void UpdateDrinkToStart(OrderedDrink d)
         {
             string query = "UPDATE OrderDrink SET DrinkStatus=0 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.DrinkID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.ItemID),
             new SqlParameter("@OrderID", d.OrderID)
             };
 
@@ -82,10 +82,10 @@ namespace RosDAL
                     TableNumber = (int)dr["tableNumber"],
                     DrinkStatus = (DrinkStatus)dr["Status"],
                     OrderID = (int)dr["OrderID"],
-                    DrinkID = (int)dr["ID"],
-                    DrinkNote = note,
+                    ItemID = (int)dr["ID"],
+                    ItemNote = note,
                     OrderedDrinkAmount = (int)dr["Amount"],
-                    Name = (string)dr["name"],
+                    ItemName = (string)dr["name"],
                     TimeDrinkOrdered = (DateTime)dr["Time"]
                 };
                 drinks.Add(drink);
@@ -96,7 +96,7 @@ namespace RosDAL
         public void UpdateDrinkStatusPickUp(OrderedDrink orderedDrink)
         {
             string query = "UPDATE OrderDrink SET DrinkStatus=1 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.ItemID),
             new SqlParameter("@OrderID", orderedDrink.OrderID)
             };
 
@@ -108,7 +108,7 @@ namespace RosDAL
         public void UpdateDrinkStatusServe(OrderedDrink d)
         {
             string query = "UPDATE OrderDrink SET DrinkStatus=2, TimeDrinkDelivered=GetDate() WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.DrinkID),
+            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.ItemID),
             new SqlParameter("@OrderID", d.OrderID)
             };
 

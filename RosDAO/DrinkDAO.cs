@@ -16,18 +16,18 @@ namespace RosDAL
         {
             foreach (Drink drink in drinkInOrderProcess)
             {
-                if (drink.Note == null)
+                if (drink.ItemNote == null)
                 {
-                    drink.Note = "null";
+                    drink.ItemNote = "null";
                 }
 
                 //Adding dish
                 string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
+                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.ItemID),
                 new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", drink.Note),
+                new SqlParameter("@Note", drink.ItemNote),
                 new SqlParameter("@CurrentTime", DateTime.Now),
-                new SqlParameter("@Amount", drink.Amount)};
+                new SqlParameter("@Amount", drink.ItemAmount)};
 
                 ExecuteEditQuery(query, sp);
             }
@@ -57,7 +57,7 @@ namespace RosDAL
 
                 Drink drink = new Drink()
                 {
-                    DrinkID = (int)dr["DrinkID"],
+                    ItemID = (int)dr["DrinkID"],
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     ItemAmount = (int)dr["Amount"],
@@ -140,7 +140,7 @@ namespace RosDAL
 
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@ItemID", drink.DrinkID)
+                new SqlParameter("@ItemID", drink.ItemID)
             };
 
             ExecuteEditQuery(query, sqlParameters);
@@ -155,7 +155,7 @@ namespace RosDAL
 
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@ItemID", drink.DrinkID)
+                new SqlParameter("@ItemID", drink.ItemID)
             };
 
             ExecuteEditQuery(query, sqlParameters);
@@ -169,7 +169,7 @@ namespace RosDAL
             {
                 Drink drink = new Drink()
                 {
-                    DrinkID = (int)dr["DrinkID"],
+                    ItemID = (int)dr["DrinkID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemStock = (int)dr["ItemStock"]

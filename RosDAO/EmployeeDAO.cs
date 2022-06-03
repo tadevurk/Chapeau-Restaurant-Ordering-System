@@ -15,25 +15,11 @@ namespace RosDAL
             conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString);
         }
 
-        public Employee GetEmployeeById(int emplID)
-        {
-            string query = $"SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] WHERE EmplID = {emplID} ORDER BY [EmplID]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
-        }
-
         public Employee GetLastEmployeeID()
         {
             string query = "SELECT TOP 1 EmplID, Name, Username, Salt, Digest FROM Employee ORDER BY EmplID DESC";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Employee> GetAllEmployees()
-        {
-            string query = "SELECT EmplID, Name, Username, Salt, Digest FROM [Employee] ORDER BY [EmplID]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public List<Employee> GetAllManagers()

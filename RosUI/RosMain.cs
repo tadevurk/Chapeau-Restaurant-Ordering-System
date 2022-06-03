@@ -199,10 +199,10 @@ namespace RosUI
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
                     li.UseItemStyleForSubItems = false;
-                    li.SubItems.Add(drink.Name);
+                    li.SubItems.Add(drink.ItemName);
 
                     //displaying output according if a note is present
-                    if (drink.DrinkNote == "null")
+                    if (drink.ItemNote == "null")
                     {
                         li.SubItems.Add("No");
                     }
@@ -261,10 +261,10 @@ namespace RosUI
                 {
                     ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
                     li.UseItemStyleForSubItems = false;
-                    li.SubItems.Add(drink.Name);
+                    li.SubItems.Add(drink.ItemName);
 
                     //displaying output according if a note is present
-                    if (drink.DrinkNote == "null")
+                    if (drink.ItemNote == "null")
                     {
                         li.SubItems.Add("No");
                     }
@@ -306,10 +306,10 @@ namespace RosUI
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
                     li.UseItemStyleForSubItems = false;
-                    li.SubItems.Add(dish.Name);
+                    li.SubItems.Add(dish.ItemName);
 
                     //displaying output according if a note is present
-                    if (dish.DishNote == "null")
+                    if (dish.ItemNote == "null")
                     {
                         li.SubItems.Add("No");
                     }
@@ -382,10 +382,10 @@ namespace RosUI
 
                     ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
                     li.UseItemStyleForSubItems = false;
-                    li.SubItems.Add(dish.Name);
+                    li.SubItems.Add(dish.ItemName);
 
                     //displaying output according if a note is present
-                    if (dish.DishNote == "null")
+                    if (dish.ItemNote == "null")
                     {
                         li.SubItems.Add("No");
                     }
@@ -493,13 +493,13 @@ namespace RosUI
                 OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
 
                 //display either the note text or if the note is empty display "No note"
-                if (dish.DishNote == "null")
+                if (dish.ItemNote == "null")
                 {
                     MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(dish.DishNote, "Note");
+                    MessageBox.Show(dish.ItemNote, "Note");
                 }
             }
             catch(Exception exp)
@@ -521,13 +521,13 @@ namespace RosUI
                 OrderedDrink d = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
 
                 //if the note is empty, display "no note", otherwise display the note
-                if (d.DrinkNote == "null")
+                if (d.ItemNote == "null")
                 {
                     MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(d.DrinkNote, "Note");
+                    MessageBox.Show(d.ItemNote, "Note");
                 }
             }
             catch (Exception exp)
@@ -596,13 +596,13 @@ namespace RosUI
                 OrderedDrink d = (OrderedDrink)lvFinishedDrinks.SelectedItems[0].Tag;
 
                 //if the note is null display "no note", otherwise display the note message
-                if (d.DrinkNote == "null")
+                if (d.ItemNote == "null")
                 {
                     MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(d.DrinkNote, "Note");
+                    MessageBox.Show(d.ItemNote, "Note");
                 }
             }
             catch(Exception exp)
@@ -624,13 +624,13 @@ namespace RosUI
                 OrderedDish dish = (OrderedDish)lvFinishedDishes.SelectedItems[0].Tag;
 
                 //if the note is null display no note, otherwise display the note message
-                if (dish.DishNote == "null")
+                if (dish.ItemNote == "null")
                 {
                     MessageBox.Show("No note", "Note");
                 }
                 else
                 {
-                    MessageBox.Show(dish.DishNote, "Note");
+                    MessageBox.Show(dish.ItemNote, "Note");
                 }
             }
             catch(Exception exp)
@@ -717,7 +717,7 @@ namespace RosUI
                     {
                         UpdateDrinks();
 
-                        throw new Exception($"You can not undo this item {orderedDrink.Name}");
+                        throw new Exception($"You can not undo this item {orderedDrink.ItemName}");
                         
                     }
 
@@ -755,7 +755,7 @@ namespace RosUI
                     if (orderedDish.Status == DishStatus.ToPrepare)
                     {
                         UpdateDishes();
-                        throw new Exception($"You can not undo this item {orderedDish.Name}");
+                        throw new Exception($"You can not undo this item {orderedDish.ItemName}");
                     }
 
                     dishLogic.BringStatusBack(orderedDish);

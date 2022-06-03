@@ -22,11 +22,6 @@ namespace RosLogic
         {
             return drinkDAO.GetAllSoftDrinks();
         }
-
-        public List<Drink> GetAllDrinks()
-        {
-            return drinkDAO.GetAllDrinks();
-        }
         public List<Drink> GetAllBeers()
         {
             return drinkDAO.GetAllBeers();

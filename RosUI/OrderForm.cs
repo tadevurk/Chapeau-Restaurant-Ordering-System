@@ -694,15 +694,15 @@ namespace RosUI
             }
             else
             {
-                if (dish.Amount == 1)
+                if (dish.ItemAmount == 1)
                 {
                     listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
                     dishLogic.IncreaseDishStock(dish);
                 }
                 else
                 {
-                    dish.Amount--;
-                    listviewOrder.SelectedItems[0].SubItems[2].Text = dish.Amount.ToString();
+                    dish.ItemAmount--;
+                    listviewOrder.SelectedItems[0].SubItems[2].Text = dish.ItemAmount.ToString();
                     dishLogic.IncreaseDishStock(dish);
                 }
             }
@@ -716,15 +716,15 @@ namespace RosUI
             }
             else
             {
-                if (drink.Amount == 1)
+                if (drink.ItemAmount == 1)
                 {
                     listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
                     drinkLogic.IncreaseDrinkStock(drink);
                 }
                 else
                 {
-                    drink.Amount--;
-                    listviewOrder.SelectedItems[0].SubItems[2].Text = drink.Amount.ToString();
+                    drink.ItemAmount--;
+                    listviewOrder.SelectedItems[0].SubItems[2].Text = drink.ItemAmount.ToString();
                     drinkLogic.IncreaseDrinkStock(drink);
                 }
             }
@@ -819,9 +819,9 @@ namespace RosUI
                     if (dish.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
                     {
                         currentItem = item;
-                        dish.Amount = int.Parse(item.SubItems[2].Text);
-                        dish.Amount++;
-                        item.SubItems[2].Text = dish.Amount.ToString();
+                        dish.ItemAmount = int.Parse(item.SubItems[2].Text);
+                        dish.ItemAmount++;
+                        item.SubItems[2].Text = dish.ItemAmount.ToString();
                     }
                 }
 
@@ -829,8 +829,8 @@ namespace RosUI
                 {
                     ListViewItem item = new ListViewItem(dish.ItemName);
                     item.SubItems.Add(dish.ItemPrice.ToString());
-                    dish.Amount = 1;
-                    item.SubItems.Add(dish.Amount.ToString());
+                    dish.ItemAmount = 1;
+                    item.SubItems.Add(dish.ItemAmount.ToString());
                     item.Tag = (Item)dish;
                     item.ForeColor = Color.Red; // Change color for the new ordered item
                     listviewOrder.Items.Add(item);
@@ -854,9 +854,9 @@ namespace RosUI
                     if (drink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
                     {
                         currentItem = item;
-                        drink.Amount = int.Parse(item.SubItems[2].Text);
-                        drink.Amount++;
-                        item.SubItems[2].Text = drink.Amount.ToString();
+                        drink.ItemAmount = int.Parse(item.SubItems[2].Text);
+                        drink.ItemAmount++;
+                        item.SubItems[2].Text = drink.ItemAmount.ToString();
                     }
                 }
 
@@ -864,8 +864,8 @@ namespace RosUI
                 {
                     ListViewItem item = new ListViewItem(drink.ItemName);
                     item.SubItems.Add(drink.ItemPrice.ToString());
-                    drink.Amount = 1;
-                    item.SubItems.Add(drink.Amount.ToString());
+                    drink.ItemAmount = 1;
+                    item.SubItems.Add(drink.ItemAmount.ToString());
                     item.Tag = (Item)drink;
                     item.ForeColor = Color.Red; // Change color for the new ordered item
                     listviewOrder.Items.Add(item);
@@ -1067,7 +1067,7 @@ namespace RosUI
                 throw new Exception("There is no note");
             }
 
-            drink.Note = txtNote.Text;
+            drink.ItemNote = txtNote.Text;
             MessageBox.Show($"{emp.Name}, You've added the note!");
         }
 
@@ -1078,7 +1078,7 @@ namespace RosUI
                 throw new Exception("There is no note");
             }
 
-            dish.Note = txtNote.Text;
+            dish.ItemNote = txtNote.Text;
             MessageBox.Show($"{emp.Name}, You've added the note!");
         }
 

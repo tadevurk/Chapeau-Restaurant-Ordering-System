@@ -215,6 +215,7 @@ namespace RosUI
                 case 1:
                     button.BackColor = Color.Red;
                     button.Text = "Occupied";
+                    button.ForeColor = Color.White;
                     return button;
                 case 2:
                     button.BackColor = Color.LightBlue;
@@ -245,11 +246,11 @@ namespace RosUI
                 {
                     TimeSpan timeTaken = DateTime.Now - dish.TimeDishOrdered;
 
-                    button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes ago";
+                    button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes";
 
-                    if (button.Text == "00 minutes ago")
+                    if (button.Text == "00 minutes")
                     {
-                        button.Text = "01 minutes ago";
+                        button.Text = "01 minutes";
                     }
                 }
             }

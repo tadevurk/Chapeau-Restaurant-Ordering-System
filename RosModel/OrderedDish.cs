@@ -11,7 +11,6 @@ namespace RosModel
     public class OrderedDish : Item
     {
         public int OrderID { get; set; }
-        public int DishID { get; set; }
 
         public DishStatus Status { get; set; }
         public DateTime TimeDishOrdered { get; set; }
@@ -19,12 +18,8 @@ namespace RosModel
 
         public int TableNumber { get; set; }
 
-        public decimal Price { get; set; }
-
         public string Course { get; set; }
 
-        public string Name { get; set; }
         public int OrderedDishAmount { get; set; }
-        public string DishNote { get; set; }
     }
 }

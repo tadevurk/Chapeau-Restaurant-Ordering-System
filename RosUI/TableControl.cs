@@ -37,12 +37,14 @@ namespace RosUI
             {
                 btnOccupy.Text = "Occupied";
                 btnOccupy.BackColor = Color.Red;
+                btnOccupy.ForeColor = Color.White;
                 btnOccupy.Enabled = false;
             }
             else if (table.TableStatus == 1)
             {
                 btnOccupy.Text = "Occupied";
                 btnOccupy.BackColor = Color.Red;
+                btnOccupy.ForeColor = Color.White;
             }
         }
 
@@ -54,6 +56,7 @@ namespace RosUI
             {
                 btnOccupy.Text = "Occupied";
                 btnOccupy.BackColor = Color.Red;
+                btnOccupy.ForeColor = Color.White;
                 table.TableStatus = 1;
                 table.WaiterID = employee.EmplID;
                 tableLogic.UpdateTableWaiter(table);
@@ -62,6 +65,7 @@ namespace RosUI
             {
                 btnOccupy.Text = "Occupy";
                 btnOccupy.BackColor = Color.LightGray;
+                btnOccupy.ForeColor = Color.Black;
                 table.TableStatus = 0;
                 tableLogic.Update(table);
             }              
