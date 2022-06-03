@@ -76,7 +76,8 @@ namespace RosUI
         {
             table = tableLogic.GetTableById(table.TableNumber);
             orderForm = new FormOrder(table, employee, rosMain);
-            orderForm.ShowDialog();
+            this.Close();
+            orderForm.Show();
         }
 
         //Will take you to the PaymentForm

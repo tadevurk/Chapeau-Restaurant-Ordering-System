@@ -976,6 +976,9 @@ namespace RosUI
 
                         //Update TableView
                         rosMain.UpdateTableToOrdered(table.TableNumber);
+
+                        this.Close();
+                        new TableOverview(emp, rosMain).Show();
                     }
                     else if (dialogResult == DialogResult.No)
                     {
