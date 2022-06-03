@@ -462,10 +462,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddLunchStarter();
-                }
+
+                AddLunchStarter();
             }
             catch (Exception exp)
             {
@@ -480,10 +478,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddLunchMain();
-                }
+
+                AddLunchMain();
             }
             catch (Exception exp)
             {
@@ -498,10 +494,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddLunchDessert();
-                }
+
+                AddLunchDessert();
             }
             catch (Exception exp)
             {
@@ -516,10 +510,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddDinnerMain();
-                }
+
+                AddDinnerMain();
             }
             catch (Exception exp)
             {
@@ -534,10 +526,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddDinnerStarter();
-                }
+
+                AddDinnerStarter();
             }
             catch (Exception exp)
             {
@@ -552,10 +542,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddDinnerDessert();
-                }
+
+                AddDinnerDessert();
             }
             catch (Exception exp)
             {
@@ -570,10 +558,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddSoftDrink();
-                }
+
+                AddSoftDrink();
             }
             catch (Exception exp)
             {
@@ -588,10 +574,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddBeer();
-                }
+
+                AddBeer();
             }
             catch (Exception exp)
             {
@@ -607,10 +591,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddWine();
-                }
+
+                AddWine();
             }
             catch (Exception exp)
             {
@@ -626,10 +608,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddSpirit();
-                }
+
+                AddSpirit();
             }
             catch (Exception exp)
             {
@@ -645,10 +625,8 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
-                {
-                    AddHotDrink();
-                }
+
+                AddHotDrink();
             }
             catch (Exception exp)
             {
@@ -664,20 +642,18 @@ namespace RosUI
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
                 }
-                else
+
+                Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
+                ListViewItem lvItem = listviewOrder.SelectedItems[0];
+                if (item is Dish)
                 {
-                    Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
-                    ListViewItem lvItem = listviewOrder.SelectedItems[0];
-                    if (item is Dish)
-                    {
-                        Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
-                        CheckDishToRemove(lvItem, dish);
-                    }
-                    else if (item is Drink)
-                    {
-                        Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
-                        CheckDrinkToRemove(lvItem, drink);
-                    }
+                    Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                    CheckDishToRemove(lvItem, dish);
+                }
+                else if (item is Drink)
+                {
+                    Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                    CheckDrinkToRemove(lvItem, drink);
                 }
             }
             catch (Exception exp)
@@ -714,20 +690,19 @@ namespace RosUI
             {
                 throw new Exception($"{emp.Name}, you cannot edit an old item");
             }
+
+            if (drink.ItemAmount == 1)
+            {
+                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+                drinkLogic.IncreaseDrinkStock(drink);
+            }
             else
             {
-                if (drink.ItemAmount == 1)
-                {
-                    listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-                    drinkLogic.IncreaseDrinkStock(drink);
-                }
-                else
-                {
-                    drink.ItemAmount--;
-                    listviewOrder.SelectedItems[0].SubItems[2].Text = drink.ItemAmount.ToString();
-                    drinkLogic.IncreaseDrinkStock(drink);
-                }
+                drink.ItemAmount--;
+                listviewOrder.SelectedItems[0].SubItems[2].Text = drink.ItemAmount.ToString();
+                drinkLogic.IncreaseDrinkStock(drink);
             }
+
         }
 
         private void AddLunchStarter()
@@ -810,33 +785,31 @@ namespace RosUI
 
             if (dish.ItemStock <= 0)
             {
-                MessageBox.Show($"{dish.ItemName} is sold out", "Sorry");
+                throw new Exception($"{dish.ItemName} is sold out");
             }
-            else
-            {
-                foreach (ListViewItem item in listviewOrder.Items)
-                {
-                    if (dish.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                    {
-                        currentItem = item;
-                        dish.ItemAmount = int.Parse(item.SubItems[2].Text);
-                        dish.ItemAmount++;
-                        item.SubItems[2].Text = dish.ItemAmount.ToString();
-                    }
-                }
 
-                if (currentItem == null)
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (dish.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
                 {
-                    ListViewItem item = new ListViewItem(dish.ItemName);
-                    item.SubItems.Add(dish.ItemPrice.ToString());
-                    dish.ItemAmount = 1;
-                    item.SubItems.Add(dish.ItemAmount.ToString());
-                    item.Tag = (Item)dish;
-                    item.ForeColor = Color.Red; // Change color for the new ordered item
-                    listviewOrder.Items.Add(item);
+                    currentItem = item;
+                    dish.ItemAmount = int.Parse(item.SubItems[2].Text);
+                    dish.ItemAmount++;
+                    item.SubItems[2].Text = dish.ItemAmount.ToString();
                 }
-                dishLogic.DecreaseDishStock(dish);
             }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(dish.ItemName);
+                item.SubItems.Add(dish.ItemPrice.ToString());
+                dish.ItemAmount = 1;
+                item.SubItems.Add(dish.ItemAmount.ToString());
+                item.Tag = (Item)dish;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+            dishLogic.DecreaseDishStock(dish);
 
             AddItemNote();
         }
@@ -847,33 +820,31 @@ namespace RosUI
 
             if (drink.ItemStock <= 0)
             {
-                MessageBox.Show($"{drink.ItemName} is sold out", $"Sorry {emp.Name}");
+                throw new Exception($"{drink.ItemName} is sold out");
             }
-            else
-            {
-                foreach (ListViewItem item in listviewOrder.Items)
-                {
-                    if (drink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
-                    {
-                        currentItem = item;
-                        drink.ItemAmount = int.Parse(item.SubItems[2].Text);
-                        drink.ItemAmount++;
-                        item.SubItems[2].Text = drink.ItemAmount.ToString();
-                    }
-                }
 
-                if (currentItem == null)
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (drink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
                 {
-                    ListViewItem item = new ListViewItem(drink.ItemName);
-                    item.SubItems.Add(drink.ItemPrice.ToString());
-                    drink.ItemAmount = 1;
-                    item.SubItems.Add(drink.ItemAmount.ToString());
-                    item.Tag = (Item)drink;
-                    item.ForeColor = Color.Red; // Change color for the new ordered item
-                    listviewOrder.Items.Add(item);
+                    currentItem = item;
+                    drink.ItemAmount = int.Parse(item.SubItems[2].Text);
+                    drink.ItemAmount++;
+                    item.SubItems[2].Text = drink.ItemAmount.ToString();
                 }
-                drinkLogic.DecreaseDrinkStock(drink);
             }
+
+            if (currentItem == null)
+            {
+                ListViewItem item = new ListViewItem(drink.ItemName);
+                item.SubItems.Add(drink.ItemPrice.ToString());
+                drink.ItemAmount = 1;
+                item.SubItems.Add(drink.ItemAmount.ToString());
+                item.Tag = (Item)drink;
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+            }
+            drinkLogic.DecreaseDrinkStock(drink);
 
             AddItemNote();
         }
@@ -912,36 +883,33 @@ namespace RosUI
                 {
                     throw new Exception($"{emp.Name}, you did not order anything!");
                 }
-                else
-                {
-                    DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
-                        {
-                            Item item = (Item)lvOrderInProcess.Tag;
 
-                            if (lvOrderInProcess.ForeColor == Color.Red)
-                            {
-                                listviewOrder.Items.Remove(lvOrderInProcess);
-                                item.ItemName = lvOrderInProcess.SubItems[0].Text;
-                                item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
-                                orderLogic.UpdateStock(item);
-                            }
+                DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
+                    {
+                        Item item = (Item)lvOrderInProcess.Tag;
+
+                        if (lvOrderInProcess.ForeColor == Color.Red)
+                        {
+                            listviewOrder.Items.Remove(lvOrderInProcess);
+                            item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                            item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                            orderLogic.UpdateStock(item);
                         }
                     }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        return;
-                    }
                 }
+                else if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
             }
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
             }
-
-
         }
 
         private void btnSendOrder_Click(object sender, EventArgs e)
@@ -952,38 +920,35 @@ namespace RosUI
                 {
                     throw new Exception($"Sorry {emp.Name}, there is nothing to send");
                 }
-                else
+                DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
                 {
-                    DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        order.OrderID = orderLogic.AddOrder(emp, table); // Create new order
+                    order.OrderID = orderLogic.AddOrder(emp, table); // Create new order
 
-                        // send order - ( and grouping the old items' amount by adding the new items' amount)
-                        SendOrder();
+                    // send order - ( and grouping the old items' amount by adding the new items' amount)
+                    SendOrder();
 
-                        //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
-                        dishLogic.AddDishes(DishesInOrderProcess, order);
-                        drinkLogic.AddDrinks(DrinkInOrderProcess, order);
+                    //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
+                    dishLogic.AddDishes(DishesInOrderProcess, order);
+                    drinkLogic.AddDrinks(DrinkInOrderProcess, order);
 
-                        table.TableStatus = 2; // Jason
-                        tableLogic.Update(table); // Jason
+                    table.TableStatus = 2; // Jason
+                    tableLogic.Update(table); // Jason
 
-                        WriteContainedItems(); // Update the list again
+                    WriteContainedItems(); // Update the list again
 
-                        //Update KitchenView and Barview
-                        rosMain.UpdateAllListViews();
+                    //Update KitchenView and Barview
+                    rosMain.UpdateAllListViews();
 
-                        //Update TableView
-                        rosMain.UpdateTableToOrdered(table.TableNumber);
+                    //Update TableView
+                    rosMain.UpdateTableToOrdered(table.TableNumber);
 
-                        this.Close();
-                        new TableOverview(emp, rosMain).Show();
-                    }
-                    else if (dialogResult == DialogResult.No)
-                    {
-                        return;
-                    }
+                    this.Close();
+                    new TableOverview(emp, rosMain).Show();
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    return;
                 }
             }
             catch (Exception exp)
@@ -1016,7 +981,27 @@ namespace RosUI
 
         private void btnOrderAddNote_Click(object sender, EventArgs e)
         {
-                AddItemNote();
+            try
+            {
+                if (listviewOrder.SelectedItems.Count == 0)
+                {
+                    return;
+                }
+
+                if (listviewOrder.SelectedItems[0].ForeColor != Color.Green)
+                {
+                    AddItemNote();
+                }
+                else
+                {
+                    throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
+                }
+            }
+            catch(Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+
         }
 
         private void AddItemNote()
@@ -1028,11 +1013,6 @@ namespace RosUI
                 if (listviewOrder.Items.Count == 0)
                 {
                     throw new Exception($"Oops {emp.Name}, please select an item");
-                }
-
-                if (listviewOrder.Items[listviewOrder.Items.Count - 1].ForeColor == Color.Green)
-                {
-                    throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
                 }
 
                 if (listviewOrder.SelectedItems.Count > 0 && listviewOrder.SelectedItems[0].ForeColor == Color.Red)
