@@ -12,6 +12,8 @@ namespace RosUI
 {
     public partial class RosMain : Form
     {
+        const int NumberOfTables = 10;
+
         Employee employee;
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
@@ -19,11 +21,10 @@ namespace RosUI
         public RosMain(Employee employee)
         {
             InitializeComponent();
-
             InitialiseTimer();
+            InitialiseComboBoxes();
 
             UpdateAllListViews();
-            InitialiseComboBoxes();
 
             this.employee = employee;
 
@@ -32,7 +33,7 @@ namespace RosUI
 
         private void InitialiseTimer()
         {
-            //setting a timer for aumtatic update
+            //setting a timer for automatic update of the list views
             Timer timer1 = new Timer();
             timer1.Interval = 60000;//1 minute
             timer1.Tick += new EventHandler(timer1_Tick);
@@ -42,7 +43,7 @@ namespace RosUI
         private void InitialiseComboBoxes()
         {
             //combo table kitchen view/ finished order combo
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= NumberOfTables; i++)
             {
                 cmbTableKit.Items.Add($"Table {i}");
                 cmbKitFinished.Items.Add($"Table {i}");
@@ -167,7 +168,6 @@ namespace RosUI
             new Login().Show();
         }
 
-
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //ShowPanel("TableView");
@@ -175,12 +175,27 @@ namespace RosUI
             new TableOverview(employee, this).Show();
         }
 
-        public void UpdateTableToOrdered(int number)
+        //calculates the timespan in minutes (for calculations)
+        private int CalculateTimeSpentInMinutes(DateTime timeDrinkOrdered)
         {
-            foreach (TableOverview to in tableOverview)
+            TimeSpan ts = DateTime.Now - timeDrinkOrdered;
+            return (int)ts.TotalMinutes;
+        }
+
+        //returns a given time in minutes or hour ago string
+        private string ReturnTimeSpentAsString(DateTime placed)
+        {
+            TimeSpan ts = DateTime.Now - placed;
+
+            if (ts.TotalMinutes > 60)
             {
-                to.OrderRecieved(number);
+                return $"{ts.TotalHours:00} hours ago";
             }
+            else
+            {
+                return $"{ts.TotalMinutes:00} minutes ago";
+            }
+
         }
 
         public void UpdateDrinks()
@@ -213,6 +228,7 @@ namespace RosUI
 
                     li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
 
+                    //if the time is more than 1 hour hilight the time in red
                     if (CalculateTimeSpentInMinutes(drink.TimeDrinkOrdered) > 60)
                     {
                         li.SubItems[3].BackColor = Color.Red;
@@ -237,11 +253,6 @@ namespace RosUI
             {
                 MessageBox.Show(exp.Message, "Error");
             }
-        }
-        private int CalculateTimeSpentInMinutes(DateTime timeDrinkOrdered)
-        {
-            TimeSpan ts = DateTime.Now - timeDrinkOrdered;
-            return (int)ts.TotalMinutes;
         }
 
         public void UpdateFinishedDrinks()
@@ -350,21 +361,6 @@ namespace RosUI
 
         }
 
-        private string ReturnTimeSpentAsString(DateTime placed)
-        {
-            TimeSpan ts = DateTime.Now - placed;
-
-            if (ts.TotalMinutes > 60)
-            {
-                return $"{ts.TotalHours:00} hours ago";
-            }
-            else
-            {
-                return $"{ts.TotalMinutes:00} minutes ago";
-            }
-
-        }
-
         public void UpdateFinishedDishes()
         {
             try
@@ -466,18 +462,6 @@ namespace RosUI
             }
         }
 
-        private void UpdateTableToReadyDish(OrderedDish dish)
-        {
-            //send an update to all TableOverview
-            foreach (TableOverview to in tableOverview)
-                to.DishReady(dish.TableNumber);
-        }
-        private void UpdateTableToReadyDrink(OrderedDrink drink)
-        {
-            //send an update to all TableOverview
-            foreach (TableOverview to in tableOverview)
-                to.DrinkReady(drink.TableNumber);
-        }
         private void btnViewNote_Click(object sender, EventArgs e)
         {
             try
@@ -536,51 +520,6 @@ namespace RosUI
 
 
         }
-
-        public void AddWaiterView(TableOverview to)
-        {
-            tableOverview.Add(to);
-        }
-
-        //Write error to text file
-        public void WriteError(Exception e, string errorMessage)
-        {
-            StreamWriter writer = File.AppendText("ErrorLog.txt");
-            writer.WriteLine($"Error occurred: {errorMessage}");
-            writer.WriteLine(e);
-            writer.WriteLine(DateTime.Now);
-            writer.Close();
-        }
-
-        private void runningOrdersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("KitchenView");
-        }
-
-        private void btnRunningKitDash_Click(object sender, EventArgs e)
-        {
-            ShowPanel("KitchenView");
-        }
-        private void btnRunnningBarDash_Click(object sender, EventArgs e)
-        {
-            ShowPanel("BarView");
-        }
-
-        private void runningOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ShowPanel("BarView");
-        }
-
-        private void finishedOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            ShowPanel("FinishedDrinkView");
-        }
-
-        private void finishedOrdersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPanel("FinishedDishView");
-        }
-
         private void btnViewNoteFinDrink_Click(object sender, EventArgs e)
         {
             try
@@ -604,7 +543,7 @@ namespace RosUI
                     MessageBox.Show(d.ItemNote, "Note");
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "Error");
             }
@@ -632,12 +571,11 @@ namespace RosUI
                     MessageBox.Show(dish.ItemNote, "Note");
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "Error");
             }
         }
-
         private void btnUndoKitFin_Click(object sender, EventArgs e)
         {
             try
@@ -661,7 +599,7 @@ namespace RosUI
                 //update current listView
                 UpdateFinishedDishes();
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "Error");
             }
@@ -690,7 +628,7 @@ namespace RosUI
                 //update the current listView
                 UpdateFinishedDrinks();
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "Error");
             }
@@ -717,10 +655,10 @@ namespace RosUI
                         UpdateDrinks();
 
                         throw new Exception($"You can not undo this item {orderedDrink.ItemName}");
-                        
+
                     }
 
-                    
+
                     UpdateTableToOrdered(orderedDrink.TableNumber);
 
                     drinkLogic.BringStatusBack(orderedDrink);
@@ -729,7 +667,7 @@ namespace RosUI
                 //update current listView
                 UpdateDrinks();
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show($"{exp.Message}", "Error");
             }
@@ -771,6 +709,143 @@ namespace RosUI
 
         }
 
+        private void btnSelByTabKit_Click(object sender, EventArgs e)
+        {
+            string table = (string)cmbTableKit.SelectedItem;
+
+            //select all items of the same table
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                {
+                    item.Selected = true;
+                }
+
+        }
+
+        private void btnSelByCourseKit_Click(object sender, EventArgs e)
+        {
+            lvOrderedDishes.SelectedItems.Clear();
+
+            string course = (string)cmbCourseKit.SelectedItem;
+            string table = (string)cmbTableKit.SelectedItem;
+
+            //select all items of the same table and course
+            foreach (ListViewItem item in lvOrderedDishes.Items)
+                if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void btnSelByTabKitFin_Click(object sender, EventArgs e)
+        {
+            lvFinishedDishes.SelectedItems.Clear();
+
+            string table = (string)cmbKitFinished.SelectedItem;
+
+            //select all items of the same table
+            foreach (ListViewItem item in lvFinishedDishes.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void BtnSelByTabBarFin_Click(object sender, EventArgs e)
+        {
+            lvFinishedDrinks.SelectedItems.Clear();
+
+            string table = (string)cmbBarFinished.SelectedItem;
+
+            //select all items of the same table
+            foreach (ListViewItem item in lvFinishedDrinks.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void btnSelByTabBar_Click(object sender, EventArgs e)
+        {
+            //clear all selected items
+            lvOrderedDrinks.SelectedItems.Clear();
+
+            string table = (string)cmbSelByTabBar.SelectedItem;
+
+            //select all items of the same table
+            foreach (ListViewItem item in lvOrderedDrinks.Items)
+                if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                {
+                    item.Selected = true;
+                }
+        }
+
+        private void UpdateTableToReadyDish(OrderedDish dish)
+        {
+            //send an update to all TableOverview
+            foreach (TableOverview to in tableOverview)
+                to.DishReady(dish.TableNumber);
+        }
+        private void UpdateTableToReadyDrink(OrderedDrink drink)
+        {
+            //send an update to all TableOverview
+            foreach (TableOverview to in tableOverview)
+                to.DrinkReady(drink.TableNumber);
+        }
+
+        //add waiter to "observers" list
+        public void AddWaiterView(TableOverview to)
+        {
+            tableOverview.Add(to);
+        }
+
+        public void UpdateTableToOrdered(int number)
+        {
+            //Update all registered TableOverview OrderIsRecieved
+            foreach (TableOverview to in tableOverview)
+            {
+                to.OrderRecieved(number);
+            }
+        }
+
+        //Write error to text file
+        public void WriteError(Exception e, string errorMessage)
+        {
+            StreamWriter writer = File.AppendText("ErrorLog.txt");
+            writer.WriteLine($"Error occurred: {errorMessage}");
+            writer.WriteLine(e);
+            writer.WriteLine(DateTime.Now);
+            writer.Close();
+        }
+
+        private void runningOrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel("KitchenView");
+        }
+
+        private void btnRunningKitDash_Click(object sender, EventArgs e)
+        {
+            ShowPanel("KitchenView");
+        }
+        private void btnRunnningBarDash_Click(object sender, EventArgs e)
+        {
+            ShowPanel("BarView");
+        }
+
+        private void runningOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowPanel("BarView");
+        }
+
+        private void finishedOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDrinkView");
+        }
+
+        private void finishedOrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowPanel("FinishedDishView");
+        }
         private void btnFinishedDishes_Click(object sender, EventArgs e)
         {
             ShowPanel("FinishedDishView");
@@ -789,71 +864,6 @@ namespace RosUI
         private void btnRunningOrdersBar_Click(object sender, EventArgs e)
         {
             ShowPanel("BarView");
-        }
-
-        private void btnSelByTabKit_Click(object sender, EventArgs e)
-        {
-            string tableNum = (string)cmbTableKit.SelectedItem;
-
-            foreach (ListViewItem item in lvOrderedDishes.Items)
-                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
-                {
-                    item.Selected = true;
-                }
-
-        }
-
-        private void btnSelByCourseKit_Click(object sender, EventArgs e)
-        {
-            lvOrderedDishes.SelectedItems.Clear();
-
-            string course = (string)cmbCourseKit.SelectedItem;
-            string tableNum = (string)cmbTableKit.SelectedItem;
-
-            foreach (ListViewItem item in lvOrderedDishes.Items)
-                if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
-                {
-                    item.Selected = true;
-                }
-        }
-
-        private void btnSelByTabKitFin_Click(object sender, EventArgs e)
-        {
-            lvFinishedDishes.SelectedItems.Clear();
-
-            string tableNum = (string)cmbKitFinished.SelectedItem;
-
-            foreach (ListViewItem item in lvFinishedDishes.Items)
-                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
-                {
-                    item.Selected = true;
-                }
-        }
-
-        private void BtnSelByTabBarFin_Click(object sender, EventArgs e)
-        {
-            lvFinishedDrinks.SelectedItems.Clear();
-
-            string tableNum = (string)cmbBarFinished.SelectedItem;
-
-            foreach (ListViewItem item in lvFinishedDrinks.Items)
-                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
-                {
-                    item.Selected = true;
-                }
-        }
-
-        private void btnSelByTabBar_Click(object sender, EventArgs e)
-        {
-            lvOrderedDrinks.SelectedItems.Clear();
-
-            string tableNum = (string)cmbSelByTabBar.SelectedItem;
-
-            foreach (ListViewItem item in lvOrderedDrinks.Items)
-                if ($"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
-                {
-                    item.Selected = true;
-                }
         }
 
     }

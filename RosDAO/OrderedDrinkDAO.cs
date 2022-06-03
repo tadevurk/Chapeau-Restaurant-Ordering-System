@@ -107,9 +107,11 @@ namespace RosDAL
 
         public void UpdateDrinkStatusServe(OrderedDrink d)
         {
-            string query = "UPDATE OrderDrink SET DrinkStatus=2, TimeDrinkDelivered=GetDate() WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
+            string query = "UPDATE OrderDrink SET DrinkStatus=2, TimeDrinkDelivered=@GetTime WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
             SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", d.ItemID),
-            new SqlParameter("@OrderID", d.OrderID)
+            new SqlParameter("@OrderID", d.OrderID),
+            new SqlParameter("@GetTime", DateTime.Now)
+
             };
 
             ExecuteEditQuery(query, sqlParameters);
