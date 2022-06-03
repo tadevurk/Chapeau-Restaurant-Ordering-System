@@ -102,11 +102,6 @@ namespace RosUI
             }
         }
 
-        private void RosMain_Load(object sender, EventArgs e)
-        {
-            ShowPanel("Dashboard");
-        }
-
         private void ShowPanel(string panelName)
         {
             //shwitch between the different panels

@@ -765,7 +765,6 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";
-            this.Load += new System.EventHandler(this.RosMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pnlKitchenView.ResumeLayout(false);
