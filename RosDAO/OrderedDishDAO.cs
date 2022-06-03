@@ -88,9 +88,9 @@ namespace RosDAL
                 " I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course" +
                 " from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID " +
-                "where OD.DishStatus<2 and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) " +
+                "where OD.DishStatus<2 " +
                 "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered " +
-                "order by OD.TimeDishOrdered DESC";
+                "order by OD.TimeDishOrdered";
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
