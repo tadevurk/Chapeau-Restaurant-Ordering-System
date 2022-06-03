@@ -26,8 +26,6 @@ namespace RosUI
             UpdateAllListViews();
             InitialiseComboBoxes();
 
-            UpdateTables();
-
             this.employee = employee;
 
             AdaptFormOnRole(employee);
@@ -149,29 +147,6 @@ namespace RosUI
 
         }
 
-        public void UpdateTables()
-        {
-            foreach (ListViewItem item in lvOrderedDishes.Items)
-            {
-                d = (OrderedDish)item.Tag;
-
-                switch (d.Status)
-                {
-                    case DishStatus.ToPrepare:
-                        UpdateTableToOrdered(d.TableNumber);
-                        break;
-                    case DishStatus.PickUp:
-                        UpdateTableToReadyDish(d);
-                        break;
-                    case DishStatus.Serve:
-                        UpdateTableToServedDish(d);
-                        break;
-                }
-
-            }
-
-        }
-
         private void HideAllPanels()
         {
             //hiding all panels
@@ -180,19 +155,6 @@ namespace RosUI
             pnlKitchenViewFinished.Hide();
             pnlBarViewFinished.Hide();
 
-        }
-
-        private void dashboardToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (employee.Roles == Roles.Bartender)
-            {
-                ShowPanel("BarDashboard");
-
-            }
-            else
-            {
-                ShowPanel("KitchenDashboard");
-            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -221,6 +183,7 @@ namespace RosUI
                 to.OrderRecieved(number);
             }
         }
+
         public void UpdateDrinks()
         {
             try
@@ -276,7 +239,6 @@ namespace RosUI
                 MessageBox.Show(exp.Message, "Error");
             }
         }
-
         private int CalculateTimeSpentInMinutes(DateTime timeDrinkOrdered)
         {
             TimeSpan ts = DateTime.Now - timeDrinkOrdered;
@@ -326,7 +288,6 @@ namespace RosUI
                 MessageBox.Show(exp.Message, "Error");
             }
         }
-
 
         public void UpdateDishes()
         {
@@ -518,7 +479,6 @@ namespace RosUI
             foreach (TableOverview to in tableOverview)
                 to.DrinkReady(drink.TableNumber);
         }
-
         private void btnViewNote_Click(object sender, EventArgs e)
         {
             try
@@ -547,7 +507,6 @@ namespace RosUI
                 MessageBox.Show($"{exp.Message}", "Error");
             }
         }
-
         private void btnViewDrinkNote_Click(object sender, EventArgs e)
         {
             try
@@ -584,24 +543,6 @@ namespace RosUI
             tableOverview.Add(to);
         }
 
-        private void UpdateTableToServedDrink(OrderedDrink orderedDrink)
-        {
-            //update all TableOverview
-            foreach (TableOverview to in tableOverview)
-            {
-                to.ItemServed(orderedDrink.TableNumber);
-            }
-        }
-
-        private void UpdateTableToServedDish(OrderedDish orderedDish)
-        {
-            //update all table overview
-            foreach (TableOverview to in tableOverview)
-            {
-                to.ItemServed(orderedDish.TableNumber);
-            }
-        }
-
         //Write error to text file
         public void WriteError(Exception e, string errorMessage)
         {
@@ -621,7 +562,6 @@ namespace RosUI
         {
             ShowPanel("KitchenView");
         }
-
         private void btnRunnningBarDash_Click(object sender, EventArgs e)
         {
             ShowPanel("BarView");
@@ -670,7 +610,6 @@ namespace RosUI
                 MessageBox.Show($"{exp.Message}", "Error");
             }
         }
-
         private void btnViewNoteFinDish_Click(object sender, EventArgs e)
         {
             try
