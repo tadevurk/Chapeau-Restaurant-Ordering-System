@@ -43,6 +43,7 @@ namespace RosUI
             btnCompletePayment.Enabled = false;
             btnCompletePayment.BackColor = Color.LightGray;
             pnlFeedback.Hide();
+            pnlSplit.Hide();
 
             DisplayBill();
 
@@ -251,6 +252,8 @@ namespace RosUI
             // change ordered items status to paid
             SetItemsPaid(orderedItems);
 
+            rosMain.UpdateAllListViews();
+
             table.TableStatus = 0;
             tableLogic.Update(table);
 
@@ -261,6 +264,106 @@ namespace RosUI
             tableOverview.Show();
 
             this.Close();
+
+        }
+
+        private void btnSplit_Click(object sender, EventArgs e)
+        {
+            pnlSplit.Show();
+            btnSubmitSplit.Enabled = false;
+            btnSubmitSplit.BackColor = Color.LightGray;
+
+            if (txtToPaySplit.Text == lblTotalAmount.Text)
+            {
+                pnlSplit.Hide();
+            }
+        }
+
+        // calculate amount to be stored in the database and display correct amounts
+        decimal deductibleAmount = 0;
+
+        private void btnSubmitSplit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal splitAmount = decimal.Parse(txtToPaySplit.Text);
+                deductibleAmount += splitAmount;
+
+                // not let the user close a bill from the partial payment mode
+                // complete a partial payment and updated values for displaying purpose 
+                // next partial payment
+                if (bill.TotalAmount == splitAmount)
+                {
+                    MessageBox.Show("Complete payment in the main form!");
+                    pnlSplit.Hide();
+                }
+                else
+                {
+                    bill.TotalAmount = splitAmount;
+                    bill.SubTotalAmount = 0;
+
+                    decimal tip = decimal.Parse(txtTipSplit.Text);
+                    bill.TipAmount = tip;
+
+                    billLogic.CreateBill(bill);
+
+                    bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
+                    bill.SubTotalAmount = CalculateSubTotalAmount();
+
+                    lblTotalAmount.Text = bill.TotalAmount.ToString();
+                    txtToPay.Text = lblTotalAmount.Text;
+
+                    pnlSplit.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Operation did not work: " + ex.Message);
+            }
+             
+        }
+
+        private void radioBtnSplitCash_CheckedChanged(object sender, EventArgs e)
+        {
+            if (txtToPaySplit.Text != null)
+            {
+                btnSubmitSplit.Enabled = true;
+                btnSubmitSplit.BackColor = Color.LightGreen;
+                bill.PaymentMethod = "Cash";
+            }
+            else
+            {
+                MessageBox.Show("Add the amount to be paid!");
+            }
+        }
+
+        private void radioBtnSplitVisa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (txtToPaySplit.Text != null)
+            {
+                btnSubmitSplit.Enabled = true;
+                btnSubmitSplit.BackColor = Color.LightGreen;
+                bill.PaymentMethod = "Visa";
+            }
+            else
+            {
+                MessageBox.Show("Add the amount to be paid!");
+            }
+        }
+
+        private void radioBtnSplitDebit_CheckedChanged(object sender, EventArgs e)
+        {
+            if (txtToPaySplit.Text != null)
+            {
+                btnSubmitSplit.Enabled = true;
+                btnSubmitSplit.BackColor = Color.LightGreen;
+                bill.PaymentMethod = "Debit";
+            }
+            else
+            {
+                MessageBox.Show("Add the amount to be paid!");
+            }
         }
 
     }

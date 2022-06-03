@@ -41,20 +41,31 @@ namespace RosUI
             this.radioBtnVisa = new System.Windows.Forms.RadioButton();
             this.radioBtnDebit = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.txtTip = new System.Windows.Forms.TextBox();
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCompletePayment = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.txtToPay = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblSubTotalAmount = new System.Windows.Forms.Label();
             this.pnlFeedback = new System.Windows.Forms.Panel();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.txtFeedback = new System.Windows.Forms.TextBox();
+            this.btnSplit = new System.Windows.Forms.Button();
+            this.pnlSplit = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnSubmitSplit = new System.Windows.Forms.Button();
+            this.radioBtnSplitDebit = new System.Windows.Forms.RadioButton();
+            this.radioBtnSplitVisa = new System.Windows.Forms.RadioButton();
+            this.radioBtnSplitCash = new System.Windows.Forms.RadioButton();
+            this.txtTipSplit = new System.Windows.Forms.TextBox();
+            this.txtToPaySplit = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.pnlFeedback.SuspendLayout();
+            this.pnlSplit.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewPayment
@@ -66,6 +77,7 @@ namespace RosUI
             this.VAT,
             this.Subtotal,
             this.Total});
+            this.listViewPayment.FullRowSelect = true;
             this.listViewPayment.HideSelection = false;
             this.listViewPayment.Location = new System.Drawing.Point(12, 65);
             this.listViewPayment.Name = "listViewPayment";
@@ -108,7 +120,7 @@ namespace RosUI
             // 
             this.lblTableNumber.AutoSize = true;
             this.lblTableNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTableNumber.Location = new System.Drawing.Point(71, 14);
+            this.lblTableNumber.Location = new System.Drawing.Point(82, 23);
             this.lblTableNumber.Name = "lblTableNumber";
             this.lblTableNumber.Size = new System.Drawing.Size(0, 23);
             this.lblTableNumber.TabIndex = 1;
@@ -117,7 +129,7 @@ namespace RosUI
             // 
             this.radioBtnCash.AutoSize = true;
             this.radioBtnCash.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioBtnCash.Location = new System.Drawing.Point(62, 519);
+            this.radioBtnCash.Location = new System.Drawing.Point(47, 514);
             this.radioBtnCash.Name = "radioBtnCash";
             this.radioBtnCash.Size = new System.Drawing.Size(79, 29);
             this.radioBtnCash.TabIndex = 2;
@@ -130,7 +142,7 @@ namespace RosUI
             // 
             this.radioBtnVisa.AutoSize = true;
             this.radioBtnVisa.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioBtnVisa.Location = new System.Drawing.Point(190, 519);
+            this.radioBtnVisa.Location = new System.Drawing.Point(175, 514);
             this.radioBtnVisa.Name = "radioBtnVisa";
             this.radioBtnVisa.Size = new System.Drawing.Size(71, 29);
             this.radioBtnVisa.TabIndex = 3;
@@ -143,7 +155,7 @@ namespace RosUI
             // 
             this.radioBtnDebit.AutoSize = true;
             this.radioBtnDebit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioBtnDebit.Location = new System.Drawing.Point(319, 519);
+            this.radioBtnDebit.Location = new System.Drawing.Point(304, 514);
             this.radioBtnDebit.Name = "radioBtnDebit";
             this.radioBtnDebit.Size = new System.Drawing.Size(79, 29);
             this.radioBtnDebit.TabIndex = 4;
@@ -156,26 +168,16 @@ namespace RosUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(305, 367);
+            this.label2.Location = new System.Drawing.Point(303, 362);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "TOTAL:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(37, 437);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 20);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "TIP:";
-            // 
             // txtTip
             // 
             this.txtTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtTip.Location = new System.Drawing.Point(100, 434);
+            this.txtTip.Location = new System.Drawing.Point(97, 418);
             this.txtTip.Name = "txtTip";
             this.txtTip.Size = new System.Drawing.Size(107, 27);
             this.txtTip.TabIndex = 7;
@@ -186,7 +188,7 @@ namespace RosUI
             this.lblTotalAmount.AutoSize = true;
             this.lblTotalAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalAmount.Location = new System.Drawing.Point(393, 362);
+            this.lblTotalAmount.Location = new System.Drawing.Point(383, 362);
             this.lblTotalAmount.Name = "lblTotalAmount";
             this.lblTotalAmount.Size = new System.Drawing.Size(41, 20);
             this.lblTotalAmount.TabIndex = 8;
@@ -196,7 +198,7 @@ namespace RosUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(239, 441);
+            this.label4.Location = new System.Drawing.Point(223, 425);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 9;
@@ -229,27 +231,17 @@ namespace RosUI
             // txtToPay
             // 
             this.txtToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtToPay.Location = new System.Drawing.Point(319, 434);
+            this.txtToPay.Location = new System.Drawing.Point(304, 418);
             this.txtToPay.Name = "txtToPay";
             this.txtToPay.Size = new System.Drawing.Size(107, 27);
             this.txtToPay.TabIndex = 16;
             this.txtToPay.TextChanged += new System.EventHandler(this.txtToPay_TextChanged);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(12, 27);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 23);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Table #";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(12, 368);
+            this.label6.Location = new System.Drawing.Point(12, 362);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 20);
             this.label6.TabIndex = 18;
@@ -260,7 +252,7 @@ namespace RosUI
             this.lblSubTotalAmount.AutoSize = true;
             this.lblSubTotalAmount.BackColor = System.Drawing.Color.White;
             this.lblSubTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSubTotalAmount.Location = new System.Drawing.Point(121, 368);
+            this.lblSubTotalAmount.Location = new System.Drawing.Point(110, 362);
             this.lblSubTotalAmount.Name = "lblSubTotalAmount";
             this.lblSubTotalAmount.Size = new System.Drawing.Size(68, 20);
             this.lblSubTotalAmount.TabIndex = 19;
@@ -270,15 +262,15 @@ namespace RosUI
             // 
             this.pnlFeedback.Controls.Add(this.btnSubmit);
             this.pnlFeedback.Controls.Add(this.txtFeedback);
-            this.pnlFeedback.Location = new System.Drawing.Point(12, 362);
+            this.pnlFeedback.Location = new System.Drawing.Point(12, 418);
             this.pnlFeedback.Name = "pnlFeedback";
-            this.pnlFeedback.Size = new System.Drawing.Size(458, 212);
+            this.pnlFeedback.Size = new System.Drawing.Size(458, 218);
             this.pnlFeedback.TabIndex = 20;
             // 
             // btnSubmit
             // 
             this.btnSubmit.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnSubmit.Location = new System.Drawing.Point(130, 147);
+            this.btnSubmit.Location = new System.Drawing.Point(125, 145);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(209, 47);
             this.btnSubmit.TabIndex = 1;
@@ -295,32 +287,171 @@ namespace RosUI
             this.txtFeedback.TabIndex = 0;
             this.txtFeedback.TextChanged += new System.EventHandler(this.txtFeedback_TextChanged);
             // 
+            // btnSplit
+            // 
+            this.btnSplit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSplit.Location = new System.Drawing.Point(137, 589);
+            this.btnSplit.Name = "btnSplit";
+            this.btnSplit.Size = new System.Drawing.Size(209, 47);
+            this.btnSplit.TabIndex = 2;
+            this.btnSplit.Text = "SPLIT";
+            this.btnSplit.UseVisualStyleBackColor = false;
+            this.btnSplit.Click += new System.EventHandler(this.btnSplit_Click);
+            // 
+            // pnlSplit
+            // 
+            this.pnlSplit.Controls.Add(this.label7);
+            this.pnlSplit.Controls.Add(this.label1);
+            this.pnlSplit.Controls.Add(this.btnSubmitSplit);
+            this.pnlSplit.Controls.Add(this.radioBtnSplitDebit);
+            this.pnlSplit.Controls.Add(this.radioBtnSplitVisa);
+            this.pnlSplit.Controls.Add(this.radioBtnSplitCash);
+            this.pnlSplit.Controls.Add(this.txtTipSplit);
+            this.pnlSplit.Controls.Add(this.txtToPaySplit);
+            this.pnlSplit.Location = new System.Drawing.Point(12, 65);
+            this.pnlSplit.Name = "pnlSplit";
+            this.pnlSplit.Size = new System.Drawing.Size(458, 656);
+            this.pnlSplit.TabIndex = 21;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(85, 164);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 28);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "Tip:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(73, 81);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 28);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "To Pay:";
+            // 
+            // btnSubmitSplit
+            // 
+            this.btnSubmitSplit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnSubmitSplit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnSubmitSplit.Location = new System.Drawing.Point(73, 488);
+            this.btnSubmitSplit.Name = "btnSubmitSplit";
+            this.btnSubmitSplit.Size = new System.Drawing.Size(298, 61);
+            this.btnSubmitSplit.TabIndex = 25;
+            this.btnSubmitSplit.Text = "SUBMIT";
+            this.btnSubmitSplit.UseVisualStyleBackColor = false;
+            this.btnSubmitSplit.Click += new System.EventHandler(this.btnSubmitSplit_Click);
+            // 
+            // radioBtnSplitDebit
+            // 
+            this.radioBtnSplitDebit.AutoSize = true;
+            this.radioBtnSplitDebit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.radioBtnSplitDebit.Location = new System.Drawing.Point(280, 383);
+            this.radioBtnSplitDebit.Name = "radioBtnSplitDebit";
+            this.radioBtnSplitDebit.Size = new System.Drawing.Size(79, 29);
+            this.radioBtnSplitDebit.TabIndex = 24;
+            this.radioBtnSplitDebit.TabStop = true;
+            this.radioBtnSplitDebit.Text = "DEBIT";
+            this.radioBtnSplitDebit.UseVisualStyleBackColor = true;
+            this.radioBtnSplitDebit.CheckedChanged += new System.EventHandler(this.radioBtnSplitDebit_CheckedChanged);
+            // 
+            // radioBtnSplitVisa
+            // 
+            this.radioBtnSplitVisa.AutoSize = true;
+            this.radioBtnSplitVisa.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.radioBtnSplitVisa.Location = new System.Drawing.Point(180, 328);
+            this.radioBtnSplitVisa.Name = "radioBtnSplitVisa";
+            this.radioBtnSplitVisa.Size = new System.Drawing.Size(71, 29);
+            this.radioBtnSplitVisa.TabIndex = 23;
+            this.radioBtnSplitVisa.TabStop = true;
+            this.radioBtnSplitVisa.Text = "VISA";
+            this.radioBtnSplitVisa.UseVisualStyleBackColor = true;
+            this.radioBtnSplitVisa.CheckedChanged += new System.EventHandler(this.radioBtnSplitVisa_CheckedChanged);
+            // 
+            // radioBtnSplitCash
+            // 
+            this.radioBtnSplitCash.AutoSize = true;
+            this.radioBtnSplitCash.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.radioBtnSplitCash.Location = new System.Drawing.Point(73, 270);
+            this.radioBtnSplitCash.Name = "radioBtnSplitCash";
+            this.radioBtnSplitCash.Size = new System.Drawing.Size(79, 29);
+            this.radioBtnSplitCash.TabIndex = 22;
+            this.radioBtnSplitCash.TabStop = true;
+            this.radioBtnSplitCash.Text = "CASH";
+            this.radioBtnSplitCash.UseVisualStyleBackColor = true;
+            this.radioBtnSplitCash.CheckedChanged += new System.EventHandler(this.radioBtnSplitCash_CheckedChanged);
+            // 
+            // txtTipSplit
+            // 
+            this.txtTipSplit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtTipSplit.Location = new System.Drawing.Point(163, 148);
+            this.txtTipSplit.Multiline = true;
+            this.txtTipSplit.Name = "txtTipSplit";
+            this.txtTipSplit.Size = new System.Drawing.Size(141, 44);
+            this.txtTipSplit.TabIndex = 21;
+            // 
+            // txtToPaySplit
+            // 
+            this.txtToPaySplit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.txtToPaySplit.Location = new System.Drawing.Point(163, 65);
+            this.txtToPaySplit.Multiline = true;
+            this.txtToPaySplit.Name = "txtToPaySplit";
+            this.txtToPaySplit.Size = new System.Drawing.Size(141, 44);
+            this.txtToPaySplit.TabIndex = 20;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(43, 425);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(39, 20);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "TIP:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(12, 26);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 20);
+            this.label3.TabIndex = 23;
+            this.label3.Text = "Table #";
+            // 
             // FormPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
             this.Controls.Add(this.pnlFeedback);
-            this.Controls.Add(this.lblSubTotalAmount);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.pnlSplit);
             this.Controls.Add(this.txtToPay);
             this.Controls.Add(this.txtTip);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.btnCompletePayment);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.lblTotalAmount);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.radioBtnDebit);
             this.Controls.Add(this.radioBtnVisa);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnSplit);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.radioBtnCash);
+            this.Controls.Add(this.lblSubTotalAmount);
+            this.Controls.Add(this.lblTotalAmount);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnCompletePayment);
             this.Controls.Add(this.lblTableNumber);
             this.Controls.Add(this.listViewPayment);
             this.Name = "FormPayment";
             this.Text = " Payment";
             this.pnlFeedback.ResumeLayout(false);
             this.pnlFeedback.PerformLayout();
+            this.pnlSplit.ResumeLayout(false);
+            this.pnlSplit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,7 +465,6 @@ namespace RosUI
         private System.Windows.Forms.RadioButton radioBtnVisa;
         private System.Windows.Forms.RadioButton radioBtnDebit;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtTip;
         private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.Label label4;
@@ -347,11 +477,22 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader VAT;
         private System.Windows.Forms.ColumnHeader Subtotal;
         private System.Windows.Forms.ColumnHeader Total;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblSubTotalAmount;
         private System.Windows.Forms.Panel pnlFeedback;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.TextBox txtFeedback;
+        private System.Windows.Forms.Button btnSplit;
+        private System.Windows.Forms.Panel pnlSplit;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnSubmitSplit;
+        private System.Windows.Forms.RadioButton radioBtnSplitDebit;
+        private System.Windows.Forms.RadioButton radioBtnSplitVisa;
+        private System.Windows.Forms.RadioButton radioBtnSplitCash;
+        private System.Windows.Forms.TextBox txtTipSplit;
+        private System.Windows.Forms.TextBox txtToPaySplit;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
     }
 }
