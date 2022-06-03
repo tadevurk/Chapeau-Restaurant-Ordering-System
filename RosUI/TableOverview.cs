@@ -21,7 +21,7 @@ namespace RosUI
         private Table table = new Table();
         private TableLogic tableLogic;
         private List<Table> tables;
-        private OrderedDish orderedDish = new OrderedDish();
+        private TableControl tableControl;
         private OrderedDishLogic orderedDishLogic;
         private OrderedDrinkLogic orderedDrinkLogic;
         public double TotalMinutes { get; }
@@ -212,6 +212,7 @@ namespace RosUI
                 case 0:
                     button.BackColor = Color.LightGray;
                     button.Text = "Empty";
+                    button.ForeColor = Color.Black;
                     return button;
                 case 1:
                     button.BackColor = Color.Red;
@@ -221,26 +222,30 @@ namespace RosUI
                 case 2:
                     button.BackColor = Color.LightBlue;
                     button.Text = "Standby";
+                    button.ForeColor = Color.Black;
                     CalculateTimeTaken(button, table);
                     return button;
                 case 3:
                     button.BackColor = Color.LightGreen;
                     button.Text = "DrinkReady";
+                    button.ForeColor = Color.Black;
                     return button;
                 case 4:
                     button.BackColor = Color.LightGreen;
                     button.Text = "DishReady";
+                    button.ForeColor = Color.Black;
                     return button;
                 case 5:
                     button.BackColor = Color.Yellow;
                     button.Text = "Served";
+                    button.ForeColor = Color.Black;
                     return button;
             }
             return button;
         }
 
         //calculates the time taken and displays it on the button
-        public Button CalculateTimeTaken(Button button, Table table)
+        private Button CalculateTimeTaken(Button button, Table table)
         {
             List<OrderedDish> orderedDishes = orderedDishLogic.GetAllOrderedDish();
 
@@ -254,7 +259,7 @@ namespace RosUI
 
                     if (button.Text == "00 minutes")
                     {
-                        button.Text = "01 minutes";
+                        button.Text = "01 minute";
                     }
                 }
             }
@@ -262,7 +267,7 @@ namespace RosUI
         }
 
         //Updates all the buttons with the newest status
-        public void UpdateAllButtons(List<Table> tables)
+        private void UpdateAllButtons(List<Table> tables)
         {
             UpdateButtonColor(tables[0], btnTableOne);
             UpdateButtonColor(tables[1], btnTableTwo);
@@ -276,7 +281,7 @@ namespace RosUI
             UpdateButtonColor(tables[9], btnTableTen);
         }
 
-        public void ServeDrinks(List<OrderedDrink> orderedDrinks)
+        private void ServeDrinks(List<OrderedDrink> orderedDrinks)
         {
             try
             {
@@ -292,7 +297,7 @@ namespace RosUI
             }
         }
 
-        public void ServeDishes(List<OrderedDish> orderedDishes)
+        private void ServeDishes(List<OrderedDish> orderedDishes)
         {
             try
             {
@@ -520,73 +525,6 @@ namespace RosUI
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 4;
-                    tableLogic.Update(table);
-                    break;
-            }
-        }
-
-        //Updates database when 
-        public void ItemServed(int number)
-        {
-            //changing color of buttons when order is ready for the pick up 
-            switch (number)
-            {
-                case 1:
-                    table.TableNumber = 1;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 2:
-                    table.TableNumber = 2;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 3:
-                    table.TableNumber = 3;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-                case 4:
-                    table.TableNumber = 4;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 5:
-                    table.TableNumber = 5;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 6:
-                    table.TableNumber = 6;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 7:
-                    table.TableNumber = 7;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 8:
-                    table.TableNumber = 8;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 9:
-                    table.TableNumber = 9;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 10:
-                    table.TableNumber = 10;
-                    table.TableStatus = 2;
                     tableLogic.Update(table);
                     break;
             }

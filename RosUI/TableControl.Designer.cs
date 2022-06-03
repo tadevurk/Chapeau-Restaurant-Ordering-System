@@ -105,7 +105,7 @@
             // btnDishServed
             // 
             this.btnDishServed.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnDishServed.Location = new System.Drawing.Point(176, 440);
+            this.btnDishServed.Location = new System.Drawing.Point(176, 520);
             this.btnDishServed.Name = "btnDishServed";
             this.btnDishServed.Size = new System.Drawing.Size(110, 40);
             this.btnDishServed.TabIndex = 7;
@@ -116,7 +116,7 @@
             // btnDrinkServed
             // 
             this.btnDrinkServed.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnDrinkServed.Location = new System.Drawing.Point(176, 520);
+            this.btnDrinkServed.Location = new System.Drawing.Point(176, 440);
             this.btnDrinkServed.Name = "btnDrinkServed";
             this.btnDrinkServed.Size = new System.Drawing.Size(110, 40);
             this.btnDrinkServed.TabIndex = 8;
