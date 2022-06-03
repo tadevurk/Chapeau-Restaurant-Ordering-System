@@ -548,36 +548,6 @@ namespace RosUI
             }
         }
 
-        private void btnServe_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //if no team is selected than throw an exception
-                if (lvOrderedDishes.SelectedItems.Count == 0)
-                {
-                    throw new Exception("No item selected!");
-                }
-
-                //update all selected dishes status, update table
-                for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
-                {
-                    OrderedDish orderedDish = (OrderedDish)lvOrderedDishes.SelectedItems[i].Tag;
-
-                    dishLogic.UpdateDishStatusServe(orderedDish);
-
-                    UpdateTableToServedDish(orderedDish);//update all table overview
-
-                }
-
-                //update current listView
-                UpdateDishes();
-            }
-            catch(Exception exp)
-            {
-                MessageBox.Show($"{exp.Message}", "Error");
-            }
-        }
-
         private void btnViewDrinkNote_Click(object sender, EventArgs e)
         {
             try
@@ -612,33 +582,6 @@ namespace RosUI
         public void AddWaiterView(TableOverview to)
         {
             tableOverview.Add(to);
-        }
-        private void btnDrinkServed_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //if no item is selected than throw an exception
-                if (lvOrderedDrinks.SelectedItems.Count == 0)
-                {
-                    throw new Exception("No item selected!");
-                }
-
-                //update all selected drink´s status, and update the table
-                for (int i = 0; i < lvOrderedDrinks.SelectedItems.Count; i++)
-                {
-                    OrderedDrink orderedDrink = (OrderedDrink)lvOrderedDrinks.SelectedItems[i].Tag;
-                    drinkLogic.UpdateDrinkStatusServe(orderedDrink);
-
-                    UpdateTableToServedDrink(orderedDrink);//update observer tableOverview form
-                }
-
-                //update current listView
-                UpdateDrinks();
-            }
-            catch(Exception exp)
-            {
-                MessageBox.Show($"{exp.Message}", "Error");
-            }
         }
 
         private void UpdateTableToServedDrink(OrderedDrink orderedDrink)
@@ -925,9 +868,10 @@ namespace RosUI
         private void btnSelByCourseKit_Click(object sender, EventArgs e)
         {
             string course = (string)cmbCourseKit.SelectedItem;
+            string tableNum = (string)cmbTableKit.SelectedItem;
 
             foreach (ListViewItem item in lvOrderedDishes.Items)
-                if (item.SubItems[4].Text == course)
+                if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == tableNum)
                 {
                     item.Selected = true;
                 }

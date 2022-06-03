@@ -46,7 +46,6 @@
             this.btnSelByTabKit = new System.Windows.Forms.Button();
             this.btnFinishedDishes = new System.Windows.Forms.Button();
             this.btnUndoKitView = new System.Windows.Forms.Button();
-            this.btnServe = new System.Windows.Forms.Button();
             this.btnViewNote = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDishReady = new System.Windows.Forms.Button();
@@ -63,7 +62,6 @@
             this.btnFinishedOrdersBar = new System.Windows.Forms.Button();
             this.btnUndoBarView = new System.Windows.Forms.Button();
             this.btnViewDrinkNote = new System.Windows.Forms.Button();
-            this.btnDrinkServed = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.brnDrinkReady = new System.Windows.Forms.Button();
             this.lvOrderedDrinks = new System.Windows.Forms.ListView();
@@ -207,7 +205,6 @@
             this.pnlKitchenView.Controls.Add(this.btnSelByTabKit);
             this.pnlKitchenView.Controls.Add(this.btnFinishedDishes);
             this.pnlKitchenView.Controls.Add(this.btnUndoKitView);
-            this.pnlKitchenView.Controls.Add(this.btnServe);
             this.pnlKitchenView.Controls.Add(this.btnViewNote);
             this.pnlKitchenView.Controls.Add(this.label1);
             this.pnlKitchenView.Controls.Add(this.btnDishReady);
@@ -261,7 +258,7 @@
             // 
             this.btnFinishedDishes.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFinishedDishes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFinishedDishes.Location = new System.Drawing.Point(505, 647);
+            this.btnFinishedDishes.Location = new System.Drawing.Point(362, 647);
             this.btnFinishedDishes.Name = "btnFinishedDishes";
             this.btnFinishedDishes.Size = new System.Drawing.Size(150, 50);
             this.btnFinishedDishes.TabIndex = 7;
@@ -281,23 +278,11 @@
             this.btnUndoKitView.UseVisualStyleBackColor = false;
             this.btnUndoKitView.Click += new System.EventHandler(this.btnUndoKitView_Click);
             // 
-            // btnServe
-            // 
-            this.btnServe.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnServe.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnServe.Location = new System.Drawing.Point(274, 647);
-            this.btnServe.Name = "btnServe";
-            this.btnServe.Size = new System.Drawing.Size(150, 50);
-            this.btnServe.TabIndex = 5;
-            this.btnServe.Text = "Serve";
-            this.btnServe.UseVisualStyleBackColor = false;
-            this.btnServe.Click += new System.EventHandler(this.btnServe_Click);
-            // 
             // btnViewNote
             // 
             this.btnViewNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewNote.Location = new System.Drawing.Point(738, 647);
+            this.btnViewNote.Location = new System.Drawing.Point(674, 647);
             this.btnViewNote.Name = "btnViewNote";
             this.btnViewNote.Size = new System.Drawing.Size(150, 50);
             this.btnViewNote.TabIndex = 4;
@@ -382,7 +367,6 @@
             this.pnlBarView.Controls.Add(this.btnFinishedOrdersBar);
             this.pnlBarView.Controls.Add(this.btnUndoBarView);
             this.pnlBarView.Controls.Add(this.btnViewDrinkNote);
-            this.pnlBarView.Controls.Add(this.btnDrinkServed);
             this.pnlBarView.Controls.Add(this.label2);
             this.pnlBarView.Controls.Add(this.brnDrinkReady);
             this.pnlBarView.Controls.Add(this.lvOrderedDrinks);
@@ -415,7 +399,7 @@
             // 
             this.btnFinishedOrdersBar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFinishedOrdersBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFinishedOrdersBar.Location = new System.Drawing.Point(786, 613);
+            this.btnFinishedOrdersBar.Location = new System.Drawing.Point(706, 613);
             this.btnFinishedOrdersBar.Name = "btnFinishedOrdersBar";
             this.btnFinishedOrdersBar.Size = new System.Drawing.Size(150, 50);
             this.btnFinishedOrdersBar.TabIndex = 7;
@@ -439,25 +423,13 @@
             // 
             this.btnViewDrinkNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewDrinkNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewDrinkNote.Location = new System.Drawing.Point(536, 613);
+            this.btnViewDrinkNote.Location = new System.Drawing.Point(380, 613);
             this.btnViewDrinkNote.Name = "btnViewDrinkNote";
             this.btnViewDrinkNote.Size = new System.Drawing.Size(150, 50);
             this.btnViewDrinkNote.TabIndex = 5;
             this.btnViewDrinkNote.Text = "View Note";
             this.btnViewDrinkNote.UseVisualStyleBackColor = false;
             this.btnViewDrinkNote.Click += new System.EventHandler(this.btnViewDrinkNote_Click);
-            // 
-            // btnDrinkServed
-            // 
-            this.btnDrinkServed.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnDrinkServed.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDrinkServed.Location = new System.Drawing.Point(292, 613);
-            this.btnDrinkServed.Name = "btnDrinkServed";
-            this.btnDrinkServed.Size = new System.Drawing.Size(150, 50);
-            this.btnDrinkServed.TabIndex = 4;
-            this.btnDrinkServed.Text = "Served";
-            this.btnDrinkServed.UseVisualStyleBackColor = false;
-            this.btnDrinkServed.Click += new System.EventHandler(this.btnDrinkServed_Click);
             // 
             // label2
             // 
@@ -836,9 +808,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.Button btnViewNote;
-        private System.Windows.Forms.Button btnServe;
         private System.Windows.Forms.Button btnViewDrinkNote;
-        private System.Windows.Forms.Button btnDrinkServed;
         private System.Windows.Forms.ColumnHeader clAmount;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader9;
