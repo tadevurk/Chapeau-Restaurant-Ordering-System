@@ -13,49 +13,6 @@ namespace RosDAL
 {
     public class OrderedDrinkDAO : BaseDAO
     {
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
-        {
-            foreach (Drink drink in drinkInOrderProcess)
-            {
-                if (drink.Note == null)
-                {
-                    drink.Note = "null";
-                }
-
-                //Adding dish
-                string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.DrinkID),
-                new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", drink.Note),
-                new SqlParameter("@CurrentTime", DateTime.Now),
-                new SqlParameter("@Amount", drink.Amount)};
-
-                ExecuteEditQuery(query, sp);
-            }
-        }
-        public void AddDrink(OrderedDrink orderedDrink) // Add dish to ordered dish table (The question is DishID or OrderID??)
-        {
-            string query = "INSERT INTO OrderDrink " +
-                "(OrderID, DrinkID, " +
-                "DrinkStatus, TimeDrinkOrdered, TimeDrinkDelivered), " +
-                "OrderedDrinkAmount, DrinkNote " +
-                "VALUES (@OrderID, @DrinkID, " +
-                "@DrinkStatus, @TimeDrinkOrdered, @TimeDrinkDelivered), " +
-                "@OrderedDrinkAmount, @DrinkNote " +
-                "SELECT SCOPE_IDENTITY()";
-
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@OrderID", orderedDrink.OrderID),
-                new SqlParameter("@DrinkID", orderedDrink.DrinkID),
-                new SqlParameter("@DrinkStatus", orderedDrink.DrinkStatus),
-                new SqlParameter("@TimeDrinkOrdered", orderedDrink.TimeDrinkOrdered),
-                new SqlParameter("@TimeDishDelivered", orderedDrink.TimeDrinkDelivered),
-                new SqlParameter("@TimeDrinkDelivered", orderedDrink.OrderedDrinkAmount),
-                new SqlParameter("@DrinkNote", orderedDrink.DrinkNote)
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
 
         public List<OrderedDrink> GetAllFinishedDrinks()
         {
@@ -91,37 +48,13 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public void UpdateDrink(OrderedDrink orderedDrink) // Change the amount of the drink etc. (The question is DrinkID or OrderID??)
-        {
-            string query = "UPDATE [OrderDrink] SET TimeDrinkOrdered = @TimeDrinkOrdered, TimeDrinkDelivered = @TimeDrinkDelivered, " +
-                "OrderedDrinkAmount = @OrderedDrinkAmount, DrinkNote = @DrinkNote " +
-                "WHERE DrinkID = @DrinkID";
-
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@DrinkID", orderedDrink.DrinkID),
-                new SqlParameter("@TimeDrinkOrdered", orderedDrink.TimeDrinkOrdered),
-                new SqlParameter("@TimeDrinkDelivered", orderedDrink.TimeDrinkDelivered),
-                new SqlParameter("@OrderedDrinkAmount", orderedDrink.OrderedDrinkAmount),
-                new SqlParameter("@DrinkNote", orderedDrink.DrinkNote)
-            };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
-        public void RemoveDrink(OrderedDrink orderedDrink) // Remove drink from ordered drink table (The question is DrinkID or OrderID??)
-        {
-            string query = "DELETE FROM OrderDrink WHERE DrinkID = @DrinkID";
-            SqlParameter[] sqlParameters = { new SqlParameter("@DrinkID", orderedDrink.DrinkID) };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
         public List<OrderedDrink> GetAllOrderedDrinks()
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note]," +
                 " SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID " +
                 "join Item as I on OD.DrinkID=I.ItemID join Drink as D on OD.DrinkID=D.DrinkID where OD.DrinkStatus<2 and cast(OD.TimeDrinkOrdered as Date) = cast(getdate() as Date) group by O.TableNumber," +
-                " OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered";
+                " OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered " +
+                "order by OD.TimeDrinkOrdered DESC";
 
             SqlParameter[] sqlParameters = new SqlParameter[0];
 
@@ -180,48 +113,6 @@ namespace RosDAL
             };
 
             ExecuteEditQuery(query, sqlParameters);
-        }
-        public void IncreaseAmount(Drink d, Order o)
-        {
-            string query = "update OrderDrink set OrderedDrinkAmount=@Amount where DrinkID=@DrinkID and OrderID=@OrderID";
-            SqlParameter[] sp = {
-                new SqlParameter("@Amount",d.Amount),
-                new SqlParameter("@DrinkID", d.DrinkID),
-                new SqlParameter("@OrderID", d.Order)
-            };
-
-            ExecuteEditQuery(query, sp);
-        }
-
-        public void UpdateDeliveredTime(Drink d)
-        {
-            string query = "update OrderDrink set TimeDrinkDelivered=Getdate() where DrinkID=@DrinkID and OrderID=@OrderID";
-            SqlParameter[] sp = {
-                new SqlParameter("@DrinkID", d.DrinkID),
-                new SqlParameter("@OrderID", d.Order)
-            };
-
-            ExecuteEditQuery(query, sp);
-        }
-        public void AddDrink(List<Drink> drink, Order order)
-        {
-            foreach (Drink d in drink)
-            {
-                if (d.Note == null)
-                {
-                    d.Note = "null";
-                }
-
-
-                //Adding dish
-                string query = "insert into OrderDish values(@OrderID, @dishID, 0, getdate(), null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@dishID", d.DrinkID),
-                new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", d.Note),
-                new SqlParameter("@Amount", d.Amount)};
-
-                ExecuteEditQuery(query, sp);
-            }
         }
     }
 }

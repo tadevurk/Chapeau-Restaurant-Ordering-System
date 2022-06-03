@@ -26,28 +26,9 @@ namespace RosLogic
             orderedDrinkdb.UpdateDrinkStatusServe(drink);
         }
 
-        public void UpdateDeliveryTime(Drink d)
-        {
-            orderedDrinkdb.UpdateDeliveredTime(d);
-        }
-
         public void UpdateDrinkStatusPickUp(OrderedDrink orderedDrink)
         {
             orderedDrinkdb.UpdateDrinkStatusPickUp(orderedDrink);
-        }
-        public void AddDrink(OrderedDrink orderedDrink)
-        {
-            orderedDrinkdb.AddDrink(orderedDrink);
-        }
-
-        public void UpdateDrink(OrderedDrink orderedDrink)
-        {
-            orderedDrinkdb.AddDrink(orderedDrink);
-        }
-
-        public void RemoveDrink(OrderedDrink orderedDrink)
-        {
-            orderedDrinkdb.RemoveDrink(orderedDrink);
         }
 
         public List<OrderedDrink> GetAllFinishedDrinks()
@@ -63,11 +44,6 @@ namespace RosLogic
         public void BringStatusBack(OrderedDrink orderedDrink)
         {
             orderedDrinkdb.BringStatusBack(orderedDrink);
-        }
-
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
-        {
-            orderedDrinkdb.AddDrinks(drinkInOrderProcess, order);
         }
     }
 }

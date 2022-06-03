@@ -12,6 +12,10 @@ namespace RosLogic
     {
         DishDAO dishDAO = new DishDAO();
 
+        public void AddDishes(List<Dish> dishes, Order order)
+        {
+            dishDAO.AddDishes(dishes, order);
+        }
         public List<Dish> GetLunchStarters()
         {
             return dishDAO.GetLunchStarters();
@@ -50,10 +54,6 @@ namespace RosLogic
         public void DecreaseDishStock(Dish dish)
         {
             dishDAO.DecreaseDishStock(dish);
-        }
-        public int RetrieveVatByID(int id)
-        {
-            return dishDAO.RetrieveVatByID(id);
         }
     }
 }

@@ -9,8 +9,29 @@ using System.Threading.Tasks;
 
 namespace RosDAL
 {
+    /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
     public class DishDAO : BaseDAO
     {
+        public void AddDishes(List<Dish> dishes, Order order) // Add dish to OrderedDish
+        {
+            foreach (Dish dish in dishes)
+            {
+                if (dish.Note == null)
+                {
+                    dish.Note = "null";
+                }
+
+                //Adding dish
+                string query = "insert into OrderDish values(@OrderID, @dishID, 0, @CurrentTime, null, @Amount, @Note);";
+                SqlParameter[] sp = { new SqlParameter("@dishID", dish.DishID),
+                new SqlParameter("@OrderID", order.OrderID),
+                new SqlParameter("@Note", dish.Note),
+                new SqlParameter("@CurrentTime", DateTime.Now),
+                new SqlParameter("@Amount", dish.Amount)};
+
+                ExecuteEditQuery(query, sp);
+            }
+        }
 
         public List<Dish> WriteContainedDishes(Table t)
         {
@@ -45,32 +66,6 @@ namespace RosDAL
             }
             return dishes;
         }
-
-        public int RetrieveVatByID(int id)
-        {
-            string qr = "Select Vat from Dish where DishID=@DishID";
-
-            SqlParameter[] sp =
-{
-                new SqlParameter("@DishID", id),
-            };
-
-            return ReadVat(ExecuteSelectQuery(qr, sp));
-        }
-
-        private int ReadVat(DataTable data)
-        {
-            int vat = 0;
-            foreach (DataRow dr in data.Rows)
-            {
-                vat = (int)dr["VAT"];
-            }
-
-            return vat;
-        }
-
-
-
         public List<Dish> GetLunchStarters() // Getting all starters
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +

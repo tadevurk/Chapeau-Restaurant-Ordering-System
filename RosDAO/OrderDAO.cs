@@ -11,6 +11,7 @@ namespace RosDAL
 {
     public class OrderDAO : BaseDAO
     {
+        ////////////// Vedat Turk 683343 IT1D //////////////////////////////
 
         public int AddOrder(Employee emp, Table t) // Mirko contributed 
         {
@@ -26,7 +27,7 @@ namespace RosDAL
 
         }
 
-        public void UpdateStock(Item item)
+        public void UpdateStock(Item item) // Cancel button query
         {
             string query = "Update Item " +
             "SET ItemStock = ItemStock + @amount " +
