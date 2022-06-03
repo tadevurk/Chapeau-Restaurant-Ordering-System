@@ -1023,7 +1023,7 @@ namespace RosUI
                     throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
                 }
 
-                if (listviewOrder.SelectedItems[0].ForeColor == Color.Red)
+                if (listviewOrder.SelectedItems.Count >0 && listviewOrder.SelectedItems[0].ForeColor == Color.Red)
                 {
                     item = (Item)listviewOrder.SelectedItems[0].Tag;
                     if (item is Dish)
@@ -1051,6 +1051,7 @@ namespace RosUI
                         AddDrinkNote(drink);
                     }
                 }
+
                 txtNote.Clear();
             }
             catch (Exception exp)
