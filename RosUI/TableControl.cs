@@ -50,7 +50,7 @@ namespace RosUI
                 table.WaiterID = employee.EmplID;
                 tableLogic.UpdateTableWaiter(table);
             }
-            else if (btnOccupy.Text == "Occupy")
+            else if (btnOccupy.Text == "Occupied")
             {          
                 btnOccupy.BackColor = Color.LightGray;
                 btnOccupy.ForeColor = Color.Black;
@@ -62,12 +62,6 @@ namespace RosUI
         //Will take you to the OrderFrom
         private void btnTakeOrder_Click(object sender, EventArgs e)
         {
-            btnOccupy.Text = "Occupied";
-            btnOccupy.BackColor = Color.Red;
-            btnOccupy.ForeColor = Color.White;
-            table.TableStatus = 1;
-            table.WaiterID = employee.EmplID;
-            tableLogic.UpdateTableWaiter(table);
             table = tableLogic.GetTableById(table.TableNumber);
             orderForm = new FormOrder(table, employee, rosMain);
             this.Close();
@@ -94,8 +88,8 @@ namespace RosUI
             tableOverview.GetAllOrderedDishes(table);
             btnOccupy.Text = "Served";
             btnOccupy.BackColor = Color.Yellow;
-            table.TableStatus = 5;
-            tableLogic.Update(table);
+            btnOccupy.ForeColor = Color.Black;
+            tableOverview.CheckOrderedItems(table);
             btnPay.Enabled = true;
             rosMain.UpdateAllListViews();
         }
@@ -105,8 +99,8 @@ namespace RosUI
             tableOverview.GetAllOrderedDrinks(table);
             btnOccupy.Text = "Served";
             btnOccupy.BackColor = Color.Yellow;
-            table.TableStatus = 5;
-            tableLogic.Update(table);
+            btnOccupy.ForeColor = Color.Black;
+            tableOverview.CheckOrderedItems(table);
             btnPay.Enabled = true;
             rosMain.UpdateAllListViews();
         }
@@ -135,7 +129,7 @@ namespace RosUI
             {
                 btnOccupy.Text = "Drink Ready";
                 btnOccupy.BackColor = Color.LightGreen;
-                btnOccupy.ForeColor = Color.Black;          
+                btnOccupy.ForeColor = Color.Black;
                 btnDrinkServed.Enabled = true;
             }
             else if (table.TableStatus == 4)
@@ -149,6 +143,7 @@ namespace RosUI
             {
                 btnOccupy.Text = "Served";
                 btnOccupy.BackColor = Color.Yellow;
+                btnOccupy.ForeColor = Color.Black;
                 btnPay.Enabled = true;
             }
             else
@@ -158,6 +153,13 @@ namespace RosUI
                 btnOccupy.ForeColor = Color.Black;
                 btnOccupy.Enabled = true;
             }
+
+            //if (employee.Name == "supusr")
+            //{
+            //    btnPay.Enabled = true;
+            //    btnDishServed.Enabled = true;
+            //    btnDrinkServed.Enabled = true;
+            //}
         }
     }
 }
