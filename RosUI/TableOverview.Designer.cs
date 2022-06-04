@@ -52,7 +52,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.btnLogout = new System.Windows.Forms.Button();
             this.lblWaiter = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             tmrTimer = new System.Windows.Forms.Timer(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tmrTimer
@@ -272,11 +276,31 @@
             this.lblWaiter.TabIndex = 21;
             this.lblWaiter.Text = "Waiter: ";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::RosUI.Properties.Resources.icons8_martini_glass_32;
+            this.pictureBox2.Location = new System.Drawing.Point(376, 84);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox2.TabIndex = 23;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::RosUI.Properties.Resources.icons8_dinner_32;
+            this.pictureBox1.Location = new System.Drawing.Point(376, 118);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.TabIndex = 24;
+            this.pictureBox1.TabStop = false;
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.lblWaiter);
             this.Controls.Add(this.btnLogout);
             this.Controls.Add(this.label10);
@@ -302,6 +326,8 @@
             this.Name = "TableOverview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TableOverview";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,5 +358,7 @@
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblWaiter;
         private System.Windows.Forms.Timer tmrTimer;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

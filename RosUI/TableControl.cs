@@ -62,12 +62,6 @@ namespace RosUI
         //Will take you to the OrderFrom
         private void btnTakeOrder_Click(object sender, EventArgs e)
         {
-            btnOccupy.Text = "Occupied";
-            btnOccupy.BackColor = Color.Red;
-            btnOccupy.ForeColor = Color.White;
-            table.TableStatus = 1;
-            table.WaiterID = employee.EmplID;
-            tableLogic.UpdateTableWaiter(table);
             table = tableLogic.GetTableById(table.TableNumber);
             orderForm = new FormOrder(table, employee, rosMain);
             this.Close();
@@ -95,8 +89,7 @@ namespace RosUI
             btnOccupy.Text = "Served";
             btnOccupy.BackColor = Color.Yellow;
             btnOccupy.ForeColor = Color.Black;
-            table.TableStatus = 5;
-            tableLogic.Update(table);
+            tableOverview.CheckOrderedItems(table);
             btnPay.Enabled = true;
             rosMain.UpdateAllListViews();
         }
@@ -107,8 +100,7 @@ namespace RosUI
             btnOccupy.Text = "Served";
             btnOccupy.BackColor = Color.Yellow;
             btnOccupy.ForeColor = Color.Black;
-            table.TableStatus = 5;
-            tableLogic.Update(table);
+            tableOverview.CheckOrderedItems(table);
             btnPay.Enabled = true;
             rosMain.UpdateAllListViews();
         }

@@ -223,7 +223,8 @@ namespace RosUI
                     button.BackColor = Color.LightBlue;
                     button.Text = "Standby";
                     button.ForeColor = Color.Black;
-                    CalculateTimeTaken(button, table);
+                    CalculateDishTimeTaken(button, table);
+                    CalculateDrinkTimeTaken(button, table);
                     return button;
                 case 3:
                     button.BackColor = Color.LightGreen;
@@ -242,10 +243,10 @@ namespace RosUI
                     return button;
             }
             return button;
-        }
+        }      
 
         //calculates the time taken and displays it on the button
-        private Button CalculateTimeTaken(Button button, Table table)
+        private Button CalculateDishTimeTaken(Button button, Table table)
         {
             List<OrderedDish> orderedDishes = orderedDishLogic.GetAllOrderedDish();
 
@@ -262,6 +263,29 @@ namespace RosUI
                         button.Text = "01 minute";
                     }
                 }
+
+            }
+            return button;
+        }
+
+        private Button CalculateDrinkTimeTaken(Button button, Table table)
+        {
+            List<OrderedDrink> orderedDrinks = orderedDrinkLogic.GetAllOrderedDrinks();
+
+            foreach (OrderedDrink orderedDrink in orderedDrinks)
+            {
+                if (orderedDrink.TableNumber == table.TableNumber && orderedDrink.DrinkStatus == 0)
+                {
+                    TimeSpan timeTaken = DateTime.Now - orderedDrink.TimeDrinkOrdered;
+
+                    button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes";
+
+                    if (button.Text == "00 minutes")
+                    {
+                        button.Text = "01 minute";
+                    }
+                }
+
             }
             return button;
         }
@@ -315,7 +339,7 @@ namespace RosUI
 
         public List<OrderedDrink> GetAllOrderedDrinks(Table table)
         {
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
             ServeDrinks(orderedDrinks);
 
             return orderedDrinks;
@@ -323,10 +347,27 @@ namespace RosUI
 
         public List<OrderedDish> GetAllOrderedDishes(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
             ServeDishes(orderedDishes);
 
             return orderedDishes;
+        }
+
+        public void CheckOrderedItems(Table table)
+        {
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
+
+            if (orderedDishes.Count == 0 && orderedDrinks.Count == 0)
+            {
+                table.TableStatus = 5;
+                tableLogic.Update(table);
+            }
+            else
+            {
+                table.TableStatus = 2;
+                tableLogic.Update(table);
+            }
         }
 
         //Updates database when the order is received in the kitchen
