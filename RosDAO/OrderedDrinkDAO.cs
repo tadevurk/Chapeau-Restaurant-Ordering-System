@@ -38,6 +38,17 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public void UpdateOrderWithBartenderID(Employee employee, OrderedDrink drink)
+        {
+            string query = "Update [Order] Set BartenderID=@EmplID where OrderID=@OrderID";
+
+            SqlParameter[] sqlParameters = { new SqlParameter("@EmplID", employee.EmplID),
+            new SqlParameter("@OrderID", drink.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
         public void UpdateDrinkToStart(OrderedDrink d)
         {
             string query = "UPDATE OrderDrink SET DrinkStatus=0 WHERE DrinkID=@DrinkID AND OrderID=@OrderID";
