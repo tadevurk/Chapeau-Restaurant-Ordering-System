@@ -313,17 +313,25 @@ namespace RosUI
         public List<OrderedDrink> GetAllOrderedDrinks(Table table)
         {
             List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
+            if(orderedDrinks.Count == 0)
+            {
+                throw new Exception();
+            }
             ServeDrinks(orderedDrinks);
 
-            return orderedDrinks;
+            return orderedDrinks;      
         }
 
         //gets all the ordered dishes by table
         public List<OrderedDish> GetAllOrderedDishes(Table table)
         {
             List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
+            if (orderedDishes.Count == 0)
+            {
+                throw new Exception();
+            }
             ServeDishes(orderedDishes);
-
+            
             return orderedDishes;
         }
 
