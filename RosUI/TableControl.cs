@@ -63,7 +63,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
             }                     
         }
 
@@ -79,7 +79,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
             }
         }
 
@@ -94,7 +94,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
             }
         }
 
@@ -108,7 +108,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
             }
         }
 
@@ -123,7 +123,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("there is currently no dishes to serve");
+                MessageBox.Show("Error", exp.Message);
             }          
         }
 
@@ -138,7 +138,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("there is currently no drinks to serve");
+                MessageBox.Show("Error", exp.Message);
             }
             
         }
