@@ -291,7 +291,7 @@ namespace RosUI
         }
 
         //Updates all the buttons with the newest status
-        private void UpdateAllButtons(List<Table> tables)
+        public void UpdateAllButtons(List<Table> tables)
         {
             UpdateButtonColor(tables[0], btnTableOne);
             UpdateButtonColor(tables[1], btnTableTwo);
@@ -580,59 +580,70 @@ namespace RosUI
                     table.TableNumber = 1;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     table.TableNumber = 2;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     table.TableNumber = 3;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableThree);
+
                     break;
                 case 4:
                     table.TableNumber = 4;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     table.TableNumber = 5;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     table.TableNumber = 6;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     table.TableNumber = 7;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     table.TableNumber = 8;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     table.TableNumber = 9;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -647,59 +658,69 @@ namespace RosUI
                     table.TableNumber = 1;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     table.TableNumber = 2;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     table.TableNumber = 3;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     table.TableNumber = 4;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     table.TableNumber = 5;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     table.TableNumber = 6;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     table.TableNumber = 7;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     table.TableNumber = 8;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     table.TableNumber = 9;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -714,59 +735,69 @@ namespace RosUI
                     table.TableNumber = 1;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     table.TableNumber = 2;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     table.TableNumber = 3;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     table.TableNumber = 4;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     table.TableNumber = 5;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     table.TableNumber = 6;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     table.TableNumber = 7;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     table.TableNumber = 8;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     table.TableNumber = 9;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }

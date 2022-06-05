@@ -103,6 +103,7 @@
             // 
             // btnTableOne
             // 
+            this.btnTableOne.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableOne.Location = new System.Drawing.Point(85, 100);
             this.btnTableOne.Name = "btnTableOne";
             this.btnTableOne.Size = new System.Drawing.Size(100, 40);
@@ -113,6 +114,7 @@
             // 
             // btnTableTwo
             // 
+            this.btnTableTwo.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableTwo.Location = new System.Drawing.Point(295, 100);
             this.btnTableTwo.Name = "btnTableTwo";
             this.btnTableTwo.Size = new System.Drawing.Size(100, 40);
@@ -123,6 +125,7 @@
             // 
             // btnTableThree
             // 
+            this.btnTableThree.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableThree.Location = new System.Drawing.Point(85, 190);
             this.btnTableThree.Name = "btnTableThree";
             this.btnTableThree.Size = new System.Drawing.Size(100, 40);
@@ -133,6 +136,7 @@
             // 
             // btnTableFour
             // 
+            this.btnTableFour.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableFour.Location = new System.Drawing.Point(295, 190);
             this.btnTableFour.Name = "btnTableFour";
             this.btnTableFour.Size = new System.Drawing.Size(100, 40);
@@ -143,6 +147,7 @@
             // 
             // btnTableFive
             // 
+            this.btnTableFive.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableFive.Location = new System.Drawing.Point(85, 280);
             this.btnTableFive.Name = "btnTableFive";
             this.btnTableFive.Size = new System.Drawing.Size(100, 40);
@@ -153,6 +158,7 @@
             // 
             // btnTableSix
             // 
+            this.btnTableSix.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableSix.Location = new System.Drawing.Point(295, 280);
             this.btnTableSix.Name = "btnTableSix";
             this.btnTableSix.Size = new System.Drawing.Size(100, 40);
@@ -163,6 +169,7 @@
             // 
             // btnTableSeven
             // 
+            this.btnTableSeven.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableSeven.Location = new System.Drawing.Point(85, 370);
             this.btnTableSeven.Name = "btnTableSeven";
             this.btnTableSeven.Size = new System.Drawing.Size(100, 40);
@@ -173,6 +180,7 @@
             // 
             // btnTableEight
             // 
+            this.btnTableEight.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableEight.Location = new System.Drawing.Point(295, 370);
             this.btnTableEight.Name = "btnTableEight";
             this.btnTableEight.Size = new System.Drawing.Size(100, 40);
@@ -183,6 +191,7 @@
             // 
             // btnTableNine
             // 
+            this.btnTableNine.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableNine.Location = new System.Drawing.Point(85, 460);
             this.btnTableNine.Name = "btnTableNine";
             this.btnTableNine.Size = new System.Drawing.Size(100, 40);
@@ -193,6 +202,7 @@
             // 
             // btnTableTen
             // 
+            this.btnTableTen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTableTen.Location = new System.Drawing.Point(295, 460);
             this.btnTableTen.Name = "btnTableTen";
             this.btnTableTen.Size = new System.Drawing.Size(100, 40);

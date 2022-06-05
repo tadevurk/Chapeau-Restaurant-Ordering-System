@@ -34,7 +34,7 @@ namespace RosUI
             tableOverview = new TableOverview(employee, rosMain);
             lblTable.Text = "Table: " + table.TableNumber;
             lblWaiter.Text = "Waiter: " + employee.Name;
-            UpdateButtonAccessibilty();
+            UpdateOccupyButton();
         }
 
         //When Clicked will Occupy and unOccupy the tables
@@ -112,6 +112,7 @@ namespace RosUI
             }
         }
 
+        //Serves the dishes oredered by the table and update the kitchen view
         private void btnDishServed_Click(object sender, EventArgs e)
         {
             try
@@ -126,6 +127,7 @@ namespace RosUI
             }          
         }
 
+        //Serves the drinks oredered by the table and update the bar view
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
             try
@@ -141,7 +143,8 @@ namespace RosUI
             
         }
 
-        private void UpdateButtonAccessibilty()
+        //updates the occupy button.
+        private void UpdateOccupyButton()
         {
             btnOccupy.Enabled = false;
 

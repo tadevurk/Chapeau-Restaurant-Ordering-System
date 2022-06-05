@@ -42,6 +42,7 @@ namespace RosUI
             // btnLogin
             // 
             this.btnLogin.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnLogin.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnLogin.Location = new System.Drawing.Point(190, 450);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(100, 40);
@@ -53,6 +54,7 @@ namespace RosUI
             // btnRegister
             // 
             this.btnRegister.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnRegister.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRegister.Location = new System.Drawing.Point(190, 530);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(100, 40);
