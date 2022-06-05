@@ -41,6 +41,7 @@
             // btnOccupy
             // 
             this.btnOccupy.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOccupy.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOccupy.Location = new System.Drawing.Point(176, 200);
             this.btnOccupy.Name = "btnOccupy";
             this.btnOccupy.Size = new System.Drawing.Size(110, 40);
@@ -52,6 +53,7 @@
             // btnTakeOrder
             // 
             this.btnTakeOrder.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnTakeOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTakeOrder.Location = new System.Drawing.Point(176, 280);
             this.btnTakeOrder.Name = "btnTakeOrder";
             this.btnTakeOrder.Size = new System.Drawing.Size(110, 40);
@@ -63,6 +65,7 @@
             // btnPay
             // 
             this.btnPay.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnPay.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPay.Location = new System.Drawing.Point(176, 360);
             this.btnPay.Name = "btnPay";
             this.btnPay.Size = new System.Drawing.Size(110, 40);
@@ -74,6 +77,7 @@
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnBack.Location = new System.Drawing.Point(383, -1);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 40);
@@ -105,7 +109,8 @@
             // btnDishServed
             // 
             this.btnDishServed.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnDishServed.Location = new System.Drawing.Point(176, 440);
+            this.btnDishServed.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDishServed.Location = new System.Drawing.Point(176, 520);
             this.btnDishServed.Name = "btnDishServed";
             this.btnDishServed.Size = new System.Drawing.Size(110, 40);
             this.btnDishServed.TabIndex = 7;
@@ -116,7 +121,8 @@
             // btnDrinkServed
             // 
             this.btnDrinkServed.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnDrinkServed.Location = new System.Drawing.Point(176, 520);
+            this.btnDrinkServed.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDrinkServed.Location = new System.Drawing.Point(176, 440);
             this.btnDrinkServed.Name = "btnDrinkServed";
             this.btnDrinkServed.Size = new System.Drawing.Size(110, 40);
             this.btnDrinkServed.TabIndex = 8;
@@ -139,7 +145,7 @@
             this.Controls.Add(this.btnOccupy);
             this.Name = "TableControl";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "LogOut";
+            this.Text = "Table Control";
             this.ResumeLayout(false);
             this.PerformLayout();
 

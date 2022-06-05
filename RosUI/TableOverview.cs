@@ -21,7 +21,6 @@ namespace RosUI
         private Table table = new Table();
         private TableLogic tableLogic;
         private List<Table> tables;
-        private OrderedDish orderedDish = new OrderedDish();
         private OrderedDishLogic orderedDishLogic;
         private OrderedDrinkLogic orderedDrinkLogic;
         public double TotalMinutes { get; }
@@ -212,6 +211,7 @@ namespace RosUI
                 case 0:
                     button.BackColor = Color.LightGray;
                     button.Text = "Empty";
+                    button.ForeColor = Color.Black;
                     return button;
                 case 1:
                     button.BackColor = Color.Red;
@@ -221,26 +221,54 @@ namespace RosUI
                 case 2:
                     button.BackColor = Color.LightBlue;
                     button.Text = "Standby";
-                    CalculateTimeTaken(button, table);
+                    button.ForeColor = Color.Black;
+                    CalculateDishTimeTaken(button, table);
+                    CalculateDrinkTimeTaken(button, table);
                     return button;
                 case 3:
                     button.BackColor = Color.LightGreen;
                     button.Text = "DrinkReady";
+                    button.ForeColor = Color.Black;
                     return button;
                 case 4:
                     button.BackColor = Color.LightGreen;
                     button.Text = "DishReady";
+                    button.ForeColor = Color.Black;
                     return button;
                 case 5:
                     button.BackColor = Color.Yellow;
                     button.Text = "Served";
+                    button.ForeColor = Color.Black;
                     return button;
             }
             return button;
         }
 
         //calculates the time taken and displays it on the button
-        public Button CalculateTimeTaken(Button button, Table table)
+        private Button CalculateDrinkTimeTaken(Button button, Table table)
+        {
+            List<OrderedDrink> orderedDrinks = orderedDrinkLogic.GetAllOrderedDrinks();
+
+            foreach (OrderedDrink orderedDrink in orderedDrinks)
+            {
+                if (orderedDrink.TableNumber == table.TableNumber && orderedDrink.DrinkStatus == 0)
+                {
+                    TimeSpan timeTaken = DateTime.Now - orderedDrink.TimeDrinkOrdered;
+
+                    button.Text = $"{timeTaken.TotalMinutes.ToString("00")} minutes";
+
+                    if (button.Text == "00 minutes")
+                    {
+                        button.Text = "01 minute";
+                    }
+                }
+
+            }
+            return button;
+        }
+
+        //calculates the time taken and displays it on the button
+        private Button CalculateDishTimeTaken(Button button, Table table)
         {
             List<OrderedDish> orderedDishes = orderedDishLogic.GetAllOrderedDish();
 
@@ -254,9 +282,10 @@ namespace RosUI
 
                     if (button.Text == "00 minutes")
                     {
-                        button.Text = "01 minutes";
+                        button.Text = "01 minute";
                     }
                 }
+
             }
             return button;
         }
@@ -274,9 +303,40 @@ namespace RosUI
             UpdateButtonColor(tables[7], btnTableEight);
             UpdateButtonColor(tables[8], btnTableNine);
             UpdateButtonColor(tables[9], btnTableTen);
+            foreach (Table table in tables)
+            {
+                CheckForOrderedItemsOnTable(table);
+            }
         }
 
-        public void ServeDrinks(List<OrderedDrink> orderedDrinks)
+        //get all the ordered drinks by table
+        public List<OrderedDrink> GetAllOrderedDrinks(Table table)
+        {
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
+            if(orderedDrinks.Count == 0)
+            {
+                throw new Exception();
+            }
+            ServeDrinks(orderedDrinks);
+
+            return orderedDrinks;      
+        }
+
+        //gets all the ordered dishes by table
+        public List<OrderedDish> GetAllOrderedDishes(Table table)
+        {
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
+            if (orderedDishes.Count == 0)
+            {
+                throw new Exception();
+            }
+            ServeDishes(orderedDishes);
+            
+            return orderedDishes;
+        }
+
+        //changes the status of the drink to served
+        private void ServeDrinks(List<OrderedDrink> orderedDrinks)
         {
             try
             {
@@ -292,7 +352,8 @@ namespace RosUI
             }
         }
 
-        public void ServeDishes(List<OrderedDish> orderedDishes)
+        //changes the status of the dish to served
+        private void ServeDishes(List<OrderedDish> orderedDishes)
         {
             try
             {
@@ -308,20 +369,205 @@ namespace RosUI
             }
         }
 
-        public List<OrderedDrink> GetAllOrderedDrinks(Table table)
+        //checks for empty list to make the order of the table served
+        public void CheckOrderedItems(Table table)
         {
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber);
-            ServeDrinks(orderedDrinks);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
 
-            return orderedDrinks;
+            if (orderedDishes.Count == 0 && orderedDrinks.Count == 0)
+            {
+                table.TableStatus = 5;
+                tableLogic.Update(table);
+            }
+            else
+            {
+                table.TableStatus = 2;
+                tableLogic.Update(table);
+            }
         }
 
-        public List<OrderedDish> GetAllOrderedDishes(Table table)
+        //checks what the ordered item a specific table has and displays the icon
+        public void CheckForOrderedItemsOnTable(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber);
-            ServeDishes(orderedDishes);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
 
-            return orderedDishes;
+            if (orderedDishes.Count > 0 && orderedDrinks.Count == 0)
+            {
+                ShowRunningDishIcon(table.TableNumber);
+            }
+            else if (orderedDrinks.Count > 0 && orderedDishes.Count == 0)
+            {
+                ShowRunningDrinkIcon(table.TableNumber);
+            }
+            else if (orderedDrinks.Count > 0 && orderedDishes.Count > 0)
+            {
+                ShowRunningDishAndDrinkIcon(table.TableNumber);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        //Displays the dish icon when a order with dishes are being prepared
+        public void ShowRunningDishIcon(int number)
+        {
+            switch (number)
+            {    
+                case 1:
+                    t1DishIcon.Visible = true;
+                    break;
+
+                case 2:
+                    t2DishIcon.Visible = true;
+                    break;
+
+                case 3:
+                    t3DishIcon.Visible = true;
+                    break;
+                case 4:
+                    t4DishIcon.Visible = true;
+                    break;
+
+                case 5:
+                    t5DishIcon.Visible = true;
+                    break;
+
+                case 6:
+                    t6DishIcon.Visible = true;
+                    break;
+
+                case 7:
+                    t7DishIcon.Visible = true;
+                    break;
+
+                case 8:
+                    t8DishIcon.Visible = true;
+                    break;
+
+                case 9:
+                    t9DishIcon.Visible = true;
+                    break;
+
+                case 10:
+                    t10DishIcon.Visible = true;
+                    break;
+            }
+        }
+
+        //displays only the drink icon 
+        public void ShowRunningDrinkIcon(int number)
+        {
+            //changes the state of the Icon and the position.
+            switch (number)
+            {
+                case 1:
+                    t1DrinkIcon.Visible = true;
+                    t1DrinkIcon.Location = new Point(47, 109);
+                    break;
+
+                case 2:
+                    t2DrinkIcon.Visible = true;
+                    t2DrinkIcon.Location = new Point(398, 109);
+                    break;
+
+                case 3:
+                    t3DrinkIcon.Visible = true;
+                    t3DrinkIcon.Location = new Point(47, 199);
+                    break;
+                case 4:
+                    t4DrinkIcon.Visible = true;
+                    t4DrinkIcon.Location = new Point(398, 199);
+                    break;
+
+                case 5:
+                    t5DrinkIcon.Visible = true;
+                    t5DrinkIcon.Location = new Point(47, 289);
+                    break;
+
+                case 6:
+                    t6DrinkIcon.Visible = true;
+                    t6DrinkIcon.Location = new Point(398, 289);
+                    break;
+
+                case 7:
+                    t7DrinkIcon.Visible = true;
+                    t7DrinkIcon.Location = new Point(47, 380);
+                    break;
+
+                case 8:
+                    t8DrinkIcon.Visible = true;
+                    t8DrinkIcon.Location = new Point(398, 380);
+                    break;
+
+                case 9:
+                    t9DrinkIcon.Visible = true;
+                    t9DrinkIcon.Location = new Point(47, 470);
+                    break;
+
+                case 10:
+                    t10DrinkIcon.Visible = true;
+                    t10DrinkIcon.Location = new Point(398, 470);
+                    break;
+            }
+        }
+
+        //displays both the drink and dish icon
+        public void ShowRunningDishAndDrinkIcon(int number)
+        {
+            switch (number)
+            {
+                case 1:
+                    t1DishIcon.Visible = true;
+                    t1DrinkIcon.Visible = true;
+                    break;
+
+                case 2:
+                    t2DishIcon.Visible = true;
+                    t2DrinkIcon.Visible = true;
+                    break;
+
+                case 3:
+                    t3DishIcon.Visible = true;
+                    t3DrinkIcon.Visible = true;
+                    break;
+                case 4:
+                    t4DishIcon.Visible = true;
+                    t4DrinkIcon.Visible = true;
+                    break;
+
+                case 5:
+                    t5DishIcon.Visible = true;
+                    t5DrinkIcon.Visible = true;
+                    break;
+
+                case 6:
+                    t6DishIcon.Visible = true;
+                    t6DrinkIcon.Visible = true;
+                    break;
+
+                case 7:
+                    t7DishIcon.Visible = true;
+                    t7DrinkIcon.Visible = true;
+                    break;
+
+                case 8:
+                    t8DishIcon.Visible = true;
+                    t8DrinkIcon.Visible = true;
+                    break;
+
+                case 9:
+                    t9DishIcon.Visible = true;
+                    t9DrinkIcon.Visible = true;
+                    break;
+
+                case 10:
+                    t10DishIcon.Visible = true;
+                    t10DrinkIcon.Visible = true;
+                    break;
+            }
         }
 
         //Updates database when the order is received in the kitchen
@@ -334,59 +580,70 @@ namespace RosUI
                     table.TableNumber = 1;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     table.TableNumber = 2;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     table.TableNumber = 3;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableThree);
+
                     break;
                 case 4:
                     table.TableNumber = 4;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     table.TableNumber = 5;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     table.TableNumber = 6;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     table.TableNumber = 7;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     table.TableNumber = 8;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     table.TableNumber = 9;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 2;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -401,59 +658,69 @@ namespace RosUI
                     table.TableNumber = 1;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     table.TableNumber = 2;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     table.TableNumber = 3;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     table.TableNumber = 4;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     table.TableNumber = 5;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     table.TableNumber = 6;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     table.TableNumber = 7;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     table.TableNumber = 8;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     table.TableNumber = 9;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 3;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -468,126 +735,69 @@ namespace RosUI
                     table.TableNumber = 1;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     table.TableNumber = 2;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     table.TableNumber = 3;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     table.TableNumber = 4;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     table.TableNumber = 5;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     table.TableNumber = 6;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     table.TableNumber = 7;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     table.TableNumber = 8;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     table.TableNumber = 9;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     table.TableNumber = 10;
                     table.TableStatus = 4;
                     tableLogic.Update(table);
-                    break;
-            }
-        }
-
-        //Updates database when 
-        public void ItemServed(int number)
-        {
-            //changing color of buttons when order is ready for the pick up 
-            switch (number)
-            {
-                case 1:
-                    table.TableNumber = 1;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 2:
-                    table.TableNumber = 2;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 3:
-                    table.TableNumber = 3;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-                case 4:
-                    table.TableNumber = 4;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 5:
-                    table.TableNumber = 5;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 6:
-                    table.TableNumber = 6;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 7:
-                    table.TableNumber = 7;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 8:
-                    table.TableNumber = 8;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 9:
-                    table.TableNumber = 9;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
-                    break;
-
-                case 10:
-                    table.TableNumber = 10;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }

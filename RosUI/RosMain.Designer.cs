@@ -609,7 +609,7 @@
             // columnHeader10
             // 
             this.columnHeader10.Text = "Dishes";
-            this.columnHeader10.Width = 600;
+            this.columnHeader10.Width = 550;
             // 
             // columnHeader11
             // 
@@ -758,10 +758,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1482, 753);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlBarView);
-            this.Controls.Add(this.pnlKitchenView);
             this.Controls.Add(this.pnlKitchenViewFinished);
             this.Controls.Add(this.pnlBarViewFinished);
+            this.Controls.Add(this.pnlBarView);
+            this.Controls.Add(this.pnlKitchenView);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";

@@ -45,5 +45,10 @@ namespace RosLogic
         {
             orderedDrinkdb.BringStatusBack(orderedDrink);
         }
+
+        public void UpdateOrderWithBartenderID(Employee employee, OrderedDrink drink)
+        {
+            orderedDrinkdb.UpdateOrderWithBartenderID(employee, drink);
+        }
     }
 }
