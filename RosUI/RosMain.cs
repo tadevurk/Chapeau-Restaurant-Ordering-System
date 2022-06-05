@@ -24,10 +24,11 @@ namespace RosUI
             InitializeComponent();
             InitialiseTimer();
             InitialiseComboBoxes();
-            InitialiseLablesWithNames();
             UpdateAllListViews();
 
             this.employee = employee;
+
+            InitialiseLablesWithNames();
 
             AdaptFormOnRole(employee);
         }
