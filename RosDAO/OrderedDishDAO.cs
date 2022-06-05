@@ -47,6 +47,15 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
+        public void UpdateOrderWithChefID(Employee employee, OrderedDish dish)
+        {
+            string query = "UPDATE [Order] SET ChefID=@EmplID WHERE OrderID=@OrderID;";
+            SqlParameter[] sqlParameters = { new SqlParameter("@EmplID", employee.EmplID),
+            new SqlParameter("@OrderID", dish.OrderID) };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
         private List<OrderedDish> ReadTables(DataTable dataTable)
         {
             List<OrderedDish> dishes = new List<OrderedDish>();
@@ -107,9 +116,10 @@ namespace RosDAL
 
         public void UpdateDishStatusServe(OrderedDish d)
         {
-            string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=GetDate() WHERE DishID=@DishID AND OrderID=@OrderID";
+            string query = "UPDATE OrderDish SET DishStatus=2, TimeDishDelivered=@GetTime WHERE DishID=@DishID AND OrderID=@OrderID";
             SqlParameter[] sqlParameters = { new SqlParameter("@DishID", d.ItemID),
-            new SqlParameter("@OrderID", d.OrderID)
+            new SqlParameter("@OrderID", d.OrderID),
+            new SqlParameter("@GetTime", DateTime.Now)
             };
 
             ExecuteEditQuery(query, sqlParameters);

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using RosModel;
 using RosDAL;
+using System;
 
 ////////////////////Mirko Cuccurullo, 691362, GROUP 1, IT1D/////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,6 +44,11 @@ namespace RosLogic
         public void BringStatusBack(OrderedDish orderedDish)
         {
             orderedDishdb.BringStatusBack(orderedDish);
+        }
+
+        public void UpdateOrderWithChefID(Employee employee, OrderedDish dish)
+        {
+            orderedDishdb.UpdateOrderWithChefID(employee, dish);
         }
     }
 }
