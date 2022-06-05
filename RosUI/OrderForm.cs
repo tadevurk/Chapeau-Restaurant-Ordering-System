@@ -172,104 +172,202 @@ namespace RosUI
         }
         private void btnLunch_Click(object sender, EventArgs e)
         {
-            showPanel("Lunch");
-            ButtonColorReset();
-            btnLunch.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Lunch");
+                ButtonColorReset();
+                btnLunch.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnStarters_Click(object sender, EventArgs e)
         {
-            showPanel("Starters");
-            ButtonColorReset();
-            btnStarters.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Starters");
+                ButtonColorReset();
+                btnStarters.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnMains_Click_1(object sender, EventArgs e)
         {
-            showPanel("Mains");
-            ButtonColorReset();
-            btnMains.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Mains");
+                ButtonColorReset();
+                btnMains.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnDesserts_Click(object sender, EventArgs e)
         {
-            showPanel("Desserts");
-            ButtonColorReset();
-            btnDesserts.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Desserts");
+                ButtonColorReset();
+                btnDesserts.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnDinner_Click(object sender, EventArgs e)
         {
-            showPanel("Dinner");
-            ButtonColorReset();
-            btnDinner.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Dinner");
+                ButtonColorReset();
+                btnDinner.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnStartersDinner_Click(object sender, EventArgs e)
         {
-            showPanel("DinnerStarters");
-            ButtonColorReset();
-            btnStartersDinner.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("DinnerStarters");
+                ButtonColorReset();
+                btnStartersDinner.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnMainsDinners_Click(object sender, EventArgs e)
         {
-            showPanel("DinnerMains");
-            ButtonColorReset();
-            btnMainsDinners.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("DinnerMains");
+                ButtonColorReset();
+                btnMainsDinners.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnDessertsDinner_Click(object sender, EventArgs e)
         {
-            showPanel("DinnerDesserts");
-            ButtonColorReset();
-            btnDessertsDinner.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("DinnerDesserts");
+                ButtonColorReset();
+                btnDessertsDinner.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnDrinks_Click(object sender, EventArgs e)
         {
-            showPanel("Drinks");
-            ButtonColorReset();
-            btnDrinks.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Drinks");
+                ButtonColorReset();
+                btnDrinks.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private void btnSoftDrink_Click(object sender, EventArgs e)
         {
-            showPanel("SoftDrinks");
-            ButtonColorReset();
-            btnSoftDrink.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("SoftDrinks");
+                ButtonColorReset();
+                btnSoftDrink.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnBeers_Click(object sender, EventArgs e)
         {
-            showPanel("Beers");
-            ButtonColorReset();
-            btnBeers.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Beers");
+                ButtonColorReset();
+                btnBeers.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
         private void btnWine_Click(object sender, EventArgs e)
         {
-            showPanel("Wines");
-            ButtonColorReset();
-            btnWine.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Wines");
+                ButtonColorReset();
+                btnWine.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private void btnSpirits_Click(object sender, EventArgs e)
         {
-            showPanel("Spirits");
-            ButtonColorReset();
-            btnSpirits.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("Spirits");
+                ButtonColorReset();
+                btnSpirits.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private void btnHotDrinks_Click(object sender, EventArgs e)
         {
-            showPanel("HotDrinks");
-            ButtonColorReset();
-            btnHotDrinks.BackColor = Color.LightGreen;
-            SendCancelNoteButtonsVisible();
+            try
+            {
+                showPanel("HotDrinks");
+                ButtonColorReset();
+                btnHotDrinks.BackColor = Color.LightGreen;
+                SendCancelNoteButtonsVisible();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
 
         private void SendCancelNoteButtonsVisible()
@@ -953,7 +1051,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                MessageBox.Show($"{exp.Message}", "Send Order");
             }
 
         }
@@ -963,7 +1061,7 @@ namespace RosUI
         {
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                Item itemInOrderList = (Item)listviewOrder.Items[i].Tag; // Tag all the item as Dish in listview
+                Item itemInOrderList = (Item)listviewOrder.Items[i].Tag; // Tag all the item as item in listview
                 ListViewItem lvItemInOrderList = listviewOrder.Items[i];
 
                 if (lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Dish)
@@ -1000,6 +1098,10 @@ namespace RosUI
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+            }
+            finally
+            {
+                txtNote.Clear();
             }
 
         }
