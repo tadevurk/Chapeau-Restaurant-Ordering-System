@@ -36,7 +36,7 @@ namespace RosUI
         {
             //setting a timer for automatic update of the list views
             Timer timer1 = new Timer();
-            timer1.Interval = 60000;//1 minute
+            timer1.Interval = 10000;//10 seconds
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Start();
         }
