@@ -997,7 +997,7 @@ namespace RosUI
                     throw new Exception($"Oops {emp.Name}, you cannot add note to ordered item");
                 }
             }
-            catch(Exception exp)
+            catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
             }
@@ -1077,7 +1077,29 @@ namespace RosUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            Hide();
+            try
+            {
+                foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Update stock when back is clicked
+                {
+                    Item item = (Item)lvOrderInProcess.Tag;
+                    {
+                        if (lvOrderInProcess.ForeColor == Color.Red)
+                        {
+                            listviewOrder.Items.Remove(lvOrderInProcess);
+                            item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                            item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                            orderLogic.UpdateStock(item);
+                        }
+                    }
+                }
+                this.Close();
+                new TableControl(emp, rosMain, table).Show();
+            }
+
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
         }
     }
 }
