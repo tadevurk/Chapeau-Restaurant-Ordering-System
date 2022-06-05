@@ -133,6 +133,11 @@ namespace RosUI
         {
             try
             {
+                if (toPay < bill.TotalAmount)
+                {
+
+                    throw new Exception("Please enter valid amount to be paid.");
+                }
 
                 DialogResult dialogResult = MessageBox.Show("Do you want to add feedback?", "Complete payment", MessageBoxButtons.YesNo);
 
@@ -182,29 +187,63 @@ namespace RosUI
         private void txtTip_TextChanged(object sender, EventArgs e)
         {
             // add a tip and adjust the amount to be paid
-            tip = Convert.ToDecimal(txtTip.Text);
-            toPay = tip + bill.TotalAmount;
 
-            txtToPay.Text = toPay.ToString();
+            try
+            {
+                if (txtTip.Text == "")
+                {
+                    MessageBox.Show("This value can not be empty!!!");
+                    txtTip.Text = "0.0";
+                }
+                else
+                {
+                    if (tip < 0)
+                    {
+
+                        throw new Exception("Please enter valid tip amount.");
+                    }
+
+                    tip = Convert.ToDecimal(txtTip.Text);
+                    toPay = tip + bill.TotalAmount;
+
+                    txtToPay.Text = toPay.ToString();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Operation did not work: " + ex.Message);
+            }
+            
         }
 
         private void txtToPay_TextChanged(object sender, EventArgs e)
         {
             // calculate the amount that will be paid
-            if (txtToPay.Text == "")
+            try
             {
-                MessageBox.Show("This value can not be empty!!!");
-                txtToPay.Text = "0.0";
+                if (txtToPay.Text == "")
+                {
+                    MessageBox.Show("This value can not be empty!!!");
+                    txtToPay.Text = lblTotalAmount.Text;
+                }
+                else
+                {
+                    
+                    toPay = Convert.ToDecimal(txtToPay.Text);
+                    tip = toPay - bill.TotalAmount;
+                    bill.TipAmount = tip;
+
+                    txtTip.Text = tip.ToString();
+
+                }
             }
-            else
+            catch (Exception ex)
             {
-                toPay = Convert.ToDecimal(txtToPay.Text);
-                tip = toPay - bill.TotalAmount;
-                bill.TipAmount = tip;
 
-                txtTip.Text = tip.ToString();
-
-            }
+                MessageBox.Show("Operation did not work: " + ex.Message);
+            } 
 
         }
 
@@ -246,12 +285,17 @@ namespace RosUI
 
         public void CompletePayment()
         {
+
             // when complete payment is clicked, the bill is stored in the database
             billLogic.CreateBill(bill);
+
+            // Pass billNumber to the order table in the database
+            billLogic.UpdateOrderBillNumber(bill, orderedItems);
 
             // change ordered items status to paid
             SetItemsPaid(orderedItems);
 
+            // Update kitchen and bar views
             rosMain.UpdateAllListViews();
 
             table.TableStatus = 0;
@@ -277,6 +321,10 @@ namespace RosUI
             {
                 pnlSplit.Hide();
             }
+
+            txtToPaySplit.Text = 0.ToString();
+            txtTipSplit.Text = 0.ToString();
+
         }
 
         // calculate amount to be stored in the database and display correct amounts
@@ -286,13 +334,24 @@ namespace RosUI
         {
             try
             {
-                decimal splitAmount = decimal.Parse(txtToPaySplit.Text);
-                deductibleAmount += splitAmount;
+                decimal splitAmount;
+                decimal tip;
+
+                bool checkPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
+                bool checkTip = decimal.TryParse(txtTipSplit.Text, out tip);
+
+                if (!checkPay || !checkTip)
+                {
+                    throw new Exception("Input is not in numerical format");
+                }
+
 
                 // not let the user close a bill from the partial payment mode
-                // complete a partial payment and updated values for displaying purpose 
+                // complete a partial payment and update values for displaying purpose and
                 // next partial payment
-                if (bill.TotalAmount == splitAmount)
+                deductibleAmount += splitAmount;
+
+                if (bill.TotalAmount <= splitAmount)
                 {
                     MessageBox.Show("Complete payment in the main form!");
                     pnlSplit.Hide();
@@ -302,7 +361,12 @@ namespace RosUI
                     bill.TotalAmount = splitAmount;
                     bill.SubTotalAmount = 0;
 
-                    decimal tip = decimal.Parse(txtTipSplit.Text);
+                    if (tip < 0)
+                    {
+                        
+                        throw new Exception("Please enter valid tip amount.");
+                    }
+
                     bill.TipAmount = tip;
 
                     billLogic.CreateBill(bill);

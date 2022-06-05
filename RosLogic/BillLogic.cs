@@ -48,5 +48,23 @@ namespace RosLogic
         {
             billdb.SetDrinkPaid(item);
         }
+
+        public void UpdateOrderBillNumber(Bill b, List<Item > items)
+        {
+            foreach (Item item in items)
+            {
+                if (item is OrderedDish)
+                {
+                    OrderedDish dish = item as OrderedDish;
+                    billdb.UpdateOrderBillNumber(b, dish);
+                }
+                else
+                {
+                    OrderedDrink drink = item as OrderedDrink;
+                    billdb.UpdateOrderBillNumber(b, drink);
+                }
+            }
+
+        }
     }
 }

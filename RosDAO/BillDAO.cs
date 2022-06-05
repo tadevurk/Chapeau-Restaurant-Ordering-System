@@ -80,17 +80,16 @@ namespace RosDAL
         // store a complete bill in the database
         public void CreateBill(Bill bill)
         {
-            
-            string query = "INSERT INTO Bill (TotalAmount, TipAmount,  Feedback, TableNumber, PaymentDate, SubTotalAmount, PaymentMethod) " +
-                "VALUES (@TotalAmount, @TipAmount,  @Feedback, @TableNumber, GETDATE(), @SubTotalAmount, @PaymentMethod)";
 
+            string query = "INSERT INTO Bill (TotalAmount, TipAmount,  Feedback, TableNumber, PaymentDate, SubTotalAmount, PaymentMethod) " +
+                "VALUES (@TotalAmount, @TipAmount,  @Feedback, @TableNumber, GETDATE(), @SubTotalAmount, @PaymentMethod);" +
+                "SELECT cast(scope_identity() as int)";
             if (bill.Feedback == null)
             {
                 bill.Feedback = "Null";
             }
             SqlParameter[] sqlParameters =
             {
-                //new SqlParameter("@BillNumber", bill.BillNumber),
                 new SqlParameter("@TotalAmount", bill.TotalAmount),
                 new SqlParameter("@TipAmount", bill.TipAmount),
                 new SqlParameter("@Feedback", bill.Feedback),
@@ -98,7 +97,8 @@ namespace RosDAL
                 new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
                 new SqlParameter("@PaymentMethod", bill.PaymentMethod),
             };
-            ExecuteEditQuery(query, sqlParameters);
+
+            bill.BillNumber = ExecuteScalarQuery(query, sqlParameters);
         }
 
         public void SetDishPaid(OrderedDish item)
@@ -127,24 +127,29 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        // update a bill in the database
-        public void UpdateBill(Bill bill)
+        public void UpdateOrderBillNumber(Bill bill, OrderedDish dish)
         {
-            string query = "UPDATE [Bill] SET BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
-                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = GETDATE()" +
-                " WHERE BillNumber = @BillNumber";
+            string query = "UPDATE [Order] SET BillNumber = @BillNumber WHERE OrderID = @OrderID";
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@BillNumber", bill.BillNumber),
-                new SqlParameter("@BillAmount", bill.TotalAmount),
-                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
-                new SqlParameter("@TipAmount", bill.TipAmount),
-                new SqlParameter("@Feedback", bill.Feedback),
-                new SqlParameter("@TableNumber", bill.TableNumber),
+                 new SqlParameter("@BillNumber", bill.BillNumber),
+                 new SqlParameter("@OrderID", dish.OrderID),
             };
+
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public void UpdateOrderBillNumber(Bill bill, OrderedDrink drink)
+        {
+            string query = "UPDATE [Order] SET BillNumber = @BillNumber WHERE OrderID = @OrderID";
+            SqlParameter[] sqlParameters =
+            {
+                 new SqlParameter("@BillNumber", bill.BillNumber),
+                 new SqlParameter("@OrderID", drink.OrderID)
+            };
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
         // retrieve a bill from database
         public Bill GetBill(Bill bill)
@@ -177,5 +182,25 @@ namespace RosDAL
             }
             return bills;
         }
+
+
+        // update a bill in the database for administaration purposes
+        public void UpdateBill(Bill bill)
+        {
+            string query = "UPDATE [Bill] SET BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
+                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = GETDATE()" +
+                " WHERE BillNumber = @BillNumber";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@BillNumber", bill.BillNumber),
+                new SqlParameter("@BillAmount", bill.TotalAmount),
+                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
+                new SqlParameter("@TipAmount", bill.TipAmount),
+                new SqlParameter("@Feedback", bill.Feedback),
+                new SqlParameter("@TableNumber", bill.TableNumber),
+            };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
     }
 }
