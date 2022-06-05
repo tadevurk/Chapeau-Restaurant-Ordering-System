@@ -1001,6 +1001,10 @@ namespace RosUI
             {
                 MessageBox.Show(exp.Message);
             }
+            finally
+            {
+                txtNote.Clear();
+            }
 
         }
 
