@@ -24,12 +24,20 @@ namespace RosUI
             InitializeComponent();
             InitialiseTimer();
             InitialiseComboBoxes();
-
+            InitialiseLablesWithNames();
             UpdateAllListViews();
 
             this.employee = employee;
 
             AdaptFormOnRole(employee);
+        }
+
+        private void InitialiseLablesWithNames()
+        {
+            lblEmpNameBar.Text += $"{employee.Name}";
+            lblEmpNameBarFin.Text += $"{employee.Name}";
+            lblEmpNameKit.Text += $"{employee.Name}";
+            lblEmpNameKitFin.Text += $"{employee.Name}";
         }
 
         private void InitialiseTimer()
@@ -85,8 +93,7 @@ namespace RosUI
             {
                 ShowPanel("KitchenView");
             }
-
-            if (employee.Roles == Roles.Chef)
+            else if (employee.Roles == Roles.Chef)
             {
                 barViewToolStripMenuItem.Visible = false;
                 tableViewToolStripMenuItem.Visible = false;
