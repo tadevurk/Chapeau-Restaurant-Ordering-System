@@ -51,7 +51,7 @@ namespace RosUI
             }
             catch(Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -66,7 +66,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -81,7 +81,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -96,7 +96,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -111,7 +111,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -126,7 +126,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -141,7 +141,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -156,7 +156,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -171,7 +171,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -186,7 +186,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -315,7 +315,7 @@ namespace RosUI
             List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
             if(orderedDrinks.Count == 0)
             {
-                throw new Exception();
+                throw new Exception("there is currently no drinks to serve");
             }
             ServeDrinks(orderedDrinks);
 
@@ -328,7 +328,7 @@ namespace RosUI
             List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
             if (orderedDishes.Count == 0)
             {
-                throw new Exception();
+                throw new Exception("there is currently no dishes to serve");
             }
             ServeDishes(orderedDishes);
             
@@ -347,7 +347,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -364,7 +364,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show("Error Occorred: " + exp.Message);
+                MessageBox.Show("Error", exp.Message);
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -520,8 +520,7 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    t1DishIcon.Visible = true;
-                    t1DrinkIcon.Visible = true;
+                    ShowRunningIcons(t1DishIcon, t1DrinkIcon);
                     break;
 
                 case 2:
@@ -570,6 +569,12 @@ namespace RosUI
             }
         }
 
+        private void ShowRunningIcons(PictureBox pbDish, PictureBox pbDrink)
+        {
+            pbDish.Visible = true;
+            pbDrink.Visible = true;
+        }
+
         //Updates database when the order is received in the kitchen
         public void OrderRecieved(int number)
         {
@@ -577,75 +582,53 @@ namespace RosUI
             switch (number)
             {
                 case 1:
-                    table.TableNumber = 1;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableOne);
                     break;
-
                 case 2:
-                    table.TableNumber = 2;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableTwo);
                     break;
-
                 case 3:
-                    table.TableNumber = 3;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableThree);
-
                     break;
                 case 4:
-                    table.TableNumber = 4;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableFour);
                     break;
-
                 case 5:
-                    table.TableNumber = 5;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableFive);
                     break;
-
                 case 6:
-                    table.TableNumber = 6;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableSix);
                     break;
-
                 case 7:
-                    table.TableNumber = 7;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableSeven);
                     break;
-
                 case 8:
-                    table.TableNumber = 8;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableEight);
                     break;
-
                 case 9:
-                    table.TableNumber = 9;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableNine);
                     break;
-
                 case 10:
-                    table.TableNumber = 10;
-                    table.TableStatus = 2;
-                    tableLogic.Update(table);
+                    DisplayingOrderRecieved(table, number);
                     UpdateButtonColor(table, btnTableTen);
                     break;
             }
+        }
+
+        private void DisplayingOrderRecieved(Table table, int number)
+        {
+            table.TableNumber = number;
+            table.TableStatus = 2;
+            tableLogic.Update(table);
         }
 
         //Updates database when the drink is ready in the bar
