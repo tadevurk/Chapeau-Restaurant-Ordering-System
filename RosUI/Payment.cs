@@ -192,7 +192,7 @@ namespace RosUI
             {
                 if (txtTip.Text == "")
                 {
-                    MessageBox.Show("This value can not be empty!!!");
+                    //MessageBox.Show("This value can not be empty!!!");
                     txtTip.Text = "0.0";
                 }
                 else
@@ -223,14 +223,15 @@ namespace RosUI
             // calculate the amount that will be paid
             try
             {
-                if (txtToPay.Text == "")
+                if (txtToPay.Text == "" || decimal.Parse(txtToPay.Text) < bill.TotalAmount)
                 {
-                    MessageBox.Show("This value can not be empty!!!");
+                    //MessageBox.Show("This value can not be empty!!!");
                     txtToPay.Text = lblTotalAmount.Text;
+                    
                 }
                 else
-                {
-                    
+                { 
+
                     toPay = Convert.ToDecimal(txtToPay.Text);
                     tip = toPay - bill.TotalAmount;
                     bill.TipAmount = tip;
@@ -334,15 +335,16 @@ namespace RosUI
         {
             try
             {
+                // check if the inserted values are in numerical format
                 decimal splitAmount;
                 decimal tip;
 
-                bool checkPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
-                bool checkTip = decimal.TryParse(txtTipSplit.Text, out tip);
+                bool numericalToPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
+                bool numericalTip = decimal.TryParse(txtTipSplit.Text, out tip);
 
-                if (!checkPay || !checkTip)
+                if (!numericalToPay || !numericalTip || txtToPaySplit.Text.Contains(',') || txtTipSplit.Text.Contains(','))
                 {
-                    throw new Exception("Input is not in numerical format");
+                    throw new Exception("Input is not in correct numerical format");
                 }
 
 
