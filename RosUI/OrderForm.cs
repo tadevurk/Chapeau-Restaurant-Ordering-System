@@ -954,11 +954,11 @@ namespace RosUI
 
             List<Item> itemsInOrder = new List<Item>();
 
-            orderedDishes = dishLogic.WriteContainedDishes(table);
-            orderedDrinks = drinkLogic.WriteContainedDrinks(table);
+            orderedDishes = dishLogic.WriteContainedDishes(table); // Read all ordered Dishes 
+            orderedDrinks = drinkLogic.WriteContainedDrinks(table); // Read all ordered Drinks
 
-            itemsInOrder.AddRange(orderedDishes);
-            itemsInOrder.AddRange(orderedDrinks);
+            itemsInOrder.AddRange(orderedDishes); // Add Dishes to item list
+            itemsInOrder.AddRange(orderedDrinks);// Add Drinks to item list
 
             listviewOrder.Items.Clear();
 
@@ -1023,12 +1023,12 @@ namespace RosUI
                 {
                     order.OrderID = orderLogic.AddOrder(emp, table); // Create new order
 
-                    // send order - ( and grouping the old items' amount by adding the new items' amount)
+                    // adding the items in the listviewOrder to dish and drink list
                     SendOrder();
 
-                    //Adding completely new dishes and drinks to Order_Dish and Order_Drink tables
-                    dishLogic.AddDishes(DishesInOrderProcess, order);
-                    drinkLogic.AddDrinks(DrinkInOrderProcess, order);
+                    
+                    dishLogic.AddDishes(DishesInOrderProcess, order); // DishesInOrderProcess is the new ordered dishes
+                    drinkLogic.AddDrinks(DrinkInOrderProcess, order);// DrinkInOrderProcess is the new ordered drinks
 
                     table.TableStatus = 2; // Jason
                     tableLogic.Update(table); // Jason

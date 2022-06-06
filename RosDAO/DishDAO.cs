@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 namespace RosDAL
 {
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
+    /////////// Contributor Mirko Cuccurullo ///////
     public class DishDAO : BaseDAO
     {
-        public void AddDishes(List<Dish> dishes, Order order) // Add dish to OrderedDish
+        public void AddDishes(List<Dish> dishes, Order order) // Add dishes to OrderedDish
         {
             foreach (Dish dish in dishes)
             {
@@ -98,7 +99,7 @@ namespace RosDAL
             return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<Dish> GetDinnerStarters()
+        public List<Dish> GetDinnerStarters() // Dinner Starter contains menu type 3 as well.
         {
             string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
                 "from Dish " +

@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 namespace RosDAL
 {
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
+    //////// Contributor Mirko Cuccurullo ///////
     public class DrinkDAO : BaseDAO
     {
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)// Add drink to OrderedDrink
+        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)// Add drinks to OrderedDrink
         {
             foreach (Drink drink in drinkInOrderProcess)
             {
