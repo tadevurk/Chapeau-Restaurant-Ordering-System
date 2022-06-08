@@ -15,17 +15,14 @@ namespace RosUI
 {
     public partial class FormPayment : Form
     {
-        //Order order = new Order();
         RosMain rosMain;
         Table table;
-        Bill bill = new Bill();
-        BillLogic billLogic = new BillLogic();
-        TableLogic tableLogic = new TableLogic();
+        Bill bill;
+        BillLogic billLogic;
+        TableLogic tableLogic;
         Employee employee;
         FormOrder formOrder;
         List<Item> orderedItems;
-        List<Item> partialPayItems;
-
 
         decimal toPay;
         decimal tip;
@@ -37,7 +34,12 @@ namespace RosUI
             this.formOrder = formOrder;
             this.employee = emp;
             this.rosMain = rosMain;
+
+            billLogic = new BillLogic();
+            tableLogic = new TableLogic();
             orderedItems = new List<Item>();
+            bill = new Bill();
+
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
             bill.TableNumber = int.Parse(lblTableNumber.Text);
             btnCompletePayment.Enabled = false;
@@ -45,9 +47,10 @@ namespace RosUI
             pnlFeedback.Hide();
             pnlSplit.Hide();
 
+            // display items on the bill
             DisplayBill();
 
-            // display all different amounts
+            // display all different amounts (sum amounts , tip)
             bill.SubTotalAmount = CalculateSubTotalAmount();
             lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
             bill.TotalAmount = CalculateTotalAmount();
@@ -57,7 +60,7 @@ namespace RosUI
 
         private void DisplayBill()
         {
-            // Display the billed item with necessary fields (can either be printed or shown to the customer)
+            // Display the ordered items with necessary fields 
             try
             {
                 listViewPayment.Items.Clear();
@@ -75,15 +78,14 @@ namespace RosUI
                 {
                     ListViewItem li = new ListViewItem();
                     li.SubItems.Add(item.ItemAmount.ToString());
-                    li.SubItems.Add(item.ItemName.ToString());
+                    li.SubItems.Add(item.ItemName);
 
-                    //item.Vat = calculateVat(item.Vat);
                     li.SubItems.Add(item.ItemVat.ToString());
 
                     item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.ItemVat);
                     li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString("0.00"));
 
-                    li.SubItems.Add((item.ItemPrice * item.ItemAmount).ToString());
+                    li.SubItems.Add((item.ItemPrice * item.ItemAmount).ToString("0.00"));
 
                     li.Tag = item;
                     listViewPayment.Items.Add(li);
@@ -145,6 +147,7 @@ namespace RosUI
                 {
                     // proceed with adding some feedback
                     pnlFeedback.Show();
+                    btnCompletePayment.Visible = false;
                 }
                 else
                 {
@@ -193,7 +196,7 @@ namespace RosUI
                 if (txtTip.Text == "")
                 {
                     //MessageBox.Show("This value can not be empty!!!");
-                    txtTip.Text = "0.0";
+                    txtTip.Text = "0.00";
                 }
                 else
                 {
@@ -206,7 +209,7 @@ namespace RosUI
                     tip = Convert.ToDecimal(txtTip.Text);
                     toPay = tip + bill.TotalAmount;
 
-                    txtToPay.Text = toPay.ToString();
+                    txtToPay.Text = toPay.ToString("0.00");
                 }
 
             }
@@ -236,7 +239,7 @@ namespace RosUI
                     tip = toPay - bill.TotalAmount;
                     bill.TipAmount = tip;
 
-                    txtTip.Text = tip.ToString();
+                    txtTip.Text = tip.ToString("0.00");
 
                 }
             }
