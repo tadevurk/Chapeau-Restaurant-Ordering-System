@@ -177,7 +177,6 @@ namespace RosUI
                 showPanel("Lunch");
                 ButtonColorReset();
                 btnLunch.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -191,7 +190,6 @@ namespace RosUI
                 showPanel("Starters");
                 ButtonColorReset();
                 btnStarters.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -205,7 +203,6 @@ namespace RosUI
                 showPanel("Mains");
                 ButtonColorReset();
                 btnMains.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -219,7 +216,6 @@ namespace RosUI
                 showPanel("Desserts");
                 ButtonColorReset();
                 btnDesserts.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -233,7 +229,6 @@ namespace RosUI
                 showPanel("Dinner");
                 ButtonColorReset();
                 btnDinner.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -247,7 +242,6 @@ namespace RosUI
                 showPanel("DinnerStarters");
                 ButtonColorReset();
                 btnStartersDinner.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -261,7 +255,6 @@ namespace RosUI
                 showPanel("DinnerMains");
                 ButtonColorReset();
                 btnMainsDinners.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -275,7 +268,6 @@ namespace RosUI
                 showPanel("DinnerDesserts");
                 ButtonColorReset();
                 btnDessertsDinner.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -289,7 +281,6 @@ namespace RosUI
                 showPanel("Drinks");
                 ButtonColorReset();
                 btnDrinks.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -304,7 +295,6 @@ namespace RosUI
                 showPanel("SoftDrinks");
                 ButtonColorReset();
                 btnSoftDrink.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -318,7 +308,6 @@ namespace RosUI
                 showPanel("Beers");
                 ButtonColorReset();
                 btnBeers.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -332,7 +321,6 @@ namespace RosUI
                 showPanel("Wines");
                 ButtonColorReset();
                 btnWine.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -347,7 +335,6 @@ namespace RosUI
                 showPanel("Spirits");
                 ButtonColorReset();
                 btnSpirits.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -361,8 +348,7 @@ namespace RosUI
             {
                 showPanel("HotDrinks");
                 ButtonColorReset();
-                btnHotDrinks.BackColor = Color.LightGreen;
-                SendCancelNoteButtonsVisible();
+                btnHotDrinks.BackColor = Color.LightGreen;           
             }
             catch (Exception exp)
             {
@@ -562,6 +548,7 @@ namespace RosUI
                 }
 
                 AddLunchStarter();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -578,6 +565,7 @@ namespace RosUI
                 }
 
                 AddLunchMain();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -594,6 +582,7 @@ namespace RosUI
                 }
 
                 AddLunchDessert();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -610,6 +599,7 @@ namespace RosUI
                 }
 
                 AddDinnerMain();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -626,6 +616,7 @@ namespace RosUI
                 }
 
                 AddDinnerStarter();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -642,6 +633,7 @@ namespace RosUI
                 }
 
                 AddDinnerDessert();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -658,6 +650,7 @@ namespace RosUI
                 }
 
                 AddSoftDrink();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -674,6 +667,7 @@ namespace RosUI
                 }
 
                 AddBeer();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -691,6 +685,7 @@ namespace RosUI
                 }
 
                 AddWine();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -708,6 +703,7 @@ namespace RosUI
                 }
 
                 AddSpirit();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
@@ -725,6 +721,7 @@ namespace RosUI
                 }
 
                 AddHotDrink();
+                SendCancelNoteButtonsVisible();
             }
             catch (Exception exp)
             {
