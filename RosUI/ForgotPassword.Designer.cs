@@ -74,7 +74,7 @@
             // 
             this.cmbSecret.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbSecret.FormattingEnabled = true;
-            this.cmbSecret.Location = new System.Drawing.Point(111, 313);
+            this.cmbSecret.Location = new System.Drawing.Point(111, 310);
             this.cmbSecret.Name = "cmbSecret";
             this.cmbSecret.Size = new System.Drawing.Size(250, 28);
             this.cmbSecret.TabIndex = 3;
@@ -82,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(186, 290);
+            this.label2.Location = new System.Drawing.Point(187, 287);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(111, 20);
             this.label2.TabIndex = 4;
@@ -90,12 +90,14 @@
             // 
             // btnResetPassword
             // 
-            this.btnResetPassword.Location = new System.Drawing.Point(181, 621);
+            this.btnResetPassword.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnResetPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnResetPassword.Location = new System.Drawing.Point(179, 620);
             this.btnResetPassword.Name = "btnResetPassword";
             this.btnResetPassword.Size = new System.Drawing.Size(120, 40);
             this.btnResetPassword.TabIndex = 5;
             this.btnResetPassword.Text = "Reset Password";
-            this.btnResetPassword.UseVisualStyleBackColor = true;
+            this.btnResetPassword.UseVisualStyleBackColor = false;
             this.btnResetPassword.Click += new System.EventHandler(this.btnResetPassword_Click);
             // 
             // txtSecretAnswer
@@ -108,7 +110,7 @@
             // lblSecretAnswer
             // 
             this.lblSecretAnswer.AutoSize = true;
-            this.lblSecretAnswer.Location = new System.Drawing.Point(187, 367);
+            this.lblSecretAnswer.Location = new System.Drawing.Point(190, 367);
             this.lblSecretAnswer.Name = "lblSecretAnswer";
             this.lblSecretAnswer.Size = new System.Drawing.Size(102, 20);
             this.lblSecretAnswer.TabIndex = 7;
@@ -116,7 +118,7 @@
             // 
             // txtNewPassword
             // 
-            this.txtNewPassword.Location = new System.Drawing.Point(178, 469);
+            this.txtNewPassword.Location = new System.Drawing.Point(178, 480);
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(125, 27);
             this.txtNewPassword.TabIndex = 8;
@@ -124,7 +126,7 @@
             // 
             // txtReEnterpassword
             // 
-            this.txtReEnterpassword.Location = new System.Drawing.Point(178, 535);
+            this.txtReEnterpassword.Location = new System.Drawing.Point(178, 560);
             this.txtReEnterpassword.Name = "txtReEnterpassword";
             this.txtReEnterpassword.Size = new System.Drawing.Size(125, 27);
             this.txtReEnterpassword.TabIndex = 9;
@@ -133,7 +135,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(189, 446);
+            this.label3.Location = new System.Drawing.Point(189, 457);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 20);
             this.label3.TabIndex = 10;
@@ -142,7 +144,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(174, 512);
+            this.label4.Location = new System.Drawing.Point(175, 537);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(131, 20);
             this.label4.TabIndex = 11;
