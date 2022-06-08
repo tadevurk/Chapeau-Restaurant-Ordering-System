@@ -45,7 +45,7 @@ namespace RosUI
         {
             //setting a timer for automatic update of the list views
             Timer timer1 = new Timer();
-            timer1.Interval = 10000;//10 seconds
+            timer1.Interval = 30000;//30 seconds
             timer1.Tick += new EventHandler(timer1_Tick);
             timer1.Start();
         }
@@ -226,7 +226,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes!");
+                        li.SubItems.Add(drink.ItemNote);
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
@@ -284,7 +284,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes!");
+                        li.SubItems.Add(drink.ItemNote);
                         li.SubItems[2].BackColor = Color.LightGreen;
                     }
 
@@ -329,7 +329,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes!");                     
+                        li.SubItems.Add(dish.ItemNote);                     
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
@@ -390,7 +390,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add("Yes!");
+                        li.SubItems.Add(dish.ItemNote);
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
@@ -449,6 +449,7 @@ namespace RosUI
                 {
                     throw new Exception("No item selected!");
                 }
+
 
                 //updating the status of each selected dish, update table status
                 for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
@@ -593,6 +594,13 @@ namespace RosUI
                     throw new Exception("No item selected!");
                 }
 
+                DialogResult dialogResult = MessageBox.Show("Do you want to undo the selected items?", "Undo Dishes", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
                 //update each dish status and update the respective table
                 for (int i = 0; i < lvFinishedDishes.SelectedItems.Count; i++)
                 {
@@ -622,6 +630,13 @@ namespace RosUI
                     throw new Exception("No item selected!");
                 }
 
+                DialogResult dialogResult = MessageBox.Show("Do you want to undo the selected items?", "Undo Dishes", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+
                 //update each drink status update the table
                 for (int i = 0; i < lvFinishedDrinks.SelectedItems.Count; i++)
                 {
@@ -649,6 +664,13 @@ namespace RosUI
                 if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
                     throw new Exception("No selected item!");
+                }
+
+                DialogResult dialogResult = MessageBox.Show("Do you want to undo the selected items?", "Undo Drinks", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
                 }
 
                 //update each item status and update the respective table
@@ -688,6 +710,13 @@ namespace RosUI
                 if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
                     throw new Exception("No selected items!");
+                }
+
+                DialogResult dialogResult = MessageBox.Show("Do you want to undo the selected items?", "Undo Dishes", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
                 }
 
                 //update all selected items, update the table
@@ -766,7 +795,7 @@ namespace RosUI
 
             //select all items of the same table
             foreach (ListViewItem item in lvFinishedDrinks.Items)
-                if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
                 {
                     item.Selected = true;
                 }
@@ -781,7 +810,7 @@ namespace RosUI
 
             //select all items of the same table
             foreach (ListViewItem item in lvOrderedDrinks.Items)
-                if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
                 {
                     item.Selected = true;
                 }

@@ -40,6 +40,7 @@
             this.finishedOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlKitchenView = new System.Windows.Forms.Panel();
+            this.lblEmpNameKit = new System.Windows.Forms.Label();
             this.cmbCourseKit = new System.Windows.Forms.ComboBox();
             this.cmbTableKit = new System.Windows.Forms.ComboBox();
             this.btnSelByCourseKit = new System.Windows.Forms.Button();
@@ -57,6 +58,7 @@
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
             this.pnlBarView = new System.Windows.Forms.Panel();
+            this.lblEmpNameBar = new System.Windows.Forms.Label();
             this.cmbSelByTabBar = new System.Windows.Forms.ComboBox();
             this.btnSelByTabBar = new System.Windows.Forms.Button();
             this.btnFinishedOrdersBar = new System.Windows.Forms.Button();
@@ -87,6 +89,7 @@
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
             this.pnlBarViewFinished = new System.Windows.Forms.Panel();
+            this.lblEmpNameBarFin = new System.Windows.Forms.Label();
             this.BtnSelByTabBarFin = new System.Windows.Forms.Button();
             this.cmbBarFinished = new System.Windows.Forms.ComboBox();
             this.btnRunningOrdersBar = new System.Windows.Forms.Button();
@@ -99,9 +102,6 @@
             this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
-            this.lblEmpNameBarFin = new System.Windows.Forms.Label();
-            this.lblEmpNameBar = new System.Windows.Forms.Label();
-            this.lblEmpNameKit = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -218,6 +218,15 @@
             this.pnlKitchenView.Name = "pnlKitchenView";
             this.pnlKitchenView.Size = new System.Drawing.Size(1482, 723);
             this.pnlKitchenView.TabIndex = 0;
+            // 
+            // lblEmpNameKit
+            // 
+            this.lblEmpNameKit.AutoSize = true;
+            this.lblEmpNameKit.Location = new System.Drawing.Point(1222, 21);
+            this.lblEmpNameKit.Name = "lblEmpNameKit";
+            this.lblEmpNameKit.Size = new System.Drawing.Size(46, 20);
+            this.lblEmpNameKit.TabIndex = 12;
+            this.lblEmpNameKit.Text = "Chef: ";
             // 
             // cmbCourseKit
             // 
@@ -343,12 +352,12 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Dishes";
-            this.columnHeader2.Width = 600;
+            this.columnHeader2.Width = 400;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "Note";
-            this.columnHeader5.Width = 80;
+            this.columnHeader5.Width = 280;
             // 
             // columnHeader6
             // 
@@ -380,6 +389,15 @@
             this.pnlBarView.Name = "pnlBarView";
             this.pnlBarView.Size = new System.Drawing.Size(1482, 723);
             this.pnlBarView.TabIndex = 4;
+            // 
+            // lblEmpNameBar
+            // 
+            this.lblEmpNameBar.AutoSize = true;
+            this.lblEmpNameBar.Location = new System.Drawing.Point(1248, 21);
+            this.lblEmpNameBar.Name = "lblEmpNameBar";
+            this.lblEmpNameBar.Size = new System.Drawing.Size(81, 20);
+            this.lblEmpNameBar.TabIndex = 12;
+            this.lblEmpNameBar.Text = "Bartender: ";
             // 
             // cmbSelByTabBar
             // 
@@ -484,12 +502,12 @@
             // clDrinks
             // 
             this.clDrinks.Text = "Drinks";
-            this.clDrinks.Width = 700;
+            this.clDrinks.Width = 470;
             // 
             // clAmount
             // 
             this.clAmount.Text = "Note";
-            this.clAmount.Width = 80;
+            this.clAmount.Width = 320;
             // 
             // columnHeader4
             // 
@@ -625,12 +643,12 @@
             // columnHeader10
             // 
             this.columnHeader10.Text = "Dishes";
-            this.columnHeader10.Width = 550;
+            this.columnHeader10.Width = 400;
             // 
             // columnHeader11
             // 
             this.columnHeader11.Text = "Note";
-            this.columnHeader11.Width = 80;
+            this.columnHeader11.Width = 280;
             // 
             // columnHeader12
             // 
@@ -661,6 +679,15 @@
             this.pnlBarViewFinished.Name = "pnlBarViewFinished";
             this.pnlBarViewFinished.Size = new System.Drawing.Size(1482, 723);
             this.pnlBarViewFinished.TabIndex = 6;
+            // 
+            // lblEmpNameBarFin
+            // 
+            this.lblEmpNameBarFin.AutoSize = true;
+            this.lblEmpNameBarFin.Location = new System.Drawing.Point(1250, 21);
+            this.lblEmpNameBarFin.Name = "lblEmpNameBarFin";
+            this.lblEmpNameBarFin.Size = new System.Drawing.Size(81, 20);
+            this.lblEmpNameBarFin.TabIndex = 9;
+            this.lblEmpNameBarFin.Text = "Bartender: ";
             // 
             // BtnSelByTabBarFin
             // 
@@ -752,12 +779,12 @@
             // columnHeader16
             // 
             this.columnHeader16.Text = "Drinks";
-            this.columnHeader16.Width = 650;
+            this.columnHeader16.Width = 500;
             // 
             // columnHeader17
             // 
             this.columnHeader17.Text = "Note";
-            this.columnHeader17.Width = 80;
+            this.columnHeader17.Width = 320;
             // 
             // columnHeader18
             // 
@@ -768,33 +795,6 @@
             // 
             this.columnHeader19.Text = "Table";
             this.columnHeader19.Width = 76;
-            // 
-            // lblEmpNameBarFin
-            // 
-            this.lblEmpNameBarFin.AutoSize = true;
-            this.lblEmpNameBarFin.Location = new System.Drawing.Point(1250, 21);
-            this.lblEmpNameBarFin.Name = "lblEmpNameBarFin";
-            this.lblEmpNameBarFin.Size = new System.Drawing.Size(81, 20);
-            this.lblEmpNameBarFin.TabIndex = 9;
-            this.lblEmpNameBarFin.Text = "Bartender: ";
-            // 
-            // lblEmpNameBar
-            // 
-            this.lblEmpNameBar.AutoSize = true;
-            this.lblEmpNameBar.Location = new System.Drawing.Point(1248, 21);
-            this.lblEmpNameBar.Name = "lblEmpNameBar";
-            this.lblEmpNameBar.Size = new System.Drawing.Size(81, 20);
-            this.lblEmpNameBar.TabIndex = 12;
-            this.lblEmpNameBar.Text = "Bartender: ";
-            // 
-            // lblEmpNameKit
-            // 
-            this.lblEmpNameKit.AutoSize = true;
-            this.lblEmpNameKit.Location = new System.Drawing.Point(1222, 21);
-            this.lblEmpNameKit.Name = "lblEmpNameKit";
-            this.lblEmpNameKit.Size = new System.Drawing.Size(46, 20);
-            this.lblEmpNameKit.TabIndex = 12;
-            this.lblEmpNameKit.Text = "Chef: ";
             // 
             // RosMain
             // 
