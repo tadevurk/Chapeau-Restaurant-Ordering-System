@@ -54,12 +54,14 @@ namespace RosUI
                 case "Lunch":
                     pnlLunch.Show();
                     pnlLunch.Visible = true;
+                    txtNote.Visible = false;
                     break;
 
                 case "Starters":
                     pnlStarters.Show();
                     pnlStarters.Visible = true;
                     pnlLunch.Visible = true;
+                    txtNote.Visible = true;
                     ReadStarters();
                     break;
 
@@ -67,6 +69,7 @@ namespace RosUI
                     pnlMains.Show();
                     pnlMains.Visible = true;
                     pnlLunch.Visible = true;
+                    txtNote.Visible = true;
                     ReadLunchMains();
                     break;
 
@@ -74,18 +77,21 @@ namespace RosUI
                     pnlDesserts.Show();
                     pnlDesserts.Visible = true;
                     pnlLunch.Visible = true;
+                    txtNote.Visible = true;
                     ReadLunchDesserts();
                     break;
 
                 case "Dinner":
                     pnlDinner.Show();
                     pnlDinner.Visible = true;
+                    txtNote.Visible = false;
                     break;
 
                 case "DinnerStarters":
                     pnlDinnerStarters.Show();
                     pnlDinnerStarters.Visible = true;
                     pnlDinner.Visible = true;
+                    txtNote.Visible = true;
                     ReadDinnerStarters();
                     break;
 
@@ -93,6 +99,7 @@ namespace RosUI
                     pnlDinnerMains.Show();
                     pnlDinnerMains.Visible = true;
                     pnlDinner.Visible = true;
+                    txtNote.Visible = true;
                     ReadDinnerMains();
                     break;
 
@@ -100,18 +107,21 @@ namespace RosUI
                     pnlDinnerDesserts.Show();
                     pnlDinnerDesserts.Visible = true;
                     pnlDinner.Visible = true;
+                    txtNote.Visible = true;
                     ReadDinnerDesserts();
                     break;
 
                 case "Drinks":
                     pnlDrinkCategories.Show();
                     pnlDrinkCategories.Visible = true;
+                    txtNote.Visible = false;
                     break;
 
                 case "SoftDrinks":
                     pnlSoftDrinks.Show();
                     pnlSoftDrinks.Visible = true;
                     pnlDrinkCategories.Visible = true;
+                    txtNote.Visible = true;
                     ReadSoftDrinks();
                     break;
 
@@ -119,6 +129,7 @@ namespace RosUI
                     pnlBeers.Show();
                     pnlBeers.Visible = true;
                     pnlDrinkCategories.Visible = true;
+                    txtNote.Visible = true;
                     ReadBeers();
                     break;
 
@@ -126,6 +137,7 @@ namespace RosUI
                     pnlWines.Show();
                     pnlBeers.Visible = true;
                     pnlDrinkCategories.Visible = true;
+                    txtNote.Visible = true;
                     ReadWines();
                     break;
 
@@ -133,6 +145,7 @@ namespace RosUI
                     pnlSpirits.Show();
                     pnlSpirits.Visible = true;
                     pnlDrinkCategories.Visible = true;
+                    txtNote.Visible = true;
                     ReadSpirits();
                     break;
 
@@ -140,6 +153,7 @@ namespace RosUI
                     pnlHotDrinks.Show();
                     pnlHotDrinks.Visible = true;
                     pnlDrinkCategories.Visible = true;
+                    txtNote.Visible = true;
                     ReadHotDrinks();
                     break;
             }
@@ -360,7 +374,6 @@ namespace RosUI
         {
             btnSendOrder.Visible = true;
             btnCancelOrder.Visible = true;
-            txtNote.Visible = true;
             btnOrderAddNote.Visible = true;
         }
         void HidePanels()
@@ -946,13 +959,10 @@ namespace RosUI
 
         private void WriteContainedItems() // Getting the ordered list
         {
-            List<Dish> orderedDishes = new List<Dish>();
-            List<Drink> orderedDrinks = new List<Drink>();
-
             List<Item> itemsInOrder = new List<Item>();
 
-            orderedDishes = dishLogic.WriteContainedDishes(table); // Read all ordered Dishes 
-            orderedDrinks = drinkLogic.WriteContainedDrinks(table); // Read all ordered Drinks
+            List<Dish> orderedDishes = dishLogic.WriteContainedDishes(table); // Read all ordered Dishes 
+            List<Drink> orderedDrinks = drinkLogic.WriteContainedDrinks(table); // Read all ordered Drinks
 
             itemsInOrder.AddRange(orderedDishes); // Add Dishes to item list
             itemsInOrder.AddRange(orderedDrinks);// Add Drinks to item list
@@ -982,18 +992,7 @@ namespace RosUI
                 DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the new orders at once
-                    {
-                        Item item = (Item)lvOrderInProcess.Tag;
-
-                        if (lvOrderInProcess.ForeColor == Color.Red)
-                        {
-                            listviewOrder.Items.Remove(lvOrderInProcess);
-                            item.ItemName = lvOrderInProcess.SubItems[0].Text;
-                            item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
-                            orderLogic.UpdateStock(item);
-                        }
-                    }
+                    UpdateCanceledStock();
                 }
                 else if (dialogResult == DialogResult.No)
                 {
@@ -1011,7 +1010,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewOrder.Items.Count == 0)
+                if (listviewOrder.Items.Count == 0) // Extra checking
                 {
                     throw new Exception($"Sorry {emp.Name}, there is nothing to send");
                 }
@@ -1029,8 +1028,6 @@ namespace RosUI
 
                     table.TableStatus = 2; // Jason
                     tableLogic.Update(table); // Jason
-
-                    WriteContainedItems(); // Update the list again
 
                     //Update KitchenView and Barview
                     rosMain.UpdateAllListViews();
@@ -1119,12 +1116,12 @@ namespace RosUI
                     item = (Item)listviewOrder.SelectedItems[0].Tag;
                     if (item is Dish)
                     {
-                        Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                        Dish dish = (Dish)item;
                         AddDishNote(dish);
                     }
                     else if (item is Drink)
                     {
-                        Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                        Drink drink = (Drink)item;
                         AddDrinkNote(drink);
                     }
                 }
@@ -1133,12 +1130,12 @@ namespace RosUI
                     item = (Item)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
                     if (item is Dish)
                     {
-                        Dish dish = (Dish)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                        Dish dish = (Dish)item;
                         AddDishNote(dish);
                     }
                     else if (item is Drink)
                     {
-                        Drink drink = (Drink)listviewOrder.Items[listviewOrder.Items.Count - 1].Tag;
+                        Drink drink = (Drink)item;
                         AddDrinkNote(drink);
                     }
                 }
@@ -1178,19 +1175,7 @@ namespace RosUI
         {
             try
             {
-                foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Update stock when back is clicked
-                {
-                    Item item = (Item)lvOrderInProcess.Tag;
-                    {
-                        if (lvOrderInProcess.ForeColor == Color.Red)
-                        {
-                            listviewOrder.Items.Remove(lvOrderInProcess);
-                            item.ItemName = lvOrderInProcess.SubItems[0].Text;
-                            item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
-                            orderLogic.UpdateStock(item);
-                        }
-                    }
-                }
+                UpdateCanceledStock();
                 this.Close();
                 new TableControl(emp, rosMain, table).Show();
             }
@@ -1198,6 +1183,23 @@ namespace RosUI
             catch (Exception exp)
             {
                 MessageBox.Show(exp.Message);
+            }
+        }
+
+        private void UpdateCanceledStock()
+        {
+            foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Update stock when back is clicked
+            {
+                Item item = (Item)lvOrderInProcess.Tag;
+                {
+                    if (lvOrderInProcess.ForeColor == Color.Red)
+                    {
+                        listviewOrder.Items.Remove(lvOrderInProcess);
+                        item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                        item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                        orderLogic.UpdateStock(item);
+                    }
+                }
             }
         }
     }
