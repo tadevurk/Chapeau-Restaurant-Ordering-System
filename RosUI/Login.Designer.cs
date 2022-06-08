@@ -28,15 +28,15 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
             this.txtPinCode = new System.Windows.Forms.TextBox();
             this.lblPinCode = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pbChapeauLogo = new System.Windows.Forms.PictureBox();
+            this.lblForgotPassword = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.pbChapeauLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLogin
@@ -96,21 +96,35 @@ namespace RosUI
             this.lblPinCode.TabIndex = 7;
             this.lblPinCode.Text = "PinCode";
             // 
-            // pictureBox1
+            // pbChapeauLogo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(140, 37);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(199, 103);
-            this.pictureBox1.TabIndex = 8;
-            this.pictureBox1.TabStop = false;
+            this.pbChapeauLogo.Image = global::RosUI.Properties.Resources.ChapeauLogo;
+            this.pbChapeauLogo.Location = new System.Drawing.Point(140, 37);
+            this.pbChapeauLogo.Name = "pbChapeauLogo";
+            this.pbChapeauLogo.Size = new System.Drawing.Size(198, 103);
+            this.pbChapeauLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbChapeauLogo.TabIndex = 8;
+            this.pbChapeauLogo.TabStop = false;
+            // 
+            // lblForgotPassword
+            // 
+            this.lblForgotPassword.AutoSize = true;
+            this.lblForgotPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lblForgotPassword.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblForgotPassword.Location = new System.Drawing.Point(179, 367);
+            this.lblForgotPassword.Name = "lblForgotPassword";
+            this.lblForgotPassword.Size = new System.Drawing.Size(125, 20);
+            this.lblForgotPassword.TabIndex = 9;
+            this.lblForgotPassword.Text = "Forgot Password?";
+            this.lblForgotPassword.Click += new System.EventHandler(this.lblForgotPassword_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lblForgotPassword);
+            this.Controls.Add(this.pbChapeauLogo);
             this.Controls.Add(this.lblPinCode);
             this.Controls.Add(this.txtPinCode);
             this.Controls.Add(this.lblUsername);
@@ -120,7 +134,7 @@ namespace RosUI
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbChapeauLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,6 +148,7 @@ namespace RosUI
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtPinCode;
         private System.Windows.Forms.Label lblPinCode;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbChapeauLogo;
+        private System.Windows.Forms.Label lblForgotPassword;
     }
 }

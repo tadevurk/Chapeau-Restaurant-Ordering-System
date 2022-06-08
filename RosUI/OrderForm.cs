@@ -1030,7 +1030,7 @@ namespace RosUI
                     dishLogic.AddDishes(DishesInOrderProcess, order);
                     drinkLogic.AddDrinks(DrinkInOrderProcess, order);
 
-                    table.TableStatus = 2; // Jason
+                    table.TableStatus = TableStatus.Standby; // Jason
                     tableLogic.Update(table); // Jason
 
                     WriteContainedItems(); // Update the list again

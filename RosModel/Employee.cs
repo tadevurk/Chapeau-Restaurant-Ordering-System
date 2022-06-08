@@ -16,5 +16,6 @@ namespace RosModel
         public string Salt { get; set; }
 
         public string Digest { get; set; }
+        public string SecretAnswer { get; set; }
     }
 }

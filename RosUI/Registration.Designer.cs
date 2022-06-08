@@ -29,7 +29,6 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registration));
             this.btnExit = new System.Windows.Forms.Button();
             this.btnRegister = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -41,6 +40,10 @@ namespace RosUI
             this.lblLicensKey = new System.Windows.Forms.Label();
             this.txtLicenseKey = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cmbSecret = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSecretAnswer = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,7 +63,7 @@ namespace RosUI
             // 
             this.btnRegister.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnRegister.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRegister.Location = new System.Drawing.Point(188, 530);
+            this.btnRegister.Location = new System.Drawing.Point(190, 628);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(100, 40);
             this.btnRegister.TabIndex = 1;
@@ -78,7 +81,7 @@ namespace RosUI
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Location = new System.Drawing.Point(179, 180);
+            this.lblUsername.Location = new System.Drawing.Point(202, 180);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(75, 20);
             this.lblUsername.TabIndex = 3;
@@ -86,14 +89,14 @@ namespace RosUI
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(179, 290);
+            this.txtName.Location = new System.Drawing.Point(179, 285);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(125, 27);
             this.txtName.TabIndex = 4;
             // 
             // txtPinCode
             // 
-            this.txtPinCode.Location = new System.Drawing.Point(179, 370);
+            this.txtPinCode.Location = new System.Drawing.Point(179, 365);
             this.txtPinCode.Name = "txtPinCode";
             this.txtPinCode.Size = new System.Drawing.Size(125, 27);
             this.txtPinCode.TabIndex = 5;
@@ -102,7 +105,7 @@ namespace RosUI
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(179, 267);
+            this.lblName.Location = new System.Drawing.Point(213, 262);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(49, 20);
             this.lblName.TabIndex = 6;
@@ -111,7 +114,7 @@ namespace RosUI
             // lblPinCode
             // 
             this.lblPinCode.AutoSize = true;
-            this.lblPinCode.Location = new System.Drawing.Point(179, 347);
+            this.lblPinCode.Location = new System.Drawing.Point(209, 342);
             this.lblPinCode.Name = "lblPinCode";
             this.lblPinCode.Size = new System.Drawing.Size(64, 20);
             this.lblPinCode.TabIndex = 7;
@@ -120,7 +123,7 @@ namespace RosUI
             // lblLicensKey
             // 
             this.lblLicensKey.AutoSize = true;
-            this.lblLicensKey.Location = new System.Drawing.Point(179, 427);
+            this.lblLicensKey.Location = new System.Drawing.Point(200, 546);
             this.lblLicensKey.Name = "lblLicensKey";
             this.lblLicensKey.Size = new System.Drawing.Size(85, 20);
             this.lblLicensKey.TabIndex = 8;
@@ -128,7 +131,7 @@ namespace RosUI
             // 
             // txtLicenseKey
             // 
-            this.txtLicenseKey.Location = new System.Drawing.Point(179, 450);
+            this.txtLicenseKey.Location = new System.Drawing.Point(179, 569);
             this.txtLicenseKey.Name = "txtLicenseKey";
             this.txtLicenseKey.Size = new System.Drawing.Size(125, 27);
             this.txtLicenseKey.TabIndex = 9;
@@ -136,18 +139,58 @@ namespace RosUI
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Image = global::RosUI.Properties.Resources.ChapeauLogo;
             this.pictureBox1.Location = new System.Drawing.Point(140, 37);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(199, 103);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
+            // 
+            // cmbSecret
+            // 
+            this.cmbSecret.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbSecret.FormattingEnabled = true;
+            this.cmbSecret.Location = new System.Drawing.Point(94, 438);
+            this.cmbSecret.Name = "cmbSecret";
+            this.cmbSecret.Size = new System.Drawing.Size(288, 28);
+            this.cmbSecret.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(189, 415);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 20);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Secret question";
+            // 
+            // txtSecretAnswer
+            // 
+            this.txtSecretAnswer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.txtSecretAnswer.Location = new System.Drawing.Point(94, 500);
+            this.txtSecretAnswer.Name = "txtSecretAnswer";
+            this.txtSecretAnswer.Size = new System.Drawing.Size(288, 27);
+            this.txtSecretAnswer.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(187, 477);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 20);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Secret Answer";
             // 
             // Registration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtSecretAnswer);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cmbSecret);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtLicenseKey);
             this.Controls.Add(this.lblLicensKey);
@@ -181,5 +224,9 @@ namespace RosUI
         private System.Windows.Forms.Label lblLicensKey;
         private System.Windows.Forms.TextBox txtLicenseKey;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ComboBox cmbSecret;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSecretAnswer;
+        private System.Windows.Forms.Label label2;
     }
 }

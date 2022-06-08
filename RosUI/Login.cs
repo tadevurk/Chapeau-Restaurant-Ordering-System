@@ -103,6 +103,12 @@ namespace RosUI
             }         
         }
 
+        //opens forgot password form
+        private void lblForgotPassword_Click(object sender, EventArgs e)
+        {
+            new ForgotPassword().Show();
+        }
+
         //Opens the registration form
         private void btnRegister_Click(object sender, EventArgs e)
         {
@@ -223,6 +229,6 @@ namespace RosUI
             HashWithSaltResult hashResultSha256 = pwHasher.Hash(password, SHA256.Create(), salt);
 
             return hashResultSha256;
-        }    
+        }
     }
 }

@@ -129,7 +129,7 @@ namespace RosDAL
                 Table table = new Table();
                 {
                     table.TableNumber = (int)dr["TableNumber"];
-                    table.TableStatus = (int)dr["TableStatus"];
+                    table.TableStatus = (TableStatus)dr["TableStatus"];
                 };
                 tables.Add(table);
             }
@@ -210,7 +210,7 @@ namespace RosDAL
             foreach (DataRow dr in dataTable.Rows)
             {                  
                 table.TableNumber = (int)dr["TableNumber"];
-                table.TableStatus = (int)dr["TableStatus"];
+                table.TableStatus = (TableStatus)dr["TableStatus"];
             }
             return table;
         }

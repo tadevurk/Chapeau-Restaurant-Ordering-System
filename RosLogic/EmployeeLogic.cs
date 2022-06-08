@@ -12,9 +12,20 @@ namespace RosLogic
     {
         EmployeeDAO employeedb = new EmployeeDAO();
 
+
+        public void UpdatePassword(Employee employee)
+        {
+            employeedb.UpdatePassword(employee);
+        }
+
         public Employee GetLastEmployeeID()
         {
             return employeedb.GetLastEmployeeID();
+        }
+
+        public List<SecretQuestion> GetAllSecretQuestions()
+        {
+            return employeedb.GetAllSecretQuestions();
         }
 
         public List<Employee> GetAllManagers()

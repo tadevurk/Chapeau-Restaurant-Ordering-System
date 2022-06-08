@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Timer tmrTablecontrol;
             this.btnOccupy = new System.Windows.Forms.Button();
             this.btnTakeOrder = new System.Windows.Forms.Button();
             this.btnPay = new System.Windows.Forms.Button();
@@ -36,6 +38,7 @@
             this.lblWaiter = new System.Windows.Forms.Label();
             this.btnDishServed = new System.Windows.Forms.Button();
             this.btnDrinkServed = new System.Windows.Forms.Button();
+            tmrTablecontrol = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnOccupy
@@ -129,6 +132,11 @@
             this.btnDrinkServed.Text = "Drink Served";
             this.btnDrinkServed.UseVisualStyleBackColor = false;
             this.btnDrinkServed.Click += new System.EventHandler(this.btnDrinkServed_Click);
+            // 
+            // tmrTablecontrol
+            // 
+            tmrTablecontrol.Interval = 60000;
+            tmrTablecontrol.Tick += new System.EventHandler(this.tmrTablecontrol_Tick);
             // 
             // TableControl
             // 
