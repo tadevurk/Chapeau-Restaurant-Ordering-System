@@ -65,7 +65,6 @@
             // 
             // txtUsername
             // 
-            this.txtUsername.Cursor = System.Windows.Forms.Cursors.Hand;
             this.txtUsername.Location = new System.Drawing.Point(178, 230);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(125, 27);
