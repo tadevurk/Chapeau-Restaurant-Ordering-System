@@ -120,6 +120,7 @@
             this.txtNewPassword.Name = "txtNewPassword";
             this.txtNewPassword.Size = new System.Drawing.Size(125, 27);
             this.txtNewPassword.TabIndex = 8;
+            this.txtNewPassword.UseSystemPasswordChar = true;
             // 
             // txtReEnterpassword
             // 
@@ -127,6 +128,7 @@
             this.txtReEnterpassword.Name = "txtReEnterpassword";
             this.txtReEnterpassword.Size = new System.Drawing.Size(125, 27);
             this.txtReEnterpassword.TabIndex = 9;
+            this.txtReEnterpassword.UseSystemPasswordChar = true;
             // 
             // label3
             // 
