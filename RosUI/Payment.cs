@@ -145,7 +145,7 @@ namespace RosUI
         {
             try
             {
-                if (toPay < bill.TotalAmount)
+                if (toPay < bill.TotalAmount || toPay == 0)
                 {
 
                     throw new Exception("Please enter valid amount to be paid.");
