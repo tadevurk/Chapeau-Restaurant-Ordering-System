@@ -303,7 +303,7 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnLogout.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnLogout.Location = new System.Drawing.Point(181, 553);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(100, 40);

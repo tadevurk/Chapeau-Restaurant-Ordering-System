@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -14,12 +15,18 @@ namespace RosUI
         private EmployeeLogic employeeLogic;
         private RosMain rosMain;
         private Employee employee;
+        private List<SecretQuestion> questions;
 
         public Registration(RosMain rosMain)
         {
             InitializeComponent();
             employeeLogic = new EmployeeLogic();
             this.rosMain = rosMain;
+            questions = employeeLogic.GetAllSecretQuestions();
+            foreach (SecretQuestion question in questions)
+            {
+                cmbSecret.Items.Add($"{question.Question}");
+            }
         }
 
         //Will register the user and store it into the database
@@ -47,6 +54,7 @@ namespace RosUI
                 employee.Username = txtUsername.Text;
                 employee.Name = txtName.Text;
                 employee.PinCode = txtPinCode.Text;
+                employee.SecretAnswer = txtSecretAnswer.Text;
 
                 //Make sure the password and the role is correct
                 if (CheckPassword(employee) && CheckRole(txtLicenseKey.Text, employee))

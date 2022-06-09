@@ -1026,7 +1026,7 @@ namespace RosUI
                     dishLogic.AddDishes(DishesInOrderProcess, order); // DishesInOrderProcess is the new ordered dishes
                     drinkLogic.AddDrinks(DrinkInOrderProcess, order);// DrinkInOrderProcess is the new ordered drinks
 
-                    table.TableStatus = 2; // Jason
+                    table.TableStatus = TableStatus.Standby; // Jason
                     tableLogic.Update(table); // Jason
 
                     //Update KitchenView and Barview
