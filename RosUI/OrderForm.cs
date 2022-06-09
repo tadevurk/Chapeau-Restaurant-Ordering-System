@@ -913,7 +913,7 @@ namespace RosUI
                 item.SubItems.Add(dish.ItemPrice.ToString());
                 dish.ItemAmount = 1;
                 item.SubItems.Add(dish.ItemAmount.ToString());
-                item.Tag = (Item)dish;
+                item.Tag = dish;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
@@ -948,7 +948,7 @@ namespace RosUI
                 item.SubItems.Add(drink.ItemPrice.ToString());
                 drink.ItemAmount = 1;
                 item.SubItems.Add(drink.ItemAmount.ToString());
-                item.Tag = (Item)drink;
+                item.Tag = drink;
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }
