@@ -54,6 +54,8 @@ namespace RosUI
             this.txtFeedback = new System.Windows.Forms.TextBox();
             this.btnSplit = new System.Windows.Forms.Button();
             this.pnlSplit = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSubmitSplit = new System.Windows.Forms.Button();
@@ -64,6 +66,10 @@ namespace RosUI
             this.txtToPaySplit = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.pnlFeedback.SuspendLayout();
             this.pnlSplit.SuspendLayout();
             this.SuspendLayout();
@@ -177,9 +183,9 @@ namespace RosUI
             // txtTip
             // 
             this.txtTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtTip.Location = new System.Drawing.Point(97, 418);
+            this.txtTip.Location = new System.Drawing.Point(91, 441);
             this.txtTip.Name = "txtTip";
-            this.txtTip.Size = new System.Drawing.Size(107, 27);
+            this.txtTip.Size = new System.Drawing.Size(87, 27);
             this.txtTip.TabIndex = 7;
             this.txtTip.TextChanged += new System.EventHandler(this.txtTip_TextChanged);
             // 
@@ -187,10 +193,10 @@ namespace RosUI
             // 
             this.lblTotalAmount.AutoSize = true;
             this.lblTotalAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTotalAmount.Location = new System.Drawing.Point(383, 362);
+            this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTotalAmount.Location = new System.Drawing.Point(377, 361);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(41, 20);
+            this.lblTotalAmount.Size = new System.Drawing.Size(44, 22);
             this.lblTotalAmount.TabIndex = 8;
             this.lblTotalAmount.Text = "total";
             // 
@@ -198,7 +204,7 @@ namespace RosUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(223, 425);
+            this.label4.Location = new System.Drawing.Point(260, 447);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 20);
             this.label4.TabIndex = 9;
@@ -231,9 +237,9 @@ namespace RosUI
             // txtToPay
             // 
             this.txtToPay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txtToPay.Location = new System.Drawing.Point(304, 418);
+            this.txtToPay.Location = new System.Drawing.Point(340, 441);
             this.txtToPay.Name = "txtToPay";
-            this.txtToPay.Size = new System.Drawing.Size(107, 27);
+            this.txtToPay.Size = new System.Drawing.Size(87, 27);
             this.txtToPay.TabIndex = 16;
             this.txtToPay.TextChanged += new System.EventHandler(this.txtToPay_TextChanged);
             // 
@@ -241,7 +247,7 @@ namespace RosUI
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(12, 362);
+            this.label6.Location = new System.Drawing.Point(12, 363);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 20);
             this.label6.TabIndex = 18;
@@ -252,7 +258,7 @@ namespace RosUI
             this.lblSubTotalAmount.AutoSize = true;
             this.lblSubTotalAmount.BackColor = System.Drawing.Color.White;
             this.lblSubTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSubTotalAmount.Location = new System.Drawing.Point(110, 362);
+            this.lblSubTotalAmount.Location = new System.Drawing.Point(110, 363);
             this.lblSubTotalAmount.Name = "lblSubTotalAmount";
             this.lblSubTotalAmount.Size = new System.Drawing.Size(68, 20);
             this.lblSubTotalAmount.TabIndex = 19;
@@ -262,9 +268,9 @@ namespace RosUI
             // 
             this.pnlFeedback.Controls.Add(this.btnSubmit);
             this.pnlFeedback.Controls.Add(this.txtFeedback);
-            this.pnlFeedback.Location = new System.Drawing.Point(12, 418);
+            this.pnlFeedback.Location = new System.Drawing.Point(12, 414);
             this.pnlFeedback.Name = "pnlFeedback";
-            this.pnlFeedback.Size = new System.Drawing.Size(458, 218);
+            this.pnlFeedback.Size = new System.Drawing.Size(458, 222);
             this.pnlFeedback.TabIndex = 20;
             // 
             // btnSubmit
@@ -300,6 +306,8 @@ namespace RosUI
             // 
             // pnlSplit
             // 
+            this.pnlSplit.Controls.Add(this.label9);
+            this.pnlSplit.Controls.Add(this.label8);
             this.pnlSplit.Controls.Add(this.label7);
             this.pnlSplit.Controls.Add(this.label1);
             this.pnlSplit.Controls.Add(this.btnSubmitSplit);
@@ -312,6 +320,26 @@ namespace RosUI
             this.pnlSplit.Name = "pnlSplit";
             this.pnlSplit.Size = new System.Drawing.Size(458, 656);
             this.pnlSplit.TabIndex = 21;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(310, 164);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(22, 25);
+            this.label9.TabIndex = 29;
+            this.label9.Text = "€";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(310, 81);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(22, 25);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "€";
             // 
             // label7
             // 
@@ -406,7 +434,7 @@ namespace RosUI
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(43, 425);
+            this.label5.Location = new System.Drawing.Point(47, 444);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(39, 20);
             this.label5.TabIndex = 22;
@@ -422,15 +450,59 @@ namespace RosUI
             this.label3.TabIndex = 23;
             this.label3.Text = "Table #";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(175, 358);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(22, 25);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "€";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(432, 358);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(22, 25);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "€";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(175, 443);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(22, 25);
+            this.label12.TabIndex = 31;
+            this.label12.Text = "€";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(423, 443);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(22, 25);
+            this.label13.TabIndex = 32;
+            this.label13.Text = "€";
+            // 
             // FormPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
-            this.Controls.Add(this.pnlFeedback);
             this.Controls.Add(this.pnlSplit);
+            this.Controls.Add(this.pnlFeedback);
             this.Controls.Add(this.txtToPay);
             this.Controls.Add(this.txtTip);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -494,5 +566,11 @@ namespace RosUI
         private System.Windows.Forms.TextBox txtToPaySplit;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
     }
 }

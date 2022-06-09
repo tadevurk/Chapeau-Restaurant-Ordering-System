@@ -54,7 +54,7 @@ namespace RosUI
             bill.SubTotalAmount = CalculateSubTotalAmount();
             lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
             bill.TotalAmount = CalculateTotalAmount();
-            lblTotalAmount.Text = bill.TotalAmount.ToString();
+            lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
             txtToPay.Text = lblTotalAmount.Text;
         }
 
@@ -326,8 +326,8 @@ namespace RosUI
                 pnlSplit.Hide();
             }
 
-            txtToPaySplit.Text = 0.ToString();
-            txtTipSplit.Text = 0.ToString();
+            txtToPaySplit.Text = 0.ToString("0.00");
+            txtTipSplit.Text = 0.ToString("0.00");
 
         }
 
