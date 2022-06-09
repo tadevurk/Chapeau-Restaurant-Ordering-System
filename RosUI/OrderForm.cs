@@ -959,25 +959,33 @@ namespace RosUI
 
         private void WriteContainedItems() // Getting the ordered list
         {
-            List<Item> itemsInOrder = new List<Item>();
-
-            List<Dish> orderedDishes = dishLogic.WriteContainedDishes(table); // Read all ordered Dishes 
-            List<Drink> orderedDrinks = drinkLogic.WriteContainedDrinks(table); // Read all ordered Drinks
-
-            itemsInOrder.AddRange(orderedDishes); // Add Dishes to item list
-            itemsInOrder.AddRange(orderedDrinks);// Add Drinks to item list
-
-            listviewOrder.Items.Clear();
-
-            foreach (Item item in itemsInOrder)
+            try
             {
-                ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
-                lvItem.SubItems.Add(item.ItemPrice.ToString());
-                lvItem.SubItems.Add(item.ItemAmount.ToString());
-                lvItem.ForeColor = Color.Green; // Change color from previous orders
-                lvItem.Tag = (Item)item;
-                listviewOrder.Items.Add(lvItem);
+                List<Item> itemsInOrder = new List<Item>();
+
+                List<Dish> orderedDishes = dishLogic.WriteContainedDishes(table); // Read all ordered Dishes 
+                List<Drink> orderedDrinks = drinkLogic.WriteContainedDrinks(table); // Read all ordered Drinks
+
+                itemsInOrder.AddRange(orderedDishes); // Add Dishes to item list
+                itemsInOrder.AddRange(orderedDrinks);// Add Drinks to item list
+
+                listviewOrder.Items.Clear();
+
+                foreach (Item item in itemsInOrder)
+                {
+                    ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
+                    lvItem.SubItems.Add(item.ItemPrice.ToString());
+                    lvItem.SubItems.Add(item.ItemAmount.ToString());
+                    lvItem.ForeColor = Color.Green; // Change color from previous orders
+                    lvItem.Tag = (Item)item;
+                    listviewOrder.Items.Add(lvItem);
+                }
             }
+            catch
+            {
+                MessageBox.Show("Something went wrong!");
+            }
+
         }
 
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
