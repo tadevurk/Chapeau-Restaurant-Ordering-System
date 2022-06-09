@@ -524,7 +524,7 @@ namespace RosUI
             // columnName
             // 
             this.columnName.Text = "Name";
-            this.columnName.Width = 165;
+            this.columnName.Width = 160;
             // 
             // columnPrice
             // 
