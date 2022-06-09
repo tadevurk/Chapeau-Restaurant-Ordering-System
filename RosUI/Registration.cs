@@ -35,13 +35,15 @@ namespace RosUI
             try
             {                             
                 //Make sure all the fields are filled
-                if (txtUsername.Text == "" || txtName.Text == "" || txtPinCode.Text == "")
+                if (txtUsername.Text == "" || txtName.Text == "" || txtPinCode.Text == "" || txtSecretAnswer.Text == "" || cmbSecret.SelectedItem == null)
                 {
                     MessageBox.Show("*Please fill all the fields*");
                     txtPinCode.Text = "";
                     txtName.Text = "";
                     txtUsername.Text = "";
                     txtLicenseKey.Text = "";
+                    txtSecretAnswer.Text = "";
+                    
                     return;
                 }
 
@@ -72,7 +74,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
                 rosMain.WriteError(exp, exp.Message);
             }
         }
@@ -88,7 +90,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
                 rosMain.WriteError(exp, exp.Message);
             }
         }
