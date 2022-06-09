@@ -39,13 +39,11 @@ namespace RosUI
                     if (txtUsername.Text == "")
                     {
                         MessageBox.Show("*Please fill your username*");
-                        txtPinCode.Text = "";
                         return;
                     }
                     if (txtPinCode.Text == "")
                     {
                         MessageBox.Show("*Please fill your password*");
-                        txtUsername.Text = "";
                         return;
                     }
                 }
@@ -92,13 +90,12 @@ namespace RosUI
                 else
                 {
                     MessageBox.Show("*Incorrect username or password*");
-                    txtUsername.Text = "";
                     txtPinCode.Text = "";
                 }
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
                 WriteError(exp, exp.Message);
             }         
         }
@@ -119,7 +116,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
                 WriteError(exp, exp.Message);
             }
         }

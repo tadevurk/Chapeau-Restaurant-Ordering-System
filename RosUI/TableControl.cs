@@ -63,7 +63,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
             }                     
         }
 
@@ -79,7 +79,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -94,7 +94,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -108,7 +108,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
             }
         }
 
@@ -124,7 +124,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
             }          
         }
 
@@ -140,7 +140,7 @@ namespace RosUI
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message + "Error Occorred: ");
+                MessageBox.Show(exp.Message, "Error");
             }
             
         }
