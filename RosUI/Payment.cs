@@ -145,7 +145,13 @@ namespace RosUI
         {
             try
             {
-                if (toPay < bill.TotalAmount || toPay == 0)
+                decimal toPay;
+                decimal tip;
+
+                bool numericalToPay = decimal.TryParse(txtToPay.Text, out toPay);
+                bool numericalTip = decimal.TryParse(txtTip.Text, out tip);
+
+                if (toPay < bill.TotalAmount || toPay == 0 || !numericalToPay || !numericalTip)
                 {
 
                     throw new Exception("Please enter valid amount to be paid.");
