@@ -173,7 +173,7 @@ namespace RosUI
         //Displays error and write it to log file
         private void DisplayError(Exception exp)
         {
-            MessageBox.Show("Error", exp.Message);
+            MessageBox.Show(exp.Message + "Error Occorred: ");
             rosMain.WriteError(exp, exp.Message);
         }
 

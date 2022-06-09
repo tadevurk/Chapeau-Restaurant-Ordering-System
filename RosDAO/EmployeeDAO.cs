@@ -9,12 +9,6 @@ namespace RosDAL
 {
     public class EmployeeDAO : BaseDAO
     {
-        private SqlConnection conn;
-        public EmployeeDAO()
-        {
-            conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DBConnectionString"].ConnectionString);
-        }
-
         public Employee GetLastEmployeeID()
         {
             string query = "SELECT TOP 1 EmplID, Name, Username, Salt, Digest, SecretAnswer FROM Employee ORDER BY EmplID DESC";
@@ -147,97 +141,87 @@ namespace RosDAL
 
         public void Add(Employee employee)
         {
-            conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Employee VALUES(@Name, @Username, @Salt, @Digest, @SecretAnswer);", conn);
+                string query = "INSERT INTO Employee VALUES(@Name, @Username, @Salt, @Digest, @SecretAnswer);";
 
-                command.Parameters.AddWithValue("@EmplID", employee.EmplID);
-                command.Parameters.AddWithValue("@Name", employee.Name);
-                command.Parameters.AddWithValue("@Username", employee.Username);
-                command.Parameters.AddWithValue("@Salt", employee.Salt);
-                command.Parameters.AddWithValue("@Digest", employee.Digest);
-                command.Parameters.AddWithValue("@SecretAnswer", employee.SecretAnswer);
+                SqlParameter[] sqlParameters = { new SqlParameter("@EmplID", employee.EmplID),
+                new SqlParameter("@Name", employee.Name),
+                new SqlParameter("@Username", employee.Username),
+                new SqlParameter("@Salt", employee.Salt),
+                new SqlParameter("@Digest", employee.Digest),
+                new SqlParameter("@SecretAnswer", employee.SecretAnswer) };
 
-                int nrOfRowsAffected = command.ExecuteNonQuery();
+                ExecuteEditQuery(query, sqlParameters);
             }
             catch (Exception e)
             {
                 throw new Exception("*Failed to register user*" + e.Message);
             }
-            conn.Close();
         }
 
         public void AddManager(Employee employee)
         {
-            conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Manager VALUES(@ManagerID);", conn);
+                string query = "INSERT INTO Manager VALUES(@ManagerID);";
 
-                command.Parameters.AddWithValue("@ManagerID", employee.EmplID);
+                SqlParameter[] sqlParameters = { new SqlParameter("@ManagerID", employee.EmplID) };
 
-                int nrOfRowsAffected = command.ExecuteNonQuery();
+                ExecuteEditQuery(query, sqlParameters);
             }
             catch (Exception e)
             {
                 throw new Exception("*Failed to register user*" + e.Message);
             }
-            conn.Close();
         }
 
         public void AddWaiter(Employee employee)
         {
-            conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Waiter VALUES(@WaiterID);", conn);
+                string query = "INSERT INTO Waiter VALUES(@WaiterID);";
 
-                command.Parameters.AddWithValue("@WaiterID", employee.EmplID);
+                SqlParameter[] sqlParameters = { new SqlParameter("@WaiterID", employee.EmplID) };
 
-                int nrOfRowsAffected = command.ExecuteNonQuery();
+                ExecuteEditQuery(query, sqlParameters);
             }
             catch (Exception e)
             {
                 throw new Exception("*Failed to register user*" + e.Message);
             }
-            conn.Close();
         }
 
         public void AddChef(Employee employee)
         {
-            conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Chef VALUES(@ChefID);", conn);
+                string query = "INSERT INTO Chef VALUES(@ChefID);";
 
-                command.Parameters.AddWithValue("@ChefID", employee.EmplID);
+                SqlParameter[] sqlParameters = { new SqlParameter("@ChefID", employee.EmplID) };
 
-                int nrOfRowsAffected = command.ExecuteNonQuery();
+                ExecuteEditQuery(query, sqlParameters);
             }
             catch (Exception e)
             {
                 throw new Exception("*Failed to register user*" + e.Message);
             }
-            conn.Close();
         }
 
         public void AddBartender(Employee employee)
         {
-            conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("INSERT INTO Bartender VALUES(@BartenderID);", conn);
+                string query = "INSERT INTO Bartender VALUES(@BartenderID);";
 
-                command.Parameters.AddWithValue("@BartenderID", employee.EmplID);
+                SqlParameter[] sqlParameters = { new SqlParameter("@BartenderID", employee.EmplID) };
 
-                int nrOfRowsAffected = command.ExecuteNonQuery();
+                ExecuteEditQuery(query, sqlParameters);
             }
             catch (Exception e)
             {
                 throw new Exception("*Failed to register user*" + e.Message);
             }
-            conn.Close();
         }
     }
 }
