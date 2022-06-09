@@ -16,8 +16,10 @@ namespace RosDAL
         }
         public Table GetTableById(int tableNumber)
         {
-            string query = $"SELECT TableNumber, TableStatus FROM [Table] WHERE TableNumber = {tableNumber} ORDER BY [TableNumber]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"SELECT TableNumber, TableStatus FROM [Table] WHERE TableNumber = @TableNumber ORDER BY [TableNumber]";
+
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber)};
+
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
 
@@ -33,10 +35,11 @@ namespace RosDAL
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
                 "SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD " +
                 "join [Order] as O on OD.OrderID = O.OrderID " +
-                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = 1 and O.TableNumber = { tableNumber} " +
+                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = 1 and O.TableNumber = @TableNumber " +
                 "group by O.TableNumber, OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered " +
                 "order by OD.TimeDrinkOrdered; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
             return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
@@ -46,9 +49,10 @@ namespace RosDAL
                  "I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course " +
                  "from OrderDish as OD join[Order] as O on OD.OrderID = O.OrderID " +
                  "join Item as I on OD.DishID = I.ItemID join Dish as D on OD.DishID = D.DishID " +
-                $"where OD.DishStatus = 1 and O.TableNumber = {tableNumber} " +
+                $"where OD.DishStatus = 1 and O.TableNumber = @TableNumber " +
                 "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
@@ -57,10 +61,11 @@ namespace RosDAL
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
                 "SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD " +
                 "join [Order] as O on OD.OrderID = O.OrderID " +
-                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = 0 and O.TableNumber = {tableNumber} " +
+                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = 0 and O.TableNumber = @TableNumber " +
                 "group by O.TableNumber, OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered " +
                 "order by OD.TimeDrinkOrdered; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
             return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
@@ -70,53 +75,36 @@ namespace RosDAL
                  "I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course " +
                  "from OrderDish as OD join[Order] as O on OD.OrderID = O.OrderID " +
                  "join Item as I on OD.DishID = I.ItemID join Dish as D on OD.DishID = D.DishID " +
-                $"where OD.DishStatus = 0 and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) and O.TableNumber = {tableNumber} " +
+                $"where OD.DishStatus = 0 and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) and O.TableNumber = @TableNumber " +
                 "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered; ";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 
         public void Update(Table table)
         {
-            conn.Open();
-            try
-            {
-                SqlCommand command = new SqlCommand("UPDATE [Table] SET TableStatus = @TableStatus WHERE TableNumber = @ID", conn);
-                command.Parameters.AddWithValue("@ID", table.TableNumber);
-                command.Parameters.AddWithValue("@TableStatus", table.TableStatus);
+                string query = "UPDATE [Table] SET TableStatus = @TableStatus WHERE TableNumber = @TableNumber";
+                SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", table.TableNumber),
+                new SqlParameter("@TableStatus", table.TableStatus) };
 
-                int nrOfRowAffected = command.ExecuteNonQuery();
-                if (nrOfRowAffected == 0)
-                    throw new Exception("Update was succesful");
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Update failed! " + e.Message);
-            }
-
-            conn.Close();
+                ExecuteEditQuery(query, sqlParameters);
         }
 
         public void UpdateTableWaiter(Table table)
         {
-            conn.Open();
             try
             {
-                SqlCommand command = new SqlCommand("UPDATE [Table] SET TableStatus = @TableStatus, WaiterID = @WaiterID WHERE TableNumber = @TableNumber", conn);
-                command.Parameters.AddWithValue("@TableNumber", table.TableNumber);
-                command.Parameters.AddWithValue("@TableStatus", table.TableStatus);
-                command.Parameters.AddWithValue("@WaiterID", table.WaiterID);
+                string query = "UPDATE [Table] SET TableStatus = @TableStatus, WaiterID = @WaiterID WHERE TableNumber = @TableNumber";
+                SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", table.TableNumber),
+                new SqlParameter("@TableStatus", table.TableStatus), new SqlParameter("@WaiterID", table.WaiterID) };
 
-                int nrOfRowAffected = command.ExecuteNonQuery();
-                if (nrOfRowAffected == 0)
-                    throw new Exception("Update was succesful");
+                ExecuteEditQuery(query, sqlParameters);
             }
             catch (Exception e)
             {
                 throw new Exception("Update failed! " + e.Message);
             }
-
-            conn.Close();
         }
 
 
