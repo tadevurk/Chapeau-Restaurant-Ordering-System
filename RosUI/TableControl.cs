@@ -88,7 +88,7 @@ namespace RosUI
         {
             try
             {
-                FormPayment formPayment = new FormPayment(table, employee, orderForm, rosMain);
+                FormPayment formPayment = new FormPayment(table, employee, rosMain);
                 formPayment.Show();
                 this.Close();
             }

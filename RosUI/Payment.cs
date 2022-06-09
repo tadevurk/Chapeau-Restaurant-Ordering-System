@@ -21,17 +21,15 @@ namespace RosUI
         BillLogic billLogic;
         TableLogic tableLogic;
         Employee employee;
-        FormOrder formOrder;
         List<Item> orderedItems;
 
         decimal toPay;
         decimal tip;
 
-        public FormPayment(Table table, Employee emp, FormOrder formOrder, RosMain rosMain)
+        public FormPayment(Table table, Employee emp, RosMain rosMain)
         {
             InitializeComponent();
             this.table = table;
-            this.formOrder = formOrder;
             this.employee = emp;
             this.rosMain = rosMain;
 
@@ -315,7 +313,7 @@ namespace RosUI
                 // Update kitchen and bar views
                 rosMain.UpdateAllListViews();
 
-                table.TableStatus = 0;
+                table.TableStatus = TableStatus.Occupied;
                 tableLogic.Update(table);
 
                 this.Hide();

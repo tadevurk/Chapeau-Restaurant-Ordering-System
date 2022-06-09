@@ -54,6 +54,7 @@ namespace RosUI
             this.txtFeedback = new System.Windows.Forms.TextBox();
             this.btnSplit = new System.Windows.Forms.Button();
             this.pnlSplit = new System.Windows.Forms.Panel();
+            this.btnBackSplit = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -70,7 +71,6 @@ namespace RosUI
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.btnBackSplit = new System.Windows.Forms.Button();
             this.pnlFeedback.SuspendLayout();
             this.pnlSplit.SuspendLayout();
             this.SuspendLayout();
@@ -323,6 +323,18 @@ namespace RosUI
             this.pnlSplit.Size = new System.Drawing.Size(458, 656);
             this.pnlSplit.TabIndex = 21;
             // 
+            // btnBackSplit
+            // 
+            this.btnBackSplit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnBackSplit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.btnBackSplit.Location = new System.Drawing.Point(346, 3);
+            this.btnBackSplit.Name = "btnBackSplit";
+            this.btnBackSplit.Size = new System.Drawing.Size(109, 29);
+            this.btnBackSplit.TabIndex = 33;
+            this.btnBackSplit.Text = "BACK";
+            this.btnBackSplit.UseVisualStyleBackColor = false;
+            this.btnBackSplit.Click += new System.EventHandler(this.btnBackSplit_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -466,7 +478,7 @@ namespace RosUI
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(432, 358);
+            this.label11.Location = new System.Drawing.Point(439, 358);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(22, 25);
             this.label11.TabIndex = 30;
@@ -491,18 +503,6 @@ namespace RosUI
             this.label13.Size = new System.Drawing.Size(22, 25);
             this.label13.TabIndex = 32;
             this.label13.Text = "€";
-            // 
-            // btnBackSplit
-            // 
-            this.btnBackSplit.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnBackSplit.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnBackSplit.Location = new System.Drawing.Point(346, 3);
-            this.btnBackSplit.Name = "btnBackSplit";
-            this.btnBackSplit.Size = new System.Drawing.Size(109, 29);
-            this.btnBackSplit.TabIndex = 33;
-            this.btnBackSplit.Text = "BACK";
-            this.btnBackSplit.UseVisualStyleBackColor = false;
-            this.btnBackSplit.Click += new System.EventHandler(this.btnBackSplit_Click);
             // 
             // FormPayment
             // 
@@ -533,6 +533,7 @@ namespace RosUI
             this.Controls.Add(this.lblTableNumber);
             this.Controls.Add(this.listViewPayment);
             this.Name = "FormPayment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Payment";
             this.pnlFeedback.ResumeLayout(false);
             this.pnlFeedback.PerformLayout();
