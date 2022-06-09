@@ -755,12 +755,12 @@ namespace RosUI
                 ListViewItem lvItem = listviewOrder.SelectedItems[0];
                 if (item is Dish)
                 {
-                    Dish dish = (Dish)listviewOrder.SelectedItems[0].Tag;
+                    Dish dish = (Dish)item;
                     CheckDishToRemove(lvItem, dish);
                 }
                 else if (item is Drink)
                 {
-                    Drink drink = (Drink)listviewOrder.SelectedItems[0].Tag;
+                    Drink drink = (Drink)item;
                     CheckDrinkToRemove(lvItem, drink);
                 }
             }
