@@ -51,11 +51,23 @@ namespace RosUI
             DisplayBill();
 
             // display all different amounts (sum amounts , tip)
-            bill.SubTotalAmount = CalculateSubTotalAmount();
-            lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
-            bill.TotalAmount = CalculateTotalAmount();
-            lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
-            txtToPay.Text = lblTotalAmount.Text;
+            ShowBillAmounts();
+        }
+
+        private void ShowBillAmounts()
+        {
+            try
+            {
+                bill.SubTotalAmount = CalculateSubTotalAmount();
+                lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
+                bill.TotalAmount = CalculateTotalAmount();
+                lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
+                txtToPay.Text = lblTotalAmount.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not load the amounts: " + ex.Message);
+            }
         }
 
         private void DisplayBill()
@@ -289,55 +301,66 @@ namespace RosUI
 
         public void CompletePayment()
         {
+            try
+            {
+                // when complete payment is clicked, the bill is stored in the database
+                billLogic.CreateBill(bill);
 
-            // when complete payment is clicked, the bill is stored in the database
-            billLogic.CreateBill(bill);
+                // Pass billNumber to the order table in the database
+                billLogic.UpdateOrderBillNumber(bill, orderedItems);
 
-            // Pass billNumber to the order table in the database
-            billLogic.UpdateOrderBillNumber(bill, orderedItems);
+                // change ordered items status to paid
+                SetItemsPaid(orderedItems);
 
-            // change ordered items status to paid
-            SetItemsPaid(orderedItems);
+                // Update kitchen and bar views
+                rosMain.UpdateAllListViews();
 
-            // Update kitchen and bar views
-            rosMain.UpdateAllListViews();
+                table.TableStatus = 0;
+                tableLogic.Update(table);
 
-            table.TableStatus = 0;
-            tableLogic.Update(table);
+                this.Hide();
 
-            this.Hide();
+                // return to the table overview through the RosMain form or Restaurant overview form
+                TableOverview tableOverview = new TableOverview(employee, rosMain);
+                tableOverview.Show();
 
-            // return to the table overview through the RosMain form or Restaurant overview form
-            TableOverview tableOverview = new TableOverview(employee, rosMain);
-            tableOverview.Show();
-
-            this.Close();
-
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Operation did not work: " + ex.Message);
+            }
         }
 
         private void btnSplit_Click(object sender, EventArgs e)
         {
-            pnlSplit.Show();
-            btnSubmitSplit.Enabled = false;
-            btnSubmitSplit.BackColor = Color.LightGray;
-
-            if (txtToPaySplit.Text == lblTotalAmount.Text)
+            try
             {
-                pnlSplit.Hide();
+                pnlSplit.Show();
+                btnSubmitSplit.Enabled = false;
+                btnSubmitSplit.BackColor = Color.LightGray;
+
+                if (txtToPaySplit.Text == lblTotalAmount.Text)
+                {
+                    pnlSplit.Hide();
+                }
+
+                txtToPaySplit.Text = 0.ToString("0.00");
+                txtTipSplit.Text = 0.ToString("0.00");
             }
-
-            txtToPaySplit.Text = 0.ToString("0.00");
-            txtTipSplit.Text = 0.ToString("0.00");
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Operation did not work: " + ex.Message);
+            }
         }
-
-        // calculate amount to be stored in the database and display correct amounts
-        decimal deductibleAmount = 0;
 
         private void btnSubmitSplit_Click(object sender, EventArgs e)
         {
             try
             {
+                // calculate amount to be stored in the database and display correct amounts
+                decimal deductibleAmount = 0;
+
                 // check if the inserted values are in numerical format
                 decimal splitAmount;
                 decimal tip;
@@ -349,7 +372,6 @@ namespace RosUI
                 {
                     throw new Exception("Input is not in correct numerical format");
                 }
-
 
                 // not let the user close a bill from the partial payment mode
                 // complete a partial payment and update values for displaying purpose and
@@ -387,7 +409,6 @@ namespace RosUI
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show("Operation did not work: " + ex.Message);
             }
              

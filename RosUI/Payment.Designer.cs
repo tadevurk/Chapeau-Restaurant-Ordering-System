@@ -258,7 +258,7 @@ namespace RosUI
             this.lblSubTotalAmount.AutoSize = true;
             this.lblSubTotalAmount.BackColor = System.Drawing.Color.White;
             this.lblSubTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSubTotalAmount.Location = new System.Drawing.Point(110, 363);
+            this.lblSubTotalAmount.Location = new System.Drawing.Point(121, 363);
             this.lblSubTotalAmount.Name = "lblSubTotalAmount";
             this.lblSubTotalAmount.Size = new System.Drawing.Size(68, 20);
             this.lblSubTotalAmount.TabIndex = 19;
@@ -454,7 +454,7 @@ namespace RosUI
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(175, 358);
+            this.label10.Location = new System.Drawing.Point(184, 358);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(22, 25);
             this.label10.TabIndex = 29;
