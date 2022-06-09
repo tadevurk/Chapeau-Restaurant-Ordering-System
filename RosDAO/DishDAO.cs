@@ -17,16 +17,22 @@ namespace RosDAL
         {
             foreach (Dish dish in dishes)
             {
+                SqlParameter noteParameter;
+
                 if (dish.ItemNote == null)
                 {
-                    dish.ItemNote = "null";
+                    noteParameter = new SqlParameter("@Note", DBNull.Value);
+                }
+                else
+                {
+                    noteParameter = new SqlParameter("@Note", dish.ItemNote);
                 }
 
                 //Adding dish
                 string query = "insert into OrderDish values(@OrderID, @dishID, 0, @CurrentTime, null, @Amount, @Note);";
                 SqlParameter[] sp = { new SqlParameter("@dishID", dish.ItemID),
                 new SqlParameter("@OrderID", order.OrderID),
-                new SqlParameter("@Note", dish.ItemNote),
+                noteParameter,
                 new SqlParameter("@CurrentTime", DateTime.Now),
                 new SqlParameter("@Amount", dish.ItemAmount)};
 
