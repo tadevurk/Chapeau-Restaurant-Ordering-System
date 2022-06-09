@@ -17,6 +17,7 @@ namespace RosUI
         Employee employee;
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
+        TableLogic tableLogic = new TableLogic();
         private List<TableOverview> tableOverview = new List<TableOverview>();
         
         public RosMain(Employee employee)
@@ -458,7 +459,6 @@ namespace RosUI
                     UpdateTableToReadyDish(dish);
                     dishLogic.UpdateDishStatusPickUp(dish);
                     dishLogic.UpdateOrderWithChefID(employee, dish);
-
                 }
 
                 //update current listView

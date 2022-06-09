@@ -116,15 +116,15 @@ namespace RosUI
         private void btnDishServed_Click(object sender, EventArgs e)
         {
             try
-            {
+            {                
                 tableOverview.GetAllOrderedDishes(table);
                 tableOverview.CheckOrderedItems(table);
-                rosMain.UpdateAllListViews();
                 UpdateOccupyButton();
+                rosMain.UpdateAllListViews();             
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "Error");
+                MessageBox.Show(exp.Message);
             }          
         }
 
@@ -132,15 +132,15 @@ namespace RosUI
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
             try
-            {
-                tableOverview.GetAllOrderedDrinks(table);
+            {        
+                tableOverview.GetAllOrderedDrinks(table);                
                 tableOverview.CheckOrderedItems(table);
-                rosMain.UpdateAllListViews();
                 UpdateOccupyButton();
+                rosMain.UpdateAllListViews();              
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "Error");
+                MessageBox.Show(exp.Message);
             }
             
         }

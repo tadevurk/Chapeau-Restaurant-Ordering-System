@@ -34,7 +34,7 @@ namespace RosUI
             tableLogic = new TableLogic();
             orderedDrinkLogic = new OrderedDrinkLogic();
             orderedDishLogic = new OrderedDishLogic();
-            tables = tableLogic.GetAllTables();
+            tables = tableLogic.GetAllTables();           
             UpdateAllButtons(tables);
             rosMain.AddWaiterView(this);
         }
@@ -301,7 +301,7 @@ namespace RosUI
             List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
             if(orderedDrinks.Count == 0)
             {
-                throw new Exception("there is currently no drinks to serve");
+                throw new Exception("you currently have no drinks to serve");
             }
             ServeDrinks(orderedDrinks);
 
@@ -314,7 +314,7 @@ namespace RosUI
             List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
             if (orderedDishes.Count == 0)
             {
-                throw new Exception("there is currently no dishes to serve");
+                throw new Exception("you currently have no dishes to serve");
             }
             ServeDishes(orderedDishes);
             

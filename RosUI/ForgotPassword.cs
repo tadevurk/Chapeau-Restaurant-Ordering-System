@@ -30,6 +30,7 @@ namespace RosUI
             }
         }
 
+        //checks all the fields and stores the stores the new password
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
             try
