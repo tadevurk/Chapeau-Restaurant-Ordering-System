@@ -37,13 +37,7 @@ namespace RosUI
                 //Make sure all the fields are filled
                 if (txtUsername.Text == "" || txtName.Text == "" || txtPinCode.Text == "" || txtSecretAnswer.Text == "" || cmbSecret.SelectedItem == null)
                 {
-                    MessageBox.Show("*Please fill all the fields*");
-                    txtPinCode.Text = "";
-                    txtName.Text = "";
-                    txtUsername.Text = "";
-                    txtLicenseKey.Text = "";
-                    txtSecretAnswer.Text = "";
-                    
+                    MessageBox.Show("make sure to fill in all the fields");
                     return;
                 }
 
@@ -61,7 +55,7 @@ namespace RosUI
                 //Make sure the password and the role is correct
                 if (CheckPassword(employee) && CheckRole(txtLicenseKey.Text, employee))
                 {
-                    MessageBox.Show("Registration Successfull");
+                    MessageBox.Show("Your Registration is Successfull");
 
                     this.Hide();
                     Login login = new Login();
@@ -108,7 +102,8 @@ namespace RosUI
             }
             else
             {
-                MessageBox.Show("*Your password must be a 4 digit pincode*");
+                txtPinCode.Text = "";
+                MessageBox.Show("Your password must be a 4 digit pincode");
                 return false;
             }
         }
@@ -138,7 +133,8 @@ namespace RosUI
                     employeeLogic.AddBartender(employee);                   
                     return true;
             }
-            MessageBox.Show("*Please check if you have the correct license key*");
+            MessageBox.Show("Please check if you have the correct license key");
+            txtLicenseKey.Text = "";
             return false;
         }
 

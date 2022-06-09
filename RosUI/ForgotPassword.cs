@@ -36,10 +36,6 @@ namespace RosUI
             {
                 if (txtUsername.Text == "" || txtSecretAnswer.Text == "" || txtNewPassword.Text == "" || txtReEnterpassword.Text == "" || cmbSecret.SelectedItem == null)
                 {
-                    txtUsername.Text = "";
-                    txtSecretAnswer.Text = "";
-                    txtNewPassword.Text = "";
-                    txtReEnterpassword.Text = "";
                     throw new Exception("please make sure you filled in all fields");                   
                 }
 

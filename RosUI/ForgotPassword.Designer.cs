@@ -74,9 +74,9 @@
             // 
             this.cmbSecret.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cmbSecret.FormattingEnabled = true;
-            this.cmbSecret.Location = new System.Drawing.Point(111, 310);
+            this.cmbSecret.Location = new System.Drawing.Point(94, 310);
             this.cmbSecret.Name = "cmbSecret";
-            this.cmbSecret.Size = new System.Drawing.Size(250, 28);
+            this.cmbSecret.Size = new System.Drawing.Size(288, 28);
             this.cmbSecret.TabIndex = 3;
             // 
             // label2
@@ -102,15 +102,15 @@
             // 
             // txtSecretAnswer
             // 
-            this.txtSecretAnswer.Location = new System.Drawing.Point(111, 390);
+            this.txtSecretAnswer.Location = new System.Drawing.Point(93, 390);
             this.txtSecretAnswer.Name = "txtSecretAnswer";
-            this.txtSecretAnswer.Size = new System.Drawing.Size(250, 27);
+            this.txtSecretAnswer.Size = new System.Drawing.Size(288, 27);
             this.txtSecretAnswer.TabIndex = 6;
             // 
             // lblSecretAnswer
             // 
             this.lblSecretAnswer.AutoSize = true;
-            this.lblSecretAnswer.Location = new System.Drawing.Point(190, 367);
+            this.lblSecretAnswer.Location = new System.Drawing.Point(189, 367);
             this.lblSecretAnswer.Name = "lblSecretAnswer";
             this.lblSecretAnswer.Size = new System.Drawing.Size(102, 20);
             this.lblSecretAnswer.TabIndex = 7;
