@@ -340,6 +340,8 @@ namespace RosUI
                 btnSubmitSplit.Enabled = false;
                 btnSubmitSplit.BackColor = Color.LightGray;
 
+                btnBack.Visible = false;
+
                 if (txtToPaySplit.Text == lblTotalAmount.Text)
                 {
                     pnlSplit.Hide();
@@ -456,5 +458,10 @@ namespace RosUI
             }
         }
 
+        private void btnBackSplit_Click(object sender, EventArgs e)
+        {
+            pnlSplit.Hide();
+            btnBack.Visible = true;
+        }
     }
 }
