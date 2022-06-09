@@ -1058,7 +1058,6 @@ namespace RosUI
 
         }
 
-
         private void SendOrder()
         {
             for (int i = 0; i < listviewOrder.Items.Count; i++)

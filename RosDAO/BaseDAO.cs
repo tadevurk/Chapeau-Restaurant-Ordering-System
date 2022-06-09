@@ -43,23 +43,6 @@ namespace RosDAL
             conn.Close();
         }
 
-        /* For Insert/Update/Delete Queries with transaction */
-        protected void ExecuteEditTranQuery(string query, SqlParameter[] sqlParameters, SqlTransaction sqlTransaction)
-        {
-            SqlCommand command = new SqlCommand(query, conn, sqlTransaction);
-            try
-            {
-                command.Parameters.AddRange(sqlParameters);
-                adapter.InsertCommand = command;
-                command.ExecuteNonQuery();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
-            }
-        }
-
         /* For Insert/Update/Delete Queries */
         protected void ExecuteEditQuery(string query, SqlParameter[] sqlParameters)
         {
