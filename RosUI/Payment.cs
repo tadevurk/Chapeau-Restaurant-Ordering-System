@@ -50,6 +50,20 @@ namespace RosUI
 
             // display all different amounts (sum amounts , tip)
             ShowBillAmounts();
+
+            // disable buttons and text boxes if a table has no items to be paid
+            if (bill.TotalAmount == 0)
+            {
+                btnSplit.Enabled = false;
+                btnSplit.BackColor = Color.LightGray;
+
+                radioBtnCash.Enabled = false;
+                radioBtnVisa.Enabled = false;
+                radioBtnDebit.Enabled = false;
+
+                txtToPay.Enabled = false;
+                txtTip.Enabled = false;
+            }
         }
 
         private void ShowBillAmounts()
@@ -106,7 +120,6 @@ namespace RosUI
                 MessageBox.Show("Could not load the bill: " + e.Message);
             }
         }
-
 
         // calculate subtotal per product unit
         private decimal CalculateItemSubtotal(decimal itemPrice, int vat)
@@ -207,7 +220,6 @@ namespace RosUI
         private void txtTip_TextChanged(object sender, EventArgs e)
         {
             // add a tip and adjust the amount to be paid
-
             try
             {
                 if (txtTip.Text == "" || tip < 0)
@@ -234,7 +246,7 @@ namespace RosUI
 
         private void txtToPay_TextChanged(object sender, EventArgs e)
         {
-            // calculate the amount that will be paid
+            // adjust the amount that will be paid and consequently adjust the tip
             try
             {
                 if (txtToPay.Text == "")
