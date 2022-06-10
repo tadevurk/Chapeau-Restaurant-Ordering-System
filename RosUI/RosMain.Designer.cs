@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.applicationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +103,7 @@
             this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -796,6 +798,12 @@
             this.columnHeader19.Text = "Table";
             this.columnHeader19.Width = 76;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
             // RosMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -901,5 +909,6 @@
         private System.Windows.Forms.Label lblEmpNameKit;
         private System.Windows.Forms.Label lblEmpNameBar;
         private System.Windows.Forms.Label lblEmpNameBarFin;
+        private System.Windows.Forms.Timer timer1;
     }
 }

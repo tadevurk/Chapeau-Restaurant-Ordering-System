@@ -23,7 +23,6 @@ namespace RosUI
         public RosMain(Employee employee)
         {
             InitializeComponent();
-            InitialiseTimer();
             InitialiseComboBoxes();
             UpdateAllListViews();
 
@@ -40,15 +39,6 @@ namespace RosUI
             lblEmpNameBarFin.Text += $"{employee.Name}";
             lblEmpNameKit.Text += $"{employee.Name}";
             lblEmpNameKitFin.Text += $"{employee.Name}";
-        }
-
-        private void InitialiseTimer()
-        {
-            //setting a timer for automatic update of the list views
-            Timer timer1 = new Timer();
-            timer1.Interval = 30000;//30 seconds
-            timer1.Tick += new EventHandler(timer1_Tick);
-            timer1.Start();
         }
 
         private void InitialiseComboBoxes()
@@ -82,11 +72,6 @@ namespace RosUI
             UpdateDrinks();
             UpdateFinishedDrinks();
             UpdateFinishedDishes();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            UpdateAllListViews();
         }
 
         private void AdaptFormOnRole(Employee employee)
@@ -905,15 +890,6 @@ namespace RosUI
             ShowPanel("KitchenView");
         }
 
-        private void btnRunningKitDash_Click(object sender, EventArgs e)
-        {
-            ShowPanel("KitchenView");
-        }
-        private void btnRunnningBarDash_Click(object sender, EventArgs e)
-        {
-            ShowPanel("BarView");
-        }
-
         private void runningOrdersToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ShowPanel("BarView");
@@ -948,5 +924,9 @@ namespace RosUI
             ShowPanel("BarView");
         }
 
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            UpdateAllListViews();
+        }
     }
 }

@@ -621,7 +621,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnLogout;
         private System.Windows.Forms.Label lblWaiter;
-        private System.Windows.Forms.Timer tmrTimer;
         private System.Windows.Forms.PictureBox t2DrinkIcon;
         private System.Windows.Forms.PictureBox t2DishIcon;
         private System.Windows.Forms.PictureBox t4DishIcon;
