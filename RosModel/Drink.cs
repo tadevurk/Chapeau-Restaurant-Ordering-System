@@ -8,9 +8,6 @@ namespace RosModel
 {
     public class Drink : Item
     {
-        public override string ToString()
-        {
-            return $"{ItemName}";
-        }
+
     }
 }

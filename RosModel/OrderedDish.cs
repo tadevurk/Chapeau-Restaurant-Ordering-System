@@ -14,7 +14,6 @@ namespace RosModel
 
         public DishStatus Status { get; set; }
         public DateTime TimeDishOrdered { get; set; }
-        public DateTime TimeDishDelivered { get; set; }
 
         public int TableNumber { get; set; }
 

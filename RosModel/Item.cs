@@ -12,8 +12,6 @@ namespace RosModel
         public string ItemName { get; set; }
         public decimal ItemPrice { get; set; }
         public int ItemStock { get; set; }
-        public string ItemStatusDrink { get; set; }
-        public string ItemType { get; set; }
 
         public string ItemNote { get; set; }  
 
@@ -21,9 +19,13 @@ namespace RosModel
 
         public int ItemVat { get; set; }
 
-        public string ItemStatusDish { get; set; }
 
         public decimal SubPrice { get; set; }
+
+        public override string ToString()
+        {
+            return ItemName;
+        }
 
     }
 }

@@ -15,9 +15,5 @@ namespace RosModel
 
         public int WaiterID { get; set; }
 
-        public Table()
-        {
-
-        }
     }
 }

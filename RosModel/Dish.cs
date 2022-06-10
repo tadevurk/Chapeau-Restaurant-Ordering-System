@@ -9,10 +9,5 @@ namespace RosModel
     public class Dish : Item
     {
 
-        public override string ToString()
-        {
-            return $"{ItemName}";
-        }
-
     }
 }
