@@ -16,9 +16,9 @@ namespace RosLogic
         {
             orderDAO = new OrderDAO();
         }
-        public int AddOrder(Employee e, Table t)
+        public int AddOrder(Employee employee, Table table)
         {
-           return orderDAO.AddOrder(e,t);
+           return orderDAO.AddOrder(employee, table);
         }
 
         public void UpdateStock(Item item)

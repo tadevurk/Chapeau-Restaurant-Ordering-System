@@ -1025,14 +1025,14 @@ namespace RosUI
                 DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    order.OrderID = orderLogic.AddOrder(emp, table); // Create new order
+                    order.OrderID = orderLogic.AddOrder(emp, table); // Create new order with waiterId and tableNumber
 
                     // adding the items in the listviewOrder to dish and drink list
                     SendOrder();
 
                     
-                    dishLogic.AddDishes(DishesInOrderProcess, order); // DishesInOrderProcess is the new ordered dishes
-                    drinkLogic.AddDrinks(DrinkInOrderProcess, order);// DrinkInOrderProcess is the new ordered drinks
+                    dishLogic.AddDishes(DishesInOrderProcess, order); // DishesInOrderProcess(comes from SendOrder) is the new ordered dishes 
+                    drinkLogic.AddDrinks(DrinkInOrderProcess, order);// DrinkInOrderProcess(comes from SendOrder) is the new ordered drinks
 
                     table.TableStatus = TableStatus.Standby; // Jason
                     tableLogic.Update(table); // Jason
