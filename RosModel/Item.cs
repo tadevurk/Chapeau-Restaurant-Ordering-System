@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace RosModel
 {
     public abstract class Item
@@ -19,13 +14,7 @@ namespace RosModel
 
         public int ItemVat { get; set; }
 
-
         public decimal SubPrice { get; set; }
-
-        public override string ToString()
-        {
-            return ItemName;
-        }
 
     }
 }
