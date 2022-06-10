@@ -194,39 +194,69 @@ namespace RosUI
         {
             switch (table.TableStatus)
             {
-                case TableStatus.Empty  :
-                    button.BackColor = Color.LightGray;
-                    button.Text = "Empty";
-                    button.ForeColor = Color.Black;
-                    return button;
+                case TableStatus.Empty:
+                    return UpdateButtonToEmpty(button);
                 case TableStatus.Occupied:
-                    button.BackColor = Color.Red;
-                    button.Text = "Occupied";
-                    button.ForeColor = Color.White;
-                    return button;
+                    return UpdateButtonToOccupied(button);
                 case TableStatus.Standby:
-                    button.BackColor = Color.LightBlue;
-                    button.Text = "Standby";
-                    button.ForeColor = Color.Black;
-                    CalculateDishTimeTaken(button, table);
-                    CalculateDrinkTimeTaken(button, table);
-                    return button;
+                    return UpdateButtonToStandby(table, button);
                 case TableStatus.DrinkReady:
-                    button.BackColor = Color.LightGreen;
-                    button.Text = "DrinkReady";
-                    button.ForeColor = Color.Black;
-                    return button;
+                    return UpdateButtonToDrinkReady(button);
                 case TableStatus.DishReady:
-                    button.BackColor = Color.LightGreen;
-                    button.Text = "DishReady";
-                    button.ForeColor = Color.Black;
-                    return button;
+                    return UpdateButtonToDishReady(button);
                 case TableStatus.Served:
-                    button.BackColor = Color.Yellow;
-                    button.Text = "Served";
-                    button.ForeColor = Color.Black;
-                    return button;
+                    return UpdateButtonToServed(button);
             }
+            return button;
+        }
+
+        private static Button UpdateButtonToServed(Button button)
+        {
+            button.BackColor = Color.Yellow;
+            button.Text = "Served";
+            button.ForeColor = Color.Black;
+            return button;
+        }
+
+        private static Button UpdateButtonToDishReady(Button button)
+        {
+            button.BackColor = Color.LightGreen;
+            button.Text = "DishReady";
+            button.ForeColor = Color.Black;
+            return button;
+        }
+
+        private static Button UpdateButtonToDrinkReady(Button button)
+        {
+            button.BackColor = Color.LightGreen;
+            button.Text = "DrinkReady";
+            button.ForeColor = Color.Black;
+            return button;
+        }
+
+        private Button UpdateButtonToStandby(Table table, Button button)
+        {
+            button.BackColor = Color.LightBlue;
+            button.Text = "Standby";
+            button.ForeColor = Color.Black;
+            CalculateDishTimeTaken(button, table);
+            CalculateDrinkTimeTaken(button, table);
+            return button;
+        }
+
+        private static Button UpdateButtonToOccupied(Button button)
+        {
+            button.BackColor = Color.Red;
+            button.Text = "Occupied";
+            button.ForeColor = Color.White;
+            return button;
+        }
+
+        private static Button UpdateButtonToEmpty(Button button)
+        {
+            button.BackColor = Color.LightGray;
+            button.Text = "Empty";
+            button.ForeColor = Color.Black;
             return button;
         }
 
@@ -558,43 +588,43 @@ namespace RosUI
             switch (tableNumber)
             {
                 case 1:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableOne);
                     break;
                 case 2:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableTwo);
                     break;
                 case 3:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableFour);
                     break;
                 case 5:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableFive);
                     break;
                 case 6:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableSix);
                     break;
                 case 7:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableSeven);
                     break;
                 case 8:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableEight);
                     break;
                 case 9:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableNine);
                     break;
                 case 10:
-                    UpdateTableToOccupiedstatus(table, tableNumber);
+                    UpdateTableToStandbystatus(table, tableNumber);
                     UpdateButtonColor(table, btnTableTen);
                     break;
             }
@@ -715,7 +745,7 @@ namespace RosUI
         }
 
         //set the table status to occupied and stores it on the database
-        private void UpdateTableToOccupiedstatus(Table table, int tableNumber)
+        private void UpdateTableToStandbystatus(Table table, int tableNumber)
         {
             table.TableNumber = tableNumber;
             table.TableStatus = TableStatus.Standby;
