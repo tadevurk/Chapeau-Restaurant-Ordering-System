@@ -29,16 +29,6 @@ namespace RosLogic
             billdb.CreateBill(b);
         }
 
-        public void UpdateBill(Bill b)
-        {
-            billdb.UpdateBill(b);
-        }
-
-        public void GetBill(Bill b)
-        {
-            billdb.GetBill(b);
-        }
-
         public void SetDishPaid(OrderedDish item)
         {
             billdb.SetDishPaid(item);

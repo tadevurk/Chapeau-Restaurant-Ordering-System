@@ -145,16 +145,17 @@ namespace RosUI
         {
             try
             {
+                // check if the inserted values are in numerical format
                 decimal toPay;
                 decimal tip;
 
                 bool numericalToPay = decimal.TryParse(txtToPay.Text, out toPay);
                 bool numericalTip = decimal.TryParse(txtTip.Text, out tip);
 
-                if (toPay < bill.TotalAmount || toPay == 0 || !numericalToPay || !numericalTip)
+                // do not let incorrect values close the bill, and offer the option for a tip to be logged any time
+                if (toPay < bill.TotalAmount || toPay <= 0 || !numericalToPay || !numericalTip)
                 {
-
-                    throw new Exception("Please enter valid amount to be paid.");
+                    throw new Exception("Please enter a  valid amount to be paid.");
                 }
 
                 DialogResult dialogResult = MessageBox.Show("Do you want to add feedback?", "Complete payment", MessageBoxButtons.YesNo);
@@ -209,19 +210,13 @@ namespace RosUI
 
             try
             {
-                if (txtTip.Text == "")
+                if (txtTip.Text == "" || tip < 0)
                 {
                     //MessageBox.Show("This value can not be empty!!!");
                     txtTip.Text = "0.00";
                 }
                 else
                 {
-                    if (tip < 0)
-                    {
-
-                        throw new Exception("Please enter valid tip amount.");
-                    }
-
                     tip = Convert.ToDecimal(txtTip.Text);
                     toPay = tip + bill.TotalAmount;
 
@@ -242,11 +237,9 @@ namespace RosUI
             // calculate the amount that will be paid
             try
             {
-                if (txtToPay.Text == "" || decimal.Parse(txtToPay.Text) < bill.TotalAmount)
+                if (txtToPay.Text == "")
                 {
-                    //MessageBox.Show("This value can not be empty!!!");
                     txtToPay.Text = lblTotalAmount.Text;
-                    
                 }
                 else
                 { 
@@ -269,14 +262,14 @@ namespace RosUI
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            // get back to the table overview
+            // go back to the table overview
             this.Hide();
             new TableOverview(employee, rosMain).Show();
             this.Close();
 
         }
 
-        // remove all items from a table that the payment is completed
+        // set all ordered items to the paid status
         public void SetItemsPaid(List<Item> orderedItems)
         {
             foreach (Item item in orderedItems)
@@ -319,12 +312,13 @@ namespace RosUI
                 // Update kitchen and bar views
                 rosMain.UpdateAllListViews();
 
+                // change the table status 
                 table.TableStatus = TableStatus.Occupied;
                 tableLogic.Update(table);
 
                 this.Hide();
 
-                // return to the table overview through the RosMain form or Restaurant overview form
+                // return to the table overview 
                 TableOverview tableOverview = new TableOverview(employee, rosMain);
                 tableOverview.Show();
 
@@ -343,16 +337,11 @@ namespace RosUI
                 pnlSplit.Show();
                 btnSubmitSplit.Enabled = false;
                 btnSubmitSplit.BackColor = Color.LightGray;
-
                 btnBack.Visible = false;
-
-                if (txtToPaySplit.Text == lblTotalAmount.Text)
-                {
-                    pnlSplit.Hide();
-                }
 
                 txtToPaySplit.Text = 0.ToString("0.00");
                 txtTipSplit.Text = 0.ToString("0.00");
+
             }
             catch (Exception ex)
             {
@@ -360,58 +349,64 @@ namespace RosUI
             }
         }
 
+
+        // calculate amount to be stored in the database and display correct amounts
+        private decimal deductibleAmount = 0;
+
         private void btnSubmitSplit_Click(object sender, EventArgs e)
         {
             try
             {
-                // calculate amount to be stored in the database and display correct amounts
-                decimal deductibleAmount = 0;
-
                 // check if the inserted values are in numerical format
                 decimal splitAmount;
-                decimal tip;
+                decimal splitTip;
 
                 bool numericalToPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
-                bool numericalTip = decimal.TryParse(txtTipSplit.Text, out tip);
+                bool numericalTip = decimal.TryParse(txtTipSplit.Text, out splitTip);
 
                 if (!numericalToPay || !numericalTip || txtToPaySplit.Text.Contains(',') || txtTipSplit.Text.Contains(','))
                 {
-                    throw new Exception("Input is not in correct numerical format");
+                    throw new Exception("Input is not in the correct numerical format");
                 }
 
-                // not let the user close a bill from the partial payment mode
+                // do not let the user close a bill from the partial payment mode
                 // complete a partial payment and update values for displaying purpose and
-                // next partial payment
-                deductibleAmount += splitAmount;
+                // next partial payment if needed
 
                 if (bill.TotalAmount <= splitAmount)
                 {
                     MessageBox.Show("Complete payment in the main form!");
-                    pnlSplit.Hide();
                 }
                 else
                 {
-                    bill.TotalAmount = splitAmount;
-                    bill.SubTotalAmount = 0;
+                    deductibleAmount += splitAmount;
 
-                    if (tip < 0)
+                    if (splitTip < 0 || splitAmount < 0 )
                     {
-                        
-                        throw new Exception("Please enter valid tip amount.");
+                        throw new Exception("Please enter a valid amounts.");
                     }
+                    else
+                    {
+                        bill.TotalAmount = splitAmount;
+                        bill.TipAmount = splitTip;
 
-                    bill.TipAmount = tip;
+                        bill.SubTotalAmount = 0;
 
-                    billLogic.CreateBill(bill);
+                        billLogic.CreateBill(bill);
 
-                    bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
-                    bill.SubTotalAmount = CalculateSubTotalAmount();
+                        bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
+                        bill.SubTotalAmount = CalculateSubTotalAmount();
 
-                    lblTotalAmount.Text = bill.TotalAmount.ToString();
-                    txtToPay.Text = lblTotalAmount.Text;
-
-                    pnlSplit.Hide();
+                        lblTotalAmount.Text = bill.TotalAmount.ToString();
+                        txtToPay.Text = lblTotalAmount.Text;
+                    }
                 }
+
+                pnlSplit.Hide();
+                radioBtnSplitCash.Checked = false;
+                radioBtnSplitVisa.Checked = false;
+                radioBtnSplitDebit.Checked = false;
+                btnBack.Visible = true;
             }
             catch (Exception ex)
             {

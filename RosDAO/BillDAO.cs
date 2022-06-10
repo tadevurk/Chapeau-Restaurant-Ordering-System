@@ -11,7 +11,7 @@ namespace RosDAL
 {
     public class BillDAO : BaseDAO
     {
-        public List<OrderedDish> GetOrderedDishes(Table table) // Get the list of the unpaid ordered dishes for a certain table
+        public List<OrderedDish> GetOrderedDishes(Table table) // Get a list of the unpaid ordered dishes for a certain table
         {
             string query = "SELECT OD.DishID, OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDishAmount) as OrderedDishAmount, " +
                 "D.Vat FROM OrderDish as OD JOIN [Order] as O on OD.OrderID = O.OrderID " +
@@ -26,7 +26,6 @@ namespace RosDAL
 
         private List<OrderedDish> ReadOrderedDishes(DataTable dataTable)
         {
-
             List<OrderedDish> orderedDishes = new List<OrderedDish>();
 
             foreach (DataRow dr in dataTable.Rows)
@@ -45,7 +44,7 @@ namespace RosDAL
             return orderedDishes;
         }
 
-        public List<OrderedDrink> GetOrderedDrinks(Table table) // Get the list of the unpaid ordered drinks for a certain table
+        public List<OrderedDrink> GetOrderedDrinks(Table table) // Get a list of the unpaid ordered drinks for a certain table
         {
             string query = "SELECT OD.DrinkID, OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDrinkAmount) as OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
                 "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID" +
@@ -77,10 +76,9 @@ namespace RosDAL
         }
 
         
-        // store a complete bill in the database
         public void CreateBill(Bill bill)
         {
-
+            // insert a complete bill into the database bill table
             string query = "INSERT INTO Bill (TotalAmount, TipAmount,  Feedback, TableNumber, PaymentDate, SubTotalAmount, PaymentMethod) " +
                 "VALUES (@TotalAmount, @TipAmount,  @Feedback, @TableNumber, GETDATE(), @SubTotalAmount, @PaymentMethod);" +
                 "SELECT cast(scope_identity() as int)";
@@ -129,6 +127,7 @@ namespace RosDAL
 
         public void UpdateOrderBillNumber(Bill bill, OrderedDish dish)
         {
+            // update BillNumber in Order table according to ordered dishes 
             string query = "UPDATE [Order] SET BillNumber = @BillNumber WHERE OrderID = @OrderID";
             SqlParameter[] sqlParameters =
             {
@@ -141,6 +140,7 @@ namespace RosDAL
 
         public void UpdateOrderBillNumber(Bill bill, OrderedDrink drink)
         {
+            // update BillNumber in Order table according to ordered drinks
             string query = "UPDATE [Order] SET BillNumber = @BillNumber WHERE OrderID = @OrderID";
             SqlParameter[] sqlParameters =
             {
@@ -150,57 +150,5 @@ namespace RosDAL
 
             ExecuteEditQuery(query, sqlParameters);
         }
-
-        // retrieve a bill from database
-        public Bill GetBill(Bill bill)
-        {
-            string query = "SELECT BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
-                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = @GETDATE()" +
-                " WHERE BillNumber = @BillNumber";
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@BillNumber", bill.BillNumber);
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters))[0];
-        }
-
-        private List<Bill> ReadTables(DataTable dataTable)
-        {
-            List<Bill> bills = new List<Bill>();
-
-            foreach (DataRow dr in dataTable.Rows)
-            {
-                Bill bill = new Bill()
-                {
-                    BillNumber = (int)dr["BillNumber"],
-                    TotalAmount = (decimal)dr["TotalAmount"],
-                    SubTotalAmount = (decimal)dr["SubTotalAmount"],
-                    TipAmount = (decimal)dr["TipAmount"],
-                    Feedback = (string)dr["Feedback"],
-                    TableNumber = (int)dr["TableNumber"],
-                    PaymentDate = (DateTime)dr["PaymentDate"]
-                };
-                bills.Add(bill);
-            }
-            return bills;
-        }
-
-
-        // update a bill in the database for administaration purposes
-        public void UpdateBill(Bill bill)
-        {
-            string query = "UPDATE [Bill] SET BillNumber = @BillNumber, BillAmount = @BillAmount, SubTotalAmount = @SubTotalAmount," +
-                " TipAmount = @TipAmount, Feedback = @Feedback, TableNumber = @TableNumber, PaymentDate = GETDATE()" +
-                " WHERE BillNumber = @BillNumber";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@BillNumber", bill.BillNumber),
-                new SqlParameter("@BillAmount", bill.TotalAmount),
-                new SqlParameter("@SubTotalAmount", bill.SubTotalAmount),
-                new SqlParameter("@TipAmount", bill.TipAmount),
-                new SqlParameter("@Feedback", bill.Feedback),
-                new SqlParameter("@TableNumber", bill.TableNumber),
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
     }
 }
