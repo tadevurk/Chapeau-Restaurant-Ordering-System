@@ -11,8 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+////////////////////Jason Xie, 659045, GROUP 1, IT1D///////////////////////////////////////////////////////////////////////////////////////////////////
+
 namespace RosUI
 {
+    
     public partial class ForgotPassword : Form
     {
         private Employee employee;
@@ -30,6 +33,7 @@ namespace RosUI
             }
         }
 
+        //checks all the fields and stores the stores the new password
         private void btnResetPassword_Click(object sender, EventArgs e)
         {
             try

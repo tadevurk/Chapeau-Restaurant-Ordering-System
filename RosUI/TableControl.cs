@@ -34,7 +34,7 @@ namespace RosUI
             tableOverview = new TableOverview(employee, rosMain);
             lblTable.Text = "Table: " + table.TableNumber;
             lblWaiter.Text = "Waiter: " + employee.Name;
-            UpdateOccupyButton();
+            UpdateOccupyButton(table, btnOccupy);
         }
 
         //When Clicked will Occupy and unOccupy the tables
@@ -116,15 +116,15 @@ namespace RosUI
         private void btnDishServed_Click(object sender, EventArgs e)
         {
             try
-            {
+            {                
                 tableOverview.GetAllOrderedDishes(table);
                 tableOverview.CheckOrderedItems(table);
-                rosMain.UpdateAllListViews();
-                UpdateOccupyButton();
+                UpdateOccupyButton(table, btnOccupy);
+                rosMain.UpdateAllListViews();             
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "Error");
+                MessageBox.Show(exp.Message);
             }          
         }
 
@@ -132,100 +132,23 @@ namespace RosUI
         private void btnDrinkServed_Click(object sender, EventArgs e)
         {
             try
-            {
-                tableOverview.GetAllOrderedDrinks(table);
+            {        
+                tableOverview.GetAllOrderedDrinks(table);                
                 tableOverview.CheckOrderedItems(table);
-                rosMain.UpdateAllListViews();
-                UpdateOccupyButton();
+                UpdateOccupyButton(table, btnOccupy);
+                rosMain.UpdateAllListViews();              
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message, "Error");
+                MessageBox.Show(exp.Message);
             }
             
         }
 
         //updates the occupy button.
-        private void UpdateOccupyButton()
+        private void UpdateOccupyButton(Table table, Button button)
         {
-            btnOccupy.Enabled = false;
-
-            if (table.TableStatus == TableStatus.Occupied)
-            {
-                UpdateButtonToOccupied();
-            }
-            else if (table.TableStatus == TableStatus.Standby)
-            {
-                UpdateButtonToStandby();
-            }
-            else if (table.TableStatus == TableStatus.DrinkReady)
-            {
-                UpdateButtonToDrinkReady();
-            }
-            else if (table.TableStatus == TableStatus.DishReady)
-            {
-                UpdateButtonToDishReady();
-            }
-            else if (table.TableStatus == TableStatus.Served)
-            {
-                UpdateButtonToServed();
-            }
-            else
-            {
-                UpdateButtonToOccupy();
-            }
-        }
-
-        private void UpdateButtonToOccupy()
-        {
-            btnOccupy.Text = "Occupy";
-            btnOccupy.BackColor = Color.LightGray;
-            btnOccupy.ForeColor = Color.Black;
-            btnOccupy.Enabled = true;
-        }
-
-        private void UpdateButtonToServed()
-        {
-            btnOccupy.Text = "Served";
-            btnOccupy.BackColor = Color.Yellow;
-            btnOccupy.ForeColor = Color.Black;
-        }
-
-        private void UpdateButtonToDishReady()
-        {
-            btnOccupy.Text = "Dish Ready";
-            btnOccupy.BackColor = Color.LightGreen;
-            btnOccupy.ForeColor = Color.Black;
-        }
-
-        private void UpdateButtonToDrinkReady()
-        {
-            btnOccupy.Text = "Drink Ready";
-            btnOccupy.BackColor = Color.LightGreen;
-            btnOccupy.ForeColor = Color.Black;
-        }
-
-        private void UpdateButtonToStandby()
-        {
-            btnOccupy.Text = "Standby";
-            btnOccupy.BackColor = Color.LightBlue;
-            btnOccupy.ForeColor = Color.Black;
-            tableOverview.CalculateDrinkTimeTaken(btnOccupy, table);
-            tableOverview.CalculateDishTimeTaken(btnOccupy, table);
-        }
-
-        private void UpdateButtonToOccupied()
-        {
-            btnOccupy.Text = "Occupied";
-            btnOccupy.BackColor = Color.Red;
-            btnOccupy.ForeColor = Color.White;
-            btnOccupy.Enabled = true;
-        }
-
-        //auto updates the Tablecontrol every minute
-        private void tmrTablecontrol_Tick(object sender, EventArgs e)
-        {
-            UpdateOccupyButton();
+            tableOverview.UpdateButtonColor(table, button);
         }
     }
 }
