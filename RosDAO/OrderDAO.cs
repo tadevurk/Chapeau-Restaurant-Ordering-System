@@ -13,17 +13,17 @@ namespace RosDAL
     {
         ////////////// Vedat Turk 683343 IT1D //////////////////////////////
 
-        public int AddOrder(Employee emp, Table t) // Mirko contributed 
+        public int AddOrder(Employee employee, Table table) // Mirko contributed 
         {
 
             string query = "insert into [Order] values(@WaiterID, null, @TableNumber, null, null);" +
                 "select cast(scope_identity() as int)";
-            SqlParameter[] pr = {
+            SqlParameter[] sqlParameters = {
             
-            new SqlParameter("@WaiterID", emp.EmplID),
-            new SqlParameter("@TableNumber", t.TableNumber)
+            new SqlParameter("@WaiterID", employee.EmplID),
+            new SqlParameter("@TableNumber", table.TableNumber)
             };
-            return ExecuteScalarQuery(query, pr);
+            return ExecuteScalarQuery(query, sqlParameters);
 
         }
 

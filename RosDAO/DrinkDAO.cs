@@ -30,13 +30,13 @@ namespace RosDAL
 
                 //Adding dish
                 string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
-                SqlParameter[] sp = { new SqlParameter("@drinkID", drink.ItemID),
+                SqlParameter[] sqlParameters = { new SqlParameter("@drinkID", drink.ItemID),
                 new SqlParameter("@OrderID", order.OrderID),
                 noteParameter,
                 new SqlParameter("@CurrentTime", DateTime.Now),
                 new SqlParameter("@Amount", drink.ItemAmount)};
 
-                ExecuteEditQuery(query, sp);
+                ExecuteEditQuery(query, sqlParameters);
             }
         }
 
@@ -47,12 +47,12 @@ namespace RosDAL
                 " join Item as I on I.ItemID=OD.DrinkID" +
                 " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
                 "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
-            SqlParameter[] sp =
+            SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@TableNumber", table.TableNumber),
             };
 
-            return ReadTablesOrder(ExecuteSelectQuery(query, sp));
+            return ReadTablesOrder(ExecuteSelectQuery(query, sqlParameters));
         }
 
         private List<Drink> ReadTablesOrder(DataTable dataTable)
