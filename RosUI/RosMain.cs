@@ -174,8 +174,6 @@ namespace RosUI
 
         private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //ShowPanel("TableView");
-
             new TableOverview(employee, this).Show();
         }
 
@@ -227,13 +225,15 @@ namespace RosUI
                     else
                     {
                         li.SubItems.Add(drink.ItemNote);
+
+                        //if a note is present highlight it in light blue
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
 
-                    //if the time is more than 1 hour hilight the time in red
-                    if (CalculateTimeSpentInMinutes(drink.TimeDrinkOrdered) > 60)
+                    //if the time is 1 hour or more, hilight the time in red
+                    if (CalculateTimeSpentInMinutes(drink.TimeDrinkOrdered) >= 60)
                     {
                         li.SubItems[3].BackColor = Color.Red;
                     }
@@ -242,7 +242,7 @@ namespace RosUI
 
                     li.Tag = drink;
 
-                    //if the item is ready for pickup should show another color
+                    //if the item is ready for pickup higlight it in green
                     if (drink.DrinkStatus == DrinkStatus.PickUp)
                     {
                         li.UseItemStyleForSubItems = true;
@@ -285,7 +285,9 @@ namespace RosUI
                     else
                     {
                         li.SubItems.Add(drink.ItemNote);
-                        li.SubItems[2].BackColor = Color.LightGreen;
+
+                        //if a note is present highlight it in light blue
+                        li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
@@ -329,13 +331,16 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add(dish.ItemNote);                     
+                        li.SubItems.Add(dish.ItemNote);
+
+                        //if a note is present highlight it in light blue
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
 
-                    if (CalculateTimeSpentInMinutes(dish.TimeDishOrdered) > 60)
+                    //if the time is 1 hour or more, hilight the time in red
+                    if (CalculateTimeSpentInMinutes(dish.TimeDishOrdered) >= 60)
                     {
                         li.SubItems[3].BackColor = Color.Red;
                     }
@@ -345,7 +350,7 @@ namespace RosUI
 
                     li.Tag = dish;
 
-                    //displaying different color for status "ToPickUp"
+                    //higlighting in green items with status "ToPickUp"
                     if (dish.Status == DishStatus.PickUp)
                     {
                         li.UseItemStyleForSubItems = true;
@@ -375,7 +380,7 @@ namespace RosUI
                 //clearing preavious items
                 lvFinishedDishes.Items.Clear();
 
-                //checking items in DishList
+                //adding items in DishListView
                 foreach (OrderedDish dish in finishedDishes)
                 {
 
@@ -391,6 +396,8 @@ namespace RosUI
                     else
                     {
                         li.SubItems.Add(dish.ItemNote);
+
+                        //if a note is present highlight it in light blue
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
                     }
 
@@ -449,7 +456,6 @@ namespace RosUI
                 {
                     throw new Exception("No item selected!");
                 }
-
 
                 //updating the status of each selected dish, update table status
                 for (int i = 0; i < lvOrderedDishes.SelectedItems.Count; i++)
@@ -630,7 +636,7 @@ namespace RosUI
                     throw new Exception("No item selected!");
                 }
 
-                DialogResult dialogResult = MessageBox.Show("Do you want to undo the selected items?", "Undo Dishes", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Do you want to undo the selected items?", "Undo Drinks", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.No)
                 {
@@ -771,7 +777,7 @@ namespace RosUI
                 string course = (string)cmbCourseKit.SelectedItem;
                 string table = (string)cmbTableKit.SelectedItem;
 
-                //select all items of the same table and course
+                //select all items of the selected table and course
                 foreach (ListViewItem item in lvOrderedDishes.Items)
                     if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == table)
                     {
@@ -794,7 +800,7 @@ namespace RosUI
 
                 string table = (string)cmbKitFinished.SelectedItem;
 
-                //select all items of the same table
+                //select all items of the selected table
                 foreach (ListViewItem item in lvFinishedDishes.Items)
                     if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
                     {

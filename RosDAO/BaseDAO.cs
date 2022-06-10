@@ -58,7 +58,6 @@ namespace RosDAL
             }
             catch (SqlException e)
             {
-                // Print.ErrorLog(e);
                 Console.WriteLine(e.Message);
                 throw;
             }
@@ -83,7 +82,6 @@ namespace RosDAL
             }
             catch (SqlException e)
             {
-                // Print.ErrorLog(e);
                 Console.WriteLine(e.Message);
                 throw;
             }
@@ -115,7 +113,6 @@ namespace RosDAL
             }
             catch (SqlException e)
             {
-                // Print.ErrorLog(e);
                 Console.WriteLine(e.Message);
                 return null;
                 throw;
