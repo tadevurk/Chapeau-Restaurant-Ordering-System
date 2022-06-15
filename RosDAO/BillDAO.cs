@@ -42,9 +42,9 @@ namespace RosDAL
 
         public List<OrderedDrink> GetOrderedDrinks(Table table) // Get a list of the unpaid ordered drinks for a certain table
         {
-            string query = "SELECT OD.DrinkID, OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDrinkAmount) as OrderedDrinkAmount, DT.Vat FROM OrderDrink as OD " +
+            string query = "SELECT OD.DrinkID, OD.OrderID, I.ItemName, I.ItemPrice, SUM(OD.OrderedDrinkAmount) as OrderedDrinkAmount, DT.Vat, DT.DrinkTypeID FROM OrderDrink as OD " +
                 "JOIN [Order] as O on OD.OrderID = O.OrderID JOIN Item as I on OD.DrinkID = I.ItemID JOIN Drink as D on OD.DrinkID = D.DrinkID" +
-                " JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus < 3 GROUP BY I.ItemName, I.ItemPrice, DT.Vat, OD.DrinkID, OD.OrderID; ";
+                " JOIN DrinkType as DT on D.DrinkTypeID = DT.DrinkTypeID WHERE O.TableNumber = @TableNumber AND OD.DrinkStatus < 3 GROUP BY I.ItemName, I.ItemPrice, DT.Vat, OD.DrinkID, OD.OrderID, DT.DrinkTypeID; ";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -64,7 +64,8 @@ namespace RosDAL
                     ItemPrice = (decimal)dr["ItemPrice"],
                     ItemAmount = (int)dr["OrderedDrinkAmount"],
                     ItemVat = (int)dr["Vat"],
-                    OrderID = (int)dr["OrderID"]
+                    OrderID = (int)dr["OrderID"],
+                    DrinkTypeID = (int)dr["DrinkTypeID"]
                 };
                 orderedDrinks.Add(orderedDrink);
             }

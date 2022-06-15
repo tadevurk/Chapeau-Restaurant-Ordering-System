@@ -1,4 +1,4 @@
-﻿using RosModel;
+﻿ using RosModel;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -48,31 +48,7 @@ namespace RosUI
             // disable buttons and text boxes if a table has no items to be paid
             if (bill.TotalAmount == 0)
             {
-                btnSplit.Enabled = false;
-                btnSplit.BackColor = Color.LightGray;
-
-                radioBtnCash.Enabled = false;
-                radioBtnVisa.Enabled = false;
-                radioBtnDebit.Enabled = false;
-
-                txtToPay.Enabled = false;
-                txtTip.Enabled = false;
-            }
-        }
-
-        private void ShowBillAmounts()
-        {
-            try
-            {
-                bill.SubTotalAmount = CalculateSubTotalAmount();
-                lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
-                bill.TotalAmount = CalculateTotalAmount();
-                lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
-                txtToPay.Text = lblTotalAmount.Text;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not load the amounts: " + ex.Message);
+                DisableButtons();
             }
         }
 
@@ -98,9 +74,11 @@ namespace RosUI
                     li.SubItems.Add(item.ItemAmount.ToString());
                     li.SubItems.Add(item.ItemName);
 
-                    li.SubItems.Add(item.ItemVat.ToString());
-
                     item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.ItemVat);
+                    decimal vatAmount = item.ItemPrice - item.SubPrice;
+
+                    li.SubItems.Add((vatAmount * item.ItemAmount).ToString("0.00"));
+
                     li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString("0.00"));
 
                     li.SubItems.Add((item.ItemPrice * item.ItemAmount).ToString("0.00"));
@@ -113,6 +91,37 @@ namespace RosUI
             {
                 MessageBox.Show("Could not load the bill: " + e.Message);
             }
+        }
+
+        private void ShowBillAmounts()
+        {
+            try
+            {
+                lblVat6.Text = CalculateLowVAT().ToString("0.00");
+                lblVat21.Text = CalculateHighVAT().ToString("0.00");
+                bill.SubTotalAmount = CalculateSubTotalAmount();
+                lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
+                bill.TotalAmount = CalculateTotalAmount();
+                lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
+                txtToPay.Text = lblTotalAmount.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not load the amounts: " + ex.Message);
+            }
+        }
+
+        private void DisableButtons()
+        {
+            btnSplit.Enabled = false;
+            btnSplit.BackColor = Color.LightGray;
+
+            radioBtnCash.Enabled = false;
+            radioBtnVisa.Enabled = false;
+            radioBtnDebit.Enabled = false;
+
+            txtToPay.Enabled = false;
+            txtTip.Enabled = false;
         }
 
         // calculate subtotal per product unit
@@ -147,6 +156,38 @@ namespace RosUI
             return subAmount;
         }
 
+        private decimal CalculateLowVAT()
+        {
+            decimal lowVAT = 0;
+
+            foreach (Item item in orderedItems)
+            {
+                if (item is OrderedDish dish)
+                {
+                    lowVAT += dish.ItemPrice - dish.SubPrice;
+                }
+                
+                if (item is OrderedDrink drink && drink.DrinkTypeID == 1)
+                {
+                    lowVAT += drink.ItemPrice - drink.SubPrice;
+                }
+            }
+            return lowVAT;
+        }
+
+        private decimal CalculateHighVAT()
+        {
+            decimal highVAT = 0;
+
+            foreach (Item item in orderedItems)
+            {
+                if (item is OrderedDrink drink && drink.DrinkTypeID == 2)
+                {
+                    highVAT += drink.ItemPrice - drink.SubPrice;
+                }
+            }
+            return highVAT;
+        }
 
         private void btnCompletePayment_Click(object sender, EventArgs e)
         {
@@ -159,7 +200,6 @@ namespace RosUI
                 bool numericalToPay = decimal.TryParse(txtToPay.Text, out toPay);
                 bool numericalTip = decimal.TryParse(txtTip.Text, out tip);
 
-                // do not let incorrect values close the bill, and offer the option for a tip to be logged any time
                 if (toPay < bill.TotalAmount || toPay <= 0 || !numericalToPay || !numericalTip)
                 {
                     throw new Exception("Please enter a  valid amount to be paid.");
@@ -218,7 +258,6 @@ namespace RosUI
             {
                 if (txtTip.Text == "" || tip < 0)
                 {
-                    //MessageBox.Show("This value can not be empty!!!");
                     txtTip.Text = "0.00";
                 }
                 else
@@ -355,10 +394,8 @@ namespace RosUI
             }
         }
 
-
-        // calculate amount to be stored in the database and display correct amounts
         private decimal deductibleAmount = 0;
-
+        // calculate amount to be stored in the database and display correct amounts
         private void btnSubmitSplit_Click(object sender, EventArgs e)
         {
             try
@@ -389,7 +426,7 @@ namespace RosUI
 
                     if (splitTip < 0 || splitAmount < 0 )
                     {
-                        throw new Exception("Please enter a valid amounts.");
+                        throw new Exception("Please enter valid amounts.");
                     }
                     else
                     {
