@@ -72,6 +72,7 @@
             this.t3DrinkIcon = new System.Windows.Forms.PictureBox();
             this.t1DishIcon = new System.Windows.Forms.PictureBox();
             this.t1DrinkIcon = new System.Windows.Forms.PictureBox();
+            this.btnMoreInfo = new System.Windows.Forms.Button();
             tmrTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.t2DrinkIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.t2DishIcon)).BeginInit();
@@ -522,11 +523,24 @@
             this.t1DrinkIcon.TabStop = false;
             this.t1DrinkIcon.Visible = false;
             // 
+            // btnMoreInfo
+            // 
+            this.btnMoreInfo.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnMoreInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMoreInfo.Location = new System.Drawing.Point(383, -1);
+            this.btnMoreInfo.Name = "btnMoreInfo";
+            this.btnMoreInfo.Size = new System.Drawing.Size(100, 40);
+            this.btnMoreInfo.TabIndex = 43;
+            this.btnMoreInfo.Text = "Table Guide";
+            this.btnMoreInfo.UseVisualStyleBackColor = false;
+            this.btnMoreInfo.Click += new System.EventHandler(this.btnMoreInfo_Click);
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.btnMoreInfo);
             this.Controls.Add(this.t9DishIcon);
             this.Controls.Add(this.t9DrinkIcon);
             this.Controls.Add(this.t7DishIcon);
@@ -641,5 +655,6 @@
         private System.Windows.Forms.PictureBox t3DrinkIcon;
         private System.Windows.Forms.PictureBox t1DishIcon;
         private System.Windows.Forms.PictureBox t1DrinkIcon;
+        private System.Windows.Forms.Button btnMoreInfo;
     }
 }
