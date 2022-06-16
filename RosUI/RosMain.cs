@@ -213,7 +213,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add(drink.ItemNote);
+                        li.SubItems.Add("Yes");
 
                         //if a note is present highlight it in light blue
                         li.SubItems[3].BackColor = Color.LightSkyBlue;
@@ -274,7 +274,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add(drink.ItemNote);
+                        li.SubItems.Add("Yes");
 
                         //if a note is present highlight it in light blue
                         li.SubItems[3].BackColor = Color.LightSkyBlue;
