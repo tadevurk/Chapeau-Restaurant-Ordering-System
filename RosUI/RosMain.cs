@@ -880,6 +880,8 @@ namespace RosUI
             {
                 if (lvOrderedDishes.SelectedItems.Count == 0)
                 {
+                    btnUndoKitView.Enabled = false;
+                    btnUndoKitView.BackColor = DefaultBackColor;
                     return;
                 }
 
@@ -972,6 +974,8 @@ namespace RosUI
             {               
                 if (lvOrderedDrinks.SelectedItems.Count == 0)
                 {
+                    btnUndoBarView.Enabled = false;
+                    btnUndoBarView.BackColor = DefaultBackColor;
                     return;
                 }
 
