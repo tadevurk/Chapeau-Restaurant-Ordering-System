@@ -611,6 +611,7 @@ namespace RosUI
                 //update current listView
                 UpdateFinishedDishes();
                 btnUndoKitFin.Enabled = false;
+
             }
             catch (Exception exp)
             {
@@ -648,6 +649,7 @@ namespace RosUI
                 //update the current listView
                 UpdateFinishedDrinks();
                 btnUndoFinDrink.Enabled = false;
+
             }
             catch (Exception exp)
             {
@@ -694,6 +696,7 @@ namespace RosUI
 
                 //update current listView
                 btnUndoBarView.Enabled = false;
+                btnUndoBarView.BackColor = Button.DefaultBackColor;
 
                 UpdateDrinks();
             }
@@ -738,7 +741,8 @@ namespace RosUI
 
                 //update current listView
                 UpdateDishes();
-                btnUndoBarView.Enabled = false;
+                btnUndoKitView.Enabled = false;
+                btnUndoKitView.BackColor = Button.DefaultBackColor;
             }
             catch (Exception exp)
             {

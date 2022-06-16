@@ -287,7 +287,7 @@
             // 
             // btnUndoKitView
             // 
-            this.btnUndoKitView.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnUndoKitView.BackColor = DefaultBackColor;
             this.btnUndoKitView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUndoKitView.Enabled = false;
             this.btnUndoKitView.Location = new System.Drawing.Point(1252, 661);
@@ -445,7 +445,7 @@
             // 
             // btnUndoBarView
             // 
-            this.btnUndoBarView.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnUndoBarView.BackColor = DefaultBackColor;
             this.btnUndoBarView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUndoBarView.Location = new System.Drawing.Point(1246, 655);
             this.btnUndoBarView.Name = "btnUndoBarView";
