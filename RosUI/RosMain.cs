@@ -18,7 +18,7 @@ namespace RosUI
         OrderedDishLogic dishLogic = new OrderedDishLogic();
         OrderedDrinkLogic drinkLogic = new OrderedDrinkLogic();
         TableLogic tableLogic = new TableLogic();
-        private List<TableOverview> tableOverview = new List<TableOverview>();
+        List<TableOverview> tableOverview;
         
         public RosMain(Employee employee)
         {
@@ -29,6 +29,8 @@ namespace RosUI
             this.employee = employee;
 
             InitialiseLablesWithNames();
+
+            tableOverview = new List<TableOverview>();
 
             AdaptFormOnRole(employee);
         }
@@ -199,7 +201,8 @@ namespace RosUI
                 //checking each item in the drinkList
                 foreach (OrderedDrink drink in orderedDrinks)
                 {
-                    ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    ListViewItem li = new ListViewItem("");
+                    li.SubItems.Add(drink.OrderedDrinkAmount.ToString());
                     li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(drink.ItemName);
 
@@ -213,7 +216,7 @@ namespace RosUI
                         li.SubItems.Add(drink.ItemNote);
 
                         //if a note is present highlight it in light blue
-                        li.SubItems[2].BackColor = Color.LightSkyBlue;
+                        li.SubItems[3].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
@@ -221,7 +224,7 @@ namespace RosUI
                     //if the time is 1 hour or more, hilight the time in red
                     if (CalculateTimeSpentInMinutes(drink.TimeDrinkOrdered) >= 60)
                     {
-                        li.SubItems[3].BackColor = Color.Red;
+                        li.SubItems[4].BackColor = Color.Red;
                     }
 
                     li.SubItems.Add(drink.TableNumber.ToString());
@@ -259,7 +262,8 @@ namespace RosUI
                 //checking each item in the drinkList
                 foreach (OrderedDrink drink in finishedDrinks)
                 {
-                    ListViewItem li = new ListViewItem(drink.OrderedDrinkAmount.ToString());
+                    ListViewItem li = new ListViewItem("");
+                    li.SubItems.Add(drink.OrderedDrinkAmount.ToString());
                     li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(drink.ItemName);
 
@@ -273,7 +277,7 @@ namespace RosUI
                         li.SubItems.Add(drink.ItemNote);
 
                         //if a note is present highlight it in light blue
-                        li.SubItems[2].BackColor = Color.LightSkyBlue;
+                        li.SubItems[3].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(drink.TimeDrinkOrdered));
@@ -306,7 +310,8 @@ namespace RosUI
                 foreach (OrderedDish dish in orderedDishes)
                 {
 
-                    ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    ListViewItem li = new ListViewItem("");
+                    li.SubItems.Add(dish.OrderedDishAmount.ToString());
                     li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(dish.ItemName);
 
@@ -320,7 +325,7 @@ namespace RosUI
                         li.SubItems.Add("Yes");
 
                         //if a note is present highlight it in light blue
-                        li.SubItems[2].BackColor = Color.LightSkyBlue;
+                        li.SubItems[3].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
@@ -328,7 +333,7 @@ namespace RosUI
                     //if the time is 1 hour or more, hilight the time in red
                     if (CalculateTimeSpentInMinutes(dish.TimeDishOrdered) >= 60)
                     {
-                        li.SubItems[3].BackColor = Color.Red;
+                        li.SubItems[4].BackColor = Color.Red;
                     }
 
                     li.SubItems.Add(dish.Course);
@@ -370,7 +375,8 @@ namespace RosUI
                 foreach (OrderedDish dish in finishedDishes)
                 {
 
-                    ListViewItem li = new ListViewItem(dish.OrderedDishAmount.ToString());
+                    ListViewItem li = new ListViewItem("");
+                    li.SubItems.Add(dish.OrderedDishAmount.ToString());
                     li.UseItemStyleForSubItems = false;
                     li.SubItems.Add(dish.ItemName);
 
@@ -384,7 +390,7 @@ namespace RosUI
                         li.SubItems.Add("Yes");
 
                         //if a note is present highlight it in light blue
-                        li.SubItems[2].BackColor = Color.LightSkyBlue;
+                        li.SubItems[3].BackColor = Color.LightSkyBlue;
                     }
 
                     li.SubItems.Add(ReturnTimeSpentAsString(dish.TimeDishOrdered));
@@ -833,7 +839,7 @@ namespace RosUI
 
                 //select all items of the same table
                 foreach (ListViewItem item in lvOrderedDishes.Items)
-                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                    if ($"Table {int.Parse(item.SubItems[6].Text)}" == table)
                     {
                         item.Selected = true;
                     }
@@ -852,7 +858,7 @@ namespace RosUI
 
                 //select all items of the selected table and course
                 foreach (ListViewItem item in lvOrderedDishes.Items)
-                    if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                    if (item.SubItems[5].Text == course && $"Table {int.Parse(item.SubItems[6].Text)}" == table)
                     {
                         item.Selected = true;
                     }
@@ -899,7 +905,7 @@ namespace RosUI
 
                 //select all items of the selected table
                 foreach (ListViewItem item in lvFinishedDishes.Items)
-                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                    if ($"Table {int.Parse(item.SubItems[6].Text)}" == table)
                     {
                         item.Selected = true;
                     }
@@ -921,7 +927,7 @@ namespace RosUI
 
                 //select all items of the same table
                 foreach (ListViewItem item in lvFinishedDrinks.Items)
-                    if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
+                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
                     {
                         item.Selected = true;
                     }
@@ -944,7 +950,7 @@ namespace RosUI
 
                 //select all items of the same table
                 foreach (ListViewItem item in lvOrderedDrinks.Items)
-                    if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
+                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
                     {
                         item.Selected = true;
                     }

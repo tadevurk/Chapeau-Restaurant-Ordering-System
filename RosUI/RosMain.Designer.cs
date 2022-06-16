@@ -104,6 +104,10 @@
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader22 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -336,7 +340,8 @@
             this.columnHeader5,
             this.columnHeader6,
             this.columnHeader7,
-            this.columnHeader8});
+            this.columnHeader8,
+            this.columnHeader20});
             this.lvOrderedDishes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lvOrderedDishes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvOrderedDishes.FullRowSelect = true;
@@ -352,34 +357,34 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Amount";
-            this.columnHeader1.Width = 120;
+            this.columnHeader1.Width = 0;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Dishes";
-            this.columnHeader2.Width = 400;
+            this.columnHeader2.Text = "Amount";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 120;
             // 
             // columnHeader5
             // 
-            this.columnHeader5.Text = "Note";
-            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 80;
+            this.columnHeader5.Text = "Name";
+            this.columnHeader5.Width = 400;
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Order Time";
-            this.columnHeader6.Width = 200;
+            this.columnHeader6.Text = "Note";
+            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader6.Width = 80;
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "Course";
-            this.columnHeader7.Width = 150;
+            this.columnHeader7.Text = "Order Time";
+            this.columnHeader7.Width = 200;
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "Table";
-            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader8.Width = 120;
+            this.columnHeader8.Text = "Course";
+            this.columnHeader8.Width = 150;
             // 
             // pnlBarView
             // 
@@ -491,7 +496,8 @@
             this.clDrinks,
             this.clAmount,
             this.columnHeader4,
-            this.columnHeader9});
+            this.columnHeader9,
+            this.columnHeader23});
             this.lvOrderedDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lvOrderedDrinks.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvOrderedDrinks.FullRowSelect = true;
@@ -507,29 +513,29 @@
             // clTable
             // 
             this.clTable.Text = "Amount";
-            this.clTable.Width = 120;
+            this.clTable.Width = 0;
             // 
             // clDrinks
             // 
-            this.clDrinks.Text = "Drinks";
-            this.clDrinks.Width = 470;
+            this.clDrinks.Text = "Amount";
+            this.clDrinks.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.clDrinks.Width = 120;
             // 
             // clAmount
             // 
-            this.clAmount.Text = "Note";
-            this.clAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.clAmount.Width = 80;
+            this.clAmount.Text = "Name";
+            this.clAmount.Width = 500;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Order Time";
-            this.columnHeader4.Width = 230;
+            this.columnHeader4.Text = "Note";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 80;
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "Table";
-            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader9.Width = 120;
+            this.columnHeader9.Text = "Order Time";
+            this.columnHeader9.Width = 230;
             // 
             // fileSystemWatcher1
             // 
@@ -627,7 +633,8 @@
             this.columnHeader11,
             this.columnHeader12,
             this.columnHeader13,
-            this.columnHeader14});
+            this.columnHeader14,
+            this.columnHeader21});
             this.lvFinishedDishes.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lvFinishedDishes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvFinishedDishes.FullRowSelect = true;
@@ -643,34 +650,34 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Amount";
-            this.columnHeader3.Width = 120;
+            this.columnHeader3.Width = 0;
             // 
             // columnHeader10
             // 
-            this.columnHeader10.Text = "Dishes";
-            this.columnHeader10.Width = 400;
+            this.columnHeader10.Text = "Amount";
+            this.columnHeader10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader10.Width = 120;
             // 
             // columnHeader11
             // 
-            this.columnHeader11.Text = "Note";
-            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader11.Width = 80;
+            this.columnHeader11.Text = "Name";
+            this.columnHeader11.Width = 400;
             // 
             // columnHeader12
             // 
-            this.columnHeader12.Text = "Order Time";
-            this.columnHeader12.Width = 200;
+            this.columnHeader12.Text = "Note";
+            this.columnHeader12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader12.Width = 80;
             // 
             // columnHeader13
             // 
-            this.columnHeader13.Text = "Course";
-            this.columnHeader13.Width = 150;
+            this.columnHeader13.Text = "Order Time";
+            this.columnHeader13.Width = 200;
             // 
             // columnHeader14
             // 
-            this.columnHeader14.Text = "Table";
-            this.columnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader14.Width = 120;
+            this.columnHeader14.Text = "Course";
+            this.columnHeader14.Width = 150;
             // 
             // cmbKitFinished
             // 
@@ -778,7 +785,8 @@
             this.columnHeader16,
             this.columnHeader17,
             this.columnHeader18,
-            this.columnHeader19});
+            this.columnHeader19,
+            this.columnHeader22});
             this.lvFinishedDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lvFinishedDrinks.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvFinishedDrinks.FullRowSelect = true;
@@ -793,27 +801,29 @@
             // columnHeader15
             // 
             this.columnHeader15.Text = "Amount";
-            this.columnHeader15.Width = 120;
+            this.columnHeader15.Width = 0;
             // 
             // columnHeader16
             // 
-            this.columnHeader16.Text = "Drinks";
-            this.columnHeader16.Width = 500;
+            this.columnHeader16.Text = "Amount";
+            this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader16.Width = 120;
             // 
             // columnHeader17
             // 
-            this.columnHeader17.Text = "Note";
-            this.columnHeader17.Width = 80;
+            this.columnHeader17.Text = "Name";
+            this.columnHeader17.Width = 500;
             // 
             // columnHeader18
             // 
-            this.columnHeader18.Text = "Order Time";
-            this.columnHeader18.Width = 230;
+            this.columnHeader18.Text = "Note";
+            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader18.Width = 80;
             // 
             // columnHeader19
             // 
-            this.columnHeader19.Text = "Table";
-            this.columnHeader19.Width = 120;
+            this.columnHeader19.Text = "Order Time";
+            this.columnHeader19.Width = 230;
             // 
             // timer1
             // 
@@ -821,16 +831,40 @@
             this.timer1.Interval = 30000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Table";
+            this.columnHeader20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader20.Width = 120;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Table";
+            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader21.Width = 120;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Table";
+            this.columnHeader22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader22.Width = 120;
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "Table";
+            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader23.Width = 120;
+            // 
             // RosMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1482, 753);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.pnlKitchenViewFinished);
-            this.Controls.Add(this.pnlBarViewFinished);
             this.Controls.Add(this.pnlBarView);
             this.Controls.Add(this.pnlKitchenView);
+            this.Controls.Add(this.pnlKitchenViewFinished);
+            this.Controls.Add(this.pnlBarViewFinished);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RosMain";
             this.Text = "Ordering System";
@@ -927,5 +961,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
     }
 }
