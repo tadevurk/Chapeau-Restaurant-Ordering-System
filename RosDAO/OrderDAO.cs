@@ -36,5 +36,21 @@ namespace RosDAL
 
             ExecuteEditQuery(query, sqlParameters);
         }
+
+        public void DecreaseStock(int itemID)
+        {
+            string query = "Update Item SET ItemStock = ItemStock - 1  where ItemID = @ItemID";
+
+            SqlParameter[] sqlParameter = { new SqlParameter("@ItemID", itemID) };
+            ExecuteEditQuery(query, sqlParameter);
+        }
+
+        public void IncreaseStock(int itemID)
+        {
+            string query = "Update Item SET ItemStock = ItemStock + 1  where ItemID = @ItemID";
+
+            SqlParameter[] sqlParameter = { new SqlParameter("@ItemID", itemID) };
+            ExecuteEditQuery(query, sqlParameter);
+        }
     }
 }

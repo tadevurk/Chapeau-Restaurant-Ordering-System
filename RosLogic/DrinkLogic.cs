@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using RosModel;
 using RosDAL;
+using System;
 
 namespace RosLogic
 /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
@@ -14,43 +15,14 @@ namespace RosLogic
             drinkDAO.AddDrinks(drinkInOrderProcess, order);
         }
 
-        public List<Drink> GetAllSoftDrinks()
+        public List<Drink> ReadContainedDrinks(Table table)
         {
-            return drinkDAO.GetAllSoftDrinks();
-        }
-        public List<Drink> GetAllBeers()
-        {
-            return drinkDAO.GetAllBeers();
+            return drinkDAO.ReadContainedDrinks(table);
         }
 
-        public List<Drink> GetAllWines()
+        public List<Drink> GetAllDrinks()
         {
-            return drinkDAO.GetAllWines();
-        }
-
-        public List<Drink> GetAllSpirits()
-        {
-            return drinkDAO.GetAllSpirits();
-        }
-
-        public List<Drink> GetAllHotDrinks()
-        {
-            return drinkDAO.GetAllHotDrinks();
-        }
-
-        public void IncreaseDrinkStock(Drink drink)
-        {
-            drinkDAO.IncreaseDrinkStock(drink);
-        }
-
-        public void DecreaseDrinkStock(Drink drink)
-        {
-            drinkDAO.DecreaseDrinkStock(drink);
-        }
-
-        public List<Drink> WriteContainedDrinks(Table table)
-        {
-            return drinkDAO.WriteContainedDrinks(table);
+            return drinkDAO.GetAllDrinks();
         }
     }
 }
