@@ -604,6 +604,7 @@ namespace RosUI
 
                 //update current listView
                 UpdateFinishedDishes();
+                btnUndoKitFin.Enabled = false;
             }
             catch (Exception exp)
             {
@@ -640,6 +641,7 @@ namespace RosUI
 
                 //update the current listView
                 UpdateFinishedDrinks();
+                btnUndoFinDrink.Enabled = false;
             }
             catch (Exception exp)
             {
@@ -685,6 +687,8 @@ namespace RosUI
                 }
 
                 //update current listView
+                btnUndoBarView.Enabled = false;
+
                 UpdateDrinks();
             }
             catch (Exception exp)
@@ -728,6 +732,7 @@ namespace RosUI
 
                 //update current listView
                 UpdateDishes();
+                btnUndoBarView.Enabled = false;
             }
             catch (Exception exp)
             {
@@ -735,21 +740,6 @@ namespace RosUI
             }
 
         }
-
-        private void btnSelByTabKit_Click(object sender, EventArgs e)
-        {
-           
-
-        }
-
-        private void btnSelByCourseKit_Click(object sender, EventArgs e)
-        {
-            
-
-        }
-
-
-
 
         private void UpdateTableToReadyDish(OrderedDish dish)
         {
