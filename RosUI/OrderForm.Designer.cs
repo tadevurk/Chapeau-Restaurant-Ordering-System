@@ -29,9 +29,6 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnStarters = new System.Windows.Forms.Button();
-            this.btnMains = new System.Windows.Forms.Button();
-            this.btnDesserts = new System.Windows.Forms.Button();
             this.btnDrinks = new System.Windows.Forms.Button();
             this.btnSendOrder = new System.Windows.Forms.Button();
             this.btnCancelOrder = new System.Windows.Forms.Button();
@@ -43,141 +40,60 @@ namespace RosUI
             this.amountOrder = new System.Windows.Forms.ColumnHeader();
             this.btnOrderRemove = new System.Windows.Forms.Button();
             this.btnOrderAddNote = new System.Windows.Forms.Button();
-            this.pnlStarters = new System.Windows.Forms.Panel();
-            this.btnAddStarter = new System.Windows.Forms.Button();
-            this.lblStartersHead = new System.Windows.Forms.Label();
-            this.listviewStarters = new System.Windows.Forms.ListView();
-            this.StarterName = new System.Windows.Forms.ColumnHeader();
-            this.Price = new System.Windows.Forms.ColumnHeader();
-            this.pnlMains = new System.Windows.Forms.Panel();
-            this.btnAddMains = new System.Windows.Forms.Button();
-            this.lblMains = new System.Windows.Forms.Label();
-            this.listviewMains = new System.Windows.Forms.ListView();
-            this.columnMainName = new System.Windows.Forms.ColumnHeader();
-            this.columnMainPrice = new System.Windows.Forms.ColumnHeader();
-            this.pnlDesserts = new System.Windows.Forms.Panel();
-            this.btnAddDessert = new System.Windows.Forms.Button();
-            this.lblDesserts = new System.Windows.Forms.Label();
-            this.listviewDesserts = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.txtNote = new System.Windows.Forms.RichTextBox();
-            this.pnlSoftDrinks = new System.Windows.Forms.Panel();
-            this.btnAddDrink = new System.Windows.Forms.Button();
-            this.lblSoftDrinks = new System.Windows.Forms.Label();
-            this.listviewSoftDrinks = new System.Windows.Forms.ListView();
-            this.columnName = new System.Windows.Forms.ColumnHeader();
-            this.columnPrice = new System.Windows.Forms.ColumnHeader();
-            this.pnlDrinkCategories = new System.Windows.Forms.Panel();
-            this.btnHotDrinks = new System.Windows.Forms.Button();
-            this.btnWine = new System.Windows.Forms.Button();
-            this.btnSpirits = new System.Windows.Forms.Button();
-            this.btnBeers = new System.Windows.Forms.Button();
-            this.btnSoftDrink = new System.Windows.Forms.Button();
-            this.pnlLunch = new System.Windows.Forms.Panel();
-            this.pnlDinner = new System.Windows.Forms.Panel();
-            this.btnStartersDinner = new System.Windows.Forms.Button();
-            this.btnMainsDinners = new System.Windows.Forms.Button();
-            this.btnDessertsDinner = new System.Windows.Forms.Button();
-            this.btnLunch = new System.Windows.Forms.Button();
-            this.btnDinner = new System.Windows.Forms.Button();
-            this.pnlDinnerMains = new System.Windows.Forms.Panel();
-            this.btnAddDinnerMains = new System.Windows.Forms.Button();
-            this.lblDinnerMain = new System.Windows.Forms.Label();
-            this.listviewDinnerMains = new System.Windows.Forms.ListView();
-            this.MainName = new System.Windows.Forms.ColumnHeader();
-            this.MainPrice = new System.Windows.Forms.ColumnHeader();
-            this.pnlDinnerStarters = new System.Windows.Forms.Panel();
-            this.btnAddDinnerStarter = new System.Windows.Forms.Button();
-            this.lblDinnerStarter = new System.Windows.Forms.Label();
-            this.listviewDinnerStarters = new System.Windows.Forms.ListView();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.pnlDinnerDesserts = new System.Windows.Forms.Panel();
-            this.btnAddDinnerDesserts = new System.Windows.Forms.Button();
-            this.lblDinnerDessert = new System.Windows.Forms.Label();
-            this.listViewDinnerDesserts = new System.Windows.Forms.ListView();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
-            this.pnlBeers = new System.Windows.Forms.Panel();
-            this.btnAddBeers = new System.Windows.Forms.Button();
-            this.lblBeers = new System.Windows.Forms.Label();
-            this.listviewBeers = new System.Windows.Forms.ListView();
-            this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
-            this.pnlWines = new System.Windows.Forms.Panel();
-            this.btnAddWines = new System.Windows.Forms.Button();
-            this.lblWines = new System.Windows.Forms.Label();
-            this.listviewWines = new System.Windows.Forms.ListView();
-            this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader10 = new System.Windows.Forms.ColumnHeader();
-            this.pnlSpirits = new System.Windows.Forms.Panel();
-            this.btnAddSpirits = new System.Windows.Forms.Button();
-            this.lblSpirits = new System.Windows.Forms.Label();
-            this.listViewSpirits = new System.Windows.Forms.ListView();
-            this.columnHeader11 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
-            this.pnlHotDrinks = new System.Windows.Forms.Panel();
-            this.btnAddHotDrinks = new System.Windows.Forms.Button();
-            this.lblHotDrinks = new System.Windows.Forms.Label();
-            this.listViewHotDrinks = new System.Windows.Forms.ListView();
-            this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
-            this.pnlStarters.SuspendLayout();
-            this.pnlMains.SuspendLayout();
-            this.pnlDesserts.SuspendLayout();
-            this.pnlSoftDrinks.SuspendLayout();
-            this.pnlDrinkCategories.SuspendLayout();
-            this.pnlLunch.SuspendLayout();
-            this.pnlDinner.SuspendLayout();
-            this.pnlDinnerMains.SuspendLayout();
-            this.pnlDinnerStarters.SuspendLayout();
-            this.pnlDinnerDesserts.SuspendLayout();
-            this.pnlBeers.SuspendLayout();
-            this.pnlWines.SuspendLayout();
-            this.pnlSpirits.SuspendLayout();
-            this.pnlHotDrinks.SuspendLayout();
+            this.pnlFoodDrink = new System.Windows.Forms.Panel();
+            this.btnMain = new System.Windows.Forms.Button();
+            this.btnStarter = new System.Windows.Forms.Button();
+            this.btnDessert = new System.Windows.Forms.Button();
+            this.pnlLunchStarters = new System.Windows.Forms.Panel();
+            this.lblFoodStarter = new System.Windows.Forms.Label();
+            this.listviewLunchFood = new System.Windows.Forms.ListView();
+            this.columNameFood = new System.Windows.Forms.ColumnHeader();
+            this.columnPriceFood = new System.Windows.Forms.ColumnHeader();
+            this.pnlDinnerStarter = new System.Windows.Forms.Panel();
+            this.lblDinnerFood = new System.Windows.Forms.Label();
+            this.listviewDinnerStarter = new System.Windows.Forms.ListView();
+            this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            this.pnlDrinks = new System.Windows.Forms.Panel();
+            this.listviewDrinks = new System.Windows.Forms.ListView();
+            this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
+            this.pnlDessert = new System.Windows.Forms.Panel();
+            this.listviewDessert = new System.Windows.Forms.ListView();
+            this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
+            this.pnlMain = new System.Windows.Forms.Panel();
+            this.lblLunchMain = new System.Windows.Forms.Label();
+            this.listivewLunchMain = new System.Windows.Forms.ListView();
+            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader22 = new System.Windows.Forms.ColumnHeader();
+            this.pnlDinnerMain = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.listviewDinnerMain = new System.Windows.Forms.ListView();
+            this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader24 = new System.Windows.Forms.ColumnHeader();
+            this.pnlDinnerDessert = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.listviewDinnerDessert = new System.Windows.Forms.ListView();
+            this.columnHeader25 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader26 = new System.Windows.Forms.ColumnHeader();
+            this.pnlFoodDrink.SuspendLayout();
+            this.pnlLunchStarters.SuspendLayout();
+            this.pnlDinnerStarter.SuspendLayout();
+            this.pnlDrinks.SuspendLayout();
+            this.pnlDessert.SuspendLayout();
+            this.pnlMain.SuspendLayout();
+            this.pnlDinnerMain.SuspendLayout();
+            this.pnlDinnerDessert.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnStarters
-            // 
-            this.btnStarters.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStarters.Location = new System.Drawing.Point(2, 12);
-            this.btnStarters.Name = "btnStarters";
-            this.btnStarters.Size = new System.Drawing.Size(116, 41);
-            this.btnStarters.TabIndex = 1;
-            this.btnStarters.Text = "STARTERS";
-            this.btnStarters.UseVisualStyleBackColor = true;
-            this.btnStarters.Click += new System.EventHandler(this.btnStarters_Click);
-            // 
-            // btnMains
-            // 
-            this.btnMains.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMains.Location = new System.Drawing.Point(147, 12);
-            this.btnMains.Name = "btnMains";
-            this.btnMains.Size = new System.Drawing.Size(116, 41);
-            this.btnMains.TabIndex = 5;
-            this.btnMains.Text = "MAINS";
-            this.btnMains.UseVisualStyleBackColor = true;
-            this.btnMains.Click += new System.EventHandler(this.btnMains_Click_1);
-            // 
-            // btnDesserts
-            // 
-            this.btnDesserts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDesserts.Location = new System.Drawing.Point(284, 12);
-            this.btnDesserts.Name = "btnDesserts";
-            this.btnDesserts.Size = new System.Drawing.Size(116, 41);
-            this.btnDesserts.TabIndex = 6;
-            this.btnDesserts.Text = "DESSERTS";
-            this.btnDesserts.UseVisualStyleBackColor = true;
-            this.btnDesserts.Click += new System.EventHandler(this.btnDesserts_Click);
             // 
             // btnDrinks
             // 
             this.btnDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDrinks.Location = new System.Drawing.Point(299, 44);
+            this.btnDrinks.Location = new System.Drawing.Point(355, 13);
             this.btnDrinks.Name = "btnDrinks";
-            this.btnDrinks.Size = new System.Drawing.Size(116, 41);
+            this.btnDrinks.Size = new System.Drawing.Size(95, 41);
             this.btnDrinks.TabIndex = 7;
             this.btnDrinks.Text = "DRINKS";
             this.btnDrinks.UseVisualStyleBackColor = true;
@@ -195,6 +111,7 @@ namespace RosUI
             this.btnSendOrder.TabIndex = 8;
             this.btnSendOrder.Text = "SEND ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
+            this.btnSendOrder.Visible = false;
             this.btnSendOrder.Click += new System.EventHandler(this.btnSendOrder_Click);
             // 
             // btnCancelOrder
@@ -209,6 +126,7 @@ namespace RosUI
             this.btnCancelOrder.TabIndex = 9;
             this.btnCancelOrder.Text = "CANCEL";
             this.btnCancelOrder.UseVisualStyleBackColor = false;
+            this.btnCancelOrder.Visible = false;
             this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
             // 
             // btnBack
@@ -239,29 +157,30 @@ namespace RosUI
             this.priceOrder,
             this.amountOrder});
             this.listviewOrder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewOrder.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
-            this.listviewOrder.Location = new System.Drawing.Point(21, 517);
+            this.listviewOrder.Location = new System.Drawing.Point(21, 458);
             this.listviewOrder.Name = "listviewOrder";
-            this.listviewOrder.Size = new System.Drawing.Size(329, 176);
+            this.listviewOrder.Size = new System.Drawing.Size(329, 209);
             this.listviewOrder.TabIndex = 13;
             this.listviewOrder.UseCompatibleStateImageBehavior = false;
             this.listviewOrder.View = System.Windows.Forms.View.Details;
             // 
             // nameOrder
             // 
-            this.nameOrder.Text = "Name";
-            this.nameOrder.Width = 165;
+            this.nameOrder.Text = "NAME";
+            this.nameOrder.Width = 155;
             // 
             // priceOrder
             // 
-            this.priceOrder.Text = "Price";
-            this.priceOrder.Width = 75;
+            this.priceOrder.Text = "PRICE";
+            this.priceOrder.Width = 65;
             // 
             // amountOrder
             // 
-            this.amountOrder.Text = "Amount";
-            this.amountOrder.Width = 75;
+            this.amountOrder.Text = "AMOUNT";
+            this.amountOrder.Width = 85;
             // 
             // btnOrderRemove
             // 
@@ -269,825 +188,396 @@ namespace RosUI
             this.btnOrderRemove.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnOrderRemove.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnOrderRemove.ForeColor = System.Drawing.Color.White;
-            this.btnOrderRemove.Location = new System.Drawing.Point(364, 529);
+            this.btnOrderRemove.Location = new System.Drawing.Point(366, 458);
             this.btnOrderRemove.Name = "btnOrderRemove";
             this.btnOrderRemove.Size = new System.Drawing.Size(104, 44);
             this.btnOrderRemove.TabIndex = 15;
             this.btnOrderRemove.Text = "-";
             this.btnOrderRemove.UseVisualStyleBackColor = false;
+            this.btnOrderRemove.Visible = false;
             this.btnOrderRemove.Click += new System.EventHandler(this.btnOrderRemove_Click);
             // 
             // btnOrderAddNote
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrderAddNote.Location = new System.Drawing.Point(364, 614);
+            this.btnOrderAddNote.Location = new System.Drawing.Point(372, 630);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(104, 44);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(98, 37);
             this.btnOrderAddNote.TabIndex = 16;
             this.btnOrderAddNote.Text = "Add Note";
             this.btnOrderAddNote.UseVisualStyleBackColor = false;
             this.btnOrderAddNote.Visible = false;
             this.btnOrderAddNote.Click += new System.EventHandler(this.btnOrderAddNote_Click);
             // 
-            // pnlStarters
-            // 
-            this.pnlStarters.Controls.Add(this.btnAddStarter);
-            this.pnlStarters.Controls.Add(this.lblStartersHead);
-            this.pnlStarters.Controls.Add(this.listviewStarters);
-            this.pnlStarters.Location = new System.Drawing.Point(9, 195);
-            this.pnlStarters.Name = "pnlStarters";
-            this.pnlStarters.Size = new System.Drawing.Size(459, 252);
-            this.pnlStarters.TabIndex = 17;
-            // 
-            // btnAddStarter
-            // 
-            this.btnAddStarter.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddStarter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddStarter.Location = new System.Drawing.Point(339, 156);
-            this.btnAddStarter.Name = "btnAddStarter";
-            this.btnAddStarter.Size = new System.Drawing.Size(117, 78);
-            this.btnAddStarter.TabIndex = 15;
-            this.btnAddStarter.Text = "Add";
-            this.btnAddStarter.UseVisualStyleBackColor = false;
-            this.btnAddStarter.Click += new System.EventHandler(this.btnAddStarter_Click);
-            // 
-            // lblStartersHead
-            // 
-            this.lblStartersHead.AutoSize = true;
-            this.lblStartersHead.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblStartersHead.ForeColor = System.Drawing.Color.White;
-            this.lblStartersHead.Location = new System.Drawing.Point(14, 13);
-            this.lblStartersHead.Name = "lblStartersHead";
-            this.lblStartersHead.Size = new System.Drawing.Size(75, 20);
-            this.lblStartersHead.TabIndex = 1;
-            this.lblStartersHead.Text = "STARTERS";
-            // 
-            // listviewStarters
-            // 
-            this.listviewStarters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.StarterName,
-            this.Price});
-            this.listviewStarters.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewStarters.FullRowSelect = true;
-            this.listviewStarters.HideSelection = false;
-            this.listviewStarters.Location = new System.Drawing.Point(14, 48);
-            this.listviewStarters.Name = "listviewStarters";
-            this.listviewStarters.Size = new System.Drawing.Size(309, 186);
-            this.listviewStarters.TabIndex = 0;
-            this.listviewStarters.UseCompatibleStateImageBehavior = false;
-            this.listviewStarters.View = System.Windows.Forms.View.Details;
-            // 
-            // StarterName
-            // 
-            this.StarterName.Text = "Name";
-            this.StarterName.Width = 165;
-            // 
-            // Price
-            // 
-            this.Price.Text = "Price";
-            this.Price.Width = 120;
-            // 
-            // pnlMains
-            // 
-            this.pnlMains.Controls.Add(this.btnAddMains);
-            this.pnlMains.Controls.Add(this.lblMains);
-            this.pnlMains.Controls.Add(this.listviewMains);
-            this.pnlMains.Location = new System.Drawing.Point(9, 195);
-            this.pnlMains.Name = "pnlMains";
-            this.pnlMains.Size = new System.Drawing.Size(459, 252);
-            this.pnlMains.TabIndex = 21;
-            // 
-            // btnAddMains
-            // 
-            this.btnAddMains.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddMains.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddMains.Location = new System.Drawing.Point(339, 156);
-            this.btnAddMains.Name = "btnAddMains";
-            this.btnAddMains.Size = new System.Drawing.Size(117, 78);
-            this.btnAddMains.TabIndex = 15;
-            this.btnAddMains.Text = "Add";
-            this.btnAddMains.UseVisualStyleBackColor = false;
-            this.btnAddMains.Click += new System.EventHandler(this.btnAddMains_Click);
-            // 
-            // lblMains
-            // 
-            this.lblMains.AutoSize = true;
-            this.lblMains.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblMains.ForeColor = System.Drawing.Color.White;
-            this.lblMains.Location = new System.Drawing.Point(14, 13);
-            this.lblMains.Name = "lblMains";
-            this.lblMains.Size = new System.Drawing.Size(55, 20);
-            this.lblMains.TabIndex = 1;
-            this.lblMains.Text = "MAINS";
-            // 
-            // listviewMains
-            // 
-            this.listviewMains.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnMainName,
-            this.columnMainPrice});
-            this.listviewMains.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewMains.FullRowSelect = true;
-            this.listviewMains.HideSelection = false;
-            this.listviewMains.Location = new System.Drawing.Point(14, 48);
-            this.listviewMains.Name = "listviewMains";
-            this.listviewMains.Size = new System.Drawing.Size(309, 186);
-            this.listviewMains.TabIndex = 0;
-            this.listviewMains.UseCompatibleStateImageBehavior = false;
-            this.listviewMains.View = System.Windows.Forms.View.Details;
-            // 
-            // columnMainName
-            // 
-            this.columnMainName.Text = "Name";
-            this.columnMainName.Width = 165;
-            // 
-            // columnMainPrice
-            // 
-            this.columnMainPrice.Text = "Price";
-            this.columnMainPrice.Width = 120;
-            // 
-            // pnlDesserts
-            // 
-            this.pnlDesserts.Controls.Add(this.btnAddDessert);
-            this.pnlDesserts.Controls.Add(this.lblDesserts);
-            this.pnlDesserts.Controls.Add(this.listviewDesserts);
-            this.pnlDesserts.Location = new System.Drawing.Point(9, 195);
-            this.pnlDesserts.Name = "pnlDesserts";
-            this.pnlDesserts.Size = new System.Drawing.Size(459, 252);
-            this.pnlDesserts.TabIndex = 22;
-            // 
-            // btnAddDessert
-            // 
-            this.btnAddDessert.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddDessert.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddDessert.Location = new System.Drawing.Point(339, 156);
-            this.btnAddDessert.Name = "btnAddDessert";
-            this.btnAddDessert.Size = new System.Drawing.Size(117, 78);
-            this.btnAddDessert.TabIndex = 15;
-            this.btnAddDessert.Text = "Add";
-            this.btnAddDessert.UseVisualStyleBackColor = false;
-            this.btnAddDessert.Click += new System.EventHandler(this.btnAddDessert_Click);
-            // 
-            // lblDesserts
-            // 
-            this.lblDesserts.AutoSize = true;
-            this.lblDesserts.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblDesserts.ForeColor = System.Drawing.Color.White;
-            this.lblDesserts.Location = new System.Drawing.Point(14, 13);
-            this.lblDesserts.Name = "lblDesserts";
-            this.lblDesserts.Size = new System.Drawing.Size(76, 20);
-            this.lblDesserts.TabIndex = 1;
-            this.lblDesserts.Text = "DESSERTS";
-            // 
-            // listviewDesserts
-            // 
-            this.listviewDesserts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.listviewDesserts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewDesserts.FullRowSelect = true;
-            this.listviewDesserts.HideSelection = false;
-            this.listviewDesserts.Location = new System.Drawing.Point(14, 48);
-            this.listviewDesserts.Name = "listviewDesserts";
-            this.listviewDesserts.Size = new System.Drawing.Size(309, 186);
-            this.listviewDesserts.TabIndex = 0;
-            this.listviewDesserts.UseCompatibleStateImageBehavior = false;
-            this.listviewDesserts.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 165;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Price";
-            this.columnHeader2.Width = 120;
-            // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(23, 453);
+            this.txtNote.Location = new System.Drawing.Point(372, 532);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(309, 48);
+            this.txtNote.Size = new System.Drawing.Size(98, 92);
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
             this.txtNote.Visible = false;
             // 
-            // pnlSoftDrinks
-            // 
-            this.pnlSoftDrinks.Controls.Add(this.btnAddDrink);
-            this.pnlSoftDrinks.Controls.Add(this.lblSoftDrinks);
-            this.pnlSoftDrinks.Controls.Add(this.listviewSoftDrinks);
-            this.pnlSoftDrinks.Location = new System.Drawing.Point(9, 195);
-            this.pnlSoftDrinks.Name = "pnlSoftDrinks";
-            this.pnlSoftDrinks.Size = new System.Drawing.Size(459, 252);
-            this.pnlSoftDrinks.TabIndex = 20;
-            // 
-            // btnAddDrink
-            // 
-            this.btnAddDrink.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddDrink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddDrink.Location = new System.Drawing.Point(339, 156);
-            this.btnAddDrink.Name = "btnAddDrink";
-            this.btnAddDrink.Size = new System.Drawing.Size(117, 78);
-            this.btnAddDrink.TabIndex = 15;
-            this.btnAddDrink.Text = "Add";
-            this.btnAddDrink.UseVisualStyleBackColor = false;
-            this.btnAddDrink.Click += new System.EventHandler(this.btnAddDrink_Click);
-            // 
-            // lblSoftDrinks
-            // 
-            this.lblSoftDrinks.AutoSize = true;
-            this.lblSoftDrinks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblSoftDrinks.ForeColor = System.Drawing.Color.White;
-            this.lblSoftDrinks.Location = new System.Drawing.Point(14, 13);
-            this.lblSoftDrinks.Name = "lblSoftDrinks";
-            this.lblSoftDrinks.Size = new System.Drawing.Size(99, 20);
-            this.lblSoftDrinks.TabIndex = 1;
-            this.lblSoftDrinks.Text = "SOFT DRINKS";
-            // 
-            // listviewSoftDrinks
-            // 
-            this.listviewSoftDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnName,
-            this.columnPrice});
-            this.listviewSoftDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewSoftDrinks.FullRowSelect = true;
-            this.listviewSoftDrinks.HideSelection = false;
-            this.listviewSoftDrinks.Location = new System.Drawing.Point(14, 48);
-            this.listviewSoftDrinks.Name = "listviewSoftDrinks";
-            this.listviewSoftDrinks.Size = new System.Drawing.Size(309, 186);
-            this.listviewSoftDrinks.TabIndex = 0;
-            this.listviewSoftDrinks.UseCompatibleStateImageBehavior = false;
-            this.listviewSoftDrinks.View = System.Windows.Forms.View.Details;
-            // 
-            // columnName
-            // 
-            this.columnName.Text = "Name";
-            this.columnName.Width = 160;
-            // 
-            // columnPrice
-            // 
-            this.columnPrice.Text = "Price";
-            this.columnPrice.Width = 120;
-            // 
-            // pnlDrinkCategories
-            // 
-            this.pnlDrinkCategories.Controls.Add(this.btnHotDrinks);
-            this.pnlDrinkCategories.Controls.Add(this.btnWine);
-            this.pnlDrinkCategories.Controls.Add(this.btnSpirits);
-            this.pnlDrinkCategories.Controls.Add(this.btnBeers);
-            this.pnlDrinkCategories.Controls.Add(this.btnSoftDrink);
-            this.pnlDrinkCategories.Location = new System.Drawing.Point(15, 103);
-            this.pnlDrinkCategories.Name = "pnlDrinkCategories";
-            this.pnlDrinkCategories.Size = new System.Drawing.Size(410, 66);
-            this.pnlDrinkCategories.TabIndex = 20;
-            // 
-            // btnHotDrinks
-            // 
-            this.btnHotDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHotDrinks.Location = new System.Drawing.Point(339, 11);
-            this.btnHotDrinks.Name = "btnHotDrinks";
-            this.btnHotDrinks.Size = new System.Drawing.Size(70, 53);
-            this.btnHotDrinks.TabIndex = 24;
-            this.btnHotDrinks.Text = "HOT DRINKS";
-            this.btnHotDrinks.UseVisualStyleBackColor = true;
-            this.btnHotDrinks.Click += new System.EventHandler(this.btnHotDrinks_Click);
-            // 
-            // btnWine
-            // 
-            this.btnWine.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnWine.Location = new System.Drawing.Point(170, 11);
-            this.btnWine.Name = "btnWine";
-            this.btnWine.Size = new System.Drawing.Size(70, 53);
-            this.btnWine.TabIndex = 23;
-            this.btnWine.Text = "WINES";
-            this.btnWine.UseVisualStyleBackColor = true;
-            this.btnWine.Click += new System.EventHandler(this.btnWine_Click);
-            // 
-            // btnSpirits
-            // 
-            this.btnSpirits.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSpirits.Location = new System.Drawing.Point(255, 11);
-            this.btnSpirits.Name = "btnSpirits";
-            this.btnSpirits.Size = new System.Drawing.Size(70, 53);
-            this.btnSpirits.TabIndex = 22;
-            this.btnSpirits.Text = "SPIRITS";
-            this.btnSpirits.UseVisualStyleBackColor = true;
-            this.btnSpirits.Click += new System.EventHandler(this.btnSpirits_Click);
-            // 
-            // btnBeers
-            // 
-            this.btnBeers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBeers.Location = new System.Drawing.Point(86, 11);
-            this.btnBeers.Name = "btnBeers";
-            this.btnBeers.Size = new System.Drawing.Size(70, 53);
-            this.btnBeers.TabIndex = 21;
-            this.btnBeers.Text = "BEERS";
-            this.btnBeers.UseVisualStyleBackColor = true;
-            this.btnBeers.Click += new System.EventHandler(this.btnBeers_Click);
-            // 
-            // btnSoftDrink
-            // 
-            this.btnSoftDrink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSoftDrink.Location = new System.Drawing.Point(3, 11);
-            this.btnSoftDrink.Name = "btnSoftDrink";
-            this.btnSoftDrink.Size = new System.Drawing.Size(70, 53);
-            this.btnSoftDrink.TabIndex = 2;
-            this.btnSoftDrink.Text = "SOFT DRINKS";
-            this.btnSoftDrink.UseVisualStyleBackColor = true;
-            this.btnSoftDrink.Click += new System.EventHandler(this.btnSoftDrink_Click);
-            // 
-            // pnlLunch
-            // 
-            this.pnlLunch.Controls.Add(this.btnStarters);
-            this.pnlLunch.Controls.Add(this.btnMains);
-            this.pnlLunch.Controls.Add(this.btnDesserts);
-            this.pnlLunch.Location = new System.Drawing.Point(15, 103);
-            this.pnlLunch.Name = "pnlLunch";
-            this.pnlLunch.Size = new System.Drawing.Size(410, 66);
-            this.pnlLunch.TabIndex = 23;
-            // 
-            // pnlDinner
-            // 
-            this.pnlDinner.Controls.Add(this.btnStartersDinner);
-            this.pnlDinner.Controls.Add(this.btnMainsDinners);
-            this.pnlDinner.Controls.Add(this.btnDessertsDinner);
-            this.pnlDinner.Location = new System.Drawing.Point(15, 103);
-            this.pnlDinner.Name = "pnlDinner";
-            this.pnlDinner.Size = new System.Drawing.Size(410, 66);
-            this.pnlDinner.TabIndex = 24;
-            // 
-            // btnStartersDinner
-            // 
-            this.btnStartersDinner.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnStartersDinner.Location = new System.Drawing.Point(2, 12);
-            this.btnStartersDinner.Name = "btnStartersDinner";
-            this.btnStartersDinner.Size = new System.Drawing.Size(116, 41);
-            this.btnStartersDinner.TabIndex = 1;
-            this.btnStartersDinner.Text = "STARTERS";
-            this.btnStartersDinner.UseVisualStyleBackColor = true;
-            this.btnStartersDinner.Click += new System.EventHandler(this.btnStartersDinner_Click);
-            // 
-            // btnMainsDinners
-            // 
-            this.btnMainsDinners.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMainsDinners.Location = new System.Drawing.Point(147, 12);
-            this.btnMainsDinners.Name = "btnMainsDinners";
-            this.btnMainsDinners.Size = new System.Drawing.Size(116, 41);
-            this.btnMainsDinners.TabIndex = 5;
-            this.btnMainsDinners.Text = "MAINS";
-            this.btnMainsDinners.UseVisualStyleBackColor = true;
-            this.btnMainsDinners.Click += new System.EventHandler(this.btnMainsDinners_Click);
-            // 
-            // btnDessertsDinner
-            // 
-            this.btnDessertsDinner.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDessertsDinner.Location = new System.Drawing.Point(284, 12);
-            this.btnDessertsDinner.Name = "btnDessertsDinner";
-            this.btnDessertsDinner.Size = new System.Drawing.Size(116, 41);
-            this.btnDessertsDinner.TabIndex = 6;
-            this.btnDessertsDinner.Text = "DESSERTS";
-            this.btnDessertsDinner.UseVisualStyleBackColor = true;
-            this.btnDessertsDinner.Click += new System.EventHandler(this.btnDessertsDinner_Click);
-            // 
-            // btnLunch
-            // 
-            this.btnLunch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLunch.Location = new System.Drawing.Point(16, 44);
-            this.btnLunch.Name = "btnLunch";
-            this.btnLunch.Size = new System.Drawing.Size(116, 41);
-            this.btnLunch.TabIndex = 25;
-            this.btnLunch.Text = "LUNCH";
-            this.btnLunch.UseVisualStyleBackColor = true;
-            this.btnLunch.Click += new System.EventHandler(this.btnLunch_Click);
-            // 
-            // btnDinner
-            // 
-            this.btnDinner.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDinner.Location = new System.Drawing.Point(162, 44);
-            this.btnDinner.Name = "btnDinner";
-            this.btnDinner.Size = new System.Drawing.Size(116, 41);
-            this.btnDinner.TabIndex = 26;
-            this.btnDinner.Text = "DINNER";
-            this.btnDinner.UseVisualStyleBackColor = true;
-            this.btnDinner.Click += new System.EventHandler(this.btnDinner_Click);
-            // 
-            // pnlDinnerMains
-            // 
-            this.pnlDinnerMains.Controls.Add(this.btnAddDinnerMains);
-            this.pnlDinnerMains.Controls.Add(this.lblDinnerMain);
-            this.pnlDinnerMains.Controls.Add(this.listviewDinnerMains);
-            this.pnlDinnerMains.Location = new System.Drawing.Point(9, 195);
-            this.pnlDinnerMains.Name = "pnlDinnerMains";
-            this.pnlDinnerMains.Size = new System.Drawing.Size(459, 252);
-            this.pnlDinnerMains.TabIndex = 27;
-            // 
-            // btnAddDinnerMains
-            // 
-            this.btnAddDinnerMains.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddDinnerMains.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddDinnerMains.Location = new System.Drawing.Point(339, 156);
-            this.btnAddDinnerMains.Name = "btnAddDinnerMains";
-            this.btnAddDinnerMains.Size = new System.Drawing.Size(117, 78);
-            this.btnAddDinnerMains.TabIndex = 15;
-            this.btnAddDinnerMains.Text = "Add";
-            this.btnAddDinnerMains.UseVisualStyleBackColor = false;
-            this.btnAddDinnerMains.Click += new System.EventHandler(this.btnAddDinnerMains_Click);
-            // 
-            // lblDinnerMain
-            // 
-            this.lblDinnerMain.AutoSize = true;
-            this.lblDinnerMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblDinnerMain.ForeColor = System.Drawing.Color.White;
-            this.lblDinnerMain.Location = new System.Drawing.Point(14, 13);
-            this.lblDinnerMain.Name = "lblDinnerMain";
-            this.lblDinnerMain.Size = new System.Drawing.Size(55, 20);
-            this.lblDinnerMain.TabIndex = 1;
-            this.lblDinnerMain.Text = "MAINS";
-            // 
-            // listviewDinnerMains
-            // 
-            this.listviewDinnerMains.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.MainName,
-            this.MainPrice});
-            this.listviewDinnerMains.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewDinnerMains.FullRowSelect = true;
-            this.listviewDinnerMains.HideSelection = false;
-            this.listviewDinnerMains.Location = new System.Drawing.Point(14, 48);
-            this.listviewDinnerMains.Name = "listviewDinnerMains";
-            this.listviewDinnerMains.Size = new System.Drawing.Size(309, 186);
-            this.listviewDinnerMains.TabIndex = 0;
-            this.listviewDinnerMains.UseCompatibleStateImageBehavior = false;
-            this.listviewDinnerMains.View = System.Windows.Forms.View.Details;
-            // 
-            // MainName
-            // 
-            this.MainName.Text = "Name";
-            this.MainName.Width = 165;
-            // 
-            // MainPrice
-            // 
-            this.MainPrice.Text = "Price";
-            this.MainPrice.Width = 120;
-            // 
-            // pnlDinnerStarters
-            // 
-            this.pnlDinnerStarters.Controls.Add(this.btnAddDinnerStarter);
-            this.pnlDinnerStarters.Controls.Add(this.lblDinnerStarter);
-            this.pnlDinnerStarters.Controls.Add(this.listviewDinnerStarters);
-            this.pnlDinnerStarters.Location = new System.Drawing.Point(9, 195);
-            this.pnlDinnerStarters.Name = "pnlDinnerStarters";
-            this.pnlDinnerStarters.Size = new System.Drawing.Size(459, 252);
-            this.pnlDinnerStarters.TabIndex = 28;
-            // 
-            // btnAddDinnerStarter
-            // 
-            this.btnAddDinnerStarter.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddDinnerStarter.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddDinnerStarter.Location = new System.Drawing.Point(339, 156);
-            this.btnAddDinnerStarter.Name = "btnAddDinnerStarter";
-            this.btnAddDinnerStarter.Size = new System.Drawing.Size(117, 78);
-            this.btnAddDinnerStarter.TabIndex = 15;
-            this.btnAddDinnerStarter.Text = "Add";
-            this.btnAddDinnerStarter.UseVisualStyleBackColor = false;
-            this.btnAddDinnerStarter.Click += new System.EventHandler(this.btnAddDinnerStarter_Click);
-            // 
-            // lblDinnerStarter
-            // 
-            this.lblDinnerStarter.AutoSize = true;
-            this.lblDinnerStarter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblDinnerStarter.ForeColor = System.Drawing.Color.White;
-            this.lblDinnerStarter.Location = new System.Drawing.Point(14, 13);
-            this.lblDinnerStarter.Name = "lblDinnerStarter";
-            this.lblDinnerStarter.Size = new System.Drawing.Size(75, 20);
-            this.lblDinnerStarter.TabIndex = 1;
-            this.lblDinnerStarter.Text = "STARTERS";
-            // 
-            // listviewDinnerStarters
-            // 
-            this.listviewDinnerStarters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listviewDinnerStarters.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewDinnerStarters.FullRowSelect = true;
-            this.listviewDinnerStarters.HideSelection = false;
-            this.listviewDinnerStarters.Location = new System.Drawing.Point(14, 48);
-            this.listviewDinnerStarters.Name = "listviewDinnerStarters";
-            this.listviewDinnerStarters.Size = new System.Drawing.Size(309, 186);
-            this.listviewDinnerStarters.TabIndex = 0;
-            this.listviewDinnerStarters.UseCompatibleStateImageBehavior = false;
-            this.listviewDinnerStarters.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Name";
-            this.columnHeader3.Width = 165;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Price";
-            this.columnHeader4.Width = 120;
-            // 
-            // pnlDinnerDesserts
-            // 
-            this.pnlDinnerDesserts.Controls.Add(this.btnAddDinnerDesserts);
-            this.pnlDinnerDesserts.Controls.Add(this.lblDinnerDessert);
-            this.pnlDinnerDesserts.Controls.Add(this.listViewDinnerDesserts);
-            this.pnlDinnerDesserts.Location = new System.Drawing.Point(9, 195);
-            this.pnlDinnerDesserts.Name = "pnlDinnerDesserts";
-            this.pnlDinnerDesserts.Size = new System.Drawing.Size(459, 252);
-            this.pnlDinnerDesserts.TabIndex = 29;
-            // 
-            // btnAddDinnerDesserts
-            // 
-            this.btnAddDinnerDesserts.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddDinnerDesserts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddDinnerDesserts.Location = new System.Drawing.Point(339, 156);
-            this.btnAddDinnerDesserts.Name = "btnAddDinnerDesserts";
-            this.btnAddDinnerDesserts.Size = new System.Drawing.Size(117, 78);
-            this.btnAddDinnerDesserts.TabIndex = 15;
-            this.btnAddDinnerDesserts.Text = "Add";
-            this.btnAddDinnerDesserts.UseVisualStyleBackColor = false;
-            this.btnAddDinnerDesserts.Click += new System.EventHandler(this.btnAddDinnerDesserts_Click);
-            // 
-            // lblDinnerDessert
-            // 
-            this.lblDinnerDessert.AutoSize = true;
-            this.lblDinnerDessert.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblDinnerDessert.ForeColor = System.Drawing.Color.White;
-            this.lblDinnerDessert.Location = new System.Drawing.Point(14, 13);
-            this.lblDinnerDessert.Name = "lblDinnerDessert";
-            this.lblDinnerDessert.Size = new System.Drawing.Size(76, 20);
-            this.lblDinnerDessert.TabIndex = 1;
-            this.lblDinnerDessert.Text = "DESSERTS";
-            // 
-            // listViewDinnerDesserts
-            // 
-            this.listViewDinnerDesserts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader5,
-            this.columnHeader6});
-            this.listViewDinnerDesserts.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listViewDinnerDesserts.FullRowSelect = true;
-            this.listViewDinnerDesserts.HideSelection = false;
-            this.listViewDinnerDesserts.Location = new System.Drawing.Point(14, 48);
-            this.listViewDinnerDesserts.Name = "listViewDinnerDesserts";
-            this.listViewDinnerDesserts.Size = new System.Drawing.Size(309, 186);
-            this.listViewDinnerDesserts.TabIndex = 0;
-            this.listViewDinnerDesserts.UseCompatibleStateImageBehavior = false;
-            this.listViewDinnerDesserts.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Name";
-            this.columnHeader5.Width = 165;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Price";
-            this.columnHeader6.Width = 120;
-            // 
-            // pnlBeers
-            // 
-            this.pnlBeers.Controls.Add(this.btnAddBeers);
-            this.pnlBeers.Controls.Add(this.lblBeers);
-            this.pnlBeers.Controls.Add(this.listviewBeers);
-            this.pnlBeers.Location = new System.Drawing.Point(9, 195);
-            this.pnlBeers.Name = "pnlBeers";
-            this.pnlBeers.Size = new System.Drawing.Size(459, 252);
-            this.pnlBeers.TabIndex = 30;
-            // 
-            // btnAddBeers
-            // 
-            this.btnAddBeers.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddBeers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddBeers.Location = new System.Drawing.Point(339, 156);
-            this.btnAddBeers.Name = "btnAddBeers";
-            this.btnAddBeers.Size = new System.Drawing.Size(117, 78);
-            this.btnAddBeers.TabIndex = 15;
-            this.btnAddBeers.Text = "Add";
-            this.btnAddBeers.UseVisualStyleBackColor = false;
-            this.btnAddBeers.Click += new System.EventHandler(this.btnAddBeers_Click);
-            // 
-            // lblBeers
-            // 
-            this.lblBeers.AutoSize = true;
-            this.lblBeers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblBeers.ForeColor = System.Drawing.Color.White;
-            this.lblBeers.Location = new System.Drawing.Point(14, 13);
-            this.lblBeers.Name = "lblBeers";
-            this.lblBeers.Size = new System.Drawing.Size(51, 20);
-            this.lblBeers.TabIndex = 1;
-            this.lblBeers.Text = "BEERS";
-            // 
-            // listviewBeers
-            // 
-            this.listviewBeers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8});
-            this.listviewBeers.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewBeers.FullRowSelect = true;
-            this.listviewBeers.HideSelection = false;
-            this.listviewBeers.Location = new System.Drawing.Point(14, 48);
-            this.listviewBeers.Name = "listviewBeers";
-            this.listviewBeers.Size = new System.Drawing.Size(309, 186);
-            this.listviewBeers.TabIndex = 0;
-            this.listviewBeers.UseCompatibleStateImageBehavior = false;
-            this.listviewBeers.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Name";
-            this.columnHeader7.Width = 165;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Price";
-            this.columnHeader8.Width = 120;
-            // 
-            // pnlWines
-            // 
-            this.pnlWines.Controls.Add(this.btnAddWines);
-            this.pnlWines.Controls.Add(this.lblWines);
-            this.pnlWines.Controls.Add(this.listviewWines);
-            this.pnlWines.Location = new System.Drawing.Point(9, 195);
-            this.pnlWines.Name = "pnlWines";
-            this.pnlWines.Size = new System.Drawing.Size(459, 252);
-            this.pnlWines.TabIndex = 31;
-            // 
-            // btnAddWines
-            // 
-            this.btnAddWines.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddWines.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddWines.Location = new System.Drawing.Point(339, 156);
-            this.btnAddWines.Name = "btnAddWines";
-            this.btnAddWines.Size = new System.Drawing.Size(117, 78);
-            this.btnAddWines.TabIndex = 15;
-            this.btnAddWines.Text = "Add";
-            this.btnAddWines.UseVisualStyleBackColor = false;
-            this.btnAddWines.Click += new System.EventHandler(this.btnAddWines_Click);
-            // 
-            // lblWines
-            // 
-            this.lblWines.AutoSize = true;
-            this.lblWines.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblWines.ForeColor = System.Drawing.Color.White;
-            this.lblWines.Location = new System.Drawing.Point(14, 13);
-            this.lblWines.Name = "lblWines";
-            this.lblWines.Size = new System.Drawing.Size(54, 20);
-            this.lblWines.TabIndex = 1;
-            this.lblWines.Text = "WINES";
-            // 
-            // listviewWines
-            // 
-            this.listviewWines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader9,
-            this.columnHeader10});
-            this.listviewWines.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listviewWines.FullRowSelect = true;
-            this.listviewWines.HideSelection = false;
-            this.listviewWines.Location = new System.Drawing.Point(14, 48);
-            this.listviewWines.Name = "listviewWines";
-            this.listviewWines.Size = new System.Drawing.Size(309, 186);
-            this.listviewWines.TabIndex = 0;
-            this.listviewWines.UseCompatibleStateImageBehavior = false;
-            this.listviewWines.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "Name";
-            this.columnHeader9.Width = 165;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Price";
-            this.columnHeader10.Width = 120;
-            // 
-            // pnlSpirits
-            // 
-            this.pnlSpirits.Controls.Add(this.btnAddSpirits);
-            this.pnlSpirits.Controls.Add(this.lblSpirits);
-            this.pnlSpirits.Controls.Add(this.listViewSpirits);
-            this.pnlSpirits.Location = new System.Drawing.Point(9, 195);
-            this.pnlSpirits.Name = "pnlSpirits";
-            this.pnlSpirits.Size = new System.Drawing.Size(459, 252);
-            this.pnlSpirits.TabIndex = 32;
-            // 
-            // btnAddSpirits
-            // 
-            this.btnAddSpirits.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddSpirits.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddSpirits.Location = new System.Drawing.Point(339, 156);
-            this.btnAddSpirits.Name = "btnAddSpirits";
-            this.btnAddSpirits.Size = new System.Drawing.Size(117, 78);
-            this.btnAddSpirits.TabIndex = 15;
-            this.btnAddSpirits.Text = "Add";
-            this.btnAddSpirits.UseVisualStyleBackColor = false;
-            this.btnAddSpirits.Click += new System.EventHandler(this.btnAddSpirits_Click);
-            // 
-            // lblSpirits
-            // 
-            this.lblSpirits.AutoSize = true;
-            this.lblSpirits.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblSpirits.ForeColor = System.Drawing.Color.White;
-            this.lblSpirits.Location = new System.Drawing.Point(14, 13);
-            this.lblSpirits.Name = "lblSpirits";
-            this.lblSpirits.Size = new System.Drawing.Size(58, 20);
-            this.lblSpirits.TabIndex = 1;
-            this.lblSpirits.Text = "SPIRITS";
-            // 
-            // listViewSpirits
-            // 
-            this.listViewSpirits.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader11,
-            this.columnHeader12});
-            this.listViewSpirits.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listViewSpirits.FullRowSelect = true;
-            this.listViewSpirits.HideSelection = false;
-            this.listViewSpirits.Location = new System.Drawing.Point(14, 48);
-            this.listViewSpirits.Name = "listViewSpirits";
-            this.listViewSpirits.Size = new System.Drawing.Size(309, 186);
-            this.listViewSpirits.TabIndex = 0;
-            this.listViewSpirits.UseCompatibleStateImageBehavior = false;
-            this.listViewSpirits.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Name";
-            this.columnHeader11.Width = 165;
-            // 
-            // columnHeader12
-            // 
-            this.columnHeader12.Text = "Price";
-            this.columnHeader12.Width = 120;
-            // 
-            // pnlHotDrinks
-            // 
-            this.pnlHotDrinks.Controls.Add(this.btnAddHotDrinks);
-            this.pnlHotDrinks.Controls.Add(this.lblHotDrinks);
-            this.pnlHotDrinks.Controls.Add(this.listViewHotDrinks);
-            this.pnlHotDrinks.Location = new System.Drawing.Point(9, 195);
-            this.pnlHotDrinks.Name = "pnlHotDrinks";
-            this.pnlHotDrinks.Size = new System.Drawing.Size(459, 252);
-            this.pnlHotDrinks.TabIndex = 33;
-            // 
-            // btnAddHotDrinks
-            // 
-            this.btnAddHotDrinks.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnAddHotDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAddHotDrinks.Location = new System.Drawing.Point(339, 156);
-            this.btnAddHotDrinks.Name = "btnAddHotDrinks";
-            this.btnAddHotDrinks.Size = new System.Drawing.Size(117, 78);
-            this.btnAddHotDrinks.TabIndex = 15;
-            this.btnAddHotDrinks.Text = "Add";
-            this.btnAddHotDrinks.UseVisualStyleBackColor = false;
-            this.btnAddHotDrinks.Click += new System.EventHandler(this.btnAddHotDrinks_Click);
-            // 
-            // lblHotDrinks
-            // 
-            this.lblHotDrinks.AutoSize = true;
-            this.lblHotDrinks.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.lblHotDrinks.ForeColor = System.Drawing.Color.White;
-            this.lblHotDrinks.Location = new System.Drawing.Point(14, 13);
-            this.lblHotDrinks.Name = "lblHotDrinks";
-            this.lblHotDrinks.Size = new System.Drawing.Size(94, 20);
-            this.lblHotDrinks.TabIndex = 1;
-            this.lblHotDrinks.Text = "HOT DRINKS";
-            // 
-            // listViewHotDrinks
-            // 
-            this.listViewHotDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader13,
-            this.columnHeader14});
-            this.listViewHotDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.listViewHotDrinks.FullRowSelect = true;
-            this.listViewHotDrinks.HideSelection = false;
-            this.listViewHotDrinks.Location = new System.Drawing.Point(14, 48);
-            this.listViewHotDrinks.Name = "listViewHotDrinks";
-            this.listViewHotDrinks.Size = new System.Drawing.Size(309, 186);
-            this.listViewHotDrinks.TabIndex = 0;
-            this.listViewHotDrinks.UseCompatibleStateImageBehavior = false;
-            this.listViewHotDrinks.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader13
-            // 
-            this.columnHeader13.Text = "Name";
-            this.columnHeader13.Width = 165;
-            // 
-            // columnHeader14
-            // 
-            this.columnHeader14.Text = "Price";
-            this.columnHeader14.Width = 120;
+            // pnlFoodDrink
+            // 
+            this.pnlFoodDrink.Controls.Add(this.btnMain);
+            this.pnlFoodDrink.Controls.Add(this.btnStarter);
+            this.pnlFoodDrink.Controls.Add(this.btnDessert);
+            this.pnlFoodDrink.Controls.Add(this.btnDrinks);
+            this.pnlFoodDrink.Location = new System.Drawing.Point(16, 39);
+            this.pnlFoodDrink.Name = "pnlFoodDrink";
+            this.pnlFoodDrink.Size = new System.Drawing.Size(454, 66);
+            this.pnlFoodDrink.TabIndex = 34;
+            // 
+            // btnMain
+            // 
+            this.btnMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMain.Location = new System.Drawing.Point(121, 13);
+            this.btnMain.Name = "btnMain";
+            this.btnMain.Size = new System.Drawing.Size(95, 41);
+            this.btnMain.TabIndex = 8;
+            this.btnMain.Text = "Mains";
+            this.btnMain.UseVisualStyleBackColor = true;
+            this.btnMain.Click += new System.EventHandler(this.btnMain_Click);
+            // 
+            // btnStarter
+            // 
+            this.btnStarter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnStarter.Location = new System.Drawing.Point(8, 13);
+            this.btnStarter.Name = "btnStarter";
+            this.btnStarter.Size = new System.Drawing.Size(95, 41);
+            this.btnStarter.TabIndex = 0;
+            this.btnStarter.Text = "Starters";
+            this.btnStarter.UseVisualStyleBackColor = true;
+            this.btnStarter.Click += new System.EventHandler(this.btnStarter_Click);
+            // 
+            // btnDessert
+            // 
+            this.btnDessert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDessert.Location = new System.Drawing.Point(238, 13);
+            this.btnDessert.Name = "btnDessert";
+            this.btnDessert.Size = new System.Drawing.Size(95, 41);
+            this.btnDessert.TabIndex = 39;
+            this.btnDessert.Text = "Desserts";
+            this.btnDessert.UseVisualStyleBackColor = true;
+            this.btnDessert.Click += new System.EventHandler(this.btnDessert_Click);
+            // 
+            // pnlLunchStarters
+            // 
+            this.pnlLunchStarters.Controls.Add(this.lblFoodStarter);
+            this.pnlLunchStarters.Controls.Add(this.listviewLunchFood);
+            this.pnlLunchStarters.Location = new System.Drawing.Point(9, 120);
+            this.pnlLunchStarters.Name = "pnlLunchStarters";
+            this.pnlLunchStarters.Size = new System.Drawing.Size(459, 327);
+            this.pnlLunchStarters.TabIndex = 35;
+            // 
+            // lblFoodStarter
+            // 
+            this.lblFoodStarter.AutoSize = true;
+            this.lblFoodStarter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblFoodStarter.ForeColor = System.Drawing.Color.White;
+            this.lblFoodStarter.Location = new System.Drawing.Point(19, 13);
+            this.lblFoodStarter.Name = "lblFoodStarter";
+            this.lblFoodStarter.Size = new System.Drawing.Size(59, 20);
+            this.lblFoodStarter.TabIndex = 18;
+            this.lblFoodStarter.Text = "Starters";
+            // 
+            // listviewLunchFood
+            // 
+            this.listviewLunchFood.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columNameFood,
+            this.columnPriceFood});
+            this.listviewLunchFood.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewLunchFood.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listviewLunchFood.FullRowSelect = true;
+            this.listviewLunchFood.HideSelection = false;
+            this.listviewLunchFood.Location = new System.Drawing.Point(12, 47);
+            this.listviewLunchFood.Name = "listviewLunchFood";
+            this.listviewLunchFood.Size = new System.Drawing.Size(404, 262);
+            this.listviewLunchFood.TabIndex = 0;
+            this.listviewLunchFood.UseCompatibleStateImageBehavior = false;
+            this.listviewLunchFood.View = System.Windows.Forms.View.Details;
+            this.listviewLunchFood.SelectedIndexChanged += new System.EventHandler(this.listviewLunchFood_SelectedIndexChanged);
+            // 
+            // columNameFood
+            // 
+            this.columNameFood.Text = "NAME";
+            this.columNameFood.Width = 300;
+            // 
+            // columnPriceFood
+            // 
+            this.columnPriceFood.Text = "PRICE";
+            this.columnPriceFood.Width = 70;
+            // 
+            // pnlDinnerStarter
+            // 
+            this.pnlDinnerStarter.Controls.Add(this.lblDinnerFood);
+            this.pnlDinnerStarter.Controls.Add(this.listviewDinnerStarter);
+            this.pnlDinnerStarter.Location = new System.Drawing.Point(9, 120);
+            this.pnlDinnerStarter.Name = "pnlDinnerStarter";
+            this.pnlDinnerStarter.Size = new System.Drawing.Size(459, 327);
+            this.pnlDinnerStarter.TabIndex = 36;
+            // 
+            // lblDinnerFood
+            // 
+            this.lblDinnerFood.AutoSize = true;
+            this.lblDinnerFood.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblDinnerFood.ForeColor = System.Drawing.Color.White;
+            this.lblDinnerFood.Location = new System.Drawing.Point(19, 13);
+            this.lblDinnerFood.Name = "lblDinnerFood";
+            this.lblDinnerFood.Size = new System.Drawing.Size(59, 20);
+            this.lblDinnerFood.TabIndex = 19;
+            this.lblDinnerFood.Text = "Starters";
+            // 
+            // listviewDinnerStarter
+            // 
+            this.listviewDinnerStarter.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader15,
+            this.columnHeader16});
+            this.listviewDinnerStarter.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewDinnerStarter.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listviewDinnerStarter.FullRowSelect = true;
+            this.listviewDinnerStarter.HideSelection = false;
+            this.listviewDinnerStarter.Location = new System.Drawing.Point(12, 47);
+            this.listviewDinnerStarter.Name = "listviewDinnerStarter";
+            this.listviewDinnerStarter.Size = new System.Drawing.Size(404, 262);
+            this.listviewDinnerStarter.TabIndex = 0;
+            this.listviewDinnerStarter.UseCompatibleStateImageBehavior = false;
+            this.listviewDinnerStarter.View = System.Windows.Forms.View.Details;
+            this.listviewDinnerStarter.SelectedIndexChanged += new System.EventHandler(this.listviewFoodDinner_SelectedIndexChanged);
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "NAME";
+            this.columnHeader15.Width = 300;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "PRICE";
+            this.columnHeader16.Width = 70;
+            // 
+            // pnlDrinks
+            // 
+            this.pnlDrinks.Controls.Add(this.listviewDrinks);
+            this.pnlDrinks.Location = new System.Drawing.Point(9, 120);
+            this.pnlDrinks.Name = "pnlDrinks";
+            this.pnlDrinks.Size = new System.Drawing.Size(459, 327);
+            this.pnlDrinks.TabIndex = 37;
+            // 
+            // listviewDrinks
+            // 
+            this.listviewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader17,
+            this.columnHeader18});
+            this.listviewDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewDrinks.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listviewDrinks.FullRowSelect = true;
+            this.listviewDrinks.HideSelection = false;
+            this.listviewDrinks.Location = new System.Drawing.Point(12, 3);
+            this.listviewDrinks.Name = "listviewDrinks";
+            this.listviewDrinks.Size = new System.Drawing.Size(404, 321);
+            this.listviewDrinks.TabIndex = 0;
+            this.listviewDrinks.UseCompatibleStateImageBehavior = false;
+            this.listviewDrinks.View = System.Windows.Forms.View.Details;
+            this.listviewDrinks.SelectedIndexChanged += new System.EventHandler(this.listviewDrinks_SelectedIndexChanged);
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "NAME";
+            this.columnHeader17.Width = 300;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "PRICE";
+            this.columnHeader18.Width = 70;
+            // 
+            // pnlDessert
+            // 
+            this.pnlDessert.Controls.Add(this.listviewDessert);
+            this.pnlDessert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlDessert.Location = new System.Drawing.Point(9, 120);
+            this.pnlDessert.Name = "pnlDessert";
+            this.pnlDessert.Size = new System.Drawing.Size(459, 327);
+            this.pnlDessert.TabIndex = 38;
+            // 
+            // listviewDessert
+            // 
+            this.listviewDessert.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader19,
+            this.columnHeader20});
+            this.listviewDessert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewDessert.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listviewDessert.FullRowSelect = true;
+            this.listviewDessert.HideSelection = false;
+            this.listviewDessert.Location = new System.Drawing.Point(12, 3);
+            this.listviewDessert.Name = "listviewDessert";
+            this.listviewDessert.Size = new System.Drawing.Size(404, 306);
+            this.listviewDessert.TabIndex = 0;
+            this.listviewDessert.UseCompatibleStateImageBehavior = false;
+            this.listviewDessert.View = System.Windows.Forms.View.Details;
+            this.listviewDessert.SelectedIndexChanged += new System.EventHandler(this.listviewDessert_SelectedIndexChanged);
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "NAME";
+            this.columnHeader19.Width = 300;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "PRICE";
+            this.columnHeader20.Width = 70;
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.lblLunchMain);
+            this.pnlMain.Controls.Add(this.listivewLunchMain);
+            this.pnlMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlMain.Location = new System.Drawing.Point(9, 120);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Size = new System.Drawing.Size(459, 327);
+            this.pnlMain.TabIndex = 39;
+            // 
+            // lblLunchMain
+            // 
+            this.lblLunchMain.AutoSize = true;
+            this.lblLunchMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.lblLunchMain.ForeColor = System.Drawing.Color.White;
+            this.lblLunchMain.Location = new System.Drawing.Point(19, 13);
+            this.lblLunchMain.Name = "lblLunchMain";
+            this.lblLunchMain.Size = new System.Drawing.Size(48, 20);
+            this.lblLunchMain.TabIndex = 17;
+            this.lblLunchMain.Text = "Mains";
+            // 
+            // listivewLunchMain
+            // 
+            this.listivewLunchMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader21,
+            this.columnHeader22});
+            this.listivewLunchMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listivewLunchMain.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listivewLunchMain.FullRowSelect = true;
+            this.listivewLunchMain.HideSelection = false;
+            this.listivewLunchMain.Location = new System.Drawing.Point(12, 47);
+            this.listivewLunchMain.Name = "listivewLunchMain";
+            this.listivewLunchMain.Size = new System.Drawing.Size(404, 262);
+            this.listivewLunchMain.TabIndex = 0;
+            this.listivewLunchMain.UseCompatibleStateImageBehavior = false;
+            this.listivewLunchMain.View = System.Windows.Forms.View.Details;
+            this.listivewLunchMain.SelectedIndexChanged += new System.EventHandler(this.listivewLunchMain_SelectedIndexChanged);
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "NAME";
+            this.columnHeader21.Width = 300;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "PRICE";
+            this.columnHeader22.Width = 70;
+            // 
+            // pnlDinnerMain
+            // 
+            this.pnlDinnerMain.Controls.Add(this.label1);
+            this.pnlDinnerMain.Controls.Add(this.listviewDinnerMain);
+            this.pnlDinnerMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlDinnerMain.Location = new System.Drawing.Point(9, 120);
+            this.pnlDinnerMain.Name = "pnlDinnerMain";
+            this.pnlDinnerMain.Size = new System.Drawing.Size(459, 327);
+            this.pnlDinnerMain.TabIndex = 40;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(19, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 20);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Mains";
+            // 
+            // listviewDinnerMain
+            // 
+            this.listviewDinnerMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader23,
+            this.columnHeader24});
+            this.listviewDinnerMain.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewDinnerMain.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listviewDinnerMain.FullRowSelect = true;
+            this.listviewDinnerMain.HideSelection = false;
+            this.listviewDinnerMain.Location = new System.Drawing.Point(12, 47);
+            this.listviewDinnerMain.Name = "listviewDinnerMain";
+            this.listviewDinnerMain.Size = new System.Drawing.Size(404, 262);
+            this.listviewDinnerMain.TabIndex = 0;
+            this.listviewDinnerMain.UseCompatibleStateImageBehavior = false;
+            this.listviewDinnerMain.View = System.Windows.Forms.View.Details;
+            this.listviewDinnerMain.SelectedIndexChanged += new System.EventHandler(this.listviewDinnerMain_SelectedIndexChanged);
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "NAME";
+            this.columnHeader23.Width = 300;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "PRICE";
+            this.columnHeader24.Width = 70;
+            // 
+            // pnlDinnerDessert
+            // 
+            this.pnlDinnerDessert.Controls.Add(this.label2);
+            this.pnlDinnerDessert.Controls.Add(this.listviewDinnerDessert);
+            this.pnlDinnerDessert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pnlDinnerDessert.Location = new System.Drawing.Point(9, 120);
+            this.pnlDinnerDessert.Name = "pnlDinnerDessert";
+            this.pnlDinnerDessert.Size = new System.Drawing.Size(459, 327);
+            this.pnlDinnerDessert.TabIndex = 41;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(19, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 20);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Desserts";
+            // 
+            // listviewDinnerDessert
+            // 
+            this.listviewDinnerDessert.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader25,
+            this.columnHeader26});
+            this.listviewDinnerDessert.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listviewDinnerDessert.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.listviewDinnerDessert.FullRowSelect = true;
+            this.listviewDinnerDessert.HideSelection = false;
+            this.listviewDinnerDessert.Location = new System.Drawing.Point(12, 47);
+            this.listviewDinnerDessert.Name = "listviewDinnerDessert";
+            this.listviewDinnerDessert.Size = new System.Drawing.Size(404, 262);
+            this.listviewDinnerDessert.TabIndex = 0;
+            this.listviewDinnerDessert.UseCompatibleStateImageBehavior = false;
+            this.listviewDinnerDessert.View = System.Windows.Forms.View.Details;
+            this.listviewDinnerDessert.SelectedIndexChanged += new System.EventHandler(this.listviewDinnerDessert_SelectedIndexChanged);
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "NAME";
+            this.columnHeader25.Width = 300;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "PRICE";
+            this.columnHeader26.Width = 70;
             // 
             // FormOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
-            this.Controls.Add(this.btnDinner);
-            this.Controls.Add(this.btnLunch);
-            this.Controls.Add(this.btnDrinks);
-            this.Controls.Add(this.pnlWines);
+            this.Controls.Add(this.pnlFoodDrink);
             this.Controls.Add(this.txtNote);
             this.Controls.Add(this.btnOrderAddNote);
             this.Controls.Add(this.btnOrderRemove);
@@ -1096,57 +586,36 @@ namespace RosUI
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnCancelOrder);
             this.Controls.Add(this.btnSendOrder);
-            this.Controls.Add(this.pnlMains);
-            this.Controls.Add(this.pnlHotDrinks);
-            this.Controls.Add(this.pnlSpirits);
-            this.Controls.Add(this.pnlBeers);
-            this.Controls.Add(this.pnlDinnerDesserts);
-            this.Controls.Add(this.pnlDinnerStarters);
-            this.Controls.Add(this.pnlStarters);
-            this.Controls.Add(this.pnlDesserts);
-            this.Controls.Add(this.pnlSoftDrinks);
-            this.Controls.Add(this.pnlDinnerMains);
-            this.Controls.Add(this.pnlDinner);
-            this.Controls.Add(this.pnlLunch);
-            this.Controls.Add(this.pnlDrinkCategories);
+            this.Controls.Add(this.pnlDrinks);
+            this.Controls.Add(this.pnlLunchStarters);
+            this.Controls.Add(this.pnlDinnerStarter);
+            this.Controls.Add(this.pnlDinnerMain);
+            this.Controls.Add(this.pnlMain);
+            this.Controls.Add(this.pnlDinnerDessert);
+            this.Controls.Add(this.pnlDessert);
             this.Name = "FormOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrderForm";
             this.Load += new System.EventHandler(this.OrderForm_Load);
-            this.pnlStarters.ResumeLayout(false);
-            this.pnlStarters.PerformLayout();
-            this.pnlMains.ResumeLayout(false);
-            this.pnlMains.PerformLayout();
-            this.pnlDesserts.ResumeLayout(false);
-            this.pnlDesserts.PerformLayout();
-            this.pnlSoftDrinks.ResumeLayout(false);
-            this.pnlSoftDrinks.PerformLayout();
-            this.pnlDrinkCategories.ResumeLayout(false);
-            this.pnlLunch.ResumeLayout(false);
-            this.pnlDinner.ResumeLayout(false);
-            this.pnlDinnerMains.ResumeLayout(false);
-            this.pnlDinnerMains.PerformLayout();
-            this.pnlDinnerStarters.ResumeLayout(false);
-            this.pnlDinnerStarters.PerformLayout();
-            this.pnlDinnerDesserts.ResumeLayout(false);
-            this.pnlDinnerDesserts.PerformLayout();
-            this.pnlBeers.ResumeLayout(false);
-            this.pnlBeers.PerformLayout();
-            this.pnlWines.ResumeLayout(false);
-            this.pnlWines.PerformLayout();
-            this.pnlSpirits.ResumeLayout(false);
-            this.pnlSpirits.PerformLayout();
-            this.pnlHotDrinks.ResumeLayout(false);
-            this.pnlHotDrinks.PerformLayout();
+            this.pnlFoodDrink.ResumeLayout(false);
+            this.pnlLunchStarters.ResumeLayout(false);
+            this.pnlLunchStarters.PerformLayout();
+            this.pnlDinnerStarter.ResumeLayout(false);
+            this.pnlDinnerStarter.PerformLayout();
+            this.pnlDrinks.ResumeLayout(false);
+            this.pnlDessert.ResumeLayout(false);
+            this.pnlMain.ResumeLayout(false);
+            this.pnlMain.PerformLayout();
+            this.pnlDinnerMain.ResumeLayout(false);
+            this.pnlDinnerMain.PerformLayout();
+            this.pnlDinnerDessert.ResumeLayout(false);
+            this.pnlDinnerDessert.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button btnStarters;
-        private System.Windows.Forms.Button btnMains;
-        private System.Windows.Forms.Button btnDesserts;
         private System.Windows.Forms.Button btnDrinks;
         private System.Windows.Forms.Button btnSendOrder;
         private System.Windows.Forms.Button btnCancelOrder;
@@ -1155,88 +624,46 @@ namespace RosUI
         private System.Windows.Forms.ListView listviewOrder;
         private System.Windows.Forms.Button btnOrderRemove;
         private System.Windows.Forms.Button btnOrderAddNote;
-        private System.Windows.Forms.Panel pnlStarters;
-        private System.Windows.Forms.Button btnAddStarter;
-        private System.Windows.Forms.Label lblStartersHead;
-        private System.Windows.Forms.ListView listviewStarters;
-        private System.Windows.Forms.ColumnHeader StarterName;
-        private System.Windows.Forms.ColumnHeader Price;
         private System.Windows.Forms.ColumnHeader nameOrder;
         private System.Windows.Forms.ColumnHeader priceOrder;
         private System.Windows.Forms.ColumnHeader amountOrder;
         private System.Windows.Forms.RichTextBox txtNote;
-        private System.Windows.Forms.Panel pnlSoftDrinks;
-        private System.Windows.Forms.Button btnAddDrink;
-        private System.Windows.Forms.Label lblSoftDrinks;
-        private System.Windows.Forms.ListView listviewSoftDrinks;
-        private System.Windows.Forms.ColumnHeader columnName;
-        private System.Windows.Forms.ColumnHeader columnPrice;
-        private System.Windows.Forms.Panel pnlDrinkCategories;
-        private System.Windows.Forms.Button btnHotDrinks;
-        private System.Windows.Forms.Button btnWine;
-        private System.Windows.Forms.Button btnSpirits;
-        private System.Windows.Forms.Button btnBeers;
-        private System.Windows.Forms.Button btnSoftDrink;
-        private System.Windows.Forms.Panel pnlMains;
-        private System.Windows.Forms.Button btnAddMains;
-        private System.Windows.Forms.Label lblMains;
-        private System.Windows.Forms.ListView listviewMains;
-        private System.Windows.Forms.ColumnHeader columnMainName;
-        private System.Windows.Forms.ColumnHeader columnMainPrice;
-        private System.Windows.Forms.Panel pnlDesserts;
-        private System.Windows.Forms.Button btnAddDessert;
-        private System.Windows.Forms.Label lblDesserts;
-        private System.Windows.Forms.ListView listviewDesserts;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Panel pnlLunch;
-        private System.Windows.Forms.Panel pnlDinner;
-        private System.Windows.Forms.Button btnStartersDinner;
-        private System.Windows.Forms.Button btnMainsDinners;
-        private System.Windows.Forms.Button btnDessertsDinner;
-        private System.Windows.Forms.Button btnLunch;
-        private System.Windows.Forms.Button btnDinner;
-        private System.Windows.Forms.Panel pnlDinnerMains;
-        private System.Windows.Forms.Button btnAddDinnerMains;
-        private System.Windows.Forms.Label lblDinnerMain;
-        private System.Windows.Forms.ListView listviewDinnerMains;
-        private System.Windows.Forms.ColumnHeader MainName;
-        private System.Windows.Forms.ColumnHeader MainPrice;
-        private System.Windows.Forms.Panel pnlDinnerStarters;
-        private System.Windows.Forms.Button btnAddDinnerStarter;
-        private System.Windows.Forms.Label lblDinnerStarter;
-        private System.Windows.Forms.ListView listviewDinnerStarters;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.Panel pnlDinnerDesserts;
-        private System.Windows.Forms.Button btnAddDinnerDesserts;
-        private System.Windows.Forms.Label lblDinnerDessert;
-        private System.Windows.Forms.ListView listViewDinnerDesserts;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.Panel pnlBeers;
-        private System.Windows.Forms.Button btnAddBeers;
-        private System.Windows.Forms.Label lblBeers;
-        private System.Windows.Forms.ListView listviewBeers;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.Panel pnlWines;
-        private System.Windows.Forms.Button btnAddWines;
-        private System.Windows.Forms.Label lblWines;
-        private System.Windows.Forms.ListView listviewWines;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.Panel pnlSpirits;
-        private System.Windows.Forms.Button btnAddSpirits;
-        private System.Windows.Forms.Label lblSpirits;
-        private System.Windows.Forms.ListView listViewSpirits;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.Panel pnlHotDrinks;
-        private System.Windows.Forms.Button btnAddHotDrinks;
-        private System.Windows.Forms.Label lblHotDrinks;
-        private System.Windows.Forms.ListView listViewHotDrinks;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
-        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.Panel pnlFoodDrink;
+        private System.Windows.Forms.Button btnStarter;
+        private System.Windows.Forms.Panel pnlLunchStarters;
+        private System.Windows.Forms.ListView listviewLunchFood;
+        private System.Windows.Forms.ColumnHeader columNameFood;
+        private System.Windows.Forms.ColumnHeader columnPriceFood;
+        private System.Windows.Forms.Panel pnlDinnerStarter;
+        private System.Windows.Forms.ListView listviewDinnerStarter;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.Panel pnlDrinks;
+        private System.Windows.Forms.ListView listviewDrinks;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.Label lblFoodStarter;
+        private System.Windows.Forms.Label lblDinnerFood;
+        private System.Windows.Forms.Panel pnlDessert;
+        private System.Windows.Forms.ListView listviewDessert;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.Button btnMain;
+        private System.Windows.Forms.Button btnDessert;
+        private System.Windows.Forms.Panel pnlMain;
+        private System.Windows.Forms.Label lblLunchMain;
+        private System.Windows.Forms.ListView listivewLunchMain;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.Panel pnlDinnerMain;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ListView listviewDinnerMain;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.Panel pnlDinnerDessert;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView listviewDinnerDessert;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
     }
 }

@@ -20,5 +20,14 @@ namespace RosLogic
         {
             orderDAO.UpdateStock(item);
         }
+
+        public void DecreaseStock(int itemID)
+        {
+            orderDAO.DecreaseStock(itemID);
+        }
+        public void IncreaseStock(int itemID)
+        {
+            orderDAO.IncreaseStock(itemID);
+        }
     }
 }
