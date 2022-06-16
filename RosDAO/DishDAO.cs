@@ -51,33 +51,15 @@ namespace RosDAL
 
             return ReadTablesOrder(ExecuteSelectQuery(query, sqlParameters));
         }
-        public List<Dish> GetStarters(string course, int menuType) // For resit
+
+        public List<Dish> GetDishes(int menuType)
         {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
+            string query = " Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish join Item on DishID = ItemID " +
                 "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
-                "where Dish.Course=@Course AND Item.MenuTypeID=@MenuType OR Item.MenuTypeID=3";
-            SqlParameter[] sqlParameters =
-{
-                new SqlParameter("@Course", course),
-                new SqlParameter("@MenuType", menuType)
-            };
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-        public List<Dish> GetDishes(string course, int menuType) // For resit
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
-                "where Dish.Course=@Course AND Item.MenuTypeID=@MenuType";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@Course", course),
-                new SqlParameter("@MenuType", menuType)
-            };
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
+                "where Item.MenuTypeID = @MenuType OR Item.MenuTypeID = 3";
+            SqlParameter sqlParameter = new SqlParameter("@MenuType", menuType);
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameter));
         }
 
 

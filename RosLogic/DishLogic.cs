@@ -18,14 +18,9 @@ namespace RosLogic
             return dishDAO.ReadContainedDishes(table);
         }
 
-        public List<Dish> GetStarters(string course, int menuType)
+        public List<Dish> GetDishes(int menuType)
         {
-            return dishDAO.GetStarters(course,menuType);
-        }
-
-        public List<Dish> GetDishes(string course, int menuType)
-        {
-            return dishDAO.GetDishes(course,menuType);
+            return dishDAO.GetDishes(menuType);
         }
     }
 }
