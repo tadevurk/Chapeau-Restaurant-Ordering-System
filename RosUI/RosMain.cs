@@ -317,7 +317,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add(dish.ItemNote);
+                        li.SubItems.Add("Yes");
 
                         //if a note is present highlight it in light blue
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
@@ -381,7 +381,7 @@ namespace RosUI
                     }
                     else
                     {
-                        li.SubItems.Add(dish.ItemNote);
+                        li.SubItems.Add("Yes");
 
                         //if a note is present highlight it in light blue
                         li.SubItems[2].BackColor = Color.LightSkyBlue;
@@ -738,114 +738,18 @@ namespace RosUI
 
         private void btnSelByTabKit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string table = (string)cmbTableKit.SelectedItem;
-
-                //select all items of the same table
-                foreach (ListViewItem item in lvOrderedDishes.Items)
-                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
-                    {
-                        item.Selected = true;
-                    }
-            }
-            catch(Exception exp) { MessageBox.Show(exp.Message, "Error"); }
+           
 
         }
 
         private void btnSelByCourseKit_Click(object sender, EventArgs e)
         {
-            try
-            {
-                lvOrderedDishes.SelectedItems.Clear();
-
-                string course = (string)cmbCourseKit.SelectedItem;
-                string table = (string)cmbTableKit.SelectedItem;
-
-                //select all items of the selected table and course
-                foreach (ListViewItem item in lvOrderedDishes.Items)
-                    if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == table)
-                    {
-                        item.Selected = true;
-                    }
-            }
-            catch (Exception exp)
-            {
-
-                MessageBox.Show(exp.Message, "Error");
-            }
+            
 
         }
 
-        private void btnSelByTabKitFin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                lvFinishedDishes.SelectedItems.Clear();
 
-                string table = (string)cmbKitFinished.SelectedItem;
 
-                //select all items of the selected table
-                foreach (ListViewItem item in lvFinishedDishes.Items)
-                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
-                    {
-                        item.Selected = true;
-                    }
-            }
-            catch (Exception exp)
-            {
-
-                MessageBox.Show(exp.Message, "Error");
-            }
-
-        }
-
-        private void BtnSelByTabBarFin_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                lvFinishedDrinks.SelectedItems.Clear();
-
-                string table = (string)cmbBarFinished.SelectedItem;
-
-                //select all items of the same table
-                foreach (ListViewItem item in lvFinishedDrinks.Items)
-                    if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
-                    {
-                        item.Selected = true;
-                    }
-            }
-            catch (Exception exp)
-            {
-
-                MessageBox.Show(exp.Message, "Error");
-            }
-
-        }
-
-        private void btnSelByTabBar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                //clear all selected items
-                lvOrderedDrinks.SelectedItems.Clear();
-
-                string table = (string)cmbSelByTabBar.SelectedItem;
-
-                //select all items of the same table
-                foreach (ListViewItem item in lvOrderedDrinks.Items)
-                    if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
-                    {
-                        item.Selected = true;
-                    }
-            }
-            catch (Exception exp)
-            {
-
-                MessageBox.Show(exp.Message, "Error");
-            }
-           
-        }
 
         private void UpdateTableToReadyDish(OrderedDish dish)
         {
@@ -927,6 +831,163 @@ namespace RosUI
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             UpdateAllListViews();
+        }
+
+        private void cmbTableKit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lvOrderedDishes.SelectedItems.Clear();
+
+                string table = (string)cmbTableKit.SelectedItem;
+
+                //select all items of the same table
+                foreach (ListViewItem item in lvOrderedDishes.Items)
+                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                    {
+                        item.Selected = true;
+                    }
+            }
+            catch (Exception exp) { MessageBox.Show(exp.Message, "Error"); }
+        }
+
+        private void cmbCourseKit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lvOrderedDishes.SelectedItems.Clear();
+
+                string course = (string)cmbCourseKit.SelectedItem;
+                string table = (string)cmbTableKit.SelectedItem;
+
+                //select all items of the selected table and course
+                foreach (ListViewItem item in lvOrderedDishes.Items)
+                    if (item.SubItems[4].Text == course && $"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                    {
+                        item.Selected = true;
+                    }
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show(exp.Message, "Error");
+            }
+        }
+
+        private void lvOrderedDishes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lvOrderedDishes.SelectedItems.Count == 0)
+                {
+                    return;
+                }
+
+                OrderedDish dish = (OrderedDish)lvOrderedDishes.SelectedItems[0].Tag;
+
+                if (dish.Status == DishStatus.PickUp)
+                {
+                    btnUndoKitView.BackColor = Color.Red;
+                    btnUndoKitView.Enabled = true;
+                }
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show(exp.Message, "Error");
+            }
+
+        }
+
+        private void cmbKitFinished_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lvFinishedDishes.SelectedItems.Clear();
+
+                string table = (string)cmbKitFinished.SelectedItem;
+
+                //select all items of the selected table
+                foreach (ListViewItem item in lvFinishedDishes.Items)
+                    if ($"Table {int.Parse(item.SubItems[5].Text)}" == table)
+                    {
+                        item.Selected = true;
+                    }
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show(exp.Message, "Error");
+            }
+        }
+
+        private void cmbBarFinished_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                lvFinishedDrinks.SelectedItems.Clear();
+
+                string table = (string)cmbBarFinished.SelectedItem;
+
+                //select all items of the same table
+                foreach (ListViewItem item in lvFinishedDrinks.Items)
+                    if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
+                    {
+                        item.Selected = true;
+                    }
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show(exp.Message, "Error");
+            }
+        }
+
+        private void cmbSelByTabBar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                //clear all selected items
+                lvOrderedDrinks.SelectedItems.Clear();
+
+                string table = (string)cmbSelByTabBar.SelectedItem;
+
+                //select all items of the same table
+                foreach (ListViewItem item in lvOrderedDrinks.Items)
+                    if ($"Table {int.Parse(item.SubItems[4].Text)}" == table)
+                    {
+                        item.Selected = true;
+                    }
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show(exp.Message, "Error");
+            }
+        }
+
+        private void lvOrderedDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {               
+                if (lvOrderedDrinks.SelectedItems.Count == 0)
+                {
+                    return;
+                }
+
+                OrderedDrink drink = (OrderedDrink)lvOrderedDrinks.SelectedItems[0].Tag;
+
+                if (drink.DrinkStatus == DrinkStatus.PickUp)
+                {
+                    btnUndoBarView.BackColor = Color.Red;
+                    btnUndoBarView.Enabled = true;
+                }
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show(exp.Message, "Error");
+            }
         }
     }
 }

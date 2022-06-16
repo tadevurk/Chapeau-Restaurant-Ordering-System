@@ -41,11 +41,11 @@
             this.finishedOrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlKitchenView = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblEmpNameKit = new System.Windows.Forms.Label();
             this.cmbCourseKit = new System.Windows.Forms.ComboBox();
             this.cmbTableKit = new System.Windows.Forms.ComboBox();
-            this.btnSelByCourseKit = new System.Windows.Forms.Button();
-            this.btnSelByTabKit = new System.Windows.Forms.Button();
             this.btnFinishedDishes = new System.Windows.Forms.Button();
             this.btnUndoKitView = new System.Windows.Forms.Button();
             this.btnViewNote = new System.Windows.Forms.Button();
@@ -61,7 +61,6 @@
             this.pnlBarView = new System.Windows.Forms.Panel();
             this.lblEmpNameBar = new System.Windows.Forms.Label();
             this.cmbSelByTabBar = new System.Windows.Forms.ComboBox();
-            this.btnSelByTabBar = new System.Windows.Forms.Button();
             this.btnFinishedOrdersBar = new System.Windows.Forms.Button();
             this.btnUndoBarView = new System.Windows.Forms.Button();
             this.btnViewDrinkNote = new System.Windows.Forms.Button();
@@ -75,9 +74,8 @@
             this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.pnlKitchenViewFinished = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.lblEmpNameKitFin = new System.Windows.Forms.Label();
-            this.cmbKitFinished = new System.Windows.Forms.ComboBox();
-            this.btnSelByTabKitFin = new System.Windows.Forms.Button();
             this.btnRunningOrderesKit = new System.Windows.Forms.Button();
             this.btnUndoKitFin = new System.Windows.Forms.Button();
             this.btnViewNoteFinDish = new System.Windows.Forms.Button();
@@ -89,9 +87,10 @@
             this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
+            this.cmbKitFinished = new System.Windows.Forms.ComboBox();
             this.pnlBarViewFinished = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.lblEmpNameBarFin = new System.Windows.Forms.Label();
-            this.BtnSelByTabBarFin = new System.Windows.Forms.Button();
             this.cmbBarFinished = new System.Windows.Forms.ComboBox();
             this.btnRunningOrdersBar = new System.Windows.Forms.Button();
             this.btnViewNoteFinDrink = new System.Windows.Forms.Button();
@@ -104,6 +103,7 @@
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -205,11 +205,11 @@
             // 
             // pnlKitchenView
             // 
+            this.pnlKitchenView.Controls.Add(this.label6);
+            this.pnlKitchenView.Controls.Add(this.label5);
             this.pnlKitchenView.Controls.Add(this.lblEmpNameKit);
             this.pnlKitchenView.Controls.Add(this.cmbCourseKit);
             this.pnlKitchenView.Controls.Add(this.cmbTableKit);
-            this.pnlKitchenView.Controls.Add(this.btnSelByCourseKit);
-            this.pnlKitchenView.Controls.Add(this.btnSelByTabKit);
             this.pnlKitchenView.Controls.Add(this.btnFinishedDishes);
             this.pnlKitchenView.Controls.Add(this.btnUndoKitView);
             this.pnlKitchenView.Controls.Add(this.btnViewNote);
@@ -221,62 +221,61 @@
             this.pnlKitchenView.Size = new System.Drawing.Size(1482, 723);
             this.pnlKitchenView.TabIndex = 0;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Location = new System.Drawing.Point(1252, 152);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(144, 25);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Select by course:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(1252, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(131, 25);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Select by table:";
+            // 
             // lblEmpNameKit
             // 
             this.lblEmpNameKit.AutoSize = true;
+            this.lblEmpNameKit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEmpNameKit.Location = new System.Drawing.Point(1222, 21);
             this.lblEmpNameKit.Name = "lblEmpNameKit";
-            this.lblEmpNameKit.Size = new System.Drawing.Size(46, 20);
+            this.lblEmpNameKit.Size = new System.Drawing.Size(57, 25);
             this.lblEmpNameKit.TabIndex = 12;
             this.lblEmpNameKit.Text = "Chef: ";
             // 
             // cmbCourseKit
             // 
             this.cmbCourseKit.FormattingEnabled = true;
-            this.cmbCourseKit.Location = new System.Drawing.Point(1221, 394);
+            this.cmbCourseKit.Location = new System.Drawing.Point(1250, 180);
             this.cmbCourseKit.Name = "cmbCourseKit";
             this.cmbCourseKit.Size = new System.Drawing.Size(151, 28);
             this.cmbCourseKit.TabIndex = 11;
+            this.cmbCourseKit.SelectedIndexChanged += new System.EventHandler(this.cmbCourseKit_SelectedIndexChanged);
             // 
             // cmbTableKit
             // 
             this.cmbTableKit.FormattingEnabled = true;
-            this.cmbTableKit.Location = new System.Drawing.Point(1220, 174);
+            this.cmbTableKit.Location = new System.Drawing.Point(1250, 96);
             this.cmbTableKit.Name = "cmbTableKit";
             this.cmbTableKit.Size = new System.Drawing.Size(151, 28);
             this.cmbTableKit.TabIndex = 10;
-            // 
-            // btnSelByCourseKit
-            // 
-            this.btnSelByCourseKit.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnSelByCourseKit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelByCourseKit.Location = new System.Drawing.Point(1222, 477);
-            this.btnSelByCourseKit.Name = "btnSelByCourseKit";
-            this.btnSelByCourseKit.Size = new System.Drawing.Size(150, 50);
-            this.btnSelByCourseKit.TabIndex = 9;
-            this.btnSelByCourseKit.Text = "Select by Course";
-            this.btnSelByCourseKit.UseVisualStyleBackColor = false;
-            this.btnSelByCourseKit.Click += new System.EventHandler(this.btnSelByCourseKit_Click);
-            // 
-            // btnSelByTabKit
-            // 
-            this.btnSelByTabKit.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnSelByTabKit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelByTabKit.Location = new System.Drawing.Point(1221, 266);
-            this.btnSelByTabKit.Name = "btnSelByTabKit";
-            this.btnSelByTabKit.Size = new System.Drawing.Size(150, 50);
-            this.btnSelByTabKit.TabIndex = 8;
-            this.btnSelByTabKit.Text = "Select by Table";
-            this.btnSelByTabKit.UseVisualStyleBackColor = false;
-            this.btnSelByTabKit.Click += new System.EventHandler(this.btnSelByTabKit_Click);
+            this.cmbTableKit.SelectedIndexChanged += new System.EventHandler(this.cmbTableKit_SelectedIndexChanged);
             // 
             // btnFinishedDishes
             // 
             this.btnFinishedDishes.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFinishedDishes.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFinishedDishes.Location = new System.Drawing.Point(536, 633);
+            this.btnFinishedDishes.Location = new System.Drawing.Point(43, 9);
             this.btnFinishedDishes.Name = "btnFinishedDishes";
-            this.btnFinishedDishes.Size = new System.Drawing.Size(150, 50);
+            this.btnFinishedDishes.Size = new System.Drawing.Size(132, 39);
             this.btnFinishedDishes.TabIndex = 7;
             this.btnFinishedDishes.Text = "Finished Orders";
             this.btnFinishedDishes.UseVisualStyleBackColor = false;
@@ -284,9 +283,10 @@
             // 
             // btnUndoKitView
             // 
-            this.btnUndoKitView.BackColor = System.Drawing.Color.Red;
+            this.btnUndoKitView.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnUndoKitView.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUndoKitView.Location = new System.Drawing.Point(43, 633);
+            this.btnUndoKitView.Enabled = false;
+            this.btnUndoKitView.Location = new System.Drawing.Point(1252, 661);
             this.btnUndoKitView.Name = "btnUndoKitView";
             this.btnUndoKitView.Size = new System.Drawing.Size(150, 50);
             this.btnUndoKitView.TabIndex = 6;
@@ -298,7 +298,7 @@
             // 
             this.btnViewNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewNote.Location = new System.Drawing.Point(972, 633);
+            this.btnViewNote.Location = new System.Drawing.Point(1252, 459);
             this.btnViewNote.Name = "btnViewNote";
             this.btnViewNote.Size = new System.Drawing.Size(150, 50);
             this.btnViewNote.TabIndex = 4;
@@ -309,17 +309,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(536, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
+            this.label1.Size = new System.Drawing.Size(199, 25);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Kitchen View";
+            this.label1.Text = "Running Kitchen Orders";
             // 
             // btnDishReady
             // 
             this.btnDishReady.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnDishReady.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDishReady.Location = new System.Drawing.Point(1222, 633);
+            this.btnDishReady.Location = new System.Drawing.Point(1252, 282);
             this.btnDishReady.Name = "btnDishReady";
             this.btnDishReady.Size = new System.Drawing.Size(150, 50);
             this.btnDishReady.TabIndex = 3;
@@ -337,19 +338,21 @@
             this.columnHeader7,
             this.columnHeader8});
             this.lvOrderedDishes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lvOrderedDishes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvOrderedDishes.FullRowSelect = true;
             this.lvOrderedDishes.HideSelection = false;
             this.lvOrderedDishes.Location = new System.Drawing.Point(43, 58);
             this.lvOrderedDishes.Name = "lvOrderedDishes";
-            this.lvOrderedDishes.Size = new System.Drawing.Size(1079, 536);
+            this.lvOrderedDishes.Size = new System.Drawing.Size(1115, 653);
             this.lvOrderedDishes.TabIndex = 0;
             this.lvOrderedDishes.UseCompatibleStateImageBehavior = false;
             this.lvOrderedDishes.View = System.Windows.Forms.View.Details;
+            this.lvOrderedDishes.SelectedIndexChanged += new System.EventHandler(this.lvOrderedDishes_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Amount";
-            this.columnHeader1.Width = 80;
+            this.columnHeader1.Width = 120;
             // 
             // columnHeader2
             // 
@@ -359,28 +362,30 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Note";
-            this.columnHeader5.Width = 280;
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 80;
             // 
             // columnHeader6
             // 
             this.columnHeader6.Text = "Order Time";
-            this.columnHeader6.Width = 150;
+            this.columnHeader6.Width = 200;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Course";
-            this.columnHeader7.Width = 80;
+            this.columnHeader7.Width = 150;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Table";
-            this.columnHeader8.Width = 80;
+            this.columnHeader8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader8.Width = 120;
             // 
             // pnlBarView
             // 
+            this.pnlBarView.Controls.Add(this.label9);
             this.pnlBarView.Controls.Add(this.lblEmpNameBar);
             this.pnlBarView.Controls.Add(this.cmbSelByTabBar);
-            this.pnlBarView.Controls.Add(this.btnSelByTabBar);
             this.pnlBarView.Controls.Add(this.btnFinishedOrdersBar);
             this.pnlBarView.Controls.Add(this.btnUndoBarView);
             this.pnlBarView.Controls.Add(this.btnViewDrinkNote);
@@ -395,39 +400,29 @@
             // lblEmpNameBar
             // 
             this.lblEmpNameBar.AutoSize = true;
+            this.lblEmpNameBar.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEmpNameBar.Location = new System.Drawing.Point(1248, 21);
             this.lblEmpNameBar.Name = "lblEmpNameBar";
-            this.lblEmpNameBar.Size = new System.Drawing.Size(81, 20);
+            this.lblEmpNameBar.Size = new System.Drawing.Size(97, 25);
             this.lblEmpNameBar.TabIndex = 12;
             this.lblEmpNameBar.Text = "Bartender: ";
             // 
             // cmbSelByTabBar
             // 
             this.cmbSelByTabBar.FormattingEnabled = true;
-            this.cmbSelByTabBar.Location = new System.Drawing.Point(1249, 226);
+            this.cmbSelByTabBar.Location = new System.Drawing.Point(1246, 124);
             this.cmbSelByTabBar.Name = "cmbSelByTabBar";
             this.cmbSelByTabBar.Size = new System.Drawing.Size(151, 28);
             this.cmbSelByTabBar.TabIndex = 11;
-            // 
-            // btnSelByTabBar
-            // 
-            this.btnSelByTabBar.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnSelByTabBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelByTabBar.Location = new System.Drawing.Point(1248, 332);
-            this.btnSelByTabBar.Name = "btnSelByTabBar";
-            this.btnSelByTabBar.Size = new System.Drawing.Size(150, 50);
-            this.btnSelByTabBar.TabIndex = 8;
-            this.btnSelByTabBar.Text = "Select By Table";
-            this.btnSelByTabBar.UseVisualStyleBackColor = false;
-            this.btnSelByTabBar.Click += new System.EventHandler(this.btnSelByTabBar_Click);
+            this.cmbSelByTabBar.SelectedIndexChanged += new System.EventHandler(this.cmbSelByTabBar_SelectedIndexChanged);
             // 
             // btnFinishedOrdersBar
             // 
             this.btnFinishedOrdersBar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnFinishedOrdersBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFinishedOrdersBar.Location = new System.Drawing.Point(536, 613);
+            this.btnFinishedOrdersBar.Location = new System.Drawing.Point(43, 10);
             this.btnFinishedOrdersBar.Name = "btnFinishedOrdersBar";
-            this.btnFinishedOrdersBar.Size = new System.Drawing.Size(150, 50);
+            this.btnFinishedOrdersBar.Size = new System.Drawing.Size(132, 39);
             this.btnFinishedOrdersBar.TabIndex = 7;
             this.btnFinishedOrdersBar.Text = "Finished Orders";
             this.btnFinishedOrdersBar.UseVisualStyleBackColor = false;
@@ -435,9 +430,9 @@
             // 
             // btnUndoBarView
             // 
-            this.btnUndoBarView.BackColor = System.Drawing.Color.Red;
+            this.btnUndoBarView.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnUndoBarView.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUndoBarView.Location = new System.Drawing.Point(43, 613);
+            this.btnUndoBarView.Location = new System.Drawing.Point(1246, 655);
             this.btnUndoBarView.Name = "btnUndoBarView";
             this.btnUndoBarView.Size = new System.Drawing.Size(150, 50);
             this.btnUndoBarView.TabIndex = 6;
@@ -449,7 +444,7 @@
             // 
             this.btnViewDrinkNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewDrinkNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewDrinkNote.Location = new System.Drawing.Point(1030, 613);
+            this.btnViewDrinkNote.Location = new System.Drawing.Point(1246, 433);
             this.btnViewDrinkNote.Name = "btnViewDrinkNote";
             this.btnViewDrinkNote.Size = new System.Drawing.Size(150, 50);
             this.btnViewDrinkNote.TabIndex = 5;
@@ -460,17 +455,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label2.Location = new System.Drawing.Point(536, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 20);
+            this.label2.Size = new System.Drawing.Size(159, 25);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Bar View";
+            this.label2.Text = "Running Bar Order";
             // 
             // brnDrinkReady
             // 
             this.brnDrinkReady.BackColor = System.Drawing.Color.LightSkyBlue;
             this.brnDrinkReady.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.brnDrinkReady.Location = new System.Drawing.Point(1248, 613);
+            this.brnDrinkReady.Location = new System.Drawing.Point(1246, 243);
             this.brnDrinkReady.Name = "brnDrinkReady";
             this.brnDrinkReady.Size = new System.Drawing.Size(150, 50);
             this.brnDrinkReady.TabIndex = 3;
@@ -487,19 +483,21 @@
             this.columnHeader4,
             this.columnHeader9});
             this.lvOrderedDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lvOrderedDrinks.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvOrderedDrinks.FullRowSelect = true;
             this.lvOrderedDrinks.HideSelection = false;
             this.lvOrderedDrinks.Location = new System.Drawing.Point(43, 58);
             this.lvOrderedDrinks.Name = "lvOrderedDrinks";
-            this.lvOrderedDrinks.Size = new System.Drawing.Size(1137, 494);
+            this.lvOrderedDrinks.Size = new System.Drawing.Size(1115, 653);
             this.lvOrderedDrinks.TabIndex = 0;
             this.lvOrderedDrinks.UseCompatibleStateImageBehavior = false;
             this.lvOrderedDrinks.View = System.Windows.Forms.View.Details;
+            this.lvOrderedDrinks.SelectedIndexChanged += new System.EventHandler(this.lvOrderedDrinks_SelectedIndexChanged);
             // 
             // clTable
             // 
             this.clTable.Text = "Amount";
-            this.clTable.Width = 79;
+            this.clTable.Width = 120;
             // 
             // clDrinks
             // 
@@ -509,17 +507,19 @@
             // clAmount
             // 
             this.clAmount.Text = "Note";
-            this.clAmount.Width = 320;
+            this.clAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.clAmount.Width = 80;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "Order Time";
-            this.columnHeader4.Width = 170;
+            this.columnHeader4.Width = 230;
             // 
             // columnHeader9
             // 
             this.columnHeader9.Text = "Table";
-            this.columnHeader9.Width = 78;
+            this.columnHeader9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader9.Width = 120;
             // 
             // fileSystemWatcher1
             // 
@@ -528,55 +528,46 @@
             // 
             // pnlKitchenViewFinished
             // 
+            this.pnlKitchenViewFinished.Controls.Add(this.label7);
             this.pnlKitchenViewFinished.Controls.Add(this.lblEmpNameKitFin);
-            this.pnlKitchenViewFinished.Controls.Add(this.cmbKitFinished);
-            this.pnlKitchenViewFinished.Controls.Add(this.btnSelByTabKitFin);
             this.pnlKitchenViewFinished.Controls.Add(this.btnRunningOrderesKit);
             this.pnlKitchenViewFinished.Controls.Add(this.btnUndoKitFin);
             this.pnlKitchenViewFinished.Controls.Add(this.btnViewNoteFinDish);
             this.pnlKitchenViewFinished.Controls.Add(this.label3);
             this.pnlKitchenViewFinished.Controls.Add(this.lvFinishedDishes);
+            this.pnlKitchenViewFinished.Controls.Add(this.cmbKitFinished);
             this.pnlKitchenViewFinished.Location = new System.Drawing.Point(0, 30);
             this.pnlKitchenViewFinished.Name = "pnlKitchenViewFinished";
             this.pnlKitchenViewFinished.Size = new System.Drawing.Size(1482, 723);
             this.pnlKitchenViewFinished.TabIndex = 6;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(1252, 100);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(131, 25);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Select by table:";
+            // 
             // lblEmpNameKitFin
             // 
             this.lblEmpNameKitFin.AutoSize = true;
+            this.lblEmpNameKitFin.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEmpNameKitFin.Location = new System.Drawing.Point(1222, 21);
             this.lblEmpNameKitFin.Name = "lblEmpNameKitFin";
-            this.lblEmpNameKitFin.Size = new System.Drawing.Size(46, 20);
+            this.lblEmpNameKitFin.Size = new System.Drawing.Size(57, 25);
             this.lblEmpNameKitFin.TabIndex = 7;
             this.lblEmpNameKitFin.Text = "Chef: ";
-            // 
-            // cmbKitFinished
-            // 
-            this.cmbKitFinished.FormattingEnabled = true;
-            this.cmbKitFinished.Location = new System.Drawing.Point(1223, 230);
-            this.cmbKitFinished.Name = "cmbKitFinished";
-            this.cmbKitFinished.Size = new System.Drawing.Size(151, 28);
-            this.cmbKitFinished.TabIndex = 8;
-            // 
-            // btnSelByTabKitFin
-            // 
-            this.btnSelByTabKitFin.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnSelByTabKitFin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelByTabKitFin.Location = new System.Drawing.Point(1223, 327);
-            this.btnSelByTabKitFin.Name = "btnSelByTabKitFin";
-            this.btnSelByTabKitFin.Size = new System.Drawing.Size(150, 50);
-            this.btnSelByTabKitFin.TabIndex = 7;
-            this.btnSelByTabKitFin.Text = "Select by Table";
-            this.btnSelByTabKitFin.UseVisualStyleBackColor = false;
-            this.btnSelByTabKitFin.Click += new System.EventHandler(this.btnSelByTabKitFin_Click);
             // 
             // btnRunningOrderesKit
             // 
             this.btnRunningOrderesKit.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnRunningOrderesKit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRunningOrderesKit.Location = new System.Drawing.Point(972, 617);
+            this.btnRunningOrderesKit.Location = new System.Drawing.Point(43, 7);
             this.btnRunningOrderesKit.Name = "btnRunningOrderesKit";
-            this.btnRunningOrderesKit.Size = new System.Drawing.Size(150, 50);
+            this.btnRunningOrderesKit.Size = new System.Drawing.Size(132, 39);
             this.btnRunningOrderesKit.TabIndex = 6;
             this.btnRunningOrderesKit.Text = "Running Orders";
             this.btnRunningOrderesKit.UseVisualStyleBackColor = false;
@@ -586,7 +577,7 @@
             // 
             this.btnUndoKitFin.BackColor = System.Drawing.Color.Red;
             this.btnUndoKitFin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUndoKitFin.Location = new System.Drawing.Point(43, 617);
+            this.btnUndoKitFin.Location = new System.Drawing.Point(1252, 659);
             this.btnUndoKitFin.Name = "btnUndoKitFin";
             this.btnUndoKitFin.Size = new System.Drawing.Size(150, 50);
             this.btnUndoKitFin.TabIndex = 5;
@@ -598,22 +589,23 @@
             // 
             this.btnViewNoteFinDish.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNoteFinDish.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewNoteFinDish.Location = new System.Drawing.Point(536, 617);
+            this.btnViewNoteFinDish.Location = new System.Drawing.Point(1252, 336);
             this.btnViewNoteFinDish.Name = "btnViewNoteFinDish";
             this.btnViewNoteFinDish.Size = new System.Drawing.Size(150, 50);
             this.btnViewNoteFinDish.TabIndex = 4;
-            this.btnViewNoteFinDish.Text = "view note";
+            this.btnViewNoteFinDish.Text = "View note";
             this.btnViewNoteFinDish.UseVisualStyleBackColor = false;
             this.btnViewNoteFinDish.Click += new System.EventHandler(this.btnViewNoteFinDish_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label3.Location = new System.Drawing.Point(536, 21);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(94, 20);
+            this.label3.Size = new System.Drawing.Size(190, 23);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Kitchen View";
+            this.label3.Text = "Finished Kitchen Orders";
             // 
             // lvFinishedDishes
             // 
@@ -627,12 +619,13 @@
             this.columnHeader13,
             this.columnHeader14});
             this.lvFinishedDishes.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lvFinishedDishes.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvFinishedDishes.FullRowSelect = true;
             this.lvFinishedDishes.HideSelection = false;
             this.lvFinishedDishes.HoverSelection = true;
             this.lvFinishedDishes.Location = new System.Drawing.Point(43, 58);
             this.lvFinishedDishes.Name = "lvFinishedDishes";
-            this.lvFinishedDishes.Size = new System.Drawing.Size(1079, 519);
+            this.lvFinishedDishes.Size = new System.Drawing.Size(1115, 653);
             this.lvFinishedDishes.TabIndex = 0;
             this.lvFinishedDishes.UseCompatibleStateImageBehavior = false;
             this.lvFinishedDishes.View = System.Windows.Forms.View.Details;
@@ -640,7 +633,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Amount";
-            this.columnHeader3.Width = 80;
+            this.columnHeader3.Width = 120;
             // 
             // columnHeader10
             // 
@@ -650,27 +643,38 @@
             // columnHeader11
             // 
             this.columnHeader11.Text = "Note";
-            this.columnHeader11.Width = 280;
+            this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader11.Width = 80;
             // 
             // columnHeader12
             // 
             this.columnHeader12.Text = "Order Time";
-            this.columnHeader12.Width = 150;
+            this.columnHeader12.Width = 200;
             // 
             // columnHeader13
             // 
             this.columnHeader13.Text = "Course";
-            this.columnHeader13.Width = 80;
+            this.columnHeader13.Width = 150;
             // 
             // columnHeader14
             // 
             this.columnHeader14.Text = "Table";
-            this.columnHeader14.Width = 80;
+            this.columnHeader14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader14.Width = 120;
+            // 
+            // cmbKitFinished
+            // 
+            this.cmbKitFinished.FormattingEnabled = true;
+            this.cmbKitFinished.Location = new System.Drawing.Point(1251, 128);
+            this.cmbKitFinished.Name = "cmbKitFinished";
+            this.cmbKitFinished.Size = new System.Drawing.Size(151, 28);
+            this.cmbKitFinished.TabIndex = 8;
+            this.cmbKitFinished.SelectedIndexChanged += new System.EventHandler(this.cmbKitFinished_SelectedIndexChanged);
             // 
             // pnlBarViewFinished
             // 
+            this.pnlBarViewFinished.Controls.Add(this.label8);
             this.pnlBarViewFinished.Controls.Add(this.lblEmpNameBarFin);
-            this.pnlBarViewFinished.Controls.Add(this.BtnSelByTabBarFin);
             this.pnlBarViewFinished.Controls.Add(this.cmbBarFinished);
             this.pnlBarViewFinished.Controls.Add(this.btnRunningOrdersBar);
             this.pnlBarViewFinished.Controls.Add(this.btnViewNoteFinDrink);
@@ -682,42 +686,42 @@
             this.pnlBarViewFinished.Size = new System.Drawing.Size(1482, 723);
             this.pnlBarViewFinished.TabIndex = 6;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(1248, 106);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(131, 25);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Select by table:";
+            // 
             // lblEmpNameBarFin
             // 
             this.lblEmpNameBarFin.AutoSize = true;
+            this.lblEmpNameBarFin.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblEmpNameBarFin.Location = new System.Drawing.Point(1250, 21);
             this.lblEmpNameBarFin.Name = "lblEmpNameBarFin";
-            this.lblEmpNameBarFin.Size = new System.Drawing.Size(81, 20);
+            this.lblEmpNameBarFin.Size = new System.Drawing.Size(97, 25);
             this.lblEmpNameBarFin.TabIndex = 9;
             this.lblEmpNameBarFin.Text = "Bartender: ";
-            // 
-            // BtnSelByTabBarFin
-            // 
-            this.BtnSelByTabBarFin.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.BtnSelByTabBarFin.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnSelByTabBarFin.Location = new System.Drawing.Point(1250, 279);
-            this.BtnSelByTabBarFin.Name = "BtnSelByTabBarFin";
-            this.BtnSelByTabBarFin.Size = new System.Drawing.Size(150, 50);
-            this.BtnSelByTabBarFin.TabIndex = 8;
-            this.BtnSelByTabBarFin.Text = "Select by Table";
-            this.BtnSelByTabBarFin.UseVisualStyleBackColor = false;
-            this.BtnSelByTabBarFin.Click += new System.EventHandler(this.BtnSelByTabBarFin_Click);
             // 
             // cmbBarFinished
             // 
             this.cmbBarFinished.FormattingEnabled = true;
-            this.cmbBarFinished.Location = new System.Drawing.Point(1249, 185);
+            this.cmbBarFinished.Location = new System.Drawing.Point(1247, 134);
             this.cmbBarFinished.Name = "cmbBarFinished";
             this.cmbBarFinished.Size = new System.Drawing.Size(151, 28);
             this.cmbBarFinished.TabIndex = 7;
+            this.cmbBarFinished.SelectedIndexChanged += new System.EventHandler(this.cmbBarFinished_SelectedIndexChanged);
             // 
             // btnRunningOrdersBar
             // 
             this.btnRunningOrdersBar.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnRunningOrdersBar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRunningOrdersBar.Location = new System.Drawing.Point(1030, 616);
+            this.btnRunningOrdersBar.Location = new System.Drawing.Point(43, 9);
             this.btnRunningOrdersBar.Name = "btnRunningOrdersBar";
-            this.btnRunningOrdersBar.Size = new System.Drawing.Size(150, 50);
+            this.btnRunningOrdersBar.Size = new System.Drawing.Size(132, 39);
             this.btnRunningOrdersBar.TabIndex = 6;
             this.btnRunningOrdersBar.Text = "Running Orders";
             this.btnRunningOrdersBar.UseVisualStyleBackColor = false;
@@ -727,7 +731,7 @@
             // 
             this.btnViewNoteFinDrink.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNoteFinDrink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewNoteFinDrink.Location = new System.Drawing.Point(536, 616);
+            this.btnViewNoteFinDrink.Location = new System.Drawing.Point(1252, 362);
             this.btnViewNoteFinDrink.Name = "btnViewNoteFinDrink";
             this.btnViewNoteFinDrink.Size = new System.Drawing.Size(150, 50);
             this.btnViewNoteFinDrink.TabIndex = 5;
@@ -739,7 +743,7 @@
             // 
             this.btnUndoFinDrink.BackColor = System.Drawing.Color.Red;
             this.btnUndoFinDrink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnUndoFinDrink.Location = new System.Drawing.Point(43, 616);
+            this.btnUndoFinDrink.Location = new System.Drawing.Point(1248, 660);
             this.btnUndoFinDrink.Name = "btnUndoFinDrink";
             this.btnUndoFinDrink.Size = new System.Drawing.Size(150, 50);
             this.btnUndoFinDrink.TabIndex = 4;
@@ -750,11 +754,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label4.Location = new System.Drawing.Point(536, 21);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 20);
+            this.label4.Size = new System.Drawing.Size(158, 25);
             this.label4.TabIndex = 2;
-            this.label4.Text = "Bar View";
+            this.label4.Text = "Finished Bar Order";
             // 
             // lvFinishedDrinks
             // 
@@ -765,11 +770,12 @@
             this.columnHeader18,
             this.columnHeader19});
             this.lvFinishedDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lvFinishedDrinks.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lvFinishedDrinks.FullRowSelect = true;
             this.lvFinishedDrinks.HideSelection = false;
             this.lvFinishedDrinks.Location = new System.Drawing.Point(43, 58);
             this.lvFinishedDrinks.Name = "lvFinishedDrinks";
-            this.lvFinishedDrinks.Size = new System.Drawing.Size(1137, 518);
+            this.lvFinishedDrinks.Size = new System.Drawing.Size(1115, 653);
             this.lvFinishedDrinks.TabIndex = 0;
             this.lvFinishedDrinks.UseCompatibleStateImageBehavior = false;
             this.lvFinishedDrinks.View = System.Windows.Forms.View.Details;
@@ -777,6 +783,7 @@
             // columnHeader15
             // 
             this.columnHeader15.Text = "Amount";
+            this.columnHeader15.Width = 120;
             // 
             // columnHeader16
             // 
@@ -786,23 +793,33 @@
             // columnHeader17
             // 
             this.columnHeader17.Text = "Note";
-            this.columnHeader17.Width = 320;
+            this.columnHeader17.Width = 80;
             // 
             // columnHeader18
             // 
             this.columnHeader18.Text = "Order Time";
-            this.columnHeader18.Width = 170;
+            this.columnHeader18.Width = 230;
             // 
             // columnHeader19
             // 
             this.columnHeader19.Text = "Table";
-            this.columnHeader19.Width = 76;
+            this.columnHeader19.Width = 120;
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
             this.timer1.Interval = 30000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(1246, 93);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(131, 25);
+            this.label9.TabIndex = 13;
+            this.label9.Text = "Select by table:";
             // 
             // RosMain
             // 
@@ -897,18 +914,18 @@
         private System.Windows.Forms.Button btnRunningOrderesKit;
         private System.Windows.Forms.ComboBox cmbCourseKit;
         private System.Windows.Forms.ComboBox cmbTableKit;
-        private System.Windows.Forms.Button btnSelByCourseKit;
-        private System.Windows.Forms.Button btnSelByTabKit;
         private System.Windows.Forms.ComboBox cmbKitFinished;
-        private System.Windows.Forms.Button btnSelByTabKitFin;
-        private System.Windows.Forms.Button BtnSelByTabBarFin;
         private System.Windows.Forms.ComboBox cmbBarFinished;
         private System.Windows.Forms.ComboBox cmbSelByTabBar;
-        private System.Windows.Forms.Button btnSelByTabBar;
         private System.Windows.Forms.Label lblEmpNameKitFin;
         private System.Windows.Forms.Label lblEmpNameKit;
         private System.Windows.Forms.Label lblEmpNameBar;
         private System.Windows.Forms.Label lblEmpNameBarFin;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
