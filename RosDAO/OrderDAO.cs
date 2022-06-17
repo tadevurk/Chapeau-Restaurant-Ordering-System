@@ -22,7 +22,7 @@ namespace RosDAL
 
         }
 
-        public void UpdateStock(Item item) // Cancel button query
+        public void IncreaseStock(Item item) // When order is cancelled all item will be increased in stock
         {
             string query = "Update Item " +
             "SET ItemStock = ItemStock + @amount " +
@@ -37,20 +37,19 @@ namespace RosDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public void DecreaseStock(int itemID)
+        public void DecreaseStock(Item item) // When order is sent all items will be decreased in stock
         {
-            string query = "Update Item SET ItemStock = ItemStock - 1  where ItemID = @ItemID";
+            string query = "Update Item " +
+            "SET ItemStock = ItemStock - @amount " +
+            "where ItemName = @ItemName; ";
 
-            SqlParameter[] sqlParameter = { new SqlParameter("@ItemID", itemID) };
-            ExecuteEditQuery(query, sqlParameter);
-        }
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@ItemName", item.ItemName),
+                new SqlParameter("@amount", item.ItemAmount)
+            };
 
-        public void IncreaseStock(int itemID)
-        {
-            string query = "Update Item SET ItemStock = ItemStock + 1  where ItemID = @ItemID";
-
-            SqlParameter[] sqlParameter = { new SqlParameter("@ItemID", itemID) };
-            ExecuteEditQuery(query, sqlParameter);
+            ExecuteEditQuery(query, sqlParameters);
         }
     }
 }

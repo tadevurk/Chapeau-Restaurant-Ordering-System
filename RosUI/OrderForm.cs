@@ -238,7 +238,7 @@ namespace RosUI
             ListViewItem selectedFood = listview.SelectedItems[0];
             Dish dish = (Dish)selectedFood.Tag;
             CheckCurrentDish(dish);
-            orderLogic.DecreaseStock(dish.ItemID);
+            //orderLogic.DecreaseStock(dish.ItemID);
         }
 
         private void AddDrinks(ListView listview)
@@ -246,7 +246,7 @@ namespace RosUI
             ListViewItem selectedDrink = listview.SelectedItems[0];
             Drink drink = (Drink)selectedDrink.Tag;
             CheckCurrentDrink(drink);
-            orderLogic.DecreaseStock(drink.ItemID);
+            //orderLogic.DecreaseStock(drink.ItemID);
         }
         private void CheckCurrentDish(Dish dish)
         {
@@ -377,7 +377,7 @@ namespace RosUI
                         listviewOrder.Items.Remove(lvOrderInProcess);
                         item.ItemName = lvOrderInProcess.SubItems[0].Text;
                         item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
-                        orderLogic.UpdateStock(item);
+                        orderLogic.IncreaseStock(item);
                     }
                 }
             }
@@ -397,6 +397,7 @@ namespace RosUI
                     SendOrder(); // adding the items in the listviewOrder to dish and drink list              
                     dishLogic.AddDishes(DishesInOrderProcess, order); // DishesInOrderProcess(comes from SendOrder) is the new ordered dishes 
                     drinkLogic.AddDrinks(DrinkInOrderProcess, order);// DrinkInOrderProcess(comes from SendOrder) is the new ordered drinks
+                    DecreaseStock();
 
                     table.TableStatus = TableStatus.Standby; // Jason
                     tableLogic.Update(table); // Jason                    
@@ -435,6 +436,24 @@ namespace RosUI
                 }
             }
         }
+
+        private void DecreaseStock()
+        {
+            foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Decrease stock when order is sent
+            {
+                Item item = (Item)lvOrderInProcess.Tag;
+                {
+                    if (lvOrderInProcess.ForeColor == Color.Red)
+                    {
+                        listviewOrder.Items.Remove(lvOrderInProcess);
+                        item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                        item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                        orderLogic.DecreaseStock(item);
+                    }
+                }
+            }
+        }
+
         private void btnOrderAddNote_Click(object sender, EventArgs e)
         {
             try
@@ -499,7 +518,7 @@ namespace RosUI
                     {
                         RemoveItem(lvItem, (Drink)item);
                     }
-                    orderLogic.IncreaseStock(item.ItemID);
+                    //orderLogic.IncreaseStock(item.ItemID);
                 }
             }
             catch (Exception exp)
