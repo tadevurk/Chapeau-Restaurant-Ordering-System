@@ -16,11 +16,6 @@ namespace RosLogic
            return orderDAO.AddOrder(employee, table);
         }
 
-        public void IncreaseStock(Item item)
-        {
-            orderDAO.IncreaseStock(item);
-        }
-
         public void DecreaseStock(Item item)
         {
             orderDAO.DecreaseStock(item);

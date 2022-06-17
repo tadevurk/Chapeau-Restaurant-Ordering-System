@@ -48,6 +48,14 @@ namespace RosDAL
             return ReadTablesOrder(ExecuteSelectQuery(query, sqlParameter));
         }
 
+        public List<Drink> GetAllDrinks()
+        {
+            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
+                "from Drink " +
+                "join Item on DrinkID = ItemID ";
+            return ReadDrinks(SelectQueryNonParameter(query));
+        }
+
         private List<Drink> ReadTablesOrder(DataTable dataTable)
         {
             List<Drink> drinks = new List<Drink>();
@@ -83,14 +91,6 @@ namespace RosDAL
                 drinks.Add(drink);
             }
             return drinks;
-        }
-
-        public List<Drink> GetAllDrinks()
-        {
-            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
-                "from Drink " +
-                "join Item on DrinkID = ItemID ";
-            return ReadDrinks(SelectQueryNonParameter(query));
         }
     }
 }
