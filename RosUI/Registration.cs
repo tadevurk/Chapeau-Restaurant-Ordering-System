@@ -20,8 +20,9 @@ namespace RosUI
         {
             InitializeComponent();
             employeeLogic = new EmployeeLogic();
-            this.rosMain = rosMain;
+            this.rosMain = rosMain;       
             questions = employeeLogic.GetAllSecretQuestions();
+
             foreach (SecretQuestion question in questions)
             {
                 cmbSecret.Items.Add($"{question.Question}");
@@ -41,19 +42,18 @@ namespace RosUI
                 }
 
                 employee = new Employee();
-
-                //stores the informaion about the user
-                Employee blank = employeeLogic.GetLastEmployeeID();
-                int id = blank.EmplID + 1;
-                employee.EmplID = id;
-                employee.Username = txtUsername.Text;
-                employee.Name = txtName.Text;
                 employee.PinCode = txtPinCode.Text;
-                employee.SecretAnswer = txtSecretAnswer.Text;
 
                 //Make sure the password and the role is correct
-                if (CheckPassword(employee) && CheckRole(txtLicenseKey.Text, employee))
-                {
+                if (CheckPassword(employee))
+                {                
+                    employee.Username = txtUsername.Text;
+                    employee.Name = txtName.Text;                    
+                    employee.SecretAnswer = txtSecretAnswer.Text;
+                    employee.Roles = CheckRole(txtLicenseKey.Text);
+
+                    //stores the informaion about the user
+                    employeeLogic.Add(employee);
                     MessageBox.Show("Your Registration is Successfull");
 
                     this.Hide();
@@ -108,33 +108,28 @@ namespace RosUI
         }
 
         //Check which role this user will be through the license key and adds it to the database
-        private bool CheckRole(string licenseKey, Employee employee)
+        private Roles CheckRole(string licenseKey)
         {
             switch (licenseKey)
             {
                 case "0001":
-                    employeeLogic.Add(employee);
-                    employeeLogic.AddManager(employee);                   
-                    return true;
+                    return Roles.Manager;
 
-                case "0002":
-                    employeeLogic.Add(employee);
-                    employeeLogic.AddWaiter(employee);                  
-                    return true;
+                case "0002":                
+                    return Roles.Waiter;
 
-                case "0003":
-                    employeeLogic.Add(employee);
-                    employeeLogic.AddChef(employee);                    
-                    return true;
+                case "0003":                
+                    return Roles.Chef;
 
-                case "0004":
-                    employeeLogic.Add(employee);
-                    employeeLogic.AddBartender(employee);                   
-                    return true;
+                case "0004":               
+                    return Roles.Bartender;
+
+                case "0000":
+                    return (int)Roles.Superuser;
             }
             MessageBox.Show("Please check if you have the correct license key");
             txtLicenseKey.Text = "";
-            return false;
+            return Roles.None;
         }
 
         //Encrypts the password

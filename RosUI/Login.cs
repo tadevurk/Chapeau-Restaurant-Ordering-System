@@ -13,7 +13,7 @@ namespace RosUI
     public partial class Login : Form
     {
         private RosMain main;
-        private Employee employee = new Employee();
+        private Employee employee;
         private EmployeeLogic employeeLogic;
 
 
@@ -21,6 +21,8 @@ namespace RosUI
         {
             InitializeComponent();
             employeeLogic = new EmployeeLogic();
+            employee = new Employee();
+            
         }
 
         //Will login the user in
@@ -48,44 +50,19 @@ namespace RosUI
                     }
                 }
 
-                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);
-                //retrieve the role from the database
-                CheckRole(employee);         
+                employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);       
 
                 //Checks the login password
                 if (CheckPassword())
                 {
-                    //Checks which role the users has and opens the corrisponding form
-                    switch (employee.Roles)
+                    this.Hide();
+                    main = new RosMain(employee);
+                    if (employee.Roles == Roles.Waiter)
                     {
-                        case Roles.Manager:
-                            this.Hide();
-                            main = new RosMain(employee);
-                            main.Show();
-                            break;
-                        case Roles.Waiter:
-                            main = new RosMain(employee);
-                            this.Hide();
-                            new TableOverview(employee, main).Show();
-                            break;
-                        case Roles.Chef:
-                            this.Hide();
-                            main = new RosMain(employee);
-                            main.Show();
-
-                            break;
-                        case Roles.Bartender:
-                            this.Hide();
-                            main = new RosMain(employee);
-                            main.Show();
-
-                            break;
-                        case Roles.None:
-                            this.Hide();
-                            main = new RosMain(employee);
-                            main.Show();
-                            break;
+                        new TableOverview(employee, main).Show();
                     }
+                    else                    
+                    main.Show();
                 }
                 else
                 {
@@ -128,89 +105,6 @@ namespace RosUI
                 return false;
 
                 return employee.Digest.ToString() == EncryptPassword(txtPinCode.Text, employee.Salt).Digest;
-        }
-
-        //Checks which role this user has
-        private void CheckRole(Employee employee)
-        {
-            
-            if (IsManager(employee))
-            {
-                employee.Roles = Roles.Manager;
-                return;
-            }
-            else if (IsWaiter(employee))
-            {
-                employee.Roles = Roles.Waiter;
-                return;
-            }
-            else if (IsChef(employee))
-            {
-                employee.Roles = Roles.Chef;
-                return;
-            }
-            else if (IsBartender(employee))
-            {
-                employee.Roles = Roles.Bartender;
-                return;
-            }
-            else
-            {
-                employee.Roles = Roles.None;
-                return;
-            }
-        }
-
-        //Checks in the database if the user is a manager
-        private bool IsManager(Employee manager)
-        {
-            List<Employee> managers = employeeLogic.GetAllManagers();
-            bool isManager = false;
-            foreach (Employee m in managers)
-            {
-                if(manager.EmplID == m.EmplID)
-                    isManager = true;
-            }
-            return isManager;
-        }
-
-        //Checks in the database if the user is a waiter
-        private bool IsWaiter(Employee waiter)
-        {
-            List<Employee> waiters = employeeLogic.GetAllWaiters();
-            bool isWaiter = false;
-            foreach (Employee w in waiters)
-            {
-                if (waiter.EmplID == w.EmplID)
-                    isWaiter = true;
-            }
-            return isWaiter;
-        }
-
-        //Checks in the database if the user is a chef
-        private bool IsChef(Employee chef)
-        {
-            List<Employee> chefs = employeeLogic.GetAllChefs();
-            bool isChef = false;
-            foreach (Employee c in chefs)
-            {
-                if (chef.EmplID == c.EmplID)
-                    isChef = true;
-            }
-            return isChef;
-        }
-
-        //Checks in the database if the user is a bartender
-        private bool IsBartender(Employee bartender)
-        {
-            List<Employee> bartenders = employeeLogic.GetAllBartenders();
-            bool isBartender = false;
-            foreach (Employee b in bartenders)
-            {
-                if (bartender.EmplID == b.EmplID)
-                    isBartender = true;
-            }
-            return isBartender;
         }
 
         //Write error to text file
