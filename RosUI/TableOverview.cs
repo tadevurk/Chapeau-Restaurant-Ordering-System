@@ -18,143 +18,170 @@ namespace RosUI
         private List<Table> tables;
         private OrderedDishLogic orderedDishLogic;
         private OrderedDrinkLogic orderedDrinkLogic;
-        public double TotalMinutes { get; }
+        private int numberOfTables;
+        private List<Button> buttons;
+        private List<Label> labels;
+        private List<PictureBox> dishIcons;
+        private List<PictureBox> drinkIcons;
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
             InitializeComponent();
             this.employee = employee;
             this.rosMain = rosMain;
-            lblWaiter.Text = "Waiter: " + employee.Name;
+            userToolStripMenuItem.Text = employee.Name;
             tableLogic = new TableLogic();
             orderedDrinkLogic = new OrderedDrinkLogic();
             orderedDishLogic = new OrderedDishLogic();
-            tables = tableLogic.GetAllTables();           
-            UpdateAllButtons(tables);
-            rosMain.AddWaiterView(this);
+            buttons = new List<Button>();
+            labels = new List<Label>();
+            dishIcons = new List<PictureBox>();
+            drinkIcons = new List<PictureBox>();
+            
+            numberOfTables = tableLogic.GetAmountOfTables();            
+            rosMain.AddWaiterView(this);          
+            GenerateTableOverview();
+            UpdateAllButtons();
         }
 
-        //clicking the button opens the table control
-        private void btnTableOne_Click(object sender, EventArgs e)
+        private void GenerateTableOverview()
+        {         
+            GenerateLabels();
+            GenerateDrinkIcon();
+            GenerateDishIcon();
+            GenerateButtons();
+        }
+
+        private List<Button> GenerateButtons()
         {
-            try
+            int i = 1;
+            Point point = new Point(19, 164);
+            for (int row = 0; row < numberOfTables / 2; row++)
             {
-                OpenTableControl(0);
+                for (int col = 0; col < 2; col++)
+                {
+                    Button button = new Button();
+
+                    button.Text = "Empty";
+                    button.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+                    button.BackColor = SystemColors.ControlLight;
+                    button.Cursor = Cursors.Hand;
+                    button.Location = new Point(point.X, point.Y);
+                    button.Name = $"btnTable{i}";
+                    button.Size = new Size(180, 100);
+                    button.UseVisualStyleBackColor = false;
+                    //button.Click += (s, e) => OpenTableControl(i);
+                    button.Click += new EventHandler(button_Click);                    
+                    this.Controls.Add(button);                     
+                    
+                    buttons.Add(button);
+                    point.X += 265;
+                    i++;
+                }
+                point.Y += 106;
+                point.X = 19;
             }
-            catch (Exception exp)
+            return buttons;
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            int i = 0;
+            foreach (Button b in buttons)
             {
-                DisplayError(exp);
+                if (button == buttons[i])
+                {
+                    OpenTableControl(i);
+                }
+                i++;
+            }        
+        }
+
+        private List<PictureBox> GenerateDrinkIcon()
+        {
+            int i = 1;
+            Point point = new Point(131, 232);
+            for (int row = 0; row < numberOfTables / 2; row++)
+            {
+                for (int col = 0; col < 2; col++)
+                {
+                    PictureBox pictureBox = new PictureBox();
+
+                    pictureBox.BackColor = SystemColors.ControlLight;
+                    pictureBox.Image = Properties.Resources.icons8_martini_glass_32;
+                    pictureBox.Visible = false;
+                    pictureBox.Location = new Point(point.X, point.Y);
+                    pictureBox.Name = $"pbDrinkIcon{i}";
+                    pictureBox.Size = new Size(32, 28);
+                    this.Controls.Add(pictureBox);                
+                    
+                    drinkIcons.Add(pictureBox);
+                    point.X += 265;
+                    i++;
+                }
+                point.Y += 106;
+                point.X = 131;
             }
+            return drinkIcons;
+        }
+
+        private List<PictureBox> GenerateDishIcon()
+        {
+            int i = 1;
+            Point point = new Point(163, 228);
+            for (int row = 0; row < numberOfTables / 2; row++)
+            {
+                for (int col = 0; col < 2; col++)
+                {
+                    PictureBox pictureBox = new PictureBox();
+
+                    pictureBox.BackColor = SystemColors.ControlLight;
+                    pictureBox.Image = Properties.Resources.icons8_dinner_32;
+                    pictureBox.Visible = false;
+                    pictureBox.Location = new Point(point.X, point.Y);
+                    pictureBox.Name = $"pbDishIcon{i}";
+                    pictureBox.Size = new Size(32, 32);
+                    this.Controls.Add(pictureBox);                    
+                    
+                    dishIcons.Add(pictureBox);
+                    point.X += 265;
+                    i++;
+                }
+                point.Y += 106;
+                point.X = 163;
+            }
+            return dishIcons;
         }
 
 
 
-        private void btnTableTwo_Click(object sender, EventArgs e)
+        private List<Label> GenerateLabels()
         {
-            try
+            int i = 1;
+            Point point = new Point(97, 168);
+            for (int row = 0; row < numberOfTables / 2; row++)
             {
-                OpenTableControl(1);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
+                for (int col = 0; col < 2; col++)
+                {
+                    Label label = new Label();
 
-        private void btnTableThree_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(2);
+                    label.Text = i.ToString();
+                    label.BackColor = SystemColors.ControlLight;
+                    label.Size = new Size(22, 25);
+                    label.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+                    label.Location = new Point(point.X, point.Y);
+                    label.Name = $"btnLabel{i}";
+                    this.Controls.Add(label);                
+                    
+                    labels.Add(label);
+                    point.X += 265;
+                    i++;
+                }
+                point.Y += 106;
+                point.X = 97;
             }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableFour_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(3);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableFive_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(4);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableSix_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(5);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableSeven_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(6);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableEight_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(7);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableNine_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(8);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableTen_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(9);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
+            return labels;
         }
 
         //Opens the table control of a specific table
@@ -172,66 +199,72 @@ namespace RosUI
             rosMain.WriteError(exp, exp.Message);
         }
 
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            new Login().Show();
-        }
-
         //Updates all the table buttons every minute
         private void tmrTimer_Tick(object sender, EventArgs e)
         {
-            UpdateAllButtons(tables);
+            UpdateAllButtons();
         }
 
         //Changes the button color depending on the status of the table
-        public Button UpdateButtonColor(Table table, Button button)
+        public Button UpdateButtonColor(Table table, Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             switch (table.TableStatus)
             {
                 case TableStatus.Empty:
-                    return UpdateButtonToEmpty(button);
+                    return UpdateButtonToEmpty(button, label, drinkIcon, dishIcon);
                 case TableStatus.Occupied:
-                    return UpdateButtonToOccupied(button);
+                    return UpdateButtonToOccupied(button, label, drinkIcon, dishIcon);
                 case TableStatus.Standby:
-                    return UpdateButtonToStandby(table, button);
+                    return UpdateButtonToStandby(table, button, label, drinkIcon, dishIcon);
                 case TableStatus.DrinkReady:
-                    return UpdateButtonToDrinkReady(button);
+                    return UpdateButtonToDrinkReady(button, label, drinkIcon, dishIcon);
                 case TableStatus.DishReady:
-                    return UpdateButtonToDishReady(button);
+                    return UpdateButtonToDishReady(button, label, drinkIcon, dishIcon);
                 case TableStatus.Served:
-                    return UpdateButtonToServed(button);
+                    return UpdateButtonToServed(button, label, drinkIcon, dishIcon);
             }
             return button;
         }
 
-        private static Button UpdateButtonToServed(Button button)
+        private static Button UpdateButtonToServed(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.Yellow;
+            label.BackColor = Color.Yellow;
+            drinkIcon.BackColor = Color.Yellow;
+            dishIcon.BackColor = Color.Yellow;
             button.Text = "Served";
             button.ForeColor = Color.Black;
             return button;
         }
 
-        private static Button UpdateButtonToDishReady(Button button)
+        private static Button UpdateButtonToDishReady(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.LightGreen;
+            label.BackColor = Color.LightGreen;
+            drinkIcon.BackColor = Color.LightGreen;
+            dishIcon.BackColor = Color.LightGreen;
             button.Text = "DishReady";
             button.ForeColor = Color.Black;
             return button;
         }
 
-        private static Button UpdateButtonToDrinkReady(Button button)
+        private static Button UpdateButtonToDrinkReady(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.LightGreen;
+            label.BackColor = Color.LightGreen;
+            drinkIcon.BackColor = Color.LightGreen;
+            dishIcon.BackColor = Color.LightGreen;
             button.Text = "DrinkReady";
             button.ForeColor = Color.Black;
             return button;
         }
 
-        private Button UpdateButtonToStandby(Table table, Button button)
+        private Button UpdateButtonToStandby(Table table, Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.LightBlue;
+            label.BackColor = Color.LightBlue;
+            drinkIcon.BackColor = Color.LightBlue;
+            dishIcon.BackColor = Color.LightBlue;
             button.Text = "Standby";
             button.ForeColor = Color.Black;
             CalculateDishTimeTaken(button, table);
@@ -239,17 +272,24 @@ namespace RosUI
             return button;
         }
 
-        private static Button UpdateButtonToOccupied(Button button)
+        private static Button UpdateButtonToOccupied(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.Red;
+            label.BackColor = Color.Red;
+            drinkIcon.BackColor = Color.Red;
+            dishIcon.BackColor = Color.Red;
             button.Text = "Occupied";
             button.ForeColor = Color.White;
+            label.ForeColor = Color.White;
             return button;
         }
 
-        private static Button UpdateButtonToEmpty(Button button)
+        private static Button UpdateButtonToEmpty(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
-            button.BackColor = Color.LightGray;
+            button.BackColor = SystemColors.ControlLight;
+            label.BackColor = SystemColors.ControlLight;
+            drinkIcon.BackColor = SystemColors.ControlLight;
+            dishIcon.BackColor = SystemColors.ControlLight;
             button.Text = "Empty";
             button.ForeColor = Color.Black;
             return button;
@@ -302,21 +342,15 @@ namespace RosUI
         }
 
         //Updates all the buttons with the newest status
-        public void UpdateAllButtons(List<Table> tables)
+        public void UpdateAllButtons()
         {
-            UpdateButtonColor(tables[0], btnTableOne);
-            UpdateButtonColor(tables[1], btnTableTwo);
-            UpdateButtonColor(tables[2], btnTableThree);
-            UpdateButtonColor(tables[3], btnTableFour);
-            UpdateButtonColor(tables[4], btnTableFive);
-            UpdateButtonColor(tables[5], btnTableSix);
-            UpdateButtonColor(tables[6], btnTableSeven);
-            UpdateButtonColor(tables[7], btnTableEight);
-            UpdateButtonColor(tables[8], btnTableNine);
-            UpdateButtonColor(tables[9], btnTableTen);
+            tables = tableLogic.GetAllTables();
+            int i = 0;
             foreach (Table table in tables)
             {
+                UpdateButtonColor(table, buttons[i], labels[i], drinkIcons[i], dishIcons[i]);
                 CheckForOrderedItemsOnTable(table);
+                i++;
             }
         }
 
@@ -425,260 +459,54 @@ namespace RosUI
         //Displays the dish icon when a order with dishes are being prepared
         public void ShowRunningDishIcon(int tableNumber)
         {
-            switch (tableNumber)
-            {    
-                case 1:
-                    t1DishIcon.Visible = true;
-                    break;
-
-                case 2:
-                    t2DishIcon.Visible = true;
-                    break;
-
-                case 3:
-                    t3DishIcon.Visible = true;
-                    break;
-                case 4:
-                    t4DishIcon.Visible = true;
-                    break;
-
-                case 5:
-                    t5DishIcon.Visible = true;
-                    break;
-
-                case 6:
-                    t6DishIcon.Visible = true;
-                    break;
-
-                case 7:
-                    t7DishIcon.Visible = true;
-                    break;
-
-                case 8:
-                    t8DishIcon.Visible = true;
-                    break;
-
-                case 9:
-                    t9DishIcon.Visible = true;
-                    break;
-
-                case 10:
-                    t10DishIcon.Visible = true;
-                    break;
-            }
+            dishIcons[tableNumber - 1].Visible = true;
         }
 
         //displays only the drink icon 
         public void ShowRunningDrinkIcon(int tableNumber)
         {
             //changes the state of the Icon and the position.
-            switch (tableNumber)
+            Point point = drinkIcons[tableNumber - 1].Location;
+            if (point.X == 131)
             {
-                case 1:
-                    MoveRunningDrinkIcon(t1DrinkIcon, 47, 109);
-                    break;
-
-                case 2:
-                    MoveRunningDrinkIcon(t2DrinkIcon, 398, 109);
-                    break;
-
-                case 3:
-                    MoveRunningDrinkIcon(t3DrinkIcon, 47, 199);
-                    break;
-
-                case 4:
-                    MoveRunningDrinkIcon(t4DrinkIcon, 398, 199);
-                    break;
-
-                case 5:
-                    MoveRunningDrinkIcon(t5DrinkIcon, 47, 289);
-                    break;
-
-                case 6:
-                    MoveRunningDrinkIcon(t6DrinkIcon, 398, 289);
-                    break;
-
-                case 7:
-                    MoveRunningDrinkIcon(t7DrinkIcon, 47, 380);
-                    break;
-
-                case 8:
-                    MoveRunningDrinkIcon(t8DrinkIcon, 398, 380);
-                    break;
-
-                case 9:
-                    MoveRunningDrinkIcon(t9DrinkIcon, 47, 470);
-                    break;
-
-                case 10:
-                    MoveRunningDrinkIcon(t10DrinkIcon, 398, 470);
-                    break;
+                point.X += 32;
             }
-        }
-
-        //move the icon to the desired position and displays it
-        private void MoveRunningDrinkIcon(PictureBox pbDrink, int x, int y)
-        {        
-            pbDrink.Location = new Point(x, y);
-            pbDrink.Visible = true;
+            drinkIcons[tableNumber - 1].Location = point;
+            drinkIcons[tableNumber - 1].Visible = true;
         }
 
         //displays both the drink and dish icon
         public void ShowRunningDishAndDrinkIcon(int tableNumber)
         {
-            switch (tableNumber)
-            {
-                case 1:
-                    ShowBothRunningIcons(t1DishIcon, t1DrinkIcon);
-                    break;
-
-                case 2:
-                    ShowBothRunningIcons(t2DishIcon, t2DrinkIcon);
-                    break;
-
-                case 3:
-                    ShowBothRunningIcons(t3DishIcon, t3DrinkIcon);
-                    break;
-                case 4:
-                    ShowBothRunningIcons(t4DishIcon, t4DrinkIcon);
-                    break;
-
-                case 5:
-                    ShowBothRunningIcons(t5DishIcon, t5DrinkIcon);
-                    break;
-
-                case 6:
-                    ShowBothRunningIcons(t6DishIcon, t6DrinkIcon);
-                    break;
-
-                case 7:
-                    ShowBothRunningIcons(t7DishIcon, t7DrinkIcon);
-                    break;
-
-                case 8:
-                    ShowBothRunningIcons(t8DishIcon, t8DrinkIcon);
-                    break;
-
-                case 9:
-                    ShowBothRunningIcons(t9DishIcon, t9DrinkIcon);
-                    break;
-
-                case 10:
-                    ShowBothRunningIcons(t10DishIcon, t10DrinkIcon);
-                    break;
-            }
-        }
-
-        //displays both dish icon and drink icon
-        private void ShowBothRunningIcons(PictureBox pbDish, PictureBox pbDrink)
-        {
-            pbDish.Visible = true;
-            pbDrink.Visible = true;
+            dishIcons[tableNumber - 1].Visible = true;
+            drinkIcons[tableNumber - 1].Visible = true;
         }
 
         //Updates database when the order is received in the kitchen
         public void OrderRecieved(int tableNumber)
         {
             //Changing color of buttons when Order is initiated
-            switch (tableNumber)
+            foreach (Table table in tables)
             {
-                case 1:
+                if (tableNumber == table.TableNumber)
+                {
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableOne);
-                    break;
-                case 2:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTwo);
-                    break;
-                case 3:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableThree);
-                    break;
-                case 4:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFour);
-                    break;
-                case 5:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFive);
-                    break;
-                case 6:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSix);
-                    break;
-                case 7:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSeven);
-                    break;
-                case 8:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableEight);
-                    break;
-                case 9:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableNine);
-                    break;
-                case 10:
-                    UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTen);
-                    break;
-            }
+                    UpdateAllButtons();
+                }
+            }           
         }
 
         //Updates database when the drink is ready in the bar
         public void DrinkReady(int tableNumber)
         {
-            //changing color of buttons when order is ready for the pick up 
-            switch (tableNumber)
+            //changing color of buttons when order is ready for the pick up            
+            foreach (Table table in tables)
             {
-                case 1:
+                if (tableNumber == table.TableNumber)
+                {
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableOne);
-                    break;
-
-                case 2:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTwo);
-                    break;
-
-                case 3:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableThree);
-                    break;
-                case 4:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFour);
-                    break;
-
-                case 5:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFive);
-                    break;
-
-                case 6:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSix);
-                    break;
-
-                case 7:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSeven);
-                    break;
-
-                case 8:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableEight);
-                    break;
-
-                case 9:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableNine);
-                    break;
-
-                case 10:
-                    UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTen);
-                    break;
+                    UpdateAllButtons();
+                }
             }
         }
 
@@ -686,56 +514,13 @@ namespace RosUI
         public void DishReady(int tableNumber)
         {
             //changing color of buttons when order is ready for the pick up 
-            switch (tableNumber)
+            foreach (Table table in tables)
             {
-                case 1:
+                if (tableNumber == table.TableNumber)
+                {
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableOne);
-                    break;
-
-                case 2:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTwo);
-                    break;
-
-                case 3:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableThree);
-                    break;
-                case 4:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFour);
-                    break;
-
-                case 5:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFive);
-                    break;
-
-                case 6:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSix);
-                    break;
-
-                case 7:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSeven);
-                    break;
-
-                case 8:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableEight);
-                    break;
-
-                case 9:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableNine);
-                    break;
-
-                case 10:
-                    UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTen);
-                    break;
+                    UpdateAllButtons();
+                }
             }
         }
 
@@ -765,8 +550,29 @@ namespace RosUI
 
         private void btnMoreInfo_Click(object sender, EventArgs e)
         {
-            this.Close();
-            new TableGuide(employee, rosMain).Show();
+            try
+            {
+                this.Close();
+                new TableGuide(employee, rosMain).Show();
+            }
+            catch (Exception exp)
+            {
+                DisplayError(exp);
+            }    
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+                new Login().Show();
+            }
+            catch (Exception exp)
+            {
+                DisplayError(exp);
+            }
+
         }
     }
 }

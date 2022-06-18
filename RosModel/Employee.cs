@@ -4,7 +4,7 @@ namespace RosModel
 {
     public enum Roles
     {
-        Manager = 1, Waiter, Chef, Bartender, None
+        Superuser = 0, Manager, Waiter, Chef, Bartender, None
     }
     public class Employee
     {
