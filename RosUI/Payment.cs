@@ -1,4 +1,4 @@
-﻿using RosModel;
+﻿ using RosModel;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -32,8 +32,8 @@ namespace RosUI
             orderedItems = new List<Item>();
             bill = new Bill();
 
-            lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
-            bill.TableNumber = int.Parse(lblTableNumber.Text);
+            lblTableNumber.Text += $" {table.TableNumber}";
+            bill.TableNumber = table.TableNumber;
             btnCompletePayment.Enabled = false;
             btnCompletePayment.BackColor = Color.LightGray;
             pnlFeedback.Hide();
@@ -48,31 +48,7 @@ namespace RosUI
             // disable buttons and text boxes if a table has no items to be paid
             if (bill.TotalAmount == 0)
             {
-                btnSplit.Enabled = false;
-                btnSplit.BackColor = Color.LightGray;
-
-                radioBtnCash.Enabled = false;
-                radioBtnVisa.Enabled = false;
-                radioBtnDebit.Enabled = false;
-
-                txtToPay.Enabled = false;
-                txtTip.Enabled = false;
-            }
-        }
-
-        private void ShowBillAmounts()
-        {
-            try
-            {
-                bill.SubTotalAmount = CalculateSubTotalAmount();
-                lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
-                bill.TotalAmount = CalculateTotalAmount();
-                lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
-                txtToPay.Text = lblTotalAmount.Text;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not load the amounts: " + ex.Message);
+                DisableButtons();
             }
         }
 
@@ -98,10 +74,12 @@ namespace RosUI
                     li.SubItems.Add(item.ItemAmount.ToString());
                     li.SubItems.Add(item.ItemName);
 
-                    li.SubItems.Add(item.ItemVat.ToString());
-
                     item.SubPrice = CalculateItemSubtotal(item.ItemPrice, item.ItemVat);
-                    li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString("0.00"));
+                    decimal vatAmount = item.ItemPrice - item.SubPrice;
+
+                    li.SubItems.Add((vatAmount * item.ItemAmount).ToString("0.00"));
+
+                    //li.SubItems.Add((item.SubPrice * item.ItemAmount).ToString("0.00"));
 
                     li.SubItems.Add((item.ItemPrice * item.ItemAmount).ToString("0.00"));
 
@@ -113,6 +91,37 @@ namespace RosUI
             {
                 MessageBox.Show("Could not load the bill: " + e.Message);
             }
+        }
+
+        private void ShowBillAmounts()
+        {
+            try
+            {
+                lblVat6.Text = CalculateLowVAT().ToString("0.00");
+                lblVat21.Text = CalculateHighVAT().ToString("0.00");
+                bill.SubTotalAmount = CalculateSubTotalAmount();
+                lblSubTotalAmount.Text = bill.SubTotalAmount.ToString("0.00");
+                bill.TotalAmount = CalculateTotalAmount();
+                lblTotalAmount.Text = bill.TotalAmount.ToString("0.00");
+                txtToPay.Text = lblTotalAmount.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Could not load the amounts: " + ex.Message);
+            }
+        }
+
+        private void DisableButtons()
+        {
+            btnSplit.Enabled = false;
+            btnSplit.BackColor = Color.LightGray;
+
+            radioBtnCash.Enabled = false;
+            radioBtnVisa.Enabled = false;
+            radioBtnDebit.Enabled = false;
+
+            txtToPay.Enabled = false;
+            txtTip.Enabled = false;
         }
 
         // calculate subtotal per product unit
@@ -147,6 +156,38 @@ namespace RosUI
             return subAmount;
         }
 
+        private decimal CalculateLowVAT()
+        {
+            decimal lowVAT = 0;
+
+            foreach (Item item in orderedItems)
+            {
+                if (item is OrderedDish dish)
+                {
+                    lowVAT += (dish.ItemPrice - dish.SubPrice) * dish.ItemAmount;
+                }
+
+                if (item is OrderedDrink drink && drink.DrinkTypeID == 1)
+                {
+                    lowVAT += (drink.ItemPrice - drink.SubPrice) * drink.ItemAmount;
+                }
+            }
+            return lowVAT;
+        }
+
+        private decimal CalculateHighVAT()
+        {
+            decimal highVAT = 0;
+
+            foreach (Item item in orderedItems)
+            {
+                if (item is OrderedDrink drink && drink.DrinkTypeID == 2)
+                {
+                    highVAT += (drink.ItemPrice - drink.SubPrice) * drink.ItemAmount;
+                }
+            }
+            return highVAT;
+        }
 
         private void btnCompletePayment_Click(object sender, EventArgs e)
         {
@@ -159,7 +200,6 @@ namespace RosUI
                 bool numericalToPay = decimal.TryParse(txtToPay.Text, out toPay);
                 bool numericalTip = decimal.TryParse(txtTip.Text, out tip);
 
-                // do not let incorrect values close the bill, and offer the option for a tip to be logged any time
                 if (toPay < bill.TotalAmount || toPay <= 0 || !numericalToPay || !numericalTip)
                 {
                     throw new Exception("Please enter a  valid amount to be paid.");
@@ -172,6 +212,7 @@ namespace RosUI
                     // proceed with adding some feedback
                     pnlFeedback.Show();
                     btnCompletePayment.Visible = false;
+                    btnSplit.Visible = false;
                 }
                 else
                 {
@@ -218,7 +259,6 @@ namespace RosUI
             {
                 if (txtTip.Text == "" || tip < 0)
                 {
-                    //MessageBox.Show("This value can not be empty!!!");
                     txtTip.Text = "0.00";
                 }
                 else
@@ -235,7 +275,7 @@ namespace RosUI
 
                 MessageBox.Show("Operation did not work: " + ex.Message);
             }
-            
+
         }
 
         private void txtToPay_TextChanged(object sender, EventArgs e)
@@ -245,10 +285,10 @@ namespace RosUI
             {
                 if (txtToPay.Text == "")
                 {
-                    txtToPay.Text = lblTotalAmount.Text;
+                    MessageBox.Show("Add a value");
                 }
                 else
-                { 
+                {
 
                     toPay = Convert.ToDecimal(txtToPay.Text);
                     tip = toPay - bill.TotalAmount;
@@ -262,7 +302,7 @@ namespace RosUI
             {
 
                 MessageBox.Show("Operation did not work: " + ex.Message);
-            } 
+            }
 
         }
 
@@ -272,7 +312,6 @@ namespace RosUI
             this.Hide();
             new TableOverview(employee, rosMain).Show();
             this.Close();
-
         }
 
         // set all ordered items to the paid status
@@ -341,8 +380,8 @@ namespace RosUI
             try
             {
                 pnlSplit.Show();
-                btnSubmitSplit.Enabled = false;
-                btnSubmitSplit.BackColor = Color.LightGray;
+                btnSplitPay.Enabled = false;
+                btnSplitPay.BackColor = Color.LightGray;
                 btnBack.Visible = false;
 
                 txtToPaySplit.Text = 0.ToString("0.00");
@@ -355,78 +394,86 @@ namespace RosUI
             }
         }
 
-
-        // calculate amount to be stored in the database and display correct amounts
-        private decimal deductibleAmount = 0;
-
-        private void btnSubmitSplit_Click(object sender, EventArgs e)
+        private void pnlSplit_Paint(object sender, PaintEventArgs e)
         {
             try
             {
-                // check if the inserted values are in numerical format
-                decimal splitAmount;
-                decimal splitTip;
+                lblSplitVat6.Text = lblVat6.Text;
+                lblSplitVat21.Text = lblVat21.Text;
+                lblSplitSub.Text = lblSubTotalAmount.Text;
+                lblSplitTotal.Text = lblTotalAmount.Text;
 
-                bool numericalToPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
-                bool numericalTip = decimal.TryParse(txtTipSplit.Text, out splitTip);
-
-                if (!numericalToPay || !numericalTip || txtToPaySplit.Text.Contains(',') || txtTipSplit.Text.Contains(','))
-                {
-                    throw new Exception("Input is not in the correct numerical format");
-                }
-
-                // do not let the user close a bill from the partial payment mode
-                // complete a partial payment and update values for displaying purpose and
-                // next partial payment if needed
-
-                if (bill.TotalAmount <= splitAmount)
-                {
-                    MessageBox.Show("Complete payment in the main form!");
-                }
-                else
-                {
-                    deductibleAmount += splitAmount;
-
-                    if (splitTip < 0 || splitAmount < 0 )
-                    {
-                        throw new Exception("Please enter a valid amounts.");
-                    }
-                    else
-                    {
-                        bill.TotalAmount = splitAmount;
-                        bill.TipAmount = splitTip;
-
-                        bill.SubTotalAmount = 0;
-
-                        billLogic.CreateBill(bill);
-
-                        bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
-                        bill.SubTotalAmount = CalculateSubTotalAmount();
-
-                        lblTotalAmount.Text = bill.TotalAmount.ToString();
-                        txtToPay.Text = lblTotalAmount.Text;
-                    }
-                }
-
-                pnlSplit.Hide();
-                radioBtnSplitCash.Checked = false;
-                radioBtnSplitVisa.Checked = false;
-                radioBtnSplitDebit.Checked = false;
-                btnBack.Visible = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Operation did not work: " + ex.Message);
             }
-             
         }
 
-        private void radioBtnSplitCash_CheckedChanged(object sender, EventArgs e)
+        private decimal deductibleAmount = 0;
+
+        // calculate amount to be stored in the database and display correct amounts
+        private void btnSplitPay_Click(object sender, EventArgs e)
+        {
+            // check if the inserted values are in numerical format
+            decimal splitAmount;
+            decimal splitTip;
+
+            bool numericalToPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
+            bool numericalTip = decimal.TryParse(txtTipSplit.Text, out splitTip);
+
+            if (!numericalToPay || !numericalTip || txtToPaySplit.Text.Contains(',') || txtTipSplit.Text.Contains(','))
+            {
+                throw new Exception("Input is not in the correct numerical format");
+            }
+
+            // do not let the user close a bill from the partial payment mode
+            // complete a partial payment and update values for displaying purpose and
+            // next partial payment if needed
+
+            if (bill.TotalAmount <= splitAmount)
+            {
+                MessageBox.Show("Complete payment in the main form!");
+            }
+            else
+            {
+                deductibleAmount += splitAmount;
+
+                if (splitTip < 0 || splitAmount < 0)
+                {
+                    throw new Exception("Please enter valid amounts.");
+                }
+                else
+                {
+                    bill.TotalAmount = splitAmount;
+                    bill.TipAmount = splitTip;
+
+                    bill.SubTotalAmount = 0;
+
+                    billLogic.CreateBill(bill);
+
+                    bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
+                    toPay = bill.TotalAmount;
+
+                    lblTotalAmount.Text = CalculateTotalAmount().ToString();
+                    txtTip.Text = 0.ToString();
+                    txtToPay.Text = toPay.ToString();
+                }
+            }
+
+            pnlSplit.Hide();
+            radioBtnSplitCash.Checked = false;
+            radioBtnSplitVisa.Checked = false;
+            radioBtnSplitDebit.Checked = false;
+            btnBack.Visible = true;
+        }
+
+        private void radioBtnSplitCash_CheckedChanged_1(object sender, EventArgs e)
         {
             if (txtToPaySplit.Text != null)
             {
-                btnSubmitSplit.Enabled = true;
-                btnSubmitSplit.BackColor = Color.LightGreen;
+                btnSplitPay.Enabled = true;
+                btnSplitPay.BackColor = Color.LightGreen;
                 bill.PaymentMethod = "Cash";
             }
             else
@@ -435,12 +482,12 @@ namespace RosUI
             }
         }
 
-        private void radioBtnSplitVisa_CheckedChanged(object sender, EventArgs e)
+        private void radioBtnSplitVisa_CheckedChanged_1(object sender, EventArgs e)
         {
             if (txtToPaySplit.Text != null)
             {
-                btnSubmitSplit.Enabled = true;
-                btnSubmitSplit.BackColor = Color.LightGreen;
+                btnSplitPay.Enabled = true;
+                btnSplitPay.BackColor = Color.LightGreen;
                 bill.PaymentMethod = "Visa";
             }
             else
@@ -449,12 +496,12 @@ namespace RosUI
             }
         }
 
-        private void radioBtnSplitDebit_CheckedChanged(object sender, EventArgs e)
+        private void radioBtnSplitDebit_CheckedChanged_1(object sender, EventArgs e)
         {
             if (txtToPaySplit.Text != null)
             {
-                btnSubmitSplit.Enabled = true;
-                btnSubmitSplit.BackColor = Color.LightGreen;
+                btnSplitPay.Enabled = true;
+                btnSplitPay.BackColor = Color.LightGreen;
                 bill.PaymentMethod = "Debit";
             }
             else
@@ -468,5 +515,8 @@ namespace RosUI
             pnlSplit.Hide();
             btnBack.Visible = true;
         }
-    }
-}
+
+    }      
+}   
+
+
