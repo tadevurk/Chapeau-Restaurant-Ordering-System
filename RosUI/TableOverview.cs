@@ -166,17 +166,16 @@ namespace RosUI
                 {
                     Label label = new Label();
 
-                    label.Text = i.ToString();
+                    label.Text = i++.ToString();
                     label.BackColor = SystemColors.ControlLight;
-                    label.Size = new Size(22, 25);
+                    label.Size = new Size(32, 32);
                     label.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
                     label.Location = new Point(point.X, point.Y);
-                    label.Name = $"btnLabel{i}";
+                    label.Name = $"lbl{i}";
                     this.Controls.Add(label);                
                     
                     labels.Add(label);
                     point.X += 265;
-                    i++;
                 }
                 point.Y += 106;
                 point.X = 97;
