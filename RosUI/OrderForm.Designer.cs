@@ -59,7 +59,7 @@ namespace RosUI
             // btnDrinks
             // 
             this.btnDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDrinks.Location = new System.Drawing.Point(322, 6);
+            this.btnDrinks.Location = new System.Drawing.Point(322, 9);
             this.btnDrinks.Name = "btnDrinks";
             this.btnDrinks.Size = new System.Drawing.Size(132, 41);
             this.btnDrinks.TabIndex = 7;
@@ -99,13 +99,15 @@ namespace RosUI
             // 
             // btnBack
             // 
-            this.btnBack.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnBack.BackColor = System.Drawing.SystemColors.Control;
             this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btnBack.Image = ((System.Drawing.Image)(resources.GetObject("btnBack.Image")));
-            this.btnBack.Location = new System.Drawing.Point(367, 3);
+            this.btnBack.Location = new System.Drawing.Point(16, 8);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(103, 29);
+            this.btnBack.Size = new System.Drawing.Size(79, 41);
             this.btnBack.TabIndex = 10;
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -113,7 +115,7 @@ namespace RosUI
             // lblTableNumber
             // 
             this.lblTableNumber.AutoSize = true;
-            this.lblTableNumber.Location = new System.Drawing.Point(16, 12);
+            this.lblTableNumber.Location = new System.Drawing.Point(402, 17);
             this.lblTableNumber.Name = "lblTableNumber";
             this.lblTableNumber.Size = new System.Drawing.Size(56, 20);
             this.lblTableNumber.TabIndex = 12;
@@ -179,15 +181,15 @@ namespace RosUI
             this.pnlFoodDrink.Controls.Add(this.btnDinner);
             this.pnlFoodDrink.Controls.Add(this.btnLunch);
             this.pnlFoodDrink.Controls.Add(this.btnDrinks);
-            this.pnlFoodDrink.Location = new System.Drawing.Point(16, 39);
+            this.pnlFoodDrink.Location = new System.Drawing.Point(16, 52);
             this.pnlFoodDrink.Name = "pnlFoodDrink";
-            this.pnlFoodDrink.Size = new System.Drawing.Size(454, 57);
+            this.pnlFoodDrink.Size = new System.Drawing.Size(454, 54);
             this.pnlFoodDrink.TabIndex = 34;
             // 
             // btnDinner
             // 
             this.btnDinner.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDinner.Location = new System.Drawing.Point(164, 6);
+            this.btnDinner.Location = new System.Drawing.Point(164, 9);
             this.btnDinner.Name = "btnDinner";
             this.btnDinner.Size = new System.Drawing.Size(132, 41);
             this.btnDinner.TabIndex = 8;
@@ -198,7 +200,7 @@ namespace RosUI
             // btnLunch
             // 
             this.btnLunch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLunch.Location = new System.Drawing.Point(8, 6);
+            this.btnLunch.Location = new System.Drawing.Point(0, 9);
             this.btnLunch.Name = "btnLunch";
             this.btnLunch.Size = new System.Drawing.Size(132, 41);
             this.btnLunch.TabIndex = 0;
@@ -215,9 +217,9 @@ namespace RosUI
             this.listviewLunch.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewLunch.FullRowSelect = true;
             this.listviewLunch.HideSelection = false;
-            this.listviewLunch.Location = new System.Drawing.Point(16, 102);
+            this.listviewLunch.Location = new System.Drawing.Point(16, 112);
             this.listviewLunch.Name = "listviewLunch";
-            this.listviewLunch.Size = new System.Drawing.Size(454, 342);
+            this.listviewLunch.Size = new System.Drawing.Size(454, 332);
             this.listviewLunch.TabIndex = 0;
             this.listviewLunch.UseCompatibleStateImageBehavior = false;
             this.listviewLunch.View = System.Windows.Forms.View.Details;
@@ -242,9 +244,9 @@ namespace RosUI
             this.listviewDinner.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewDinner.FullRowSelect = true;
             this.listviewDinner.HideSelection = false;
-            this.listviewDinner.Location = new System.Drawing.Point(16, 102);
+            this.listviewDinner.Location = new System.Drawing.Point(16, 112);
             this.listviewDinner.Name = "listviewDinner";
-            this.listviewDinner.Size = new System.Drawing.Size(454, 342);
+            this.listviewDinner.Size = new System.Drawing.Size(454, 332);
             this.listviewDinner.TabIndex = 0;
             this.listviewDinner.UseCompatibleStateImageBehavior = false;
             this.listviewDinner.View = System.Windows.Forms.View.Details;
@@ -269,9 +271,9 @@ namespace RosUI
             this.listviewDrinks.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewDrinks.FullRowSelect = true;
             this.listviewDrinks.HideSelection = false;
-            this.listviewDrinks.Location = new System.Drawing.Point(16, 102);
+            this.listviewDrinks.Location = new System.Drawing.Point(16, 112);
             this.listviewDrinks.Name = "listviewDrinks";
-            this.listviewDrinks.Size = new System.Drawing.Size(454, 342);
+            this.listviewDrinks.Size = new System.Drawing.Size(454, 332);
             this.listviewDrinks.TabIndex = 0;
             this.listviewDrinks.UseCompatibleStateImageBehavior = false;
             this.listviewDrinks.View = System.Windows.Forms.View.Details;
