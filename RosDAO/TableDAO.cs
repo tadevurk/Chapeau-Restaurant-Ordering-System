@@ -30,6 +30,15 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));    
         }
 
+        public int GetAmountOfTables()
+        {
+            string query = $"SELECT COUNT(TableNumber) AS [count] FROM [Table]";
+
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            return ReadAmount(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public List<OrderedDrink> GetOrderedDrinksReady(int tableNumber)
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
@@ -201,6 +210,16 @@ namespace RosDAL
                 table.TableStatus = (TableStatus)dr["TableStatus"];
             }
             return table;
+        }
+
+        private int ReadAmount(DataTable dataTable)
+        {
+            int count = 0;
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                count = (int)dr["count"];
+            }
+            return count;
         }
     }
 }

@@ -142,18 +142,22 @@ namespace RosUI
             else if (IsWaiter(employee))
             {
                 employee.Roles = Roles.Waiter;
+                return;
             }
             else if (IsChef(employee))
             {
                 employee.Roles = Roles.Chef;
+                return;
             }
             else if (IsBartender(employee))
             {
                 employee.Roles = Roles.Bartender;
+                return;
             }
             else
             {
                 employee.Roles = Roles.None;
+                return;
             }
         }
 

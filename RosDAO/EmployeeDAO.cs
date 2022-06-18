@@ -52,8 +52,11 @@ namespace RosDAL
 
         public Employee GetEmployeeByUsername(string username)
         {
-            string query = $"SELECT EmplID, Name, Username, Salt, Digest, SecretAnswer FROM [Employee] WHERE Username = '{username}';";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = $"SELECT EmplID, Name, Username, Salt, Digest, SecretAnswer FROM [Employee] WHERE Username = @Username;";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@Username", username)
+            };
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
 

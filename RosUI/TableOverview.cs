@@ -18,6 +18,8 @@ namespace RosUI
         private List<Table> tables;
         private OrderedDishLogic orderedDishLogic;
         private OrderedDrinkLogic orderedDrinkLogic;
+        private int numberOfTables;
+
         public double TotalMinutes { get; }
 
         public TableOverview(Employee employee, RosMain rosMain)
@@ -25,136 +27,41 @@ namespace RosUI
             InitializeComponent();
             this.employee = employee;
             this.rosMain = rosMain;
-            lblWaiter.Text = "Waiter: " + employee.Name;
+            userToolStripMenuItem.Text = employee.Name;
             tableLogic = new TableLogic();
             orderedDrinkLogic = new OrderedDrinkLogic();
             orderedDishLogic = new OrderedDishLogic();
             tables = tableLogic.GetAllTables();           
             UpdateAllButtons(tables);
             rosMain.AddWaiterView(this);
-        }
 
-        //clicking the button opens the table control
-        private void btnTableOne_Click(object sender, EventArgs e)
-        {
-            try
+            numberOfTables = tableLogic.GetAmountOfTables();
+            int x = 7;
+            int y = 168;
+            int i = 0;
+            for (int row = 0; row < numberOfTables / 2; row++)
             {
-                OpenTableControl(0);
+                for (int col = 0; col < 2; col++)
+                {
+                    Button button = new Button();
+                    button.Text = "Empty";
+                    button.Enabled = true;
+                    button.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
+                    button.BackColor = SystemColors.ControlLight;
+                    button.Cursor = Cursors.Hand;
+                    button.Location = new Point(x, y);
+                    button.Name = $"btnTable{i}";
+                    button.Size = new Size(180, 100);
+                    button.UseVisualStyleBackColor = false;
+                    button.Click += (s, e) => OpenTableControl(i);
+                    this.Controls.Add(button);
+                    x += 290;
+                    i++;
+                }
+                y += 106;
+                x = 7;
             }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
 
-
-
-        private void btnTableTwo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(1);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableThree_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(2);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableFour_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(3);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableFive_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(4);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableSix_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(5);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableSeven_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(6);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableEight_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(7);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableNine_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(8);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
-        }
-
-        private void btnTableTen_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                OpenTableControl(9);
-            }
-            catch (Exception exp)
-            {
-                DisplayError(exp);
-            }
         }
 
         //Opens the table control of a specific table
@@ -170,12 +77,6 @@ namespace RosUI
         {
             MessageBox.Show(exp.Message, "Error");
             rosMain.WriteError(exp, exp.Message);
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            new Login().Show();
         }
 
         //Updates all the table buttons every minute
@@ -304,16 +205,16 @@ namespace RosUI
         //Updates all the buttons with the newest status
         public void UpdateAllButtons(List<Table> tables)
         {
-            UpdateButtonColor(tables[0], btnTableOne);
-            UpdateButtonColor(tables[1], btnTableTwo);
-            UpdateButtonColor(tables[2], btnTableThree);
-            UpdateButtonColor(tables[3], btnTableFour);
-            UpdateButtonColor(tables[4], btnTableFive);
-            UpdateButtonColor(tables[5], btnTableSix);
-            UpdateButtonColor(tables[6], btnTableSeven);
-            UpdateButtonColor(tables[7], btnTableEight);
-            UpdateButtonColor(tables[8], btnTableNine);
-            UpdateButtonColor(tables[9], btnTableTen);
+            //UpdateButtonColor(tables[0], btnTableOne);
+            //UpdateButtonColor(tables[1], btnTableTwo);
+            //UpdateButtonColor(tables[2], btnTableThree);
+            //UpdateButtonColor(tables[3], btnTableFour);
+            //UpdateButtonColor(tables[4], btnTableFive);
+            //UpdateButtonColor(tables[5], btnTableSix);
+            //UpdateButtonColor(tables[6], btnTableSeven);
+            //UpdateButtonColor(tables[7], btnTableEight);
+            //UpdateButtonColor(tables[8], btnTableNine);
+            //UpdateButtonColor(tables[9], btnTableTen);
             foreach (Table table in tables)
             {
                 CheckForOrderedItemsOnTable(table);
@@ -584,43 +485,43 @@ namespace RosUI
             {
                 case 1:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableOne);
+                    //UpdateButtonColor(table, btnTableOne);
                     break;
                 case 2:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTwo);
+                    //UpdateButtonColor(table, btnTableTwo);
                     break;
                 case 3:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableThree);
+                    //UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFour);
+                    //UpdateButtonColor(table, btnTableFour);
                     break;
                 case 5:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFive);
+                    //UpdateButtonColor(table, btnTableFive);
                     break;
                 case 6:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSix);
+                    //UpdateButtonColor(table, btnTableSix);
                     break;
                 case 7:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSeven);
+                    //UpdateButtonColor(table, btnTableSeven);
                     break;
                 case 8:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableEight);
+                    //UpdateButtonColor(table, btnTableEight);
                     break;
                 case 9:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableNine);
+                    //UpdateButtonColor(table, btnTableNine);
                     break;
                 case 10:
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTen);
+                    //UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -633,51 +534,51 @@ namespace RosUI
             {
                 case 1:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableOne);
+                    //UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTwo);
+                    //UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableThree);
+                    //UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFour);
+                    //UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFive);
+                    //UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSix);
+                    //UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSeven);
+                    //UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableEight);
+                    //UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableNine);
+                    //UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTen);
+                    //UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -690,51 +591,51 @@ namespace RosUI
             {
                 case 1:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableOne);
+                    //UpdateButtonColor(table, btnTableOne);
                     break;
 
                 case 2:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTwo);
+                    //UpdateButtonColor(table, btnTableTwo);
                     break;
 
                 case 3:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableThree);
+                    //UpdateButtonColor(table, btnTableThree);
                     break;
                 case 4:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFour);
+                    //UpdateButtonColor(table, btnTableFour);
                     break;
 
                 case 5:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableFive);
+                    //UpdateButtonColor(table, btnTableFive);
                     break;
 
                 case 6:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSix);
+                    //UpdateButtonColor(table, btnTableSix);
                     break;
 
                 case 7:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableSeven);
+                    //UpdateButtonColor(table, btnTableSeven);
                     break;
 
                 case 8:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableEight);
+                    //UpdateButtonColor(table, btnTableEight);
                     break;
 
                 case 9:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableNine);
+                    //UpdateButtonColor(table, btnTableNine);
                     break;
 
                 case 10:
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateButtonColor(table, btnTableTen);
+                    //UpdateButtonColor(table, btnTableTen);
                     break;
             }
         }
@@ -765,8 +666,29 @@ namespace RosUI
 
         private void btnMoreInfo_Click(object sender, EventArgs e)
         {
-            this.Close();
-            new TableGuide(employee, rosMain).Show();
+            try
+            {
+                this.Close();
+                new TableGuide(employee, rosMain).Show();
+            }
+            catch (Exception exp)
+            {
+                DisplayError(exp);
+            }    
+        }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.Close();
+                new Login().Show();
+            }
+            catch (Exception exp)
+            {
+                DisplayError(exp);
+            }
+
         }
     }
 }
