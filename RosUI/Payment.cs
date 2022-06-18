@@ -32,8 +32,8 @@ namespace RosUI
             orderedItems = new List<Item>();
             bill = new Bill();
 
-            lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber}";
-            bill.TableNumber = int.Parse(lblTableNumber.Text);
+            lblTableNumber.Text += $" {table.TableNumber}";
+            bill.TableNumber = table.TableNumber;
             btnCompletePayment.Enabled = false;
             btnCompletePayment.BackColor = Color.LightGray;
             pnlFeedback.Hide();
@@ -306,7 +306,7 @@ namespace RosUI
 
         }
 
-        private void btnBack_Click_1(object sender, EventArgs e)
+        private void btnBack_Click(object sender, EventArgs e)
         {
             // go back to the table overview
             this.Hide();

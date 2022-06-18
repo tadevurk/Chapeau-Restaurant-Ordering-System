@@ -36,7 +36,6 @@ namespace RosUI
             this.Item = new System.Windows.Forms.ColumnHeader();
             this.VAT = new System.Windows.Forms.ColumnHeader();
             this.Total = new System.Windows.Forms.ColumnHeader();
-            this.lblTableNumber = new System.Windows.Forms.Label();
             this.radioBtnCash = new System.Windows.Forms.RadioButton();
             this.radioBtnVisa = new System.Windows.Forms.RadioButton();
             this.radioBtnDebit = new System.Windows.Forms.RadioButton();
@@ -73,17 +72,16 @@ namespace RosUI
             this.btnBackSplit = new System.Windows.Forms.Button();
             this.btnSplit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblTableNumber = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lblVat6 = new System.Windows.Forms.Label();
             this.lblVat21 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.PictureBox();
+            this.btnBack = new System.Windows.Forms.Button();
             this.pnlFeedback.SuspendLayout();
             this.pnlSplit.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewPayment
@@ -131,15 +129,6 @@ namespace RosUI
             this.Total.Text = "Total";
             this.Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Total.Width = 115;
-            // 
-            // lblTableNumber
-            // 
-            this.lblTableNumber.AutoSize = true;
-            this.lblTableNumber.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblTableNumber.Location = new System.Drawing.Point(82, 23);
-            this.lblTableNumber.Name = "lblTableNumber";
-            this.lblTableNumber.Size = new System.Drawing.Size(0, 23);
-            this.lblTableNumber.TabIndex = 1;
             // 
             // radioBtnCash
             // 
@@ -541,15 +530,15 @@ namespace RosUI
             this.label5.TabIndex = 22;
             this.label5.Text = "TIP: €";
             // 
-            // label3
+            // lblTableNumber
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(12, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 20);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "Table #";
+            this.lblTableNumber.AutoSize = true;
+            this.lblTableNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTableNumber.Location = new System.Drawing.Point(383, 23);
+            this.lblTableNumber.Name = "lblTableNumber";
+            this.lblTableNumber.Size = new System.Drawing.Size(64, 20);
+            this.lblTableNumber.TabIndex = 23;
+            this.lblTableNumber.Text = "Table #";
             // 
             // label14
             // 
@@ -611,14 +600,16 @@ namespace RosUI
             // 
             // btnBack
             // 
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Image = ((System.Drawing.Image)(resources.GetObject("btnBack.Image")));
-            this.btnBack.Location = new System.Drawing.Point(438, 14);
+            this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBack.Location = new System.Drawing.Point(9, 13);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(32, 32);
-            this.btnBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.btnBack.TabIndex = 39;
-            this.btnBack.TabStop = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
+            this.btnBack.Size = new System.Drawing.Size(68, 40);
+            this.btnBack.TabIndex = 40;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // FormPayment
             // 
@@ -636,7 +627,7 @@ namespace RosUI
             this.Controls.Add(this.label14);
             this.Controls.Add(this.txtToPay);
             this.Controls.Add(this.txtTip);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblTableNumber);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -648,7 +639,6 @@ namespace RosUI
             this.Controls.Add(this.btnCompletePayment);
             this.Controls.Add(this.lblSubTotalAmount);
             this.Controls.Add(this.lblTotalAmount);
-            this.Controls.Add(this.lblTableNumber);
             this.Controls.Add(this.listViewPayment);
             this.Name = "FormPayment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -657,7 +647,6 @@ namespace RosUI
             this.pnlFeedback.PerformLayout();
             this.pnlSplit.ResumeLayout(false);
             this.pnlSplit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnBack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -715,6 +704,6 @@ namespace RosUI
         private System.Windows.Forms.Button btnSplitPay;
         private System.Windows.Forms.Label lblSplitSub;
         private System.Windows.Forms.Label lblSplitTotal;
-        private System.Windows.Forms.PictureBox btnBack;
+        private System.Windows.Forms.Button btnBack;
     }
 }
