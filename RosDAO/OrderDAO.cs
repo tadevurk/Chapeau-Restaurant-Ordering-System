@@ -13,8 +13,7 @@ namespace RosDAL
 
             string query = "insert into [Order] values(@WaiterID, null, @TableNumber, null, null);" +
                 "select cast(scope_identity() as int)";
-            SqlParameter[] sqlParameters = {
-            
+            SqlParameter[] sqlParameters = {           
             new SqlParameter("@WaiterID", employee.EmplID),
             new SqlParameter("@TableNumber", table.TableNumber)
             };
@@ -22,10 +21,10 @@ namespace RosDAL
 
         }
 
-        public void UpdateStock(Item item) // Cancel button query
+        public void DecreaseStock(Item item) // When order is sent all items will be decreased in stock
         {
             string query = "Update Item " +
-            "SET ItemStock = ItemStock + @amount " +
+            "SET ItemStock = ItemStock - @amount " +
             "where ItemName = @ItemName; ";
 
             SqlParameter[] sqlParameters =
@@ -35,22 +34,6 @@ namespace RosDAL
             };
 
             ExecuteEditQuery(query, sqlParameters);
-        }
-
-        public void DecreaseStock(int itemID)
-        {
-            string query = "Update Item SET ItemStock = ItemStock - 1  where ItemID = @ItemID";
-
-            SqlParameter[] sqlParameter = { new SqlParameter("@ItemID", itemID) };
-            ExecuteEditQuery(query, sqlParameter);
-        }
-
-        public void IncreaseStock(int itemID)
-        {
-            string query = "Update Item SET ItemStock = ItemStock + 1  where ItemID = @ItemID";
-
-            SqlParameter[] sqlParameter = { new SqlParameter("@ItemID", itemID) };
-            ExecuteEditQuery(query, sqlParameter);
         }
     }
 }
