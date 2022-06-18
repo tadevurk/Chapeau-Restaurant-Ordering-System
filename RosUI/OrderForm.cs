@@ -154,6 +154,8 @@ namespace RosUI
             {
                 showPanel("Lunch");
                 ButtonColorReset();
+                listviewDinner.SelectedItems.Clear();
+                listviewDrinks.SelectedItems.Clear();
                 btnLunch.BackColor = Color.LightGreen;
             }
             catch (Exception exp)
@@ -167,6 +169,8 @@ namespace RosUI
             {
                 showPanel("Dinner");
                 ButtonColorReset();
+                listviewLunch.SelectedItems.Clear();
+                listviewDrinks.SelectedItems.Clear();
                 btnDinner.BackColor = Color.LightGreen;
             }
             catch (Exception exp)
@@ -180,6 +184,8 @@ namespace RosUI
             {
                 showPanel("Drinks");
                 ButtonColorReset();
+                listviewLunch.SelectedItems.Clear();
+                listviewDinner.SelectedItems.Clear();
                 btnDrinks.BackColor = Color.LightGreen;
             }
             catch (Exception exp)
@@ -248,6 +254,9 @@ namespace RosUI
         {
             try
             {
+                listviewDinner.SelectedItems.Clear();
+                listviewLunch.SelectedItems.Clear();
+                listviewDrinks.SelectedItems.Clear();
                 if (listviewOrder.SelectedItems.Count == 1)
                 {
                     Item item = (Item)listviewOrder.SelectedItems[0].Tag;
@@ -511,25 +520,28 @@ namespace RosUI
                 return;
             }
 
-            if (listviewLunch.SelectedItems.Count > 0)
+            if (listviewLunch.SelectedItems.Count == 1)
             {
                 Dish dish = (Dish)listviewLunch.SelectedItems[0].Tag;
                 dish.ItemNote = txtNote.Text;
-                listviewLunch.SelectedItems[0].Selected = false;
+                listviewLunch.SelectedItems.Clear();
+                MessageBox.Show($"{emp.Name}, you have added the note!");
             }
-            else if (listviewDinner.SelectedItems.Count > 0)
+            else if (listviewDinner.SelectedItems.Count == 1)
             {
                 Dish dish = (Dish)listviewDinner.SelectedItems[0].Tag;
                 dish.ItemNote = txtNote.Text;
-                listviewDinner.SelectedItems[0].Selected = false;
+                listviewDinner.SelectedItems.Clear();
+                MessageBox.Show($"{emp.Name}, you have added the note!");
             }
-            else if (listviewDrinks.SelectedItems.Count > 0)
+            else if (listviewDrinks.SelectedItems.Count == 1)
             {
                 Drink drink = (Drink)listviewDrinks.SelectedItems[0].Tag;
                 drink.ItemNote = txtNote.Text;
-                listviewDrinks.SelectedItems[0].Selected = false;
+                listviewDrinks.SelectedItems.Clear();
+                MessageBox.Show($"{emp.Name}, you have added the note!");
             }
-            MessageBox.Show($"{emp.Name}, you have added the note!");
+            
         }
     }
 }
