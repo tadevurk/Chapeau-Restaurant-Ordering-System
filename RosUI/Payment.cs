@@ -306,13 +306,12 @@ namespace RosUI
 
         }
 
-        private void btnBack_Click(object sender, EventArgs e)
+        private void btnBack_Click_1(object sender, EventArgs e)
         {
             // go back to the table overview
             this.Hide();
             new TableOverview(employee, rosMain).Show();
             this.Close();
-
         }
 
         // set all ordered items to the paid status
@@ -517,7 +516,6 @@ namespace RosUI
             btnBack.Visible = true;
         }
 
-        
     }      
 }   
 

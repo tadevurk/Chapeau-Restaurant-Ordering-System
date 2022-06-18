@@ -29,6 +29,7 @@ namespace RosUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPayment));
             this.listViewPayment = new System.Windows.Forms.ListView();
             this.ColumnHeadings = new System.Windows.Forms.ColumnHeader();
             this.Quantity = new System.Windows.Forms.ColumnHeader();
@@ -44,7 +45,6 @@ namespace RosUI
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCompletePayment = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
             this.txtToPay = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblSubTotalAmount = new System.Windows.Forms.Label();
@@ -80,8 +80,10 @@ namespace RosUI
             this.lblVat21 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.PictureBox();
             this.pnlFeedback.SuspendLayout();
             this.pnlSplit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnBack)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewPayment
@@ -229,18 +231,6 @@ namespace RosUI
             this.btnCompletePayment.Text = "PAY";
             this.btnCompletePayment.UseVisualStyleBackColor = false;
             this.btnCompletePayment.Click += new System.EventHandler(this.btnCompletePayment_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnBack.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnBack.Location = new System.Drawing.Point(361, 21);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(109, 29);
-            this.btnBack.TabIndex = 13;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // txtToPay
             // 
@@ -619,11 +609,23 @@ namespace RosUI
             this.label17.Size = new System.Drawing.Size(394, 2);
             this.label17.TabIndex = 38;
             // 
+            // btnBack
+            // 
+            this.btnBack.Image = ((System.Drawing.Image)(resources.GetObject("btnBack.Image")));
+            this.btnBack.Location = new System.Drawing.Point(438, 14);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(32, 32);
+            this.btnBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.btnBack.TabIndex = 39;
+            this.btnBack.TabStop = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click_1);
+            // 
             // FormPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(482, 753);
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.pnlSplit);
             this.Controls.Add(this.pnlFeedback);
             this.Controls.Add(this.label17);
@@ -642,7 +644,6 @@ namespace RosUI
             this.Controls.Add(this.radioBtnDebit);
             this.Controls.Add(this.radioBtnVisa);
             this.Controls.Add(this.radioBtnCash);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.btnCompletePayment);
             this.Controls.Add(this.lblSubTotalAmount);
@@ -656,6 +657,7 @@ namespace RosUI
             this.pnlFeedback.PerformLayout();
             this.pnlSplit.ResumeLayout(false);
             this.pnlSplit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnBack)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -673,7 +675,6 @@ namespace RosUI
         private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCompletePayment;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.TextBox txtToPay;
         private System.Windows.Forms.ColumnHeader ColumnHeadings;
         private System.Windows.Forms.ColumnHeader Quantity;
@@ -714,5 +715,6 @@ namespace RosUI
         private System.Windows.Forms.Button btnSplitPay;
         private System.Windows.Forms.Label lblSplitSub;
         private System.Windows.Forms.Label lblSplitTotal;
+        private System.Windows.Forms.PictureBox btnBack;
     }
 }
