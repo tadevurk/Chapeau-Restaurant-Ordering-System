@@ -250,7 +250,7 @@ namespace RosUI
             {
                 if (listviewOrder.SelectedItems.Count == 1)
                 {
-                    Item item = (Item)listviewOrder.SelectedItems[0].Tag; // Remove the ORDERED STARTER FROM ORDER LIST
+                    Item item = (Item)listviewOrder.SelectedItems[0].Tag;
                     ListViewItem lvItem = listviewOrder.SelectedItems[0];
                     if (item is Dish)
                     {
@@ -346,7 +346,7 @@ namespace RosUI
         private void RemoveItem(ListViewItem lvItem, Item item)
         {
 
-            if (item.ItemName == lvItem.SubItems[0].Text && lvItem.SubItems[0].ForeColor == Color.Green)
+            if (item.ItemName == lvItem.SubItems[0].Text && lvItem.SubItems[0].ForeColor == Color.Green) // Disabling the ordered item to choose and remove
             {
                 lvItem.Selected = false;
                 return;
