@@ -37,7 +37,7 @@ namespace RosDAL
             }
         }
 
-        public List<Dish> WriteContainedDishes(Table t)
+        public List<Dish> ReadContainedDishes(Table table)
         {
             string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount], O.TableNumber as [TableNumber] from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
@@ -46,11 +46,22 @@ namespace RosDAL
                 "group by DishID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter[] sqlParameters =
             {
-                new SqlParameter("@TableNumber", t.TableNumber),
+                new SqlParameter("@TableNumber", table.TableNumber),
             };
 
             return ReadTablesOrder(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        public List<Dish> GetDishes(int menuType)
+        {
+            string query = " Select DishID, ItemName, ItemPrice, ItemStock " +
+                "from Dish join Item on DishID = ItemID " +
+                "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
+                "where Item.MenuTypeID = @MenuType OR Item.MenuTypeID = 3";
+            SqlParameter sqlParameter = new SqlParameter("@MenuType", menuType);
+            return ReadDishes(ExecuteSelectQuery(query, sqlParameter));
+        }
+
 
         private List<Dish> ReadTablesOrder(DataTable table)
         {
@@ -69,97 +80,6 @@ namespace RosDAL
                 dishes.Add(dish);
             }
             return dishes;
-        }
-        public List<Dish> GetLunchStarters() // Getting all starters
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
-                "where Dish.Course = 'Starter' AND Item.MenuTypeID = 1 OR Item.MenuTypeID=3";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Dish> GetLunchMains() //Getting all Mains
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 1";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-
-        public List<Dish> GetLunchDesserts() //Getting all Desserts
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 1";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Dish> GetDinnerStarters() // Dinner Starter contains menu type 3 as well.
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
-                "where Dish.Course = 'Starter' AND Item.MenuTypeID = 2 OR Item.MenuTypeID=3";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Dish> GetDinnerMains()
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Main' AND Item.MenuTypeID = 2";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<Dish> GetDinnerDesserts() //Getting all Desserts
-        {
-            string query = "Select DishID, ItemName, ItemPrice, ItemStock " +
-                "from Dish " +
-                "join Item on DishID = ItemID " +
-                "where Dish.Course = 'Dessert' AND Item.MenuTypeID = 2";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public void DecreaseDishStock(Dish dish) // Decrease the dish from stock (Add buttons)
-        {
-            string query = "Update Item " +
-                "SET ItemStock = ItemStock - 1 " +
-                "where ItemID = @ItemID; ";
-
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@ItemID", dish.ItemID)
-            };
-
-            ExecuteEditQuery(query, sqlParameters);
-        }
-
-
-        public void IncreaseDishStock(Dish dish) // Increase the dish from stock (Remove button)
-        {
-            string query = "Update Item " +
-                "SET ItemStock = ItemStock + 1  " +
-                "where ItemID = @ItemID; ";
-
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@ItemID", dish.ItemID)
-            };
-
-            ExecuteEditQuery(query, sqlParameters);
         }
 
         private List<Dish> ReadDishes(DataTable dataTable) // Reading the dishes
