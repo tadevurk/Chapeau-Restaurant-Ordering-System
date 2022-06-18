@@ -307,7 +307,7 @@ namespace RosUI
             this.Controls.Add(this.listviewLunch);
             this.Name = "FormOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "l";
+            this.Text = "Order Form";
             this.Load += new System.EventHandler(this.OrderForm_Load);
             this.pnlFoodDrink.ResumeLayout(false);
             this.ResumeLayout(false);
