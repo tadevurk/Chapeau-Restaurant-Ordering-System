@@ -36,7 +36,7 @@ namespace RosUI
         {
             try
             {
-                if (btnOccupy.Text == "Occupy")
+                if (btnOccupy.Text == "Empty")
                 {
                     btnOccupy.Text = "Occupied";
                     btnOccupy.BackColor = Color.Red;
@@ -47,13 +47,16 @@ namespace RosUI
                 }
                 else if (btnOccupy.Text == "Occupied")
                 {
-                    btnOccupy.Text = "Occupy";
+                    btnOccupy.Text = "Empty";
                     btnOccupy.BackColor = Color.LightGray;
                     btnOccupy.ForeColor = Color.Black;
                     table.TableStatus = TableStatus.Empty;
                     tableLogic.Update(table);
                 }
-                else { return; };
+                else
+                {
+                    return;
+                }
             }
             catch (Exception exp)
             {

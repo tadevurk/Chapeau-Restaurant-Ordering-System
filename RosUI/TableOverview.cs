@@ -762,5 +762,11 @@ namespace RosUI
             table.TableStatus = TableStatus.DishReady;
             tableLogic.Update(table);
         }
+
+        private void btnMoreInfo_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            new TableGuide(employee, rosMain).Show();
+        }
     }
 }
