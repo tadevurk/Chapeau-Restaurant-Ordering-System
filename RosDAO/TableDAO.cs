@@ -30,6 +30,15 @@ namespace RosDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));    
         }
 
+        public int GetAmountOfTables()
+        {
+            string query = $"SELECT COUNT(TableNumber) AS [count] FROM [Table]";
+
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+
+            return ReadAmount(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public List<OrderedDrink> GetOrderedDrinksReady(int tableNumber)
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
@@ -110,97 +119,145 @@ namespace RosDAL
 
         private List<Table> ReadTables(DataTable dataTable)
         {
-            List<Table> tables = new List<Table>();
-
-            foreach (DataRow dr in dataTable.Rows)
+            try
             {
-                Table table = new Table();
+                List<Table> tables = new List<Table>();
+
+                foreach (DataRow dr in dataTable.Rows)
                 {
-                    table.TableNumber = (int)dr["TableNumber"];
-                    table.TableStatus = (TableStatus)dr["TableStatus"];
-                };
-                tables.Add(table);
+                    Table table = new Table();
+                    {
+                        table.TableNumber = (int)dr["TableNumber"];
+                        table.TableStatus = (TableStatus)dr["TableStatus"];
+                    };
+                    tables.Add(table);
+                }
+                return tables;
             }
-            return tables;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         public List<OrderedDrink> ReadOrderedDrinks(DataTable dataTable)
         {
-
-            List<OrderedDrink> drinks = new List<OrderedDrink>();
-
-            foreach (DataRow dr in dataTable.Rows)
+            try
             {
-                string note = "";
-                if (dr["Note"].Equals(DBNull.Value))
-                {
-                    note = "null";
-                }
-                else
-                {
-                    note = (string)dr["Note"];
-                }
+                List<OrderedDrink> drinks = new List<OrderedDrink>();
 
-                OrderedDrink drink = new OrderedDrink()
+                foreach (DataRow dr in dataTable.Rows)
                 {
-                    TableNumber = (int)dr["tableNumber"],
-                    DrinkStatus = (DrinkStatus)dr["Status"],
-                    OrderID = (int)dr["OrderID"],
-                    ItemID = (int)dr["ID"],
-                    ItemNote = note,
-                    OrderedDrinkAmount = (int)dr["Amount"],
-                    ItemName = (string)dr["name"],
-                    TimeDrinkOrdered = (DateTime)dr["Time"]
-                };
-                drinks.Add(drink);
+                    string note = "";
+                    if (dr["Note"].Equals(DBNull.Value))
+                    {
+                        note = "null";
+                    }
+                    else
+                    {
+                        note = (string)dr["Note"];
+                    }
+
+                    OrderedDrink drink = new OrderedDrink()
+                    {
+                        TableNumber = (int)dr["tableNumber"],
+                        DrinkStatus = (DrinkStatus)dr["Status"],
+                        OrderID = (int)dr["OrderID"],
+                        ItemID = (int)dr["ID"],
+                        ItemNote = note,
+                        OrderedDrinkAmount = (int)dr["Amount"],
+                        ItemName = (string)dr["name"],
+                        TimeDrinkOrdered = (DateTime)dr["Time"]
+                    };
+                    drinks.Add(drink);
+                }
+                return drinks;
             }
-            return drinks;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
 
         private List<OrderedDish> ReadOrderedDishes(DataTable dataTable)
         {
-            List<OrderedDish> orderedDishes = new List<OrderedDish>();
-
-            foreach (DataRow dr in dataTable.Rows)
+            try
             {
-                string note = "";
+                List<OrderedDish> orderedDishes = new List<OrderedDish>();
 
-                if (dr["Note"].Equals(DBNull.Value))
+                foreach (DataRow dr in dataTable.Rows)
                 {
-                    note = "null";
+                    string note = "";
+
+                    if (dr["Note"].Equals(DBNull.Value))
+                    {
+                        note = "null";
+                    }
+                    else
+                    {
+                        note = (string)dr["Note"];
+                    }
+
+                    OrderedDish dish = new OrderedDish()
+                    {
+                        TableNumber = (int)dr["tableNumber"],
+                        Status = (DishStatus)dr["Status"],
+                        ItemID = (int)dr["ID"],
+                        OrderID = (int)dr["OrderID"],
+                        ItemNote = note,
+                        OrderedDishAmount = (int)dr["Amount"],
+                        ItemName = (string)dr["name"],
+                        TimeDishOrdered = (DateTime)dr["Time"],
+                        Course = (string)dr["Course"]
+
+                    };
+                    orderedDishes.Add(dish);
                 }
-                else
-                {
-                    note = (string)dr["Note"];
-                }
-
-                OrderedDish dish = new OrderedDish()
-                {
-                    TableNumber = (int)dr["tableNumber"],
-                    Status = (DishStatus)dr["Status"],
-                    ItemID = (int)dr["ID"],
-                    OrderID = (int)dr["OrderID"],
-                    ItemNote = note,
-                    OrderedDishAmount = (int)dr["Amount"],
-                    ItemName = (string)dr["name"],
-                    TimeDishOrdered = (DateTime)dr["Time"],
-                    Course = (string)dr["Course"]
-
-                };
-                orderedDishes.Add(dish);
+                return orderedDishes;
             }
-            return orderedDishes;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }      
         }
 
         private Table ReadTable(DataTable dataTable)
         {
-            Table table = new Table();
-            foreach (DataRow dr in dataTable.Rows)
-            {                  
-                table.TableNumber = (int)dr["TableNumber"];
-                table.TableStatus = (TableStatus)dr["TableStatus"];
+            try
+            {
+                Table table = new Table();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    table.TableNumber = (int)dr["TableNumber"];
+                    table.TableStatus = (TableStatus)dr["TableStatus"];
+                }
+                return table;
             }
-            return table;
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
+        }
+
+        private int ReadAmount(DataTable dataTable)
+        {
+            try
+            {
+                int count = 0;
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    count = (int)dr["count"];
+                }
+                return count;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
         }
     }
 }

@@ -23,6 +23,11 @@ namespace RosLogic
             return tabledb.GetAllTables();
         }
 
+        public int GetAmountOfTables()
+        {
+            return tabledb.GetAmountOfTables();
+        }
+
         public List<OrderedDrink> GetOrderedDrinksReady(int tableNumber)
         {
             return tabledb.GetOrderedDrinksReady(tableNumber);

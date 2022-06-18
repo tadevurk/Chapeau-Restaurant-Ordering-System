@@ -145,7 +145,15 @@ namespace RosUI
         //updates the occupy button.
         private void UpdateOccupyButton(Table table, Button button)
         {
-            tableOverview.UpdateButtonColor(table, button);
+            Label l = new Label();
+            PictureBox pb = new PictureBox();
+            PictureBox pb2 = new PictureBox();
+            button.Enabled = false;
+            tableOverview.UpdateButtonColor(table, button, l, pb, pb2);
+            if (button.Text == "Empty" || button.Text == "Occupied")
+            {
+                button.Enabled = true;
+            }               
         }
     }
 }
