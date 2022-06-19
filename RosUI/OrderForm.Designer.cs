@@ -158,12 +158,11 @@ namespace RosUI
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.SystemColors.Control;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrderAddNote.FlatAppearance.BorderSize = 0;
             this.btnOrderAddNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderAddNote.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderAddNote.Image")));
-            this.btnOrderAddNote.Location = new System.Drawing.Point(394, 450);
+            this.btnOrderAddNote.Location = new System.Drawing.Point(391, 454);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(76, 37);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(79, 37);
             this.btnOrderAddNote.TabIndex = 16;
             this.btnOrderAddNote.UseVisualStyleBackColor = false;
             this.btnOrderAddNote.Visible = false;
@@ -171,7 +170,7 @@ namespace RosUI
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(16, 450);
+            this.txtNote.Location = new System.Drawing.Point(16, 454);
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(354, 37);
             this.txtNote.TabIndex = 18;
