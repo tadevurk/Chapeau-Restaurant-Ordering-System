@@ -127,7 +127,7 @@ namespace RosUI
 
                 if (listview.Items.IndexOf(li) % 2 == 0)
                 {
-                    li.BackColor = Color.AliceBlue;                  
+                    li.BackColor = Color.FromArgb(224, 234, 255);
                 }
 
                 if (dish.ItemStock == 0)
@@ -150,12 +150,12 @@ namespace RosUI
 
                 if (listview.Items.IndexOf(li) % 2 == 0)
                 {
-                    li.BackColor = Color.AliceBlue;
+                    li.BackColor = Color.FromArgb(224, 234, 255);
                 }
                 if (drink.ItemStock == 0)
                 {
-                    li.BackColor = Color.DarkGray;
-                    li.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
+                   li.BackColor = Color.DarkGray;
+                   li.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
             }
         }

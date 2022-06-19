@@ -156,13 +156,15 @@ namespace RosUI
             // 
             // btnOrderAddNote
             // 
-            this.btnOrderAddNote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOrderAddNote.BackColor = System.Drawing.SystemColors.Control;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrderAddNote.Location = new System.Drawing.Point(372, 450);
+            this.btnOrderAddNote.FlatAppearance.BorderSize = 0;
+            this.btnOrderAddNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrderAddNote.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderAddNote.Image")));
+            this.btnOrderAddNote.Location = new System.Drawing.Point(394, 450);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(98, 37);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(76, 37);
             this.btnOrderAddNote.TabIndex = 16;
-            this.btnOrderAddNote.Text = "Add Note";
             this.btnOrderAddNote.UseVisualStyleBackColor = false;
             this.btnOrderAddNote.Visible = false;
             this.btnOrderAddNote.Click += new System.EventHandler(this.btnOrderAddNote_Click);
@@ -171,7 +173,7 @@ namespace RosUI
             // 
             this.txtNote.Location = new System.Drawing.Point(16, 450);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(344, 37);
+            this.txtNote.Size = new System.Drawing.Size(354, 37);
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
             this.txtNote.Visible = false;
