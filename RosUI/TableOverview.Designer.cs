@@ -120,16 +120,17 @@
             // lblOrderReady
             // 
             this.lblOrderReady.AutoSize = true;
-            this.lblOrderReady.Location = new System.Drawing.Point(362, 104);
+            this.lblOrderReady.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOrderReady.Location = new System.Drawing.Point(346, 102);
             this.lblOrderReady.Name = "lblOrderReady";
-            this.lblOrderReady.Size = new System.Drawing.Size(102, 20);
+            this.lblOrderReady.Size = new System.Drawing.Size(124, 25);
             this.lblOrderReady.TabIndex = 46;
             this.lblOrderReady.Text = "Order is ready";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightGreen;
-            this.pictureBox1.Location = new System.Drawing.Point(336, 104);
+            this.pictureBox1.Location = new System.Drawing.Point(326, 104);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(20, 20);
             this.pictureBox1.TabIndex = 47;
@@ -138,7 +139,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Yellow;
-            this.pictureBox2.Location = new System.Drawing.Point(336, 130);
+            this.pictureBox2.Location = new System.Drawing.Point(326, 130);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(20, 20);
             this.pictureBox2.TabIndex = 48;
@@ -147,16 +148,17 @@
             // lblOrderServed
             // 
             this.lblOrderServed.AutoSize = true;
-            this.lblOrderServed.Location = new System.Drawing.Point(362, 130);
+            this.lblOrderServed.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblOrderServed.Location = new System.Drawing.Point(346, 128);
             this.lblOrderServed.Name = "lblOrderServed";
-            this.lblOrderServed.Size = new System.Drawing.Size(108, 20);
+            this.lblOrderServed.Size = new System.Drawing.Size(132, 25);
             this.lblOrderServed.TabIndex = 49;
             this.lblOrderServed.Text = "Order is served";
             // 
             // pictureBox3
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.pictureBox3.Location = new System.Drawing.Point(160, 78);
+            this.pictureBox3.Location = new System.Drawing.Point(154, 78);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(20, 20);
             this.pictureBox3.TabIndex = 50;
@@ -165,16 +167,17 @@
             // lblTableFree
             // 
             this.lblTableFree.AutoSize = true;
-            this.lblTableFree.Location = new System.Drawing.Point(186, 78);
+            this.lblTableFree.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTableFree.Location = new System.Drawing.Point(174, 76);
             this.lblTableFree.Name = "lblTableFree";
-            this.lblTableFree.Size = new System.Drawing.Size(88, 20);
+            this.lblTableFree.Size = new System.Drawing.Size(104, 25);
             this.lblTableFree.TabIndex = 51;
             this.lblTableFree.Text = "Table is free";
             // 
             // pictureBox4
             // 
             this.pictureBox4.BackColor = System.Drawing.Color.Red;
-            this.pictureBox4.Location = new System.Drawing.Point(160, 104);
+            this.pictureBox4.Location = new System.Drawing.Point(154, 104);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(20, 20);
             this.pictureBox4.TabIndex = 52;
@@ -183,16 +186,17 @@
             // lblTableOccupied
             // 
             this.lblTableOccupied.AutoSize = true;
-            this.lblTableOccupied.Location = new System.Drawing.Point(186, 104);
+            this.lblTableOccupied.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTableOccupied.Location = new System.Drawing.Point(174, 102);
             this.lblTableOccupied.Name = "lblTableOccupied";
-            this.lblTableOccupied.Size = new System.Drawing.Size(123, 20);
+            this.lblTableOccupied.Size = new System.Drawing.Size(146, 25);
             this.lblTableOccupied.TabIndex = 53;
             this.lblTableOccupied.Text = "Table is occupied";
             // 
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.LightBlue;
-            this.pictureBox5.Location = new System.Drawing.Point(336, 78);
+            this.pictureBox5.Location = new System.Drawing.Point(326, 78);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(20, 20);
             this.pictureBox5.TabIndex = 54;
@@ -201,18 +205,20 @@
             // lblRunningOrder
             // 
             this.lblRunningOrder.AutoSize = true;
-            this.lblRunningOrder.Location = new System.Drawing.Point(362, 78);
+            this.lblRunningOrder.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblRunningOrder.Location = new System.Drawing.Point(346, 76);
             this.lblRunningOrder.Name = "lblRunningOrder";
-            this.lblRunningOrder.Size = new System.Drawing.Size(105, 20);
+            this.lblRunningOrder.Size = new System.Drawing.Size(129, 25);
             this.lblRunningOrder.TabIndex = 55;
             this.lblRunningOrder.Text = "Running Order";
             // 
             // lblDrinkOrder
             // 
             this.lblDrinkOrder.AutoSize = true;
-            this.lblDrinkOrder.Location = new System.Drawing.Point(43, 106);
+            this.lblDrinkOrder.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDrinkOrder.Location = new System.Drawing.Point(37, 102);
             this.lblDrinkOrder.Name = "lblDrinkOrder";
-            this.lblDrinkOrder.Size = new System.Drawing.Size(86, 20);
+            this.lblDrinkOrder.Size = new System.Drawing.Size(105, 25);
             this.lblDrinkOrder.TabIndex = 56;
             this.lblDrinkOrder.Text = "Drink Order";
             // 
@@ -220,7 +226,7 @@
             // 
             this.pictureBox6.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox6.Image = global::RosUI.Properties.Resources.icons8_martini_glass_32;
-            this.pictureBox6.Location = new System.Drawing.Point(10, 98);
+            this.pictureBox6.Location = new System.Drawing.Point(4, 98);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(32, 28);
             this.pictureBox6.TabIndex = 57;
@@ -230,7 +236,7 @@
             // 
             this.pictureBox7.BackColor = System.Drawing.SystemColors.Control;
             this.pictureBox7.Image = global::RosUI.Properties.Resources.icons8_dinner_32;
-            this.pictureBox7.Location = new System.Drawing.Point(11, 65);
+            this.pictureBox7.Location = new System.Drawing.Point(5, 65);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(32, 32);
             this.pictureBox7.TabIndex = 58;
@@ -239,9 +245,10 @@
             // lblDishOrder
             // 
             this.lblDishOrder.AutoSize = true;
-            this.lblDishOrder.Location = new System.Drawing.Point(43, 77);
+            this.lblDishOrder.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblDishOrder.Location = new System.Drawing.Point(37, 75);
             this.lblDishOrder.Name = "lblDishOrder";
-            this.lblDishOrder.Size = new System.Drawing.Size(80, 20);
+            this.lblDishOrder.Size = new System.Drawing.Size(98, 25);
             this.lblDishOrder.TabIndex = 59;
             this.lblDishOrder.Text = "Dish Order";
             // 

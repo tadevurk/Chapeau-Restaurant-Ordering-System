@@ -74,12 +74,14 @@
             // 
             // btnBack
             // 
-            this.btnBack.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.btnBack.Location = new System.Drawing.Point(383, -1);
+            this.btnBack.BackColor = System.Drawing.Color.Transparent;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Image = global::RosUI.Properties.Resources.BackIcon;
+            this.btnBack.Location = new System.Drawing.Point(0, 4);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(100, 40);
+            this.btnBack.Size = new System.Drawing.Size(80, 40);
             this.btnBack.TabIndex = 6;
-            this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
