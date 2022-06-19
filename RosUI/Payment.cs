@@ -415,57 +415,66 @@ namespace RosUI
         // calculate amount to be stored in the database and display correct amounts
         private void btnSplitPay_Click(object sender, EventArgs e)
         {
-            // check if the inserted values are in numerical format
-            decimal splitAmount;
-            decimal splitTip;
-
-            bool numericalToPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
-            bool numericalTip = decimal.TryParse(txtTipSplit.Text, out splitTip);
-
-            if (!numericalToPay || !numericalTip || txtToPaySplit.Text.Contains(',') || txtTipSplit.Text.Contains(','))
+            try
             {
-                throw new Exception("Input is not in the correct numerical format");
-            }
+                decimal splitAmount;
+                decimal splitTip;
 
-            // do not let the user close a bill from the partial payment mode
-            // complete a partial payment and update values for displaying purpose and
-            // next partial payment if needed
+                bool numericalToPay = decimal.TryParse(txtToPaySplit.Text, out splitAmount);
+                bool numericalTip = decimal.TryParse(txtTipSplit.Text, out splitTip);
 
-            if (bill.TotalAmount <= splitAmount)
-            {
-                MessageBox.Show("Complete payment in the main form!");
-            }
-            else
-            {
-                deductibleAmount += splitAmount;
-
-                if (splitTip < 0 || splitAmount < 0)
+                if (!numericalToPay || !numericalTip || txtToPaySplit.Text.Contains(',') || txtTipSplit.Text.Contains(','))
                 {
-                    throw new Exception("Please enter valid amounts.");
+                    throw new Exception("Input is not in the correct numerical format");
+                }
+
+                // do not let the user close a bill from the partial payment mode
+                // complete a partial payment and update values for displaying purpose and
+                // next partial payment if needed
+
+                if (bill.TotalAmount <= splitAmount)
+                {
+                    MessageBox.Show("Complete payment in the main form!");
                 }
                 else
                 {
-                    bill.TotalAmount = splitAmount;
-                    bill.TipAmount = splitTip;
+                    deductibleAmount += splitAmount;
 
-                    bill.SubTotalAmount = 0;
+                    if (splitTip < 0 || splitAmount < 0)
+                    {
+                        throw new Exception("Please enter valid amounts.");
+                    }
+                    else
+                    {
+                        bill.TotalAmount = splitAmount;
+                        bill.TipAmount = splitTip;
 
-                    billLogic.CreateBill(bill);
+                        bill.SubTotalAmount = 0;
 
-                    bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
-                    toPay = bill.TotalAmount;
+                        billLogic.CreateBill(bill);
 
-                    lblTotalAmount.Text = CalculateTotalAmount().ToString();
-                    txtTip.Text = 0.ToString();
-                    txtToPay.Text = toPay.ToString();
+                        bill.TotalAmount = CalculateTotalAmount() - deductibleAmount;
+                        toPay = bill.TotalAmount;
+
+                        lblTotalAmount.Text = CalculateTotalAmount().ToString();
+                        txtTip.Text = 0.ToString();
+                        txtToPay.Text = toPay.ToString();
+                    }
                 }
-            }
 
-            pnlSplit.Hide();
-            radioBtnSplitCash.Checked = false;
-            radioBtnSplitVisa.Checked = false;
-            radioBtnSplitDebit.Checked = false;
-            btnBack.Visible = true;
+                pnlSplit.Hide();
+                radioBtnSplitCash.Checked = false;
+                radioBtnSplitVisa.Checked = false;
+                radioBtnSplitDebit.Checked = false;
+                btnBack.Visible = true;
+            }
+            catch (Exception exp)
+            {
+
+                MessageBox.Show( exp.Message, "Error");
+            }
+            // check if the inserted values are in numerical format
+          
         }
 
         private void radioBtnSplitCash_CheckedChanged_1(object sender, EventArgs e)

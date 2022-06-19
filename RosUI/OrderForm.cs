@@ -414,11 +414,9 @@ namespace RosUI
         {
             foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the items from order list
             {
+                if (lvOrderInProcess.ForeColor == Color.Red)
                 {
-                    if (lvOrderInProcess.ForeColor == Color.Red)
-                    {
-                        listviewOrder.Items.Remove(lvOrderInProcess);
-                    }
+                    listviewOrder.Items.Remove(lvOrderInProcess);
                 }
             }
         }
@@ -540,8 +538,7 @@ namespace RosUI
                 drink.ItemNote = txtNote.Text;
                 listviewDrinks.SelectedItems.Clear();
                 MessageBox.Show($"{emp.Name}, you have added the note!");
-            }
-            
+            }        
         }
     }
 }
