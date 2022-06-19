@@ -124,11 +124,17 @@ namespace RosUI
                 li.SubItems.Add(dish.ItemPrice.ToString());
                 li.Tag = dish;
                 listview.Items.Add(li);
-                if (dish.ItemStock == 0)
+
+                if (listview.Items.IndexOf(li) % 2 == 0)
                 {
-                    li.ForeColor = Color.DarkGray;
+                    li.BackColor = Color.AliceBlue;                  
                 }
 
+                if (dish.ItemStock == 0)
+                {
+                    li.BackColor = Color.DarkGray;
+                    li.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
+                }
             }
         }
         private void ReadDrinks(ListView listview, List<Drink> drinks)
@@ -141,9 +147,15 @@ namespace RosUI
                 li.SubItems.Add(drink.ItemPrice.ToString());
                 li.Tag = drink;
                 listview.Items.Add(li);
+
+                if (listview.Items.IndexOf(li) % 2 == 0)
+                {
+                    li.BackColor = Color.AliceBlue;
+                }
                 if (drink.ItemStock == 0)
                 {
-                    li.ForeColor = Color.DarkGray;
+                    li.BackColor = Color.DarkGray;
+                    li.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
             }
         }
@@ -197,7 +209,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewLunch.SelectedItems.Count == 1 && listviewLunch.SelectedItems[0].ForeColor == Color.DarkGray)
+                if (listviewLunch.SelectedItems.Count == 1 && listviewLunch.SelectedItems[0].BackColor == Color.DarkGray)
                 {
                     listviewLunch.SelectedItems[0].Selected = false;
                 }
@@ -216,7 +228,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewDinner.SelectedItems.Count == 1 && listviewDinner.SelectedItems[0].ForeColor == Color.DarkGray)
+                if (listviewDinner.SelectedItems.Count == 1 && listviewDinner.SelectedItems[0].BackColor == Color.DarkGray)
                 {
                     listviewDinner.SelectedItems[0].Selected = false;
                 }
@@ -235,7 +247,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewDrinks.SelectedItems.Count == 1 && listviewDrinks.SelectedItems[0].ForeColor == Color.DarkGray)
+                if (listviewDrinks.SelectedItems.Count == 1 && listviewDrinks.SelectedItems[0].BackColor == Color.DarkGray)
                 {
                     listviewDrinks.SelectedItems[0].Selected = false;
                 }
