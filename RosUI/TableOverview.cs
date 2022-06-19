@@ -506,7 +506,7 @@ namespace RosUI
                 if (tableNumber == table.TableNumber)
                 {
                     UpdateTableToStandbystatus(table, tableNumber);
-                    UpdateAllButtons();
+                    UpdateButtonColor(table, buttons[tableNumber-1], labels[tableNumber-1], drinkIcons[tableNumber-1], dishIcons[tableNumber-1]);
                 }
             }           
         }
@@ -520,7 +520,7 @@ namespace RosUI
                 if (tableNumber == table.TableNumber)
                 {
                     UpdateTableToDrinkReadyStatus(table, tableNumber);
-                    UpdateAllButtons();
+                    UpdateButtonColor(table, buttons[tableNumber - 1], labels[tableNumber - 1], drinkIcons[tableNumber - 1], dishIcons[tableNumber - 1]);
                 }
             }
         }
@@ -534,7 +534,7 @@ namespace RosUI
                 if (tableNumber == table.TableNumber)
                 {
                     UpdateTableToDishReadyStatus(table, tableNumber);
-                    UpdateAllButtons();
+                    UpdateButtonColor(table, buttons[tableNumber - 1], labels[tableNumber - 1], drinkIcons[tableNumber - 1], dishIcons[tableNumber - 1]);
                 }
             }
         }
