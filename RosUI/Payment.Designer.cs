@@ -134,7 +134,7 @@ namespace RosUI
             // 
             this.radioBtnCash.AutoSize = true;
             this.radioBtnCash.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioBtnCash.Location = new System.Drawing.Point(67, 547);
+            this.radioBtnCash.Location = new System.Drawing.Point(66, 555);
             this.radioBtnCash.Name = "radioBtnCash";
             this.radioBtnCash.Size = new System.Drawing.Size(79, 29);
             this.radioBtnCash.TabIndex = 2;
@@ -147,7 +147,7 @@ namespace RosUI
             // 
             this.radioBtnVisa.AutoSize = true;
             this.radioBtnVisa.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioBtnVisa.Location = new System.Drawing.Point(195, 547);
+            this.radioBtnVisa.Location = new System.Drawing.Point(194, 555);
             this.radioBtnVisa.Name = "radioBtnVisa";
             this.radioBtnVisa.Size = new System.Drawing.Size(71, 29);
             this.radioBtnVisa.TabIndex = 3;
@@ -160,7 +160,7 @@ namespace RosUI
             // 
             this.radioBtnDebit.AutoSize = true;
             this.radioBtnDebit.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.radioBtnDebit.Location = new System.Drawing.Point(324, 547);
+            this.radioBtnDebit.Location = new System.Drawing.Point(323, 555);
             this.radioBtnDebit.Name = "radioBtnDebit";
             this.radioBtnDebit.Size = new System.Drawing.Size(79, 29);
             this.radioBtnDebit.TabIndex = 4;
@@ -593,7 +593,7 @@ namespace RosUI
             // label17
             // 
             this.label17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label17.Location = new System.Drawing.Point(38, 593);
+            this.label17.Location = new System.Drawing.Point(37, 601);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(394, 2);
             this.label17.TabIndex = 38;
