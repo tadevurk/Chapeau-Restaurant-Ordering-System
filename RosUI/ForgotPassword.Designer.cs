@@ -152,13 +152,15 @@
             // 
             // btnExit
             // 
-            this.btnExit.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnExit.Location = new System.Drawing.Point(0, 0);
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Image = global::RosUI.Properties.Resources.BackIcon;
+            this.btnExit.Location = new System.Drawing.Point(0, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(94, 29);
+            this.btnExit.Size = new System.Drawing.Size(80, 40);
             this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 

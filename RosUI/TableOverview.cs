@@ -38,20 +38,29 @@ namespace RosUI
             dishIcons = new List<PictureBox>();
             drinkIcons = new List<PictureBox>();
             
-            numberOfTables = tableLogic.GetAmountOfTables();            
+            numberOfTables = tableLogic.GetAmountOfTables();             
             rosMain.AddWaiterView(this);          
             GenerateTableOverview();
             UpdateAllButtons();
         }
 
+        //Generates all necessary components into the table view
         private void GenerateTableOverview()
-        {         
-            GenerateLabels();
-            GenerateDrinkIcon();
-            GenerateDishIcon();
-            GenerateButtons();
+        {
+            try
+            {
+                GenerateLabels();
+                GenerateDrinkIcon();
+                GenerateDishIcon();
+                GenerateButtons();
+            }
+            catch (Exception exp)
+            {
+                DisplayError(exp);
+            }           
         }
 
+        //generates the buttons dynamically
         private List<Button> GenerateButtons()
         {
             int i = 1;
@@ -70,7 +79,6 @@ namespace RosUI
                     button.Name = $"btnTable{i}";
                     button.Size = new Size(180, 100);
                     button.UseVisualStyleBackColor = false;
-                    //button.Click += (s, e) => OpenTableControl(i);
                     button.Click += new EventHandler(button_Click);                    
                     this.Controls.Add(button);                     
                     
@@ -84,6 +92,7 @@ namespace RosUI
             return buttons;
         }
 
+        //A method that checks with button was clicked and opens the corresponding table control
         private void button_Click(object sender, EventArgs e)
         {
             Button button = sender as Button;
@@ -98,6 +107,7 @@ namespace RosUI
             }        
         }
 
+        //generates the drinkicons dynamically
         private List<PictureBox> GenerateDrinkIcon()
         {
             int i = 1;
@@ -126,6 +136,7 @@ namespace RosUI
             return drinkIcons;
         }
 
+        //generates the dishicons dynamically
         private List<PictureBox> GenerateDishIcon()
         {
             int i = 1;
@@ -154,8 +165,7 @@ namespace RosUI
             return dishIcons;
         }
 
-
-
+        //generates the labals dynamically
         private List<Label> GenerateLabels()
         {
             int i = 1;
@@ -225,6 +235,7 @@ namespace RosUI
             return button;
         }
 
+        //update the button to served
         private static Button UpdateButtonToServed(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.Yellow;
@@ -236,6 +247,7 @@ namespace RosUI
             return button;
         }
 
+        //Update the button to dish ready
         private static Button UpdateButtonToDishReady(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.LightGreen;
@@ -247,6 +259,7 @@ namespace RosUI
             return button;
         }
 
+        //Update the button to drink ready
         private static Button UpdateButtonToDrinkReady(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.LightGreen;
@@ -258,6 +271,7 @@ namespace RosUI
             return button;
         }
 
+        //update the button to standby
         private Button UpdateButtonToStandby(Table table, Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.LightBlue;
@@ -271,6 +285,7 @@ namespace RosUI
             return button;
         }
 
+        //Update the button to occupied
         private static Button UpdateButtonToOccupied(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = Color.Red;
@@ -283,6 +298,7 @@ namespace RosUI
             return button;
         }
 
+        //Update the button to empty
         private static Button UpdateButtonToEmpty(Button button, Label label, PictureBox drinkIcon, PictureBox dishIcon)
         {
             button.BackColor = SystemColors.ControlLight;
@@ -466,7 +482,7 @@ namespace RosUI
         {
             //changes the state of the Icon and the position.
             Point point = drinkIcons[tableNumber - 1].Location;
-            if (point.X == 131)
+            if (point.X == 131 || point.X == 396)
             {
                 point.X += 32;
             }
@@ -547,6 +563,7 @@ namespace RosUI
             tableLogic.Update(table);
         }
 
+        //Opens the table guide
         private void btnMoreInfo_Click(object sender, EventArgs e)
         {
             try
@@ -560,6 +577,7 @@ namespace RosUI
             }    
         }
 
+        //Is used for the logout
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try

@@ -107,7 +107,7 @@ namespace RosUI
             }
         }
 
-        //Check which role this user will be through the license key and adds it to the database
+        //Check with role the user will get according to the license key
         private Roles CheckRole(string licenseKey)
         {
             switch (licenseKey)

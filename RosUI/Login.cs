@@ -21,8 +21,7 @@ namespace RosUI
         {
             InitializeComponent();
             employeeLogic = new EmployeeLogic();
-            employee = new Employee();
-            
+            employee = new Employee();            
         }
 
         //Will login the user in
@@ -52,7 +51,7 @@ namespace RosUI
 
                 employee = employeeLogic.GetEmployeeByUsername(txtUsername.Text);       
 
-                //Checks the login password
+                //Checks the login password and opens the corresponding view
                 if (CheckPassword())
                 {
                     this.Hide();

@@ -16,6 +16,7 @@ namespace RosUI
             this.rosMain = rosMain;
         }
 
+        //go back to table overview
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
