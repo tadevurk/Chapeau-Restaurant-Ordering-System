@@ -94,6 +94,7 @@ namespace RosUI
             {
                 List<Dish> orderedDishes = dishLogic.ReadContainedDishes(table); // Read all ordered Dishes 
                 List<Drink> orderedDrinks = drinkLogic.ReadContainedDrinks(table); // Read all ordered Drinks
+
                 List<Item> itemsInOrder = new List<Item>();
                 itemsInOrder.AddRange(orderedDishes); // Add Dishes to item list
                 itemsInOrder.AddRange(orderedDrinks);// Add Drinks to item list
@@ -102,7 +103,7 @@ namespace RosUI
                 foreach (Item item in itemsInOrder)
                 {
                     ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
-                    lvItem.SubItems.Add($"€ {item.ItemPrice.ToString()}");
+                    lvItem.SubItems.Add($"€ {item.ItemPrice}");
                     lvItem.SubItems.Add(item.ItemAmount.ToString());
                     lvItem.ForeColor = Color.Green; // Change color from previous orders
                     lvItem.Tag = (Item)item;
@@ -121,7 +122,7 @@ namespace RosUI
             foreach (Dish dish in dishes)
             {
                 ListViewItem li = new ListViewItem(dish.ItemName.ToString());
-                li.SubItems.Add($"€ {dish.ItemPrice.ToString()}");
+                li.SubItems.Add($"€ {dish.ItemPrice}");
                 li.SubItems.Add(dish.Course);
                 li.Tag = dish;
                 listview.Items.Add(li);
@@ -145,7 +146,7 @@ namespace RosUI
             foreach (Drink drink in drinks)
             {
                 ListViewItem li = new ListViewItem(drink.ItemName.ToString());
-                li.SubItems.Add($"€ {drink.ItemPrice.ToString()}");
+                li.SubItems.Add($"€ {drink.ItemPrice}");
                 li.SubItems.Add(drink.DrinkCategory);
                 li.Tag = drink;
                 listview.Items.Add(li);
@@ -296,8 +297,8 @@ namespace RosUI
 
         private void AddFood(ListView listview)
         {
-            ListViewItem selectedFood = listview.SelectedItems[0];
-            Dish dish = (Dish)selectedFood.Tag;
+            ListViewItem selectedDish = listview.SelectedItems[0];
+            Dish dish = (Dish)selectedDish.Tag;
             CheckCurrentDish(dish);
         }
 
@@ -330,10 +331,10 @@ namespace RosUI
             if (currentItem == null)
             {
                 ListViewItem lvItem = new ListViewItem(dish.ItemName);
-                lvItem.SubItems.Add($"€ {dish.ItemPrice.ToString()}");
+                lvItem.SubItems.Add($"€ {dish.ItemPrice}");
                 dish.ItemAmount = 1;
                 lvItem.SubItems.Add(dish.ItemAmount.ToString());
-                lvItem.Tag = dish;
+                lvItem.Tag = dish; // Tagging to add the DishesInOrderProcess list
                 lvItem.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(lvItem);
             }
@@ -347,24 +348,24 @@ namespace RosUI
                 throw new Exception($"{drink.ItemName} is sold out");
             }
 
-            foreach (ListViewItem item in listviewOrder.Items)
+            foreach (ListViewItem lvItem in listviewOrder.Items)
             {
-                if (drink.ItemName == item.SubItems[0].Text && item.ForeColor != Color.Green)
+                if (drink.ItemName == lvItem.SubItems[0].Text && lvItem.ForeColor != Color.Green)
                 {
-                    currentItem = item;
-                    drink.ItemAmount = int.Parse(item.SubItems[2].Text);
+                    currentItem = lvItem;
+                    drink.ItemAmount = int.Parse(lvItem.SubItems[2].Text);
                     drink.ItemAmount++;
-                    item.SubItems[2].Text = drink.ItemAmount.ToString();
+                    lvItem.SubItems[2].Text = drink.ItemAmount.ToString();
                 }
             }
 
             if (currentItem == null)
             {
                 ListViewItem item = new ListViewItem(drink.ItemName);
-                item.SubItems.Add($"€ {drink.ItemPrice.ToString()}");
+                item.SubItems.Add($"€ {drink.ItemPrice}");
                 drink.ItemAmount = 1;
                 item.SubItems.Add(drink.ItemAmount.ToString());
-                item.Tag = drink;
+                item.Tag = drink; // Tagging to add the DrinksInOrderProcess list
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
             }          
@@ -441,7 +442,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewOrder.Items.Count == 0) // Extra checking
+                if (listviewOrder.Items.Count == 0) // Extra checking if the list is empty
                 {
                     throw new Exception($"Sorry {emp.Name}, there is nothing to send");
                 }
@@ -452,7 +453,7 @@ namespace RosUI
                     SendOrder(); // adding the items in the listviewOrder to dish and drink list              
                     dishLogic.AddDishes(DishesInOrderProcess, order); // DishesInOrderProcess(comes from SendOrder) is the new ordered dishes 
                     drinkLogic.AddDrinks(DrinkInOrderProcess, order);// DrinkInOrderProcess(comes from SendOrder) is the new ordered drinks
-                    DecreaseStock();
+                    DecreaseStock(); // Decrease the stock for all new ordered items by their amounts
 
                     table.TableStatus = TableStatus.Standby; // Jason
                     tableLogic.Update(table); // Jason                    
@@ -476,17 +477,17 @@ namespace RosUI
         {
             for (int i = 0; i < listviewOrder.Items.Count; i++)
             {
-                Item itemInOrderList = (Item)listviewOrder.Items[i].Tag; // Tag all the item as item in listview
-                ListViewItem lvItemInOrderList = listviewOrder.Items[i];
+                Item item = (Item)listviewOrder.Items[i].Tag; // Tag all the item as item in listview
+                ListViewItem lvItem = listviewOrder.Items[i];
 
-                if (lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Dish)
+                if (lvItem.ForeColor == Color.Red && item is Dish)
                 {
-                    Dish dish = (Dish)itemInOrderList;
+                    Dish dish = (Dish)item;
                     DishesInOrderProcess.Add(dish);
                 }
-                else if (lvItemInOrderList.ForeColor == Color.Red && itemInOrderList is Drink)
+                else if (lvItem.ForeColor == Color.Red && item is Drink)
                 {
-                    Drink drink = (Drink)itemInOrderList;
+                    Drink drink = (Drink)item;
                     DrinkInOrderProcess.Add(drink);
                 }
             }
@@ -494,7 +495,7 @@ namespace RosUI
 
         private void DecreaseStock()
         {
-            foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Decrease stock when order is sent
+            foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Decrease stock when order is taken
             {
                 Item item = (Item)lvOrderInProcess.Tag;
                 {

@@ -120,9 +120,9 @@ namespace RosUI
             this.lblTableNumber.AutoSize = true;
             this.lblTableNumber.Location = new System.Drawing.Point(402, 17);
             this.lblTableNumber.Name = "lblTableNumber";
-            this.lblTableNumber.Size = new System.Drawing.Size(56, 20);
+            this.lblTableNumber.Size = new System.Drawing.Size(57, 20);
             this.lblTableNumber.TabIndex = 12;
-            this.lblTableNumber.Text = "table #";
+            this.lblTableNumber.Text = "Table #";
             // 
             // listviewOrder
             // 
@@ -144,17 +144,19 @@ namespace RosUI
             // 
             // nameOrder
             // 
-            this.nameOrder.Text = "Name";
+            this.nameOrder.Text = "Item";
             this.nameOrder.Width = 270;
             // 
             // priceOrder
             // 
             this.priceOrder.Text = "Price";
+            this.priceOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.priceOrder.Width = 75;
             // 
             // amountOrder
             // 
-            this.amountOrder.Text = "Amount";
+            this.amountOrder.Text = "Quantity";
+            this.amountOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountOrder.Width = 85;
             // 
             // btnOrderAddNote
@@ -239,11 +241,13 @@ namespace RosUI
             // columnPriceFood
             // 
             this.columnPriceFood.Text = "Price";
+            this.columnPriceFood.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnPriceFood.Width = 100;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Type";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 100;
             // 
             // listviewDinner
@@ -272,11 +276,13 @@ namespace RosUI
             // columnHeader16
             // 
             this.columnHeader16.Text = "Price";
+            this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader16.Width = 100;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "Type";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 100;
             // 
             // listviewDrinks
@@ -305,11 +311,13 @@ namespace RosUI
             // columnHeader18
             // 
             this.columnHeader18.Text = "Price";
+            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader18.Width = 100;
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Type";
+            this.columnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader1.Width = 100;
             // 
             // FormOrder
