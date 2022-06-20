@@ -102,7 +102,7 @@ namespace RosUI
             // 
             // Quantity
             // 
-            this.Quantity.Text = "Qnt";
+            this.Quantity.Text = "Qty";
             this.Quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.Quantity.Width = 65;
             // 
