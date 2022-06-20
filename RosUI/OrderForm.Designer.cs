@@ -147,7 +147,7 @@ namespace RosUI
             // priceOrder
             // 
             this.priceOrder.Text = "Price";
-            this.priceOrder.Width = 65;
+            this.priceOrder.Width = 75;
             // 
             // amountOrder
             // 

@@ -102,7 +102,7 @@ namespace RosUI
                 foreach (Item item in itemsInOrder)
                 {
                     ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
-                    lvItem.SubItems.Add(item.ItemPrice.ToString());
+                    lvItem.SubItems.Add($"€ {item.ItemPrice.ToString()}");
                     lvItem.SubItems.Add(item.ItemAmount.ToString());
                     lvItem.ForeColor = Color.Green; // Change color from previous orders
                     lvItem.Tag = (Item)item;
@@ -121,7 +121,7 @@ namespace RosUI
             foreach (Dish dish in dishes)
             {
                 ListViewItem li = new ListViewItem(dish.ItemName.ToString());
-                li.SubItems.Add(dish.ItemPrice.ToString());
+                li.SubItems.Add($"€ {dish.ItemPrice.ToString()}");
                 li.Tag = dish;
                 listview.Items.Add(li);
 
@@ -144,7 +144,7 @@ namespace RosUI
             foreach (Drink drink in drinks)
             {
                 ListViewItem li = new ListViewItem(drink.ItemName.ToString());
-                li.SubItems.Add(drink.ItemPrice.ToString());
+                li.SubItems.Add($"€ {drink.ItemPrice.ToString()}");
                 li.Tag = drink;
                 listview.Items.Add(li);
 
@@ -328,7 +328,7 @@ namespace RosUI
             if (currentItem == null)
             {
                 ListViewItem lvItem = new ListViewItem(dish.ItemName);
-                lvItem.SubItems.Add(dish.ItemPrice.ToString());
+                lvItem.SubItems.Add($"€ {dish.ItemPrice.ToString()}");
                 dish.ItemAmount = 1;
                 lvItem.SubItems.Add(dish.ItemAmount.ToString());
                 lvItem.Tag = dish;
@@ -359,7 +359,7 @@ namespace RosUI
             if (currentItem == null)
             {
                 ListViewItem item = new ListViewItem(drink.ItemName);
-                item.SubItems.Add(drink.ItemPrice.ToString());
+                item.SubItems.Add($"€ {drink.ItemPrice.ToString()}");
                 drink.ItemAmount = 1;
                 item.SubItems.Add(drink.ItemAmount.ToString());
                 item.Tag = drink;
