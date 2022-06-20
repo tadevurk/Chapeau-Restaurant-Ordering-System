@@ -77,7 +77,7 @@ namespace RosUI
             this.btnSendOrder.Name = "btnSendOrder";
             this.btnSendOrder.Size = new System.Drawing.Size(201, 47);
             this.btnSendOrder.TabIndex = 8;
-            this.btnSendOrder.Text = "SEND";
+            this.btnSendOrder.Text = "ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
             this.btnSendOrder.Visible = false;
             this.btnSendOrder.Click += new System.EventHandler(this.btnSendOrder_Click);
@@ -158,11 +158,12 @@ namespace RosUI
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.SystemColors.Control;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOrderAddNote.FlatAppearance.BorderSize = 0;
             this.btnOrderAddNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderAddNote.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderAddNote.Image")));
-            this.btnOrderAddNote.Location = new System.Drawing.Point(391, 454);
+            this.btnOrderAddNote.Location = new System.Drawing.Point(379, 454);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(79, 37);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(91, 44);
             this.btnOrderAddNote.TabIndex = 16;
             this.btnOrderAddNote.UseVisualStyleBackColor = false;
             this.btnOrderAddNote.Visible = false;
@@ -172,7 +173,7 @@ namespace RosUI
             // 
             this.txtNote.Location = new System.Drawing.Point(16, 454);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(354, 37);
+            this.txtNote.Size = new System.Drawing.Size(354, 44);
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
             this.txtNote.Visible = false;

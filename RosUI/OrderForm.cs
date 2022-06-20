@@ -212,6 +212,7 @@ namespace RosUI
                 if (listviewLunch.SelectedItems.Count == 1 && listviewLunch.SelectedItems[0].BackColor == Color.DarkGray)
                 {
                     listviewLunch.SelectedItems[0].Selected = false;
+                    return;
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
@@ -231,6 +232,7 @@ namespace RosUI
                 if (listviewDinner.SelectedItems.Count == 1 && listviewDinner.SelectedItems[0].BackColor == Color.DarkGray)
                 {
                     listviewDinner.SelectedItems[0].Selected = false;
+                    return;
                 }
                 if (listviewDinner.SelectedItems.Count == 1)
                 {
@@ -250,6 +252,7 @@ namespace RosUI
                 if (listviewDrinks.SelectedItems.Count == 1 && listviewDrinks.SelectedItems[0].BackColor == Color.DarkGray)
                 {
                     listviewDrinks.SelectedItems[0].Selected = false;
+                    return;
                 }
                 if (listviewDrinks.SelectedItems.Count == 1)
                 {
