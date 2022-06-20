@@ -18,7 +18,6 @@ namespace RosDAL
             new SqlParameter("@TableNumber", table.TableNumber)
             };
             return ExecuteScalarQuery(query, sqlParameters);
-
         }
 
         public void DecreaseStock(Item item) // When order is sent all items will be decreased in stock
@@ -32,7 +31,6 @@ namespace RosDAL
                 new SqlParameter("@ItemName", item.ItemName),
                 new SqlParameter("@amount", item.ItemAmount)
             };
-
             ExecuteEditQuery(query, sqlParameters);
         }
     }

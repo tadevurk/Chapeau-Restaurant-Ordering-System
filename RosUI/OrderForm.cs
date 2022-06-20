@@ -498,13 +498,12 @@ namespace RosUI
             foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Decrease stock when order is taken
             {
                 Item item = (Item)lvOrderInProcess.Tag;
+
+                if (lvOrderInProcess.ForeColor == Color.Red)
                 {
-                    if (lvOrderInProcess.ForeColor == Color.Red)
-                    {
-                        item.ItemName = lvOrderInProcess.SubItems[0].Text;
-                        item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
-                        orderLogic.DecreaseStock(item);
-                    }
+                    item.ItemName = lvOrderInProcess.SubItems[0].Text;
+                    item.ItemAmount = int.Parse(lvOrderInProcess.SubItems[2].Text);
+                    orderLogic.DecreaseStock(item);
                 }
             }
         }
