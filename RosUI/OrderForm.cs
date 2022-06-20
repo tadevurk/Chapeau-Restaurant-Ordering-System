@@ -538,21 +538,21 @@ namespace RosUI
                 Dish dish = (Dish)listviewLunch.SelectedItems[0].Tag;
                 dish.ItemNote = txtNote.Text;
                 listviewLunch.SelectedItems.Clear();
-                MessageBox.Show($"{emp.Name}, you have added the note!");
+                MessageBox.Show("Note has been added!");
             }
             else if (listviewDinner.SelectedItems.Count == 1)
             {
                 Dish dish = (Dish)listviewDinner.SelectedItems[0].Tag;
                 dish.ItemNote = txtNote.Text;
                 listviewDinner.SelectedItems.Clear();
-                MessageBox.Show($"{emp.Name}, you have added the note!");
+                MessageBox.Show("Note has been added!");
             }
             else if (listviewDrinks.SelectedItems.Count == 1)
             {
                 Drink drink = (Drink)listviewDrinks.SelectedItems[0].Tag;
                 drink.ItemNote = txtNote.Text;
                 listviewDrinks.SelectedItems.Clear();
-                MessageBox.Show($"{emp.Name}, you have added the note!");
+                MessageBox.Show("Note has been added!");
             }        
         }
     }
