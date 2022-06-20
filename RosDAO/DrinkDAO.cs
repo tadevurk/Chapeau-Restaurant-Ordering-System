@@ -50,7 +50,7 @@ namespace RosDAL
 
         public List<Drink> GetAllDrinks()
         {
-            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock " +
+            string query = "Select DrinkID, ItemName, ItemPrice, ItemStock, DrinkCategory " +
                 "from Drink " +
                 "join Item on DrinkID = ItemID ";
             return ReadDrinks(SelectQueryNonParameter(query));
@@ -86,7 +86,8 @@ namespace RosDAL
                     ItemID = (int)dr["DrinkID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
-                    ItemStock = (int)dr["ItemStock"]
+                    ItemStock = (int)dr["ItemStock"],
+                    DrinkCategory = (string)dr["DrinkCategory"]
                 };
                 drinks.Add(drink);
             }

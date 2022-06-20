@@ -122,6 +122,7 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(dish.ItemName.ToString());
                 li.SubItems.Add($"€ {dish.ItemPrice.ToString()}");
+                li.SubItems.Add(dish.Course);
                 li.Tag = dish;
                 listview.Items.Add(li);
 
@@ -145,6 +146,7 @@ namespace RosUI
             {
                 ListViewItem li = new ListViewItem(drink.ItemName.ToString());
                 li.SubItems.Add($"€ {drink.ItemPrice.ToString()}");
+                li.SubItems.Add(drink.DrinkCategory);
                 li.Tag = drink;
                 listview.Items.Add(li);
 
