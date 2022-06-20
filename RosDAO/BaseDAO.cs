@@ -119,33 +119,5 @@ namespace RosDAL
             }
             return dataTable;
         }
-
-        protected DataTable SelectQueryNonParameter(string query) // For resit
-        {
-            SqlCommand command = new SqlCommand();
-            DataTable dataTable;
-            DataSet dataSet = new DataSet();
-
-            try
-            {
-                command.Connection = OpenConnection();
-                command.CommandText = query;
-                command.ExecuteNonQuery();
-                adapter.SelectCommand = command;
-                adapter.Fill(dataSet);
-                dataTable = dataSet.Tables[0];
-            }
-            catch (SqlException e)
-            {
-                Console.WriteLine(e.Message);
-                return null;
-                throw;
-            }
-            finally
-            {
-                CloseConnection();
-            }
-            return dataTable;
-        }
     }
 }

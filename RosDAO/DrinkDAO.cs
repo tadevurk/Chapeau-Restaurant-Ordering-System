@@ -53,7 +53,7 @@ namespace RosDAL
             string query = "Select DrinkID, ItemName, ItemPrice, ItemStock, DrinkCategory " +
                 "from Drink " +
                 "join Item on DrinkID = ItemID ";
-            return ReadDrinks(SelectQueryNonParameter(query));
+            return ReadDrinks(ExecuteSelectQuery(query));
         }
 
         private List<Drink> ReadTablesOrder(DataTable dataTable)

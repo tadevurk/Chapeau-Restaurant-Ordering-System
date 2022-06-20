@@ -121,21 +121,17 @@ namespace RosUI
 
             foreach (Dish dish in dishes)
             {
-                ListViewItem li = new ListViewItem(dish.ItemName.ToString());
-                li.SubItems.Add($"€ {dish.ItemPrice}");
-                li.SubItems.Add(dish.Course);
-                li.Tag = dish;
-                listview.Items.Add(li);
+                ListViewItem lvItem = new ListViewItem(dish.ItemName.ToString());
+                lvItem.SubItems.Add($"€ {dish.ItemPrice}");
+                lvItem.SubItems.Add(dish.Course);
+                lvItem.Tag = dish;
+                listview.Items.Add(lvItem);
 
-                if (listview.Items.IndexOf(li) % 2 == 0)
-                {
-                    li.BackColor = Color.FromArgb(224, 234, 255);
-                }
 
                 if (dish.ItemStock == 0)
                 {
-                    li.BackColor = Color.DarkGray;
-                    li.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
+                    lvItem.BackColor = Color.DarkGray;
+                    lvItem.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
             }
         }
@@ -145,20 +141,16 @@ namespace RosUI
 
             foreach (Drink drink in drinks)
             {
-                ListViewItem li = new ListViewItem(drink.ItemName.ToString());
-                li.SubItems.Add($"€ {drink.ItemPrice}");
-                li.SubItems.Add(drink.DrinkCategory);
-                li.Tag = drink;
-                listview.Items.Add(li);
+                ListViewItem lvItem = new ListViewItem(drink.ItemName.ToString());
+                lvItem.SubItems.Add($"€ {drink.ItemPrice}");
+                lvItem.SubItems.Add(drink.DrinkCategory);
+                lvItem.Tag = drink;
+                listview.Items.Add(lvItem);
 
-                if (listview.Items.IndexOf(li) % 2 == 0)
-                {
-                    li.BackColor = Color.FromArgb(224, 234, 255);
-                }
                 if (drink.ItemStock == 0)
                 {
-                   li.BackColor = Color.DarkGray;
-                   li.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
+                   lvItem.BackColor = Color.DarkGray;
+                   lvItem.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
             }
         }
@@ -171,6 +163,7 @@ namespace RosUI
                 ButtonColorReset();
                 listviewDinner.SelectedItems.Clear();
                 listviewDrinks.SelectedItems.Clear();
+                txtNote.Clear();
                 btnLunch.BackColor = Color.LightGreen;
             }
             catch (Exception exp)
@@ -186,6 +179,7 @@ namespace RosUI
                 ButtonColorReset();
                 listviewLunch.SelectedItems.Clear();
                 listviewDrinks.SelectedItems.Clear();
+                txtNote.Clear();
                 btnDinner.BackColor = Color.LightGreen;
             }
             catch (Exception exp)
@@ -201,6 +195,7 @@ namespace RosUI
                 ButtonColorReset();
                 listviewLunch.SelectedItems.Clear();
                 listviewDinner.SelectedItems.Clear();
+                txtNote.Clear();
                 btnDrinks.BackColor = Color.LightGreen;
             }
             catch (Exception exp)
@@ -222,6 +217,7 @@ namespace RosUI
                     AddFood(listviewLunch);
                     SendCancelNoteButtonsVisible();
                 }
+                txtNote.Clear();
             }
             catch (Exception exp)
             {
@@ -242,6 +238,7 @@ namespace RosUI
                     AddFood(listviewDinner);
                     SendCancelNoteButtonsVisible();
                 }
+                txtNote.Clear();
             }
             catch (Exception exp)
             {
@@ -262,6 +259,7 @@ namespace RosUI
                     AddDrinks(listviewDrinks);
                     SendCancelNoteButtonsVisible();
                 }
+                txtNote.Clear();
             }
             catch (Exception exp)
             {
@@ -288,6 +286,7 @@ namespace RosUI
                         RemoveItem(lvItem, (Drink)item); // Remove the drink from the list
                     }
                 }
+                txtNote.Clear();
             }
             catch (Exception exp)
             {
