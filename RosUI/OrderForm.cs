@@ -107,7 +107,7 @@ namespace RosUI
                     lvItem.SubItems.Add(item.ItemAmount.ToString());
                     if (item.NoteAmount >= 1)
                     {
-                        lvItem.SubItems.Add("(!)");
+                        lvItem.SubItems.Add("✓");
                     }
                     else
                     {
@@ -177,6 +177,7 @@ namespace RosUI
                 ButtonColorReset();
                 listviewDinner.SelectedItems.Clear();
                 listviewDrinks.SelectedItems.Clear();
+                btnOrderAddNote.Enabled = false;
                 txtNote.Clear();
                 btnLunch.BackColor = Color.LightGreen;
             }
@@ -193,6 +194,7 @@ namespace RosUI
                 ButtonColorReset();
                 listviewLunch.SelectedItems.Clear();
                 listviewDrinks.SelectedItems.Clear();
+                btnOrderAddNote.Enabled = false;
                 txtNote.Clear();
                 btnDinner.BackColor = Color.LightGreen;
             }
@@ -209,6 +211,7 @@ namespace RosUI
                 ButtonColorReset();
                 listviewLunch.SelectedItems.Clear();
                 listviewDinner.SelectedItems.Clear();
+                btnOrderAddNote.Enabled = false;
                 txtNote.Clear();
                 btnDrinks.BackColor = Color.LightGreen;
             }
@@ -230,6 +233,7 @@ namespace RosUI
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
+                    btnOrderAddNote.Enabled = true;
                     AddFood(listviewLunch);
                     SendCancelNoteButtonsVisible();
                 }
@@ -253,6 +257,7 @@ namespace RosUI
                 }
                 if (listviewDinner.SelectedItems.Count == 1)
                 {
+                    btnOrderAddNote.Enabled = true;
                     AddFood(listviewDinner);
                     SendCancelNoteButtonsVisible();
                 }
@@ -275,6 +280,7 @@ namespace RosUI
                 }
                 if (listviewDrinks.SelectedItems.Count == 1)
                 {
+                    btnOrderAddNote.Enabled = true;
                     AddDrinks(listviewDrinks);
                     SendCancelNoteButtonsVisible();
                 }
@@ -293,6 +299,7 @@ namespace RosUI
                 listviewDinner.SelectedItems.Clear();
                 listviewLunch.SelectedItems.Clear();
                 listviewDrinks.SelectedItems.Clear();
+                btnOrderAddNote.Enabled = false;
 
                 if (listviewOrder.SelectedItems[0].ForeColor == Color.Green)
                 {
@@ -463,7 +470,8 @@ namespace RosUI
             {
                 if (txtNote.Text == "")
                 {
-                    return;
+                    throw new Exception("Text box is empty!");
+                    //return;
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
@@ -483,7 +491,7 @@ namespace RosUI
                     {
                         if (drinkItem.SubItems[0].Text == item.SubItems[0].Text)
                         {
-                            item.SubItems[3].Text = "(!)";
+                            item.SubItems[3].Text = "✓";
                         }
                     }
                     listviewDrinks.SelectedItems.Clear();
@@ -508,10 +516,10 @@ namespace RosUI
             {
                 if (menuListView.SelectedItems[0].SubItems[0].Text == item.SubItems[0].Text)
                 {
-                    item.SubItems[3].Text = "(!)";
+                    item.SubItems[3].Text = "✓";
                 }
             }
-            listviewDinner.SelectedItems.Clear();
+            menuListView.SelectedItems.Clear();
             MessageBox.Show("Note has been added!");
         }
         private void btnSendOrder_Click(object sender, EventArgs e)

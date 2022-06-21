@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 namespace RosDAL
 {
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
-    //////// Contributor Mirko Cuccurullo ///////
     public class DrinkDAO : BaseDAO
     {
         public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)// Add drinks to OrderedDrink
@@ -24,8 +23,6 @@ namespace RosDAL
                 {
                     noteParameter = new SqlParameter("@Note", drink.ItemNote);
                 }
-
-                //Adding dish
                 string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
                 SqlParameter[] sqlParameters = { new SqlParameter("@drinkID", drink.ItemID),
                 new SqlParameter("@OrderID", order.OrderID),
@@ -76,7 +73,6 @@ namespace RosDAL
             }
             return drinks;
         }      
-
         private List<Drink> ReadDrinks(DataTable dataTable) // Reading the drinks
         {
             List<Drink> drinks = new List<Drink>();

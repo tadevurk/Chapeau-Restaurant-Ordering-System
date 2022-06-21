@@ -171,6 +171,7 @@ namespace RosUI
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.SystemColors.Control;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOrderAddNote.Enabled = false;
             this.btnOrderAddNote.FlatAppearance.BorderSize = 0;
             this.btnOrderAddNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderAddNote.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderAddNote.Image")));
