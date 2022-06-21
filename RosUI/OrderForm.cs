@@ -105,6 +105,14 @@ namespace RosUI
                     ListViewItem lvItem = new ListViewItem(item.ItemName.ToString());
                     lvItem.SubItems.Add($"€ {item.ItemPrice}");
                     lvItem.SubItems.Add(item.ItemAmount.ToString());
+                    if (item.NoteAmount >= 1)
+                    {
+                        lvItem.SubItems.Add("(!)");
+                    }
+                    else
+                    {
+                        lvItem.SubItems.Add("");
+                    }
                     lvItem.ForeColor = Color.Green; // Change color from previous orders
                     lvItem.Tag = (Item)item;
                     listviewOrder.Items.Add(lvItem);
@@ -131,7 +139,7 @@ namespace RosUI
                     lvItem.BackColor = Color.FromArgb(224, 234, 255);
                 }
 
-                if (dish.ItemStock == 0)
+                if (dish.ItemStock <= 0)
                 {
                     lvItem.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
@@ -154,7 +162,7 @@ namespace RosUI
                     lvItem.BackColor = Color.FromArgb(224, 234, 255);
                 }
 
-                if (drink.ItemStock == 0)
+                if (drink.ItemStock <= 0)
                 {
                    lvItem.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
@@ -209,14 +217,16 @@ namespace RosUI
                 MessageBox.Show(exp.Message);
             }
         }
-        private void listviewLunch_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void listviewLunch_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                if (listviewLunch.SelectedItems.Count == 1 && listviewLunch.SelectedItems[0].Font.Style == FontStyle.Strikeout)
+                listviewOrder.SelectedItems.Clear();
+                if (listviewLunch.SelectedItems[0].Font.Style == FontStyle.Strikeout)
                 {
                     listviewLunch.SelectedItems[0].Selected = false;
-                    return;
+                    throw new Exception("This item is sold out!");
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
@@ -230,15 +240,16 @@ namespace RosUI
                 MessageBox.Show($"{exp.Message}", "Sorry");
             }
         }
-        private void listviewDinner_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void listviewDinner_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                
-                if (listviewDinner.SelectedItems.Count == 1 && listviewDinner.SelectedItems[0].Font.Style == FontStyle.Strikeout)
+                listviewOrder.SelectedItems.Clear();
+                if (listviewDinner.SelectedItems[0].Font.Style == FontStyle.Strikeout)
                 {
                     listviewDinner.SelectedItems[0].Selected = false;
-                    return;
+                    throw new Exception("This item is sold out!");
                 }
                 if (listviewDinner.SelectedItems.Count == 1)
                 {
@@ -252,14 +263,15 @@ namespace RosUI
                 MessageBox.Show($"{exp.Message}", "Sorry");
             }
         }
-        private void listviewDrinks_SelectedIndexChanged(object sender, EventArgs e)
+        private void listviewDrinks_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
-                if (listviewDrinks.SelectedItems.Count == 1 && listviewDrinks.SelectedItems[0].Font.Style == FontStyle.Strikeout)
+                listviewOrder.SelectedItems.Clear();
+                if (listviewDrinks.SelectedItems[0].Font.Style == FontStyle.Strikeout)
                 {
                     listviewDrinks.SelectedItems[0].Selected = false;
-                    return;
+                    throw new Exception("This item is sold out!");
                 }
                 if (listviewDrinks.SelectedItems.Count == 1)
                 {
@@ -273,13 +285,20 @@ namespace RosUI
                 MessageBox.Show($"{exp.Message}", "Sorry");
             }
         }
-        private void listviewOrder_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void listviewOrder_MouseClick(object sender, MouseEventArgs e)
         {
             try
             {
                 listviewDinner.SelectedItems.Clear();
                 listviewLunch.SelectedItems.Clear();
                 listviewDrinks.SelectedItems.Clear();
+
+                if (listviewOrder.SelectedItems[0].ForeColor == Color.Green)
+                {
+                    listviewOrder.SelectedItems[0].Selected = false;
+                    throw new Exception("This item is already ordered!");
+                }
                 if (listviewOrder.SelectedItems.Count == 1)
                 {
                     Item item = (Item)listviewOrder.SelectedItems[0].Tag;
@@ -293,11 +312,12 @@ namespace RosUI
                         RemoveItem(lvItem, (Drink)item); // Remove the drink from the list
                     }
                 }
+
                 txtNote.Clear();
             }
             catch (Exception exp)
             {
-                MessageBox.Show($"{exp.Message}", "ERROR");
+                MessageBox.Show(exp.Message);
             }
         }
 
@@ -317,11 +337,6 @@ namespace RosUI
         private void CheckCurrentDish(Dish dish)
         {
             ListViewItem? currentItem = null;
-
-            if (dish.ItemStock <= 0) // Extra checking for the sold out items, already enabled
-            {
-                throw new Exception($"{dish.ItemName} is sold out");
-            }
 
             foreach (ListViewItem lvItem in listviewOrder.Items)
             {
@@ -350,11 +365,6 @@ namespace RosUI
         private void CheckCurrentDrink(Drink drink)
         {
             ListViewItem? currentItem = null;
-
-            if (drink.ItemStock <= 0) // Extra checking for the sold out items, already enabled
-            {
-                throw new Exception($"{drink.ItemName} is sold out");
-            }
 
             foreach (ListViewItem lvItem in listviewOrder.Items)
             {
@@ -447,6 +457,63 @@ namespace RosUI
                 }
             }
         }
+        private void btnOrderAddNote_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtNote.Text == "")
+                {
+                    return;
+                }
+                if (listviewLunch.SelectedItems.Count == 1)
+                {
+                    AddDishNote(listviewLunch, listviewOrder);
+                }
+                else if ((listviewDinner.SelectedItems.Count == 1))
+                {
+                    AddDishNote(listviewDinner, listviewOrder);
+                }
+                else if (listviewDrinks.SelectedItems.Count == 1)
+                {
+                    Drink drink = (Drink)listviewDrinks.SelectedItems[0].Tag;
+                    drink.ItemNote = txtNote.Text;
+                    ListViewItem drinkItem = listviewDrinks.SelectedItems[0];
+
+                    foreach (ListViewItem item in listviewOrder.Items)
+                    {
+                        if (drinkItem.SubItems[0].Text == item.SubItems[0].Text)
+                        {
+                            item.SubItems[3].Text = "(!)";
+                        }
+                    }
+                    listviewDrinks.SelectedItems.Clear();
+                    MessageBox.Show("Note has been added!");
+                }
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            finally
+            {
+                txtNote.Clear();
+            }
+        }
+        private void AddDishNote(ListView menuListView, ListView listviewOrder)
+        {
+            Dish dish = (Dish)menuListView.SelectedItems[0].Tag;
+            dish.ItemNote = txtNote.Text;
+
+            foreach (ListViewItem item in listviewOrder.Items)
+            {
+                if (menuListView.SelectedItems[0].SubItems[0].Text == item.SubItems[0].Text)
+                {
+                    item.SubItems[3].Text = "(!)";
+                }
+            }
+            listviewDinner.SelectedItems.Clear();
+            MessageBox.Show("Note has been added!");
+        }
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
             try
@@ -501,7 +568,6 @@ namespace RosUI
                 }
             }
         }
-
         private void DecreaseStock()
         {
             foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Decrease stock when order is taken
@@ -515,83 +581,6 @@ namespace RosUI
                     orderLogic.DecreaseStock(item);
                 }
             }
-        }
-
-        private void btnOrderAddNote_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (listviewOrder.SelectedItems.Count > 0) // Disabling the ordered items
-                {
-                    listviewOrder.SelectedItems[0].Selected = false;
-                    return;
-                }
-                AddItemNote(); // Add note according to its list
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
-            finally
-            {
-                txtNote.Clear();
-            }
-        }
-        private void AddItemNote()
-        {
-            if (txtNote.Text == "")
-            {
-                return;
-            }
-
-            if (listviewLunch.SelectedItems.Count == 1)
-            {
-                Dish dish = (Dish)listviewLunch.SelectedItems[0].Tag;
-                dish.ItemNote = txtNote.Text;
-                ListViewItem dishItem = listviewLunch.SelectedItems[0];
-
-                foreach (ListViewItem item in listviewOrder.Items)
-                {
-                    if (dishItem.SubItems[0].Text == item.SubItems[0].Text)
-                    {
-                        item.SubItems[3].Text = "(!)";
-                    }
-                }
-                listviewLunch.SelectedItems.Clear();
-                MessageBox.Show("Note has been added!");
-            }
-            else if (listviewDinner.SelectedItems.Count == 1)
-            {
-                Dish dish = (Dish)listviewDinner.SelectedItems[0].Tag;
-                dish.ItemNote = txtNote.Text;
-                ListViewItem dishItem = listviewDinner.SelectedItems[0];
-
-                foreach (ListViewItem item in listviewOrder.Items)
-                {
-                    if (dishItem.SubItems[0].Text == item.SubItems[0].Text)
-                    {
-                        item.SubItems[3].Text = "(!)";
-                    }
-                }
-                listviewDinner.SelectedItems.Clear();
-                MessageBox.Show("Note has been added!");
-            }
-            else if (listviewDrinks.SelectedItems.Count == 1)
-            {
-                Drink drink = (Drink)listviewDrinks.SelectedItems[0].Tag;
-                drink.ItemNote = txtNote.Text;
-                ListViewItem drinkItem = listviewDrinks.SelectedItems[0];
-
-                foreach (ListViewItem item in listviewOrder.Items)
-                {
-                    if (drinkItem.SubItems[0].Text == item.SubItems[0].Text)
-                    {
-                        item.SubItems[3].Text = "(!)";
-                    }
-                }
-                listviewDrinks.SelectedItems.Clear();
-                MessageBox.Show("Note has been added!");
-            }        
         }
     }
 }

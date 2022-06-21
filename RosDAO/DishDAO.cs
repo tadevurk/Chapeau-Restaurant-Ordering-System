@@ -39,7 +39,9 @@ namespace RosDAL
 
         public List<Dish> ReadContainedDishes(Table table)
         {
-            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount], O.TableNumber as [TableNumber] from OrderDish as OD" +
+            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount]," +
+                " O.TableNumber as [TableNumber], Count(OD.DishNote) as [NoteAmount] " +
+                "from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DishID" +
                 " where O.TableNumber=@TableNumber and OD.DishStatus<3" +
@@ -76,6 +78,7 @@ namespace RosDAL
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     ItemAmount = (int)dr["Amount"],
+                    NoteAmount = (int)dr["NoteAmount"]
                 };
                 dishes.Add(dish);
             }

@@ -137,17 +137,18 @@ namespace RosUI
             this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
             this.listviewOrder.Location = new System.Drawing.Point(16, 504);
+            this.listviewOrder.MultiSelect = false;
             this.listviewOrder.Name = "listviewOrder";
             this.listviewOrder.Size = new System.Drawing.Size(454, 190);
             this.listviewOrder.TabIndex = 13;
             this.listviewOrder.UseCompatibleStateImageBehavior = false;
             this.listviewOrder.View = System.Windows.Forms.View.Details;
-            this.listviewOrder.SelectedIndexChanged += new System.EventHandler(this.listviewOrder_SelectedIndexChanged);
+            this.listviewOrder.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewOrder_MouseClick);
             // 
             // nameOrder
             // 
             this.nameOrder.Text = "Item";
-            this.nameOrder.Width = 200;
+            this.nameOrder.Width = 190;
             // 
             // priceOrder
             // 
@@ -233,12 +234,13 @@ namespace RosUI
             this.listviewLunch.FullRowSelect = true;
             this.listviewLunch.HideSelection = false;
             this.listviewLunch.Location = new System.Drawing.Point(16, 112);
+            this.listviewLunch.MultiSelect = false;
             this.listviewLunch.Name = "listviewLunch";
             this.listviewLunch.Size = new System.Drawing.Size(454, 332);
             this.listviewLunch.TabIndex = 0;
             this.listviewLunch.UseCompatibleStateImageBehavior = false;
             this.listviewLunch.View = System.Windows.Forms.View.Details;
-            this.listviewLunch.SelectedIndexChanged += new System.EventHandler(this.listviewLunch_SelectedIndexChanged);
+            this.listviewLunch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewLunch_MouseClick);
             // 
             // columNameFood
             // 
@@ -268,12 +270,13 @@ namespace RosUI
             this.listviewDinner.FullRowSelect = true;
             this.listviewDinner.HideSelection = false;
             this.listviewDinner.Location = new System.Drawing.Point(16, 112);
+            this.listviewDinner.MultiSelect = false;
             this.listviewDinner.Name = "listviewDinner";
             this.listviewDinner.Size = new System.Drawing.Size(454, 332);
             this.listviewDinner.TabIndex = 0;
             this.listviewDinner.UseCompatibleStateImageBehavior = false;
             this.listviewDinner.View = System.Windows.Forms.View.Details;
-            this.listviewDinner.SelectedIndexChanged += new System.EventHandler(this.listviewDinner_SelectedIndexChanged);
+            this.listviewDinner.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewDinner_MouseClick);
             // 
             // columnHeader15
             // 
@@ -303,12 +306,13 @@ namespace RosUI
             this.listviewDrinks.FullRowSelect = true;
             this.listviewDrinks.HideSelection = false;
             this.listviewDrinks.Location = new System.Drawing.Point(16, 112);
+            this.listviewDrinks.MultiSelect = false;
             this.listviewDrinks.Name = "listviewDrinks";
             this.listviewDrinks.Size = new System.Drawing.Size(454, 332);
             this.listviewDrinks.TabIndex = 0;
             this.listviewDrinks.UseCompatibleStateImageBehavior = false;
             this.listviewDrinks.View = System.Windows.Forms.View.Details;
-            this.listviewDrinks.SelectedIndexChanged += new System.EventHandler(this.listviewDrinks_SelectedIndexChanged);
+            this.listviewDrinks.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewDrinks_MouseClick);
             // 
             // columnHeader17
             // 

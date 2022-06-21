@@ -16,5 +16,7 @@ namespace RosModel
 
         public decimal SubPrice { get; set; }
 
+        public int NoteAmount { get; set; }
+
     }
 }

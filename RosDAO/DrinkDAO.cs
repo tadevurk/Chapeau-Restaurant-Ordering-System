@@ -40,7 +40,8 @@ namespace RosDAL
         public List<Drink> ReadContainedDrinks(Table table)
         {
             string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
-                " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
+                " O.TableNumber as [TableNumber], Count(Od.DrinkNote) as [NoteAmount]" +
+                " from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DrinkID" +
                 " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
                 "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
@@ -69,6 +70,7 @@ namespace RosDAL
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     ItemAmount = (int)dr["Amount"],
+                    NoteAmount = (int)dr["NoteAmount"]
                 };
                 drinks.Add(drink);
             }
