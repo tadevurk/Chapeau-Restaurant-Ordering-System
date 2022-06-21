@@ -47,12 +47,15 @@ namespace RosUI
             this.listviewLunch = new System.Windows.Forms.ListView();
             this.columNameFood = new System.Windows.Forms.ColumnHeader();
             this.columnPriceFood = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
             this.listviewDinner = new System.Windows.Forms.ListView();
             this.columnHeader15 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader16 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
             this.listviewDrinks = new System.Windows.Forms.ListView();
             this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
             this.pnlFoodDrink.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,7 +80,7 @@ namespace RosUI
             this.btnSendOrder.Name = "btnSendOrder";
             this.btnSendOrder.Size = new System.Drawing.Size(201, 47);
             this.btnSendOrder.TabIndex = 8;
-            this.btnSendOrder.Text = "SEND";
+            this.btnSendOrder.Text = "ORDER";
             this.btnSendOrder.UseVisualStyleBackColor = false;
             this.btnSendOrder.Visible = false;
             this.btnSendOrder.Click += new System.EventHandler(this.btnSendOrder_Click);
@@ -117,9 +120,9 @@ namespace RosUI
             this.lblTableNumber.AutoSize = true;
             this.lblTableNumber.Location = new System.Drawing.Point(402, 17);
             this.lblTableNumber.Name = "lblTableNumber";
-            this.lblTableNumber.Size = new System.Drawing.Size(56, 20);
+            this.lblTableNumber.Size = new System.Drawing.Size(57, 20);
             this.lblTableNumber.TabIndex = 12;
-            this.lblTableNumber.Text = "table #";
+            this.lblTableNumber.Text = "Table #";
             // 
             // listviewOrder
             // 
@@ -141,37 +144,41 @@ namespace RosUI
             // 
             // nameOrder
             // 
-            this.nameOrder.Text = "Name";
+            this.nameOrder.Text = "Item";
             this.nameOrder.Width = 270;
             // 
             // priceOrder
             // 
             this.priceOrder.Text = "Price";
-            this.priceOrder.Width = 65;
+            this.priceOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.priceOrder.Width = 75;
             // 
             // amountOrder
             // 
-            this.amountOrder.Text = "Amount";
+            this.amountOrder.Text = "Quantity";
+            this.amountOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountOrder.Width = 85;
             // 
             // btnOrderAddNote
             // 
-            this.btnOrderAddNote.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.btnOrderAddNote.BackColor = System.Drawing.SystemColors.Control;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOrderAddNote.Location = new System.Drawing.Point(372, 450);
+            this.btnOrderAddNote.FlatAppearance.BorderSize = 0;
+            this.btnOrderAddNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOrderAddNote.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderAddNote.Image")));
+            this.btnOrderAddNote.Location = new System.Drawing.Point(379, 454);
             this.btnOrderAddNote.Name = "btnOrderAddNote";
-            this.btnOrderAddNote.Size = new System.Drawing.Size(98, 37);
+            this.btnOrderAddNote.Size = new System.Drawing.Size(91, 44);
             this.btnOrderAddNote.TabIndex = 16;
-            this.btnOrderAddNote.Text = "Add Note";
             this.btnOrderAddNote.UseVisualStyleBackColor = false;
             this.btnOrderAddNote.Visible = false;
             this.btnOrderAddNote.Click += new System.EventHandler(this.btnOrderAddNote_Click);
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(16, 450);
+            this.txtNote.Location = new System.Drawing.Point(16, 454);
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(344, 37);
+            this.txtNote.Size = new System.Drawing.Size(354, 44);
             this.txtNote.TabIndex = 18;
             this.txtNote.Text = "";
             this.txtNote.Visible = false;
@@ -212,7 +219,8 @@ namespace RosUI
             // 
             this.listviewLunch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columNameFood,
-            this.columnPriceFood});
+            this.columnPriceFood,
+            this.columnHeader2});
             this.listviewLunch.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listviewLunch.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewLunch.FullRowSelect = true;
@@ -228,18 +236,26 @@ namespace RosUI
             // columNameFood
             // 
             this.columNameFood.Text = "Item";
-            this.columNameFood.Width = 350;
+            this.columNameFood.Width = 220;
             // 
             // columnPriceFood
             // 
             this.columnPriceFood.Text = "Price";
-            this.columnPriceFood.Width = 70;
+            this.columnPriceFood.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnPriceFood.Width = 100;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Type";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 100;
             // 
             // listviewDinner
             // 
             this.listviewDinner.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader15,
-            this.columnHeader16});
+            this.columnHeader16,
+            this.columnHeader3});
             this.listviewDinner.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listviewDinner.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewDinner.FullRowSelect = true;
@@ -255,18 +271,26 @@ namespace RosUI
             // columnHeader15
             // 
             this.columnHeader15.Text = "Item";
-            this.columnHeader15.Width = 350;
+            this.columnHeader15.Width = 220;
             // 
             // columnHeader16
             // 
             this.columnHeader16.Text = "Price";
-            this.columnHeader16.Width = 70;
+            this.columnHeader16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader16.Width = 100;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Type";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 100;
             // 
             // listviewDrinks
             // 
             this.listviewDrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader17,
-            this.columnHeader18});
+            this.columnHeader18,
+            this.columnHeader1});
             this.listviewDrinks.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listviewDrinks.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewDrinks.FullRowSelect = true;
@@ -282,12 +306,19 @@ namespace RosUI
             // columnHeader17
             // 
             this.columnHeader17.Text = "Item";
-            this.columnHeader17.Width = 350;
+            this.columnHeader17.Width = 220;
             // 
             // columnHeader18
             // 
             this.columnHeader18.Text = "Price";
-            this.columnHeader18.Width = 70;
+            this.columnHeader18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader18.Width = 100;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Type";
+            this.columnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader1.Width = 100;
             // 
             // FormOrder
             // 
@@ -339,5 +370,8 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader columnHeader17;
         private System.Windows.Forms.ColumnHeader columnHeader18;
         private System.Windows.Forms.Button btnDinner;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

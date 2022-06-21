@@ -54,7 +54,7 @@ namespace RosDAL
 
         public List<Dish> GetDishes(int menuType)
         {
-            string query = " Select DishID, ItemName, ItemPrice, ItemStock " +
+            string query = " Select DishID, ItemName, ItemPrice, ItemStock, Course " +
                 "from Dish join Item on DishID = ItemID " +
                 "join Menu on Item.MenuTypeID = Menu.MenuTypeID " +
                 "where Item.MenuTypeID = @MenuType OR Item.MenuTypeID = 3";
@@ -93,7 +93,8 @@ namespace RosDAL
                     ItemID = (int)dr["DishID"],
                     ItemName = (string)dr["ItemName"],
                     ItemPrice = (decimal)dr["ItemPrice"],
-                    ItemStock = (int)dr["ItemStock"]
+                    ItemStock = (int)dr["ItemStock"],
+                    Course = (string)dr["Course"]
                 };
                 dishes.Add(starter);
             }
