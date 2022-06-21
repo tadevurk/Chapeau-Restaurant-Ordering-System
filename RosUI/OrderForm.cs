@@ -127,10 +127,8 @@ namespace RosUI
                 lvItem.Tag = dish;
                 listview.Items.Add(lvItem);
 
-
                 if (dish.ItemStock == 0)
                 {
-                    lvItem.BackColor = Color.DarkGray;
                     lvItem.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
             }
@@ -149,7 +147,6 @@ namespace RosUI
 
                 if (drink.ItemStock == 0)
                 {
-                   lvItem.BackColor = Color.DarkGray;
                    lvItem.Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Strikeout);
                 }
             }
@@ -207,7 +204,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewLunch.SelectedItems.Count == 1 && listviewLunch.SelectedItems[0].BackColor == Color.DarkGray)
+                if (listviewLunch.SelectedItems.Count == 1 && listviewLunch.SelectedItems[0].Font.Style == FontStyle.Strikeout)
                 {
                     listviewLunch.SelectedItems[0].Selected = false;
                     return;
@@ -228,7 +225,8 @@ namespace RosUI
         {
             try
             {
-                if (listviewDinner.SelectedItems.Count == 1 && listviewDinner.SelectedItems[0].BackColor == Color.DarkGray)
+                
+                if (listviewDinner.SelectedItems.Count == 1 && listviewDinner.SelectedItems[0].Font.Style == FontStyle.Strikeout)
                 {
                     listviewDinner.SelectedItems[0].Selected = false;
                     return;
@@ -249,7 +247,7 @@ namespace RosUI
         {
             try
             {
-                if (listviewDrinks.SelectedItems.Count == 1 && listviewDrinks.SelectedItems[0].BackColor == Color.DarkGray)
+                if (listviewDrinks.SelectedItems.Count == 1 && listviewDrinks.SelectedItems[0].Font.Style == FontStyle.Strikeout)
                 {
                     listviewDrinks.SelectedItems[0].Selected = false;
                     return;
@@ -336,6 +334,7 @@ namespace RosUI
                 lvItem.Tag = dish; // Tagging to add the DishesInOrderProcess list
                 lvItem.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(lvItem);
+                listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
             }
         }
         private void CheckCurrentDrink(Drink drink)
@@ -367,6 +366,7 @@ namespace RosUI
                 item.Tag = drink; // Tagging to add the DrinksInOrderProcess list
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
+                listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
             }          
         }
         private void RemoveItem(ListViewItem lvItem, Item item)
