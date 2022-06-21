@@ -39,6 +39,7 @@ namespace RosUI
             this.nameOrder = new System.Windows.Forms.ColumnHeader();
             this.priceOrder = new System.Windows.Forms.ColumnHeader();
             this.amountOrder = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.btnOrderAddNote = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.RichTextBox();
             this.pnlFoodDrink = new System.Windows.Forms.Panel();
@@ -95,7 +96,7 @@ namespace RosUI
             this.btnCancelOrder.Name = "btnCancelOrder";
             this.btnCancelOrder.Size = new System.Drawing.Size(201, 47);
             this.btnCancelOrder.TabIndex = 9;
-            this.btnCancelOrder.Text = "CANCEL";
+            this.btnCancelOrder.Text = "CANCEL ORDER";
             this.btnCancelOrder.UseVisualStyleBackColor = false;
             this.btnCancelOrder.Visible = false;
             this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
@@ -129,7 +130,8 @@ namespace RosUI
             this.listviewOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nameOrder,
             this.priceOrder,
-            this.amountOrder});
+            this.amountOrder,
+            this.columnHeader4});
             this.listviewOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listviewOrder.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewOrder.FullRowSelect = true;
@@ -145,19 +147,24 @@ namespace RosUI
             // nameOrder
             // 
             this.nameOrder.Text = "Item";
-            this.nameOrder.Width = 270;
+            this.nameOrder.Width = 200;
             // 
             // priceOrder
             // 
             this.priceOrder.Text = "Price";
             this.priceOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.priceOrder.Width = 75;
+            this.priceOrder.Width = 85;
             // 
             // amountOrder
             // 
             this.amountOrder.Text = "Quantity";
             this.amountOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountOrder.Width = 85;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Note";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnOrderAddNote
             // 
@@ -373,5 +380,6 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

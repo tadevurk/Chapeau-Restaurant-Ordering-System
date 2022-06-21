@@ -336,13 +336,14 @@ namespace RosUI
 
             if (currentItem == null)
             {
-                ListViewItem lvItem = new ListViewItem(dish.ItemName);
-                lvItem.SubItems.Add($"€ {dish.ItemPrice}");
+                ListViewItem item = new ListViewItem(dish.ItemName);
+                item.SubItems.Add($"€ {dish.ItemPrice}");
                 dish.ItemAmount = 1;
-                lvItem.SubItems.Add(dish.ItemAmount.ToString());
-                lvItem.Tag = dish; // Tagging to add the DishesInOrderProcess list
-                lvItem.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(lvItem);
+                item.SubItems.Add(dish.ItemAmount.ToString());
+                item.SubItems.Add("");
+                item.Tag = dish; // Tagging to add the DishesInOrderProcess list
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
                 listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
             }
         }
@@ -372,6 +373,7 @@ namespace RosUI
                 item.SubItems.Add($"€ {drink.ItemPrice}");
                 drink.ItemAmount = 1;
                 item.SubItems.Add(drink.ItemAmount.ToString());
+                item.SubItems.Add("");
                 item.Tag = drink; // Tagging to add the DrinksInOrderProcess list
                 item.ForeColor = Color.Red; // Change color for the new ordered item
                 listviewOrder.Items.Add(item);
@@ -406,7 +408,7 @@ namespace RosUI
                     throw new Exception($"{emp.Name}, you did not order anything!");
                 }
 
-                DialogResult dialogResult = MessageBox.Show("Do you want to cancel new order?", "Cancel Order", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Do you want to cancel complete order?", "Cancel Order", MessageBoxButtons.YesNo, MessageBoxIcon.None, MessageBoxDefaultButton.Button2);
                 if (dialogResult == DialogResult.Yes)
                 {
                     CancelOrder();
@@ -415,7 +417,6 @@ namespace RosUI
                 {
                     return;
                 }
-
             }
             catch (Exception exp)
             {
@@ -547,6 +548,15 @@ namespace RosUI
             {
                 Dish dish = (Dish)listviewLunch.SelectedItems[0].Tag;
                 dish.ItemNote = txtNote.Text;
+                ListViewItem dishItem = listviewLunch.SelectedItems[0];
+
+                foreach (ListViewItem item in listviewOrder.Items)
+                {
+                    if (dishItem.SubItems[0].Text == item.SubItems[0].Text)
+                    {
+                        item.SubItems[3].Text = "(!)";
+                    }
+                }
                 listviewLunch.SelectedItems.Clear();
                 MessageBox.Show("Note has been added!");
             }
@@ -554,6 +564,15 @@ namespace RosUI
             {
                 Dish dish = (Dish)listviewDinner.SelectedItems[0].Tag;
                 dish.ItemNote = txtNote.Text;
+                ListViewItem dishItem = listviewDinner.SelectedItems[0];
+
+                foreach (ListViewItem item in listviewOrder.Items)
+                {
+                    if (dishItem.SubItems[0].Text == item.SubItems[0].Text)
+                    {
+                        item.SubItems[3].Text = "(!)";
+                    }
+                }
                 listviewDinner.SelectedItems.Clear();
                 MessageBox.Show("Note has been added!");
             }
@@ -561,6 +580,15 @@ namespace RosUI
             {
                 Drink drink = (Drink)listviewDrinks.SelectedItems[0].Tag;
                 drink.ItemNote = txtNote.Text;
+                ListViewItem drinkItem = listviewDrinks.SelectedItems[0];
+
+                foreach (ListViewItem item in listviewOrder.Items)
+                {
+                    if (drinkItem.SubItems[0].Text == item.SubItems[0].Text)
+                    {
+                        item.SubItems[3].Text = "(!)";
+                    }
+                }
                 listviewDrinks.SelectedItems.Clear();
                 MessageBox.Show("Note has been added!");
             }        
