@@ -460,7 +460,7 @@ namespace RosUI
                     rosMain.UpdateTableToOrdered(table.TableNumber); //Update TableView
 
                     this.Close();
-                    new TableOverview(emp, rosMain).Show();
+                    new TableControl(emp, rosMain, table).Show();
                 }
                 else if (dialogResult == DialogResult.No)
                 {

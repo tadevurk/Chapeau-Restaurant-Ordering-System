@@ -104,6 +104,21 @@ namespace RosDAL
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        public List<OrderedDish> GetAllOrderedDishByTable(Table table)
+        {
+            string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], OD.DishID as ID, OD.OrderID as [OrderID]," +
+                " I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course" +
+                " from OrderDish as OD join [Order] as O on OD.OrderID=O.OrderID" +
+                " join Item as I on OD.DishID=I.ItemID join Dish as D on OD.DishID=D.DishID " +
+                "where OD.DishStatus <= 2 AND tableNumber = @TableNumber " +
+                "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered " +
+                "order by OD.TimeDishOrdered";
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", table.TableNumber) };
+
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public void UpdateDishStatusPickUp(OrderedDish orderedDish)
         {
             string query = "UPDATE OrderDish SET DishStatus=1 WHERE DishID=@DishID AND OrderID=@OrderID AND DishStatus=0";

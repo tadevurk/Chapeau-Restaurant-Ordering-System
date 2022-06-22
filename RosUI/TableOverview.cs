@@ -23,6 +23,8 @@ namespace RosUI
         private List<Label> labels;
         private List<PictureBox> dishIcons;
         private List<PictureBox> drinkIcons;
+        private bool moveUp = false;
+        private bool moveDown = false;
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
@@ -53,6 +55,7 @@ namespace RosUI
                 GenerateDrinkIcon();
                 GenerateDishIcon();
                 GenerateButtons();
+                MoveComponents(-60);
             }
             catch (Exception exp)
             {
@@ -590,6 +593,85 @@ namespace RosUI
                 DisplayError(exp);
             }
 
+        }
+
+        //Show/Hide the legenda
+        private void lblShowInfo_Click(object sender, EventArgs e)
+        {
+            
+            if (pbDishOrder.Visible == false)
+            {
+                ShowInfo();
+                moveDown = MoveComponents(60);
+                lblShowInfo.Text = "Hide Info";             
+            }
+            else
+            {
+                HideInfo();
+                moveDown = MoveComponents(-60);
+                lblShowInfo.Text = "Show Info";              
+            }            
+        }
+
+        //Move all the components 
+        private bool MoveComponents(int pixels)
+        {
+            foreach (Button button in buttons)
+            {
+                button.Location = new Point(button.Location.X, button.Location.Y + pixels);               
+            }
+
+            foreach (Label label in labels)
+            {
+                label.Location = new Point(label.Location.X, label.Location.Y + pixels);
+            }
+
+            foreach (PictureBox dishIcon in dishIcons)
+            {
+                dishIcon.Location = new Point(dishIcon.Location.X, dishIcon.Location.Y + pixels);
+            }
+
+            foreach (PictureBox drinkIcon in drinkIcons)
+            {
+                drinkIcon.Location = new Point(drinkIcon.Location.X, drinkIcon.Location.Y + pixels);
+            }
+            return true;
+        }
+
+        //Hide the legenda
+        private void HideInfo()
+        {
+            pbDishOrder.Visible = false;
+            pbDrinkIcon.Visible = false;
+            lblDishOrder.Visible = false;
+            lblDrinkOrder.Visible = false;
+            pbEmpty.Visible = false;
+            lblTableFree.Visible = false;
+            pbOccupied.Visible = false;
+            lblTableOccupied.Visible = false;
+            pbRunningOrder.Visible = false;
+            lblRunningOrder.Visible = false;
+            pbOrderReady.Visible = false;
+            lblOrderReady.Visible = false;
+            pbOrderServed.Visible = false;
+        }
+
+        //Show the legenda
+        private void ShowInfo()
+        {
+            pbDishOrder.Visible = true;
+            pbDrinkIcon.Visible = true;
+            lblDishOrder.Visible = true;
+            lblDrinkOrder.Visible = true;
+            pbEmpty.Visible = true;
+            lblTableFree.Visible = true;
+            pbOccupied.Visible = true;
+            lblTableOccupied.Visible = true;
+            pbRunningOrder.Visible = true;
+            lblRunningOrder.Visible = true;
+            pbOrderReady.Visible = true;
+            lblOrderReady.Visible = true;
+            pbOrderServed.Visible = true;
         }
     }
 }

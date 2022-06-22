@@ -124,6 +124,9 @@
   <data name="icons8-dinner-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-dinner-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BackIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BackIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8-martini-glass-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-martini-glass-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,7 +139,7 @@
   <data name="TableIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TableIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="BackIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BackIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ShowIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ShowIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
