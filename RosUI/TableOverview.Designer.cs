@@ -71,7 +71,7 @@
             // 
             this.btnMoreInfo.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnMoreInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMoreInfo.Location = new System.Drawing.Point(-1, 714);
+            this.btnMoreInfo.Location = new System.Drawing.Point(20, 701);
             this.btnMoreInfo.Name = "btnMoreInfo";
             this.btnMoreInfo.Size = new System.Drawing.Size(100, 40);
             this.btnMoreInfo.TabIndex = 43;

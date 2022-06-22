@@ -383,7 +383,5 @@ namespace RosUI
             UpdateOccupyButton(table, btnOccupy);
             return;
         }
-
-
     }
 }
