@@ -182,7 +182,7 @@
             // 
             // Quantity
             // 
-            this.Quantity.Text = "Qnt";
+            this.Quantity.Text = "Qty";
             this.Quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cmbStatus
