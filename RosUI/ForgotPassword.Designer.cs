@@ -73,6 +73,7 @@
             // cmbSecret
             // 
             this.cmbSecret.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbSecret.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSecret.FormattingEnabled = true;
             this.cmbSecret.Location = new System.Drawing.Point(94, 310);
             this.cmbSecret.Name = "cmbSecret";

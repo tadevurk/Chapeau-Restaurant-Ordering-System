@@ -187,8 +187,10 @@
             // 
             // cmbStatus
             // 
+            this.cmbStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStatus.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cmbStatus.Location = new System.Drawing.Point(325, 64);
             this.cmbStatus.Name = "cmbStatus";
             this.cmbStatus.Size = new System.Drawing.Size(151, 31);
