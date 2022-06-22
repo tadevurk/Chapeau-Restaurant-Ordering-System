@@ -328,96 +328,8 @@ namespace RosUI
             }
         }
 
-        private void AddFood(ListView listview)
-        {
-            ListViewItem selectedDish = listview.SelectedItems[0];
-            Dish dish = (Dish)selectedDish.Tag;
-            CheckCurrentDish(dish);
-        }
-
-        private void AddDrinks(ListView listview)
-        {
-            ListViewItem selectedDrink = listview.SelectedItems[0];
-            Drink drink = (Drink)selectedDrink.Tag;
-            CheckCurrentDrink(drink);
-        }
-        private void CheckCurrentDish(Dish dish)
-        {
-            ListViewItem? checkItem = null;
-            Dish currentDish;
-
-            foreach (ListViewItem lvItem in listviewOrder.Items)
-            {
-                if (lvItem.Tag is Dish)
-                {
-                    currentDish = (Dish)lvItem.Tag;
-                    if (dish.ItemName == currentDish.ItemName && lvItem.ForeColor != Color.Green)
-                    {
-                        checkItem = lvItem;
-                        currentDish.ItemAmount = int.Parse(lvItem.SubItems[2].Text);
-                        currentDish.ItemAmount++;
-                        lvItem.SubItems[2].Text = currentDish.ItemAmount.ToString();
-                    }
-                }
-            }
-
-            if (checkItem == null)
-            {
-                currentDish = dish;
-                ListViewItem item = new ListViewItem(currentDish.ItemName);
-                item.SubItems.Add($"€ {currentDish.ItemPrice}");
-                currentDish.ItemAmount = 1;
-                item.SubItems.Add(currentDish.ItemAmount.ToString());
-                item.SubItems.Add(""); // Note column
-                item.Tag = currentDish; // Tagging to add the DishesInOrderProcess list
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-                listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
-            }
-        }
-        private void CheckCurrentDrink(Drink drink)
-        {
-            ListViewItem? checkItem = null;
-            Drink currentDrink;
-
-            foreach (ListViewItem lvItem in listviewOrder.Items)
-            {
-                if (lvItem.Tag is Drink)
-                {
-                    currentDrink = (Drink)lvItem.Tag;
-                    if (drink.ItemName == currentDrink.ItemName && lvItem.ForeColor != Color.Green)
-                    {
-                        checkItem = lvItem;
-                        currentDrink.ItemAmount = int.Parse(lvItem.SubItems[2].Text);
-                        currentDrink.ItemAmount++;
-                        lvItem.SubItems[2].Text = currentDrink.ItemAmount.ToString();
-                    }
-                }
-            }
-
-            if (checkItem == null)
-            {
-                currentDrink = drink;
-                ListViewItem item = new ListViewItem(currentDrink.ItemName);
-                item.SubItems.Add($"€ {currentDrink.ItemPrice}");
-                currentDrink.ItemAmount = 1;
-                item.SubItems.Add(currentDrink.ItemAmount.ToString());
-                item.SubItems.Add(""); // Note column
-                item.Tag = currentDrink; // Tagging to add the DrinksInOrderProcess list
-                item.ForeColor = Color.Red; // Change color for the new ordered item
-                listviewOrder.Items.Add(item);
-                listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
-            }          
-        }
         private void RemoveItem(ListViewItem lvItem, Item item)
         {
-
-            if (item.ItemName == lvItem.SubItems[0].Text && lvItem.SubItems[0].ForeColor == Color.Green) // Disabling the ordered item to choose and remove
-            {
-                lvItem.Selected = false;
-                return;
-            }
-
             if (item.ItemAmount == 1)
             {
                 listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
@@ -428,6 +340,91 @@ namespace RosUI
                 listviewOrder.SelectedItems[0].SubItems[2].Text = item.ItemAmount.ToString();
             }
         }
+
+        private void AddFood(ListView listview)
+        {
+            ListViewItem selectedLvItem = listview.SelectedItems[0];
+            Dish selectedDish = (Dish)selectedLvItem.Tag; // Checking purpose
+            CheckCurrentDish(selectedDish);
+        }
+
+        private void AddDrinks(ListView listview)
+        {
+            ListViewItem selectedLvItem = listview.SelectedItems[0];
+            Drink selectedDrink = (Drink)selectedLvItem.Tag; // Checking purpose
+            CheckCurrentDrink(selectedDrink);
+        }
+        private void CheckCurrentDish(Dish selectedDish)
+        {
+            ListViewItem? checkItem = null;
+            Dish dish; // actual dish object
+
+            foreach (ListViewItem lvItem in listviewOrder.Items)
+            {
+                if (lvItem.Tag is Dish)
+                {
+                    dish = (Dish)lvItem.Tag;
+                    //if (dish.ItemName == currentDish.ItemName && lvItem.ForeColor != Color.Green)
+                    if (selectedDish.ItemID == dish.ItemID && lvItem.ForeColor != Color.Green)
+                    {
+                        checkItem = lvItem;
+                        dish.ItemAmount = int.Parse(lvItem.SubItems[2].Text);
+                        dish.ItemAmount++;
+                        lvItem.SubItems[2].Text = dish.ItemAmount.ToString();
+                    }
+                }
+            }
+
+            if (checkItem == null)
+            {
+                dish = selectedDish; // if the listviewOrder doesn't contain, then write
+                ListViewItem item = new ListViewItem(dish.ItemName);
+                item.SubItems.Add($"€ {dish.ItemPrice}");
+                dish.ItemAmount = 1;
+                item.SubItems.Add(dish.ItemAmount.ToString());
+                item.SubItems.Add(""); // Note column
+                item.Tag = dish; // Tagging to add the DishesInOrderProcess list
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+                listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
+            }
+        }
+        private void CheckCurrentDrink(Drink selectedDrink)
+        {
+            ListViewItem? checkItem = null;
+            Drink drink; // actual drink object
+
+            foreach (ListViewItem lvItem in listviewOrder.Items)
+            {
+                if (lvItem.Tag is Drink)
+                {
+                    drink = (Drink)lvItem.Tag;
+                    //if (drink.ItemName == currentDrink.ItemName && lvItem.ForeColor != Color.Green)
+                    if (selectedDrink.ItemID == drink.ItemID && lvItem.ForeColor != Color.Green)
+                    {
+                        checkItem = lvItem;
+                        drink.ItemAmount = int.Parse(lvItem.SubItems[2].Text);
+                        drink.ItemAmount++;
+                        lvItem.SubItems[2].Text = drink.ItemAmount.ToString();
+                    }
+                }
+            }
+
+            if (checkItem == null)
+            {
+                drink = selectedDrink; // if the listviewOrder doesn't contain, then write
+                ListViewItem item = new ListViewItem(drink.ItemName);
+                item.SubItems.Add($"€ {drink.ItemPrice}");
+                drink.ItemAmount = 1;
+                item.SubItems.Add(drink.ItemAmount.ToString());
+                item.SubItems.Add(""); // Note column
+                item.Tag = drink; // Tagging to add the DrinksInOrderProcess list
+                item.ForeColor = Color.Red; // Change color for the new ordered item
+                listviewOrder.Items.Add(item);
+                listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible();
+            }          
+        }
+
         private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
         {
             try
@@ -487,26 +484,25 @@ namespace RosUI
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
-                    AddDishNote(listviewLunch, listviewOrder);
+                    AddDishNote(listviewLunch);
                 }
                 else if (listviewDinner.SelectedItems.Count == 1)
                 {
-                    AddDishNote(listviewDinner, listviewOrder);
+                    AddDishNote(listviewDinner);
                 }
                 else if (listviewDrinks.SelectedItems.Count == 1)
                 {
-                    Drink currentDrink;
-                    Drink drink = (Drink)listviewDrinks.SelectedItems[0].Tag;                  
-                    ListViewItem drinkItem = listviewDrinks.SelectedItems[0];
+                    Drink drink;
+                    Drink selectedDrink = (Drink)listviewDrinks.SelectedItems[0].Tag;                  
 
                     foreach (ListViewItem item in listviewOrder.Items)
                     {
                         if (item.Tag is Drink)
                         {
-                            currentDrink = (Drink)item.Tag;
-                            if (currentDrink.ItemName == drink.ItemName)
+                            drink = (Drink)item.Tag;
+                            if (drink.ItemName == selectedDrink.ItemName)
                             {
-                                currentDrink.ItemNote = txtNote.Text;
+                                drink.ItemNote = txtNote.Text;
                                 item.SubItems[3].Text = "✓";
                             }
                         }
@@ -524,19 +520,19 @@ namespace RosUI
                 txtNote.Clear();
             }
         }
-        private void AddDishNote(ListView menuListView, ListView listviewOrder)
+        private void AddDishNote(ListView menuListView)
         {
-            Dish currentDish;
-            Dish dish = (Dish)menuListView.SelectedItems[0].Tag;
+            Dish dish;
+            Dish selectedDish = (Dish)menuListView.SelectedItems[0].Tag;
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
                 if (item.Tag is Dish)
                 {
-                    currentDish = (Dish)item.Tag;
-                    if (currentDish.ItemName == dish.ItemName)
+                    dish = (Dish)item.Tag;
+                    if (dish.ItemName == selectedDish.ItemName)
                     {
-                        currentDish.ItemNote = txtNote.Text;
+                        dish.ItemNote = txtNote.Text;
                         item.SubItems[3].Text = "✓";
                     }
                 }
