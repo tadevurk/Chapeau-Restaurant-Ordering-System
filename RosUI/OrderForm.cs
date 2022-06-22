@@ -126,6 +126,10 @@ namespace RosUI
                 lvItem.SubItems.Add(dish.Course);
                 lvItem.Tag = dish;
                 listview.Items.Add(lvItem);
+                if (listview.Items.IndexOf(lvItem) % 2 == 0)
+                {
+                    lvItem.BackColor = Color.FromArgb(224, 234, 255);
+                }
 
                 if (dish.ItemStock == 0)
                 {
@@ -144,6 +148,11 @@ namespace RosUI
                 lvItem.SubItems.Add(drink.DrinkCategory);
                 lvItem.Tag = drink;
                 listview.Items.Add(lvItem);
+
+                if (listview.Items.IndexOf(lvItem) % 2 == 0)
+                {
+                    lvItem.BackColor = Color.FromArgb(224, 234, 255);
+                }
 
                 if (drink.ItemStock == 0)
                 {
