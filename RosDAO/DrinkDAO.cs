@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 namespace RosDAL
 {
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
-    //////// Contributor Mirko Cuccurullo ///////
     public class DrinkDAO : BaseDAO
     {
         public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)// Add drinks to OrderedDrink
@@ -24,8 +23,6 @@ namespace RosDAL
                 {
                     noteParameter = new SqlParameter("@Note", drink.ItemNote);
                 }
-
-                //Adding dish
                 string query = "insert into OrderDrink values(@OrderID, @drinkID, 0, @CurrentTime, null, @Amount, @Note);";
                 SqlParameter[] sqlParameters = { new SqlParameter("@drinkID", drink.ItemID),
                 new SqlParameter("@OrderID", order.OrderID),
@@ -40,7 +37,8 @@ namespace RosDAL
         public List<Drink> ReadContainedDrinks(Table table)
         {
             string query = "select OD.DrinkID as DrinkID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDrinkAmount) as [Amount]," +
-                " O.TableNumber as [TableNumber] from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
+                " O.TableNumber as [TableNumber], Count(Od.DrinkNote) as [NoteAmount]" +
+                " from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DrinkID" +
                 " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
                 "group by DrinkID, I.ItemName, I.ItemPrice, O.TableNumber";
@@ -69,12 +67,12 @@ namespace RosDAL
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     ItemAmount = (int)dr["Amount"],
+                    NoteAmount = (int)dr["NoteAmount"]
                 };
                 drinks.Add(drink);
             }
             return drinks;
         }      
-
         private List<Drink> ReadDrinks(DataTable dataTable) // Reading the drinks
         {
             List<Drink> drinks = new List<Drink>();

@@ -39,6 +39,7 @@ namespace RosUI
             this.nameOrder = new System.Windows.Forms.ColumnHeader();
             this.priceOrder = new System.Windows.Forms.ColumnHeader();
             this.amountOrder = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.btnOrderAddNote = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.RichTextBox();
             this.pnlFoodDrink = new System.Windows.Forms.Panel();
@@ -95,7 +96,7 @@ namespace RosUI
             this.btnCancelOrder.Name = "btnCancelOrder";
             this.btnCancelOrder.Size = new System.Drawing.Size(201, 47);
             this.btnCancelOrder.TabIndex = 9;
-            this.btnCancelOrder.Text = "CANCEL";
+            this.btnCancelOrder.Text = "CANCEL ORDER";
             this.btnCancelOrder.UseVisualStyleBackColor = false;
             this.btnCancelOrder.Visible = false;
             this.btnCancelOrder.Click += new System.EventHandler(this.btnCancelOrder_Click);
@@ -129,29 +130,31 @@ namespace RosUI
             this.listviewOrder.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.nameOrder,
             this.priceOrder,
-            this.amountOrder});
+            this.amountOrder,
+            this.columnHeader4});
             this.listviewOrder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.listviewOrder.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.listviewOrder.FullRowSelect = true;
             this.listviewOrder.HideSelection = false;
             this.listviewOrder.Location = new System.Drawing.Point(16, 504);
+            this.listviewOrder.MultiSelect = false;
             this.listviewOrder.Name = "listviewOrder";
             this.listviewOrder.Size = new System.Drawing.Size(454, 190);
             this.listviewOrder.TabIndex = 13;
             this.listviewOrder.UseCompatibleStateImageBehavior = false;
             this.listviewOrder.View = System.Windows.Forms.View.Details;
-            this.listviewOrder.SelectedIndexChanged += new System.EventHandler(this.listviewOrder_SelectedIndexChanged);
+            this.listviewOrder.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewOrder_MouseClick);
             // 
             // nameOrder
             // 
             this.nameOrder.Text = "Item";
-            this.nameOrder.Width = 270;
+            this.nameOrder.Width = 190;
             // 
             // priceOrder
             // 
             this.priceOrder.Text = "Price";
             this.priceOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.priceOrder.Width = 75;
+            this.priceOrder.Width = 85;
             // 
             // amountOrder
             // 
@@ -159,10 +162,16 @@ namespace RosUI
             this.amountOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.amountOrder.Width = 85;
             // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Note";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // btnOrderAddNote
             // 
             this.btnOrderAddNote.BackColor = System.Drawing.SystemColors.Control;
             this.btnOrderAddNote.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOrderAddNote.Enabled = false;
             this.btnOrderAddNote.FlatAppearance.BorderSize = 0;
             this.btnOrderAddNote.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOrderAddNote.Image = ((System.Drawing.Image)(resources.GetObject("btnOrderAddNote.Image")));
@@ -226,12 +235,13 @@ namespace RosUI
             this.listviewLunch.FullRowSelect = true;
             this.listviewLunch.HideSelection = false;
             this.listviewLunch.Location = new System.Drawing.Point(16, 112);
+            this.listviewLunch.MultiSelect = false;
             this.listviewLunch.Name = "listviewLunch";
             this.listviewLunch.Size = new System.Drawing.Size(454, 332);
             this.listviewLunch.TabIndex = 0;
             this.listviewLunch.UseCompatibleStateImageBehavior = false;
             this.listviewLunch.View = System.Windows.Forms.View.Details;
-            this.listviewLunch.SelectedIndexChanged += new System.EventHandler(this.listviewLunch_SelectedIndexChanged);
+            this.listviewLunch.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewLunch_MouseClick);
             // 
             // columNameFood
             // 
@@ -261,12 +271,13 @@ namespace RosUI
             this.listviewDinner.FullRowSelect = true;
             this.listviewDinner.HideSelection = false;
             this.listviewDinner.Location = new System.Drawing.Point(16, 112);
+            this.listviewDinner.MultiSelect = false;
             this.listviewDinner.Name = "listviewDinner";
             this.listviewDinner.Size = new System.Drawing.Size(454, 332);
             this.listviewDinner.TabIndex = 0;
             this.listviewDinner.UseCompatibleStateImageBehavior = false;
             this.listviewDinner.View = System.Windows.Forms.View.Details;
-            this.listviewDinner.SelectedIndexChanged += new System.EventHandler(this.listviewDinner_SelectedIndexChanged);
+            this.listviewDinner.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewDinner_MouseClick);
             // 
             // columnHeader15
             // 
@@ -296,12 +307,13 @@ namespace RosUI
             this.listviewDrinks.FullRowSelect = true;
             this.listviewDrinks.HideSelection = false;
             this.listviewDrinks.Location = new System.Drawing.Point(16, 112);
+            this.listviewDrinks.MultiSelect = false;
             this.listviewDrinks.Name = "listviewDrinks";
             this.listviewDrinks.Size = new System.Drawing.Size(454, 332);
             this.listviewDrinks.TabIndex = 0;
             this.listviewDrinks.UseCompatibleStateImageBehavior = false;
             this.listviewDrinks.View = System.Windows.Forms.View.Details;
-            this.listviewDrinks.SelectedIndexChanged += new System.EventHandler(this.listviewDrinks_SelectedIndexChanged);
+            this.listviewDrinks.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listviewDrinks_MouseClick);
             // 
             // columnHeader17
             // 
@@ -373,5 +385,6 @@ namespace RosUI
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
