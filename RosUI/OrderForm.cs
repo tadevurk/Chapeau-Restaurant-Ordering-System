@@ -364,7 +364,6 @@ namespace RosUI
                 if (lvItem.Tag is Dish)
                 {
                     dish = (Dish)lvItem.Tag;
-                    //if (dish.ItemName == currentDish.ItemName && lvItem.ForeColor != Color.Green)
                     if (selectedDish.ItemID == dish.ItemID && lvItem.ForeColor != Color.Green)
                     {
                         checkItem = lvItem;
@@ -399,7 +398,6 @@ namespace RosUI
                 if (lvItem.Tag is Drink)
                 {
                     drink = (Drink)lvItem.Tag;
-                    //if (drink.ItemName == currentDrink.ItemName && lvItem.ForeColor != Color.Green)
                     if (selectedDrink.ItemID == drink.ItemID && lvItem.ForeColor != Color.Green)
                     {
                         checkItem = lvItem;
@@ -480,7 +478,6 @@ namespace RosUI
                 if (txtNote.Text == "")
                 {
                     throw new Exception("Text box is empty!");
-                    //return;
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
@@ -585,12 +582,12 @@ namespace RosUI
                 if (lvItem.ForeColor == Color.Red && item is Dish)
                 {
                     Dish dish = (Dish)item;
-                    DishesInOrderProcess.Add(dish);
+                    DishesInOrderProcess.Add(dish); // Adding to the dish list to add to the database (orderedDish)
                 }
                 else if (lvItem.ForeColor == Color.Red && item is Drink)
                 {
                     Drink drink = (Drink)item;
-                    DrinkInOrderProcess.Add(drink);
+                    DrinkInOrderProcess.Add(drink); // Adding to the drink list to add to the database (orderedDrink)
                 }
             }
         }
