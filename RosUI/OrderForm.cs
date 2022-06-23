@@ -497,7 +497,7 @@ namespace RosUI
                         if (item.Tag is Drink)
                         {
                             drink = (Drink)item.Tag;
-                            if (drink.ItemName == selectedDrink.ItemName)
+                            if (drink.ItemName == selectedDrink.ItemName && item.ForeColor != Color.Green)
                             {
                                 drink.ItemNote = txtNote.Text;
                                 item.SubItems[3].Text = "✓";
@@ -524,7 +524,7 @@ namespace RosUI
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
-                if (item.Tag is Dish)
+                if (item.Tag is Dish && item.ForeColor != Color.Green)
                 {
                     dish = (Dish)item.Tag;
                     if (dish.ItemName == selectedDish.ItemName)
