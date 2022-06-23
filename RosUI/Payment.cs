@@ -402,7 +402,7 @@ namespace RosUI
                 lblSplitVat21.Text = lblVat21.Text;
                 lblSplitSub.Text = lblSubTotalAmount.Text;
                 lblSplitTotal.Text = lblTotalAmount.Text;
-
+                lblSplitDue.Text = toPay.ToString("0.00");
             }
             catch (Exception ex)
             {

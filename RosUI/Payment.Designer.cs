@@ -49,6 +49,8 @@ namespace RosUI
             this.btnSubmit = new System.Windows.Forms.Button();
             this.txtFeedback = new System.Windows.Forms.TextBox();
             this.pnlSplit = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblSplitDue = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -254,6 +256,8 @@ namespace RosUI
             // 
             // pnlSplit
             // 
+            this.pnlSplit.Controls.Add(this.label3);
+            this.pnlSplit.Controls.Add(this.lblSplitDue);
             this.pnlSplit.Controls.Add(this.label1);
             this.pnlSplit.Controls.Add(this.label10);
             this.pnlSplit.Controls.Add(this.label11);
@@ -275,6 +279,25 @@ namespace RosUI
             this.pnlSplit.Size = new System.Drawing.Size(458, 638);
             this.pnlSplit.TabIndex = 21;
             this.pnlSplit.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSplit_Paint);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(133, 150);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(70, 20);
+            this.label3.TabIndex = 60;
+            this.label3.Text = "DUE: €";
+            // 
+            // lblSplitDue
+            // 
+            this.lblSplitDue.AutoSize = true;
+            this.lblSplitDue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblSplitDue.Location = new System.Drawing.Point(203, 148);
+            this.lblSplitDue.Name = "lblSplitDue";
+            this.lblSplitDue.Size = new System.Drawing.Size(0, 22);
+            this.lblSplitDue.TabIndex = 59;
             // 
             // label1
             // 
@@ -304,7 +327,7 @@ namespace RosUI
             // 
             this.lblSplitVat21.AutoSize = true;
             this.lblSplitVat21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSplitVat21.Location = new System.Drawing.Point(34, 122);
+            this.lblSplitVat21.Location = new System.Drawing.Point(34, 88);
             this.lblSplitVat21.Name = "lblSplitVat21";
             this.lblSplitVat21.Size = new System.Drawing.Size(96, 18);
             this.lblSplitVat21.TabIndex = 53;
@@ -314,7 +337,7 @@ namespace RosUI
             // 
             this.lblSplitVat6.AutoSize = true;
             this.lblSplitVat6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSplitVat6.Location = new System.Drawing.Point(34, 64);
+            this.lblSplitVat6.Location = new System.Drawing.Point(34, 40);
             this.lblSplitVat6.Name = "lblSplitVat6";
             this.lblSplitVat6.Size = new System.Drawing.Size(84, 18);
             this.lblSplitVat6.TabIndex = 52;
@@ -342,7 +365,7 @@ namespace RosUI
             // 
             this.lblSplitSub.AutoSize = true;
             this.lblSplitSub.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSplitSub.Location = new System.Drawing.Point(255, 64);
+            this.lblSplitSub.Location = new System.Drawing.Point(255, 40);
             this.lblSplitSub.Name = "lblSplitSub";
             this.lblSplitSub.Size = new System.Drawing.Size(82, 18);
             this.lblSplitSub.TabIndex = 49;
@@ -371,12 +394,12 @@ namespace RosUI
             // lblSplitTotal
             // 
             this.lblSplitTotal.AutoSize = true;
-            this.lblSplitTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblSplitTotal.Location = new System.Drawing.Point(255, 118);
+            this.lblSplitTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblSplitTotal.Location = new System.Drawing.Point(255, 84);
             this.lblSplitTotal.Name = "lblSplitTotal";
-            this.lblSplitTotal.Size = new System.Drawing.Size(95, 22);
+            this.lblSplitTotal.Size = new System.Drawing.Size(70, 20);
             this.lblSplitTotal.TabIndex = 43;
-            this.lblSplitTotal.Text = "TOTAL: € ";
+            this.lblSplitTotal.Text = "Total: € ";
             // 
             // radioBtnSplitDebit
             // 
@@ -604,5 +627,7 @@ namespace RosUI
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSplitDue;
+        private System.Windows.Forms.Label label3;
     }
 }
