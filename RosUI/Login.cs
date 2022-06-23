@@ -21,7 +21,8 @@ namespace RosUI
         {
             InitializeComponent();
             employeeLogic = new EmployeeLogic();
-            employee = new Employee();            
+            employee = new Employee();
+            main = new RosMain(employee);
         }
 
         //Will login the user in

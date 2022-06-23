@@ -20,6 +20,7 @@ namespace RosUI
         {
             InitializeComponent();
             employeeLogic = new EmployeeLogic();
+            employee = new Employee();
             this.rosMain = rosMain;       
             questions = employeeLogic.GetAllSecretQuestions();
 
