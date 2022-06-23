@@ -583,7 +583,6 @@ namespace RosUI
         private System.Windows.Forms.Button btnSplit;
         private System.Windows.Forms.Panel pnlSplit;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnBackSplit;
         private System.Windows.Forms.Label lblVat6;
         private System.Windows.Forms.Label lblVat21;
