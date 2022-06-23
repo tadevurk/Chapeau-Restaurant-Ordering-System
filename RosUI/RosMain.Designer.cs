@@ -58,6 +58,7 @@
             this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader7 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader8 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
             this.pnlBarView = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.lblEmpNameBar = new System.Windows.Forms.Label();
@@ -73,6 +74,7 @@
             this.clAmount = new System.Windows.Forms.ColumnHeader();
             this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader9 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.pnlKitchenViewFinished = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
@@ -88,6 +90,7 @@
             this.columnHeader12 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader14 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
             this.cmbKitFinished = new System.Windows.Forms.ComboBox();
             this.pnlBarViewFinished = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
@@ -103,11 +106,8 @@
             this.columnHeader17 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader18 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader19 = new System.Windows.Forms.ColumnHeader();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.columnHeader20 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader21 = new System.Windows.Forms.ColumnHeader();
             this.columnHeader22 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader23 = new System.Windows.Forms.ColumnHeader();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.pnlKitchenView.SuspendLayout();
             this.pnlBarView.SuspendLayout();
@@ -287,7 +287,6 @@
             // 
             // btnUndoKitView
             // 
-            this.btnUndoKitView.BackColor = DefaultBackColor;
             this.btnUndoKitView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUndoKitView.Enabled = false;
             this.btnUndoKitView.Location = new System.Drawing.Point(1252, 661);
@@ -302,7 +301,7 @@
             // 
             this.btnViewNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewNote.Location = new System.Drawing.Point(1252, 459);
+            this.btnViewNote.Location = new System.Drawing.Point(1251, 404);
             this.btnViewNote.Name = "btnViewNote";
             this.btnViewNote.Size = new System.Drawing.Size(150, 50);
             this.btnViewNote.TabIndex = 4;
@@ -324,7 +323,7 @@
             // 
             this.btnDishReady.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnDishReady.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDishReady.Location = new System.Drawing.Point(1252, 282);
+            this.btnDishReady.Location = new System.Drawing.Point(1252, 322);
             this.btnDishReady.Name = "btnDishReady";
             this.btnDishReady.Size = new System.Drawing.Size(150, 50);
             this.btnDishReady.TabIndex = 3;
@@ -386,6 +385,12 @@
             this.columnHeader8.Text = "Course";
             this.columnHeader8.Width = 150;
             // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Table";
+            this.columnHeader20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader20.Width = 120;
+            // 
             // pnlBarView
             // 
             this.pnlBarView.Controls.Add(this.label9);
@@ -445,7 +450,6 @@
             // 
             // btnUndoBarView
             // 
-            this.btnUndoBarView.BackColor = DefaultBackColor;
             this.btnUndoBarView.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUndoBarView.Location = new System.Drawing.Point(1246, 655);
             this.btnUndoBarView.Name = "btnUndoBarView";
@@ -459,7 +463,7 @@
             // 
             this.btnViewDrinkNote.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewDrinkNote.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewDrinkNote.Location = new System.Drawing.Point(1246, 433);
+            this.btnViewDrinkNote.Location = new System.Drawing.Point(1246, 398);
             this.btnViewDrinkNote.Name = "btnViewDrinkNote";
             this.btnViewDrinkNote.Size = new System.Drawing.Size(150, 50);
             this.btnViewDrinkNote.TabIndex = 5;
@@ -481,7 +485,7 @@
             // 
             this.brnDrinkReady.BackColor = System.Drawing.Color.LightSkyBlue;
             this.brnDrinkReady.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.brnDrinkReady.Location = new System.Drawing.Point(1246, 243);
+            this.brnDrinkReady.Location = new System.Drawing.Point(1246, 316);
             this.brnDrinkReady.Name = "brnDrinkReady";
             this.brnDrinkReady.Size = new System.Drawing.Size(150, 50);
             this.brnDrinkReady.TabIndex = 3;
@@ -536,6 +540,12 @@
             // 
             this.columnHeader9.Text = "Order Time";
             this.columnHeader9.Width = 230;
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "Table";
+            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader23.Width = 120;
             // 
             // fileSystemWatcher1
             // 
@@ -679,6 +689,12 @@
             this.columnHeader14.Text = "Course";
             this.columnHeader14.Width = 150;
             // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Table";
+            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader21.Width = 120;
+            // 
             // cmbKitFinished
             // 
             this.cmbKitFinished.FormattingEnabled = true;
@@ -748,7 +764,7 @@
             // 
             this.btnViewNoteFinDrink.BackColor = System.Drawing.Color.LightSkyBlue;
             this.btnViewNoteFinDrink.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnViewNoteFinDrink.Location = new System.Drawing.Point(1252, 362);
+            this.btnViewNoteFinDrink.Location = new System.Drawing.Point(1252, 345);
             this.btnViewNoteFinDrink.Name = "btnViewNoteFinDrink";
             this.btnViewNoteFinDrink.Size = new System.Drawing.Size(150, 50);
             this.btnViewNoteFinDrink.TabIndex = 5;
@@ -825,35 +841,17 @@
             this.columnHeader19.Text = "Order Time";
             this.columnHeader19.Width = 230;
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 30000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
-            // 
-            // columnHeader20
-            // 
-            this.columnHeader20.Text = "Table";
-            this.columnHeader20.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader20.Width = 120;
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "Table";
-            this.columnHeader21.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader21.Width = 120;
-            // 
             // columnHeader22
             // 
             this.columnHeader22.Text = "Table";
             this.columnHeader22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader22.Width = 120;
             // 
-            // columnHeader23
+            // timer1
             // 
-            this.columnHeader23.Text = "Table";
-            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader23.Width = 120;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // RosMain
             // 

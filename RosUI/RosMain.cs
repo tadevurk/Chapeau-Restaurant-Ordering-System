@@ -52,8 +52,8 @@ namespace RosUI
                 cmbKitFinished.Items.Add($"Table {i}");
                 cmbBarFinished.Items.Add($"Table {i}");
                 cmbSelByTabBar.Items.Add($"Table {i}");
-
             }
+
             cmbTableKit.SelectedIndex = 0;
             cmbKitFinished.SelectedIndex = 0;
             cmbSelByTabBar.SelectedIndex = 0;
