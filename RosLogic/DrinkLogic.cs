@@ -10,9 +10,9 @@ namespace RosLogic
     {
         DrinkDAO drinkDAO = new DrinkDAO();
 
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)
+        public void AddOrderedDrinks(List<Drink> drinkInOrderProcess, Order order)
         {
-            drinkDAO.AddDrinks(drinkInOrderProcess, order);
+            drinkDAO.AddOrderedDrinks(drinkInOrderProcess, order);
         }
 
         public List<Drink> ReadContainedDrinks(Table table)

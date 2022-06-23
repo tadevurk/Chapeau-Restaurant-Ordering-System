@@ -9,9 +9,9 @@ namespace RosLogic
     {
         DishDAO dishDAO = new DishDAO();
 
-        public void AddDishes(List<Dish> dishes, Order order)
+        public void AddOrderedDishes(List<Dish> dishes, Order order)
         {
-            dishDAO.AddDishes(dishes, order);
+            dishDAO.AddOrderedDishes(dishes, order);
         }
         public List<Dish> ReadContainedDishes(Table table)
         {

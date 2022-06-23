@@ -9,7 +9,7 @@ namespace RosDAL
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
     public class DishDAO : BaseDAO
     {
-        public void AddDishes(List<Dish> dishes, Order order) // Add dishes to OrderedDish
+        public void AddOrderedDishes(List<Dish> dishes, Order order) // Add dishes to OrderedDish
         {
             foreach (Dish dish in dishes)
             {

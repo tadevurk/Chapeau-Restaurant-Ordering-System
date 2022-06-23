@@ -9,7 +9,7 @@ namespace RosDAL
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
     public class DrinkDAO : BaseDAO
     {
-        public void AddDrinks(List<Drink> drinkInOrderProcess, Order order)// Add drinks to OrderedDrink
+        public void AddOrderedDrinks(List<Drink> drinkInOrderProcess, Order order)// Add drinks to OrderedDrink
         {
             foreach (Drink drink in drinkInOrderProcess)
             {
