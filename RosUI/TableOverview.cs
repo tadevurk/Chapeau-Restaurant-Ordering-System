@@ -23,8 +23,6 @@ namespace RosUI
         private List<Label> labels;
         private List<PictureBox> dishIcons;
         private List<PictureBox> drinkIcons;
-        private bool moveUp = false;
-        private bool moveDown = false;
 
         public TableOverview(Employee employee, RosMain rosMain)
         {
@@ -35,11 +33,11 @@ namespace RosUI
             tableLogic = new TableLogic();
             orderedDrinkLogic = new OrderedDrinkLogic();
             orderedDishLogic = new OrderedDishLogic();
+            tables = new List<Table>(); 
             buttons = new List<Button>();
             labels = new List<Label>();
             dishIcons = new List<PictureBox>();
             drinkIcons = new List<PictureBox>();
-            
             numberOfTables = tableLogic.GetAmountOfTables();             
             rosMain.AddWaiterView(this);          
             GenerateTableOverview();
@@ -375,7 +373,7 @@ namespace RosUI
         //get all the ordered drinks by table
         public List<OrderedDrink> GetAllOrderedDrinks(Table table)
         {
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber, DrinkStatus.PickUp);
             if(orderedDrinks.Count == 0)
             {
                 throw new Exception("you currently have no drinks to serve");
@@ -388,7 +386,7 @@ namespace RosUI
         //gets all the ordered dishes by table
         public List<OrderedDish> GetAllOrderedDishes(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber, DishStatus.PickUp);
             if (orderedDishes.Count == 0)
             {
                 throw new Exception("you currently have no dishes to serve");
@@ -435,8 +433,8 @@ namespace RosUI
         //checks for empty list to make the order of the table served
         public void CheckOrderedItems(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber, DishStatus.ToPrepare);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber, DrinkStatus.ToPrepare);
 
             if (orderedDishes.Count == 0 && orderedDrinks.Count == 0)
             {
@@ -453,8 +451,8 @@ namespace RosUI
         //checks what the ordered item a specific table has and displays the icon
         public void CheckForOrderedItemsOnTable(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber, DishStatus.ToPrepare);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber, DrinkStatus.ToPrepare);
 
             if (orderedDishes.Count > 0 && orderedDrinks.Count == 0)
             {
@@ -602,13 +600,13 @@ namespace RosUI
             if (pbDishOrder.Visible == false)
             {
                 ShowInfo();
-                moveDown = MoveComponents(60);
+                MoveComponents(60);
                 lblShowInfo.Text = "Hide Info";             
             }
             else
             {
                 HideInfo();
-                moveDown = MoveComponents(-60);
+                MoveComponents(-60);
                 lblShowInfo.Text = "Show Info";              
             }            
         }

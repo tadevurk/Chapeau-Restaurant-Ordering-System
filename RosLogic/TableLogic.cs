@@ -28,24 +28,14 @@ namespace RosLogic
             return tabledb.GetAmountOfTables();
         }
 
-        public List<OrderedDrink> GetOrderedDrinksReady(int tableNumber)
+        public List<OrderedDrink> GetOrderedDrinks(int tableNumber, DrinkStatus status)
         {
-            return tabledb.GetOrderedDrinksReady(tableNumber);
+            return tabledb.GetOrderedDrinks(tableNumber, status);
         }
 
-        public List<OrderedDish> GetOrderedDishesReady(int tableNumber)
+        public List<OrderedDish> GetOrderedDishes(int tableNumber, DishStatus status)
         {
-            return tabledb.GetOrderedDishesReady(tableNumber);
-        }
-
-        public List<OrderedDrink> GetOrderedDrinksToPrepare(int tableNumber)
-        {
-            return tabledb.GetOrderedDrinksToPrepare(tableNumber);
-        }
-
-        public List<OrderedDish> GetOrderedDishesToPrepare(int tableNumber)
-        {
-            return tabledb.GetOrderedDishesToPrepare(tableNumber);
+            return tabledb.GetOrderedDishes(tableNumber, status);
         }
 
         public void Update(Table table)
