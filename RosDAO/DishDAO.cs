@@ -7,7 +7,6 @@ using System.Data.SqlClient;
 namespace RosDAL
 {
     /////////////////////////// Vedat Turk 683343 IT1D ////////////////////////////////////////////
-    /////////// Contributor Mirko Cuccurullo ///////
     public class DishDAO : BaseDAO
     {
         public void AddDishes(List<Dish> dishes, Order order) // Add dishes to OrderedDish
@@ -24,8 +23,6 @@ namespace RosDAL
                 {
                     noteParameter = new SqlParameter("@Note", dish.ItemNote);
                 }
-
-                //Adding dish
                 string query = "insert into OrderDish values(@OrderID, @dishID, 0, @CurrentTime, null, @Amount, @Note);";
                 SqlParameter[] sqlParameters = { new SqlParameter("@dishID", dish.ItemID),
                 new SqlParameter("@OrderID", order.OrderID),
@@ -39,7 +36,9 @@ namespace RosDAL
 
         public List<Dish> ReadContainedDishes(Table table)
         {
-            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount], O.TableNumber as [TableNumber] from OrderDish as OD" +
+            string query = "select OD.DishID as DishID, I.ItemName as [Name], I.ItemPrice as [Price], SUM(OD.OrderedDishAmount) as [Amount]," +
+                " O.TableNumber as [TableNumber], Count(OD.DishNote) as [NoteAmount] " +
+                "from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DishID" +
                 " where O.TableNumber=@TableNumber and OD.DishStatus<3" +
@@ -61,8 +60,6 @@ namespace RosDAL
             SqlParameter sqlParameter = new SqlParameter("@MenuType", menuType);
             return ReadDishes(ExecuteSelectQuery(query, sqlParameter));
         }
-
-
         private List<Dish> ReadTablesOrder(DataTable table)
         {
             List<Dish> dishes = new List<Dish>();
@@ -76,12 +73,12 @@ namespace RosDAL
                     ItemName = (string)dr["Name"],
                     ItemPrice = (decimal)dr["Price"],
                     ItemAmount = (int)dr["Amount"],
+                    NoteAmount = (int)dr["NoteAmount"]
                 };
                 dishes.Add(dish);
             }
             return dishes;
         }
-
         private List<Dish> ReadDishes(DataTable dataTable) // Reading the dishes
         {
             List<Dish> dishes = new List<Dish>();

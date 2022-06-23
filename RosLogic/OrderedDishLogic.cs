@@ -31,6 +31,11 @@ namespace RosLogic
             return orderedDishdb.GetAllOrderedDish();
         }
 
+        public List<OrderedDish> GetAllOrderedDishByTable(Table table)
+        {
+            return orderedDishdb.GetAllOrderedDishByTable(table);
+        }
+
         public List<OrderedDish> GetAllFinishedDish()
         {
             return orderedDishdb.GetAllFinishedDish();
