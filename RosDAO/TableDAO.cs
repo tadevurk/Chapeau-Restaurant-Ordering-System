@@ -39,55 +39,31 @@ namespace RosDAL
             return ReadAmount(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<OrderedDrink> GetOrderedDrinksReady(int tableNumber)
+        public List<OrderedDrink> GetOrderedDrinks(int tableNumber, int status)
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
                 "SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD " +
                 "join [Order] as O on OD.OrderID = O.OrderID " +
-                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = 1 and O.TableNumber = @TableNumber " +
+                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = @status and O.TableNumber = @TableNumber " +
                 "group by O.TableNumber, OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered " +
                 "order by OD.TimeDrinkOrdered; ";
 
-            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber),
+             new SqlParameter("@status", status)};
             return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<OrderedDish> GetOrderedDishesReady(int tableNumber)
+        public List<OrderedDish> GetOrderedDishes(int tableNumber, int status)
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], OD.DishID as ID, OD.OrderID as [OrderID], " +
                  "I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course " +
                  "from OrderDish as OD join[Order] as O on OD.OrderID = O.OrderID " +
                  "join Item as I on OD.DishID = I.ItemID join Dish as D on OD.DishID = D.DishID " +
-                $"where OD.DishStatus = 1 and O.TableNumber = @TableNumber " +
+                $"where OD.DishStatus = @status and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) and O.TableNumber = @TableNumber " +
                 "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered; ";
 
-            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
-            return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<OrderedDrink> GetOrderedDrinksToPrepare(int tableNumber)
-        {
-            string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
-                "SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD " +
-                "join [Order] as O on OD.OrderID = O.OrderID " +
-                $"join Item as I on OD.DrinkID = I.ItemID join Drink as D on OD.DrinkID = D.DrinkID where OD.DrinkStatus = 0 and O.TableNumber = @TableNumber " +
-                "group by O.TableNumber, OD.DrinkStatus, OD.DrinkID, I.ItemName, OD.DrinkNote, OD.OrderID, OD.TimeDrinkOrdered " +
-                "order by OD.TimeDrinkOrdered; ";
-
-            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
-            return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
-        }
-
-        public List<OrderedDish> GetOrderedDishesToPrepare(int tableNumber)
-        {
-            string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], OD.DishID as ID, OD.OrderID as [OrderID], " +
-                 "I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course " +
-                 "from OrderDish as OD join[Order] as O on OD.OrderID = O.OrderID " +
-                 "join Item as I on OD.DishID = I.ItemID join Dish as D on OD.DishID = D.DishID " +
-                $"where OD.DishStatus = 0 and cast(OD.TimeDishOrdered as Date) = cast(getdate() as Date) and O.TableNumber = @TableNumber " +
-                "group by O.TableNumber, OD.DishStatus, OD.DishID, I.ItemName, OD.DishNote, D.Course, OD.OrderID, OD.TimeDishOrdered; ";
-
-            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber) };
+            SqlParameter[] sqlParameters = { new SqlParameter("@TableNumber", tableNumber),
+             new SqlParameter("@status", status) };
             return ReadOrderedDishes(ExecuteSelectQuery(query, sqlParameters));
         }
 

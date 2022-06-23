@@ -375,7 +375,7 @@ namespace RosUI
         //get all the ordered drinks by table
         public List<OrderedDrink> GetAllOrderedDrinks(Table table)
         {
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksReady(table.TableNumber);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber, 1);
             if(orderedDrinks.Count == 0)
             {
                 throw new Exception("you currently have no drinks to serve");
@@ -388,7 +388,7 @@ namespace RosUI
         //gets all the ordered dishes by table
         public List<OrderedDish> GetAllOrderedDishes(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesReady(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber, 1);
             if (orderedDishes.Count == 0)
             {
                 throw new Exception("you currently have no dishes to serve");
@@ -435,8 +435,8 @@ namespace RosUI
         //checks for empty list to make the order of the table served
         public void CheckOrderedItems(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber, 0);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber, 0);
 
             if (orderedDishes.Count == 0 && orderedDrinks.Count == 0)
             {
@@ -453,8 +453,8 @@ namespace RosUI
         //checks what the ordered item a specific table has and displays the icon
         public void CheckForOrderedItemsOnTable(Table table)
         {
-            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishesToPrepare(table.TableNumber);
-            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinksToPrepare(table.TableNumber);
+            List<OrderedDish> orderedDishes = tableLogic.GetOrderedDishes(table.TableNumber, 0);
+            List<OrderedDrink> orderedDrinks = tableLogic.GetOrderedDrinks(table.TableNumber, 0);
 
             if (orderedDishes.Count > 0 && orderedDrinks.Count == 0)
             {
