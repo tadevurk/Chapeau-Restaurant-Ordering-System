@@ -113,13 +113,13 @@ namespace RosUI
             // 
             // VAT
             // 
-            this.VAT.Text = "VAT";
+            this.VAT.Text = "VAT €";
             this.VAT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.VAT.Width = 85;
             // 
             // Total
             // 
-            this.Total.Text = "Total";
+            this.Total.Text = "Total €";
             this.Total.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Total.Width = 95;
             // 
@@ -306,9 +306,9 @@ namespace RosUI
             this.lblSplitVat21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSplitVat21.Location = new System.Drawing.Point(34, 122);
             this.lblSplitVat21.Name = "lblSplitVat21";
-            this.lblSplitVat21.Size = new System.Drawing.Size(80, 18);
+            this.lblSplitVat21.Size = new System.Drawing.Size(96, 18);
             this.lblSplitVat21.TabIndex = 53;
-            this.lblSplitVat21.Text = "VAT 21% : ";
+            this.lblSplitVat21.Text = "VAT 21% : €  ";
             // 
             // lblSplitVat6
             // 
@@ -316,9 +316,9 @@ namespace RosUI
             this.lblSplitVat6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblSplitVat6.Location = new System.Drawing.Point(34, 64);
             this.lblSplitVat6.Name = "lblSplitVat6";
-            this.lblSplitVat6.Size = new System.Drawing.Size(72, 18);
+            this.lblSplitVat6.Size = new System.Drawing.Size(84, 18);
             this.lblSplitVat6.TabIndex = 52;
-            this.lblSplitVat6.Text = "VAT 6% : ";
+            this.lblSplitVat6.Text = "VAT 6% : € ";
             // 
             // txtToPaySplit
             // 
@@ -479,9 +479,9 @@ namespace RosUI
             this.lblVat6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblVat6.Location = new System.Drawing.Point(37, 376);
             this.lblVat6.Name = "lblVat6";
-            this.lblVat6.Size = new System.Drawing.Size(72, 18);
+            this.lblVat6.Size = new System.Drawing.Size(84, 18);
             this.lblVat6.TabIndex = 33;
-            this.lblVat6.Text = "VAT 6% : ";
+            this.lblVat6.Text = "VAT 6% : € ";
             // 
             // lblVat21
             // 
@@ -489,9 +489,9 @@ namespace RosUI
             this.lblVat21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lblVat21.Location = new System.Drawing.Point(37, 407);
             this.lblVat21.Name = "lblVat21";
-            this.lblVat21.Size = new System.Drawing.Size(80, 18);
+            this.lblVat21.Size = new System.Drawing.Size(92, 18);
             this.lblVat21.TabIndex = 34;
-            this.lblVat21.Text = "VAT 21% : ";
+            this.lblVat21.Text = "VAT 21% : € ";
             // 
             // label17
             // 
