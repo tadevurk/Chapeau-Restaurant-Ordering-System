@@ -39,7 +39,7 @@ namespace RosDAL
             return ReadAmount(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<OrderedDrink> GetOrderedDrinks(int tableNumber, int status)
+        public List<OrderedDrink> GetOrderedDrinks(int tableNumber, DrinkStatus status)
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.TimeDrinkOrdered as [Time], OD.DrinkStatus as [Status], OD.DrinkID as ID, OD.OrderID as [OrderID], I.ItemName as name, OD.DrinkNote as [Note], " +
                 "SUM(OD.OrderedDrinkAmount) as [Amount] from OrderDrink as OD " +
@@ -53,7 +53,7 @@ namespace RosDAL
             return ReadOrderedDrinks(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<OrderedDish> GetOrderedDishes(int tableNumber, int status)
+        public List<OrderedDish> GetOrderedDishes(int tableNumber, DishStatus status)
         {
             string query = "SELECT O.TableNumber as tableNumber, OD.DishStatus as [Status], OD.DishID as ID, OD.OrderID as [OrderID], " +
                  "I.ItemName as name,OD.TimeDishOrdered as [Time], OD.DishNote as [Note], SUM(OD.OrderedDishAmount) as [Amount], D.Course " +
