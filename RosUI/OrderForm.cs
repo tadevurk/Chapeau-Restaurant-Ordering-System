@@ -364,7 +364,6 @@ namespace RosUI
                 if (lvItem.Tag is Dish)
                 {
                     dish = (Dish)lvItem.Tag;
-                    //if (dish.ItemName == currentDish.ItemName && lvItem.ForeColor != Color.Green)
                     if (selectedDish.ItemID == dish.ItemID && lvItem.ForeColor != Color.Green)
                     {
                         checkItem = lvItem;
@@ -399,7 +398,6 @@ namespace RosUI
                 if (lvItem.Tag is Drink)
                 {
                     drink = (Drink)lvItem.Tag;
-                    //if (drink.ItemName == currentDrink.ItemName && lvItem.ForeColor != Color.Green)
                     if (selectedDrink.ItemID == drink.ItemID && lvItem.ForeColor != Color.Green)
                     {
                         checkItem = lvItem;
@@ -480,7 +478,6 @@ namespace RosUI
                 if (txtNote.Text == "")
                 {
                     throw new Exception("Text box is empty!");
-                    //return;
                 }
                 if (listviewLunch.SelectedItems.Count == 1)
                 {
@@ -500,7 +497,7 @@ namespace RosUI
                         if (item.Tag is Drink)
                         {
                             drink = (Drink)item.Tag;
-                            if (drink.ItemName == selectedDrink.ItemName)
+                            if (drink.ItemName == selectedDrink.ItemName && item.ForeColor != Color.Green)
                             {
                                 drink.ItemNote = txtNote.Text;
                                 item.SubItems[3].Text = "✓";
@@ -527,7 +524,7 @@ namespace RosUI
 
             foreach (ListViewItem item in listviewOrder.Items)
             {
-                if (item.Tag is Dish)
+                if (item.Tag is Dish && item.ForeColor != Color.Green)
                 {
                     dish = (Dish)item.Tag;
                     if (dish.ItemName == selectedDish.ItemName)
@@ -585,12 +582,12 @@ namespace RosUI
                 if (lvItem.ForeColor == Color.Red && item is Dish)
                 {
                     Dish dish = (Dish)item;
-                    DishesInOrderProcess.Add(dish);
+                    DishesInOrderProcess.Add(dish); // Adding to the dish list to add to the database (orderedDish)
                 }
                 else if (lvItem.ForeColor == Color.Red && item is Drink)
                 {
                     Drink drink = (Drink)item;
-                    DrinkInOrderProcess.Add(drink);
+                    DrinkInOrderProcess.Add(drink); // Adding to the drink list to add to the database (orderedDrink)
                 }
             }
         }
