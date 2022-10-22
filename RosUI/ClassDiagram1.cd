@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RosUI.Login">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAMAQAACggAAQAQACIABACgEAACAAAABAAAIBggEQ=</HashCode>
+      <FileName>Login.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="main" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RosUI.RosMain">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>DQGoQFIijnhC6jkKZALYCkL+Q3wnN1DhPIuYQwQBHiQ=</HashCode>
+      <FileName>RosMain.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="tableOverview" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RosUI.FormOrder">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AG+SRCyDdSG2SQXbLc+1YY/+i2QaJUhrsA3soPT0zWM=</HashCode>
+      <FileName>OrderForm.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rosMain" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RosUI.FormPayment">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>iIBKCkAAhSCEIBJKEACoQICGASSgQAnwQAaBgGGSiAA=</HashCode>
+      <FileName>Payment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rosMain" />
+      <Field Name="formOrder" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RosUI.Registration">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQAAEgQAECAAAAQAAAC4ABCCgGAAAAAAABAAAJBgAEQ=</HashCode>
+      <FileName>Registration.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rosMain" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RosUI.TableControl">
+    <Position X="6" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAgAACAACAACABAABCqAsACAAoAAABAgSBEAAiAAAA=</HashCode>
+      <FileName>TableControl.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rosMain" />
+      <Field Name="tableOverview" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="RosUI.TableOverview">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>MEISQDIAYPZGBrhkUBCqgApHACIBIQARAAANgTiQUAg=</HashCode>
+      <FileName>TableOverview.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="rosMain" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

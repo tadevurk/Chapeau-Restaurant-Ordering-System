@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RosDAL.BaseDAO">
+    <Position X="5.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAEAAAAAAACABAAAQQAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>BaseDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.BillDAO">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAASAAAAAAAAAAQAAAACAAAIAACAAEDAAAAA=</HashCode>
+      <FileName>BillDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.DishDAO">
+    <Position X="4" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAAAgAgAAEAAAAAAAAgAAAAAgAAEAQAAgAAIAAA=</HashCode>
+      <FileName>DishDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.DrinkDAO">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAABAAAAgAAAgAAAIAIgAAAAEAUAIAAAIAAA=</HashCode>
+      <FileName>DrinkDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.EmployeeDAO">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABJAAgAAgCQBAAAAAEAABAgAAAQAAAAIAAAAAIAAAAA=</HashCode>
+      <FileName>EmployeeDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.OrderDAO">
+    <Position X="0.5" Y="4" Width="1.5" />
+    <InheritanceLine Type="RosDAL.BaseDAO" FixedFromPoint="true">
+      <Path>
+        <Point X="7.25" Y="0.5" />
+        <Point X="7.25" Y="0.125" />
+        <Point X="1.25" Y="0.125" />
+        <Point X="1.25" Y="4" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OrderDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RosDAL.TableDAO">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAgAgCQAgAAAAAAAAAAAAAQAAAIAAAAAIBEAAAA=</HashCode>
+      <FileName>TableDAO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
