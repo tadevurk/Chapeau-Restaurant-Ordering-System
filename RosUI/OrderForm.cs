@@ -18,7 +18,6 @@ namespace RosUI
         private OrderLogic orderLogic;
         private TableLogic tableLogic;
         private List<Item> itemListInOrderProcess; // For the orders that are in process (between order- will be ordered)
-        //private List<Item> drinksInOrderProcess; // For the orders that are in process (between order- will be ordered)
         private Order order;
 
         public FormOrder(Table table, Employee employee, RosMain rosMainForm)
@@ -31,7 +30,6 @@ namespace RosUI
             orderLogic = new OrderLogic();
             tableLogic = new TableLogic();
             itemListInOrderProcess = new List<Item>();
-            //drinksInOrderProcess = new List<Item>();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
 
             ReadRunningOrder();
@@ -497,7 +495,8 @@ namespace RosUI
                 {
                     if (lvItem.Tag is Drink)
                     {
-                        Drink drink = (Drink)lvItem.Tag; // Tag the drink from listviewOrder
+                        // Tag the drink from listviewOrder
+                        Drink drink = (Drink)lvItem.Tag;
                         if (drink.ItemName == selectedItem.ItemName && !drink.IsOrdered)
                         {
                             drink.ItemNote = txtNote.Text;
