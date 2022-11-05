@@ -1,6 +1,7 @@
 ﻿
 namespace RosModel
 {
+    public enum MenuType { Lunch=1, Dinner=2}
     public abstract class Item
     {
         public int ItemID { get; set; }
@@ -17,6 +18,8 @@ namespace RosModel
         public decimal SubPrice { get; set; }
 
         public int NoteAmount { get; set; }
+
+        public bool IsOrdered { get; set; }
 
     }
 }
