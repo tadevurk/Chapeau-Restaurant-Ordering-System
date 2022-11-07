@@ -12,8 +12,8 @@ namespace RosDAL
 {
     public class OrderDAO : BaseDAO
     {
-        // Add order items to drink and dish table
-        public void SendOrderedItems(List<Item> itemsInOrderProcess, Order order) 
+        // Write order items to drink and dish table
+        public void WriteOrderedItems(List<Item> itemsInOrderProcess, Order order) 
         {      
             foreach (Item item in itemsInOrderProcess)
             {
@@ -168,7 +168,8 @@ namespace RosDAL
             return ExecuteScalarQuery(query, sqlParameters);
         }
 
-        public void DecreaseStock(Item item) // When order is sent all items will be decreased in stock
+        // When order is sent all items will be decreased in stock
+        public void DecreaseStock(Item item)
         {
             string query = "Update Item " +
             "SET ItemStock = ItemStock - @amount " +

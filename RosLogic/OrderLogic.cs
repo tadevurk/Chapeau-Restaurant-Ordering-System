@@ -17,11 +17,11 @@ namespace RosLogic
             orderDAO = new OrderDAO();
         }
 
-        public void SendOrderedItems(List<Item> itemsInOrderProcess, Order order)
+        public void WriteOrderedItems(List<Item> itemsInOrderProcess, Order order)
         {
             if(itemsInOrderProcess.Count > 0)
             {
-                orderDAO.SendOrderedItems(itemsInOrderProcess, order);
+                orderDAO.WriteOrderedItems(itemsInOrderProcess, order);
             }
         }
 

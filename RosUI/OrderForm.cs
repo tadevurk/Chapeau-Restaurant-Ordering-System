@@ -71,6 +71,8 @@ namespace RosUI
             btnDrinks.BackColor = Color.LightSkyBlue;
             btnDinner.BackColor = Color.LightSkyBlue;
         }
+
+        // If an item is selected, make visible some buttons
         private void SendCancelNoteButtonsVisible()
         {
             btnSendOrder.Visible = true;
@@ -97,6 +99,8 @@ namespace RosUI
             }
 
         }
+
+        // Clean selected items by passing the listview array since each time different list(s) view is cleaned
         private static void CleanSelectedItems(ListView[] lists)
         {
             foreach (ListView list in lists)
@@ -104,8 +108,7 @@ namespace RosUI
                 list.SelectedItems.Clear();
             }
         }
-
-        private void CleanOrderWindow(Button button) // BtnDrinks/Dinner/Lunch 
+        private void CleanOrderWindow(Button button)
         {
             ButtonColorReset();
             btnOrderAddNote.Enabled = false;
@@ -134,8 +137,6 @@ namespace RosUI
                     {
                         lvItem.SubItems.Add("");
                     }
-
-                    // Change color from previous orders
                     lvItem.ForeColor = Color.Green;
                     lvItem.Tag = (Item)item;
                     listviewOrder.Items.Add(lvItem);
@@ -164,7 +165,6 @@ namespace RosUI
                     listview.Items.Add(lvItem);
 
                     ChangeColorOfItems(listview, dish, lvItem);
-
                 }
                 if (item is Drink drink)
                 {
@@ -178,7 +178,6 @@ namespace RosUI
                 }
             }
         }
-
 
         private void btnLunch_Click(object sender, EventArgs e)
         {
@@ -423,9 +422,11 @@ namespace RosUI
                 MessageBox.Show(exp.Message);
             }
         }
-        private void CancelOrder() // Cancel the complete order
+
+        // Cancel the complete order
+        private void CancelOrder()
         {
-            foreach (ListViewItem lvOrderInProcess in listviewOrder.Items) // Remove the items from order list
+            foreach (ListViewItem lvOrderInProcess in listviewOrder.Items)
             {
                 Item item = (Item)lvOrderInProcess.Tag;
 
@@ -512,18 +513,18 @@ namespace RosUI
         {
             try
             {
-                // If the last item is not ordered yet
+                // If the last item is not ordered yet or the list is empty
                 bool hasItemToOrder = ((Item)listviewOrder.Items[listviewOrder.Items.Count -1].Tag).IsOrdered;
-                // Extra checking if the list is empty
                 if (listviewOrder.Items.Count == 0 || hasItemToOrder)
                 {
                     throw new Exception($"Sorry {employee.Name}, there is nothing to send");
                 }
+
                 DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    SendOrder(); // adding the items in the listviewOrder to dish and drink list              
-                    DecreaseStock(); // Decrease the stock for all new ordered items by their amounts
+                    WriteOrder();            
+                    DecreaseStock();
                     UpdateOtherComponents();
                     this.Close();
                     new TableControl(employee, rosMainForm, table).Show();
@@ -539,17 +540,11 @@ namespace RosUI
             }
         }
 
-        private void UpdateOtherComponents()
+        private void WriteOrder()
         {
-            table.TableStatus = TableStatus.Standby; // Jason
-            tableLogic.Update(table); // Jason                    
-            rosMainForm.UpdateAllListViews(); //Update KitchenView and Barview
-            rosMainForm.UpdateTableToOrdered(table.TableNumber); //Update TableView
-        }
+            // Create new order with waiterId and tableNumber
+            order.OrderID = orderLogic.OpenOrder(employee, table);
 
-        private void SendOrder()
-        {
-            order.OrderID = orderLogic.OpenOrder(employee, table); // Create new order with waiterId and tableNumber
             foreach (ListViewItem lvItem in listviewOrder.Items)
             {
                 Item item = (Item)lvItem.Tag;
@@ -558,14 +553,23 @@ namespace RosUI
                     itemListInOrderProcess.Add(item);
                 }
             }
-            orderLogic.SendOrderedItems(itemListInOrderProcess, order);
+            orderLogic.WriteOrderedItems(itemListInOrderProcess, order);
         }
+
+        // Decrease the stock for all new ordered items by their amounts
         private void DecreaseStock()
         {
             foreach (Item item in itemListInOrderProcess)
             {
                 orderLogic.DecreaseStock(item);
             }
+        }
+        private void UpdateOtherComponents()
+        {
+            table.TableStatus = TableStatus.Standby; // Jason
+            tableLogic.Update(table); // Jason                    
+            rosMainForm.UpdateAllListViews(); //Update KitchenView and Barview
+            rosMainForm.UpdateTableToOrdered(table.TableNumber); //Update TableView
         }
     }
 }
