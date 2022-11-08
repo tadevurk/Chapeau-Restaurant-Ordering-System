@@ -50,7 +50,6 @@ namespace RosDAL
             }
         }
 
-
         public List<Item> ReadRunningOrderItems(Table table)
         {
             List<Item> items;
@@ -59,7 +58,7 @@ namespace RosDAL
                 "from OrderDish as OD" +
                 " join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DishID" +
-                " where O.TableNumber=@TableNumber and OD.DishStatus<3" +
+                " where O.TableNumber=@TableNumber and OD.DishStatus<3" + // Dish Status { ToPrepare, PickUp, Serve, Paid }
                 "group by ItemID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter[] sqlParameters =
             {

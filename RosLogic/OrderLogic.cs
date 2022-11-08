@@ -19,10 +19,11 @@ namespace RosLogic
 
         public void WriteOrderedItems(List<Item> itemsInOrderProcess, Order order)
         {
-            if(itemsInOrderProcess.Count > 0)
+            if(itemsInOrderProcess.Count <= 0)
             {
-                orderDAO.WriteOrderedItems(itemsInOrderProcess, order);
+                throw new Exception("Something went wrong, try again!");
             }
+            orderDAO.WriteOrderedItems(itemsInOrderProcess, order);
         }
 
         public List<Item> ReadRunningOrderItems(Table table)
@@ -58,17 +59,18 @@ namespace RosLogic
         {
             if (employee == null && table == null)
             {
-                throw new ArgumentNullException();
+                throw new Exception("Something went wrong, try again!");
             }
             return orderDAO.OpenOrder(employee, table);
         }
 
         public void DecreaseStock(Item item)
         {
-            if (item != null)
+            if (item == null)
             {
-                orderDAO.DecreaseStock(item);
+                throw new Exception("Item is not decreased from stock");
             }
+            orderDAO.DecreaseStock(item);
         }
 
     }

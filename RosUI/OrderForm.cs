@@ -17,8 +17,6 @@ namespace RosUI
         private Employee employee;
         private OrderLogic orderLogic;
         private TableLogic tableLogic;
-        private List<Item> itemListInOrderProcess; // For the orders that are in process (between order- will be ordered)
-        private Order order;
 
         public FormOrder(Table table, Employee employee, RosMain rosMainForm)
         {
@@ -26,15 +24,11 @@ namespace RosUI
             this.rosMainForm = rosMainForm;
             this.employee = employee;
             this.table = table;
-            order = new Order(employee, table);
             orderLogic = new OrderLogic();
             tableLogic = new TableLogic();
-            itemListInOrderProcess = new List<Item>();
             lblTableNumber.Text = $"{lblTableNumber.Text} {table.TableNumber.ToString()}";
-
-            ReadRunningOrder();
+            DisplayRunningOrder();
         }
-
 
         private void showPanel(string panelName)
         {
@@ -65,6 +59,7 @@ namespace RosUI
             ButtonColorReset();
         }
 
+        #region DESIGN OF THE ORDER FORM
         private void ButtonColorReset()
         {
             btnLunch.BackColor = Color.LightSkyBlue;
@@ -115,9 +110,11 @@ namespace RosUI
             txtNote.Clear();
             button.BackColor = Color.LightGreen;
         }
+        #endregion
 
-        // Read all (already) ordered items from the table
-        private void ReadRunningOrder()
+        #region DISPLAY ORDERED ITEMS AND MENU ITEMS 
+        // Display all (already) ordered items from the table
+        private void DisplayRunningOrder()
         {
             try
             {
@@ -163,7 +160,6 @@ namespace RosUI
                     lvItem.SubItems.Add(dish.Course);
                     lvItem.Tag = dish;
                     listview.Items.Add(lvItem);
-
                     ChangeColorOfItems(listview, dish, lvItem);
                 }
                 if (item is Drink drink)
@@ -173,12 +169,11 @@ namespace RosUI
                     lvItem.SubItems.Add(drink.DrinkCategory);
                     lvItem.Tag = drink;
                     listview.Items.Add(lvItem);
-
                     ChangeColorOfItems(listview, drink, lvItem);
                 }
             }
         }
-
+        #endregion
         private void btnLunch_Click(object sender, EventArgs e)
         {
             try
@@ -223,7 +218,7 @@ namespace RosUI
         {
             try
             {
-                Dish selectedDish = (Dish)listviewLunch.SelectedItems[0].Tag;
+                Item selectedDish = (Item)listviewLunch.SelectedItems[0].Tag;
                 AddItemAndCleanUI(selectedDish, listviewLunch);
             }
             catch (Exception exp)
@@ -236,7 +231,7 @@ namespace RosUI
         {
             try
             {
-                Dish selectedDish = (Dish)listviewDinner.SelectedItems[0].Tag;
+                Item selectedDish = (Item)listviewDinner.SelectedItems[0].Tag;
                 AddItemAndCleanUI(selectedDish, listviewDinner);
             }
             catch (Exception exp)
@@ -249,7 +244,7 @@ namespace RosUI
         {
             try
             {
-                Drink selectedDrink = (Drink)listviewDrinks.SelectedItems[0].Tag;
+                Item selectedDrink = (Item)listviewDrinks.SelectedItems[0].Tag;
                 AddItemAndCleanUI(selectedDrink, listviewDrinks);
             }
             catch (Exception exp)
@@ -272,91 +267,20 @@ namespace RosUI
             txtNote.Clear();
         }
 
-        private void listviewOrder_MouseClick(object sender, MouseEventArgs e) // Removing the item from ordered list
-        {
-            try
-            {
-                CleanSelectedItems(new ListView[] { listviewDinner, listviewLunch, listviewDrinks });
-                btnOrderAddNote.Enabled = false;
-
-                Item item = (Item)listviewOrder.SelectedItems[0].Tag;
-
-                if (item.IsOrdered)
-                {
-                    listviewOrder.SelectedItems[0].Selected = false;
-                    throw new Exception("This item is already ordered!");
-                }
-                if (listviewOrder.SelectedItems.Count == 1)
-                {
-                    if (item is Dish)
-                    {
-                        RemoveItem((Dish)item); // Remove the dish from the list
-                    }
-                    else if (item is Drink)
-                    {
-                        RemoveItem((Drink)item); // Remove the drink from the list
-                    }
-                }
-
-                txtNote.Clear();
-            }
-            catch (Exception exp)
-            {
-                MessageBox.Show(exp.Message);
-            }
-        }
-
-        // Remove the items one by one
-        private void RemoveItem(Item item)
-        {
-            if (item.ItemAmount == 1)
-            {
-                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
-            }
-            else
-            {
-                item.ItemAmount--;
-                listviewOrder.SelectedItems[0].SubItems[2].Text = item.ItemAmount.ToString();
-            }
-        }
-
+        #region ADD ITEM / CHECK EXISTING ITEM TO listiewOrder
         private void AddItem(Item selectedItem)
         {
             ListViewItem? checkItem = null;
-            if (selectedItem is Dish)
+
+            foreach(ListViewItem lvItem in listviewOrder.Items)
             {
-                foreach (ListViewItem lvItem in listviewOrder.Items)
-                {
-                    if (lvItem.Tag is Dish)
-                    {
-                        CheckExistingItem(selectedItem, ref checkItem, lvItem);
-                    }
-                }
-
-                // For new dish
-                if (checkItem == null)
-                {
-                    CreateItem(selectedItem);
-                }
+                CheckExistingItem(selectedItem, ref checkItem, lvItem);
             }
-
-            if (selectedItem is Drink)
+            
+            if (checkItem == null)
             {
-                foreach (ListViewItem lvItem in listviewOrder.Items)
-                {
-                    if (lvItem.Tag is Drink)
-                    {
-                        CheckExistingItem(selectedItem, ref checkItem, lvItem);
-
-                    }
-                }
-                // For new drink
-                if (checkItem == null)
-                {
-                    CreateItem(selectedItem);
-                }
+                CreateItem(selectedItem);
             }
-
         }
 
         private static void CheckExistingItem(Item selectedItem, ref ListViewItem? checkItem, ListViewItem lvItem)
@@ -366,25 +290,27 @@ namespace RosUI
             {
                 checkItem = lvItem; //Not null anymore
                 item.ItemAmount = int.Parse(lvItem.SubItems[2].Text);
-                item.ItemAmount++; // Increase the amount of the existing dish in the listviewOrder
+                item.ItemAmount++; // Increase the amount of the existing item in the listviewOrder
                 lvItem.SubItems[2].Text = item.ItemAmount.ToString();
             }
         }
 
         private void CreateItem(Item selectedItem)
         {
-            ListViewItem item = new ListViewItem(selectedItem.ItemName);
-            item.SubItems.Add($"€ {selectedItem.ItemPrice}");
+            ListViewItem lvItem = new ListViewItem(selectedItem.ItemName);
+            lvItem.SubItems.Add($"€ {selectedItem.ItemPrice}");
             selectedItem.ItemAmount = 1;
-            item.SubItems.Add(selectedItem.ItemAmount.ToString());
-            item.SubItems.Add(""); // Note column
-            item.Tag = selectedItem; // Tagging to add the DishesInOrderProcess list
-            item.ForeColor = Color.Red; // Change color for the new ordered item
-            listviewOrder.Items.Add(item);
+            lvItem.SubItems.Add(selectedItem.ItemAmount.ToString());
+            lvItem.SubItems.Add(""); // Note column
+            lvItem.Tag = selectedItem;  
+            lvItem.ForeColor = Color.Red; // Change color for the new ordered item
+            listviewOrder.Items.Add(lvItem);
             listviewOrder.Items[listviewOrder.Items.Count - 1].EnsureVisible(); // To see the last item for scrollbar
         }
+        #endregion
 
-        private void btnCancelOrder_Click(object sender, EventArgs e) // Clear the order list
+        #region CANCEL (WHOLE ORDER) OR REMOVE (ONE BY ONE)
+        private void btnCancelOrder_Click(object sender, EventArgs e)
         {
             try
             {
@@ -413,7 +339,7 @@ namespace RosUI
             try
             {
                 CancelOrder();
-                this.Close();
+                Close();
                 new TableControl(employee, rosMainForm, table).Show();
             }
 
@@ -436,6 +362,49 @@ namespace RosUI
                 }
             }
         }
+        private void listviewOrder_MouseClick(object sender, MouseEventArgs e) // Removing the item from ordered list
+        {
+            try
+            {
+                CleanSelectedItems(new ListView[] { listviewDinner, listviewLunch, listviewDrinks });
+                btnOrderAddNote.Enabled = false;
+
+                Item item = (Item)listviewOrder.SelectedItems[0].Tag;
+
+                if (item.IsOrdered)
+                {
+                    listviewOrder.SelectedItems[0].Selected = false;
+                    throw new Exception("This item is already ordered!");
+                }
+                if (listviewOrder.SelectedItems.Count == 1)
+                {
+                    RemoveItem(item);
+                }
+
+                txtNote.Clear();
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+        }
+
+        // Remove the items one by one
+        private void RemoveItem(Item item)
+        {
+            if (item.ItemAmount == 1)
+            {
+                listviewOrder.Items.RemoveAt(listviewOrder.SelectedItems[0].Index);
+            }
+            else
+            {
+                item.ItemAmount--;
+                listviewOrder.SelectedItems[0].SubItems[2].Text = item.ItemAmount.ToString();
+            }
+        }
+        #endregion
+
+        #region ADD ITEM NOTE (EVENT AND METHOD)
         private void btnOrderAddNote_Click(object sender, EventArgs e)
         {
             try
@@ -460,7 +429,6 @@ namespace RosUI
                     selectedItem = (Item)listviewDrinks.SelectedItems[0].Tag;
                     AddItemNote(listviewDrinks, selectedItem);
                 }
-
             }
             catch (Exception exp)
             {
@@ -472,49 +440,29 @@ namespace RosUI
             }
         }
 
-
         private void AddItemNote(ListView menuListView, Item selectedItem)
         {
-            if (selectedItem is Dish)
+            foreach (ListViewItem lvItem in listviewOrder.Items)
             {
-                foreach (ListViewItem lvItem in listviewOrder.Items)
-                {
-                    // Tag the dish from listviewOrder
-                    if (lvItem.Tag is Dish dish)
+                Item item = (Item)lvItem.Tag;
+                if (item.ItemID == selectedItem.ItemID && !item.IsOrdered)
                     {
-                        if (dish.ItemID == selectedItem.ItemID && !dish.IsOrdered)
-                        {
-                            dish.ItemNote = txtNote.Text;
-                            lvItem.SubItems[3].Text = "✓";
-                        }
-                    }
-                }
-            }
-            if (selectedItem is Drink)
-            {
-                foreach (ListViewItem lvItem in listviewOrder.Items)
-                {
-                    if (lvItem.Tag is Drink)
-                    {
-                        // Tag the drink from listviewOrder
-                        Drink drink = (Drink)lvItem.Tag;
-                        if (drink.ItemName == selectedItem.ItemName && !drink.IsOrdered)
-                        {
-                            drink.ItemNote = txtNote.Text;
-                            lvItem.SubItems[3].Text = "✓";
-                        }
-                    }
-                }
+                        item.ItemNote = txtNote.Text;
+                        lvItem.SubItems[3].Text = "✓";
+                    }        
             }
             CleanSelectedItems(new ListView[] { menuListView });
             MessageBox.Show("Note has been added!");
         }
+        #endregion
+
+        #region WRITE ITEM, DECREASE STOCK AND UPDATE THE OTHER COMPONENT
         private void btnSendOrder_Click(object sender, EventArgs e)
         {
             try
             {
                 // If the last item is not ordered yet or the list is empty
-                bool hasItemToOrder = ((Item)listviewOrder.Items[listviewOrder.Items.Count -1].Tag).IsOrdered;
+                bool hasItemToOrder = listviewOrder.Items.Count > 0 && ((Item)listviewOrder.Items[listviewOrder.Items.Count -1].Tag).IsOrdered;
                 if (listviewOrder.Items.Count == 0 || hasItemToOrder)
                 {
                     throw new Exception($"Sorry {employee.Name}, there is nothing to send");
@@ -523,10 +471,9 @@ namespace RosUI
                 DialogResult dialogResult = MessageBox.Show("Do you want to send this order?", "Send Order", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    WriteOrder();            
-                    DecreaseStock();
+                    WriteItemAndDecreaseStock();            
                     UpdateOtherComponents();
-                    this.Close();
+                    Close();
                     new TableControl(employee, rosMainForm, table).Show();
                 }
                 else if (dialogResult == DialogResult.No)
@@ -540,29 +487,24 @@ namespace RosUI
             }
         }
 
-        private void WriteOrder()
+        private void WriteItemAndDecreaseStock()
         {
             // Create new order with waiterId and tableNumber
-            order.OrderID = orderLogic.OpenOrder(employee, table);
-
+            Order order = new(employee, table)
+            {
+                OrderID = orderLogic.OpenOrder(employee, table)
+            };
+            List<Item> itemListInOrderProcess = new();
             foreach (ListViewItem lvItem in listviewOrder.Items)
             {
                 Item item = (Item)lvItem.Tag;
                 if (!item.IsOrdered)
                 {
                     itemListInOrderProcess.Add(item);
+                    orderLogic.DecreaseStock(item);
                 }
             }
             orderLogic.WriteOrderedItems(itemListInOrderProcess, order);
-        }
-
-        // Decrease the stock for all new ordered items by their amounts
-        private void DecreaseStock()
-        {
-            foreach (Item item in itemListInOrderProcess)
-            {
-                orderLogic.DecreaseStock(item);
-            }
         }
         private void UpdateOtherComponents()
         {
@@ -571,5 +513,6 @@ namespace RosUI
             rosMainForm.UpdateAllListViews(); //Update KitchenView and Barview
             rosMainForm.UpdateTableToOrdered(table.TableNumber); //Update TableView
         }
+        #endregion
     }
 }
