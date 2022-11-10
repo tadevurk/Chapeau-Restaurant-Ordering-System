@@ -71,7 +71,7 @@ namespace RosDAL
                 " O.TableNumber as [TableNumber], Count(Od.DrinkNote) as [NoteAmount]" +
                 " from OrderDrink as OD join [Order] as O on OD.OrderID=O.OrderID" +
                 " join Item as I on I.ItemID=OD.DrinkID" +
-                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " +
+                " where O.TableNumber=@TableNumber and OD.DrinkStatus<3 " + 
                 "group by ItemID, I.ItemName, I.ItemPrice, O.TableNumber";
             SqlParameter sqlParameter = new SqlParameter("@TableNumber", table.TableNumber);
 
@@ -167,7 +167,6 @@ namespace RosDAL
             return ExecuteScalarQuery(query, sqlParameters);
         }
 
-        // When order is sent all items will be decreased in stock
         public void DecreaseStock(Item item)
         {
             string query = "Update Item " +
